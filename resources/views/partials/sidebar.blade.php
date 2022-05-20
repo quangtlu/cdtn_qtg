@@ -36,7 +36,7 @@
                     <a href="{{route('admin.users.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Danh mục sản phẩm
+                            Người dùng
                         </p>
                     </a>
                 </li>
