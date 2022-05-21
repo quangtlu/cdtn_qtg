@@ -2,6 +2,8 @@
 
 namespace App\Services;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserService
 
@@ -13,12 +15,12 @@ class UserService
         $this->userModel = $userModel;
     }
 
-    public function getListUser(){
+    public function getPaginate(){
         $users = $this->userModel->latest()->paginate(10);
         return $users;
     }
 
-    public function getUser($id){
+    public function getById($id){
         $user = $this->userModel->findOrFail($id);   
         return $user; 
     }
@@ -28,7 +30,7 @@ class UserService
             "name" => $request->name,
             "phone" => $request->phone,
             "role_id" => $request->role_id,
-            "password" => md5($request->password),
+            "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
         $this->userModel->create($data);
