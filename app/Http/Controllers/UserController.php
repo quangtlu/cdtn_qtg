@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->getListUser();
+        $users = $this->userService->getPaginate();
         return view('admin.users.index', compact('users'));
     }
 
@@ -62,7 +62,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->userService->getUser($id);
+        $user = $this->userService->getById($id);
         return view('admin.users.edit', compact('user'));
     }
 
