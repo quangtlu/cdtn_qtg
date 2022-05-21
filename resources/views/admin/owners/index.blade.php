@@ -1,9 +1,9 @@
 @extends('layouts.admin')
-@section('title', 'Quản lý chủ sở hữu tác phẩm')
+@section('title', 'Quản lý chủ sở hữu')
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'Chủ sở hữu tác phẩm', 'key' => 'Danh sách'])
+        @include('partials.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Danh sách'])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
@@ -14,7 +14,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên chủ sơ hữu tác phẩm</th>
+                                <th>Tên chủ sơ hữu</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Action</th>

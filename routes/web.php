@@ -83,3 +83,14 @@ Route::name('admin.permissions')->group(function () {
         Route::get('/destroy/{id}', 'PermissionController@destroy')->name('.destroy');
     });
 });
+
+Route::name('admin.conversations')->group(function () {
+    Route::prefix('admin/conversations')->group(function () {
+        Route::get('/', 'ConversationController@index')->name('.index');
+        Route::get('/create', 'ConversationController@create')->name('.create');
+        Route::post('/store', 'ConversationController@store')->name('.store');
+        Route::get('/edit/{id}', 'ConversationController@edit')->name('.edit');
+        Route::post('/update/{id}', 'ConversationController@update')->name('.update');
+        Route::get('/destroy/{id}', 'ConversationController@destroy')->name('.destroy');
+    });
+});
