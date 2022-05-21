@@ -10,4 +10,14 @@ class Conversation extends Model
     {
         return $this->hasMany(ConversationUser::class);
     }
+
+    public function Messages()
+    { 
+        return $this->hasMany(Messages::class);
+    }
+
+    public function User()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
