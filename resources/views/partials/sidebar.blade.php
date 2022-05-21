@@ -45,6 +45,10 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý tác giả
+                    <a href="{{route('admin.roles.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quản lý nhóm quyền
                         </p>
                     </a>
                 </li>
@@ -53,6 +57,10 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý tác phẩm
+                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quản lý quyền
                         </p>
                     </a>
                 </li>
