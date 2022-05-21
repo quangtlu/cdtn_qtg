@@ -49,6 +49,18 @@ Route::name('admin.products')->group(function () {
         Route::get('/destroy/{id}', 'ProductController@destroy')->name('.destroy');
     });
 });
+
+Route::name('admin.owners')->group(function () {
+    Route::prefix('admin/owners')->group(function () {
+        Route::get('/', 'OwnerController@index')->name('.index');
+        Route::get('/create', 'OwnerController@create')->name('.create');
+        Route::post('/store', 'OwnerController@store')->name('.store');
+        Route::get('/edit/{id}', 'OwnerController@edit')->name('.edit');
+        Route::post('/update/{id}', 'OwnerController@update')->name('.update');
+        Route::get('/destroy/{id}', 'OwnerController@destroy')->name('.destroy');
+    });
+});
+
 Route::name('admin.roles')->group(function () {
     Route::prefix('admin/roles')->group(function () {
         Route::get('/', 'RoleController@index')->name('.index');
