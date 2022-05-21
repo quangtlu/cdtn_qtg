@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['register' => false]);
+
+Route::get('/admin', 'HomeController@index')->name('admin.home');
 
 Route::name('admin.users')->group(function () {
     Route::prefix('admin/users')->group(function () {
@@ -27,6 +27,7 @@ Route::name('admin.users')->group(function () {
         Route::get('/destroy/{id}', 'UserController@destroy')->name('.destroy');
     });
 });
+
 
 Route::name('admin.authors')->group(function () {
     Route::prefix('admin/authors')->group(function () {
