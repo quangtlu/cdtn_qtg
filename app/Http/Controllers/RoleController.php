@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\RoleService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class RoleController extends Controller
 {

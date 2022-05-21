@@ -38,3 +38,14 @@ Route::name('admin.roles')->group(function () {
         Route::get('/destroy/{id}', 'RoleController@destroy')->name('.destroy');
     });
 });
+
+Route::name('admin.permissions')->group(function () {
+    Route::prefix('admin/permissions')->group(function () {
+        Route::get('/', 'PermissionController@index')->name('.index');
+        Route::get('/create', 'PermissionController@create')->name('.create');
+        Route::post('/store', 'PermissionController@store')->name('.store');
+        Route::get('/edit/{id}', 'PermissionController@edit')->name('.edit');
+        Route::post('/update/{id}', 'PermissionController@update')->name('.update');
+        Route::get('/destroy/{id}', 'PermissionController@destroy')->name('.destroy');
+    });
+});
