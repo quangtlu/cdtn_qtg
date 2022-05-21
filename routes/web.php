@@ -23,7 +23,18 @@ Route::name('admin.users')->group(function () {
         Route::get('/create', 'UserController@create')->name('.create');
         Route::post('/store', 'UserController@store')->name('.store');
         Route::get('/edit/{id}', 'UserController@edit')->name('.edit');
-        Route::put('/update/{id}', 'UserController@update')->name('.update');
+        Route::post('/update/{id}', 'UserController@update')->name('.update');
         Route::get('/destroy/{id}', 'UserController@destroy')->name('.destroy');
+    });
+});
+
+Route::name('admin.roles')->group(function () {
+    Route::prefix('admin/roles')->group(function () {
+        Route::get('/', 'RoleController@index')->name('.index');
+        Route::get('/create', 'RoleController@create')->name('.create');
+        Route::post('/store', 'RoleController@store')->name('.store');
+        Route::get('/edit/{id}', 'RoleController@edit')->name('.edit');
+        Route::post('/update/{id}', 'RoleController@update')->name('.update');
+        Route::get('/destroy/{id}', 'RoleController@destroy')->name('.destroy');
     });
 });
