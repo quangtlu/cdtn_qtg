@@ -47,6 +47,8 @@ Route::name('admin.products')->group(function () {
         Route::get('/edit/{id}', 'ProductController@edit')->name('.edit');
         Route::post('/update/{id}', 'ProductController@update')->name('.update');
         Route::get('/destroy/{id}', 'ProductController@destroy')->name('.destroy');
+    });
+});
 Route::name('admin.roles')->group(function () {
     Route::prefix('admin/roles')->group(function () {
         Route::get('/', 'RoleController@index')->name('.index');
