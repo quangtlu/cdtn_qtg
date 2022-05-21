@@ -19,10 +19,10 @@
                             </div>
                             <div class="form-group">
                                 <h5>Quyền</h5>
-                                <label for="category_name">add-user</label>
-                                <input type="checkbox" value="1" name="permission_id[]" id="category_name">
-                                <label for="category_name">edit-user</label>
-                                <input type="checkbox" value="2" name="permission_id[]" id="category_name">
+                                 @foreach ($permissions as $permission)
+                                    <label for="category_name">{{ $permission->name }}</label>
+                                    <input type="checkbox" value="{{ $permission->id }}" name="permission_id[]" id="category_name">
+                                 @endforeach
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>

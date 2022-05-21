@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
-Route::get('/admin', 'HomeController@index')->name('admin.home');
+Route::get('home', 'HomeController@index')->name('admin.index');
 
 Route::name('admin.users')->group(function () {
     Route::prefix('admin/users')->group(function () {

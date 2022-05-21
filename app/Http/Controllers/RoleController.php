@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Services\RoleService;
+use App\Services\PermissionService;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     private $roleService;
+    private $permissionService;
 
-    public function __construct(RoleService $roleSerive)
+    public function __construct(RoleService $roleSerive, PermissionService $permissionService)
     {
         $this->roleService = $roleSerive;
+        $this->permissionService = $permissionService;
+        $permissions = $this->permissionService->getAll();
+        view()->share('permissions', $permissions);
     }
     
     public function index()
