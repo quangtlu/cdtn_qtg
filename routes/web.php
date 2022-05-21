@@ -23,7 +23,7 @@ Route::name('admin.users')->group(function () {
         Route::get('/create', 'UserController@create')->name('.create');
         Route::post('/store', 'UserController@store')->name('.store');
         Route::get('/edit/{id}', 'UserController@edit')->name('.edit');
-        Route::put('/update/{id}', 'UserController@update')->name('.update');
+        Route::post('/update/{id}', 'UserController@update')->name('.update');
         Route::get('/destroy/{id}', 'UserController@destroy')->name('.destroy');
     });
 });
@@ -34,7 +34,18 @@ Route::name('admin.authors')->group(function () {
         Route::get('/create', 'AuthorController@create')->name('.create');
         Route::post('/store', 'AuthorController@store')->name('.store');
         Route::get('/edit/{id}', 'AuthorController@edit')->name('.edit');
-        Route::put('/update/{id}', 'AuthorController@update')->name('.update');
+        Route::post('/update/{id}', 'AuthorController@update')->name('.update');
         Route::get('/destroy/{id}', 'AuthorController@destroy')->name('.destroy');
+    });
+});
+
+Route::name('admin.products')->group(function () {
+    Route::prefix('admin/products')->group(function () {
+        Route::get('/', 'ProductController@index')->name('.index');
+        Route::get('/create', 'ProductController@create')->name('.create');
+        Route::post('/store', 'ProductController@store')->name('.store');
+        Route::get('/edit/{id}', 'ProductController@edit')->name('.edit');
+        Route::post('/update/{id}', 'ProductController@update')->name('.update');
+        Route::get('/destroy/{id}', 'ProductController@destroy')->name('.destroy');
     });
 });
