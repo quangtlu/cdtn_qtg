@@ -1,25 +1,17 @@
 @extends('layouts.admin')
-@section('title', 'Thêm mới chủ sở hữu')
+@section('title', 'Thêm mới hội thoại')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Thêm mới'])
+        @include('partials.content_header', ['name' => 'Hội thoại', 'key' => 'Thêm mới'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('admin.owners.store') }}" method="POST">
+                        <form action="{{ route('admin.conversations.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên chủ sở hữu</label>
                                 <input type="text" name="name" class="form-control" id="category_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="category_name">Số điện thoại</label>
-                                <input type="text" name="phone" class="form-control" id="category_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="category_name">Email</label>
-                                <input type="email" name="email" class="form-control" id="category_name">
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>

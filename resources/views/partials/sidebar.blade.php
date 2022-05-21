@@ -60,7 +60,7 @@
                     <a href="{{route('admin.owners.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Quản lý chủ sở hữu tác phẩm
+                            Quản lý chủ sở hữu
                         </p>
                     </a>
                 </li>
@@ -77,6 +77,14 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản lý quyền
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.conversations.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quản lý hội thoại
                         </p>
                     </a>
                 </li>
