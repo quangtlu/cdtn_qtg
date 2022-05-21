@@ -41,6 +41,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('admin.authors.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quản lý tác giả
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -49,6 +53,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('admin.products.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quản lý tác phẩm
                     <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>

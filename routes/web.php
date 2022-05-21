@@ -28,6 +28,25 @@ Route::name('admin.users')->group(function () {
     });
 });
 
+Route::name('admin.authors')->group(function () {
+    Route::prefix('admin/authors')->group(function () {
+        Route::get('/', 'AuthorController@index')->name('.index');
+        Route::get('/create', 'AuthorController@create')->name('.create');
+        Route::post('/store', 'AuthorController@store')->name('.store');
+        Route::get('/edit/{id}', 'AuthorController@edit')->name('.edit');
+        Route::post('/update/{id}', 'AuthorController@update')->name('.update');
+        Route::get('/destroy/{id}', 'AuthorController@destroy')->name('.destroy');
+    });
+});
+
+Route::name('admin.products')->group(function () {
+    Route::prefix('admin/products')->group(function () {
+        Route::get('/', 'ProductController@index')->name('.index');
+        Route::get('/create', 'ProductController@create')->name('.create');
+        Route::post('/store', 'ProductController@store')->name('.store');
+        Route::get('/edit/{id}', 'ProductController@edit')->name('.edit');
+        Route::post('/update/{id}', 'ProductController@update')->name('.update');
+        Route::get('/destroy/{id}', 'ProductController@destroy')->name('.destroy');
 Route::name('admin.roles')->group(function () {
     Route::prefix('admin/roles')->group(function () {
         Route::get('/', 'RoleController@index')->name('.index');

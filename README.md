@@ -1,4 +1,6 @@
 - git clone git@gitlab.com:quangtlu/qtg.git
+- php artisan key:generate
+- cp .env.example .env
 - config database trong .env 
 - composer install
 DB_CONNECTION=mysql
