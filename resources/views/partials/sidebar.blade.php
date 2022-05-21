@@ -36,7 +36,15 @@
                     <a href="{{route('admin.users.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Người dùng
+                            Quản lý người dùng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.authors.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quản lý tác giả
                         </p>
                     </a>
                 </li>
