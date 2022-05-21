@@ -27,3 +27,6 @@ Route::name('admin.users')->group(function () {
         Route::get('/destroy/{id}', 'UserController@destroy')->name('.destroy');
     });
 });
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserService
 
@@ -28,7 +30,7 @@ class UserService
             "name" => $request->name,
             "phone" => $request->phone,
             "role_id" => $request->role_id,
-            "password" => md5($request->password),
+            "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
         $this->userModel->create($data);
