@@ -15,12 +15,12 @@ class UserService
         $this->userModel = $userModel;
     }
 
-    public function getListUser(){
+    public function getPaginate(){
         $users = $this->userModel->latest()->paginate(10);
         return $users;
     }
 
-    public function getUser($id){
+    public function getById($id){
         $user = $this->userModel->findOrFail($id);   
         return $user; 
     }
