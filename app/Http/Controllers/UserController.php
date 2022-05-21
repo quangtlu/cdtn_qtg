@@ -2,88 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private $userService;
+    private $roleSercice;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, RoleService $roleSercice)
     {
         $this->userService = $userService;
+        $this->roleSercice = $roleSercice;
+        $roles = $this->roleSercice->getAll();
+        view()->share('roles', $roles);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $users = $this->userService->getPaginate();
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->userService->create($request);
         return Redirect(route('admin.users.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = $this->userService->getById($id);
-        return view('admin.users.edit', compact('user'));
+        $roleOfUsers = $user->roles;
+        return view('admin.users.edit', compact('user', 'roleOfUsers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->userService->update($request, $id);
         return Redirect(route('admin.users.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $this->userService->delete($id);

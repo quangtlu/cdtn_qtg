@@ -13,6 +13,11 @@ class RoleService
         $this->roleModel = $roleModel;
     }
 
+    public function getAll(){
+        $roles = $this->roleModel->all();
+        return $roles;
+    }
+
     public function getPaginate(){
         $roles = $this->roleModel->latest()->paginate(10);
         return $roles;
