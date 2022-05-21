@@ -13,6 +13,11 @@ class PermissionService
         $this->permissionModel = $permissionModel;
     }
 
+    public function getAll(){
+        $permissions = $this->permissionModel->all();
+        return $permissions;
+    }
+
     public function getPaginate(){
         $permissions = $this->permissionModel->latest()->paginate(10);
         return $permissions;
