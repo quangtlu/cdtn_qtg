@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -51,7 +52,18 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $this->userService->delete($id);
-        return Redirect(route('admin.users.index'));
+        try {
+            $this->userService->delete($id);
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ], 200);
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return response()->json([
+                'status' => 500,
+                'message' => 'fail'
+            ], 500);
+        }
     }
 }
