@@ -1,9 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'Quản lý nhóm quyền')
+@section('title', 'Quản lý vai trò')
+@section('js')
+    <script src="{{ asset('js/alertDelete.js') }}"></script>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'nhóm quyền', 'key' => 'Danh sách'])
+        @include('partials.content_header', ['name' => 'vai trò', 'key' => 'Danh sách'])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
@@ -14,7 +17,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên nhóm quyền</th>
+                                <th>Vai trò</th>
                                 <th>Mô tả</th>
                                 <th>Action</th>
                             </tr>
@@ -24,10 +27,10 @@
                                     <tr>
                                         <td>{{ $role->id }}</td>
                                         <td>{{ $role->name }}</td>
-                                        <td>{{ $role->description }}</td>
+                                        <td>{{ $role->display_name }}</td>
                                         <td>
                                             <a href="{{ route('admin.roles.edit', ["id" => $role->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.roles.destroy', ["id" => $role->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.roles.destroy', ["id" => $role->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -68,7 +68,7 @@
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Quản lý nhóm quyền
+                            Quản lý vai trò
                         </p>
                     </a>
                 </li>
