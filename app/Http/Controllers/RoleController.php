@@ -16,8 +16,8 @@ class RoleController extends Controller
     {
         $this->roleService = $roleSerive;
         $this->permissionService = $permissionService;
-        $permissions = $this->permissionService->getAll();
-        view()->share('permissions', $permissions);
+        $permissionParents = $this->permissionService->getParentById(0);
+        view()->share('permissionParents', $permissionParents);
     }
     
     public function index()
@@ -45,7 +45,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->roleService->getById($id);
-        return view('admin.roles.edit', compact('role'));
+        $permissionsChecked = $role->permissions;
+        return view('admin.roles.edit', compact('role', 'permissionsChecked'));
     }
 
     public function update(Request $request, $id)

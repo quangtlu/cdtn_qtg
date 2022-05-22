@@ -1,8 +1,12 @@
-function actionDelete (event){
+$(function() {
+    $(document).on('click', '.btn-delete', actionDelete)
+})
+
+function actionDelete (){
     let urlRequest = $(this).data('url');
     let that = $(this)
     Swal.fire({
-        title: 'Bạn có chắc muốn xóa?',
+        title: 'Bạn có chắc muốn xóa ?',
         text: "Bạn không thể khôi phục bản ghi này",
         icon: 'warning',
         showCancelButton: true,
@@ -30,6 +34,4 @@ function actionDelete (event){
       })
 }
 
-$(function() {
-    $(document).on('click', '.btn-delete', actionDelete)
-})
+

@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý người dùng')
 @section('js')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('admin/user/index.js') }}"></script>
+    <script src="{{ asset('js/alertDelete.js') }}"></script>
 @endsection
 @section('content')
     <div class="content-wrapper">

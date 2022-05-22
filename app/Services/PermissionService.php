@@ -13,22 +13,32 @@ class PermissionService
         $this->permissionModel = $permissionModel;
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         $permissions = $this->permissionModel->all();
         return $permissions;
     }
 
-    public function getPaginate(){
+    public function getPaginate()
+    {
         $permissions = $this->permissionModel->latest()->paginate(10);
         return $permissions;
     }
 
-    public function getById($id){
+    public function getParentById($id)
+    {
+        $parents = $this->permissionModel->where('parent_id', $id)->get();
+        return $parents;
+    }
+
+    public function getById($id)
+    {
         $permission = $this->permissionModel->findOrFail($id);   
         return $permission; 
     }
 
-    public function create($request){
+    public function create($request)
+    {
         $data = [
             "name" => $request->name,
             "description" => $request->description,
@@ -36,7 +46,8 @@ class PermissionService
         $this->permissionModel->create($data);
     }
 
-    public function update($request, $id){
+    public function update($request, $id)
+    {
         $permission = $this->getById($id);
         $data = [
             "name" => $request->name,
@@ -45,7 +56,8 @@ class PermissionService
         $permission->update($data);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $this->permissionModel->destroy($id);
     }
 }
