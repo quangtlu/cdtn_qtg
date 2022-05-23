@@ -9,7 +9,6 @@
                     <div class="col-md-6">
                         <form action="{{ route('admin.authors.update', ["id" => $author->id]) }}" method="POST">
                             @csrf
-                            @method("PUT")
                             <div class="form-group">
                                 <label for="category_name">Họ và tên</label>
                                 <input type="text" value="{{ $author->name }}" name="name" class="form-control" id="category_name">
