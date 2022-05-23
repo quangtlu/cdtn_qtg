@@ -17,6 +17,7 @@
                                 <th>Tên tác phẩm</th>
                                 <th>Ngày xuất bản</th>
                                 <th>Ngày đăng kí tác phẩm</th>
+                                <th>Tác phẩm</th>
                                 <th>Chủ sở hữu tác phẩm</th>
                             </tr>
                             </thead>
@@ -27,10 +28,11 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->pub_date }}</td>
                                         <td>{{ $product->regis_date }}</td>
-                                        <td>{{ $product->owner_id }}</td>
+                                        <td>{{ $product->author()->name}}</td>
+                                        <td>{{ $product->owner->name}}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ["id" => $product->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.products.destroy', ["id" => $product->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.products.destroy', ["id" => $product->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
                                     </tr>
                                 @endforeach

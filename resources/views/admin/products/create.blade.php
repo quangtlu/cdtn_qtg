@@ -22,10 +22,19 @@
                                 <input type="date" name="regis_date" class="form-control" id="category_name">
                             </div>
                             <div class="form-group">
+                                <label for="category_name">Tác giả</label>
+                                <select name="author_id" class="form-control" id="category_name">
+                                    @foreach ($owners as $owner)
+                                        <option value="{{ $owner->id }}">{{ $owner->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="category_name">Chủ sở hữu tác phẩm</label>
                                 <select name="owner_id" class="form-control" id="category_name">
-                                    <option value="1">Admin</option>
-                                    <option value="2">Người dùng</option>
+                                    @foreach ($owners as $owner)
+                                        <option value="{{ $owner->id }}">{{ $owner->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>

@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Owner;
+use App\Services\AuthorService;
 use App\Services\ProductService;
+use App\Services\OwnerService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     private $productService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, OwnerService $ownerService, AuthorService $authorService)
     {
         $this->productService = $productService;
+        $this->ownerService = $ownerService;
+        $this->authorService = $authorService;
+        $authors = $this->authorService->getAll();
+        $owners = $this->ownerService->getAll();
+        view()->share(['authors' => $authors, 'owners' => $owners]);
     }
 
     public function index()

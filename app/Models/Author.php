@@ -12,4 +12,9 @@ class Author extends Model
     {
         return $this->hasMany(AuthorProduct::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

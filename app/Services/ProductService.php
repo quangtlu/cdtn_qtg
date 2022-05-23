@@ -14,7 +14,7 @@ class ProductService
     }
 
     public function getPaginate(){
-        $products = $this->productModel->latest()->paginate(10);
+        $products = Product::latest()->paginate(10);
         return $products;
     }
 
