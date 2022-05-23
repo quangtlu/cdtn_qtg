@@ -1,0 +1,6 @@
+.select2-selection__choice{
+    background-color: #28a745 !important;
+}
+.select2-selection__choice__remove{
+    color: red !important;
+}

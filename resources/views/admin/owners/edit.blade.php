@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Sửa thông tin chủ sở hữu tác phẩm')
+@section('title', 'Sửa thông tin chủ sở hữu')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Chủ sở hữu tác phẩm', 'key' => 'Sửa thông tin'])
+        @include('partials.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -10,7 +10,7 @@
                         <form action="{{ route('admin.owners.update', ["id" => $owner->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Họ và tên</label>
+                                <label for="category_name">Tên chủ sở hữu</label>
                                 <input type="text" value="{{ $owner->name }}" name="name" class="form-control" id="category_name">
                             </div>
                             <div class="form-group">

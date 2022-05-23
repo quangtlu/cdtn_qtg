@@ -27,7 +27,8 @@
                                         <td>{{ $author->dob }}</td>
                                         <td>
                                             <a href="{{ route('admin.authors.edit', ["id" => $author->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.authors.destroy', ["id" => $author->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.authors.destroy', ["id" => $author->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
+
                                         </td>
                                     </tr>
                                 @endforeach

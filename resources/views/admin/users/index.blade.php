@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý người dùng')
+@section('js')
+    <script src="{{ asset('js/alertDelete.js') }}"></script>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -29,7 +32,7 @@
                                         <td>{{ $user->phone }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.edit', ["id" => $user->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.users.destroy', ["id" => $user->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.users.destroy', ["id" => $user->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
                                     </tr>
                                 @endforeach

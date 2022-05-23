@@ -13,6 +13,11 @@ class RoleService
         $this->roleModel = $roleModel;
     }
 
+    public function getAll(){
+        $roles = $this->roleModel->all();
+        return $roles;
+    }
+
     public function getPaginate(){
         $roles = $this->roleModel->latest()->paginate(10);
         return $roles;
@@ -26,21 +31,26 @@ class RoleService
     public function create($request){
         $data = [
             "name" => $request->name,
-            "description" => $request->description,
+            "display_name" => $request->display_name,
         ];
-        $this->roleModel->create($data);
+        $role = $this->roleModel->create($data);
+        $role->permissions()->attach($request->permission_id);
     }
 
     public function update($request, $id){
         $role = $this->getById($id);
         $data = [
             "name" => $request->name,
-            "description" => $request->description,
+            "display_name" => $request->display_name,
         ];
         $role->update($data);
+        $role->permissions()->sync($request->permission_id);
     }
 
     public function delete($id){
+        $role = $this->getById($id);
         $this->roleModel->destroy($id);
+        $role->permissions()->detach();
+
     }
 }

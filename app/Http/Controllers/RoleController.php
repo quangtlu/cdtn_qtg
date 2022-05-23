@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Services\RoleService;
+use App\Services\PermissionService;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     private $roleService;
+    private $permissionService;
 
-    public function __construct(RoleService $roleSerive)
+    public function __construct(RoleService $roleSerive, PermissionService $permissionService)
     {
         $this->roleService = $roleSerive;
+        $this->permissionService = $permissionService;
+        $permissionParents = $this->permissionService->getParentById(0);
+        view()->share('permissionParents', $permissionParents);
     }
     
     public function index()
@@ -39,7 +45,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->roleService->getById($id);
-        return view('admin.roles.edit', compact('role'));
+        $permissionsChecked = $role->permissions;
+        return view('admin.roles.edit', compact('role', 'permissionsChecked'));
     }
 
     public function update(Request $request, $id)

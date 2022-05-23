@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Thêm mới chủ sở hữu tác phẩm')
+@section('title', 'Thêm mới chủ sở hữu')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Chủ sở hữu tác phẩm', 'key' => 'Thêm mới'])
+        @include('partials.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Thêm mới'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -10,7 +10,7 @@
                         <form action="{{ route('admin.owners.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên chủ sở hữu tác phẩm</label>
+                                <label for="category_name">Tên chủ sở hữu</label>
                                 <input type="text" name="name" class="form-control" id="category_name">
                             </div>
                             <div class="form-group">

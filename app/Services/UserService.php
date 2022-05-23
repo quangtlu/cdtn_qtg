@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 
@@ -27,11 +29,11 @@ class UserService
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
-            "role_id" => $request->role_id,
-            "password" => md5($request->password),
+            "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
-        $this->userModel->create($data);
+        $user = $this->userModel->create($data);
+        $user->roles()->attach($request->role_id);
     }
 
     public function update($request, $id){
@@ -39,14 +41,16 @@ class UserService
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
-            "role_id" => $request->role_id,
-            "password" => md5($request->password),
+            "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
         $user->update($data);
+        $user->roles()->sync($request->role_id);
     }
 
     public function delete($id){
+        $user = $this->getById($id);
         $this->userModel->destroy($id);
+        $user->roles()->detach();
     }
 }

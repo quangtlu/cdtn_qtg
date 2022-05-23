@@ -14,7 +14,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên chủ sơ hữu tác phẩm</th>
+                                <th>Tên chủ sơ hữu</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Action</th>
