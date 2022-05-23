@@ -35,7 +35,7 @@ class UserService
     }
 
     public function update($request, $id){
-        $user = $this->getUser($id);
+        $user = $this->getById($id);
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
