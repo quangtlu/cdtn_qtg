@@ -15,7 +15,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên quyền</th>
-                                <th>Mô tả</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -23,11 +22,9 @@
                                 @foreach ($permissions as $permission)
                                     <tr>
                                         <td>{{ $permission->id }}</td>
-                                        <td>{{ $permission->name }}</td>
-                                        <td>{{ $permission->description }}</td>
+                                        <td>{{ $permission->display_name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.permissions.edit', ["id" => $permission->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.permissions.destroy', ["id" => $permission->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.permissions.destroy', ["id" => $permission->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
                                     </tr>
                                 @endforeach

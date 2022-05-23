@@ -30,7 +30,8 @@
                                         <td>{{ $product->owner_id }}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ["id" => $product->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.products.destroy', ["id" => $product->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.products.destroy', ["id" => $product->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
+
                                         </td>
                                     </tr>
                                 @endforeach

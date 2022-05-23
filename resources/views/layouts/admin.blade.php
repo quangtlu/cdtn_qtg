@@ -20,6 +20,7 @@
 <script src={{ asset("AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js") }}></script>
 <script src={{ asset("AdminLTE/dist/js/adminlte.min.js") }}></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/alertDelete.js') }}"></script>
 
 @yield('js')
 </body>
