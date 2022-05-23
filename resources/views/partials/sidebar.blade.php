@@ -76,7 +76,7 @@
                     <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Quản lý quyền
+                            Quản lý quyền truy cập
                         </p>
                     </a>
                 </li>
