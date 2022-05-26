@@ -39,10 +39,19 @@ class ProductController extends Controller
         return Redirect(route('admin.products.index'));
     }
 
+    public function show($id)
+    {   
+        $product = $this->productService->getById($id);
+        $productImgs = $product->image ?  explode("|", $product->image) : null;
+        return view('admin.products.show', compact('product', 'productImgs'));
+    }
+
     public function edit($id)
     {
         $product = $this->productService->getById($id);
-        return view('admin.products.edit', compact('product'));
+        $productOfAuthors = $product->author;
+        $productImg = explode("|", $product->image)[0];
+        return view('admin.products.edit', compact('product', 'productOfAuthors', 'productImg'));
     }
 
     public function update(Request $request, $id)

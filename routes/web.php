@@ -10,11 +10,11 @@ Route::middleware('auth')->group(function () {
 
     Route::name('admin.users')->group(function () {
         Route::prefix('admin/users')->group(function () {
-            Route::get('/', 'UserController@index')->name('.index')->middleware('can:list-user');
+            Route::get('/', 'UserController@index')->name('.index');
             Route::get('/create', 'UserController@create')->name('.create')->middleware('can:add-user');
             Route::post('/store', 'UserController@store')->name('.store')->middleware('can:add-user');
-            Route::get('/edit/{id}', 'UserController@edit')->name('.edit')->middleware('can:edit-user');
-            Route::post('/update/{id}', 'UserController@update')->name('.update')->middleware('can:edit-user');
+            Route::get('/edit/{id}', 'UserController@edit')->name('.edit');
+            Route::post('/update/{id}', 'UserController@update')->name('.update');
             Route::get('/destroy/{id}', 'UserController@destroy')->name('.destroy')->middleware('can:delete-user');
         });
     });
@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'ProductController@index')->name('.index')->middleware('can:list-product');
             Route::get('/create', 'ProductController@create')->name('.create')->middleware('can:add-product');
             Route::post('/store', 'ProductController@store')->name('.store')->middleware('can:add-product');
+            Route::get('/show/{id}', 'ProductController@show')->name('.show');
             Route::get('/edit/{id}', 'ProductController@edit')->name('.edit')->middleware('can:edit-product');
             Route::post('/update/{id}', 'ProductController@update')->name('.update')->middleware('can:edit-product');
             Route::get('/destroy/{id}', 'ProductController@destroy')->name('.destroy')->middleware('can:delete-product');
@@ -54,20 +55,20 @@ Route::middleware('auth')->group(function () {
     
     Route::name('admin.roles')->group(function () {
         Route::prefix('admin/roles')->group(function () {
-            Route::get('/', 'RoleController@index')->name('.index')->middleware('can:list-role');
-            Route::get('/create', 'RoleController@create')->name('.create')->middleware('can:add-role');
-            Route::post('/store', 'RoleController@store')->name('.store')->middleware('can:add-role');
-            Route::get('/edit/{id}', 'RoleController@edit')->name('.edit')->middleware('can:edit-role');
-            Route::post('/update/{id}', 'RoleController@update')->name('.update')->middleware('can:edit-role');
+            Route::get('/', 'RoleController@index')->name('.index');
+            Route::get('/create', 'RoleController@create')->name('.create');
+            Route::post('/store', 'RoleController@store')->name('.store');
+            Route::get('/edit/{id}', 'RoleController@edit')->name('.edit');
+            Route::post('/update/{id}', 'RoleController@update')->name('.update');
             Route::get('/destroy/{id}', 'RoleController@destroy')->name('.destroy')->middleware('can:delete-role');
         });
     });
     
     Route::name('admin.permissions')->group(function () {
         Route::prefix('admin/permissions')->group(function () {
-            Route::get('/', 'PermissionController@index')->name('.index')->middleware('can:list-permission');
-            Route::get('/create', 'PermissionController@create')->name('.create')->middleware('can:add-permission');
-            Route::post('/store', 'PermissionController@store')->name('.store')->middleware('can:add-permission');
+            Route::get('/', 'PermissionController@index')->name('.index');
+            Route::get('/create', 'PermissionController@create')->name('.create');
+            Route::post('/store', 'PermissionController@store')->name('.store');
             Route::get('/edit/{id}', 'PermissionController@edit')->name('.edit')->middleware('can:edit-permission');
             Route::post('/update/{id}', 'PermissionController@update')->name('.update')->middleware('can:edit-permission');
             Route::get('/destroy/{id}', 'PermissionController@destroy')->name('.destroy')->middleware('can:delete-permission');

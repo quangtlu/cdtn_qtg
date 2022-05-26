@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ["name", "pub_date", "regis_date", "owner_id"];
+    protected $fillable = ["name", "pub_date", "regis_date", "owner_id", "description", "image"];
 
     public function owner()
     {
