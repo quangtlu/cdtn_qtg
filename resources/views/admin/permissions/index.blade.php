@@ -1,28 +1,73 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý quyền')
+@section('css')
+    <style>
+        input[type="checkbox"] {
+            transform: scale(1.3)
+        }
+    </style>
+@endsection
+@section('js')
+    <script src="{{ asset('admin/role/create.js') }}"></script>
+@endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'quyền', 'key' => 'Danh sách'])
-        <!-- /.content-header -->
-        <!-- Main content -->
+        @include('partials.content_header', ['name' => 'quyền', 'key' => 'Quản lý'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.permissions.store') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="category_name">Chọn module</label>
+                                <select name="module_parents" id="" class="form-control">
+                                    @foreach (config('permission.module_parents') as $moduleItem)
+                                        <option value="{{ $moduleItem }}">{{ $moduleItem }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label>
+                                                    <input type="checkbox" class="checkall">
+                                                    Chọn tất cả
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @foreach (config('permission.module_children') as $moduleItem)
+                                        <div class="col-md-3">
+                                            <label>
+                                                <input type="checkbox" class="checkbox-children" name="module_children[]" value="{{ $moduleItem }}">
+                                                {{ $moduleItem }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
                         <table class="table">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên quyền</th>
-                                <th>Action</th>
+                                <th>Xóa</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($permissions as $permission)
                                     <tr>
                                         <td>{{ $permission->id }}</td>
-                                        <td>{{ $permission->display_name }}</td>
+                                        <td>
+                                            <input class="form-control" value="{{ $permission->name }}" name="name" disabled type="text">
+                                        </td>
                                         <td>
                                             <button type="button" data-url="{{ route('admin.permissions.destroy', ["id" => $permission->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
@@ -32,9 +77,6 @@
                         </table>
                         {{ $permissions->links() }}
                     </div>
-                    <div class="col-md-12">
-                        <a href="{{ route('admin.permissions.create') }}"><button class="btn btn-success float-right m-2">Thêm mới</button></a>
-                    </div>
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -42,3 +84,4 @@
         <!-- /.content -->
     </div>
 @endsection
+

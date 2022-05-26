@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class RoleService
 
@@ -29,28 +29,19 @@ class RoleService
     }
 
     public function create($request){
-        $data = [
-            "name" => $request->name,
-            "display_name" => $request->display_name,
-        ];
-        $role = $this->roleModel->create($data);
-        $role->permissions()->attach($request->permission_id);
+        $role = $this->roleModel->create(['name' => $request->name]);
+        $role->givePermissionTo($request->permissionNames);
     }
 
     public function update($request, $id){
         $role = $this->getById($id);
-        $data = [
-            "name" => $request->name,
-            "display_name" => $request->display_name,
-        ];
-        $role->update($data);
-        $role->permissions()->sync($request->permission_id);
+        $role->update(['name' => $request->name]);
+        $role->syncPermissions($request->permissionNames);
     }
 
     public function delete($id){
         $role = $this->getById($id);
         $this->roleModel->destroy($id);
         $role->permissions()->detach();
-
     }
 }

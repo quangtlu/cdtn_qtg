@@ -32,10 +32,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Vai trò</label>
-                                <select name="role_id[]" class="form-control select2_init" multiple>
+                                <select name="roleNames[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        <option value="{{ $role->name}}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

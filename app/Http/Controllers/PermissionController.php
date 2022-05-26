@@ -20,20 +20,10 @@ class PermissionController extends Controller
         return view('admin.permissions.index', compact('permissions'));
     }
 
-    public function create()
-    {
-        return view('admin.permissions.create');
-    }
-
     public function store(Request $request)
     {
         $this->permissionService->create($request);
         return Redirect(route('admin.permissions.index'));
-    }
-
-    public function show()
-    {
-        //
     }
 
     public function edit($id)

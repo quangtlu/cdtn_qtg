@@ -33,7 +33,7 @@ class UserService
             "email" => $request->email,
         ];
         $user = $this->userModel->create($data);
-        $user->roles()->attach($request->role_id);
+        $user->assignRole($request->roleNames);
     }
 
     public function update($request, $id){
