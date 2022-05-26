@@ -23,10 +23,6 @@
                                 <label for="category_name">Tên vai trò</label>
                                 <input value="{{ $role->name }}" type="text" name="name" class="form-control" id="category_name">
                             </div>
-                            <div class="form-group">
-                                <label for="category_name">Mô tả</label>
-                                <textarea class="form-control" value="{{ $role->display_name }}" name="display_name" id="" cols="30" rows="5">{{ $role->display_name }}</textarea>
-                            </div>
                         </div>
                         <div class="col-md-12">
                             <div class="row">
@@ -40,30 +36,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                @foreach ($permissionParents as $permissionParent)
-                                    <div class="card border-primary col-md-12">
-                                        <div class="card-header bg-success">
-                                            <label>
-                                                <input type="checkbox" class="checkbox-wrapper" value="">
-                                            </label>
-                                            {{ $permissionParent->name }}
-                                        </div>
-                                        <div class="row">
-                                            @foreach ($permissionParent->permissionChildren as $permissionChildren)
-                                                <div class="card-body text-primary col-md-3">
-                                                    <h5 class="card-title">
-                                                    <label>
-                                                        <input class="checkbox-children" name="permission_id[]" type="checkbox" value="{{ $permissionChildren->id }}"
-                                                            {{ $permissionsChecked->contains($permissionChildren->id) ? 'checked' : '' }}
-                                                        >
-                                                    </label>
-                                                    {{ $permissionChildren->name }}
-                                                    </h5>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                <div class="card border-primary col-md-12">
+                                    <div class="card-header bg-success">
+                                        <label>
+                                            Danh sách quyền
+                                        </label>
                                     </div>
-                                @endforeach
+                                    <div class="row">
+                                        @foreach ($permissions as $permission)
+                                            <div class="card-body text-primary col-md-3">
+                                                <h5 class="card-title">
+                                                    <label>
+                                                        <input {{ $permissionsSelected->contains($permission) ? 'checked' : '' }}
+                                                            class="checkbox-children" name="permissionNames[]" type="checkbox" value="{{ $permission->name}}">
+                                                        {{ $permission->name }}
+                                                    </label>
+                                                </h5>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Permission;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
+use App\Models\User;
 
 
 class PermissionSeeder extends Seeder
@@ -13,44 +16,83 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $roles = [
-            ['key_code' =>'manage_user' ,'name' => 'Quản lý người dùng', 'display_name' => 'Quản lý người dùng', 'parent_id' => 0],
-            ['key_code' =>'manage_author' ,'name' => 'Quản lý tác giả', 'display_name' => 'Quản lý tác giả', 'parent_id' => 0],
-            ['key_code' =>'manage_product' ,'name' => 'Quản lý tác phẩm', 'display_name' => 'Quản lý tác phẩm', 'parent_id' => 0],
-            ['key_code' =>'manage_owner' ,'name' => 'Quản lý chủ sở hữu', 'display_name' => 'Quản lý chủ sở hữu', 'parent_id' => 0],
-            ['key_code' =>'manage_role' ,'name' => 'Quản lý vai trò', 'display_name' => 'Quản lý vai trò', 'parent_id' => 0],
-            ['key_code' =>'manage_permission' ,'name' => 'Quản lý quyền', 'display_name' => 'Quản lý quyền', 'parent_id' => 0],
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-            ['key_code' =>'list_user' , 'name' => 'Xem danh sách người dùng', 'display_name' => 'Xem danh sách người dùng', 'parent_id' => 1],
-            ['key_code' =>'list_author' , 'name' => 'Xem danh sách tác giả', 'display_name' => 'Xem danh sách tác giả', 'parent_id' => 2],
-            ['key_code' =>'list_product' , 'name' => 'Xem danh sách tác phẩm', 'display_name' => 'Xem danh sách tác phẩm', 'parent_id' => 3],
-            ['key_code' =>'list_owner' , 'name' => 'Xem danh sách chủ sở hữu', 'display_name' => 'Xem danh sách chủ sở hữu', 'parent_id' => 4],
-            ['key_code' =>'list_role' , 'name' => 'Xem danh sách vai trò', 'display_name' => 'Xem danh sách vai trò', 'parent_id' => 5],
-            ['key_code' =>'list_permission' , 'name' => 'Xem danh sách quyền', 'display_name' => 'Xem danh sách quyền', 'parent_id' => 6],
-
-            ['key_code' =>'add_user' , 'name' => 'Thêm mới người dùng', 'display_name' => 'Thêm mới người dùng', 'parent_id' => 1],
-            ['key_code' =>'add_author' , 'name' => 'Thêm mới tác giả', 'display_name' => 'Thêm mới tác giả', 'parent_id' => 2],
-            ['key_code' =>'add_product' , 'name' => 'Thêm mới tác phẩm', 'display_name' => 'Thêm mới tác phẩm', 'parent_id' => 3],
-            ['key_code' =>'add_owner' , 'name' => 'Thêm mới chủ sở hữu', 'display_name' => 'Thêm mới chủ sở hữu', 'parent_id' => 4],
-            ['key_code' =>'add_role' , 'name' => 'Thêm mới vai trò', 'display_name' => 'Thêm mới vai trò', 'parent_id' => 5],
-            ['key_code' =>'add_permission' , 'name' => 'Thêm mới quyền', 'display_name' => 'Thêm mới quyền', 'parent_id' => 6],
-
-            ['key_code' =>'edit_user' , 'name' => 'Chỉnh sửa người dùng', 'display_name' => 'Chỉnh sửa người dùng', 'parent_id' => 1],
-            ['key_code' =>'edit_author' , 'name' => 'Chỉnh sửa tác giả', 'display_name' => 'Chỉnh sửa tác giả', 'parent_id' => 2],
-            ['key_code' =>'edit_product' , 'name' => 'Chỉnh sửa tác phẩm', 'display_name' => 'Chỉnh sửa tác phẩm', 'parent_id' => 3],
-            ['key_code' =>'edit_owner' , 'name' => 'Chỉnh sửa chủ sở hữu', 'display_name' => 'Chỉnh sửa chủ sở hữu', 'parent_id' => 4],
-            ['key_code' =>'edit_role' , 'name' => 'Chỉnh sửa vai trò', 'display_name' => 'Chỉnh sửa vai trò', 'parent_id' => 5],
-            ['key_code' =>'edit_permission' , 'name' => 'Chỉnh sửa quyền', 'display_name' => 'Chỉnh sửa quyền', 'parent_id' => 6],
-
-            ['key_code' =>'delete_user' , 'name' => 'Xóa người dùng', 'display_name' => 'Xóa người dùng', 'parent_id' => 1],
-            ['key_code' =>'delete_author' , 'name' => 'Xóa tác giả', 'display_name' => 'Xóa tác giả', 'parent_id' => 2],
-            ['key_code' =>'delete_product' , 'name' => 'Xóa tác phẩm', 'display_name' => 'Xóa tác phẩm', 'parent_id' => 3],
-            ['key_code' =>'delete_owner' , 'name' => 'Xóa chủ sở hữu', 'display_name' => 'Xóa chủ sở hữu', 'parent_id' => 4],
-            ['key_code' =>'delete_role' , 'name' => 'Xóa vai trò', 'display_name' => 'Xóa vai trò', 'parent_id' => 5],
-            ['key_code' =>'delete_permission' , 'name' => 'Xóa quyền', 'display_name' => 'Xóa quyền', 'parent_id' => 6],
-
+        $postPermissions = [
+            Permission::create(['name' => 'list post']),
+            Permission::create(['name' => 'add post']),
+            Permission::create(['name' => 'edit post']),
+            Permission::create(['name' => 'delete post']),
+        ];
+        $userPermissions = [
+            Permission::create(['name' => 'list user']),
+            Permission::create(['name' => 'add user']),
+            Permission::create(['name' => 'edit user']),
+            Permission::create(['name' => 'delete user']),
+        ];
+        $productPermissions = [
+            Permission::create(['name' => 'list product']),
+            Permission::create(['name' => 'add product']),
+            Permission::create(['name' => 'edit product']),
+            Permission::create(['name' => 'delete product']),
+        ];
+        $authorPermissions = [
+            Permission::create(['name' => 'list author']),
+            Permission::create(['name' => 'add author']),
+            Permission::create(['name' => 'edit author']),
+            Permission::create(['name' => 'delete author']),
+        ];
+        $ownerPermissions = [
+            Permission::create(['name' => 'list owner']),
+            Permission::create(['name' => 'add owner']),
+            Permission::create(['name' => 'edit owner']),
+            Permission::create(['name' => 'delete owner']),
+        ];
+        $rolePermissions = [
+            Permission::create(['name' => 'list role']),
+            Permission::create(['name' => 'add role']),
+            Permission::create(['name' => 'edit role']),
+            Permission::create(['name' => 'delete role']),
+        ];
+        $permissionPermissions = [
+            Permission::create(['name' => 'list permission']),
+            Permission::create(['name' => 'add permission']),
+            Permission::create(['name' => 'edit permission']),
+            Permission::create(['name' => 'delete permission']),
+        ];
+        $conservationPermissions = [
+            Permission::create(['name' => 'list conservation']),
+            Permission::create(['name' => 'add conservation']),
+            Permission::create(['name' => 'edit conservation']),
+            Permission::create(['name' => 'delete conservation']),
         ];
 
-        Permission::insert($roles);
+        $userAdmin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'phone' => '0123456789',
+            'password' => Hash::make('password')
+        ]);
+        $editorRole = Role::create(['name' => 'editor']);
+        $userRole = Role::create(['name' => 'user']);
+        $guestRole = Role::create(['name' => 'guest']);
+        $counselorRole = Role::create(['name' => 'counselor']);
+
+        $this->setPermissionToTole($postPermissions, $editorRole);
+        $this->setPermissionToTole($postPermissions, $userRole);
+        $this->setPermissionToTole($postPermissions, $guestRole);
+        $this->setPermissionToTole($postPermissions, $counselorRole);
+
+        //Super admin
+        $roleAdmin = Role::create(['name' => 'super-admin']);
+        $roleAdmin->givePermissionTo(Permission::all());
+        $userAdmin->assignRole($roleAdmin);
+    }
+
+    public function setPermissionToTole(array $permissions, $role)
+    {
+        foreach ($permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
     }
 }
