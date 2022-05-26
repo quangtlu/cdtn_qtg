@@ -14,7 +14,7 @@ class ProductService
     }
 
     public function getPaginate(){
-        $products = $this->productModel->latest()->paginate(10);
+        $products = Product::latest()->paginate(10);
         return $products;
     }
 
@@ -29,22 +29,50 @@ class ProductService
             "pub_date" => $request->pub_date,
             "regis_date" => $request->regis_date,
             "owner_id" => $request->owner_id,
+            "description" => $request->description,
         ];
-        $this->productModel->create($data);
+        if($files=$request->file('image')){
+                $images=array();
+                foreach($files as $file){
+                    $name=$file->getClientOriginalName();
+                    $file->move('image/products',$name);
+                    $images[]=$name;
+                }
+                $data['image'] = implode("|",$images);
+                
+        } else {
+            $data['image'] = null;
+        }
+        $product = $this->productModel->create($data);
+        $product->author()->attach($request->author_id);
     }
 
     public function update($request, $id){
-        $author = $this->getById($id);
+        $product = $this->getById($id);
         $data = [
             "name" => $request->name,
             "pub_date" => $request->pub_date,
             "regis_date" => $request->regis_date,
             "owner_id" => $request->owner_id,
+            "description" => $request->description,
         ];
-        $author->update($data);
+
+        if($files=$request->file('image')){
+                $images=array();
+                foreach($files as $file){
+                    $name=$file->getClientOriginalName();
+                    $file->move('image/products',$name);
+                    $images[]=$name;
+                }
+                $data['image'] = implode("|",$images);
+        }
+        $product->update($data);
+        $product->author()->sync($request->author_id);
     }
 
     public function delete($id){
+        $product = $this->getById($id);
         $this->productModel->destroy($id);
+        $product->author()->detach();
     }
 }

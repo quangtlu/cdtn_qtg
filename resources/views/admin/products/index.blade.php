@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý tác phẩm')
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('admin/product/index.css')}}"/>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -14,23 +18,34 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Ảnh</th>
                                 <th>Tên tác phẩm</th>
-                                <th>Ngày xuất bản</th>
-                                <th>Ngày đăng kí tác phẩm</th>
-                                <th>Chủ sở hữu tác phẩm</th>
+                                <th>Tác giả</th>
+                                <th>Chủ sở hữu</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr>
                                         <td>{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->pub_date }}</td>
-                                        <td>{{ $product->regis_date }}</td>
-                                        <td>{{ $product->owner_id }}</td>
+                                        <td>
+                                            @if ($product->image)
+                                                <img class="avt-product" src=" {{ asset('image/products/'.explode("|", $product->image)[0]) }}" alt="">
+                                            @else
+                                                <img class="avt-product" src="{{ asset('image/products/no_image.jpg') }}" alt="">
+                                            @endif
+                                        </td>
+                                       
+                                        <td>{{ Str::ucfirst(strtolower($product->name)) }}</td>
+                                        <td>
+                                                {{ $product->author->count() > 1 ? $product->author->first()->name.",..." : $product->author->first()->name }} 
+                                        </td>
+                                        <td>{{ $product->owner->name}}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ["id" => $product->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <a href="{{ route('admin.products.destroy', ["id" => $product->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.products.destroy', ["id" => $product->id]) }}" class="btn btn-danger btn-sm btn-delete">Xoá</i></button>
+                                            <a href="{{ route('admin.products.show', ["id" => $product->id]) }}"><button class="btn btn-info btn-sm">Chi tiết</button></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -19,6 +19,12 @@ class AuthorService
         return $authors;
     }
 
+    public function getAll()
+    {
+        $authors = $this->authorModel->all();
+        return $authors;
+    }
+
     public function getById($id){
         $author = $this->authorModel->findOrFail($id);   
         return $author; 
