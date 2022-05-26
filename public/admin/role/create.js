@@ -7,3 +7,8 @@ $('.checkall').on('click', function(){
     $(this).parents().find('.checkbox-wrapper').prop('checked', $(this).prop('checked'))
 
 })
+
+$('.input-name').on('click', function(){
+    console.log(2)
+    $(this).prop('disabled', function() { $(this).removeProp('disable')});
+})

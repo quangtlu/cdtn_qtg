@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-use App\Models\Permission;
+use Spatie\Permission\Models\Permission;
 
 class PermissionService
 
@@ -39,33 +39,9 @@ class PermissionService
 
     public function create($request)
     {
-        $data1 = [
-            "name" => $request->module_parents,
-            "display_name" => $request->module_parents,
-            "parent_id" => 0,
-        ];
-        $permission = $this->permissionModel->create($data1);
-
         foreach ($request->module_children as $value) {
-            $data2 = [
-                "name" => $value,
-                "display_name" => $value.' '.$request->module_parents,
-                "parent_id" => $permission->id,
-                "key_code" => $value.'-'.$request->module_parents,
-            ];
-            $this->permissionModel->create($data2);
+            $this->permissionModel->create(['name' => $value.' '.$request->module_parents]);
         }
-        
-    }
-
-    public function update($request, $id)
-    {
-        $permission = $this->getById($id);
-        $data = [
-            "name" => $request->name,
-            "display_name" => $request->display_name,
-        ];
-        $permission->update($data);
     }
 
     public function delete($id)
