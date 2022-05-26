@@ -17,7 +17,9 @@
                                 <label for="category_name">Ngày sinh</label>
                                 <input type="date" name="dob" class="form-control" id="category_name">
                             </div>
+                            @can('add author')
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @endcan
                         </form>
                     </div>
                 </div>

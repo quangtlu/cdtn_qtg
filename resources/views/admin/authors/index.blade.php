@@ -16,7 +16,9 @@
                                 <th>ID</th>
                                 <th>Họ tên</th>
                                 <th>Ngày sinh</th>
+                                @can('edit author' | 'delete author')
                                 <th>Action</th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
@@ -25,11 +27,15 @@
                                         <td>{{ $author->id }}</td>
                                         <td>{{ $author->name }}</td>
                                         <td>{{ $author->dob }}</td>
+                                        @can('edit author' | 'delete author')
                                         <td>
+                                            @can('edit author')
                                             <a href="{{ route('admin.authors.edit', ["id" => $author->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            <button type="button" data-url="{{ route('admin.authors.destroy', ["id" => $author->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
-
+                                            @can('delete author')
+                                            <button type="button" data-url="{{ route('admin.authors.destroy', ["id" => $author->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>@endcan
+                                            @endcan
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>
