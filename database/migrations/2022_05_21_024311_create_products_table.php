@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->date('pub_date');
             $table->date('regis_date');
             $table->integer('owner_id');
+            $table->text('description');
+            $table->text('image');
             $table->timestamps();
         });
     }

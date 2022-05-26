@@ -9,7 +9,7 @@ class Owner extends Model
 {
     protected $fillable = ["name", "phone", 'email'];
 
-    public function Product()
+    public function products()
     {
         return $this->hasMany(Product::class);
     }

@@ -19,6 +19,12 @@ class OwnerService
         return $owners;
     }
 
+    public function getAll()
+    {
+        $owners = $this->ownerModel->all();
+        return $owners;
+    }
+
     public function getById($id){
         $owner = $this->ownerModel->findOrFail($id);   
         return $owner; 
