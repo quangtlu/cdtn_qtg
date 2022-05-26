@@ -32,6 +32,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @can('list user')
                 <li class="nav-item">
                     <a href="{{route('admin.users.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -40,14 +41,18 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('list author')
                 <li class="nav-item">
                     <a href="{{route('admin.authors.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quản lý tác giả
-                        </p>
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Quản lý tác giả
+                    </p>
                     </a>
                 </li>
+                @endcan
+                @can('list product')
                 <li class="nav-item">
                     <a href="{{route('admin.products.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -56,6 +61,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('list owner')
                 <li class="nav-item">
                     <a href="{{route('admin.owners.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -64,6 +71,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('list role')
                 <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -72,6 +81,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('list permission')
                 <li class="nav-item">
                     <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -80,6 +91,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('list conservation')
                 <li class="nav-item">
                     <a href="{{route('admin.conversations.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -88,6 +101,7 @@
                         </p>
                     </a>
                 </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
