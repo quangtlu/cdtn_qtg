@@ -18,6 +18,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Họ tên</th>
+                                <th>Ngày sinh</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Action</th>
@@ -28,6 +29,7 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->dob }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>

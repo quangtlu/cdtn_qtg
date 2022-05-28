@@ -21,14 +21,15 @@ class UserService
     }
 
     public function getById($id){
-        $user = $this->userModel->findOrFail($id);   
-        return $user; 
+        $user = $this->userModel->findOrFail($id);
+        return $user;
     }
 
     public function create($request){
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
+            "dob" => $request->dob,
             "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
@@ -41,6 +42,7 @@ class UserService
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
+            "dob" => $request->dob,
             "password" => Hash::make($request->password),
             "email" => $request->email,
         ];

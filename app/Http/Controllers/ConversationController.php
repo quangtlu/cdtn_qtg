@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\ConversationService;
 use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class ConversationController extends Controller
 {
@@ -33,7 +35,7 @@ class ConversationController extends Controller
 
     // public function show(Conversation $conversation)
     // {
-        
+
     // }
 
     public function edit($id)

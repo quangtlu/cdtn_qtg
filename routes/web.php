@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::name('admin.conversations')->group(function () {
         Route::prefix('admin/conversations')->group(function () {
             Route::get('/', 'ConversationController@index')->name('.index')->middleware('can:list role');
+            Route::get('/create', 'ConversationController@create')->name('.create')->middleware('can:add role');
             Route::post('/store', 'ConversationController@store')->name('.store')->middleware('can:add role');
         });
     });

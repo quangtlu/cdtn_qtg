@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
-use App\Services\RoleService;
 use App\Services\PermissionService;
+use App\Services\RoleService;
 use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class RoleController extends Controller
 {
@@ -19,7 +21,7 @@ class RoleController extends Controller
         $permissions = $this->permissionService->getAll();
         view()->share('permissions', $permissions);
     }
-    
+
     public function index()
     {
         $roles = $this->roleService->getPaginate();

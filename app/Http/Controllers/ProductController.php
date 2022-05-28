@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Owner;
 use App\Services\AuthorService;
-use App\Services\ProductService;
 use App\Services\OwnerService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class ProductController extends Controller
 {
@@ -40,7 +41,7 @@ class ProductController extends Controller
     }
 
     public function show($id)
-    {   
+    {
         $product = $this->productService->getById($id);
         $productImgs = $product->image ?  explode("|", $product->image) : null;
         return view('admin.products.show', compact('product', 'productImgs'));

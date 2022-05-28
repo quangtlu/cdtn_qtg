@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\User\StoreUserRequest;
+use App\Http\Requests\Admin\User\UpdateUserRequest;
 use App\Services\RoleService;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use function redirect;
+use function response;
+use function view;
 
 class UserController extends Controller
 {
@@ -31,7 +35,7 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         $this->userService->create($request);
         return Redirect(route('admin.users.index'));
@@ -44,7 +48,7 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user', 'roleOfUsers'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         $this->userService->update($request, $id);
         return Redirect(route('admin.users.index'));
