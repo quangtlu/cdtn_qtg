@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\OwnerService;
 use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class OwnerController extends Controller
 {

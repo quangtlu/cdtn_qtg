@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\PermissionService;
 use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class PermissionController extends Controller
 {
@@ -13,7 +15,7 @@ class PermissionController extends Controller
     {
         $this->permissionService = $permissionService;
     }
-    
+
     public function index()
     {
         $permissions = $this->permissionService->getPaginate();
