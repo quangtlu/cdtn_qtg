@@ -38,7 +38,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $this->userService->create($request);
-        return Redirect(route('admin.users.index'));
+        return Redirect(route('admin.users.index'))->with('success', 'Thêm người dùng thành công !');
     }
 
     public function edit($id)

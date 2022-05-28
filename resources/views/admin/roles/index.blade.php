@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý vai trò')
 @section('js')
-    <script src="{{ asset('js/alertDelete.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
 @endsection
 @section('content')
     <div class="content-wrapper">
