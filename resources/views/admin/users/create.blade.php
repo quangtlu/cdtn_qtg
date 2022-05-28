@@ -16,35 +16,35 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên <b class="field-require">*</b></label>
-                                <input type="text" name="name" class="form-control" id="category_name">
+                                <input type="text" name="name" class="form-control" >
                                 @error('name')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input type="date" name="dob" class="form-control" id="category_name">
+                                <input type="date" name="dob" class="form-control" >
                                 @error('dob')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại<b class="field-require">*</b></label>
-                                <input type="text" name="phone" class="form-control" id="category_name">
+                                <input type="text" name="phone" class="form-control" >
                                 @error('phone')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email<b class="field-require">*</b></label>
-                                <input type="email" name="email" class="form-control" id="category_name">
+                                <input type="email" name="email" class="form-control" >
                                 @error('email')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mật khẩu<b class="field-require">*</b></label>
-                                <input id="password" data-toggle="password" type="password" name="password" class="form-control" id="category_name">
+                                <input id="password" data-toggle="password" type="password" name="password" class="form-control" >
                                 @error('password')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

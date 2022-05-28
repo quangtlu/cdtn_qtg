@@ -6,7 +6,7 @@ Auth::routes(['register' => false]);
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('home', 'HomeController@index')->name('admin.index');
+    Route::get('admin/dashboard', 'DashboardController@index')->name('admin.dashboard');
 
     Route::name('admin.users')->group(function () {
         Route::prefix('admin/users')->group(function () {

@@ -178,5 +178,6 @@ return [
         'add',
         'edit',
         'delete',
+        'show'
     ]
 ];

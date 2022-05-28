@@ -49,7 +49,7 @@
                                         </div>
                                     </div>
                                     @foreach (config('permission.module_children') as $moduleItem)
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <label>
                                                 <input type="checkbox" class="checkbox-children" name="module_children[]" value="{{ $moduleItem }}">
                                                 {{ $moduleItem }}
@@ -64,7 +64,9 @@
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            @can('add permission')
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @endcan
                         </form>
                     </div>
                     <div class="col-md-6">

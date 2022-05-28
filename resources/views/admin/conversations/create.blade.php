@@ -11,7 +11,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên chủ sở hữu</label>
-                                <input type="text" name="name" class="form-control" id="category_name">
+                                <input type="text" name="name" class="form-control" >
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>
