@@ -13,6 +13,7 @@
 <div class="wrapper">
 @include('partials.header')
 @include('partials.sidebar')
+@include('partials.flash-message')
     @yield('content')
 @include('partials.footer')
 </div>
