@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\Role\StoreRoleRequest;
+use App\Http\Requests\Admin\Role\UpdateRoleRequest;
 use App\Models\Permission;
 use App\Services\PermissionService;
 use App\Services\RoleService;
@@ -33,7 +35,7 @@ class RoleController extends Controller
         return view('admin.roles.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRoleRequest $request)
     {
         $this->roleService->create($request);
         return Redirect(route('admin.roles.index'));
@@ -46,7 +48,7 @@ class RoleController extends Controller
         return view('admin.roles.edit', compact('role', 'permissionsSelected'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
         $this->roleService->update($request, $id);
         return Redirect(route('admin.roles.index'));

@@ -17,35 +17,35 @@
                                 <label for="category_name">Họ và tên</label>
                                 <input type="text" value="{{ $user->name }}" name="name" class="form-control" id="category_name">
                                 @error('name')
-                                <div class="mt-1 alert alert-danger">{{ $message }}</div>
+                                <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
                                 <input type="date" value="{{ $user->dob }}" name="dob" class="form-control" id="category_name">
                                 @error('dob')
-                                <div class="mt-1 alert alert-danger">{{ $message }}</div>
+                                <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
                                 <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" id="category_name">
                                 @error('phone')
-                                <div class="mt-1 alert alert-danger">{{ $message }}</div>
+                                <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email</label>
                                 <input value="{{ $user->email }}" type="email" name="email" class="form-control" id="category_name">
                                 @error('email')
-                                <div class="mt-1 alert alert-danger">{{ $message }}</div>
+                                <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mật khẩu</label>
                                 <input type="password" name="password" class="form-control" id="category_name">
                                 @error('password')
-                                <div class="mt-1 alert alert-danger">{{ $message }}</div>
+                                <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -59,7 +59,7 @@
                                     @endforeach
                                 </select>
                                 @error('roleNames')
-                                <div class="mt-1 alert alert-danger">{{ $message }}</div>
+                                <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
