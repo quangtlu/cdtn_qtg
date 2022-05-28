@@ -11,15 +11,15 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên chủ sở hữu</label>
-                                <input type="text" name="name" class="form-control" id="category_name">
+                                <input type="text" name="name" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
-                                <input type="text" name="phone" class="form-control" id="category_name">
+                                <input type="text" name="phone" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email</label>
-                                <input type="email" name="email" class="form-control" id="category_name">
+                                <input type="email" name="email" class="form-control" >
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>

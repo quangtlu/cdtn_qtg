@@ -11,11 +11,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên</label>
-                                <input type="text" value="{{ $author->name }}" name="name" class="form-control" id="category_name">
+                                <input type="text" value="{{ $author->name }}" name="name" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
-                                <input value="{{ $author->dob }}" type="date" name="dob" class="form-control" id="category_name">
+                                <input value="{{ $author->dob }}" type="date" name="dob" class="form-control" >
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>

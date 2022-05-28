@@ -17,7 +17,9 @@
                                 <th>Tên chủ sơ hữu</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                @can('add owner | edit owner')
                                 <th>Action</th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
@@ -28,8 +30,12 @@
                                         <td>{{ $owner->email }}</td>
                                         <td>{{ $owner->phone }}</td>
                                         <td>
+                                            @can('edit owner')
                                             <a href="{{ route('admin.owners.edit', ["id" => $owner->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
+                                            @endcan
+                                            @can('delete owner')
                                             <a href="{{ route('admin.owners.destroy', ["id" => $owner->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
