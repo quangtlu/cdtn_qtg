@@ -38,7 +38,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $this->roleService->create($request);
-        return Redirect(route('admin.roles.index'));
+        return Redirect(route('admin.roles.index'))->with('success', 'Thêm vai trò thành công');
     }
 
     public function edit($id)
@@ -51,7 +51,7 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, $id)
     {
         $this->roleService->update($request, $id);
-        return Redirect(route('admin.roles.index'));
+        return Redirect(route('admin.roles.index'))->with('success', 'Cập nhật vai trò thành công');
     }
 
     public function destroy($id)

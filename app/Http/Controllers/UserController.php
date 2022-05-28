@@ -38,7 +38,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $this->userService->create($request);
-        return Redirect(route('admin.users.index'))->with('success', 'Thêm người dùng thành công !');
+        return Redirect(route('admin.users.index'))->with('success', 'Thêm người dùng thành công');
     }
 
     public function edit($id)
@@ -51,7 +51,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $this->userService->update($request, $id);
-        return Redirect(route('admin.users.index'));
+        return Redirect(route('admin.users.index'))->with('success', 'Cập nhật người dùng thành công');
     }
 
     public function destroy($id)

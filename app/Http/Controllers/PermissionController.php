@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\Permission\StorePermissionRequest;
 use App\Services\PermissionService;
 use Illuminate\Http\Request;
 use function redirect;
@@ -22,22 +23,15 @@ class PermissionController extends Controller
         return view('admin.permissions.index', compact('permissions'));
     }
 
-    public function store(Request $request)
+    public function store(StorePermissionRequest $request)
     {
-        $this->permissionService->create($request);
-        return Redirect(route('admin.permissions.index'));
-    }
-
-    public function edit($id)
-    {
-        $permission = $this->permissionService->getById($id);
-        return view('admin.permissions.edit', compact('permission'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $this->permissionService->update($request, $id);
-        return Redirect(route('admin.permissions.index'));
+        try {
+            $this->permissionService->create($request);
+            return Redirect(route('admin.permissions.index'))->with('success', 'Thêm quyền thành công');
+        }
+        catch (\Exception $exception){
+            return Redirect(route('admin.permissions.index'))->with('error', 'Thêm quyền thất bại');
+        }
     }
 
     public function destroy($id)

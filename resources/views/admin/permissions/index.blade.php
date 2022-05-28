@@ -22,15 +22,24 @@
                             <div class="form-group">
                                 <label for="category_name">Chọn module</label>
                                 <select name="module_parents" id="" class="form-control">
+                                    <option></option>
                                     @foreach (config('permission.module_parents') as $moduleItem)
                                         <option value="{{ $moduleItem }}">{{ $moduleItem }}</option>
                                     @endforeach
                                 </select>
+                                @error('module_parents')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <label>
+                                                    Action
+                                                </label>
+                                            </div>
                                             <div class="col-md-12">
                                                 <label>
                                                     <input type="checkbox" class="checkall">
@@ -47,7 +56,13 @@
                                             </label>
                                         </div>
                                     @endforeach
+                                    @error('module_children')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
+                                @error('module_children'.' '.'module_parents')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>
