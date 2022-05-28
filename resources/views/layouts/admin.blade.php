@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href={{ asset("AdminLTE/plugins/fontawesome-free/css/all.min.css")}} >
     <link rel="stylesheet" href={{ asset("AdminLTE/dist/css/adminlte.min.css") }} >
+    <link rel="stylesheet" href="{{{asset("admin/alert.css")}}}">
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 @include('partials.header')
 @include('partials.sidebar')
-@include('partials.flash-message')
+    @include('partials.flash-message')
     @yield('content')
 @include('partials.footer')
 </div>
@@ -21,7 +22,7 @@
 <script src={{ asset("AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js") }}></script>
 <script src={{ asset("AdminLTE/dist/js/adminlte.min.js") }}></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('js/alertDelete.js') }}"></script>
+<script src="{{ asset('js/alert.js') }}"></script>
 
 @yield('js')
 </body>

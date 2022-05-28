@@ -1,5 +1,9 @@
 $(function() {
     $(document).on('click', '.btn-delete', actionDelete)
+
+    $('.alert-dismissible').fadeTo(2000, 500).slideUp(500, function(){
+        $('.alert-dismissible').slideUp(500);
+    });
 })
 
 function actionDelete (){
@@ -29,7 +33,7 @@ function actionDelete (){
                     }
                 }
             })
-        
+
         }
       })
 }

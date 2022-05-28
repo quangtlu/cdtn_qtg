@@ -50,7 +50,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Vai trò<b class="field-require">*</b></label>
+                                <label>Vai trò</label>
                                 <select name="roleNames[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($roles as $role)
