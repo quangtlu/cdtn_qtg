@@ -22,6 +22,9 @@
                             <div class="form-group">
                                 <label for="category_name">Tên vai trò</label>
                                 <input value="{{ $role->name }}" type="text" name="name" class="form-control" id="category_name">
+                                @error('name')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -42,6 +45,9 @@
                                             Danh sách quyền
                                         </label>
                                     </div>
+                                    @error('permissionNames')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                    @enderror
                                     <div class="row">
                                         @foreach ($permissions as $permission)
                                             <div class="card-body text-primary col-md-3">
