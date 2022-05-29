@@ -2,8 +2,8 @@
     <div class="w3layouts-top-strip">
         <div class="container">
             <div class="logo">
-                <h1><a href="index.html">Fashion Blog</a></h1>
-                <p>lets make a Life style</p>
+                <h1><a href="index.html">Quang Vinh Copyright</a></h1>
+                <p>Thanng Long University</p>
             </div>
             <div class="w3ls-social-icons">
                 @guest
@@ -11,7 +11,7 @@
                     <a class="header-link" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
                 @endguest
                 @auth
-                    <a class="header-link" href="features.html">{{ Auth::user()->name }}</a>
+                    <a class="header-link user-name" href="features.html">{{ Auth::user()->name }}</a>
                         <a class="header-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
