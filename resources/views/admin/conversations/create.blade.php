@@ -2,7 +2,7 @@
 @section('title', 'Thêm mới hội thoại')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Hội thoại', 'key' => 'Thêm mới'])
+        @include('partials.admin.content_header', ['name' => 'Hội thoại', 'key' => 'Thêm mới'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

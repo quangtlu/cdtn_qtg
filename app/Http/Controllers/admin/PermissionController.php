@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Requests\Admin\Permission\StorePermissionRequest;
 use App\Services\PermissionService;
-use Illuminate\Http\Request;
 use function redirect;
 use function view;
 

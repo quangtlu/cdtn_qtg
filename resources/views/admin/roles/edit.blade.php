@@ -12,7 +12,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'vai trò', 'key' => 'cập nhật'])
+        @include('partials.admin.content_header', ['name' => 'vai trò', 'key' => 'cập nhật'])
         <div class="content">
             <div class="container-fluid">
                 <form action="{{ route('admin.roles.update', ['id' => $role->id]) }}" method="POST" style="width: 100%">
