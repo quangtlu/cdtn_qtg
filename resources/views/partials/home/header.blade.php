@@ -45,8 +45,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Short Codes <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="icons.html">Icons Page</a></li>
-                            <li><a href="typo.html">Typography</a></li>
+                            <li><a href="icons.html">Blog</a></li>
+                            <li><a href="typo.html">FAQ</a></li>
 
                         </ul>
                     </li>
