@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Người dùng', 'key' => 'Sửa thông tin'])
+        @include('partials.admin.content_header', ['name' => 'Người dùng', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -15,30 +15,52 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên</label>
-                                <input type="text" value="{{ $user->name }}" name="name" class="form-control" id="category_name">
+                                <input type="text" value="{{ $user->name }}" name="name" class="form-control" >
+                                @error('name')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name">Ngày sinh</label>
+                                <input type="date" value="{{ $user->dob }}" name="dob" class="form-control" >
+                                @error('dob')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
-                                <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" id="category_name">
+                                <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" >
+                                @error('phone')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email</label>
-                                <input value="{{ $user->email }}" type="email" name="email" class="form-control" id="category_name">
+                                <input value="{{ $user->email }}" type="email" name="email" class="form-control" >
+                                @error('email')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mật khẩu</label>
-                                <input type="password" name="password" class="form-control" id="category_name">
+                                <input type="password" name="password" class="form-control" >
+                                @error('password')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Nhóm quyền</label>
                                 <select name="role_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($roles as $role)
-                                        <option 
+                                        <option
                                         {{ $roleOfUsers->contains('id', $role->id) ? 'selected' : '' }}
                                         value="{{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('roleNames')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>

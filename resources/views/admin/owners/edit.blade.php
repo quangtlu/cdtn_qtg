@@ -2,7 +2,7 @@
 @section('title', 'Sửa thông tin chủ sở hữu')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Sửa thông tin'])
+        @include('partials.admin.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -11,15 +11,15 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên chủ sở hữu</label>
-                                <input type="text" value="{{ $owner->name }}" name="name" class="form-control" id="category_name">
+                                <input type="text" value="{{ $owner->name }}" name="name" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
-                                <input value="{{ $owner->phone }}" type="text" name="phone" class="form-control" id="category_name">
+                                <input value="{{ $owner->phone }}" type="text" name="phone" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email</label>
-                                <input value="{{ $owner->email }}" type="email" name="email" class="form-control" id="category_name">
+                                <input value="{{ $owner->email }}" type="email" name="email" class="form-control" >
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>

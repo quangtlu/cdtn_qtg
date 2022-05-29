@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý vai trò')
 @section('js')
-    <script src="{{ asset('js/alertDelete.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
 @endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'vai trò', 'key' => 'Danh sách'])
+        @include('partials.admin.content_header', ['name' => 'vai trò', 'key' => 'Danh sách'])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">

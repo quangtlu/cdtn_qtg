@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Tác phẩm', 'key' => 'Sửa thông tin'])
+        @include('partials.admin.content_header', ['name' => 'Tác phẩm', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -15,15 +15,15 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên tác phẩm</label>
-                                <input type="text" value="{{ $product->name }}" name="name" class="form-control" id="category_name">
+                                <input type="text" value="{{ $product->name }}" name="name" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
-                                <input value="{{ $product->pub_date }}" type="date" name="pub_date" class="form-control" id="category_name">
+                                <input value="{{ $product->pub_date }}" type="date" name="pub_date" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
-                                <input value="{{ $product->regis_date }}" type="date" name="regis_date" class="form-control" id="category_name">
+                                <input value="{{ $product->regis_date }}" type="date" name="regis_date" class="form-control" >
                             </div>
                             <div class="form-group">
                                 <label>Tác giả</label>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Chủ sở hữu tác phẩm</label>
-                                <select name="owner_id" class="form-control" id="category_name">
+                                <select name="owner_id" class="form-control" >
                                     @foreach ($owners as $owner)
                                         <option {{ $owner->id == $product->owner->id ? 'selected' : '' }} value="{{ $owner->id }}">{{ $owner->name }}</option>
                                     @endforeach
@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5" value="">
-                                <img class="product-img" src="{{ asset("image/products/$productImg") }}" alt="">                                    
+                                <img class="product-img" src="{{ asset("image/products/$productImg") }}" alt="">
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>

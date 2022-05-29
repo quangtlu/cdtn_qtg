@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý người dùng')
 @section('js')
-    <script src="{{ asset('js/alertDelete.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
 @endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'Người dùng', 'key' => 'Danh sách'])
+        @include('partials.admin.content_header', ['name' => 'Người dùng', 'key' => 'Danh sách'])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
@@ -18,6 +18,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Họ tên</th>
+                                <th>Ngày sinh</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Action</th>
@@ -28,6 +29,7 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->dob }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>

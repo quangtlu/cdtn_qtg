@@ -4,3 +4,6 @@
 .select2-selection__choice__remove{
     color: red !important;
 }
+.field-require{
+    color:red;
+}

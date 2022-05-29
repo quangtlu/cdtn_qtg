@@ -12,7 +12,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'quyền', 'key' => 'Quản lý'])
+        @include('partials.admin.content_header', ['name' => 'quyền', 'key' => 'Quản lý'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -22,15 +22,24 @@
                             <div class="form-group">
                                 <label for="category_name">Chọn module</label>
                                 <select name="module_parents" id="" class="form-control">
+                                    <option></option>
                                     @foreach (config('permission.module_parents') as $moduleItem)
                                         <option value="{{ $moduleItem }}">{{ $moduleItem }}</option>
                                     @endforeach
                                 </select>
+                                @error('module_parents')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <label>
+                                                    Action
+                                                </label>
+                                            </div>
                                             <div class="col-md-12">
                                                 <label>
                                                     <input type="checkbox" class="checkall">
@@ -40,16 +49,24 @@
                                         </div>
                                     </div>
                                     @foreach (config('permission.module_children') as $moduleItem)
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <label>
                                                 <input type="checkbox" class="checkbox-children" name="module_children[]" value="{{ $moduleItem }}">
                                                 {{ $moduleItem }}
                                             </label>
                                         </div>
                                     @endforeach
+                                    @error('module_children')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
+                                @error('module_children'.' '.'module_parents')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
+                            @can('add permission')
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @endcan
                         </form>
                     </div>
                     <div class="col-md-6">

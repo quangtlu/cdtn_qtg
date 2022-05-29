@@ -3,30 +3,30 @@
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
-
+//Admin
 Route::middleware('auth')->group(function () {
 
-    Route::get('home', 'HomeController@index')->name('admin.index');
+    Route::get('admin/dashboard', 'admin\DashboardController@index')->name('admin.dashboard');
 
     Route::name('admin.users')->group(function () {
         Route::prefix('admin/users')->group(function () {
-            Route::get('/', 'UserController@index')->name('.index')->middleware('can:list user');
-            Route::get('/create', 'UserController@create')->name('.create')->middleware('can:add user');
-            Route::post('/store', 'UserController@store')->name('.store')->middleware('can:add user');
-            Route::get('/edit/{id}', 'UserController@edit')->name('.edit')->middleware('can:edit user');
-            Route::post('/update/{id}', 'UserController@update')->name('.update')->middleware('can:edit user');
-            Route::get('/destroy/{id}', 'UserController@destroy')->name('.destroy')->middleware('can:delete user');
+            Route::get('/', 'admin\UserController@index')->name('.index')->middleware('can:list user');
+            Route::get('/create', 'admin\UserController@create')->name('.create')->middleware('can:add user');
+            Route::post('/store', 'admin\UserController@store')->name('.store')->middleware('can:add user');
+            Route::get('/edit/{id}', 'admin\UserController@edit')->name('.edit')->middleware('can:edit user');
+            Route::post('/update/{id}', 'admin\UserController@update')->name('.update')->middleware('can:edit user');
+            Route::get('/destroy/{id}', 'admin\UserController@destroy')->name('.destroy')->middleware('can:delete user');
         });
     });
 
     Route::name('admin.authors')->group(function () {
         Route::prefix('admin/authors')->group(function () {
-            Route::get('/', 'AuthorController@index')->name('.index')->middleware('can:list author');
-            Route::get('/create', 'AuthorController@create')->name('.create')->middleware('can:add author');
-            Route::post('/store', 'AuthorController@store')->name('.store')->middleware('can:add author');
-            Route::get('/edit/{id}', 'AuthorController@edit')->name('.edit')->middleware('can:edit author');
-            Route::post('/update/{id}', 'AuthorController@update')->name('.update')->middleware('can:edit author');
-            Route::get('/destroy/{id}', 'AuthorController@destroy')->name('.destroy')->middleware('can:delete author');
+            Route::get('/', 'admin\AuthorController@index')->name('.index')->middleware('can:list author');
+            Route::get('/create', 'admin\AuthorController@create')->name('.create')->middleware('can:add author');
+            Route::post('/store', 'admin\AuthorController@store')->name('.store')->middleware('can:add author');
+            Route::get('/edit/{id}', 'admin\AuthorController@edit')->name('.edit')->middleware('can:edit author');
+            Route::post('/update/{id}', 'admin\AuthorController@update')->name('.update')->middleware('can:edit author');
+            Route::get('/destroy/{id}', 'admin\AuthorController@destroy')->name('.destroy')->middleware('can:delete author');
         });
     });
 
@@ -44,12 +44,12 @@ Route::middleware('auth')->group(function () {
 
     Route::name('admin.owners')->group(function () {
         Route::prefix('admin/owners')->group(function () {
-            Route::get('/', 'OwnerController@index')->name('.index')->middleware('can:list owner');
-            Route::get('/create', 'OwnerController@create')->name('.create')->middleware('can:add owner');
-            Route::post('/store', 'OwnerController@store')->name('.store')->middleware('can:add owner');
-            Route::get('/edit/{id}', 'OwnerController@edit')->name('.edit')->middleware('can:edit owner');
-            Route::post('/update/{id}', 'OwnerController@update')->name('.update')->middleware('can:edit owner');
-            Route::get('/destroy/{id}', 'OwnerController@destroy')->name('.destroy')->middleware('can:delete owner');
+            Route::get('/', 'admin\OwnerController@index')->name('.index')->middleware('can:list owner');
+            Route::get('/create', 'admin\OwnerController@create')->name('.create')->middleware('can:add owner');
+            Route::post('/store', 'admin\OwnerController@store')->name('.store')->middleware('can:add owner');
+            Route::get('/edit/{id}', 'admin\OwnerController@edit')->name('.edit')->middleware('can:edit owner');
+            Route::post('/update/{id}', 'admin\OwnerController@update')->name('.update')->middleware('can:edit owner');
+            Route::get('/destroy/{id}', 'admin\OwnerController@destroy')->name('.destroy')->middleware('can:delete owner');
         });
     });
 
@@ -67,32 +67,35 @@ Route::middleware('auth')->group(function () {
 
     Route::name('admin.roles')->group(function () {
         Route::prefix('admin/roles')->group(function () {
-            Route::get('/', 'RoleController@index')->name('.index')->middleware('can:list role');
-            Route::get('/create', 'RoleController@create')->name('.create')->middleware('can:add role');
-            Route::post('/store', 'RoleController@store')->name('.store')->middleware('can:add role');
-            Route::get('/edit/{id}', 'RoleController@edit')->name('.edit')->middleware('can:edit role');
-            Route::post('/update/{id}', 'RoleController@update')->name('.update')->middleware('can:edit role');
-            Route::get('/destroy/{id}', 'RoleController@destroy')->name('.destroy')->middleware('can:delete role');
+            Route::get('/', 'admin\RoleController@index')->name('.index')->middleware('can:list role');
+            Route::get('/create', 'admin\RoleController@create')->name('.create')->middleware('can:add role');
+            Route::post('/store', 'admin\RoleController@store')->name('.store')->middleware('can:add role');
+            Route::get('/edit/{id}', 'admin\RoleController@edit')->name('.edit')->middleware('can:edit role');
+            Route::post('/update/{id}', 'admin\RoleController@update')->name('.update')->middleware('can:edit role');
+            Route::get('/destroy/{id}', 'admin\RoleController@destroy')->name('.destroy')->middleware('can:delete role');
         });
     });
 
     Route::name('admin.permissions')->group(function () {
         Route::prefix('admin/permissions')->group(function () {
-            Route::get('/', 'PermissionController@index')->name('.index')->middleware('can:list role');
-            Route::post('/store', 'PermissionController@store')->name('.store')->middleware('can:add role');
-            Route::get('/destroy/{id}', 'PermissionController@destroy')->name('.destroy')->middleware('can:delete role');
+            Route::get('/', 'admin\PermissionController@index')->name('.index')->middleware('can:list role');
+            Route::post('/store', 'admin\PermissionController@store')->name('.store')->middleware('can:add role');
+            Route::get('/destroy/{id}', 'admin\PermissionController@destroy')->name('.destroy')->middleware('can:delete role');
         });
     });
 
     Route::name('admin.conversations')->group(function () {
         Route::prefix('admin/conversations')->group(function () {
-            Route::get('/', 'ConversationController@index')->name('.index')->middleware('can:list role');
-            Route::post('/store', 'ConversationController@store')->name('.store')->middleware('can:add role');
+            Route::get('/', 'admin\ConversationController@index')->name('.index')->middleware('can:list role');
+            Route::get('/create', 'admin\ConversationController@create')->name('.create')->middleware('can:add role');
+            Route::post('/store', 'admin\ConversationController@store')->name('.store')->middleware('can:add role');
         });
     });
 
 });
 
+//Home
+Route::get('/', 'home\HomeController@index')->name('home.index');
 
 
 

@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'Người dùng', 'key' => 'Thêm mới'])
+        @include('partials.admin.content_header', ['name' => 'Người dùng', 'key' => 'Thêm mới'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -15,20 +15,39 @@
                         <form action="{{ route('admin.users.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Họ và tên</label>
-                                <input type="text" name="name" class="form-control" id="category_name">
+                                <label for="category_name">Họ và tên <b class="field-require">*</b></label>
+                                <input type="text" name="name" class="form-control" >
+                                @error('name')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Số điện thoại</label>
-                                <input type="text" name="phone" class="form-control" id="category_name">
+                                <label for="category_name">Ngày sinh</label>
+                                <input type="date" name="dob" class="form-control" >
+                                @error('dob')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Email</label>
-                                <input type="email" name="email" class="form-control" id="category_name">
+                                <label for="category_name">Số điện thoại<b class="field-require">*</b></label>
+                                <input type="text" name="phone" class="form-control" >
+                                @error('phone')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mật khẩu</label>
-                                <input type="password" name="password" class="form-control" id="category_name">
+                                <label for="category_name">Email<b class="field-require">*</b></label>
+                                <input type="email" name="email" class="form-control" >
+                                @error('email')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name">Mật khẩu<b class="field-require">*</b></label>
+                                <input id="password" data-toggle="password" type="password" name="password" class="form-control" >
+                                @error('password')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Vai trò</label>
@@ -38,6 +57,9 @@
                                         <option value="{{ $role->name}}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('roleNames')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>
@@ -52,4 +74,5 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('admin/user/create.js') }}"></script>
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
 @endsection
