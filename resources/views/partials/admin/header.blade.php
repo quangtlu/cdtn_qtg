@@ -16,6 +16,7 @@
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
+                <input type="hidden" name="url_redirect_name" value="admin.dashboard">
             </form>
         </li>
     </ul>

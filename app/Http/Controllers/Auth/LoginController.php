@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\admin\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class LoginController extends Controller
@@ -43,12 +44,15 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $request->session()->flash('success', 'Đăng nhập thành công');
-        return redirect()->intended($this->redirectPath());
+        if ($user->isAdmin()){
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('home.index');
     }
 
     public function logout(Request $request)
     {
         $this->performLogout($request);
-        return redirect()->route('login');
+        return redirect()->route($request->url_redirect_name);
     }
 }
