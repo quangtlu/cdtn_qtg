@@ -75,7 +75,7 @@
                 @can('list role')
                 <li class="nav-item">
                     <a href="{{route('admin.posts.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="fas fa-book"></i>
                         <p>
                             Quản lý bài viết
                         </p>

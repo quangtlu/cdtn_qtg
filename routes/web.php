@@ -78,19 +78,20 @@ Route::middleware('auth')->group(function () {
                 Route::post('/store', 'Admin\ConversationController@store')->name('.store')->middleware('can:add role');
             });
         });
-    });
-
-    Route::name('.posts')->group(function () {
-        Route::prefix('/posts')->group(function () {
-            Route::get('/', 'admin\PostController@index')->name('.index');
-            Route::get('/create', 'admin\PostController@create')->name('.create');
-            Route::post('/store', 'admin\PostController@store')->name('.store');
-            Route::get('/edit/{id}', 'admin\PostController@edit')->name('.edit');
-            Route::post('/update/{id}', 'admin\PostController@update')->name('.update');
-            Route::get('/show/{id}', 'admin\PostController@show')->name('.show');
-            Route::get('/destroy/{id}', 'admin\PostController@destroy')->name('.destroy');
+        
+        Route::name('.posts')->group(function () {
+            Route::prefix('/posts')->group(function () {
+                Route::get('/', 'Admin\PostController@index')->name('.index');
+                Route::get('/create', 'Admin\PostController@create')->name('.create');
+                Route::post('/store', 'Admin\PostController@store')->name('.store');
+                Route::get('/edit/{id}', 'Admin\PostController@edit')->name('.edit');
+                Route::post('/update/{id}', 'Admin\PostController@update')->name('.update');
+                Route::get('/show/{id}', 'Admin\PostController@show')->name('.show');
+                Route::get('/destroy/{id}', 'Admin\PostController@destroy')->name('.destroy');
+            });
         });
     });
+
     
 });
 

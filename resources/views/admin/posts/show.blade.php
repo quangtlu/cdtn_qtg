@@ -33,7 +33,7 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'Tác phẩm', 'key' => 'Chi tiết'])
+        @include('partials.admin.content_header', ['name' => 'Tác phẩm', 'key' => 'Chi tiết'])
     <!-- product -->
         <div class="product-content product-wrap clearfix product-deatil">
             @if (empty($postImgs)) 
