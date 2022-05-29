@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'ProductController@store')->name('.store')->middleware('can:add product');
             Route::get('/edit/{id}', 'ProductController@edit')->name('.edit')->middleware('can:edit product');
             Route::post('/update/{id}', 'ProductController@update')->name('.update')->middleware('can:edit product');
+            Route::get('/show/{id}', 'ProductController@edit')->name('.show')->middleware('can:show product');
             Route::get('/destroy/{id}', 'ProductController@destroy')->name('.destroy')->middleware('can:delete product');
         });
     });
@@ -49,6 +50,18 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{id}', 'OwnerController@edit')->name('.edit')->middleware('can:edit owner');
             Route::post('/update/{id}', 'OwnerController@update')->name('.update')->middleware('can:edit owner');
             Route::get('/destroy/{id}', 'OwnerController@destroy')->name('.destroy')->middleware('can:delete owner');
+        });
+    });
+
+    Route::name('admin.posts')->group(function () {
+        Route::prefix('admin/posts')->group(function () {
+            Route::get('/', 'PostController@index')->name('.index');
+            Route::get('/create', 'PostController@create')->name('.create');
+            Route::post('/store', 'PostController@store')->name('.store');
+            Route::get('/edit/{id}', 'PostController@edit')->name('.edit');
+            Route::post('/update/{id}', 'PostController@update')->name('.update');
+            Route::get('/show/{id}', 'PostController@show')->name('.show');
+            Route::get('/destroy/{id}', 'PostController@destroy')->name('.destroy');
         });
     });
 
