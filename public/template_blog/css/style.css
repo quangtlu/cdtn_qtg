@@ -29,14 +29,14 @@ input[type="button"],input[type="submit"]{
 	-ms-transition:0.5s all;
 }
 h1,h2,h3,h4,h5,h6{
-	margin:0;		
+	margin:0;
 	font-weight:400;
     transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
-}	
+}
 p{
 	margin:0;
 	font-family: 'Open Sans', sans-serif;
@@ -488,7 +488,7 @@ header {
     animation-delay: 30s;
 }
 /* Animation for the slideshow images *
-@-webkit-keyframes imageAnimation { 
+@-webkit-keyframes imageAnimation {
 	0% {
 	    opacity: 0;
 	    -webkit-animation-timing-function: ease-in;
@@ -508,7 +508,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@-moz-keyframes imageAnimation { 
+@-moz-keyframes imageAnimation {
 	0% {
 	    opacity: 0;
 	    -moz-animation-timing-function: ease-in;
@@ -528,7 +528,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@-o-keyframes imageAnimation { 
+@-o-keyframes imageAnimation {
 	0% {
 	    opacity: 0;
 	    -o-animation-timing-function: ease-in;
@@ -548,7 +548,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@-ms-keyframes imageAnimation { 
+@-ms-keyframes imageAnimation {
 	0% {
 	    opacity: 0;
 	    -ms-animation-timing-function: ease-in;
@@ -568,7 +568,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@keyframes imageAnimation { 
+@keyframes imageAnimation {
 	0% {
 	    opacity: 0;
 	    animation-timing-function: ease-in;
@@ -589,7 +589,7 @@ header {
 	100% { opacity: 0 }
 }
 /* Animation for the title *
-@-webkit-keyframes titleAnimation { 
+@-webkit-keyframes titleAnimation {
 	0% {
 	    opacity: 0;
 	    -webkit-transform: translateY(200px);
@@ -609,7 +609,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@-moz-keyframes titleAnimation { 
+@-moz-keyframes titleAnimation {
 	0% {
 	    opacity: 0;
 	    -moz-transform: translateY(200px);
@@ -629,7 +629,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@-o-keyframes titleAnimation { 
+@-o-keyframes titleAnimation {
 	0% {
 	    opacity: 0;
 	    -o-transform: translateY(200px);
@@ -649,7 +649,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@-ms-keyframes titleAnimation { 
+@-ms-keyframes titleAnimation {
 	0% {
 	    opacity: 0;
 	    -ms-transform: translateY(200px);
@@ -669,7 +669,7 @@ header {
 	}
 	100% { opacity: 0 }
 }
-@keyframes titleAnimation { 
+@keyframes titleAnimation {
 	0% {
 	    opacity: 0;
 	    transform: translateY(200px);
@@ -693,10 +693,10 @@ header {
 .no-cssanimations .cb-slideshow li span{
 	opacity: 1;
 }
-@media screen and (max-width: 1140px) { 
+@media screen and (max-width: 1140px) {
 	.cb-slideshow li div h3 { font-size: 100px }
 }
-@media screen and (max-width: 600px) { 
+@media screen and (max-width: 600px) {
 	.cb-slideshow li div h3 { font-size: 50px }
 }
 
@@ -740,7 +740,7 @@ header {
     -moz-border-radius: 0px;
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
-	
+
 	border-top: 1px solid #e1e1e1;
 }
 .dropdown-menu>li>a {
@@ -1178,7 +1178,7 @@ ul.tag li a:hover{
 	color: #FFAC3A;
 }
 .agileinfo p a:hover{
-    color: #fff;	
+    color: #fff;
 }
 /*-- //copyright --*/
 .w3agile_special_deals_grid_left_grid{
@@ -1451,7 +1451,7 @@ ul.bs-glyphicons-list li:hover span {
     -ms-transition: 0.5s all;
     -moz-transition: 0.5s all;
     cursor: pointer;
-} 
+}
 .icon-box:hover {
     background: #000;
 	transition:0.5s all;
@@ -1470,11 +1470,11 @@ ul.bs-glyphicons-list li:hover span {
     float: left;
     width: 12.5%;
     height: 115px;
-    padding: 10px; 
+    padding: 10px;
     line-height: 1.4;
-    text-align: center;  
+    text-align: center;
     font-size: 12px;
-    list-style-type: none;	
+    list-style-type: none;
 }
 .codes .bs-glyphicons .glyphicon {
     margin-top: 5px;
@@ -1492,7 +1492,7 @@ ul.bs-glyphicons-list li:hover span {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 	color: #777;
-} 
+}
 .codes .bs-glyphicons .glyphicon-class {
     display: block;
     text-align: center;
@@ -1549,7 +1549,7 @@ h3.agileits-icons-title {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 	color: #777;
-} 
+}
 .bs-glyphicons .glyphicon-class {
     display: block;
     text-align: center;
@@ -1598,7 +1598,7 @@ h3.agileits-icons-title {
 	}
 	h3.icon-subheading {
 		font-size: 22px;
-	}	
+	}
 }
 @media (max-width: 480px){
 	.bs-glyphicons li {
@@ -1685,7 +1685,7 @@ li.list-group-item1 {
 .label {
 	font-weight: 300 !important;
 	border-radius:4px;
-}  
+}
 .grid_5{
 	background:none;
 	padding:2em 0;
@@ -2668,7 +2668,7 @@ nav.events {
 	bottom: 20px;
 	right: 2%;
 	overflow: hidden;
-	z-index: 999; 
+	z-index: 999;
 	width: 32px;
 	height: 32px;
 	border: none;
@@ -2881,8 +2881,8 @@ nav.events {
     padding: 10px 15.6px;
 }
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
-    margin-right: 0px; 
-    margin-left: 0px; 
+    margin-right: 0px;
+    margin-left: 0px;
     width: 93%;
     float: left;
 }
@@ -3307,4 +3307,11 @@ a.agileits.w3layouts {
 .w3ls_work_grids {
     margin-top: 1em;
 }
+}
+.header-link {
+    text-decoration: none !important;
+    font-size: 16px;
+}
+.user-name{
+    color: #FFAC3A;
 }
