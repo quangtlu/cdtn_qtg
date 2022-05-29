@@ -74,6 +74,14 @@
                 @endcan
                 @can('list role')
                 <li class="nav-item">
+                    <a href="{{route('admin.posts.index')}}" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <p>
+                            Quản lý bài viết
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="fas fa-user-tag"></i>
                         <p>
