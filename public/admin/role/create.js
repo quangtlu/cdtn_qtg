@@ -9,6 +9,5 @@ $('.checkall').on('click', function(){
 })
 
 $('.input-name').on('click', function(){
-    console.log(2)
     $(this).prop('disabled', function() { $(this).removeProp('disable')});
 })

@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="{{ asset('template_blog/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen" property="" />
+    @yield('css')
     <!-- stylesheet -->
     <!-- meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,5 +111,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
+@yield('js')
 </body>
 </html>

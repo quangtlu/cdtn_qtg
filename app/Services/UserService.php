@@ -34,7 +34,11 @@ class UserService
             "email" => $request->email,
         ];
         $user = $this->userModel->create($data);
-        $user->assignRole($request->roleNames);
+        if ($request->roleNames) {
+            $user->assignRole($request->roleNames);
+        } else {
+            $user->assignRole('user');
+        }
     }
 
     public function update($request, $id){
