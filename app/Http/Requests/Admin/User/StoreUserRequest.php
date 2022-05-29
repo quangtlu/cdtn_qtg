@@ -31,7 +31,7 @@ class StoreUserRequest extends FormRequest
             'password' => [
                 'bail',
                 'required',
-                'min:6',
+                'min:8',
             ],
         ];
     }
@@ -50,7 +50,7 @@ class StoreUserRequest extends FormRequest
             'dob.date_format' => 'Vui lòng nhập đúng định dạng Ngày-tháng-năm',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
             'password.required' => 'Vui lòng nhập mật khẩu',
-            'password.min' => 'Mật khẩu tối thiểu 6 kí tự',
+            'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
         ];
     }
 }
