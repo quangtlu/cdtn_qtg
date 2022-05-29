@@ -12,7 +12,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'quyền', 'key' => 'Quản lý'])
+        @include('partials.admin.content_header', ['name' => 'quyền', 'key' => 'Quản lý'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

@@ -12,11 +12,11 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-@include('partials.header')
-@include('partials.sidebar')
-    @include('partials.flash-message')
+@include('partials.admin.header')
+@include('partials.admin.sidebar')
+    @include('partials.admin.flash-message')
     @yield('content')
-@include('partials.footer')
+@include('partials.admin.footer')
 </div>
 <script src={{ asset("AdminLTE/plugins/jquery/jquery.min.js") }}></script>
 <script src={{ asset("AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js") }}></script>

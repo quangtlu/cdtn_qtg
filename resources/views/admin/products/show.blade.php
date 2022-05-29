@@ -33,11 +33,11 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'Tác phẩm', 'key' => 'Chi tiết'])
+        @include('partials.admin.content_header', ['name' => 'Tác phẩm', 'key' => 'Chi tiết'])
     <!-- product -->
         <div class="product-content product-wrap clearfix product-deatil">
-            @if (empty($productImgs)) 
-                <img class="no-image" src="{{ asset("image/products/no_image.jpg") }}" alt="">                                    
+            @if (empty($productImgs))
+                <img class="no-image" src="{{ asset("image/products/no_image.jpg") }}" alt="">
             @else
                 <div class="swiper">
                 <!-- Additional required wrapper -->
@@ -45,16 +45,16 @@
                         <!-- Slides -->
                         @foreach ($productImgs as $item)
                             <div class="swiper-slide">
-                                <img class="product-img" src="{{ asset("image/products/$item") }}" alt="">                                    
+                                <img class="product-img" src="{{ asset("image/products/$item") }}" alt="">
                             </div>
                         @endforeach
                     </div>
                     @if (count($productImgs)>1)
                         <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>                        
+                        <div class="swiper-button-next"></div>
                     @endif
                 </div>
-                        
+
             @endif
                 <!-- If we need scrollbar -->
             <div class="row">

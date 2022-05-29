@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Requests\Admin\Role\StoreRoleRequest;
 use App\Http\Requests\Admin\Role\UpdateRoleRequest;
 use App\Models\Permission;
 use App\Services\PermissionService;
 use App\Services\RoleService;
-use Illuminate\Http\Request;
 use function redirect;
 use function view;
 
