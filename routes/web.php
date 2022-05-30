@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/destroy/{id}', 'Admin\PermissionController@destroy')->name('.destroy')->middleware('can:delete role');
             });
         });
-        
+
         Route::name('.conversations')->group(function () {
             Route::prefix('/conversations')->group(function () {
                 Route::get('/', 'Admin\ConversationController@index')->name('.index')->middleware('can:list role');
@@ -78,28 +78,39 @@ Route::middleware('auth')->group(function () {
                 Route::post('/store', 'Admin\ConversationController@store')->name('.store')->middleware('can:add role');
             });
         });
-        
+
         Route::name('.posts')->group(function () {
             Route::prefix('/posts')->group(function () {
-                Route::get('/', 'Admin\PostController@index')->name('.index');
-                Route::get('/create', 'Admin\PostController@create')->name('.create');
-                Route::post('/store', 'Admin\PostController@store')->name('.store');
-                Route::get('/edit/{id}', 'Admin\PostController@edit')->name('.edit');
-                Route::post('/update/{id}', 'Admin\PostController@update')->name('.update');
-                Route::get('/show/{id}', 'Admin\PostController@show')->name('.show');
-                Route::get('/destroy/{id}', 'Admin\PostController@destroy')->name('.destroy');
+                Route::get('/', 'Admin\PostController@index')->name('.index')->middleware('can:list post');
+                Route::get('/create', 'Admin\PostController@create')->name('.create')->middleware('can:add post');
+                Route::post('/store', 'Admin\PostController@store')->name('.store')->middleware('can:add post');
+                Route::get('/edit/{id}', 'Admin\PostController@edit')->name('.edit')->middleware('can:edit post');
+                Route::post('/update/{id}', 'Admin\PostController@update')->name('.update')->middleware('can:edit post');
+                Route::get('/show/{id}', 'Admin\PostController@show')->name('.show')->middleware('can:delete post');
+                Route::get('/destroy/{id}', 'Admin\PostController@destroy')->name('.destroy')->middleware('can:delete post');
+            });
+        });
+
+        Route::name('.faqs')->group(function () {
+            Route::prefix('/faqs')->group(function () {
+                Route::get('/', 'Admin\FaqController@index')->name('.index')->middleware('can:list faq');
+                Route::get('/create', 'Admin\FaqController@create')->name('.create')->middleware('can:add faq');
+                Route::post('/store', 'Admin\FaqController@store')->name('.store')->middleware('can:add faq');
+                Route::get('/edit/{id}', 'Admin\FaqController@edit')->name('.edit')->middleware('can:edit faq');
+                Route::post('/update/{id}', 'Admin\FaqController@update')->name('.update')->middleware('can:edit faq');
+                Route::get('/destroy/{id}', 'Admin\FaqController@destroy')->name('.destroy')->middleware('can:delete faq');
             });
         });
     });
 
-    
+
 });
 
 //Home
 Route::get('/', 'home\HomeController@index')->name('home.index');
 
 Route::name('home')->prefix('home')->group(function () {
-    
+
 });
 
 

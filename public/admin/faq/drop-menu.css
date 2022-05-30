@@ -1,0 +1,15 @@
+.faq-card-wrap {
+    position: relative;
+}
+.menu-icon {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    cursor: pointer;
+    font-size: 21px;
+    z-index: 1;
+}
+.dropdown-toggle::after {
+    display: none;
+}
+
