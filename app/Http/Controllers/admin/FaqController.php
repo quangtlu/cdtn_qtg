@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\Faq\StoreFaqRequest;
+use App\Http\Requests\Admin\Faq\UpdateFaqRequest;
 use App\Services\FaqService;
 use Illuminate\Http\Request;
 use function redirect;
@@ -27,10 +29,10 @@ class FaqController extends Controller
         return view('admin.faq.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreFaqRequest $request)
     {
         $this->faqService->create($request);
-        return Redirect(route('admin.faqs.index'));
+        return Redirect(route('admin.faqs.index'))->with('success', 'Thêm FAQ thành công');
     }
 
     public function edit($id)
@@ -39,10 +41,10 @@ class FaqController extends Controller
         return view('admin.faq.edit', compact('faq'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateFaqRequest $request, $id)
     {
         $this->faqService->update($request, $id);
-        return Redirect(route('admin.faqs.index'));
+        return Redirect(route('admin.faqs.index'))->with('success', 'Cập nhật FAQ thành công');
     }
 
     public function destroy($id)
