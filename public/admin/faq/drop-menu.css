@@ -3,11 +3,19 @@
 }
 .menu-icon {
     position: absolute;
-    top: 1px;
-    right: 1px;
+    top: 0px;
+    text-align: center;
+    right: -8px;
     cursor: pointer;
-    font-size: 21px;
+    font-size: 18px;
     z-index: 1;
+    padding: 3px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+.menu-icon:hover {
+    background-color: #CCCCD0;
 }
 .dropdown-toggle::after {
     display: none;
