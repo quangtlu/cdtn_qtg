@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\User;
-
+namespace App\Http\Requests\Admin\Owner;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class UpdateOwnerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,9 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
-            'email' => 'bail|required|unique:users|email:rfc,dns',
-            'dob' => 'bail|before:today|nullable',
-            'password' => [
-                'bail',
-                'required',
-                'min:8',
-            ],
+            'name' => ['required', Rule::unique('owners','name')->ignore($this->id)],
+            'phone' => ['bail', 'required', 'regex:/(0)[0-9]{9}/', 'max:10', Rule::unique('owners','phone')->ignore($this->id)],
+            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('owners','email')->ignore($this->id)],
         ];
     }
 
@@ -47,9 +41,10 @@ class StoreUserRequest extends FormRequest
             'email.required' => 'Vui lòng email',
             'email.email' => 'Vui lòng nhập đúng email',
             'email.unique' => 'Email đã tồn tại',
+            'dob.date_format' => 'Vui lòng nhập đúng định dạng Ngày-tháng-năm',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
             'password.required' => 'Vui lòng nhập mật khẩu',
-            'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
+            'password.min' => 'Mật khẩu tối thiểu 6 kí tự',
         ];
     }
 }

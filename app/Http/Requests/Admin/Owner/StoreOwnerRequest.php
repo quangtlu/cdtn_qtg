@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\User;
+namespace App\Http\Requests\Admin\Owner;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreOwnerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,22 +24,17 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
-            'email' => 'bail|required|unique:users|email:rfc,dns',
-            'dob' => 'bail|before:today|nullable',
-            'password' => [
-                'bail',
-                'required',
-                'min:8',
-            ],
+            'name' => 'required|unique:owners',
+            'phone' => 'bail|required|unique:owners|regex:/(0)[0-9]{9}/|max:10',
+            'email' => 'bail|required|unique:owners|email:rfc,dns',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên người dùng',
+            'name.required' => 'Vui lòng nhập tên chủ sở hữu',
+            'name.unique' => 'Vui lòng nhập tên chủ sở hữu đã tồn tại',
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.unique' => 'Số điện thoại đã tồn tại',
             'phone.regex' => 'vui lòng nhập đúng số điện thoại',
@@ -47,9 +42,6 @@ class StoreUserRequest extends FormRequest
             'email.required' => 'Vui lòng email',
             'email.email' => 'Vui lòng nhập đúng email',
             'email.unique' => 'Email đã tồn tại',
-            'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
-            'password.required' => 'Vui lòng nhập mật khẩu',
-            'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
         ];
     }
 }

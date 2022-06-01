@@ -22,9 +22,9 @@
                                 <th>Tên tác phẩm</th>
                                 <th>Tác giả</th>
                                 <th>Chủ sở hữu</th>
-                                @can('add product | edit product | show product')
+
                                 <th>Action</th>
-                                @endcan
+
                             </tr>
                             </thead>
                             <tbody>
@@ -33,24 +33,24 @@
                                         <td>{{ $product->id }}</td>
                                         <td>
                                             @if ($product->image)
-                                                <img class="avt-product" src=" {{ asset('image/products/'.explode("|", $product->image)[0]) }}" alt="">
+                                                <img class="avt-product index-avt" src=" {{ asset('image/products/'.explode("|", $product->image)[0]) }}" alt="">
                                             @else
-                                                <img class="avt-product" src="{{ asset('image/products/no_image.jpg') }}" alt="">
+                                                <img class="avt-product index-avt" src="{{ asset('image/products/no_image.jpg') }}" alt="">
                                             @endif
                                         </td>
 
-                                        <td>{{ Str::ucfirst(strtolower($product->name)) }}</td>
+                                        <td>{{ Str::ucfirst($product->name) }}</td>
                                         <td>
                                                 {{ $product->author->count() > 1 ? $product->author->first()->name.",..." : $product->author->first()->name }}
                                         </td>
                                         <td>{{ $product->owner->name}}</td>
-                                        @can('add product | edit product | show product')
+
                                         <td>
                                             <a href="{{ route('admin.products.edit', ["id" => $product->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
                                             <button type="button" data-url="{{ route('admin.products.destroy', ["id" => $product->id]) }}" class="btn btn-danger btn-sm btn-delete">Xoá</i></button>
                                             <a href="{{ route('admin.products.show', ["id" => $product->id]) }}"><button class="btn btn-info btn-sm">Chi tiết</button></a>
                                         </td>
-                                        @endcan
+
                                     </tr>
                                 @endforeach
                             </tbody>

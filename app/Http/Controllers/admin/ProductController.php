@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\Product\StoreProductRequest;
+use App\Http\Requests\Admin\Product\UpdateProductRequest;
 use App\Services\AuthorService;
 use App\Services\OwnerService;
 use App\Services\ProductService;
@@ -34,10 +36,10 @@ class ProductController extends Controller
         return view('admin.products.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $this->productService->create($request);
-        return Redirect(route('admin.products.index'));
+        return Redirect(route('admin.products.index'))->with('success', 'Thêm tác phẩm thành công');
     }
 
     public function show($id)
@@ -55,10 +57,10 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'productOfAuthors', 'productImg'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $this->productService->update($request, $id);
-        return Redirect(route('admin.products.index'));
+        return Redirect(route('admin.products.index'))->with('success', 'Cập nhật tác phẩm thành công');
     }
 
     public function destroy($id)
