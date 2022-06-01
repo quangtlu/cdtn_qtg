@@ -32,7 +32,7 @@ class OwnerController extends Controller
     public function store(StoreOwnerRequest $request)
     {
         $this->ownerService->create($request);
-        return Redirect(route('admin.owners.index'));
+        return Redirect(route('admin.owners.index'))->with('success', 'Thêm chủ sở hữu thành công');
     }
 
     public function edit($id)
@@ -44,7 +44,7 @@ class OwnerController extends Controller
     public function update(UpdateOwnerRequest $request, $id)
     {
         $this->ownerService->update($request, $id);
-        return Redirect(route('admin.owners.index'));
+        return Redirect(route('admin.owners.index'))->with('success', 'Câp nhật chủ sở hữu thành công');
     }
 
     public function destroy($id)
