@@ -11,7 +11,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -29,7 +29,7 @@
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
                             </div>
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </form>
                     </div>
                 </div>

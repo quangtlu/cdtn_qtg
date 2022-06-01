@@ -116,10 +116,12 @@ Route::middleware('auth')->group(function () {
 
 //Home
 Route::get('/', 'home\HomeController@index')->name('home.index');
-
-Route::name('home')->prefix('home')->group(function () {
-
+Route::get('/faq', 'home\FaqController@index')->name('faq.index');
+Route::name('posts')->prefix('posts')->group(function () {
+    Route::get('/', 'home\PostController@index')->name('.index');
+    Route::get('/{id}', 'home\PostController@show')->name('.show');
 });
+
 
 
 

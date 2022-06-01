@@ -68,6 +68,14 @@ class PermissionSeeder extends Seeder
             Permission::create(['name' => 'delete conservation']),
         ];
 
+        $faqPermissions = [
+            Permission::create(['name' => 'list faq']),
+            Permission::create(['name' => 'add faq']),
+            Permission::create(['name' => 'edit faq']),
+            Permission::create(['name' => 'delete faq']),
+        ];
+
+
         $userAdmin = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
