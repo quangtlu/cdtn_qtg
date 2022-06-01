@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required',Rule::unique('product','name')->ignore($this->id)],
+            'name' => ['required',Rule::unique('products','name')->ignore($this->id)],
             'pub_date' => 'before:today',
             'regis_date' => 'before:today',
             'owner_id' => 'required',

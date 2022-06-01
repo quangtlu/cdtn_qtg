@@ -62,6 +62,9 @@
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
                                 <textarea class="form-control" name="description" id="summernote" cols="30" rows="5"></textarea>
+                                @error('description')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
