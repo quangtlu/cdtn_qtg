@@ -101,6 +101,14 @@ Route::middleware('auth')->group(function () {
                 Route::get('/destroy/{id}', 'Admin\FaqController@destroy')->name('.destroy')->middleware('can:delete faq');
             });
         });
+
+        Route::name('.profile')->group(function(){
+            Route::prefix('/profile-user')->group(function() {
+                Route::get('/', 'Admin\ProfileController@index')->name('.index');
+                Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('.edit');
+                Route::post('/update{id}', 'Admin\ProfileController@update')->name('.update');
+            });
+        });
     });
 
 
