@@ -128,6 +128,14 @@
                     </a>
                 </li>
                 @endcan
+                <li class="nav-item">
+                    <a href="{{route('admin.tags.index')}}" class="nav-link">
+                        <i class="fas fa-tags"></i>
+                        <p>
+                            Quản lý Tags
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
