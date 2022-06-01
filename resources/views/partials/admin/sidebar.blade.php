@@ -110,6 +110,16 @@
                     </a>
                 </li>
                 @endcan
+                @can('list faq')
+                <li class="nav-item">
+                    <a href="{{route('admin.faqs.index')}}" class="nav-link">
+                        <i class="fas fa-comments"></i>
+                        <p>
+                            Quản lý FAQ
+                        </p>
+                    </a>
+                </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
