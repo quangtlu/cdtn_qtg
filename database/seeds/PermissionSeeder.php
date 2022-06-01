@@ -42,14 +42,12 @@ class PermissionSeeder extends Seeder
             Permission::create(['name' => 'add author']),
             Permission::create(['name' => 'edit author']),
             Permission::create(['name' => 'delete author']),
-            Permission::create(['name' => 'show product']),
         ];
         $ownerPermissions = [
             Permission::create(['name' => 'list owner']),
             Permission::create(['name' => 'add owner']),
             Permission::create(['name' => 'edit owner']),
             Permission::create(['name' => 'delete owner']),
-            Permission::create(['name' => 'show product']),
         ];
         $rolePermissions = [
             Permission::create(['name' => 'list role']),

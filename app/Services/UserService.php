@@ -50,7 +50,13 @@ class UserService
             "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
-        $user->update($data);
+        if($file=$request->file('image')){
+                $name=$file->getClientOriginalName();
+                $file->move('image/profile',$name);
+            }
+        $data['image'] = $file;
+        dd($data);
+        // $user->update($data);
         $user->roles()->sync($request->role_id);
     }
 
