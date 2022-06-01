@@ -1930,14 +1930,7 @@ h2.typoh2{
     text-align:left;
 }
 .single-left1 p{
-	margin: 2em 0;
-    color: #999;
-    line-height: 2em;
-}
-.single-left1 p i{
-	color:#212121;
-	margin:1em 0;
-	display:block;
+	margin: 10px 0;
 }
 .admin{
 	padding:2em;
@@ -3314,4 +3307,12 @@ a.agileits.w3layouts {
 }
 .user-name{
     color: #FFAC3A;
+}
+.post-content-limit-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }

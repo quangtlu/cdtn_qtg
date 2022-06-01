@@ -20,8 +20,8 @@ class PostService
     }
 
     public function getById($id){
-        $post = $this->postModel->findOrFail($id);   
-        return $post; 
+        $post = $this->postModel->findOrFail($id);
+        return $post;
     }
 
     public function create($request){
@@ -39,7 +39,7 @@ class PostService
                     $images[]=$name;
                 }
                 $data['image'] = implode("|",$images);
-                
+
         } else {
             $data['image'] = null;
         }

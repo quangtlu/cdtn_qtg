@@ -11,7 +11,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <form action="{{ route('admin.posts.update', ["id" => $post->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -23,12 +23,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
-                                <textarea class="form-control tinymce_editor_init" value="{{ $post->content }}" name="content" id="summernote" cols="30" rows="5">{{ $post->content }}</textarea>
+                                <textarea class="form-control" value="{{ $post->content }}" name="content" id="summernote" cols="30" rows="5">{{ $post->content }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5" value="">
-                                <img class="product-img" src="{{ asset("image/posts/$postImgs") }}" alt="">                                    
+                                <img class="product-img" src="{{ asset("image/posts/$postImgs") }}" alt="">
                             </div>
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>
@@ -42,7 +42,6 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.2/tinymce.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
@@ -50,6 +49,9 @@
         $('.select2_init').select2({
             'placeholder': 'Chọn tác giả'
         })
+        $('#summernote').summernote({
+            height: 400
+        });
     })
     </script>
 @endsection

@@ -30,11 +30,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->postService->create($request);
-        return Redirect(route('admin.posts.index'));
+        return Redirect(route('admin.posts.index'))->with('success', 'Thêm mới bài viết thành công');
     }
 
     public function show($id)
-    {   
+    {
         $post = $this->postService->getById($id);
         $postImgs = $post->image ?  explode("|", $post->image) : null;
         return view('admin.posts.show', compact('post', 'postImgs'));
@@ -51,7 +51,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $this->postService->update($request, $id);
-        return Redirect(route('admin.posts.index'));
+        return Redirect(route('admin.posts.index'))->with('success', 'Cập nhật bài viết thành công');
     }
 
     public function destroy($id)
