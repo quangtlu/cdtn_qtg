@@ -6,6 +6,7 @@
     <link href="{{ asset('template_blog/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen" property="" />
+
     <!-- stylesheet -->
     <!-- meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,9 +47,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             });
         });
     </script>
-    <!-- start-smoth-scrolling -->
-
-    <!-- scriptfor smooth drop down-nav -->
     <script>
         $(document).ready(function(){
             $(".dropdown").hover(
@@ -63,12 +61,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             );
         });
     </script>
-    @yield('css')
+    <link rel="stylesheet" href="{{ asset("home/alert.css") }}">
+@yield('css')
 <!-- //script for smooth drop down-nav -->
 </head>
 <body>
 <!-- header -->
 @include('partials.home.header')
+@include('partials.flash-message')
 <div class="container">
     <div class="banner-btm-agile">
         <div class="col-md-9 btm-wthree-left">@yield('content')</div>
@@ -84,10 +84,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     });
 </script>
-<!-- //here ends scrolling icon -->
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/alert.js') }}"></script>
 @yield('js')
 </body>
 </html>

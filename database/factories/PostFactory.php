@@ -10,6 +10,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->title,
         'content' => $faker->text,
         'user_id' => rand(1,99),
-        'image' => 'anh-1.jpg',
+        'image' => '1.jpg|2.jpg|3.jpg',
     ];
 });

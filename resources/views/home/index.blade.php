@@ -56,7 +56,6 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        <!-- wthree-top-1 -->
         <div class="wthree-top-1">
             <div class="w3agile-top">
                 <section class="slider">
