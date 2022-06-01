@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\Constraint\Exception as ConstraintException;
 
 class UserService
 
@@ -50,14 +52,15 @@ class UserService
             "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
-        if($file=$request->file('image')){
-                $name=$file->getClientOriginalName();
-                $file->move('image/profile',$name);
-            }
-        $data['image'] = $file;
-        dd($data);
-        // $user->update($data);
-        $user->roles()->sync($request->role_id);
+        if($file=$request->file('image')) {
+            $name=$file->getClientOriginalName();
+            $file->move('image/profile',$name);
+            $data['image'] = $name;
+        }
+        $user->update($data);
+        if($request->role_id){
+            $user->roles()->sync($request->role_id);
+        }
     }
 
     public function delete($id){

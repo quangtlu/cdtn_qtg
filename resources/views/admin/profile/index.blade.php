@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Quản lý tác giả')
+@section('title', 'Thông tin cá nhân')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/profile/index.css') }}">
 @endsection
@@ -15,7 +15,7 @@
                     <div class="col-md-5 border-right">
                         <div class="p-3">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-right">Profile</h4>
+                                <h4 class="text-right">Thông tin tài khoản</h4>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12">
@@ -47,10 +47,10 @@
                     <div class="col-md-4">
                         <div class="">
                             <div class="d-flex flex-column align-items-center text-center">
-                                @if (empty($profileImg)) 
+                                @if (empty($profile->image)) 
                                     <img class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/user.jpg") }}" alt="">                                    
                                 @else
-                                    <img class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/$profileImg") }}">
+                                    <img class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/$profile->image") }}">
                                 @endif
                                 <span class="font-weight-bold">{{ $profile->name }}</span>
                                 <span class="text-black-50">{{ $profile->email }}</span>

@@ -22,8 +22,7 @@ class ProfileController extends Controller
     {
         $userId = Auth::user()->id;
         $profile = $this->userService->getById($userId);
-        $profileImg = $profile->image ? ($profile->image) : null;
-        return view('admin.profile.index', compact('profile', 'profileImg'));
+        return view('admin.profile.index', compact('profile'));
     }
 
     public function edit($id)

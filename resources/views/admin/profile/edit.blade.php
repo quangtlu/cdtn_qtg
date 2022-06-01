@@ -58,12 +58,17 @@
                         <div class="col-md-4">
                             <div class="">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img class="rounded-circle mt-5" src="{{ asset("image/profile/$profileImg") }}" alt="">
-                                    <input type="file" multiple class="form-control-file" name="image" id="" cols="30" rows="5" value="">
+                                    @if ($profile->image != null)
+                                        <img id="avt-img" data-img_url = '{{ asset("image/profile") }}'  class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/$profile->image") }}" alt="">
+                                    @else
+                                        <img id="avt-img" data-img_url = '{{ asset("image/profile") }}' class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/user.jpg") }}" alt="">
+                                    @endif
+                                    <input type="file" id="profile_pic" value="" name="image" accept=".jpg, .jpeg, .png">
                                     {{-- <span> </span> --}}
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </form>
                 <!-- /.row -->
@@ -74,4 +79,10 @@
 @endsection
 @section('js')
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+    <script>
+        $('#profile_pic').on('change', function(){
+            var file = $(this)[0].files[0].mozFullPath
+            $('#avt-img').attr('src', file)
+        })
+    </script>
 @endsection
