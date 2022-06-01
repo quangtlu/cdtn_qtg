@@ -19,7 +19,7 @@ class OwnerController extends Controller
     public function index()
     {
         $owners = $this->ownerService->getPaginate();
-        return view('faq.owners.index', compact('owners'));
+        return view('admin.owners.index', compact('owners'));
     }
 
     public function create()
