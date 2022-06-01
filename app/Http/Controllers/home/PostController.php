@@ -28,4 +28,10 @@ class PostController
         $post = $this->postService->getById($id);
         return view('home.posts.show', compact('post'));
     }
+
+    public function store(Request $request)
+    {
+        $this->postService->create($request);
+        return Redirect(route('posts.index'))->with('success', 'Đăng bài thành công');
+    }
 }

@@ -2,17 +2,32 @@
 @section('title', $post->title )
 @section('content')
     <div class="single-left1">
-        @if($post->image != null)
-        <img src="images/2.jpg" alt=" " class="img-responsive" />
-        @endif
         <h3>{{ $post->title }}</h3>
         <ul>
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">{{ $post->user->name }}</a></li>
             <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">5 Tags</a></li>
-            <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="#">5 Comments</a></li>
+            <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#">5 Comments</a></li>
+            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $post->created_at }}</a></li>
         </ul>
         <p>{!! $post->content !!}</p>
     </div>
+    @if($post->image != null)
+        <div class="w3agile-top">
+            <section class="slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        @foreach(explode("|", $post->image) as $image)
+                            <li>
+                                <div class="w3agile_special_deals_grid_left_grid">
+                                    <img src="{{ asset('image/posts/'.$image) }}" class="img-responsive" alt="" />
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
+        </div>
+    @endif
     <div class="comments">
         <h3>Our Recent Comments</h3>
         <div class="comments-grids">
@@ -87,4 +102,20 @@
             </div>
         </form>
     </div>
+@endsection
+@section('js')
+    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+
 @endsection
