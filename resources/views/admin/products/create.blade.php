@@ -11,20 +11,29 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên tác phẩm</label>
                                 <input type="text" name="name" class="form-control" >
+                                @error('name')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
                                 <input type="date" name="pub_date" class="form-control" >
+                                @error('pub_date')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
                                 <input type="date" name="regis_date" class="form-control" >
+                                @error('regis_date')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Tác giả</label>
@@ -34,14 +43,21 @@
                                         <option value="{{ $author->id }}">{{ $author->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('author_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Chủ sở hữu tác phẩm</label>
                                 <select name="owner_id" class="form-control" >
+                                    <option value=""></option>
                                     @foreach ($owners as $owner)
                                         <option value="{{ $owner->id }}">{{ $owner->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('owner_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
@@ -51,7 +67,7 @@
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
                             </div>
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </form>
                     </div>
                 </div>
