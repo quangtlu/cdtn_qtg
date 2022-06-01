@@ -17,6 +17,9 @@
                             <div class="form-group">
                                 <label for="category_name">Tên bài viết</label>
                                 <input type="text" value="{{ $post->title }}" name="title" class="form-control" id="category_name">
+                                @error('title')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Tác giả: {{ Auth::user()->name }}</label>
@@ -24,13 +27,16 @@
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
                                 <textarea class="form-control" value="{{ $post->content }}" name="content" id="summernote" cols="30" rows="5">{{ $post->content }}</textarea>
+                                @error('content')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="height: 68px">
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5" value="">
                                 <img class="product-img" src="{{ asset("image/posts/$postImgs") }}" alt="">
                             </div>
-                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            <button type="submit" class="btn btn-primary mb-2">Cập nhật</button>
                         </form>
                     </div>
                 </div>

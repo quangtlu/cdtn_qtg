@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,9 +33,10 @@ class PostService
             "user_id" => $user->id,
         ];
         if($files=$request->file('image')){
+            $time = Carbon::now('Asia/Ho_Chi_Minh')->format("Y.m.d H.i.s");
                 $images=array();
                 foreach($files as $file){
-                    $name=$file->getClientOriginalName();
+                    $name=$time.'.'.$file->getClientOriginalName();
                     $file->move('image/posts',$name);
                     $images[]=$name;
                 }
@@ -56,10 +58,11 @@ class PostService
         ];
 
         if($files=$request->file('image')){
+            $time = Carbon::now('Asia/Ho_Chi_Minh')->format("Y.m.d H.i.s");
                 $images=array();
                 foreach($files as $file){
-                    $name=$file->getClientOriginalName();
-                    $file->move('image/post',$name);
+                    $name=$time.'.'.$file->getClientOriginalName();
+                    $file->move('image/posts',$name);
                     $images[]=$name;
                 }
                 $data['image'] = implode("|",$images);
