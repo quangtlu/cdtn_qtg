@@ -12,10 +12,16 @@
                             <div class="form-group">
                                 <label for="category_name">Họ và tên</label>
                                 <input type="text" name="name" class="form-control" >
+                                @error('name')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
                                 <input type="date" name="dob" class="form-control" >
+                                @error('dob')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             @can('add author')
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
