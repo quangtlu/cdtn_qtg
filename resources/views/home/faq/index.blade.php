@@ -7,7 +7,7 @@
             <div class="panel-heading" role="tab" id="heading{{$i}}">
                 <h4 class="panel-title">
                     <a class="question-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
-                        C{!! $faqs[$i]->question  !!}
+                        {!! $faqs[$i]->question  !!}
                     </a>
                 </h4>
             </div>
