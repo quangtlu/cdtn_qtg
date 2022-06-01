@@ -8,21 +8,13 @@
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
+                        @foreach(explode("|", $post->image) as $image)
                         <li>
                             <div class="w3agile_special_deals_grid_left_grid">
-                                <a href="singlepage.html"><img src="{{ asset('template_blog/images/2.jpg') }}" class="img-responsive" alt="" /></a>
+                                <a href="{{ route('posts.show', ['id' => $post->id]) }}"><img src="{{ asset('image/posts/'.$image) }}" class="img-responsive" alt="" /></a>
                             </div>
                         </li>
-                        <li>
-                            <div class="w3agile_special_deals_grid_left_grid">
-                                <a href="singlepage.html"><img src="{{ asset('template_blog/images/3.jpg') }}" class="img-responsive" alt="" /></a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="w3agile_special_deals_grid_left_grid">
-                                <a href="singlepage.html"><img src="{{ asset('template_blog/images/3.jpg') }}" class="img-responsive" alt="" /></a>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>CONNECT SOCIALLY
             </section>
@@ -63,4 +55,5 @@
         </div>
     </div>
     @endforeach
+    {{ $posts->links() }}
 @endsection
