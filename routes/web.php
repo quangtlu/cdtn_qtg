@@ -122,6 +122,10 @@ Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/{id}', 'home\PostController@show')->name('.show');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::post('/posts/store', 'home\PostController@store')->name('posts.store')->middleware('can:add post');
+});
+
 
 
 

@@ -1,0 +1,39 @@
+#avt-user {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+#input-post {
+    border-radius: 40px;
+    cursor: pointer;
+}
+.modal-content{
+    border-radius: 20px;
+}
+.modal-header {
+    border-radius: 17px 17px 0 0;
+}
+.panel {
+    border-radius: 20px;
+}
+.panel-heading {
+    border-radius: 17px 17px 0 0;
+}
+.panel-footer {
+    border-radius: 0px 0px 17px 17px;
+}
+.btn-modal-post {
+    border-radius: 20px;
+}
+.post-info{
+    list-style: none;
+}
+.post-info i{
+    margin-right: 5px;
+}
+.post-info__link{
+    text-decoration: none !important;
+    color: #fca003;
+    font-size: 16px;
+}
+

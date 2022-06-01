@@ -59,7 +59,7 @@ class PostService
                 $images=array();
                 foreach($files as $file){
                     $name=$file->getClientOriginalName();
-                    $file->move('image/post',$name);
+                    $file->move('image/posts',$name);
                     $images[]=$name;
                 }
                 $data['image'] = implode("|",$images);
