@@ -1,6 +1,34 @@
 @extends('layouts.home')
+@section('title', 'Home')
 @section('content')
-    <div class="col-md-9 btm-wthree-left">
+    <div class="w3-slider">
+        <!-- main-slider -->
+        <ul id="demo1">
+            <li>
+                <img src="{{asset('template_blog/images/1.jpg')}}" alt="" />
+                <!--Slider Description example-->
+                <div class="slide-desc">
+                    <h3>Fashion</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's dummy. </p>
+                </div>
+            </li>
+            <li>
+                <img src="{{asset('template_blog/images/2.jpg')}}" alt="" />
+                <div class="slide-desc">
+                    <h3>Life Style </h3>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                </div>
+            </li>
+            <li>
+                <img src="{{asset('template_blog/images/3.jpg')}}" alt="" />
+                <div class="slide-desc">
+                    <h3>Photography</h3>
+                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature. </p>
+                </div>
+            </li>
+
+        </ul>
+    </div>
         <div class="wthree-top">
             <div class="w3agile-top">
                 <div class="w3agile_special_deals_grid_left_grid">
@@ -160,5 +188,4 @@
             </div>
         </div>
         <!-- wthree-top-1 -->
-    </div>
 @endsection

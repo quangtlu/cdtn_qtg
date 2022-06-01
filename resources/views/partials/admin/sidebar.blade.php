@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list role')
+                @can('list post')
                 <li class="nav-item">
                     <a href="{{route('admin.posts.index')}}" class="nav-link">
                         <i class="fas fa-book"></i>
@@ -81,6 +81,8 @@
                         </p>
                     </a>
                 </li>
+                @endcan
+                @can('list role')
                 <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="fas fa-user-tag"></i>
@@ -113,7 +115,7 @@
                 @can('list faq')
                 <li class="nav-item">
                     <a href="{{route('admin.faqs.index')}}" class="nav-link">
-                        <i class="fas fa-comments"></i>
+                        <i class="fas fa-question-circle"></i>
                         <p>
                             Quản lý FAQ
                         </p>
