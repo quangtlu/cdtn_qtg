@@ -17,10 +17,16 @@
                             <div class="form-group">
                                 <label for="category_name">Tiêu đề</label>
                                 <input type="text" name="title" class="form-control" id="category_name">
+                                @error('title')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Nội dung</label>
                                 <textarea class="form-control" name="content" id="summernote" cols="30" rows="5"></textarea>
+                                @error('content')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
