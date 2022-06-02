@@ -33,7 +33,7 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Tác phẩm', 'key' => 'Chi tiết'])
+        @include('partials.admin.content_header', ['name' => 'Bài viết', 'key' => 'Chi tiết'])
     <!-- product -->
         <div class="product-content product-wrap clearfix product-deatil">
             @if (empty($postImgs)) 
@@ -71,10 +71,21 @@
                             <li>
                                 Thẻ tag:
                                 @php
+                                $tagsName = [];
                                     foreach ($post->tag as $tagName){
                                         $tagsName[] = $tagName->name;
                                     }
-                                    echo $str = implode(", ", $tagsName);
+                                    echo $tagsName = implode(", ", $tagsName);
+                                @endphp
+                            </li>
+                            <li>
+                                Danh mục:
+                                @php
+                                $categoriesName = [];
+                                    foreach ($post->category as $categoryName){
+                                        $categoriesName[] = $categoryName->name;
+                                    }
+                                    echo $categoriesName = implode(", ", $categoriesName);
                                 @endphp
                             </li>
                             <li>

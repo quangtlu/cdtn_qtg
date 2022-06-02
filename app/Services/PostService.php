@@ -46,6 +46,8 @@ class PostService
             $data['image'] = null;
         }
         $post = $this->postModel->create($data);
+        $post->tag()->attach($request->tag_id);
+        $post->category()->attach($request->category_id);
         if ($post) {
             $user->givePermissionTo(['user edit post', 'user delete post']);
         }
@@ -71,6 +73,8 @@ class PostService
                 $data['image'] = implode("|",$images);
         }
         $post->update($data);
+        $post->tag()->sync($request->tag_id);
+        $post->category()->sync($request->category_id);
     }
 
     public function delete($id){
