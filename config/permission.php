@@ -171,7 +171,8 @@ return [
         'comment',
         'message',
         'faq',
-        'category'
+        'category',
+        'tag'
     ],
 
     'module_children' => [

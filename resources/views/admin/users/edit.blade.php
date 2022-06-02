@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('admin.users.update', ["id" => $user->id]) }}" method="POST">
+                        <form action="{{ route('admin.users.update', ["id" => $user->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên</label>

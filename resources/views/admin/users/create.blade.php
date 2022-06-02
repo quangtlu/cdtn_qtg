@@ -14,7 +14,7 @@
         ])
         <div class="content">
             <div class="container-fluid">
-                <form action="{{ route('admin.users.store') }}" method="POST">
+                <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             @csrf
