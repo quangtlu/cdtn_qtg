@@ -10,8 +10,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                @if (empty(Auth::user()->image)) 
-                    <img class="img-circle elevation-2"  src="{{ asset("image/profile/user.jpg") }}" alt="">                                    
+                @if (empty(Auth::user()->image))
+                    <img class="img-circle elevation-2"  src="{{ asset("image/profile/user.jpg") }}" alt="">
                 @else
                     <input type="hidden" {{ $image = Auth::user()->image  }}>
                     <img class="img-circle elevation-2"  src="{{ asset("image/profile/$image") }}">
@@ -38,7 +38,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @can('list user')
+                @can('admin list user')
                 <li class="nav-item">
                     <a href="{{route('admin.users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list author')
+                @can('admin list author')
                 <li class="nav-item">
                     <a href="{{route('admin.authors.index')}}" class="nav-link">
                         <i class="fas fa-user-edit"></i>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list product')
+                @can('admin list product')
                 <li class="nav-item">
                     <a href="{{route('admin.products.index')}}" class="nav-link">
                         <i class="fas fa-book"></i>
@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list owner')
+                @can('admin list owner')
                 <li class="nav-item">
                     <a href="{{route('admin.owners.index')}}" class="nav-link">
                         <i class="fas fa-user-tie"></i>
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list post')
+                @can('admin list post')
                 <li class="nav-item">
                     <a href="{{route('admin.posts.index')}}" class="nav-link">
                         <i class="fas fa-book"></i>
@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list role')
+                @can('admin list role')
                 <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
                         <i class="fas fa-user-tag"></i>
@@ -98,7 +98,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list permission')
+                @can('admin list permission')
                 <li class="nav-item">
                     <a href="{{route('admin.permissions.index')}}" class="nav-link">
                         <i class="fas fa-user-shield"></i>
@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list conservation')
+                @can('admin list conservation')
                 <li class="nav-item">
                     <a href="{{route('admin.conversations.index')}}" class="nav-link">
                         <i class="fas fa-comments"></i>
@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('list faq')
+                @can('admin list faq')
                 <li class="nav-item">
                     <a href="{{route('admin.faqs.index')}}" class="nav-link">
                         <i class="fas fa-question-circle"></i>

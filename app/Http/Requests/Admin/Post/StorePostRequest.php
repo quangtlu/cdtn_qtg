@@ -25,7 +25,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:posts',
-            'tag_id' =>'required',
             'content' => 'required',
         ];
     }
@@ -33,10 +32,9 @@ class StorePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Vui lòng nhập tên bài viết',
-            'title.unique' => 'Tên bài viết đã tồn tại',
-            'tag_id.required' => 'Vui lòng chọn thẻ tag',
-            'content.required' => 'Vui lòng nhập miêu tả',
+            'title.required' => 'Vui lòng nhập tiêu đề',
+            'title.unique' => 'Tiêu đề đã tồn tại',
+            'content.required' => 'Vui lòng nhập nội dung',
         ];
     }
 }

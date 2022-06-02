@@ -50,6 +50,5 @@ class AuthorController extends Controller
     public function destroy($id)
     {
         $this->authorService->delete($id);
-        return Redirect(route('admin.authors.index'));
     }
 }

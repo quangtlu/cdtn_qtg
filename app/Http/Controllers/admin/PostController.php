@@ -64,6 +64,5 @@ class PostController extends Controller
     public function destroy($id)
     {
         $this->postService->delete($id);
-        return Redirect(route('admin.posts.index'));
     }
 }

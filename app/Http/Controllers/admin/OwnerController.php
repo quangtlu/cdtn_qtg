@@ -50,6 +50,5 @@ class OwnerController extends Controller
     public function destroy($id)
     {
         $this->ownerService->delete($id);
-        return Redirect(route('admin.owners.index'));
     }
 }

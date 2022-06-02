@@ -3,7 +3,7 @@
     height: 40px;
     border-radius: 50%;
 }
-#input-post {
+#create-post {
     border-radius: 40px;
     cursor: pointer;
 }
@@ -27,6 +27,8 @@
 }
 .post-info{
     list-style: none;
+    padding: 27px 0;
+
 }
 .post-info i{
     margin-right: 5px;
@@ -34,6 +36,20 @@
 .post-info__link{
     text-decoration: none !important;
     color: #fca003;
-    font-size: 16px;
+    font-size: 14px;
+    padding: 5px 0;
+    display: block;
+}
+.error-message{
+    color: red;
+    font-size: 14px;
+}
+.btn-delete {
+    cursor: pointer;
+    color: red;
+}
+.btn-edit {
+    color: #0c84ff;
+    cursor: pointer;
 }
 

@@ -18,61 +18,69 @@ class PermissionSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $postPermissions = [
-            Permission::create(['name' => 'list post']),
-            Permission::create(['name' => 'add post']),
-            Permission::create(['name' => 'edit post']),
-            Permission::create(['name' => 'delete post']),
+        $postPermissionsUser = [
+            Permission::create(['name' => 'user add post']),
+            Permission::create(['name' => 'user edit post']),
+            Permission::create(['name' => 'user delete post']),
         ];
+
+        $postPermissionsAdmin = [
+            Permission::create(['name' => 'admin list post']),
+            Permission::create(['name' => 'admin add post']),
+            Permission::create(['name' => 'admin edit post']),
+            Permission::create(['name' => 'admin delete post']),
+        ];
+
         $userPermissions = [
-            Permission::create(['name' => 'list user']),
-            Permission::create(['name' => 'add user']),
-            Permission::create(['name' => 'edit user']),
-            Permission::create(['name' => 'delete user']),
+            Permission::create(['name' => 'admin list user']),
+            Permission::create(['name' => 'admin add user']),
+            Permission::create(['name' => 'admin edit user']),
+            Permission::create(['name' => 'admin delete user']),
         ];
+
         $productPermissions = [
-            Permission::create(['name' => 'list product']),
-            Permission::create(['name' => 'add product']),
-            Permission::create(['name' => 'edit product']),
-            Permission::create(['name' => 'delete product']),
-            Permission::create(['name' => 'show product']),
+            Permission::create(['name' => 'admin list product']),
+            Permission::create(['name' => 'admin add product']),
+            Permission::create(['name' => 'admin edit product']),
+            Permission::create(['name' => 'admin delete product']),
+            Permission::create(['name' => 'admin show product']),
         ];
         $authorPermissions = [
-            Permission::create(['name' => 'list author']),
-            Permission::create(['name' => 'add author']),
-            Permission::create(['name' => 'edit author']),
-            Permission::create(['name' => 'delete author']),
+            Permission::create(['name' => 'admin list author']),
+            Permission::create(['name' => 'admin add author']),
+            Permission::create(['name' => 'admin edit author']),
+            Permission::create(['name' => 'admin delete author']),
         ];
         $ownerPermissions = [
-            Permission::create(['name' => 'list owner']),
-            Permission::create(['name' => 'add owner']),
-            Permission::create(['name' => 'edit owner']),
-            Permission::create(['name' => 'delete owner']),
+            Permission::create(['name' => 'admin list owner']),
+            Permission::create(['name' => 'admin add owner']),
+            Permission::create(['name' => 'admin edit owner']),
+            Permission::create(['name' => 'admin delete owner']),
         ];
         $rolePermissions = [
-            Permission::create(['name' => 'list role']),
-            Permission::create(['name' => 'add role']),
-            Permission::create(['name' => 'edit role']),
-            Permission::create(['name' => 'delete role']),
+            Permission::create(['name' => 'admin list role']),
+            Permission::create(['name' => 'admin add role']),
+            Permission::create(['name' => 'admin edit role']),
+            Permission::create(['name' => 'admin delete role']),
         ];
         $permissionPermissions = [
-            Permission::create(['name' => 'list permission']),
-            Permission::create(['name' => 'add permission']),
-            Permission::create(['name' => 'edit permission']),
-            Permission::create(['name' => 'delete permission']),
+            Permission::create(['name' => 'admin list permission']),
+            Permission::create(['name' => 'admin add permission']),
+            Permission::create(['name' => 'admin edit permission']),
+            Permission::create(['name' => 'admin delete permission']),
         ];
         $conservationPermissions = [
-            Permission::create(['name' => 'list conservation']),
-            Permission::create(['name' => 'add conservation']),
-            Permission::create(['name' => 'edit conservation']),
-            Permission::create(['name' => 'delete conservation']),
+            Permission::create(['name' => 'admin list conservation']),
+            Permission::create(['name' => 'admin add conservation']),
+            Permission::create(['name' => 'admin edit conservation']),
+            Permission::create(['name' => 'admin delete conservation']),
         ];
 
         $faqPermissions = [
-            Permission::create(['name' => 'list faq']),
-            Permission::create(['name' => 'add faq']),
-            Permission::create(['name' => 'edit faq']),
-            Permission::create(['name' => 'delete faq']),
+            Permission::create(['name' => 'admin list faq']),
+            Permission::create(['name' => 'admin add faq']),
+            Permission::create(['name' => 'admin edit faq']),
+            Permission::create(['name' => 'admin delete faq']),
         ];
 
 
@@ -84,13 +92,13 @@ class PermissionSeeder extends Seeder
         ]);
         $editorRole = Role::create(['name' => 'editor']);
         $userRole = Role::create(['name' => 'user']);
-        $guestRole = Role::create(['name' => 'guest']);
         $counselorRole = Role::create(['name' => 'counselor']);
 
-        $this->setPermissionToTole($postPermissions, $editorRole);
-        $this->setPermissionToTole($postPermissions, $userRole);
-        $this->setPermissionToTole($postPermissions, $guestRole);
-        $this->setPermissionToTole($postPermissions, $counselorRole);
+        $this->setPermissionToTole($postPermissionsAdmin, $editorRole);
+        $this->setPermissionToTole($faqPermissions, $editorRole);
+        $this->setPermissionToTole($postPermissionsUser, $userRole);
+
+        $counselorRole->givePermissionTo(['admin list product', 'admin list owner', 'admin list author', 'admin show product', 'admin list faq']);
 
         //Super admin
         $roleAdmin = Role::create(['name' => 'super-admin']);
