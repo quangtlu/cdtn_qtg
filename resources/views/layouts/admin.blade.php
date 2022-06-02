@@ -14,7 +14,7 @@
 <div class="wrapper">
 @include('partials.admin.header')
 @include('partials.admin.sidebar')
-    @include('partials.flash-message')
+    @include('partials.admin.flash-message')
     @yield('content')
 @include('partials.admin.footer')
 </div>

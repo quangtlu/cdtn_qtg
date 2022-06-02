@@ -59,6 +59,19 @@ class RegisterController extends Controller
                 'bail',
                 'required',
                 'min:8',
+            ],
+            [
+                'name.required' => 'Vui lòng nhập tên người dùng',
+                'phone.required' => 'Vui lòng nhập số điện thoại',
+                'phone.unique' => 'Số điện thoại đã tồn tại',
+                'phone.regex' => 'vui lòng nhập đúng số điện thoại',
+                'phone.max' => 'Số điện thoại tối đa 10 số',
+                'email.required' => 'Vui lòng email',
+                'email.email' => 'Vui lòng nhập đúng email',
+                'email.unique' => 'Email đã tồn tại',
+                'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
             ]
         ]);
     }
@@ -75,6 +88,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'dob' => $data['dob'],
             'password' => Hash::make($data['password']),
         ]);
         $user->assignRole('user');
