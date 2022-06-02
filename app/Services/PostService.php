@@ -4,10 +4,13 @@ namespace App\Services;
 
 use Carbon\Carbon;
 use App\Models\Post;
+use App\traits\HandleImage;
 use Illuminate\Support\Facades\Auth;
 
 class PostService
 {
+    use HandleImage;
+
     private $postModel;
 
     public function __construct(Post $postModel)
@@ -33,14 +36,8 @@ class PostService
             "user_id" => $user->id,
         ];
         if($files=$request->file('image')){
-            $time = Carbon::now('Asia/Ho_Chi_Minh')->format("Y.m.d H.i.s");
-                $images=array();
-                foreach($files as $file){
-                    $name=$time.'.'.$file->getClientOriginalName();
-                    $file->move('image/posts',$name);
-                    $images[]=$name;
-                }
-                $data['image'] = implode("|",$images);
+            $images = $this->uploadMutilpleImage($files);
+            $data['image'] = implode("|",$images);
 
         } else {
             $data['image'] = null;
@@ -63,14 +60,8 @@ class PostService
         ];
 
         if($files=$request->file('image')){
-            $time = Carbon::now('Asia/Ho_Chi_Minh')->format("Y.m.d H.i.s");
-                $images=array();
-                foreach($files as $file){
-                    $name=$time.'.'.$file->getClientOriginalName();
-                    $file->move('image/posts',$name);
-                    $images[]=$name;
-                }
-                $data['image'] = implode("|",$images);
+            $images = $this->uploadMutilpleImage($files);
+            $data['image'] = implode("|",$images);
         }
         $post->update($data);
         $post->tag()->sync($request->tag_id);

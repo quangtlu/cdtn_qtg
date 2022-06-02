@@ -14,9 +14,9 @@
 
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="{{ asset('template_signin_signup/css/style.css') }} " type="text/css" media="all" />
-
     <!-- fontawesome v5 -->
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+    @yield('css')
 
 </head>
 
@@ -24,11 +24,6 @@
 
 <section class="forms">
     <div class="container">
-        <!-- logo -->
-        <div class="logo">
-            <a class="brand-logo" href="{{ route('home.index') }}">Quang Vinh Copyright</a>
-        </div>
-        <!-- //logo -->
         <div class="forms-grid">
             @yield('content')
         </div>
@@ -36,5 +31,6 @@
 </section>
 <script src={{ asset("AdminLTE/plugins/jquery/jquery.min.js") }}></script>
 <script src="{{ asset('js/showPasswordAuth.js') }}"></script>
+@yield('js')
 </body>
 </html>

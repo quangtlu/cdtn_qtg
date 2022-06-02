@@ -1,12 +1,25 @@
 @extends('layouts.signin_signup')
 @section('title', 'Đăng ký')
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
+@endsection
+@section('js')
+<script src="{{ asset('js/avatar.js') }}"></script>
+@endsection
 @section('content')
     <!-- register -->
-    <div class="register">
-        <span class="fas fa-user-circle"></span>
-        <strong>Đăng ký tài khoản</strong>
-        <form method="POST" action="{{ route('register') }}" class="register-form">
-            @csrf
+    <form method="POST" action="{{ route('register') }}" class="register-form" enctype="multipart/form-data">
+        @csrf
+        <div class="register">
+            <div class="avatar-header">
+                <div class="avatar-wrapper">
+                    <img class="profile-pic" src=""/>
+                    <div class="upload-button">
+                        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                    </div>
+                    <input class="file-upload" name="image" type="file" accept="image/*"/>
+                </div>
+            </div>
             <fieldset>
                 <div class="form">
                     <div class="form-row">
@@ -14,6 +27,29 @@
                         <label class="form-label" for="input">Họ tên</label>
                         <input type="text" name="name" class="form-text" @error('name') is-invalid @enderror">
                         @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <span class="fas fa-venus-mars"></span>
+                        <label class="form-label" for="input">Giới tính</label>
+                        <select name="gender" class="form-text" id="gender">
+                            <option value=""></option>
+                            <option value="nam">Nam</option>
+                            <option value="nu">Nữ</option>
+                        </select>
+                        @error('gender')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="input">Ngày sinh</label>
+                        <input type="date" name="dob" class="form-text" @error('dob') is-invalid @enderror">
+                        @error('dob')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
                         </span>
@@ -40,16 +76,6 @@
                         @enderror
                     </div>
                     <div class="form-row">
-                        <span class="fas fa-calendar"></span>
-                        <label class="form-label" for="input">Ngày sinh</label>
-                        <input type="date" name="dob" class="form-text" @error('dob') is-invalid @enderror">
-                        @error('dob')
-                        <span class="invalid-feedback" role="alert">
-                            {{ $message }}
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="form-row">
                         <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
                         <label class="form-label" for="input">Mật khẩu</label>
                         <input id="input-password" type="password" name="password"
@@ -69,8 +95,8 @@
                     </div>
                 </div>
             </fieldset>
-        </form>
-
-    </div>
+        </div>        
+    </form>
+    
     <!-- //register -->
 @endsection

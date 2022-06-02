@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\admin\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use App\Services\UserService;
+use App\traits\HandleImage;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -24,7 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
+    use HandleImage;
     /**
      * Where to redirect users after registration.
      *
@@ -52,6 +52,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data,[
             'name' => 'required',
+            'gender' => 'required',
             'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
             'email' => 'bail|required|unique:users|email:rfc,dns',
             'dob' => 'bail|before:today|nullable',
@@ -84,14 +85,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (isset($data['image'])) {
+            $nameImage = $this->uploadSingleImage($data['image']);
+        }
+        else {
+            $nameImage = $this->getAvatarDefault($data['gender']);
+        }
+        
         $user = User::create([
             'name' => $data['name'],
+            'gender' => $data['gender'],
+            'image' => $nameImage,
             'email' => $data['email'],
             'phone' => $data['phone'],
             'dob' => $data['dob'],
             'password' => Hash::make($data['password']),
         ]);
+
         $user->assignRole('user');
         return $user;
     }
+
+    
 }

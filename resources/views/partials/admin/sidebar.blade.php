@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 @endcan
-                @can('admin list faq')
+                @can('list faq')
                 <li class="nav-item">
                     <a href="{{route('admin.faqs.index')}}" class="nav-link">
                         <i class="fas fa-question-circle"></i>

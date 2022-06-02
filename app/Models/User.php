@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasRoles;
 
-    protected $fillable = ["name", "email", "phone", "password", "image"];
+    protected $fillable = ["name", "email", "phone", "password", "image", "gender", "dob"];
 
     public function posts()
     {

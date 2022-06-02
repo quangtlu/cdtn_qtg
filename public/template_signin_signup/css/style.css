@@ -446,4 +446,7 @@ a.brand-logo {
 #show-pass-icon {
     cursor: pointer;
 }
+.register-form{
+    display: flex;
+}
 /*-- //forms styling--*/

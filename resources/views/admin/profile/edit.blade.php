@@ -1,8 +1,11 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý tác giả')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admin/profile/index.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
+@endsection
+@section('js')
+<script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+<script src="{{ asset('js/avatar.js') }}"></script>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -15,7 +18,7 @@
                 <form action="{{ route('admin.profile.update', ["id" => $profile->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-5 border-right">
+                        <div class="col-md-8 border-right">
                             <div class="p-3 form-profile">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4 class="text-right">Profile</h4>
@@ -30,6 +33,20 @@
                                     <div class="col-md-12">
                                         <label class="labels">Ngày sinh</label>
                                         <input type="date" value="{{ $profile->dob }}" name="dob" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label class="labels">Giới tính</label>
+                                        <select name="gender" id="" class="form-control">
+                                            @if ($profile->gender == 'nam')
+                                                <option value="name" selected>Nam</option>
+                                                <option value="nu">Nu</option>
+                                            @else
+                                                <option value="name">Nam</option>
+                                                <option value="nu" selected>Nu</option>
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -58,13 +75,18 @@
                         <div class="col-md-4">
                             <div class="">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    @if ($profile->image != null)
-                                        <img id="avt-img" data-img_url = '{{ asset("image/profile") }}'  class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/$profile->image") }}" alt="">
-                                    @else
-                                        <img id="avt-img" data-img_url = '{{ asset("image/profile") }}' class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/user.jpg") }}" alt="">
-                                    @endif
-                                    <input type="file" id="profile_pic" value="" name="image" accept=".jpg, .jpeg, .png">
-                                    {{-- <span> </span> --}}
+                                    <div class="avatar-header">
+                                        <div class="avatar-wrapper">
+                                            <img class="profile-pic" src="
+                                            @if ($profile->image)
+                                                {{ asset('image/profile/'.$profile->image)}}
+                                            @endif "/>
+                                            <div class="upload-button">
+                                                <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="file-upload" name="image" type="file" accept="image/*"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

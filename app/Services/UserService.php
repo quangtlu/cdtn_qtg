@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Support\Facades\Hash;
-use PHPUnit\Framework\Constraint\Exception as ConstraintException;
+use App\traits\HandleImage;
 
 class UserService
 
 {
+    use HandleImage;
+
     private $userModel;
 
     public function __construct(User $userModel)
@@ -28,13 +29,24 @@ class UserService
     }
 
     public function create($request){
+
+        if($file = $request->image) {
+            $image = $this->uploadSingleImage($file);
+        }
+        else {
+            $image = $this->getAvatarDefault($request->gender);
+        }
+
         $data = [
             "name" => $request->name,
+            "gender" => $request->gender,
+            "image" => $image,
             "phone" => $request->phone,
             "dob" => $request->dob,
             "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
+        
         $user = $this->userModel->create($data);
         if ($request->roleNames) {
             $user->assignRole($request->roleNames);
@@ -48,13 +60,13 @@ class UserService
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
+            "gender" => $request->gender,
             "dob" => $request->dob,
             "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
         if($file=$request->file('image')) {
-            $name=$file->getClientOriginalName();
-            $file->move('image/profile',$name);
+            $name = $this->uploadSingleImage($file);
             $data['image'] = $name;
         }
         $user->update($data);
