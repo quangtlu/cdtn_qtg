@@ -68,8 +68,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!-- header -->
 @include('partials.home.header')
-@include('partials.flash-message')
-<div class="container">
+<div class="container" id="container" data-messageSuccess="{{ Session::get('success') }}" data-messageError="{{ Session::get('error') }}">
     <div class="banner-btm-agile">
         <div class="col-md-9 btm-wthree-left">@yield('content')</div>
         @include('partials.home.wthree_right')
@@ -88,5 +87,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{ asset('home/alert.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('js')
+
 </body>
 </html>
