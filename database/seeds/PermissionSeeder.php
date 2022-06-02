@@ -111,7 +111,7 @@ class PermissionSeeder extends Seeder
         $this->setPermissionToTole($faqPermissions, $editorRole);
         $this->setPermissionToTole($postPermissionsUser, $userRole);
 
-        $counselorRole->givePermissionTo(['admin list product', 'admin list owner', 'admin list author', 'admin show product', 'admin list faq']);
+        $counselorRole->givePermissionTo(['admin list product', 'admin list owner', 'admin list author', 'admin show product', 'list faq']);
 
         //Super admin
         $roleAdmin = Role::create(['name' => 'super-admin']);
