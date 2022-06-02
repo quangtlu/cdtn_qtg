@@ -36,7 +36,7 @@
                                             @endif
                                         </td>
                                         
-                                        <td>{{ $post->title }}</td>
+                                        <td>{{ Str::ucfirst($post->title) }}</td>
                                         <td>{{ $post->user->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.posts.edit', ["id" => $post->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
