@@ -136,6 +136,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.categories.index')}}" class="nav-link">
+                        <i class="fas fa-list-alt"></i>
+                        <p>
+                            Quản lý danh mục
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
