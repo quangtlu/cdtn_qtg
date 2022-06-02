@@ -22,9 +22,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Tác giả: {{ Auth::user()->name }}</label>
-                            </div>
-                            <div class="form-group">
                                 <label>Thẻ tag</label>
                                 <select name="tag_id[]" class="form-control select2_init" multiple>
                                     <option></option>

@@ -64,8 +64,8 @@
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            @can('add permission')
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @can('admin add permission')
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
                             @endcan
                         </form>
                     </div>

@@ -29,8 +29,7 @@ class UserService
     }
 
     public function create($request){
-
-        if($file = $request->image) {
+        if($file = $request->file('image')) {
             $image = $this->uploadSingleImage($file);
         }
         else {
