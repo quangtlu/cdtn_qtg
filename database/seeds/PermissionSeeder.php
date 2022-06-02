@@ -5,7 +5,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 
 class PermissionSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $postPermissionsUser = [
             Permission::create(['name' => 'user add post']),
@@ -77,17 +77,23 @@ class PermissionSeeder extends Seeder
         ];
 
         $faqPermissions = [
-            Permission::create(['name' => 'admin list faq']),
+            Permission::create(['name' => 'list faq']),
             Permission::create(['name' => 'admin add faq']),
             Permission::create(['name' => 'admin edit faq']),
             Permission::create(['name' => 'admin delete faq']),
         ];
 
+        $profilePermissions = [
+            Permission::create(['name' => 'show profile']),
+            Permission::create(['name' => 'edit profile']),
+        ];
 
         $userAdmin = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'phone' => '0123456789',
+            'gender' => 'nam',
+            'image' => 'avatar-nam.jpg',
             'password' => Hash::make('password')
         ]);
         $editorRole = Role::create(['name' => 'editor']);

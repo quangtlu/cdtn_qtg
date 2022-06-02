@@ -94,7 +94,7 @@ Route::middleware('auth')->group(function () {
 
         Route::name('.faqs')->group(function () {
             Route::prefix('/faqs')->group(function () {
-                Route::get('/', 'Admin\FaqController@index')->name('.index')->middleware('can:admin list faq');
+                Route::get('/', 'Admin\FaqController@index')->name('.index')->middleware('can:list faq');
                 Route::get('/create', 'Admin\FaqController@create')->name('.create')->middleware('can:admin add faq');
                 Route::post('/store', 'Admin\FaqController@store')->name('.store')->middleware('can:admin add faq');
                 Route::get('/edit/{id}', 'Admin\FaqController@edit')->name('.edit')->middleware('can:admin edit faq');
@@ -105,20 +105,20 @@ Route::middleware('auth')->group(function () {
 
         Route::name('.profile')->group(function(){
             Route::prefix('/profile-user')->group(function() {
-                Route::get('/', 'Admin\ProfileController@index')->name('.index')->middleware('can:admin show profile');
-                Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('.edit')->middleware('can:admin edit profile');
-                Route::post('/update{id}', 'Admin\ProfileController@update')->name('.update')->middleware('can:admin edit profile');
+                Route::get('/', 'Admin\ProfileController@index')->name('.index')->middleware('can:show profile');
+                Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('.edit')->middleware('can:edit profile');
+                Route::post('/update{id}', 'Admin\ProfileController@update')->name('.update')->middleware('can:edit profile');
             });
         });
 
         Route::name('.tags')->group(function () {
             Route::prefix('/tags')->group(function () {
-                Route::get('/', 'Admin\TagController@index')->name('.index')->middleware('can:list faq');
-                Route::get('/create', 'Admin\TagController@create')->name('.create')->middleware('can:add faq');
-                Route::post('/store', 'Admin\TagController@store')->name('.store')->middleware('can:add faq');
-                Route::get('/edit/{id}', 'Admin\TagController@edit')->name('.edit')->middleware('can:edit faq');
-                Route::post('/update/{id}', 'Admin\TagController@update')->name('.update')->middleware('can:edit faq');
-                Route::get('/destroy/{id}', 'Admin\TagController@destroy')->name('.destroy')->middleware('can:delete faq');
+                Route::get('/', 'Admin\TagController@index')->name('.index')->middleware('can:list tag');
+                Route::get('/create', 'Admin\TagController@create')->name('.create')->middleware('can:add tag');
+                Route::post('/store', 'Admin\TagController@store')->name('.store')->middleware('can:add tag');
+                Route::get('/edit/{id}', 'Admin\TagController@edit')->name('.edit')->middleware('can:edit tag');
+                Route::post('/update/{id}', 'Admin\TagController@update')->name('.update')->middleware('can:edit tag');
+                Route::get('/destroy/{id}', 'Admin\TagController@destroy')->name('.destroy')->middleware('can:delete tag');
             });
         });
     });
