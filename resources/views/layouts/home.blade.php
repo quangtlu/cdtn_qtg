@@ -85,7 +85,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 </script>
 <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
-<script src="{{ asset('js/alert.js') }}"></script>
+<script src="{{ asset('home/alert.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('js')
 </body>
 </html>

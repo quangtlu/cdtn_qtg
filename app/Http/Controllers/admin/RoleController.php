@@ -56,6 +56,5 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $this->roleService->delete($id);
-        return Redirect(route('admin.roles.index'));
     }
 }

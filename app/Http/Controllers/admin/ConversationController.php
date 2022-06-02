@@ -53,6 +53,5 @@ class ConversationController extends Controller
     public function destroy($id)
     {
         $this->conversationService->delete($id);
-        return Redirect(route('admin.conversations.index'));
     }
 }

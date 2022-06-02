@@ -1,11 +1,15 @@
 @extends('layouts.home')
 @section('title', 'FAQ')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('home/faq/style.css') }}">
+@endsection
 @section('content')
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         @for($i = 0; $i < count($faqs); $i++)
         <div class="panel panel-primary">
             <div class="panel-heading" role="tab" id="heading{{$i}}">
                 <h4 class="panel-title">
+                    <i class="fa fa-question-circle icon-question"></i>
                     <a class="question-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
                         {!! $faqs[$i]->question  !!}
                     </a>

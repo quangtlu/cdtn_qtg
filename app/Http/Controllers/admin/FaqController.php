@@ -50,6 +50,5 @@ class FaqController extends Controller
     public function destroy($id)
     {
         $this->faqService->delete($id);
-        return Redirect(route('admin.faqs.index'));
     }
 }
