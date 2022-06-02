@@ -22,7 +22,7 @@
                                     <option value="0">Chọn danh mục cha</option>
                                     {!! $htmlOption !!}
                                 </select>
-                                @error('phone')
+                                @error('parent_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

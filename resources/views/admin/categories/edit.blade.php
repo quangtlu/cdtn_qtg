@@ -1,32 +1,28 @@
 @extends('layouts.admin')
-@section('title', 'Sửa thông tin chủ sở hữu')
+@section('title', 'Sửa thông tin danh mục')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.admin.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Sửa thông tin'])
+        @include('partials.admin.content_header', ['name' => 'Danh mục', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('admin.owners.update', ["id" => $owner->id]) }}" method="POST">
+                        <form action="{{ route('admin.categories.update', ["id" => $category->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên chủ sở hữu</label>
-                                <input type="text" value="{{ $owner->name }}" name="name" class="form-control" >
+                                <label for="category_name">Tên danh mục</label>
+                                <input type="text" value="{{ $category->name }}" name="name" class="form-control" >
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Số điện thoại</label>
-                                <input value="{{ $owner->phone }}" type="text" name="phone" class="form-control" >
-                                @error('phone')
-                                    <span class="mt-1 text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="category_name">Email</label>
-                                <input value="{{ $owner->email }}" type="email" name="email" class="form-control" >
-                                @error('email')
+                                <label for="category_name">Danh mục cha</label>
+                                <select name="parent_id" class="form-control" >
+                                    <option value="0">Chọn danh mục cha</option>
+                                    {!! $htmlOption !!}
+                                </select>
+                                @error('parent_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

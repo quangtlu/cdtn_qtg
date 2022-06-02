@@ -24,9 +24,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $data = $this->categoryService->getAll();
-        $recusive = new Recusive($data);
-        $htmlOption = $recusive->categoryRecusive();
+        $htmlOption = $this->getCategory($parentId = '');
         return view('admin.categories.create', compact('htmlOption'));
     }
 
@@ -36,15 +34,19 @@ class CategoryController extends Controller
         return Redirect(route('admin.categories.index'))->with('success', 'Thêm danh mục thành công');
     }
 
-    public function show(Category $category)
+    public function getCategory($parentId)
     {
-        
+        $data = $this->categoryService->getAll();
+        $recusive = new Recusive($data);
+        $htmlOption = $recusive->categoryRecusive($parentId);
+        return $htmlOption;
     }
 
     public function edit($id)
     {
         $category = $this->categoryService->getById($id);
-        return view('admin.categories.edit', compact('category'));
+        $htmlOption = $this->getCategory($category->parent_id);
+        return view('admin.categories.edit', compact('category', 'htmlOption'));
     }
 
     public function update(Request $request, $id)
@@ -56,6 +58,5 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->categoryService->delete($id);
-        return Redirect(route('admin.categories.index'));
     }
 }

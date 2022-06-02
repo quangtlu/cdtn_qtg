@@ -1,9 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'Quản lý chủ sở hữu')
+@section('title', 'Quản lý danh mục')
+@section('js')
+    <script src="{{ asset('js/alert.js') }}"></script>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Chủ sở hữu', 'key' => 'Danh sách'])
+        @include('partials.admin.content_header', ['name' => 'Danh mục', 'key' => 'Danh sách'])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
@@ -15,7 +18,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên danh mục</th>
-                                <th>Danh mục cha</th>
                                 {{-- @can('add owner | edit owner') --}}
                                 <th>Action</th>
                                 {{-- @endcan --}}
@@ -26,13 +28,12 @@
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->parent_id }}</td>
                                         <td>
                                             {{-- @can('edit owner') --}}
                                             <a href="{{ route('admin.categories.edit', ["id" => $category->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
                                             {{-- @endcan --}}
                                             {{-- @can('delete owner') --}}
-                                            <a href="{{ route('admin.categories.destroy', ["id" => $category->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
+                                            <button type="button" data-url="{{ route('admin.categories.destroy', ["id" => $category->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                             {{-- @endcan --}}
                                         </td>
                                     </tr>
