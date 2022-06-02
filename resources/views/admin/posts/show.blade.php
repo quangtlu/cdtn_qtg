@@ -60,13 +60,22 @@
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-12">
                     <h2 class="name">
-                        {{ $post->title }}
+                        {{ Str::ucfirst($post->title) }}
                     </h2>
                     <hr />
                     <div class="">
                         <ul>
                             <li>
                                 Tác giả: {{ $post->user->name}}
+                            </li>
+                            <li>
+                                Thẻ tag:
+                                @php
+                                    foreach ($post->tag as $tagName){
+                                        $tagsName[] = $tagName->name;
+                                    }
+                                    echo $str = implode(", ", $tagsName);
+                                @endphp
                             </li>
                             <li>
                                 Mô tả:<br>

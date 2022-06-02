@@ -110,6 +110,17 @@ Route::middleware('auth')->group(function () {
                 Route::post('/update{id}', 'Admin\ProfileController@update')->name('.update')->middleware('can:admin edit profile');
             });
         });
+
+        Route::name('.tags')->group(function () {
+            Route::prefix('/tags')->group(function () {
+                Route::get('/', 'Admin\TagController@index')->name('.index')->middleware('can:list faq');
+                Route::get('/create', 'Admin\TagController@create')->name('.create')->middleware('can:add faq');
+                Route::post('/store', 'Admin\TagController@store')->name('.store')->middleware('can:add faq');
+                Route::get('/edit/{id}', 'Admin\TagController@edit')->name('.edit')->middleware('can:edit faq');
+                Route::post('/update/{id}', 'Admin\TagController@update')->name('.update')->middleware('can:edit faq');
+                Route::get('/destroy/{id}', 'Admin\TagController@destroy')->name('.destroy')->middleware('can:delete faq');
+            });
+        });
     });
 
 
