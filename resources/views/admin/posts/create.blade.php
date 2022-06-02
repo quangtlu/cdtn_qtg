@@ -22,6 +22,21 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Tác giả: {{ Auth::user()->name }}</label>
+                            </div>
+                            <div class="form-group">
+                                <label>Thẻ tag</label>
+                                <select name="tag_id[]" class="form-control select2_init" multiple>
+                                    <option></option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tag_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="category_name">Nội dung</label>
                                 <textarea class="form-control" name="content" id="summernote" cols="30" rows="5"></textarea>
                                 @error('content')
@@ -49,7 +64,7 @@
     <script>
     $(function () {
         $('.select2_init').select2({
-            'placeholder': 'Chọn tác giả'
+            'placeholder': 'Chọn thẻ tag',
         })
     })
     $('#summernote').summernote({
