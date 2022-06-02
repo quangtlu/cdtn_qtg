@@ -169,7 +169,8 @@ return [
         'post',
         'conservation',
         'comment',
-        'message'
+        'message',
+        'faq'
 
     ],
 

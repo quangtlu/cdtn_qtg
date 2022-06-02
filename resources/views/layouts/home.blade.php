@@ -1,18 +1,12 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Fashion Blog a Blogging Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <title>@yield('title')</title>
     <link href="{{ asset('template_blog/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all" /><!-- fontawesome -->
     <link href="{{ asset('template_blog/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen" property="" />
-    @yield('css')
+
     <!-- stylesheet -->
     <!-- meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,9 +47,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             });
         });
     </script>
-    <!-- start-smoth-scrolling -->
-
-    <!-- scriptfor smooth drop down-nav -->
     <script>
         $(document).ready(function(){
             $(".dropdown").hover(
@@ -70,47 +61,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             );
         });
     </script>
-    <!-- //script for smooth drop down-nav -->
+    <link rel="stylesheet" href="{{ asset("home/alert.css") }}">
+@yield('css')
+<!-- //script for smooth drop down-nav -->
 </head>
 <body>
 <!-- header -->
 @include('partials.home.header')
-<!-- //header -->
-<!-- top-header and slider -->
-@include('partials.home.slider')
-<!-- //main-slider -->
-<!-- //top-header and slider -->
+@include('partials.flash-message')
 <div class="container">
     <div class="banner-btm-agile">
-        <!-- //btm-wthree-left -->
-        @yield('content')
-        <!-- //btm-wthree-left -->
-        <!-- btm-wthree-right -->
+        <div class="col-md-9 btm-wthree-left">@yield('content')</div>
         @include('partials.home.wthree_right')
-        <!-- //btm-wthree-right -->
         <div class="clearfix"></div>
     </div>
 </div>
 @include('partials.home.footer')
 <script type="text/javascript">
     $(document).ready(function() {
-        /*
-            var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-            };
-        */
 
         $().UItoTop({ easingType: 'easeOutQuart' });
 
     });
 </script>
-<!-- //here ends scrolling icon -->
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
+<script src="{{ asset('home/alert.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('js')
 </body>
 </html>

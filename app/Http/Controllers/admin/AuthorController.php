@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\Author\StoreAuthorRequest;
+use App\Http\Requests\Admin\Author\UpdateAuthorRequest;
 use App\Services\AuthorService;
 use Illuminate\Http\Request;
 use function redirect;
@@ -27,10 +29,10 @@ class AuthorController extends Controller
         return view('admin.authors.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAuthorRequest $request)
     {
         $this->authorService->create($request);
-        return Redirect(route('admin.authors.index'));
+        return Redirect(route('admin.authors.index'))->with('success', 'Thêm tác giả thành công');
     }
 
     public function edit($id)
@@ -39,15 +41,14 @@ class AuthorController extends Controller
         return view('admin.authors.edit', compact('author'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateAuthorRequest $request, $id)
     {
         $this->authorService->update($request, $id);
-        return Redirect(route('admin.authors.index'));
+        return Redirect(route('admin.authors.index'))->with('success', 'Cập nhật tác giả thành công');
     }
 
     public function destroy($id)
     {
         $this->authorService->delete($id);
-        return Redirect(route('admin.authors.index'));
     }
 }

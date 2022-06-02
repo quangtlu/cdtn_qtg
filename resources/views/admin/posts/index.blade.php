@@ -30,13 +30,13 @@
                                         <td>{{ $post->id }}</td>
                                         <td>
                                             @if ($post->image)
-                                            <img class="avt-product" src=" {{ asset('image/posts/'.explode("|", $post->image)[0]) }}" alt="">
+                                            <img class="avt-product index-avt" src=" {{ asset('image/posts/'.explode("|", $post->image)[0]) }}" alt="">
                                             @else
-                                            <img class="avt-product" src="{{ asset('image/posts/no_image.jpg') }}" alt="">
+                                            <img class="avt-product index-avt" src="{{ asset('image/posts/no_image.jpg') }}" alt="">
                                             @endif
                                         </td>
                                         
-                                        <td>{{ $post->title }}</td>
+                                        <td>{{ Str::ucfirst($post->title) }}</td>
                                         <td>{{ $post->user->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.posts.edit', ["id" => $post->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>

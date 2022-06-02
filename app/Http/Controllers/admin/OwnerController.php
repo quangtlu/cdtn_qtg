@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\Owner\StoreOwnerRequest;
+use App\Http\Requests\Admin\Owner\UpdateOwnerRequest;
 use App\Services\OwnerService;
 use Illuminate\Http\Request;
 use function redirect;
@@ -27,10 +29,10 @@ class OwnerController extends Controller
         return view('admin.owners.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreOwnerRequest $request)
     {
         $this->ownerService->create($request);
-        return Redirect(route('admin.owners.index'));
+        return Redirect(route('admin.owners.index'))->with('success', 'Thêm chủ sở hữu thành công');
     }
 
     public function edit($id)
@@ -39,15 +41,14 @@ class OwnerController extends Controller
         return view('admin.owners.edit', compact('owner'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateOwnerRequest $request, $id)
     {
         $this->ownerService->update($request, $id);
-        return Redirect(route('admin.owners.index'));
+        return Redirect(route('admin.owners.index'))->with('success', 'Câp nhật chủ sở hữu thành công');
     }
 
     public function destroy($id)
     {
         $this->ownerService->delete($id);
-        return Redirect(route('admin.owners.index'));
     }
 }

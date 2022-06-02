@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +21,8 @@ class PostService
     }
 
     public function getById($id){
-        $post = $this->postModel->findOrFail($id);   
-        return $post; 
+        $post = $this->postModel->findOrFail($id);
+        return $post;
     }
 
     public function create($request){
@@ -32,18 +33,22 @@ class PostService
             "user_id" => $user->id,
         ];
         if($files=$request->file('image')){
+            $time = Carbon::now('Asia/Ho_Chi_Minh')->format("Y.m.d H.i.s");
                 $images=array();
                 foreach($files as $file){
-                    $name=$file->getClientOriginalName();
+                    $name=$time.'.'.$file->getClientOriginalName();
                     $file->move('image/posts',$name);
                     $images[]=$name;
                 }
                 $data['image'] = implode("|",$images);
-                
+
         } else {
             $data['image'] = null;
         }
         $post = $this->postModel->create($data);
+        if ($post) {
+            $user->givePermissionTo(['user edit post', 'user delete post']);
+        }
     }
 
     public function update($request, $id){
@@ -56,10 +61,11 @@ class PostService
         ];
 
         if($files=$request->file('image')){
+            $time = Carbon::now('Asia/Ho_Chi_Minh')->format("Y.m.d H.i.s");
                 $images=array();
                 foreach($files as $file){
-                    $name=$file->getClientOriginalName();
-                    $file->move('image/post',$name);
+                    $name=$time.'.'.$file->getClientOriginalName();
+                    $file->move('image/posts',$name);
                     $images[]=$name;
                 }
                 $data['image'] = implode("|",$images);
@@ -68,7 +74,6 @@ class PostService
     }
 
     public function delete($id){
-        $post = $this->getById($id);
         $this->postModel->destroy($id);
     }
 }

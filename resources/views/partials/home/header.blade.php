@@ -2,7 +2,7 @@
     <div class="w3layouts-top-strip">
         <div class="container">
             <div class="logo">
-                <h1><a href="index.html">Quang Vinh Copyright</a></h1>
+                <h1><a href="{{ route('home.index') }}">Quang Vinh Copyright</a></h1>
                 <p>Thanng Long University</p>
             </div>
             <div class="w3ls-social-icons">
@@ -41,17 +41,17 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="active" href="index.html">Trang chủ</a></li>
+                    <li><a class="active" href="{{ route('home.index') }}">Trang chủ</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Short Codes <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="icons.html">Blog</a></li>
-                            <li><a href="typo.html">FAQ</a></li>
-
+                            <li><a href="">Các khái niệm liên quan</a></li>
+                            <li><a href="">Luật sở hữu trí tuệ Việt Nam 2005</a></li>
+                            <li><a href="">Các vấn đề thường gặp</a></li>
                         </ul>
                     </li>
-                    <li><a href="photography.html">Photography</a></li>
-                    <li><a href="features.html">Features</a></li>
+                    <li><a href="{{ route('faq.index') }}">FAQ</a></li>
+                    <li><a href="{{route('posts.index')}}">Diễn đàm</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
             <div class="w3_agile_login">

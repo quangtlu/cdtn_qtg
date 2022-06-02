@@ -11,25 +11,43 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên bài viết</label>
+                                <label for="category_name">Tiêu đề</label>
                                 <input type="text" name="title" class="form-control" id="category_name">
+                                @error('title')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Tác giả: {{ Auth::user()->name }}</label>
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mô tả</label>
+                                <label>Thẻ tag</label>
+                                <select name="tag_id[]" class="form-control select2_init" multiple>
+                                    <option></option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tag_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name">Nội dung</label>
                                 <textarea class="form-control" name="content" id="summernote" cols="30" rows="5"></textarea>
+                                @error('content')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
                             </div>
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </form>
                     </div>
                 </div>
@@ -41,17 +59,16 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.2/tinymce.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
     $(function () {
         $('.select2_init').select2({
-            'placeholder': 'Chọn tác giả'
+            'placeholder': 'Chọn thẻ tag',
         })
     })
     $('#summernote').summernote({
             height: 400
-        });
+    });
     </script>
 @endsection

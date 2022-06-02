@@ -11,13 +11,13 @@ class User extends Authenticatable
 {
     use HasRoles;
 
-    protected $fillable = ["name", "email", "phone", "password"];
+    protected $fillable = ["name", "email", "phone", "password", "image"];
 
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
     }
-    
+
     public function isAdmin ()
     {
         if (Auth::user()->hasRole('user')) {
