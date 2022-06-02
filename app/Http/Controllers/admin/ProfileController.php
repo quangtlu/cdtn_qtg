@@ -49,6 +49,5 @@ class ProfileController extends Controller
     public function checkPermission($id)
     {
         return $id == Auth::user()->id;
-        
     }
 }

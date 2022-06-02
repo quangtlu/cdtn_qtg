@@ -33,7 +33,7 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng nhập tiêu đề bài viết',
-            'title.unique' => 'Tên bài viết đã tồn tại',
+            'title.unique' => 'Tiêu đề bài viết đã tồn tại',
             'content.required' => 'Vui lòng nhập nội dung',
         ];
     }

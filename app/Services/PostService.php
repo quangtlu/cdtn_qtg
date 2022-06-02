@@ -46,6 +46,9 @@ class PostService
             $data['image'] = null;
         }
         $post = $this->postModel->create($data);
+        if ($post) {
+            $user->givePermissionTo(['user edit post', 'user delete post']);
+        }
     }
 
     public function update($request, $id){
@@ -71,7 +74,6 @@ class PostService
     }
 
     public function delete($id){
-        $post = $this->getById($id);
         $this->postModel->destroy($id);
     }
 }
