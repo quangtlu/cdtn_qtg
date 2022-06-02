@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Quản lý tác giả')
+@section('title', 'Thông tin cá nhân')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
 @endsection
@@ -10,7 +10,7 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Tác giả', 'key' => 'Danh sách'])
+        @include('partials.admin.content_header', ['name' => 'Cá nhân', 'key' => 'Thông tin'])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
@@ -20,9 +20,6 @@
                     <div class="row">
                         <div class="col-md-8 border-right">
                             <div class="p-3 form-profile">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="text-right">Profile</h4>
-                                </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label class="labels">Họ tên</label>
@@ -39,12 +36,12 @@
                                     <div class="col-md-12">
                                         <label class="labels">Giới tính</label>
                                         <select name="gender" id="" class="form-control">
-                                            @if ($profile->gender == 'nam')
-                                                <option value="name" selected>Nam</option>
-                                                <option value="nu">Nu</option>
+                                            @if ($profile->gender == 'Nam')
+                                                <option value="Nam" selected>Nam</option>
+                                                <option value="Nữ">Nữ</option>
                                             @else
-                                                <option value="name">Nam</option>
-                                                <option value="nu" selected>Nu</option>
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ" selected>Nữ</option>
                                             @endif
                                         </select>
                                     </div>
@@ -72,7 +69,7 @@
                                 <button class="btn btn-primary profile-button " type="submit">Cập nhật</button>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-5">
                             <div class="">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <div class="avatar-header">

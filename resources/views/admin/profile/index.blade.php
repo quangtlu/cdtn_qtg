@@ -6,7 +6,7 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Thông tin cá nhân', 'key' => 'Profile'])
+        @include('partials.admin.content_header', ['name' => 'Cá nhân', 'key' => 'Thông tin '])
         <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
@@ -20,6 +20,11 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <label class="labels">Họ tên: {{ $profile->name }}</label>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label class="labels">Giới tính: {{ $profile->gender }}</label>
                                 </div>
                             </div>
                             <div class="row mt-3">

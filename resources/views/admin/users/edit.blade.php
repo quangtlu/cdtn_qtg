@@ -21,6 +21,21 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="category_name">Giới tính</label>
+                                <select name="gender" id="" class="form-control">
+                                    @if ($user->gender == 'Nam')
+                                        <option value="Nam" selected>Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    @else
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ" selected>Nữ</option>
+                                    @endif
+                                </select>
+                                @error('gender')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
                                 <input type="date" value="{{ $user->dob }}" name="dob" class="form-control" >
                                 @error('dob')
