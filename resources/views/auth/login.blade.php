@@ -1,57 +1,46 @@
-@extends('layouts.app')
-@section('js')
-    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-@endsection
+@extends('layouts.signin_signup')
+@section('title', 'Đăng nhập')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Đăng nhập</div>
+    <!-- login -->
+    <div class="login">
+        <span class="fas fa-sign-in-alt"></span>
+        <strong>Welcome!</strong>
+        <span>Đăng nhập tài khoản của bạn</span>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" data-toggle="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-12 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Đăng nhập') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+        <form action="{{ route('login') }}" method="post" class="login-form">
+            @csrf
+            <fieldset>
+                <div class="form">
+                    <div class="form-row">
+                        <span class="fas fa-user"></span>
+                        <label class="form-label" for="input">Email</label>
+                        <input type="email" name="email" class="form-text">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                           {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
+                        <label class="form-label" for="input">Mật khẩu</label>
+                        <input id="input-password" type="password" name="password" class="form-text">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row button-login">
+                        <button type="submit" class="btn btn-login">Đăng nhập<span
+                                class="fas fa-arrow-right"></span></button>
+                    </div>
+                    <div class="form-row button-login">
+                        Bạn chưa có tài khoản? <a href="{{ route('register') }}">Đăng ký tại đây</a>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </fieldset>
+        </form>
     </div>
-</div>
+    <!-- //login -->
 @endsection

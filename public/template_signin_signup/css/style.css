@@ -314,7 +314,7 @@ a.brand-logo {
     border: 0;
     height: 40px;
     margin-bottom: 15px;
-    padding: 0 40px 0 0px;
+    padding: 10px 40px 5px 10px;
     width: 100%;
     background: white no-repeat;
     transition: 100ms all linear 0s;
@@ -438,5 +438,12 @@ a.brand-logo {
         font-size: 25px;
     }
 }
-
+.invalid-feedback{
+    font-size: 13px;
+    color: red !important;
+    padding-bottom: 10px;
+}
+#show-pass-icon {
+    cursor: pointer;
+}
 /*-- //forms styling--*/

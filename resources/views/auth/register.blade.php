@@ -1,90 +1,76 @@
-@extends('layouts.app')
-
+@extends('layouts.signin_signup')
+@section('title', 'Đăng ký')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Họ và tên</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Số điện thoại') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Xác nhận mật khẩu') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Đăng ký') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <!-- register -->
+    <div class="register">
+        <span class="fas fa-user-circle"></span>
+        <strong>Đăng ký tài khoản</strong>
+        <form method="POST" action="{{ route('register') }}" class="register-form">
+            @csrf
+            <fieldset>
+                <div class="form">
+                    <div class="form-row">
+                        <span class="fas fa-user"></span>
+                        <label class="form-label" for="input">Họ tên</label>
+                        <input type="text" name="name" class="form-text" @error('name') is-invalid @enderror">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <span class="fas fa-envelope"></span>
+                        <label class="form-label" for="input">E-mail</label>
+                        <input type="email" name="email" class="form-text" @error('email') is-invalid @enderror">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                           {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <span class="fas fa-mobile-alt"></span>
+                        <label class="form-label" for="input">Số điện thoại</label>
+                        <input type="phone" name="phone" class="form-text" @error('phone') is-invalid @enderror">
+                        @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <span class="fas fa-calendar"></span>
+                        <label class="form-label" for="input">Ngày sinh</label>
+                        <input type="date" name="dob" class="form-text" @error('dob') is-invalid @enderror">
+                        @error('dob')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row">
+                        <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
+                        <label class="form-label" for="input">Mật khẩu</label>
+                        <input id="input-password" type="password" name="password"
+                               autocomplete="new-password" class="form-text" id="password" type="password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                           {{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-row button-login">
+                        <button type="submit" class="btn btn-login">Đăng ký <span
+                                class="fas fa-arrow-right"></span></button>
+                    </div>
+                    <div class="form-row button-login">
+                        Bạn đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập tại đây</a>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </fieldset>
+        </form>
+
     </div>
-</div>
+    <!-- //register -->
 @endsection
