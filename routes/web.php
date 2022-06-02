@@ -121,6 +121,17 @@ Route::middleware('auth')->group(function () {
                 Route::get('/destroy/{id}', 'Admin\TagController@destroy')->name('.destroy')->middleware('can:delete faq');
             });
         });
+
+        Route::name('.categories')->group(function () {
+            Route::prefix('/categories')->group(function () {
+                Route::get('/', 'Admin\CategoryController@index')->name('.index');
+                Route::get('/create', 'Admin\CategoryController@create')->name('.create');
+                Route::post('/store', 'Admin\CategoryController@store')->name('.store');
+                Route::get('/edit/{id}', 'Admin\CategoryController@edit')->name('.edit');
+                Route::post('/update/{id}', 'Admin\CategoryController@update')->name('.update');
+                Route::get('/destroy/{id}', 'Admin\CategoryController@destroy')->name('.destroy');
+            });
+        });
     });
 
 
