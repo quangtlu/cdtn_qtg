@@ -29,10 +29,22 @@
                                 <select name="tag_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($tags as $tag)
-                                        <option {{ $postOfTag->contains('id', $tag->id) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        <option {{ $postOfTags->contains('id', $tag->id) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('tag_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Danh mục</label>
+                                <select name="category_id[]" class="form-control select3_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        <option {{ $postOfCategories->contains('id', $category->id) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -66,6 +78,9 @@
     $(function () {
         $('.select2_init').select2({
             'placeholder': 'Chọn thẻ tag'
+        })
+        $('.select3_init').select2({
+            'placeholder': 'Chọn danh mục'
         })
         $('#summernote').summernote({
             height: 400

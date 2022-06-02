@@ -87,6 +87,13 @@ class PermissionSeeder extends Seeder
             Permission::create(['name' => 'show profile']),
             Permission::create(['name' => 'edit profile']),
         ];
+        $categoryPermissions = [
+            Permission::create(['name' => 'admin list category']),
+            Permission::create(['name' => 'admin add category']),
+            Permission::create(['name' => 'admin edit category']),
+            Permission::create(['name' => 'admin delete category']),
+        ];
+
 
         $userAdmin = User::create([
             'name' => 'Admin',

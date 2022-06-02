@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
+use App\Services\CategoryService;
 use App\Services\PostService;
 use App\Services\TagService;
 use App\Services\UserService;
@@ -13,13 +14,16 @@ class PostController extends Controller
 {
     private $postService;
 
-    public function __construct(PostService $postService, UserService $userService, TagService $tagService)
+    public function __construct(PostService $postService, UserService $userService,
+                                TagService $tagService, CategoryService $categoryService)
     {
         $this->postService = $postService;
         $this->userService = $userService;
         $this->tagService = $tagService;
+        $this->categoryService = $categoryService;
         $tags = $this->tagService->getAll();
-        view()->share(['tags' => $tags]);
+        $categories = $this->categoryService->getAll();
+        view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
     public function index()
@@ -50,9 +54,10 @@ class PostController extends Controller
     {
         $post = $this->postService->getById($id);
         $postUser = $post->user;
-        $postOfTag = $post->tag;
+        $postOfTags = $post->tag;
+        $postOfCategories = $post->category;
         $postImgs = explode("|", $post->image)[0];
-        return view('admin.posts.edit', compact('post', 'postUser', 'postImgs', 'postOfTag'));
+        return view('admin.posts.edit', compact('post', 'postUser', 'postImgs', 'postOfTags', 'postOfCategories'));
     }
 
     public function update(UpdatePostRequest $request, $id)

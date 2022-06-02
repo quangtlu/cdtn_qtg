@@ -170,8 +170,8 @@ return [
         'conservation',
         'comment',
         'message',
-        'faq'
-
+        'faq',
+        'category'
     ],
 
     'module_children' => [

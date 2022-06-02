@@ -37,6 +37,18 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Danh mục</label>
+                                <select name="category_id[]" class="form-control select3_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="category_name">Nội dung</label>
                                 <textarea class="form-control" name="content" id="summernote" cols="30" rows="5"></textarea>
                                 @error('content')
@@ -65,6 +77,9 @@
     $(function () {
         $('.select2_init').select2({
             'placeholder': 'Chọn thẻ tag',
+        })
+        $('.select3_init').select2({
+            'placeholder': 'Chọn danh mục',
         })
     })
     $('#summernote').summernote({
