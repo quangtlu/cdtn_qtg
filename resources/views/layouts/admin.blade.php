@@ -8,6 +8,7 @@
     <link rel="stylesheet" href={{ asset("AdminLTE/plugins/fontawesome-free/css/all.min.css")}} >
     <link rel="stylesheet" href={{ asset("AdminLTE/dist/css/adminlte.min.css") }} >
     <link rel="stylesheet" href="{{ asset("admin/alert.css") }}">
+    <link rel="stylesheet" href="{{ asset('admin/profile/index.css') }}">
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">

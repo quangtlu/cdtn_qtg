@@ -3,6 +3,9 @@
 @section('js')
     <script src="{{ asset('js/alert.js') }}"></script>
 @endsection
+@section('css')
+    <link rel="stylesheet" href="{{ asset('admin/product/index.css')}}"/>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -17,7 +20,9 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Ảnh</th>
                                 <th>Họ tên</th>
+                                <th>Giới tính</th>
                                 <th>Ngày sinh</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -28,7 +33,11 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
+                                        <td>
+                                            <img class="avt-product index-avt" src=" {{ asset('image/profile/'.$user->image) }}" alt="">
+                                        </td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->gender }}</td>
                                         <td>{{ $user->dob }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>

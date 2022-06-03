@@ -50,18 +50,33 @@
             width: 100%;
         }
     
-            .avatar-wrapper .upload-button .fa-arrow-circle-up {
+            .avatar-wrapper .upload-button .camera-icon {
                 position: absolute;
-                font-size: 243px;
-                top: -16px;
-                left: -5px;
                 text-align: center;
                 opacity: 0;
                 transition: all .3s ease;
-                color: #e4eae7;
+                color: #a9b1ad;
+                font-size: 127px;
+                top: 36px;
+                left: 36px;
             }
     
-            .avatar-wrapper .upload-button:hover .fa-arrow-circle-up {
+            .avatar-wrapper .upload-button:hover .camera-icon {
+                opacity: .9;
+            }
+
+            .avatar-wrapper .upload-button .icon-register {
+                position: absolute;
+                text-align: center;
+                opacity: 0;
+                transition: all .3s ease;
+                color: #505754;
+                font-size: 127px;
+                top: 36px;
+                left: 36px;
+            }
+    
+            .avatar-wrapper .upload-button:hover .icon-register {
                 opacity: .9;
             }
     

@@ -36,8 +36,8 @@
                                 <label class="form-label">Giới tính</label>
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
-                                    <option value="nam">Nam</option>
-                                    <option value="nu">Nữ</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
                                 </select>
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
@@ -79,14 +79,14 @@
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </div>
                         <div class="col-md-6">
-                            <div class="avatar-header">
-                                <div class="avatar-wrapper">
+                            <div class="avatar-header mt-4">
+                                <div class="avatar-wrapper mt-5">
                                     <img class="profile-pic" src="" />
                                     <div class="upload-button">
-                                        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                        <i class="fa fa-camera camera-icon" aria-hidden="true"></i>
                                     </div>
                                     <input class="file-upload" name="image" type="file" accept="image/*" />
                                 </div>
