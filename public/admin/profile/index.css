@@ -46,3 +46,19 @@ body {
 .form-profile {
     padding-top: 0px!important;
 }
+
+.avata-img
+{
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    border: 1px solid #796e6e;
+}
+
+.avt-side 
+{
+    border-radius: 50%;
+    height: 40px!important;
+    width: 40px !important;
+    margin-left: 3px;
+}

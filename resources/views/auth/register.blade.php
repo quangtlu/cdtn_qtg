@@ -11,11 +11,11 @@
     <form method="POST" action="{{ route('register') }}" class="register-form" enctype="multipart/form-data">
         @csrf
         <div class="register">
-            <div class="avatar-header">
+            <div class="avatar-header" title="Ảnh đại diện">
                 <div class="avatar-wrapper">
                     <img class="profile-pic" src=""/>
                     <div class="upload-button">
-                        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                        <i class="fas fa-camera icon-register" aria-hidden="true"></i>
                     </div>
                     <input class="file-upload" name="image" type="file" accept="image/*"/>
                 </div>

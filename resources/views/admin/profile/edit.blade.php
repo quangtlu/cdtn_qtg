@@ -3,10 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
 @endsection
-@section('js')
-<script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
-<script src="{{ asset('js/avatar.js') }}"></script>
-@endsection
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -61,7 +58,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label class="labels">Password</label>
-                                        <input id="password" data-toggle="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                        <input id="password" data-toggle="password" type="password" name="password" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +76,7 @@
                                                 {{ asset('image/profile/'.$profile->image)}}
                                             @endif "/>
                                             <div class="upload-button">
-                                                <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                                                <i class="fas fa-camera camera-icon" aria-hidden="true"></i>
                                             </div>
                                             <input class="file-upload" name="image" type="file" accept="image/*"/>
                                         </div>
@@ -98,10 +95,6 @@
 @endsection
 @section('js')
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-    <script>
-        $('#profile_pic').on('change', function(){
-            var file = $(this)[0].files[0].mozFullPath
-            $('#avt-img').attr('src', file)
-        })
-    </script>
+    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/avatar.js') }}"></script>
 @endsection

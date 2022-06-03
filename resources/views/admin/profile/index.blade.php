@@ -12,7 +12,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5 border-right">
+                    <div class="col-md-6 border-right">
                         <div class="p-3">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Thông tin tài khoản</h4>
@@ -49,16 +49,11 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="">
                             <div class="d-flex flex-column align-items-center text-center">
-                                @if (empty($profile->image)) 
-                                    <img class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/user.jpg") }}" alt="">                                    
-                                @else
-                                    <img class="rounded-circle mt-5" width="150px" src="{{ asset("image/profile/$profile->image") }}">
-                                @endif
-                                <span class="font-weight-bold">{{ $profile->name }}</span>
-                                <span class="text-black-50">{{ $profile->email }}</span>
+                                <img class="avata-img mt-5" width="150px" src="{{ asset("image/profile/$profile->image") }}">
+                                <span class="text-black-50 mt-3">Ảnh đại diện</span>
                                 {{-- <span> </span> --}}
                             </div>
                         </div>
