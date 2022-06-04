@@ -6,6 +6,8 @@ use App\Http\Requests\Admin\Permission\StorePermissionRequest;
 use App\Services\PermissionService;
 use function redirect;
 use function view;
+use App\Http\Controllers\Controller;
+
 
 class PermissionController extends Controller
 {

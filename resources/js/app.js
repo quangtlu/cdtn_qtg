@@ -27,6 +27,24 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('chat-layout', require('./components/ChatLayout.vue').default)
+
 const app = new Vue({
     el: '#app',
+    data: {
+        currentUserLogin: {}
+    },
+    created() {
+        this.getCurrentUserLogin()
+    },
+    methods: {
+        async getCurrentUserLogin() {
+            try {
+                const response = await axios.get('/getUserLogin')
+                this.currentUserLogin = response.data
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 });

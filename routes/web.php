@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Message;
+use App\Events\MessagePosted;
 
 Auth::routes(['register' => true]);
 //Admin
@@ -103,8 +106,8 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::name('.profile')->group(function(){
-            Route::prefix('/profile-user')->group(function() {
+        Route::name('.profile')->group(function () {
+            Route::prefix('/profile-user')->group(function () {
                 Route::get('/', 'Admin\ProfileController@index')->name('.index')->middleware('can:show profile');
                 Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('.edit')->middleware('can:edit profile');
                 Route::post('/update{id}', 'Admin\ProfileController@update')->name('.update')->middleware('can:edit profile');
@@ -133,8 +136,6 @@ Route::middleware('auth')->group(function () {
             });
         });
     });
-
-
 });
 
 //Home
@@ -151,10 +152,18 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'home\PostController@update')->name('.update')->middleware('can:user edit post');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
+    Route::get('/getUserLogin', 'ChatController@getUserLogin');
+    Route::get('/chat', 'ChatController@index');
+    Route::get('/messages', 'ChatController@getMessage');
+    Route::post('/messages', function() {
+        $user = Auth::user();
+        $message = new Message();
+        $message->message = request()->get('message', '');
+        $message->user_id = $user->id;
+        $message->save();
+
+        broadcast(new MessagePosted($message, $user))->toOthers();
+        return ['message' => $message->load('user')];
+        
+    });
 });
-
-
-
-
-
-

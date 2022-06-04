@@ -8,6 +8,8 @@ use App\Services\OwnerService;
 use Illuminate\Http\Request;
 use function redirect;
 use function view;
+use App\Http\Controllers\Controller;
+
 
 class OwnerController extends Controller
 {

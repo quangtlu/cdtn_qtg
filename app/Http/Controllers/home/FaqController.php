@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Controllers\Controller;
 use App\Services\FaqService;
 use function view;
 
-class FaqController
+class FaqController extends Controller
 {
     private $faqService;
 

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Components\Recusive;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
+use App\Http\Controllers\Controller;
+
 
 class CategoryController extends Controller
 {    

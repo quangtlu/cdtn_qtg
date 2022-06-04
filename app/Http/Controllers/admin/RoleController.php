@@ -9,6 +9,8 @@ use App\Services\PermissionService;
 use App\Services\RoleService;
 use function redirect;
 use function view;
+use App\Http\Controllers\Controller;
+
 
 class RoleController extends Controller
 {
