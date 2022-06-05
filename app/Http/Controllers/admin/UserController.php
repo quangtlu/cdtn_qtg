@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use function redirect;
 use function response;
 use function view;
+use App\Http\Controllers\Controller;
+
 
 class UserController extends Controller
 {

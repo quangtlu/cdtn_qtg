@@ -107,16 +107,6 @@
                     </a>
                 </li>
                 @endcan
-                @can('admin list conservation')
-                <li class="nav-item">
-                    <a href="{{route('admin.conversations.index')}}" class="nav-link">
-                        <i class="fas fa-comments"></i>
-                        <p>
-                            Quản lý hội thoại
-                        </p>
-                    </a>
-                </li>
-                @endcan
                 @can('list faq')
                 <li class="nav-item">
                     <a href="{{route('admin.faqs.index')}}" class="nav-link">

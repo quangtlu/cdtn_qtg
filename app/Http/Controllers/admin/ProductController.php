@@ -10,6 +10,8 @@ use App\Services\ProductService;
 use Illuminate\Http\Request;
 use function redirect;
 use function view;
+use App\Http\Controllers\Controller;
+
 
 class ProductController extends Controller
 {

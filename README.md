@@ -1,9 +1,17 @@
 - git clone 
+- Cài đặt redis
 - composer install
+- npm install
 - cp .env.example .env
-- config database trong .env 
-- php artisan migrate:fresh --seed
 - php artisan key:generate
-- php artisan config:clear
-- php artisan config:cache
+- npm install -g laravel-echo-server
+- php artisan migrate --seed
+- laravel-echo-server init và thiết lập như hình
+![alt text](https://images.viblo.asia/d5e28b10-7d75-454b-ade0-d91dfe406246.png)
+
+<!-- Chạy ứng dụng, mỗi lệnh 1 terminal -->
+- redis-server
 - php artisan serve
+- npm run watch
+- laravel-echo-server start
+- php artisan queue:work
