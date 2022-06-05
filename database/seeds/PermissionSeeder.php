@@ -5,6 +5,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 use App\Models\User;
+use App\Chatroom;
 use Illuminate\Support\Facades\Hash;
 
 class PermissionSeeder extends Seeder
@@ -117,6 +118,16 @@ class PermissionSeeder extends Seeder
         $roleAdmin = Role::create(['name' => 'super-admin']);
         $roleAdmin->givePermissionTo(Permission::all());
         $userAdmin->assignRole($roleAdmin);
+
+        $chatroom1 = new Chatroom();
+        $chatroom1->name = 'Chatroom 1';
+        $chatroom1->description = 'Where heroes rise';
+        $chatroom1->save();
+
+        $chatroom2 = new Chatroom();
+        $chatroom2->name = 'Chatroom 2';
+        $chatroom2->description = 'Where losers hide';
+        $chatroom2->save();
     }
 
     public function setPermissionToTole(array $permissions, $role)
