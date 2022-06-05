@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Message;
-use App\Events\MessagePosted;
 
 Auth::routes(['register' => true]);
 //Admin
@@ -139,7 +136,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Home
-Route::get('/home', 'home\HomeController@index')->name('home.index');
+Route::get('/index', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
 Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/', 'home\PostController@index')->name('.index');
@@ -152,14 +149,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'home\PostController@update')->name('.update')->middleware('can:user edit post');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
-});
 
-Route::get('/', 'AppController@index')->middleware('auth');
+    Route::get('/', 'AppController@index');
+    
+    Route::get('/messages', 'MessageController@index');
+    
+    Route::post('/messages', 'MessageController@store');
+    
+    Route::get('/{any}', 'AppController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
+    
 
-Route::get('/messages', 'MessageController@index')->middleware('auth');
-
-Route::post('/messages', 'MessageController@store')->middleware('auth');
-
-Route::get('/{any}', 'AppController@index')->where('any', '.*')->middleware('auth'); // catch all routes or else it will return 404 with Vue router in history mode
-
+});    
 
