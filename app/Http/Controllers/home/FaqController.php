@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Controllers\Controller;
 use App\Services\FaqService;
 use function view;
-use App\Models\Post;
-use Illuminate\Support\Facades\Session;
-class FaqController
+
+class FaqController extends Controller
 {
     private $faqService;
 

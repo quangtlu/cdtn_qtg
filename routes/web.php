@@ -72,14 +72,6 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::name('.conversations')->group(function () {
-            Route::prefix('/conversations')->group(function () {
-                Route::get('/', 'Admin\ConversationController@index')->name('.index')->middleware('can:admin list role');
-                Route::get('/create', 'Admin\ConversationController@create')->name('.create')->middleware('can:admin add role');
-                Route::post('/store', 'Admin\ConversationController@store')->name('.store')->middleware('can:admin add role');
-            });
-        });
-
         Route::name('.posts')->group(function () {
             Route::prefix('/posts')->group(function () {
                 Route::get('/', 'Admin\PostController@index')->name('.index')->middleware('can:admin list post');
@@ -103,8 +95,8 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::name('.profile')->group(function(){
-            Route::prefix('/profile-user')->group(function() {
+        Route::name('.profile')->group(function () {
+            Route::prefix('/profile-user')->group(function () {
                 Route::get('/', 'Admin\ProfileController@index')->name('.index')->middleware('can:show profile');
                 Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('.edit')->middleware('can:edit profile');
                 Route::post('/update{id}', 'Admin\ProfileController@update')->name('.update')->middleware('can:edit profile');
@@ -133,8 +125,6 @@ Route::middleware('auth')->group(function () {
             });
         });
     });
-
-
 });
 
 //Home
@@ -151,10 +141,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'home\PostController@update')->name('.update')->middleware('can:user edit post');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
-});
 
-
-
-
-
+    Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
+    Route::get('/messages', 'MessageController@index');
+    Route::post('/messages', 'MessageController@store');
+    Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
+    
+});    
 

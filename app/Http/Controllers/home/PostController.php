@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\home;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Services\PostService;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class PostController
+class PostController extends Controller
 {
     private $postService;
 
