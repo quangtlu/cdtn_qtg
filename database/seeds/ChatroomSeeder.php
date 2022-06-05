@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Chatroom;
+use App\Models\Chatroom;
 
 class ChatroomSeeder extends Seeder
 {
