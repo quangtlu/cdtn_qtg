@@ -4,12 +4,12 @@
       {{ message.content }}
     </div>
     <div class="img_cont_msg" data-toggle="tooltip" data-placement="top" :title="`${message.sender.name} (${message.sender.email})`">
-      <img src="/images/current_user.jpg" class="rounded-circle user_img_msg">
+      <img src="/image/current_user.jpg" class="rounded-circle user_img_msg">
     </div>
   </div>
   <div class="d-flex justify-content-start mb-4" v-else>
     <div class="img_cont_msg" data-toggle="tooltip" data-placement="top" :title="`${message.sender.name} (${message.sender.email})`">
-      <img src="/images/other_user.jpg" class="rounded-circle user_img_msg">
+      <img src="/image/other_user.jpg" class="rounded-circle user_img_msg">
     </div>
     <div class="msg_container" data-toggle="tooltip" data-placement="top" :title="message.created_at">
       {{ message.content }}

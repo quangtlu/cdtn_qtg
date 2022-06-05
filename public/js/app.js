@@ -11204,8 +11204,8 @@
                       attrs: {
                         src:
                           user.id === _vm.$root.user.id
-                            ? "/images/current_user.jpg"
-                            : "/images/other_user.jpg"
+                            ? "/image/current_user.jpg"
+                            : "/image/other_user.jpg"
                       }
                     }),
                     _vm._v(" "),
@@ -11308,7 +11308,7 @@
             [
               _c("img", {
                 staticClass: "rounded-circle user_img_msg",
-                attrs: { src: "/images/current_user.jpg" }
+                attrs: { src: "/image/current_user.jpg" }
               })
             ]
           )
@@ -11328,7 +11328,7 @@
             [
               _c("img", {
                 staticClass: "rounded-circle user_img_msg",
-                attrs: { src: "/images/other_user.jpg" }
+                attrs: { src: "/image/other_user.jpg" }
               })
             ]
           ),

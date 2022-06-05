@@ -16,7 +16,7 @@
           <div class="d-flex bd-highlight">
             <div class="img_cont">
               <img
-                :src="user.id === $root.user.id ? '/images/current_user.jpg' : '/images/other_user.jpg'"
+                :src="user.id === $root.user.id ? '/image/current_user.jpg' : '/image/other_user.jpg'"
                 class="rounded-circle user_img"
               >
               <span class="online_icon"></span>
