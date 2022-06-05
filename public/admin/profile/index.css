@@ -50,9 +50,9 @@ body {
 .avata-img
 {
     border-radius: 50%;
-    height: 300px;
-    width: 300px;
-    border: 1px solid #796e6e;
+    height: 230px;
+    width: 230px;
+    border: 1px solid #fff;
 }
 
 .avt-side 

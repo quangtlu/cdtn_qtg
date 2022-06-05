@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('title', 'Sửa thông tin tác giả')
+@section('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endsection
 @section('content')
     <div class="content-wrapper">
         @include('partials.admin.content_header', ['name' => 'Tác giả', 'key' => 'Sửa thông tin'])
@@ -18,7 +21,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
-                                <input value="{{ $author->dob }}" type="date" name="dob" class="form-control" >
+                                <input value="{{ $author->dob }}" type="datetime-local"  placeholder="yyyy-mm-dd" name="dob" class="form-control" style="background-color: #fff">
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -32,4 +35,10 @@
         </div>
         <!-- /.content -->
     </div>
+@endsection
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[type=datetime-local]",{});
+    </script>
 @endsection
