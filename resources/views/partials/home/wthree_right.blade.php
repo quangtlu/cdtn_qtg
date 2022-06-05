@@ -22,28 +22,16 @@
         </div>
     </div>
     <div class="w3ls_popular_posts">
-        <h3>Popular Posts</h3>
-        <div class="agileits_popular_posts_grid">
-            <div class="w3agile_special_deals_grid_left_grid">
-                <a href="singlepage.html"><img src="images/p1.jpg" class="img-responsive" alt="" /></a>
+        <h3>Bài viết mới nhất</h3>
+        @foreach ($newestPosts as $post)
+            <div class="agileits_popular_posts_grid">
+                <div class="w3agile_special_deals_grid_left_grid">
+                    <a href="singlepage.html"><img src="images/p1.jpg" class="img-responsive" alt="" /></a>
+                </div>
+                <h4><a href="singlepage.html">{{ $post->title }}</a></h4>
+                <h5><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</h5>
             </div>
-            <h4><a href="singlepage.html">Tellus Faucibus Eleifend Sit Amet</a></h4>
-            <h5><i class="fa fa-calendar" aria-hidden="true"></i>FEB 15,2017</h5>
-        </div>
-        <div class="agileits_popular_posts_grid">
-            <div class="w3agile_special_deals_grid_left_grid">
-                <a href="singlepage.html"><img src="images/p2.jpg" class="img-responsive" alt="" /></a>
-            </div>
-            <h4><a href="singlepage.html">Mauris Ut Odio Sed Nisi Convallis</a></h4>
-            <h5><i class="fa fa-calendar" aria-hidden="true"></i>FEB 15,2017</h5>
-        </div>
-        <div class="agileits_popular_posts_grid">
-            <div class="w3agile_special_deals_grid_left_grid">
-                <a href="singlepage.html"><img src="images/p3.jpg" class="img-responsive" alt="" /></a>
-            </div>
-            <h4><a href="singlepage.html">Curabitur A Sapien Et Tellus Faucibus</a></h4>
-            <h5><i class="fa fa-calendar" aria-hidden="true"></i>FEB 15,2017</h5>
-        </div>
+        @endforeach
     </div>
 
     <div class="w3l_categories">

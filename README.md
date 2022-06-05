@@ -1,5 +1,6 @@
 - git clone 
 - Cài đặt redis
+- redis-server
 - composer install
 - npm install
 - cp .env.example .env
@@ -11,7 +12,11 @@
 
 <!-- Chạy ứng dụng, mỗi lệnh 1 terminal -->
 - redis-server
+    nếu gặp lỗi thì chạy lệnh này: 
+        + redis-cli ping
+        + redis-cli shutdown
 - php artisan serve
 - npm run watch
 - laravel-echo-server start
 - php artisan queue:work
+

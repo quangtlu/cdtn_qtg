@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Services\PostService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -32,7 +34,7 @@ class PostController extends Controller
         return view('home.posts.show', compact('post'));
     }
 
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
         $this->postService->create($request);
         return Redirect(route('posts.index'))->with('success', 'Đăng bài thành công');
@@ -59,5 +61,4 @@ class PostController extends Controller
             return Redirect(route('posts.index'))->with('error', 'Bạn không có quyền truy cập');
         }
     }
-
 }

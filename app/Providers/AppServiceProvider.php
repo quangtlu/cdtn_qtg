@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Post;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $newestPosts = Post::select('title', 'created_at')->orderBy('created_at', 'desc')->limit(3)->get();
+        view()->share('newestPosts', $newestPosts);
     }
 }

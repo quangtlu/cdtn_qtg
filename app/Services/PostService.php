@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Post;
 use App\traits\HandleImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PostService
 {
@@ -71,4 +72,6 @@ class PostService
     public function delete($id){
         $this->postModel->destroy($id);
     }
+
+
 }
