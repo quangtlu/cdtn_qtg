@@ -43,17 +43,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-2 text-center">
-                            <a href="{{ route('admin.profile.edit', ["id" => $profile->id ]) }}">
-                                <button class="btn btn-info">Sửa</button>
-                            </a>
+                        <div class="row">
+                            <div class="mt-3 text-center mx-auto">
+                                <a href="{{ route('admin.profile.edit', ["id" => $profile->id ]) }}">
+                                    <button class="btn btn-info">Sửa</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="">
+                        <div class="mt-4">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img class="avata-img mt-5" width="150px" src="{{ asset("image/profile/$profile->image") }}">
-                                <span class="text-black-50 mt-3">Ảnh đại diện</span>
+                                <img class="avata-img mt-5" src="{{ asset("image/profile/$profile->image") }}">
+                                <span class="text-black-50 mt-3">
+                                    <h5>Ảnh đại diện</h5>
+                                </span>
                                 {{-- <span> </span> --}}
                             </div>
                         </div>
