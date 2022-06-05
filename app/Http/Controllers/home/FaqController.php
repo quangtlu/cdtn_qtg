@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Services\FaqService;
 use function view;
-
+use App\Models\Post;
+use Illuminate\Support\Facades\Session;
 class FaqController
 {
     private $faqService;
