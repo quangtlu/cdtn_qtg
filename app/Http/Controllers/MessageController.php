@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Message;
-use Auth;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 use App\Events\MessagePosted;
 
 class MessageController extends Controller

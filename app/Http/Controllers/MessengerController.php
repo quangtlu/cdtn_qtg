@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Chatroom;
+use App\Models\Chatroom;
 use Illuminate\Support\Facades\Auth;
 
 class MessengerController extends Controller

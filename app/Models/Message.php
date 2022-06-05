@@ -1,10 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Chatroom;
+use App\Models\Chatroom;
 
 class Message extends Model
 {
