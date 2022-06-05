@@ -72,14 +72,6 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::name('.conversations')->group(function () {
-            Route::prefix('/conversations')->group(function () {
-                Route::get('/', 'Admin\ConversationController@index')->name('.index')->middleware('can:admin list role');
-                Route::get('/create', 'Admin\ConversationController@create')->name('.create')->middleware('can:admin add role');
-                Route::post('/store', 'Admin\ConversationController@store')->name('.store')->middleware('can:admin add role');
-            });
-        });
-
         Route::name('.posts')->group(function () {
             Route::prefix('/posts')->group(function () {
                 Route::get('/', 'Admin\PostController@index')->name('.index')->middleware('can:admin list post');
@@ -136,7 +128,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Home
-Route::get('/index', 'home\HomeController@index')->name('home.index');
+Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
 Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/', 'home\PostController@index')->name('.index');
@@ -150,14 +142,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
 
-    Route::get('/', 'AppController@index');
-    
+    Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('/messages', 'MessageController@index');
-    
     Route::post('/messages', 'MessageController@store');
+    Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
     
-    Route::get('/{any}', 'AppController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
-    
-
 });    
 

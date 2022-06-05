@@ -19,11 +19,11 @@
           v-model="inputMessage"
           name=""
           class="form-control type_msg"
-          placeholder="Type your message..."
+          placeholder="Nhập nội dung tin nhắn..."
           @keyup.enter="saveMessage"
         />
         <div class="input-group-append">
-          <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+          <span @click="saveMessage" class="input-group-text send_btn"><i class="fas fa-paper-plane"></i></span>
         </div>
       </div>
     </div>

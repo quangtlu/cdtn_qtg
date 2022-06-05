@@ -119,15 +119,6 @@ class PermissionSeeder extends Seeder
         $roleAdmin->givePermissionTo(Permission::all());
         $userAdmin->assignRole($roleAdmin);
 
-        $chatroom1 = new Chatroom();
-        $chatroom1->name = 'Chatroom 1';
-        $chatroom1->description = 'Where heroes rise';
-        $chatroom1->save();
-
-        $chatroom2 = new Chatroom();
-        $chatroom2->name = 'Chatroom 2';
-        $chatroom2->description = 'Where losers hide';
-        $chatroom2->save();
     }
 
     public function setPermissionToTole(array $permissions, $role)

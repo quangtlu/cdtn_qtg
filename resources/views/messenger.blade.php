@@ -7,7 +7,7 @@
         <meta name="description" content="Realtime chat app using Laravel, VueJS, Redis, Laravel Echo, SocketIO">
         <meta name="keywords" content="Realtime chat app, Laravel, VueJS, Laravel Echo, Redis, SocketIO">
 
-        <title>Realtime Chat | Laravel, VueJS, Redis, Laravel Echo, SocketIO</title>
+        <title>Trò chuyện</title>
 
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font_awesome/all.min.css') }}">

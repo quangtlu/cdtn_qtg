@@ -17,4 +17,9 @@ class Message extends Model
     public function room () {
         return $this->belongsTo(Chatroom::class, 'room');
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:H:i:s d/m/Y ',
+    ];
+
 }

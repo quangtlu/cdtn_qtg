@@ -1,9 +1,9 @@
 <template>
   <div class="card mb-sm-3 mb-md-0 contacts_card">
     <div class="card-header">
-      <h3 class="d-flex text-white">Online<span class="badge badge-success ml-2">{{ usersOnline.length }}</span></h3>
+      <h3 class="d-flex text-white">Thành viên<span class="badge badge-success ml-2">{{ usersOnline.length }}</span></h3>
       <div class="input-group">
-        <input v-model="searchQuery" type="text" placeholder="Search..." name="" class="form-control search">
+        <input v-model="searchQuery" type="text" placeholder="Nhập tên thành viên..." name="" class="form-control search">
         <div class="input-group-prepend">
           <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
         </div>
@@ -16,7 +16,7 @@
           <div class="d-flex bd-highlight">
             <div class="img_cont">
               <img
-                :src="user.id === $root.user.id ? '/image/current_user.jpg' : '/image/other_user.jpg'"
+                :src="'/image/profile/' + user.image"
                 class="rounded-circle user_img"
               >
               <span class="online_icon"></span>
@@ -29,7 +29,7 @@
               >
                 {{ user.new_messages }}
               </span>
-              <p>{{ user.name }} is online</p>
+              <p>Đang hoạt động</p>
             </div>
           </div>
         </li>

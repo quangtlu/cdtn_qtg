@@ -1,52 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/js/app"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      csrfToken: document.head.querySelector('meta[name="csrf-token"]').content
-    };
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListUser.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListUser.vue?vue&type=script&lang=js& ***!
@@ -248,7 +201,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -4873,7 +4825,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "body,\nhtml {\n  height: 100%;\n  margin: 0;\n}\n.app-container {\n  background: #0078d4;\n  background-image: linear-gradient(0deg, #0078d4, #00bcf2);\n}\n.app-container .app-header {\n  position: absolute;\n  width: 100%;\n  top: 30px;\n}\n.app-container .app-header .btn-logout {\n  margin-right: 30px;\n}\n.app-container .chat-container {\n  height: 95%;\n}\n.chat {\n  margin-top: auto;\n  margin-bottom: auto;\n}\n.chat .card {\n  height: 500px;\n  border-radius: 15px !important;\n  background-color: rgba(0, 0, 0, 0.4) !important;\n}\n.chat .card .card-header {\n  border-radius: 15px 15px 0 0 !important;\n  border-bottom: 0 !important;\n}\n.chat .card .card-header .search_btn {\n  border-radius: 0 15px 15px 0 !important;\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n  cursor: pointer;\n}\n.chat .card .card-header .search {\n  border-radius: 15px 0 0 15px !important;\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n}\n.chat .card .card-header .search:focus {\n  box-shadow: none !important;\n  outline: 0px !important;\n}\n.chat .card .msg_head {\n  position: relative;\n}\n.chat .card .msg_card_body {\n  overflow-y: auto;\n}\n.chat .card .card-footer {\n  border-radius: 0 0 15px 15px !important;\n  border-top: 0 !important;\n}\n.chat .card .card-footer .type_msg {\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n  height: 60px !important;\n  overflow-y: auto;\n  border-radius: 15px 0 0 15px !important;\n}\n.chat .card .card-footer .type_msg:focus {\n  box-shadow: none !important;\n  outline: 0px !important;\n}\n.chat .card .card-footer .send_btn {\n  border-radius: 0 15px 15px 0 !important;\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n  cursor: pointer;\n}\n.chat .contacts_body {\n  padding: 0.75rem 0 !important;\n  overflow-y: auto;\n  white-space: nowrap;\n}\n.chat .contacts_body .contacts {\n  list-style: none;\n  padding: 0;\n}\n.chat .contacts_body .contacts li {\n  width: 100% !important;\n  padding: 5px 10px;\n  transition: background-color 0.2s;\n  cursor: pointer;\n  position: relative;\n}\n.chat .contacts_body .contacts li:hover {\n  background-color: rgba(0, 0, 0, 0.3);\n}\n.chat .contacts_body .contacts li.active {\n  background-color: rgba(0, 0, 0, 0.3);\n}\n.chat .contacts_body .contacts li .current-user-mark {\n  height: 100%;\n  width: 3px;\n  background: #00ffa4;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n.chat .contacts_body .contacts li .img_cont {\n  position: relative;\n}\n.chat .contacts_body .contacts li .img_cont .user_img {\n  height: 45px;\n  width: 45px;\n  border: 2px solid #f5f6fa;\n}\n.container {\n  align-content: center;\n}\n.user_img_msg {\n  height: 40px;\n  width: 40px;\n  border: 2px solid #f5f6fa;\n}\n.online_icon {\n  position: absolute;\n  height: 15px;\n  width: 15px;\n  background-color: #4cd137;\n  border-radius: 50%;\n  bottom: 17px;\n  right: 0;\n  border: 2px solid white;\n}\n.offline {\n  background-color: #c23616 !important;\n}\n.user_info {\n  margin-top: auto;\n  margin-bottom: auto;\n  margin-left: 15px;\n}\n.user_info span {\n  font-size: 20px;\n  color: white;\n}\n.user_info p {\n  font-size: 10px;\n  color: rgba(255, 255, 255, 0.6);\n}\n.msg_container {\n  margin-top: auto;\n  margin-bottom: auto;\n  margin-left: 10px;\n  border-radius: 25px;\n  background-color: #00a0e5;\n  padding: 10px;\n  position: relative;\n  color: white;\n  word-break: break-word;\n  max-width: 70%;\n}\n.msg_container_send {\n  margin-top: auto;\n  margin-bottom: auto;\n  margin-right: 10px;\n  border-radius: 25px;\n  background-color: #42e274;\n  padding: 10px;\n  position: relative;\n  color: white;\n  word-break: break-word;\n  max-width: 70%;\n}\n@media (max-width: 768px) {\n.app-container {\n    height: auto !important;\n}\n.app-container .app-header {\n    position: initial;\n    padding-top: 30px;\n}\n.app-container .app-header .btn-logout {\n    margin-right: 0;\n}\n.app-container .chat {\n    margin-top: 1rem;\n}\n.app-container .chat:last-child, .app-container .chat:first-child {\n    margin-top: 1rem;\n}\n}\n@media (max-width: 576px) {\n.contacts_card {\n    margin-bottom: 15px !important;\n}\n}\n.font-12px {\n  font-size: 12px !important;\n}\n.private-message-container {\n  border-top-left-radius: 15px;\n  border-top-right-radius: 15px;\n  background-color: white;\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n  width: 300px;\n}\n.private-message-container.expand {\n  height: 350px;\n}\n.private-message-container .chat-header {\n  border-top-left-radius: 15px;\n  border-top-right-radius: 15px;\n  transition: background-color 0.2s;\n  cursor: pointer;\n}\n.private-message-container .chat-header:hover {\n  background-color: #e6e5e5;\n}\n.private-message-container .chat-header .img_cont {\n  position: relative;\n}\n.private-message-container .chat-header .btn-close {\n  position: absolute;\n  right: 15px;\n  top: 15px;\n  outline: none;\n  border: none;\n  background: none;\n}\n.private-message-container .chat-header .btn-close i {\n  font-size: 18px;\n  transition: transform 0.2s;\n}\n.private-message-container .chat-header .btn-close i:hover {\n  transform: scale(1.2);\n}\n.private-message-container .private-chat-body {\n  height: calc(100% - 65px - 40px);\n  overflow-y: scroll;\n}\n.private-message-container .private-chat-body .msg_container_send {\n  padding: 5px 10px 5px 10px !important;\n  border-radius: 15px !important;\n  max-width: 165px;\n}\n.private-message-container .private-chat-body .msg_container {\n  padding: 5px 10px 5px 10px !important;\n  border-radius: 15px !important;\n  max-width: 165px;\n}\n.private-message-container .private-chat-body .img_cont_msg img {\n  width: 30px;\n  height: 30px;\n}\n.private-message-container .text-input input {\n  height: 40px;\n  border: none;\n  border-top: solid 1px #ddd;\n  outline: none;\n  padding: 7px;\n  font-size: 12px;\n}\n@-webkit-keyframes wave {\n0%, 60%, 100% {\n    transform: initial;\n}\n30% {\n    transform: translateY(-15px);\n}\n}\n@keyframes wave {\n0%, 60%, 100% {\n    transform: initial;\n}\n30% {\n    transform: translateY(-15px);\n}\n}\n#wave .dot {\n  display: inline-block;\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  margin-right: 2px;\n  background: white;\n  -webkit-animation: wave 1.3s linear infinite;\n          animation: wave 1.3s linear infinite;\n}\n#wave .dot:nth-child(2) {\n  -webkit-animation-delay: -1.1s;\n          animation-delay: -1.1s;\n}\n#wave .dot:nth-child(3) {\n  -webkit-animation-delay: -0.9s;\n          animation-delay: -0.9s;\n}\n.blink-anim {\n  -webkit-animation: blink 2s infinite;\n          animation: blink 2s infinite;\n}\n@keyframes wave {\n0%, 60%, 100% {\n    transform: initial;\n}\n30% {\n    transform: translateY(-7px);\n}\n}\n@-webkit-keyframes blink {\n0%, 100% {\n    background: white;\n}\n50% {\n    background: #2e7fd7;\n}\n}\n@keyframes blink {\n0%, 100% {\n    background: white;\n}\n50% {\n    background: #2e7fd7;\n}\n}", ""]);
+exports.push([module.i, "body,\nhtml {\n  height: 100%;\n  margin: 0;\n}\n.app-container {\n  background: #0078d4;\n  background-image: linear-gradient(0deg, #0078d4, #00bcf2);\n}\n.app-container .app-container-link {\n  text-decoration: none;\n  color: #fff;\n  font-size: 20px;\n}\n.app-container .app-header {\n  position: absolute;\n  width: 100%;\n  top: 15px;\n}\n.app-container .app-header .btn-logout {\n  margin-right: 30px;\n}\n.app-container .chat-container {\n  height: 95%;\n}\n.chat {\n  margin-top: auto;\n  margin-bottom: auto;\n}\n.chat .card {\n  height: 500px;\n  border-radius: 15px !important;\n  background-color: rgba(0, 0, 0, 0.4) !important;\n}\n.chat .card .card-header {\n  border-radius: 15px 15px 0 0 !important;\n  border-bottom: 0 !important;\n}\n.chat .card .card-header .search_btn {\n  border-radius: 0 15px 15px 0 !important;\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n  cursor: pointer;\n}\n.chat .card .card-header .search {\n  border-radius: 15px 0 0 15px !important;\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n}\n.chat .card .card-header .search:focus {\n  box-shadow: none !important;\n  outline: 0px !important;\n}\n.chat .card .msg_head {\n  position: relative;\n}\n.chat .card .msg_card_body {\n  overflow-y: auto;\n}\n.chat .card .card-footer {\n  border-radius: 0 0 15px 15px !important;\n  border-top: 0 !important;\n}\n.chat .card .card-footer .type_msg {\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n  height: 60px !important;\n  overflow-y: auto;\n  border-radius: 15px 0 0 15px !important;\n}\n.chat .card .card-footer .type_msg:focus {\n  box-shadow: none !important;\n  outline: 0px !important;\n}\n.chat .card .card-footer .send_btn {\n  border-radius: 0 15px 15px 0 !important;\n  background-color: rgba(0, 0, 0, 0.3) !important;\n  border: 0 !important;\n  color: white !important;\n  cursor: pointer;\n}\n.chat .contacts_body {\n  padding: 0.75rem 0 !important;\n  overflow-y: auto;\n  white-space: nowrap;\n}\n.chat .contacts_body .contacts {\n  list-style: none;\n  padding: 0;\n}\n.chat .contacts_body .contacts li {\n  width: 100% !important;\n  padding: 5px 10px;\n  transition: background-color 0.2s;\n  cursor: pointer;\n  position: relative;\n}\n.chat .contacts_body .contacts li:hover {\n  background-color: rgba(0, 0, 0, 0.3);\n}\n.chat .contacts_body .contacts li.active {\n  background-color: rgba(0, 0, 0, 0.3);\n}\n.chat .contacts_body .contacts li .current-user-mark {\n  height: 100%;\n  width: 3px;\n  background: #00ffa4;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n.chat .contacts_body .contacts li .img_cont {\n  position: relative;\n}\n.chat .contacts_body .contacts li .img_cont .user_img {\n  height: 45px;\n  width: 45px;\n  border: 2px solid #f5f6fa;\n}\n.container {\n  align-content: center;\n}\n.user_img_msg {\n  height: 40px;\n  width: 40px;\n  border: 2px solid #f5f6fa;\n}\n.online_icon {\n  position: absolute;\n  height: 15px;\n  width: 15px;\n  background-color: #4cd137;\n  border-radius: 50%;\n  bottom: 17px;\n  right: 0;\n  border: 2px solid white;\n}\n.offline {\n  background-color: #c23616 !important;\n}\n.user_info {\n  margin-top: auto;\n  margin-bottom: auto;\n  margin-left: 15px;\n}\n.user_info span {\n  font-size: 20px;\n  color: white;\n}\n.user_info p {\n  font-size: 10px;\n  color: rgba(255, 255, 255, 0.6);\n}\n.msg_container {\n  margin-top: auto;\n  margin-bottom: auto;\n  margin-left: 10px;\n  border-radius: 25px;\n  background-color: #00a0e5;\n  padding: 10px;\n  position: relative;\n  color: white;\n  word-break: break-word;\n  max-width: 70%;\n}\n.msg_container_send {\n  margin-top: auto;\n  margin-bottom: auto;\n  margin-right: 10px;\n  border-radius: 25px;\n  background-color: #42e274;\n  padding: 10px;\n  position: relative;\n  color: white;\n  word-break: break-word;\n  max-width: 70%;\n}\n@media (max-width: 768px) {\n.app-container {\n    height: auto !important;\n}\n.app-container .app-header {\n    position: initial;\n    padding-top: 30px;\n}\n.app-container .app-header .btn-logout {\n    margin-right: 0;\n}\n.app-container .chat {\n    margin-top: 1rem;\n}\n.app-container .chat:last-child, .app-container .chat:first-child {\n    margin-top: 1rem;\n}\n}\n@media (max-width: 576px) {\n.contacts_card {\n    margin-bottom: 15px !important;\n}\n}\n.font-12px {\n  font-size: 12px !important;\n}\n.private-message-container {\n  border-top-left-radius: 15px;\n  border-top-right-radius: 15px;\n  background-color: white;\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n  width: 300px;\n}\n.private-message-container.expand {\n  height: 350px;\n}\n.private-message-container .chat-header {\n  border-top-left-radius: 15px;\n  border-top-right-radius: 15px;\n  transition: background-color 0.2s;\n  cursor: pointer;\n}\n.private-message-container .chat-header:hover {\n  background-color: #e6e5e5;\n}\n.private-message-container .chat-header .img_cont {\n  position: relative;\n}\n.private-message-container .chat-header .btn-close {\n  position: absolute;\n  right: 15px;\n  top: 15px;\n  outline: none;\n  border: none;\n  background: none;\n}\n.private-message-container .chat-header .btn-close i {\n  font-size: 18px;\n  transition: transform 0.2s;\n}\n.private-message-container .chat-header .btn-close i:hover {\n  transform: scale(1.2);\n}\n.private-message-container .private-chat-body {\n  height: calc(100% - 65px - 40px);\n  overflow-y: scroll;\n}\n.private-message-container .private-chat-body .msg_container_send {\n  padding: 5px 10px 5px 10px !important;\n  border-radius: 15px !important;\n  max-width: 165px;\n}\n.private-message-container .private-chat-body .msg_container {\n  padding: 5px 10px 5px 10px !important;\n  border-radius: 15px !important;\n  max-width: 165px;\n}\n.private-message-container .private-chat-body .img_cont_msg img {\n  width: 30px;\n  height: 30px;\n}\n.private-message-container .text-input input {\n  height: 40px;\n  border: none;\n  border-top: solid 1px #ddd;\n  outline: none;\n  padding: 7px;\n  font-size: 12px;\n}\n@-webkit-keyframes wave {\n0%, 60%, 100% {\n    transform: initial;\n}\n30% {\n    transform: translateY(-15px);\n}\n}\n@keyframes wave {\n0%, 60%, 100% {\n    transform: initial;\n}\n30% {\n    transform: translateY(-15px);\n}\n}\n#wave .dot {\n  display: inline-block;\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  margin-right: 2px;\n  background: white;\n  -webkit-animation: wave 1.3s linear infinite;\n          animation: wave 1.3s linear infinite;\n}\n#wave .dot:nth-child(2) {\n  -webkit-animation-delay: -1.1s;\n          animation-delay: -1.1s;\n}\n#wave .dot:nth-child(3) {\n  -webkit-animation-delay: -0.9s;\n          animation-delay: -0.9s;\n}\n.blink-anim {\n  -webkit-animation: blink 2s infinite;\n          animation: blink 2s infinite;\n}\n@keyframes wave {\n0%, 60%, 100% {\n    transform: initial;\n}\n30% {\n    transform: translateY(-7px);\n}\n}\n@-webkit-keyframes blink {\n0%, 100% {\n    background: white;\n}\n50% {\n    background: #2e7fd7;\n}\n}\n@keyframes blink {\n0%, 100% {\n    background: white;\n}\n50% {\n    background: #2e7fd7;\n}\n}", ""]);
 
 // exports
 
@@ -10228,47 +10180,17 @@ var render = function () {
                 {
                   staticClass: "flex-grow-1",
                   staticStyle: { "text-decoration": "none" },
-                  attrs: { to: "/" },
+                  attrs: { to: "/messenger" },
                 },
                 [
-                  _c("h2", { staticClass: "text-white" }, [
-                    _vm._v("\n          Realtime Chat App\n        "),
+                  _c("h4", { staticClass: "text-white" }, [
+                    _vm._v("\n          Trò chuyện\n          "),
+                    _c("i", { staticClass: "fab fa-facebook-messenger" }),
                   ]),
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "btn-logout" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: {
-                      href: "/logout",
-                      onclick:
-                        "event.preventDefault();\n                            document.getElementById('logout-form').submit();",
-                    },
-                  },
-                  [_vm._v("\n          Logout\n        ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    staticStyle: { display: "none" },
-                    attrs: {
-                      id: "logout-form",
-                      action: "/logout",
-                      method: "POST",
-                    },
-                  },
-                  [
-                    _c("input", {
-                      attrs: { type: "hidden", name: "_token" },
-                      domProps: { value: _vm.csrfToken },
-                    }),
-                  ]
-                ),
-              ]),
+              _vm._m(0),
             ],
             1
           ),
@@ -10283,7 +10205,18 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "app-container-link", attrs: { href: "/" } },
+      [_vm._v("Trang chủ "), _c("i", { staticClass: "fas fa-home" })]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -10308,7 +10241,7 @@ var render = function () {
   return _c("div", { staticClass: "card mb-sm-3 mb-md-0 contacts_card" }, [
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "d-flex text-white" }, [
-        _vm._v("Online"),
+        _vm._v("Thành viên"),
         _c("span", { staticClass: "badge badge-success ml-2" }, [
           _vm._v(_vm._s(_vm.usersOnline.length)),
         ]),
@@ -10325,7 +10258,11 @@ var render = function () {
             },
           ],
           staticClass: "form-control search",
-          attrs: { type: "text", placeholder: "Search...", name: "" },
+          attrs: {
+            type: "text",
+            placeholder: "Nhập tên thành viên...",
+            name: "",
+          },
           domProps: { value: _vm.searchQuery },
           on: {
             input: function ($event) {
@@ -10365,12 +10302,7 @@ var render = function () {
                 _c("div", { staticClass: "img_cont" }, [
                   _c("img", {
                     staticClass: "rounded-circle user_img",
-                    attrs: {
-                      src:
-                        user.id === _vm.$root.user.id
-                          ? "/image/current_user.jpg"
-                          : "/image/other_user.jpg",
-                    },
+                    attrs: { src: "/image/profile/" + user.image },
                   }),
                   _vm._v(" "),
                   _c("span", { staticClass: "online_icon" }),
@@ -10399,7 +10331,7 @@ var render = function () {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(user.name) + " is online")]),
+                  _c("p", [_vm._v("Đang hoạt động")]),
                 ]),
               ]),
             ]
@@ -10472,7 +10404,7 @@ var render = function () {
           [
             _c("img", {
               staticClass: "rounded-circle user_img_msg",
-              attrs: { src: "/image/current_user.jpg" },
+              attrs: { src: "/image/profile/" + _vm.message.sender.image },
             }),
           ]
         ),
@@ -10492,7 +10424,7 @@ var render = function () {
           [
             _c("img", {
               staticClass: "rounded-circle user_img_msg",
-              attrs: { src: "/image/other_user.jpg" },
+              attrs: { src: "/image/profile/" + _vm.message.sender.image },
             }),
           ]
         ),
@@ -10572,7 +10504,7 @@ var render = function () {
             },
           ],
           staticClass: "form-control type_msg",
-          attrs: { name: "", placeholder: "Type your message..." },
+          attrs: { name: "", placeholder: "Nhập nội dung tin nhắn..." },
           domProps: { value: _vm.inputMessage },
           on: {
             keyup: function ($event) {
@@ -10593,23 +10525,21 @@ var render = function () {
           },
         }),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "input-group-append" }, [
+          _c(
+            "span",
+            {
+              staticClass: "input-group-text send_btn",
+              on: { click: _vm.saveMessage },
+            },
+            [_c("i", { staticClass: "fas fa-paper-plane" })]
+          ),
+        ]),
       ]),
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c("span", { staticClass: "input-group-text send_btn" }, [
-        _c("i", { staticClass: "fas fa-location-arrow" }),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -10636,7 +10566,7 @@ var render = function () {
       _c("div", { staticClass: "card mb-sm-3 mb-md-0 contacts_card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("h3", { staticClass: "d-flex text-white" }, [
-            _vm._v("Chatroom"),
+            _vm._v("Phòng trò chuyện"),
             _c("span", { staticClass: "badge badge-success ml-2" }, [
               _vm._v(_vm._s(_vm.$root.rooms.length)),
             ]),
@@ -10653,7 +10583,11 @@ var render = function () {
                 },
               ],
               staticClass: "form-control search",
-              attrs: { type: "text", placeholder: "Search...", name: "" },
+              attrs: {
+                type: "text",
+                placeholder: "Nhập tên phòng...",
+                name: "",
+              },
               domProps: { value: _vm.searchQuery },
               on: {
                 input: function ($event) {
@@ -10681,7 +10615,10 @@ var render = function () {
                   _c("router-link", { attrs: { to: "/rooms/" + room.id } }, [
                     _c("div", { staticClass: "d-flex bd-highlight" }, [
                       _c("div", { staticClass: "user_info" }, [
-                        _c("span", [_vm._v(_vm._s(room.name))]),
+                        _c("span", [
+                          _vm._v(_vm._s(room.name) + " "),
+                          _c("i", { staticClass: "fas fa-comments" }),
+                        ]),
                         _vm._v(" "),
                         room.description
                           ? _c("p", [_vm._v(_vm._s(room.description))])
@@ -10947,19 +10884,17 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=f348271a& */ "./resources/js/App.vue?vue&type=template&id=f348271a&");
-/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./resources/js/App.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _App_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/App.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _App_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/App.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-
-
+var script = {}
 
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  script,
   _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -10973,20 +10908,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/App.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/App.vue?vue&type=script&lang=js&":
-/*!*******************************************************!*\
-  !*** ./resources/js/App.vue?vue&type=script&lang=js& ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib??ref--4-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -11468,7 +11389,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
-  path: '/',
+  path: '/messenger',
   name: 'list.room',
   component: _pages_ListRoom__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {

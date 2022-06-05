@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/messenger',
     name: 'list.room',
     component: ListRoom
   },
@@ -15,7 +15,7 @@ const routes = [
     path: '/rooms/:roomId',
     name: 'room',
     component: Room
-  }
+  },
 ]
 
 const router = new VueRouter({

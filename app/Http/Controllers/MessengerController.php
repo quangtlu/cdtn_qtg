@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Chatroom;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
-class AppController extends Controller
+class MessengerController extends Controller
 {
     public function index () {
         $data = ['user' => Auth::user(), 'rooms' => Chatroom::all()];
-        return view('app', ['data' => $data]);
+        return view('messenger', ['data' => $data]);
     }
 }
