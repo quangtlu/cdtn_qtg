@@ -8,7 +8,8 @@ use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use App\Services\CategoryService;
+use App\Services\TagService;
 
 class PostController extends Controller
 {
@@ -17,9 +18,15 @@ class PostController extends Controller
     /**
      * @param $postService
      */
-    public function __construct(PostService $postService)
+    public function __construct(PostService $postService,
+                                TagService $tagService, CategoryService $categoryService)
     {
         $this->postService = $postService;
+        $this->tagService = $tagService;
+        $this->categoryService = $categoryService;
+        $tags = $this->tagService->getAll();
+        $categories = $this->categoryService->getAll();
+        view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
     public function index()
@@ -34,7 +41,7 @@ class PostController extends Controller
         return view('home.posts.show', compact('post'));
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         $this->postService->create($request);
         return Redirect(route('posts.index'))->with('success', 'Đăng bài thành công');
