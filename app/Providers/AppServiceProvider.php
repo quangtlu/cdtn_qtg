@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        try{
             $newestPosts = Post::select('title', 'created_at')->orderBy('created_at', 'desc')->limit(3)->get();
             $categories = Category::select('name')->where('parent_id', 0)->orderBy('created_at', 'desc')->get();
             $tags = Tag::select('name')->orderBy('created_at', 'desc')->get();
@@ -36,9 +35,5 @@ class AppServiceProvider extends ServiceProvider
             view()->share('newestPosts', $newestPosts);
             view()->share('categories', $categories);
             view()->share('tags', $tags);
-        } catch(\Throwable $th) {
-            throw $th;
-        }
-
     }
 }
