@@ -11,7 +11,7 @@
                     <a class="header-link" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
                 @endguest
                 @auth
-                    <a class="header-link user-name" href="features.html">{{ Auth::user()->name }}</a>
+                    <a class="header-link user-name" href="{{ route('profile.index') }}">{{ Auth::user()->name }}</a>
                         <a class="header-link" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
