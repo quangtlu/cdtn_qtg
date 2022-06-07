@@ -153,5 +153,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages', 'MessageController@index');
     Route::post('/messages', 'MessageController@store');
     Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
+    
+    Route::name('profile')->group(function () {
+        Route::prefix('/profile-user')->group(function () {
+            Route::get('/', 'home\ProfileController@index')->name('.index');
+            Route::get('/edit/{id}', 'home\ProfileController@edit')->name('.edit');
+            Route::post('/update{id}', 'home\ProfileController@update')->name('.update');
+        });
+    });
+});    
 
-});

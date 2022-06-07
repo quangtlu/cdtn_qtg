@@ -2,7 +2,14 @@
 @section('title', 'Diễn đàm')
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        #select2-data-2-1coy {
+            width: 100%;
+        }
+    </style>
 @endsection
 @section('content')
     @auth
@@ -47,6 +54,30 @@
                         <div class="form-group">
                             <label for="title">Tiêu đề</label>
                             <input type="text" name="title" class="form-control" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label>Thẻ tag</label>
+                            <select name="tag_id[]" class="form-control select2_init" multiple>
+                                <option></option>
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('tag_id')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Danh mục</label>
+                            <select name="category_id[]" class="form-control select3_init" multiple>
+                                <option></option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="summernote">Nội dung</label>
@@ -140,6 +171,20 @@
         })
         $('#summernote').summernote({
             height: 200
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(function () {
+            $('.select2_init').select2({
+                'placeholder': 'Chọn thẻ tag',
+            })
+            $('.select3_init').select2({
+                'placeholder': 'Chọn danh mục',
+            })
+        })
+        $('#summernote').summernote({
+                height: 400
         });
     </script>
 
