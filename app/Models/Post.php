@@ -14,6 +14,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function postTag()
     {
         return $this->hasMany(PostTag::class, 'post_id');
@@ -33,4 +38,6 @@ class Post extends Model
     {
         return $this->hasMany(PostCategory::class);
     }
+
+    
 }

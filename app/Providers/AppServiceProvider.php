@@ -26,7 +26,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $newestPosts = Post::select('title', 'created_at')->orderBy('created_at', 'desc')->limit(3)->get();
-        view()->share('newestPosts', $newestPosts);
+        
+        try {
+            $newestPosts = Post::select('title', 'created_at')->orderBy('created_at', 'desc')->limit(3)->get();
+            view()->share('newestPosts', $newestPosts);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        
     }
 }

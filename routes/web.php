@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => true]);
 //Admin
@@ -142,10 +143,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
 
+    Route::name('comments.')->prefix('posts')->group(function () {
+        Route::post('/', 'home\CommentController@store')->name('store');
+        Route::post('/update/{id}', 'home\CommentController@update')->name('update');
+        Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
+    });
+
     Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('/messages', 'MessageController@index');
     Route::post('/messages', 'MessageController@store');
     Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
-    
-});    
 
+});

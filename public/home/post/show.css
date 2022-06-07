@@ -1,0 +1,15 @@
+.comment-action-link {
+    cursor: pointer;
+}
+
+.btn-delete-comment {
+    color: red !important;
+}
+
+.btn-edit-comment {
+    color: rgb(38, 182, 218)!important;
+}
+
+.edit-comment-form {
+    display: none;
+}
