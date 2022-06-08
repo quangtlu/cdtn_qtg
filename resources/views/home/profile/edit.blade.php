@@ -32,7 +32,7 @@
                     <h4 class="text-center" style="font-size: xx-large">Thông tin tài khoản</h4>
                 </div>
                 <div class="row profile-content">
-                    <div class="col-md-7 border-right">
+                    <div class="col-md-6 border-right">
                         <div class="p-3">
                             <div class="">
                                 <div class="row my-3">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5 ml-3">
+                    <div class="col-md-6 ml-3">
                         <div class="mt-3" style="margin-top: 40px">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="avatar-header">

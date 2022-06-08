@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts',
+            'title' => 'required',
             'tag_id' => 'required',
             'category_id' => 'required',
             'content' => 'required',
@@ -35,7 +35,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng nhập tiêu đề',
-            'title.unique' => 'Tiêu đề đã tồn tại',
             'tag_id.required' => 'Vui lòng chọn thẻ tag',
             'category_id.required' => 'Vui lòng chọn danh mục',
             'content.required' => 'Vui lòng nhập nội dung',

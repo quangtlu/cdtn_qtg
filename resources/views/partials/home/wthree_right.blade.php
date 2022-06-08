@@ -1,7 +1,7 @@
 <div class="col-md-3 w3agile_blog_left">
     <div class="wthreesearch">
-        <form action="#" method="post">
-            <input type="search" name="Search" placeholder="Search here" required="">
+        <form action="{{ route('posts.search') }}" method="GET">
+            <input type="search" name="keyword" placeholder="Tìm kiếm" required="">
             <button type="submit" class="btn btn-default search" aria-label="Left Align">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>
@@ -10,7 +10,7 @@
     </div>
 
     <div class="agileinfo_calender">
-        <h3>CONNECT SOCIALLY</h3>
+        <h3>Mạng xã hội</h3>
         <div class="w3ls-social-icons-1">
             <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
             <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>

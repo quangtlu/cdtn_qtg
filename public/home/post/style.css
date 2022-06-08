@@ -3,53 +3,69 @@
     height: 40px;
     border-radius: 50%;
 }
+
 #create-post {
     border-radius: 40px;
     cursor: pointer;
 }
-.modal-content{
+
+.modal-content {
     border-radius: 20px;
 }
+
 .modal-header {
     border-radius: 17px 17px 0 0;
 }
+
 .panel {
     border-radius: 20px;
 }
+
 .panel-heading {
     border-radius: 17px 17px 0 0;
 }
+
 .panel-footer {
     border-radius: 0px 0px 17px 17px;
 }
+
 .btn-modal-post {
     border-radius: 20px;
 }
-.post-info{
+
+.post-info {
     list-style: none;
     padding: 27px 0;
 
 }
-.post-info i{
+
+.post-info i {
     margin-right: 5px;
 }
-.post-info__link{
+
+.post-info__link {
     text-decoration: none !important;
     color: #fca003;
     font-size: 14px;
     padding: 5px 0;
     display: block;
 }
-.error-message{
+
+.error-message {
     color: red;
     font-size: 14px;
 }
+
 .btn-delete {
     cursor: pointer;
     color: red;
 }
+
 .btn-edit {
     color: #0c84ff;
     cursor: pointer;
 }
 
+.select2-container {
+    width: 100% !important;
+}

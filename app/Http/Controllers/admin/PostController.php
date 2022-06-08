@@ -32,6 +32,12 @@ class PostController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
+    public function search(Request $request)
+    {
+        $posts = $this->postService->search($request);
+        return view('admin.posts.index', compact('posts'));
+    }
+
     public function create()
     {
         return view('admin.posts.create');

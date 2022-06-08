@@ -19,6 +19,9 @@
         .profile-content{
             margin-top: 50px;
         }
+        .avata-img {
+            border: 1px solid #ffac3a;
+        }
     </style>
 @endsection
 @section('content')
@@ -61,7 +64,7 @@
                     <div class="row btn-edit">
                         <div class="text-center">
                             <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
-                                <button class="btn btn-info">Sửa</button>
+                                <button class="btn btn-info">Chỉnh sửa</button>
                             </a>
                         </div>
                     </div>
@@ -70,9 +73,7 @@
                     <div class="mt-3">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img class="avata-img mt-5" src="{{ asset("image/profile/$profile->image") }}">
-                            <span class="text-black-50 mt-2">
-                                <h4 >Ảnh đại diện</h4>
-                            </span>
+                            <h4 style="margin-top: 24px !important">Ảnh đại diện</h4>
                             {{-- <span> </span> --}}
                         </div>
                     </div>

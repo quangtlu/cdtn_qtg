@@ -62,8 +62,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <link rel="stylesheet" href="{{ asset("home/alert.css") }}">
+    <link rel="stylesheet" href="{{ asset('home/main.css') }}">
 @yield('css')
-<!-- //script for smooth drop down-nav -->
+
 </head>
 <body>
 <!-- header -->
@@ -84,8 +85,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 </script>
 <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
-<script src="{{ asset('home/alert.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('home/alert.js') }}"></script>
 @yield('js')
 
 </body>
