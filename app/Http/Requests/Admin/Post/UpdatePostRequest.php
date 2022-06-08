@@ -24,7 +24,7 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required',Rule::unique('posts','title')->ignore($this->id)],
+            'title' => ['required'],
             'tag_id' => 'required',
             'category_id' => 'required',
             'content' => 'required',
@@ -35,7 +35,6 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng nhập tiêu đề bài viết',
-            'title.unique' => 'Tiêu đề bài viết đã tồn tại',
             'tag_id.required' => 'Vui lòng chọn thẻ tag',
             'category_id.required' => 'Vui lòng chọn danh mục',
             'content.required' => 'Vui lòng nhập nội dung',

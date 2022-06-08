@@ -9,7 +9,9 @@
         <ul>
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">{{ $post->user->name }}</a>
             </li>
-            <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $post->tag->count() }}
+            <li title="
+                                @foreach ($post->tag as $tagg) {{ $tagg->name }} | @endforeach"><span
+                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $post->tag->count() }}
                     Tags</a></li>
             <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#">{{ $post->comments->count() }} bình
                     luận</a></li>
@@ -46,37 +48,49 @@
                         <h4><a href="#">{{ $comment->user->name }}</a></h4>
                         <ul>
                             <li>{{ $comment->created_at }}<i>|</i></li>
-                            <li><a class="rep-comment" data-userName="{{ $comment->user->name }}" href="#rep-comment">Trả
-                                    lời</a><i>|</i></li>
-                            @if ($comment->user->id == Auth::user()->id)
-                                <li><a class="comment-action-link btn-delete-comment"
-                                        data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>|</li>
-                                </li>
-                                <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a></li>
-                                </li>
-                            @endif
+                            <li>
+                                @auth
+                                    <a class="rep-comment comment-action-link"
+                                        data-userName="{{ $comment->user->name }}">Trảlời</a>
+                                @endauth
+                                @guest
+                                    <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trảlời</a>
+                                @endguest
+                                <i>|</i>
+                            </li>
+                            @auth
+                                @if ($comment->user->id == Auth::user()->id)
+                                    <li><a class="comment-action-link btn-delete-comment"
+                                            data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>|</li>
+                                    </li>
+                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a></li>
+                                    </li>
+                                @endif
+                            @endauth
                         </ul>
                         <p class="comment-content">{{ $comment->comment }}</p>
-                        @if ($comment->user->id == Auth::user()->id)
-                            <div class="leave-coment-form edit-comment-form">
-                                <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
-                                    @csrf
-                                    <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
-                                    @error('comment')
-                                        <span class="mt-1 text-danger">{{ $message }}</span>
-                                    @enderror
-                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                    <div class="w3_single_submit">
-                                        <input type="submit" value="Cập nhật">
-                                    </div>
-                                </form>
-                            </div>
-                        @endif
+                        @auth
+                            @if ($comment->user->id == Auth::user()->id)
+                                <div class="leave-coment-form edit-comment-form">
+                                    <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
+                                        @csrf
+                                        <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
+                                        @error('comment')
+                                            <span class="mt-1 text-danger">{{ $message }}</span>
+                                        @enderror
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <div class="w3_single_submit">
+                                            <input type="submit" value="Cập nhật">
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
+                        @endauth
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -91,7 +105,7 @@
         <div class="leave-coment-form">
             <form action="{{ route('comments.store') }}" method="post">
                 @csrf
-                <textarea id="rep-comment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
+                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
                 @error('comment')
                     <span class="mt-1 text-danger">{{ $message }}</span>
                 @enderror
@@ -111,14 +125,16 @@
     <script type="text/javascript">
         $(window).load(function() {
 
-            $('.btn-edit-comment').on('click', function (){
+            $('.btn-edit-comment').on('click', function() {
                 $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
                 $(this).closest('.comments-grid-right').children('.comment-content').toggle()
             })
-            $('.rep-comment').on('click', function (){
-                var userName = $(this).data('userName')
-                console.log($(this).data('userName'));
-                $('#rep-comment').text(userName)
+            $('.rep-comment').on('click', function() {
+                var userName = $(this).attr('data-userName')
+                $('#leave-coment').text(userName)
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $("#leave-coment").offset().top
+                }, 1000);
 
             })
             $('.flexslider').flexslider({

@@ -18,9 +18,11 @@ class PostController extends Controller
     /**
      * @param $postService
      */
-    public function __construct(PostService $postService,
-                                TagService $tagService, CategoryService $categoryService)
-    {
+    public function __construct(
+        PostService $postService,
+        TagService $tagService,
+        CategoryService $categoryService
+    ) {
         $this->postService = $postService;
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
@@ -35,6 +37,12 @@ class PostController extends Controller
         return view('home.posts.index', compact('posts'));
     }
 
+    public function search(Request $request)
+    {
+        $posts = $this->postService->search($request);
+        return view('home.posts.index', compact('posts'));
+    }
+
     public function show($id)
     {
         $post = $this->postService->getById($id);
@@ -44,28 +52,28 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $this->postService->create($request);
-        return Redirect(route('posts.index'))->with('success', 'Đăng bài thành công');
+        return Redirect()->back()->with('success', 'Đăng bài thành công');
     }
+    
 
     public function update(UpdatePostRequest $request, $id)
     {
         $post = $this->postService->getById($id);
-        if($post->user->id == Auth::user()->id){
+        if ($post->user->id == Auth::user()->id) {
             $this->postService->update($request, $id);
-            return Redirect(route('posts.index'))->with('success', 'Cập nhật thành công');
+            return Redirect()->back()->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect(route('posts.index'))->with('error', 'Bạn không có quyền truy cập');
+            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
         }
-
     }
 
     public function destroy($id)
     {
         $post = $this->postService->getById($id);
-        if($post->user->id == Auth::user()->id){
+        if ($post->user->id == Auth::user()->id) {
             $this->postService->delete($id);
         } else {
-            return Redirect(route('posts.index'))->with('error', 'Bạn không có quyền truy cập');
+            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
         }
     }
 }

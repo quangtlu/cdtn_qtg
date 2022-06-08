@@ -2,13 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Comment;
+use App\Models\PostCategory;
 use Faker\Generator as Faker;
 
-$factory->define(Comment::class, function (Faker $faker) {
+$factory->define(PostCategory::class, function (Faker $faker) {
     return [
-        'user_id' => rand(1,100),
         'post_id' => rand(1,100),
-        'comment' => $faker->text
+        'category_id' => rand(1,20)
     ];
 });

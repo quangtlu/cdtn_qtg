@@ -7,9 +7,18 @@
 }
 
 .btn-edit-comment {
-    color: rgb(38, 182, 218)!important;
+    color: rgb(38, 182, 218) !important;
 }
 
 .edit-comment-form {
     display: none;
+}
+
+.post-info__link {
+    text-decoration: none !important;
+    color: #fca003 !important;
+    font-size: 14px;
+    padding: 5px 0;
+    display: block;
+    cursor: pointer;
 }

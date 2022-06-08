@@ -13,6 +13,12 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <form action="{{ route('admin.posts.search') }}" method="GET" class="form-inline">
+                          <input class="form-control col-md-10 mr-1" name="keyword" required type="search" placeholder="Nhập tiêu đề, nội dung..." aria-label="Search">
+                          <button class="btn btn-outline-success my-2 my-sm-0 col-md-1" type="submit">Tìm kiếm</button>
+                        </form>
+                    </div>
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
@@ -47,7 +53,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $posts->links() }}
+                        {{ $posts->withQueryString()->links() }}
                     </div>
                     <div class="col-md-12">
                         <a href="{{ route('admin.posts.create') }}"><button class="btn btn-success float-right m-2">Thêm mới</button></a>

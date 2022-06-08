@@ -1,0 +1,29 @@
+.user-info-wrap{
+    position: relative;
+}
+.user-info{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.user-info__avt {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 1px solid #FFAC3A
+}
+.user-info__name {
+    display: block;
+    text-align: center;
+    color: #FFAC3A;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.header-link-logout{
+    padding-right: 10px;
+}
+.dropdown-menu {
+    top: 20px;
+    left: -35px;
+}

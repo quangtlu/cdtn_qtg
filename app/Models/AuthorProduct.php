@@ -1,12 +1,11 @@
 <?php
 
-namespace App\app\Models;
+namespace App\Models;
 
-use App\Models\Author;
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class AuthorProduct extends Model
 {
+    protected $table = 'author_product';
     protected $fillable = ["author_id", "product_id"];
 }

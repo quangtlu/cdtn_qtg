@@ -2,13 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Comment;
+use App\Models\PostTag;
 use Faker\Generator as Faker;
 
-$factory->define(Comment::class, function (Faker $faker) {
+$factory->define(PostTag::class, function (Faker $faker) {
     return [
-        'user_id' => rand(1,100),
         'post_id' => rand(1,100),
-        'comment' => $faker->text
+        'tag_id' => rand(1,20)
     ];
 });

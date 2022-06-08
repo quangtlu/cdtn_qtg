@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.posts')->group(function () {
             Route::prefix('/posts')->group(function () {
                 Route::get('/', 'Admin\PostController@index')->name('.index')->middleware('can:admin list post');
+                Route::get('/search', 'Admin\PostController@search')->name('.search')->middleware('can:admin list post');
                 Route::get('/create', 'Admin\PostController@create')->name('.create')->middleware('can:admin add post');
                 Route::post('/store', 'Admin\PostController@store')->name('.store')->middleware('can:admin add post');
                 Route::get('/edit/{id}', 'Admin\PostController@edit')->name('.edit')->middleware('can:admin edit post');
@@ -133,6 +134,7 @@ Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
 Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/', 'home\PostController@index')->name('.index');
+    Route::get('/search', 'home\PostController@search')->name('.search');
     Route::get('/{id}', 'home\PostController@show')->name('.show');
 });
 
@@ -143,7 +145,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
 
-    Route::name('comments.')->prefix('posts')->group(function () {
+    Route::name('comments.')->prefix('comments')->group(function () {
         Route::post('/', 'home\CommentController@store')->name('store');
         Route::post('/update/{id}', 'home\CommentController@update')->name('update');
         Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');

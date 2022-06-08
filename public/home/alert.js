@@ -1,7 +1,5 @@
 $(function() {
-    $(document).on('click', '.btn-delete', actionDeletePost)
-    $(document).on('click', '.btn-delete-comment', actionDeleteComment)
-
+    
     var messageSuccess = $('#container').attr('data-messageSuccess')
     var messageError = $('#container').attr('data-messageError')
 
@@ -23,6 +21,9 @@ $(function() {
             timer: 1500
         })
     }
+
+    $(document).on('click', '.btn-delete', actionDeletePost)
+    $(document).on('click', '.btn-delete-comment', actionDeleteComment)
         
 })
 

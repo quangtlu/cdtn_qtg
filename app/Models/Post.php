@@ -39,5 +39,10 @@ class Post extends Model
         return $this->hasMany(PostCategory::class);
     }
 
-    
+    public function scopeSearch($query, $keywork)
+    {
+        return $query->where('title', 'LIKE', "%{$keywork}%")
+            ->orWhere('content', 'LIKE', "%{$keywork}%");
+    }
+
 }
