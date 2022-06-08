@@ -23,7 +23,7 @@
 .header-link-logout{
     padding-right: 10px;
 }
-.dropdown-menu {
+.dropdown-menu__user-info {
     top: 20px;
     left: -35px;
 }

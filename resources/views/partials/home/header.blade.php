@@ -4,12 +4,12 @@
             @auth
                 <div class="user-info-wrap">
                     <div class="user-info">
-                        <img class="user-info__avt" src="{{ config('consts.image.profile') . Auth::user()->image }}"
+                        <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
                             alt="avatar">
                         <div class="dropdown">
                             <span class="user-info__name dropdown-toggle"
                                 data-toggle="dropdown">{{ Auth::user()->name }}</span>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu__user-info ">
                                 <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
                                         nhân</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
