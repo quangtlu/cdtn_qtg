@@ -85,7 +85,7 @@
                         <div class="col-md-6" >
                             <div class="avatar-header mt-4">
                                 <div class="avatar-wrapper mt-5" title="Ảnh đại diện">
-                                    <img class="profile-pic" src="" />
+                                    <img class="profile-pic" src="{{ asset('image/profile/register.png') }}" />
                                     <div class="upload-button">
                                         <i class="fa fa-camera camera-icon" aria-hidden="true"></i>
                                     </div>

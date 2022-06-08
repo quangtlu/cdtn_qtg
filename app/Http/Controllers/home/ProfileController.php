@@ -40,9 +40,9 @@ class ProfileController extends Controller
     {
         if ($this->checkPermission($id)) {
             $this->userService->update($request, $id);
-            return Redirect(route('home.profile.index'))->with('success', 'Cập nhật thành công');
+            return Redirect(route('profile.index'))->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect(route('home.profile.index'))->with('error', 'Bạn không có quyền truy cập');
+            return Redirect(route('profile.index'))->with('error', 'Bạn không có quyền truy cập');
         }
     }
 
