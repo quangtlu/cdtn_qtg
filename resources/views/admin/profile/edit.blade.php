@@ -70,8 +70,8 @@
                             <div class="">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <div class="avatar-header">
-                                        <div class="avatar-wrapper">
-                                            <img class="profile-pic" src="
+                                        <div class="avatar-wrapper" title="Ảnh đại diện">
+                                            <img class="profile-pic"  src="
                                             @if ($profile->image)
                                                 {{ asset('image/profile/'.$profile->image)}}
                                             @endif "/>
