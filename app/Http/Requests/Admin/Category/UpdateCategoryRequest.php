@@ -24,8 +24,9 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required',Rule::unique('categories','phone')->ignore($this->id)],
+            'name' => ['required',Rule::unique('categories','name')->ignore($this->id)],
             'parent_id' => 'required',
+            'type_id' => 'required',
         ];
     }
 
@@ -35,6 +36,7 @@ class UpdateCategoryRequest extends FormRequest
             'name.required' => 'Vui lòng nhập tên danh mục',
             'name.unique' => 'Tên danh mục đã tồn tại',
             'parent_id.required' => 'Vui lòng chọn danh mục cha',
+            'type_id.required' => 'Vui lòng chọn loại danh mục',
         ];
     }
 }

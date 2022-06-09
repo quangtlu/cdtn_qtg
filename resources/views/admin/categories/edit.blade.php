@@ -7,22 +7,35 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{ route('admin.categories.update', ["id" => $category->id]) }}" method="POST">
+                        <form action="{{ route('admin.categories.update', ['id' => $category->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên danh mục</label>
-                                <input type="text" value="{{ $category->name }}" name="name" class="form-control" >
+                                <input type="text" value="{{ $category->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Danh mục cha</label>
-                                <select name="parent_id" class="form-control" >
+                                <select name="parent_id" class="form-control">
                                     <option value="0">Chọn danh mục cha</option>
                                     {!! $htmlOption !!}
                                 </select>
                                 @error('parent_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name">Loại danh mục</label>
+                                <select name="type_id" class="form-control">
+                                    <option value="">Chọn loại danh mục</option>
+                                    @foreach ($types as $type)
+                                        <option {{ $category->type_id == $type->id ? 'selected' : '' }}
+                                            value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('type_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

@@ -26,6 +26,18 @@
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="category_name">Loại danh mục</label>
+                                <select name="type_id" class="form-control" >
+                                    <option value="">Chọn loại danh mục</option>
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('type_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>
                     </div>
