@@ -19,6 +19,12 @@ class AuthorService
         return $authors;
     }
 
+    public function search($request)
+    {
+        $authors = Author::search($request->keyword)->paginate(10);
+        return $authors;
+    }
+
     public function getAll()
     {
         $authors = $this->authorModel->all();
