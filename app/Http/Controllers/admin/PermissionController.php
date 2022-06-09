@@ -7,7 +7,7 @@ use App\Services\PermissionService;
 use function redirect;
 use function view;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
@@ -21,6 +21,12 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = $this->permissionService->getPaginate();
+        return view('admin.permissions.index', compact('permissions'));
+    }
+
+    public function search(Request $request)
+    {
+        $permissions = $this->permissionService->search($request);
         return view('admin.permissions.index', compact('permissions'));
     }
 

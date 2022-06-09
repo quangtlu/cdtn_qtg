@@ -31,11 +31,11 @@ class User extends Authenticatable
         return true;
     }
 
-    public function scopeSearch($query, $keywork)
+    public function scopeSearch($query, $keyword)
     {
-        return $query->where('name', 'LIKE', "%{$keywork}%")
-            ->orWhere('phone', 'LIKE', "%{$keywork}%")
-            ->orWhere('id', 'LIKE', "%{$keywork}%")
-            ->orWhere('email', 'LIKE', "%{$keywork}%");
+        return $query->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('phone', 'LIKE', "%{$keyword}%")
+            ->orWhere('id', 'LIKE', "%{$keyword}%")
+            ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
 }

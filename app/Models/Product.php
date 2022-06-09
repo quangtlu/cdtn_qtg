@@ -27,4 +27,16 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'product_category');
     }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('id', 'LIKE', "%{$keyword}%")
+            ->orWhereHas('author', function ($subQuery) use ($keyword) {
+                $subQuery->where('name', 'like', '%' . $keyword . '%');
+            })
+            ->orWhereHas('owner', function ($subQuery) use ($keyword) {
+                $subQuery->where('name', 'like', '%' . $keyword . '%');
+            });
+    }
 }

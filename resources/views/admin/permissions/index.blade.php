@@ -70,6 +70,29 @@
                         </form>
                     </div>
                     <div class="col-md-6">
+                    {{-- search --}}
+                    <div class="nav-item col-md-12">
+                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <div class="navbar-search-block">
+                            <form class="form-inline" action="{{ route('admin.permissions.search') }}" method="GET">
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control form-control-navbar" name="keyword" required type="search"
+                                        placeholder="Tìm kiếm tên quyền..." aria-label="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-navbar" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {{-- end search --}}
                         <table class="table">
                             <thead>
                             <tr>
@@ -92,7 +115,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $permissions->links() }}
+                        {{ $permissions->withQueryString()->links() }}
                     </div>
                 </div>
                 <!-- /.row -->

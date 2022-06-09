@@ -25,6 +25,12 @@ class TagController extends Controller
         return view('admin.tags.index', compact('tags'));
     }
 
+    public function search(Request $request)
+    {
+        $tags = $this->tagService->search($request);
+        return view('admin.tags.index', compact('tags'));
+    }
+
     public function create()
     {
         return view('admin.tags.create');

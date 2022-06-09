@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Services;
+
+use App\Models\Permission as ModelsPermission;
 use Spatie\Permission\Models\Permission;
 
 class PermissionService
@@ -16,6 +18,12 @@ class PermissionService
     public function getAll()
     {
         $permissions = $this->permissionModel->all();
+        return $permissions;
+    }
+
+    public function search($request)
+    {
+        $permissions = ModelsPermission::search($request->keyword)->paginate(10);
         return $permissions;
     }
 

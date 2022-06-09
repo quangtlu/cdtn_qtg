@@ -19,6 +19,13 @@ class OwnerService
         return $owners;
     }
 
+    public function search($request)
+    {
+        $users = Owner::search($request->keyword)->paginate(10);
+        return $users;
+    }
+
+
     public function getAll()
     {
         $owners = $this->ownerModel->all();

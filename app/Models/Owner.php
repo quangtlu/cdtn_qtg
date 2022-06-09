@@ -13,4 +13,12 @@ class Owner extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('phone', 'LIKE', "%{$keyword}%")
+            ->orWhere('id', 'LIKE', "%{$keyword}%")
+            ->orWhere('email', 'LIKE', "%{$keyword}%");
+    }
 }

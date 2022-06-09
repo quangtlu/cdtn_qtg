@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.products')->group(function () {
             Route::prefix('/products')->group(function () {
                 Route::get('/', 'Admin\ProductController@index')->name('.index')->middleware('can:admin list product');
+                Route::get('/search', 'Admin\ProductController@search')->name('.search')->middleware('can:admin list product');
                 Route::get('/create', 'Admin\ProductController@create')->name('.create')->middleware('can:admin add product');
                 Route::post('/store', 'Admin\ProductController@store')->name('.store')->middleware('can:admin add product');
                 Route::get('/edit/{id}', 'Admin\ProductController@edit')->name('.edit')->middleware('can:admin edit product');
@@ -48,6 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.owners')->group(function () {
             Route::prefix('/owners')->group(function () {
                 Route::get('/', 'Admin\OwnerController@index')->name('.index')->middleware('can:admin list owner');
+                Route::get('/search', 'Admin\OwnerController@search')->name('.search')->middleware('can:admin list owner');
                 Route::get('/create', 'Admin\OwnerController@create')->name('.create')->middleware('can:admin add owner');
                 Route::post('/store', 'Admin\OwnerController@store')->name('.store')->middleware('can:admin add owner');
                 Route::get('/edit/{id}', 'Admin\OwnerController@edit')->name('.edit')->middleware('can:admin edit owner');
@@ -69,9 +71,10 @@ Route::middleware('auth')->group(function () {
 
         Route::name('.permissions')->group(function () {
             Route::prefix('/permissions')->group(function () {
-                Route::get('/', 'Admin\PermissionController@index')->name('.index')->middleware('can:admin list role');
-                Route::post('/store', 'Admin\PermissionController@store')->name('.store')->middleware('can:admin add role');
-                Route::get('/destroy/{id}', 'Admin\PermissionController@destroy')->name('.destroy')->middleware('can:admin delete role');
+                Route::get('/', 'Admin\PermissionController@index')->name('.index');
+                Route::get('/search', 'Admin\PermissionController@search')->name('.search');
+                Route::post('/store', 'Admin\PermissionController@store')->name('.store');
+                Route::get('/destroy/{id}', 'Admin\PermissionController@destroy')->name('.destroy');
             });
         });
 
@@ -90,12 +93,13 @@ Route::middleware('auth')->group(function () {
 
         Route::name('.faqs')->group(function () {
             Route::prefix('/faqs')->group(function () {
-                Route::get('/', 'Admin\FaqController@index')->name('.index')->middleware('can:list faq');
-                Route::get('/create', 'Admin\FaqController@create')->name('.create')->middleware('can:admin add faq');
-                Route::post('/store', 'Admin\FaqController@store')->name('.store')->middleware('can:admin add faq');
-                Route::get('/edit/{id}', 'Admin\FaqController@edit')->name('.edit')->middleware('can:admin edit faq');
-                Route::post('/update/{id}', 'Admin\FaqController@update')->name('.update')->middleware('can:admin edit faq');
-                Route::get('/destroy/{id}', 'Admin\FaqController@destroy')->name('.destroy')->middleware('can:admin delete faq');
+                Route::get('/', 'Admin\FaqController@index')->name('.index');
+                Route::get('/search', 'Admin\FaqController@search')->name('.search');
+                Route::get('/create', 'Admin\FaqController@create')->name('.create');
+                Route::post('/store', 'Admin\FaqController@store')->name('.store');
+                Route::get('/edit/{id}', 'Admin\FaqController@edit')->name('.edit');
+                Route::post('/update/{id}', 'Admin\FaqController@update')->name('.update');
+                Route::get('/destroy/{id}', 'Admin\FaqController@destroy')->name('.destroy');
             });
         });
 
@@ -109,18 +113,20 @@ Route::middleware('auth')->group(function () {
 
         Route::name('.tags')->group(function () {
             Route::prefix('/tags')->group(function () {
-                Route::get('/', 'Admin\TagController@index')->name('.index')->middleware('can:list tag');
-                Route::get('/create', 'Admin\TagController@create')->name('.create')->middleware('can:add tag');
-                Route::post('/store', 'Admin\TagController@store')->name('.store')->middleware('can:add tag');
-                Route::get('/edit/{id}', 'Admin\TagController@edit')->name('.edit')->middleware('can:edit tag');
-                Route::post('/update/{id}', 'Admin\TagController@update')->name('.update')->middleware('can:edit tag');
-                Route::get('/destroy/{id}', 'Admin\TagController@destroy')->name('.destroy')->middleware('can:delete tag');
+                Route::get('/', 'Admin\TagController@index')->name('.index');
+                Route::get('/search', 'Admin\TagController@search')->name('.search');
+                Route::get('/create', 'Admin\TagController@create')->name('.create');
+                Route::post('/store', 'Admin\TagController@store')->name('.store');
+                Route::get('/edit/{id}', 'Admin\TagController@edit')->name('.edit');
+                Route::post('/update/{id}', 'Admin\TagController@update')->name('.update');
+                Route::get('/destroy/{id}', 'Admin\TagController@destroy')->name('.destroy');
             });
         });
 
         Route::name('.categories')->group(function () {
             Route::prefix('/categories')->group(function () {
                 Route::get('/', 'Admin\CategoryController@index')->name('.index');
+                Route::get('/search', 'Admin\CategoryController@search')->name('.search');
                 Route::get('/create', 'Admin\CategoryController@create')->name('.create');
                 Route::post('/store', 'Admin\CategoryController@store')->name('.store');
                 Route::get('/edit/{id}', 'Admin\CategoryController@edit')->name('.edit');
