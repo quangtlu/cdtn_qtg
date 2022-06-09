@@ -137,6 +137,9 @@ Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/', 'home\PostController@index')->name('.index');
     Route::get('/search', 'home\PostController@search')->name('.search');
     Route::get('/{id}', 'home\PostController@show')->name('.show');
+    Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('.getPostByCategory');
+    Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('.getPostByUser');
+    Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('.getPostByTag');
 });
 
 Route::middleware('auth')->group(function () {
