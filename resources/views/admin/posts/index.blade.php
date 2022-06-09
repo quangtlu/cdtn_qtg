@@ -13,9 +13,8 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <a href="{{ route('admin.posts.create') }}"><button class="btn btn-success btn-sm float-right m-2">Thêm
-                        mới</button></a>
-                    <div class="nav-item col-md-12 mb-2">
+                    <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.posts.create') }}">Thêm</a>
+                    <div class="nav-item col-md-10">
                         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                             <i class="fas fa-search"></i>
                         </a>
@@ -23,7 +22,7 @@
                             <form class="form-inline" action="{{ route('admin.posts.search') }}" method="GET">
                                 <div class="input-group input-group-sm">
                                     <input class="form-control form-control-navbar" name="keyword" required type="search"
-                                        placeholder="Search" aria-label="Search">
+                                        placeholder="Tìm kiếm tiêu đề, nội dung..." aria-label="Search">
                                     <div class="input-group-append">
                                         <button class="btn btn-navbar" type="submit">
                                             <i class="fas fa-search"></i>
