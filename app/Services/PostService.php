@@ -77,6 +77,7 @@ class PostService
 
     public function delete($id)
     {
+        $post = $this->getById($id);
         $this->postModel->destroy($id);
     }
 }
