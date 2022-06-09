@@ -72,11 +72,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-<<<<<<< HEAD
                         {{ $authors->withQueryString()->links() }}
-=======
-                        {{ $authors->links() }}
->>>>>>> b9b975c53d7c5fe64d731f7b924dd0e625b12ce2
                     </div>
                 </div>
                 <!-- /.row -->
