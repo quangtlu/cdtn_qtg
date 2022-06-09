@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Services\CategoryService;
 use App\Services\PostService;
 use App\Services\TagService;
-use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,11 +15,10 @@ class PostController extends Controller
 {
     private $postService;
 
-    public function __construct(PostService $postService, UserService $userService,
+    public function __construct(PostService $postService,
                                 TagService $tagService, CategoryService $categoryService)
     {
         $this->postService = $postService;
-        $this->userService = $userService;
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
         $tags = $this->tagService->getAll();
@@ -31,6 +29,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = $this->postService->getPaginate();
+        return view('admin.posts.index', compact('posts'));
+    }
+
+    public function search(Request $request)
+    {
+        $posts = $this->postService->search($request);
         return view('admin.posts.index', compact('posts'));
     }
 

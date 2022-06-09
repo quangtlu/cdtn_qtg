@@ -14,17 +14,22 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function postTag()
     {
         return $this->hasMany(PostTag::class, 'post_id');
     }
 
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function category()
+    public function categories()
     {
         return $this->belongsToMany(Category::class, 'post_category');
     }
@@ -33,4 +38,11 @@ class Post extends Model
     {
         return $this->hasMany(PostCategory::class);
     }
+
+    public function scopeSearch($query, $keywork)
+    {
+        return $query->where('title', 'LIKE', "%{$keywork}%")
+            ->orWhere('content', 'LIKE', "%{$keywork}%");
+    }
+
 }

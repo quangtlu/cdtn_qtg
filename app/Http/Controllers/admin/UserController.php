@@ -11,7 +11,7 @@ use function redirect;
 use function response;
 use function view;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -29,6 +29,12 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userService->getPaginate();
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function search(Request $request)
+    {
+        $users = $this->userService->search($request);
         return view('admin.users.index', compact('users'));
     }
 

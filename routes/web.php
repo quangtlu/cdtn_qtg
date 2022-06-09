@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => true]);
 //Admin
@@ -11,6 +12,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.users')->group(function () {
             Route::prefix('/users')->group(function () {
                 Route::get('/', 'Admin\UserController@index')->name('.index')->middleware('can:admin list user');
+                Route::get('/search', 'Admin\UserController@search')->name('.search');
                 Route::get('/create', 'Admin\UserController@create')->name('.create')->middleware('can:admin add user');
                 Route::post('/store', 'Admin\UserController@store')->name('.store')->middleware('can:admin add user');
                 Route::get('/edit/{id}', 'Admin\UserController@edit')->name('.edit')->middleware('can:admin edit user');
@@ -75,6 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.posts')->group(function () {
             Route::prefix('/posts')->group(function () {
                 Route::get('/', 'Admin\PostController@index')->name('.index')->middleware('can:admin list post');
+                Route::get('/search', 'Admin\PostController@search')->name('.search')->middleware('can:admin list post');
                 Route::get('/create', 'Admin\PostController@create')->name('.create')->middleware('can:admin add post');
                 Route::post('/store', 'Admin\PostController@store')->name('.store')->middleware('can:admin add post');
                 Route::get('/edit/{id}', 'Admin\PostController@edit')->name('.edit')->middleware('can:admin edit post');
@@ -132,7 +135,11 @@ Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
 Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/', 'home\PostController@index')->name('.index');
+    Route::get('/search', 'home\PostController@search')->name('.search');
     Route::get('/{id}', 'home\PostController@show')->name('.show');
+    Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('.getPostByCategory');
+    Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('.getPostByUser');
+    Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('.getPostByTag');
 });
 
 Route::middleware('auth')->group(function () {
@@ -142,10 +149,23 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
 
+    Route::name('comments.')->prefix('comments')->group(function () {
+        Route::post('/', 'home\CommentController@store')->name('store');
+        Route::post('/update/{id}', 'home\CommentController@update')->name('update');
+        Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
+    });
+
     Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('/messages', 'MessageController@index');
     Route::post('/messages', 'MessageController@store');
     Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*'); // catch all routes or else it will return 404 with Vue router in history mode
     
+    Route::name('profile')->group(function () {
+        Route::prefix('/profile-user')->group(function () {
+            Route::get('/', 'home\ProfileController@index')->name('.index');
+            Route::get('/edit/{id}', 'home\ProfileController@edit')->name('.edit');
+            Route::post('/update{id}', 'home\ProfileController@update')->name('.update');
+        });
+    });
 });    
 

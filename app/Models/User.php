@@ -18,11 +18,24 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function isAdmin ()
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function isAdmin()
     {
         if (Auth::user()->hasRole('user')) {
             return false;
         }
         return true;
+    }
+
+    public function scopeSearch($query, $keywork)
+    {
+        return $query->where('name', 'LIKE', "%{$keywork}%")
+            ->orWhere('phone', 'LIKE', "%{$keywork}%")
+            ->orWhere('id', 'LIKE', "%{$keywork}%")
+            ->orWhere('email', 'LIKE', "%{$keywork}%");
     }
 }

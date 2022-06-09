@@ -5,7 +5,6 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 use App\Models\User;
-use App\Chatroom;
 use Illuminate\Support\Facades\Hash;
 
 class PermissionSeeder extends Seeder

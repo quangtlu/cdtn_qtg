@@ -2,6 +2,7 @@
 - Cài đặt redis
 - redis-server
 - composer install
+- composer dump-autoload 
 - npm install
 - cp .env.example .env
 - php artisan key:generate
@@ -17,6 +18,6 @@
         + redis-cli shutdown
 - php artisan serve
 - npm run watch
-- laravel-echo-server start
+- laravel-echo-server start (Đăng nhập trước khi chạy)
 - php artisan queue:work
 
