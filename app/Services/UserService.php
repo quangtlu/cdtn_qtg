@@ -48,8 +48,8 @@ class UserService
             "image" => $image,
             "phone" => $request->phone,
             "dob" => $request->dob,
-            "password" => Hash::make($request->password),
             "email" => $request->email,
+            "password" => Hash::make($request->password),
         ];
         
         $user = $this->userModel->create($data);
