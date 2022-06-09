@@ -19,7 +19,7 @@
                             <form class="form-inline" action="{{ route('admin.owners.search') }}" method="GET">
                                 <div class="input-group input-group-sm">
                                     <input class="form-control form-control-navbar" name="keyword" required type="search"
-                                        placeholder="Tìm kiếm tiêu đề, nội dung..." aria-label="Search">
+                                        placeholder="Tìm kiếm tên, email, số điện thoại..." aria-label="Search">
                                     <div class="input-group-append">
                                         <button class="btn btn-navbar" type="submit">
                                             <i class="fas fa-search"></i>
@@ -32,6 +32,10 @@
                             </form>
                         </div>
                     </div>
+<<<<<<< HEAD
+                    {{-- end search --}}
+=======
+>>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
                     <div class="col-md-12">
                         <table class="table">
                             <thead>

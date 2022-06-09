@@ -29,7 +29,7 @@ class FaqController extends Controller
     public function search(Request $request)
     {
         $faqs = $this->faqService->search($request);
-        return view('admin.faqs.index', compact('faqs'));
+        return view('admin.faq.index', compact('faqs'));
     }
 
     public function create()

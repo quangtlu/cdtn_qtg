@@ -8,7 +8,7 @@ use function redirect;
 use function view;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {

@@ -31,6 +31,12 @@ class FaqService
         return $faqs;
     }
 
+    public function search($request)
+    {
+        $faqs = Faq::search($request->keyword)->paginate(10);
+        return $faqs;
+    }
+
     public function getById($id){
         $faq = $this->faqModel->findOrFail($id);
         return $faq;
