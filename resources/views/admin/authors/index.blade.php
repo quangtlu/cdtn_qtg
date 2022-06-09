@@ -19,11 +19,7 @@
                             <form class="form-inline" action="{{ route('admin.authors.search') }}" method="GET">
                                 <div class="input-group input-group-sm">
                                     <input class="form-control form-control-navbar" name="keyword" required type="search"
-<<<<<<< HEAD
-                                        placeholder="Tìm kiếm tiêu đề, nội dung..." aria-label="Search">
-=======
                                         placeholder="Tìm kiếm theo tên, email, số điện thoại,.." aria-label="Search">
->>>>>>> b9b975c53d7c5fe64d731f7b924dd0e625b12ce2
                                     <div class="input-group-append">
                                         <button class="btn btn-navbar" type="submit">
                                             <i class="fas fa-search"></i>
@@ -46,7 +42,7 @@
                                 <th>Ngày sinh</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                @can('admin edit author' | 'admin delete author')
+                                {{-- @can('admin edit author' | 'admin delete author') --}}
                                 <th>Action</th>
                                 {{-- @endcan --}}
                             </tr>
