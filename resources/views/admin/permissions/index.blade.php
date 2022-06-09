@@ -16,7 +16,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mt-4">
                         <form action="{{ route('admin.permissions.store') }}" method="POST">
                             @csrf
                             <div class="form-group">

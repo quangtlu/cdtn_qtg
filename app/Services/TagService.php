@@ -18,6 +18,12 @@ class TagService
         return $tags;
     }
 
+    public function search($request)
+    {
+        $tags = Tag::search($request->keyword)->paginate(10);
+        return $tags;
+    }
+
     public function getAll()
     {
         $tags = $this->tagModel->all();

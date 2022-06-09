@@ -32,7 +32,10 @@
                             </form>
                         </div>
                     </div>
+<<<<<<< HEAD
                     {{-- end search --}}
+=======
+>>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
@@ -41,9 +44,9 @@
                                 <th>Tên chủ sơ hữu</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                @can('add owner | edit owner')
+                                {{-- @can('add owner | edit owner') --}}
                                 <th>Action</th>
-                                @endcan
+                                {{-- @endcan --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -54,12 +57,12 @@
                                         <td>{{ $owner->email }}</td>
                                         <td>{{ $owner->phone }}</td>
                                         <td>
-                                            @can('edit owner')
+                                            {{-- @can('edit owner') --}}
                                             <a href="{{ route('admin.owners.edit', ["id" => $owner->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            @endcan
-                                            @can('delete owner')
+                                            {{-- @endcan --}}
+                                            {{-- @can('delete owner') --}}
                                             <a href="{{ route('admin.owners.destroy', ["id" => $owner->id]) }}"><button class="btn btn-danger btn-sm">Xóa</button></a>
-                                            @endcan
+                                            {{-- @endcan --}}
                                         </td>
                                     </tr>
                                 @endforeach

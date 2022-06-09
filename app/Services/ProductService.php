@@ -21,8 +21,8 @@ class ProductService
 
     public function search($request)
     {
-        $users = Product::search($request->keyword)->paginate(10);
-        return $users;
+        $products = Product::search($request->keyword)->paginate(10);
+        return $products;
     }
 
     public function getById($id){

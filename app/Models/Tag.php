@@ -18,8 +18,8 @@ class Tag extends Model
         return $this->belongsToMany(Post::class);
     }
 
-    public function scopeSearch($query, $keyword)
+    public function scopeSearch($query, $keywork)
     {
-        return $query->where('name', 'LIKE', "%{$keyword}%");
+        return $query->where('name', 'LIKE', "%{$keywork}%")->orwhere('id', 'LIKE', "%{$keywork}%");
     }
 }

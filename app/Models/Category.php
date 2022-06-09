@@ -8,11 +8,6 @@ class Category extends Model
 {
     protected $fillable = ["name", "parent_id", "type"];
     
-    public function postCategory()
-    {
-        return $this->hasMany(PostCategory::class, 'category_id');
-    }
-
     public function posts()
     {
         return $this->belongsToMany(Post::class, 'post_category');
@@ -23,9 +18,11 @@ class Category extends Model
         return $this->belongsToMany(Product::class, 'product_category');
     }
 
-    public function scopeSearch($query, $keyword)
+    public function scopeSearch($query, $keywork)
     {
-        return $query->where('name', 'LIKE', "%{$keyword}%");
+        return $query->where('name', 'LIKE', "%{$keywork}%")
+            ->orWhere('id', 'LIKE', "%{$keywork}%")
+            ->orWhere('type', 'LIKE', "%{$keywork}%");
     }
 
 }
