@@ -25,10 +25,7 @@
         <h3>Bài viết mới nhất</h3>
         @foreach ($newestPosts as $post)
             <div class="agileits_popular_posts_grid">
-                <div class="w3agile_special_deals_grid_left_grid">
-                    <a href="singlepage.html"><img src="images/p1.jpg" class="img-responsive" alt="" /></a>
-                </div>
-                <h4><a href="singlepage.html">{{ $post->title }}</a></h4>
+                <h4><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
                 <h5><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</h5>
             </div>
         @endforeach
@@ -39,7 +36,7 @@
         <ul>
             @foreach ($categories as $category)
                 <li>
-                    <a href="singlepage.html">
+                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                         <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                         {{ $category->name }}
                     </a>
@@ -51,8 +48,13 @@
         <h3>Tags</h3>
         <ul class="tag">
             @foreach ($tags as $tag)
-                <li><a href="singlepage.html">{{ $tag->name }}</a></li>
+                <li><a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->name }}</a></li>
             @endforeach
         </ul>
     </div>
 </div>
+<style>
+    .w3l_tags{
+        margin-top: 4rem;
+    }
+</style>

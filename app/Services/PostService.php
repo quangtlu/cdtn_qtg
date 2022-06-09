@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\PostCategory;
+use App\Models\Tag;
 use App\traits\HandleImage;
 
 class PostService
@@ -49,8 +52,8 @@ class PostService
             $data['image'] = null;
         }
         $post = $this->postModel->create($data);
-        $post->tag()->attach($request->tag_id);
-        $post->category()->attach($request->category_id);
+        $post->tags()->attach($request->tag_id);
+        $post->categories()->attach($request->category_id);
         if ($post) {
             $user->givePermissionTo(['user edit post', 'user delete post']);
         }
@@ -71,8 +74,8 @@ class PostService
             $data['image'] = implode("|", $images);
         }
         $post->update($data);
-        $post->tag()->sync($request->tag_id);
-        $post->category()->sync($request->category_id);
+        $post->tags()->sync($request->tag_id);
+        $post->categories()->sync($request->category_id);
     }
 
     public function delete($id)

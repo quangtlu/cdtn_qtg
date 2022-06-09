@@ -2,6 +2,7 @@
 - Cài đặt redis
 - redis-server
 - composer install
+- composer dump-autoload 
 - npm install
 - cp .env.example .env
 - php artisan key:generate

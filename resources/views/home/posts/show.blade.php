@@ -7,11 +7,11 @@
     <div class="single-left1">
         <h3>{{ $post->title }}</h3>
         <ul>
-            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">{{ $post->user->name }}</a>
+            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             </li>
             <li title="
-                                @foreach ($post->tag as $tagg) {{ $tagg->name }} | @endforeach"><span
-                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $post->tag->count() }}
+                                    @foreach ($post->tags as $tag) {{ $tag->name }} | @endforeach"><span
+                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $post->tags->count() }}
                     Tags</a></li>
             <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#">{{ $post->comments->count() }} bình
                     luận</a></li>
@@ -36,10 +36,28 @@
             </section>
         </div>
     @endif
+    <div class="category-tag">
+        <ul class="tag">
+            <li class="li-category-tag">
+                <span style="font-size:18px">Danh mục: </span>
+                @foreach ($post->categories as $category)
+                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                @endforeach
+            </li>
+        </ul>
+        <ul class="tag" style="margin-top:0 !important">
+            <li class="li-category-tag">
+                <span style="margin-bottom:5px; font-size:18px">Tags: </span>
+                @foreach ($post->tags as $tag)
+                    <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->name }}</a>
+                @endforeach
+            </li>
+        </ul>
+    </div>
     <div class="comments">
         <h3 style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
-            @foreach ($post->comments as $comment)
+            @foreach ($comments as $comment)
                 <div class="comments-grid">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
@@ -95,6 +113,7 @@
                     <div class="clearfix"> </div>
                 </div>
             @endforeach
+            {{ $comments->links() }}
         </div>
     </div>
     @guest
@@ -146,5 +165,25 @@
 
         });
     </script>
-
 @endsection
+<style>
+    ul.tag li a
+    {
+        padding: 5px !important;
+        font-size: 8px !important;
+    }
+    .comments-grid-left
+    {
+        width: 10% !important;
+    }
+    .comments-grid-right
+    {
+        width: 85% !important;
+    }
+    .comments-grid-left img
+    {
+        padding: 0 !important;
+        border: 1px solid #ffac3a !important;
+        border-radius: 50% !important;
+    }
+</style>
