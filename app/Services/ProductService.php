@@ -30,6 +30,7 @@ class ProductService
             "pub_date" => $request->pub_date,
             "regis_date" => $request->regis_date,
             "owner_id" => $request->owner_id,
+            "categoryIds" => $request->categoryIds,
             "description" => $request->description,
         ];
         if($files=$request->file('image')){
@@ -46,6 +47,7 @@ class ProductService
         }
         $product = $this->productModel->create($data);
         $product->author()->attach($request->author_id);
+        $product->categories()->attach($request->categoryIds);
     }
 
     public function update($request, $id){
@@ -55,6 +57,7 @@ class ProductService
             "pub_date" => $request->pub_date,
             "regis_date" => $request->regis_date,
             "owner_id" => $request->owner_id,
+            "categoryIds" => $request->categoryIds,
             "description" => $request->description,
         ];
 
@@ -69,11 +72,13 @@ class ProductService
         }
         $product->update($data);
         $product->author()->sync($request->author_id);
+        $product->categories()->sync($request->categoryIds);
     }
 
     public function delete($id){
         $product = $this->getById($id);
         $this->productModel->destroy($id);
         $product->author()->detach();
+        $product->categories()->detach();
     }
 }

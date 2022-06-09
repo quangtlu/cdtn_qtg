@@ -49,7 +49,7 @@
                                 <th>Giới tính</th>
                                 <th>Ngày sinh</th>
                                 <th>Email</th>
-                                <th>Phone</th>
+                                <th>Số điện thoại</th>
                                 <th>Action</th>
                             </tr>
                             </thead>

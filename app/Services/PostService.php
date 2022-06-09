@@ -82,7 +82,7 @@ class PostService
     {
         $post = $this->getById($id);
         $this->postModel->destroy($id);
-        $post->category()->detach();
-        $post->tag()->detach();
+        $post->categories()->detach();
+        $post->tags()->detach();
     }
 }

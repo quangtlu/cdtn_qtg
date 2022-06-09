@@ -11,20 +11,30 @@ use Illuminate\Http\Request;
 use function redirect;
 use function view;
 use App\Http\Controllers\Controller;
-
+use App\Services\CategoryService;
 
 class ProductController extends Controller
 {
     private $productService;
+    private $ownerService;
+    private $authorService;
+    private $categoryService;
 
-    public function __construct(ProductService $productService, OwnerService $ownerService, AuthorService $authorService)
+    public function __construct(
+        ProductService $productService, 
+        OwnerService $ownerService, 
+        AuthorService $authorService,
+        CategoryService $categoryService
+    )
     {
         $this->productService = $productService;
         $this->ownerService = $ownerService;
         $this->authorService = $authorService;
+        $this->categoryService = $categoryService;
         $authors = $this->authorService->getAll();
         $owners = $this->ownerService->getAll();
-        view()->share(['authors' => $authors, 'owners' => $owners]);
+        $categories = $this->categoryService->getAll();
+        view()->share(['authors' => $authors, 'owners' => $owners, 'categories' => $categories]);
     }
 
     public function index()
@@ -55,8 +65,9 @@ class ProductController extends Controller
     {
         $product = $this->productService->getById($id);
         $productOfAuthors = $product->author;
+        $productOfCategories = $product->categories;
         $productImg = explode("|", $product->image)[0];
-        return view('admin.products.edit', compact('product', 'productOfAuthors', 'productImg'));
+        return view('admin.products.edit', compact('product', 'productOfAuthors', 'productImg', 'productOfCategories'));
     }
 
     public function update(UpdateProductRequest $request, $id)
