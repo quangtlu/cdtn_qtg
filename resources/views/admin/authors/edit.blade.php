@@ -70,6 +70,7 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        flatpickr("input[type=datetime-local]", {});
+        flatpickr("input[type=datetime-local]", {
+        });
     </script>
 @endsection
