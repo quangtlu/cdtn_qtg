@@ -19,6 +19,12 @@ class ProductService
         return $products;
     }
 
+    public function search($request)
+    {
+        $products = Product::search($request->keyword)->paginate(10);
+        return $products;
+    }
+
     public function getById($id){
         $product = $this->productModel->findOrFail($id);   
         return $product; 

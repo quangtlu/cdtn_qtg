@@ -43,6 +43,12 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
+    public function search(Request $request)
+    {
+        $products = $this->productService->search($request);
+        return view('admin.products.index', compact('products'));
+    }
+
     public function create()
     {
         return view('admin.products.create');

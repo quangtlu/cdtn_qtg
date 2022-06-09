@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\Permission\StorePermissionRequest;
 use App\Services\PermissionService;
 use function redirect;
 use function view;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
@@ -21,6 +22,12 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = $this->permissionService->getPaginate();
+        return view('admin.permissions.index', compact('permissions'));
+    }
+
+    public function search(Request $request)
+    {
+        $permissions = $this->permissionService->search($request);
         return view('admin.permissions.index', compact('permissions'));
     }
 

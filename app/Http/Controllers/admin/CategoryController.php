@@ -27,6 +27,12 @@ class CategoryController extends Controller
         return view('admin.categories.index', compact('categories'));
     }
 
+    public function search(Request $request)
+    {
+        $categories = $this->categoryService->search($request);
+        return view('admin.categories.index', compact('categories'));
+    }
+
     public function create()
     {
         $htmlOption = $this->getCategory($parentId = '');

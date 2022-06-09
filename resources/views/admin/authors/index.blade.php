@@ -19,7 +19,11 @@
                             <form class="form-inline" action="{{ route('admin.authors.search') }}" method="GET">
                                 <div class="input-group input-group-sm">
                                     <input class="form-control form-control-navbar" name="keyword" required type="search"
+<<<<<<< HEAD
+                                        placeholder="Tìm kiếm tiêu đề, nội dung..." aria-label="Search">
+=======
                                         placeholder="Tìm kiếm theo tên, email, số điện thoại,.." aria-label="Search">
+>>>>>>> b9b975c53d7c5fe64d731f7b924dd0e625b12ce2
                                     <div class="input-group-append">
                                         <button class="btn btn-navbar" type="submit">
                                             <i class="fas fa-search"></i>
@@ -44,7 +48,7 @@
                                 <th>Số điện thoại</th>
                                 @can('admin edit author' | 'admin delete author')
                                 <th>Action</th>
-                                @endcan
+                                {{-- @endcan --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -57,17 +61,22 @@
                                         <td>{{ $author->email }}</td>
                                         <td>{{ $author->phone }}</td>
                                         <td>
-                                            @can('admin edit author')
+                                            {{-- @can('admin edit author') --}}
                                             <a href="{{ route('admin.authors.edit', ["id" => $author->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                                @can('admin delete author')
-                                            <button type="button" data-url="{{ route('admin.authors.destroy', ["id" => $author->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>@endcan
-                                            @endcan
+                                                {{-- @can('admin delete author') --}}
+                                            <button type="button" data-url="{{ route('admin.authors.destroy', ["id" => $author->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
+                                                {{-- @endcan --}}
+                                            {{-- @endcan --}}
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+<<<<<<< HEAD
+                        {{ $authors->withQueryString()->links() }}
+=======
                         {{ $authors->links() }}
+>>>>>>> b9b975c53d7c5fe64d731f7b924dd0e625b12ce2
                     </div>
                 </div>
                 <!-- /.row -->

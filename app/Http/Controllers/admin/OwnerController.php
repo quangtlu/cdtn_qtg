@@ -26,6 +26,12 @@ class OwnerController extends Controller
         return view('admin.owners.index', compact('owners'));
     }
 
+    public function search(Request $request)
+    {
+        $owners = $this->ownerService->search($request);
+        return view('admin.owners.index', compact('owners'));
+    }
+
     public function create()
     {
         return view('admin.owners.create');

@@ -26,6 +26,12 @@ class FaqController extends Controller
         return view('admin.faq.index', compact('faqs'));
     }
 
+    public function search(Request $request)
+    {
+        $faqs = $this->faqService->search($request);
+        return view('admin.faqs.index', compact('faqs'));
+    }
+
     public function create()
     {
         return view('admin.faq.create');
