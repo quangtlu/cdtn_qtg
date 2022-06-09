@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.authors')->group(function () {
             Route::prefix('/authors')->group(function () {
                 Route::get('/', 'Admin\AuthorController@index')->name('.index')->middleware('can:admin list author');
-                Route::get('/search', 'Admin\AuthorController@search')->name('.search');
+                Route::get('/search', 'Admin\AuthorController@search')->name('.search')->middleware('can:admin list author');
                 Route::get('/create', 'Admin\AuthorController@create')->name('.create')->middleware('can:admin add author');
                 Route::post('/store', 'Admin\AuthorController@store')->name('.store')->middleware('can:admin add author');
                 Route::get('/edit/{id}', 'Admin\AuthorController@edit')->name('.edit')->middleware('can:admin edit author');

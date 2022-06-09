@@ -2,6 +2,7 @@
 @section('title', 'Thêm mới tác giả')
 @section('css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -13,7 +14,7 @@
                         <form action="{{ route('admin.authors.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Họ và tên</label>
+                                <label for="category_name">Họ và tên<b class="field-require">*</b></label>
                                 <input type="text" name="name" class="form-control" >
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -26,9 +27,34 @@
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            @can('add author')
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
-                            @endcan
+                            <div class="form-group">
+                                <label class="form-label">Giới tính<b class="field-require">*</b></label>
+                                <select name="gender" class="form-control" id="gender">
+                                    <option value=""></option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name">Số điện thoại<b class="field-require">*</b><b class="field-require">*</b></label>
+                                <input type="text" name="phone" class="form-control">
+                                @error('phone')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name">Email<b class="field-require">*</b><b class="field-require">*</b></label>
+                                <input type="email" name="email" class="form-control">
+                                @error('email')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </form>
                     </div>
                 </div>

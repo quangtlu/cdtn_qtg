@@ -17,8 +17,9 @@ class CreateAuthorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('gender');
             $table->string('phone')->unique();
-            $table->date('dob');
+            $table->date('dob')->nullable();
             $table->timestamps();
         });
     }

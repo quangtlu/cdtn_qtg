@@ -47,7 +47,6 @@ class UpdateUserRequest extends FormRequest
             'email.required' => 'Vui lòng email',
             'email.email' => 'Vui lòng nhập đúng email',
             'email.unique' => 'Email đã tồn tại',
-            'dob.date_format' => 'Vui lòng nhập đúng định dạng Ngày-tháng-năm',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password.min' => 'Mật khẩu tối thiểu 8 kí tự',

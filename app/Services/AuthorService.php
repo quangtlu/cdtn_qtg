@@ -39,7 +39,10 @@ class AuthorService
     public function create($request){
         $data = [
             "name" => $request->name,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
             "dob" => $request->dob,
+            "email" => $request->email,
         ];
         $this->authorModel->create($data);
     }
@@ -48,7 +51,10 @@ class AuthorService
         $author = $this->getById($id);
         $data = [
             "name" => $request->name,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
             "dob" => $request->dob,
+            "email" => $request->email,
         ];
         $author->update($data);
     }
