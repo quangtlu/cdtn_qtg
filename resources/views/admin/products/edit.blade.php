@@ -49,6 +49,21 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Danh mục</label>
+                                <select name="categoryIds[]" class="form-control select2_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        @if ($category->type == 'product')
+                                            <option  {{ $productOfCategories->contains('id', $category->id) ? 'selected' : '' }}
+                                            value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('categoryIds')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="category_name">Chủ sở hữu tác phẩm</label>
                                 <select name="owner_id" class="form-control" >
                                     @foreach ($owners as $owner)
@@ -68,7 +83,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
-                                <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5" value="">
+                                <input type="file" accept="image/*" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5" value="">
                                 <img class="product-img" src="{{ asset("image/products/$productImg") }}" alt="">
                             </div>
                             <button type="submit" class="btn btn-primary mb-2">Cập nhật</button>

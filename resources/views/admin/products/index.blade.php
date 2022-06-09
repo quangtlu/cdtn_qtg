@@ -22,7 +22,7 @@
                                     <th>Tên tác phẩm</th>
                                     <th>Tác giả</th>
                                     <th>Chủ sở hữu</th>
-
+                                    <th>Danh mục</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -47,7 +47,7 @@
                                             {{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
                                         </td>
                                         <td>{{ $product->owner->name }}</td>
-
+                                        <td>{{ $product->categories->count() > 1 ? $product->categories->first()->name . ',...' : $product->categories->first()->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ['id' => $product->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>

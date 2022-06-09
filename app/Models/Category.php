@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ["name", "parent_id", "type_id"];
+    protected $fillable = ["name", "parent_id", "type"];
     
     public function postCategory()
     {
@@ -18,8 +18,9 @@ class Category extends Model
         return $this->belongsToMany(Post::class, 'post_category');
     }
 
-    public function type()
+    public function products()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsToMany(Product::class, 'product_category');
     }
+
 }

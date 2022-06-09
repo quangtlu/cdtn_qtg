@@ -38,7 +38,9 @@
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @if ($category->type === 'post')
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif  
                                     @endforeach
                                 </select>
                                 @error('category_id')
@@ -54,7 +56,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
-                                <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
+                                <input type="file" accept="image/*" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
                             </div>
                             <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </form>

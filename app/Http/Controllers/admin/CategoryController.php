@@ -16,12 +16,9 @@ class CategoryController extends Controller
     private $categoryService;
     private $typeService;
 
-    public function __construct(CategoryService $categoryService, TypeService $typeService)
+    public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
-        $this->typeService = $typeService;
-        $types = $this->typeService->getAll();
-        view()->share('types', $types);
     }
 
     public function index()

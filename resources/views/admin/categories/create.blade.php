@@ -28,13 +28,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Loại danh mục</label>
-                                <select name="type_id" class="form-control" >
+                                <select name="type" class="form-control" >
                                     <option value="">Chọn loại danh mục</option>
-                                    @foreach ($types as $type)
-                                        <option value="{{ $type->id }}">{{ $type->name}}</option>
+                                    @foreach (config('consts.type') as $type)
+                                        <option value="{{ $type }}">{{ $type}}</option>
                                     @endforeach
                                 </select>
-                                @error('type_id')
+                                @error('type')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

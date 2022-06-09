@@ -12,11 +12,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'parent_id' => 0,
-            'type_id' => 1,
-            'name' => 'Tài liệu tham khảo'
-        ]);
         factory(Category::class, 20)->create();
     }
 }

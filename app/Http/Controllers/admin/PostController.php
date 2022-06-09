@@ -60,8 +60,8 @@ class PostController extends Controller
     {
         $post = $this->postService->getById($id);
         $postUser = $post->user;
-        $postOfTags = $post->tag;
-        $postOfCategories = $post->category;
+        $postOfTags = $post->tags;
+        $postOfCategories = $post->categories;
         $postImgs = explode("|", $post->image)[0];
         return view('admin.posts.edit', compact('post', 'postUser', 'postImgs', 'postOfTags', 'postOfCategories'));
     }

@@ -17,21 +17,23 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên tác phẩm</label>
-                                <input type="text" name="name" class="form-control" >
+                                <input type="text" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
-                                <input type="datetime-local"  placeholder="yyyy-mm-dd" name="pub_date" class="form-control" style="background-color: #fff">
+                                <input type="datetime-local" placeholder="yyyy-mm-dd" name="pub_date" class="form-control"
+                                    style="background-color: #fff">
                                 @error('pub_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
-                                <input type="datetime-local"  placeholder="yyyy-mm-dd" name="regis_date" class="form-control" style="background-color: #fff">
+                                <input type="datetime-local" placeholder="yyyy-mm-dd" name="regis_date"
+                                    class="form-control" style="background-color: #fff">
                                 @error('regis_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -49,8 +51,22 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Danh mục</label>
+                                <select name="categoryIds[]" class="form-control select2_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        @if ($category->type == 'product')
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('categoryIds')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="category_name">Chủ sở hữu tác phẩm</label>
-                                <select name="owner_id" class="form-control" >
+                                <select name="owner_id" class="form-control">
                                     <option value=""></option>
                                     @foreach ($owners as $owner)
                                         <option value="{{ $owner->id }}">{{ $owner->name }}</option>
@@ -69,7 +85,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
-                                <input type="file" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
+                                <input type="file" accept="image/*" multiple class="form-control-file" name="image[]" id="" cols="30"
+                                    rows="5">
                             </div>
                             <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </form>
@@ -87,17 +104,15 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
-    $(function () {
-        $('.select2_init').select2({
-            'placeholder': 'Chọn tác giả'
+        $(function() {
+            $('.select2_init').select2({})
         })
-    })
-    $('#summernote').summernote({
+        $('#summernote').summernote({
             height: 400
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        flatpickr("input[type=datetime-local]",{});
+        flatpickr("input[type=datetime-local]", {});
     </script>
 @endsection
