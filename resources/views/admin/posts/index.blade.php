@@ -14,6 +14,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.posts.create') }}">Thêm</a>
+                    {{-- search --}}
                     <div class="nav-item col-md-10">
                         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                             <i class="fas fa-search"></i>
@@ -35,6 +36,7 @@
                             </form>
                         </div>
                     </div>
+                    {{-- end search --}}
                     <div class="col-md-12">
                         <table class="table">
                             <thead>

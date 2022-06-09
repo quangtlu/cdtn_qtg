@@ -23,6 +23,12 @@ class UserService
         return $users;
     }
 
+    public function search($request)
+    {
+        $users = User::search($request->keyword)->paginate(10);
+        return $users;
+    }
+
     public function getById($id){
         $user = $this->userModel->findOrFail($id);
         return $user;

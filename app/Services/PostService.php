@@ -78,7 +78,6 @@ class PostService
     public function delete($id)
     {
         $post = $this->getById($id);
-        $post->comments()->detach();
         $this->postModel->destroy($id);
     }
 }

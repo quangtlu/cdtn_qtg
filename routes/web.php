@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.users')->group(function () {
             Route::prefix('/users')->group(function () {
                 Route::get('/', 'Admin\UserController@index')->name('.index')->middleware('can:admin list user');
+                Route::get('/search', 'Admin\UserController@search')->name('.search');
                 Route::get('/create', 'Admin\UserController@create')->name('.create')->middleware('can:admin add user');
                 Route::post('/store', 'Admin\UserController@store')->name('.store')->middleware('can:admin add user');
                 Route::get('/edit/{id}', 'Admin\UserController@edit')->name('.edit')->middleware('can:admin edit user');
