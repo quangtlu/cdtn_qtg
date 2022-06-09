@@ -25,7 +25,9 @@ class UpdateAuthorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'dob' => 'bail|before:today',
+            'phone' => ['bail', 'required', 'regex:/(0)[0-9]{9}/', 'max:10', Rule::unique('users','phone')->ignore($this->id)],
+            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users','email')->ignore($this->id)],
+            'dob' => 'bail|before:today|nullable',
         ];
     }
 
@@ -33,6 +35,13 @@ class UpdateAuthorRequest extends FormRequest
     {
         return [
             'name.required' => 'Vui lòng nhập tên tác giả',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'phone.unique' => 'Số điện thoại đã tồn tại',
+            'phone.regex' => 'vui lòng nhập đúng số điện thoại',
+            'phone.max' => 'Số điện thoại tối đa 10 số',
+            'email.required' => 'Vui lòng email',
+            'email.email' => 'Vui lòng nhập đúng email',
+            'email.unique' => 'Email đã tồn tại',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
         ];
     }
