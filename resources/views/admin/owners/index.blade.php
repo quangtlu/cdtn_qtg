@@ -32,10 +32,7 @@
                             </form>
                         </div>
                     </div>
-<<<<<<< HEAD
                     {{-- end search --}}
-=======
->>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
