@@ -26,6 +26,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'name' => 'required|unique:categories',
             'parent_id' => 'required',
+            'type_id' => 'required',
         ];
     }
 
@@ -35,6 +36,7 @@ class StoreCategoryRequest extends FormRequest
             'name.required' => 'Vui lòng nhập tên danh mục',
             'name.unique' => 'Tên danh mục đã tồn tại',
             'parent_id.required' => 'Vui lòng chọn danh mục cha',
+            'type_id.required' => 'Vui lòng chọn loại danh mục',
         ];
     }
 }

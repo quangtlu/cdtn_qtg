@@ -34,6 +34,7 @@ class CategoryService
         $data = [
             "name" => $request->name,
             "parent_id" => $request->parent_id,
+            "type_id" => $request->type_id,
         ];
         $this->categoryModel->create($data);
     }
@@ -43,6 +44,7 @@ class CategoryService
         $data = [
             "name" => $request->name,
             "parent_id" => $request->parent_id,
+            "type_id" => $request->type_id,
         ];
         $category->update($data);
     }

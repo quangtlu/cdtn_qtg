@@ -42,7 +42,9 @@ class Post extends Model
     public function scopeSearch($query, $keywork)
     {
         return $query->where('title', 'LIKE', "%{$keywork}%")
-            ->orWhere('content', 'LIKE', "%{$keywork}%");
+            ->orWhere('content', 'LIKE', "%{$keywork}%")
+            ->orWhereHas('user', function ($subQuery) use ($keywork) {
+                $subQuery->where('name', 'like', '%' . $keywork . '%');
+            });
     }
-
 }

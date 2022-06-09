@@ -9,15 +9,19 @@ use App\Components\Recusive;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Http\Controllers\Controller;
-
+use App\Services\TypeService;
 
 class CategoryController extends Controller
 {    
     private $categoryService;
+    private $typeService;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService, TypeService $typeService)
     {
         $this->categoryService = $categoryService;
+        $this->typeService = $typeService;
+        $types = $this->typeService->getAll();
+        view()->share('types', $types);
     }
 
     public function index()

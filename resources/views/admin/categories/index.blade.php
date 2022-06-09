@@ -18,9 +18,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên danh mục</th>
-                                {{-- @can('add owner | edit owner') --}}
+                                <th>Loại danh mục</th>
                                 <th>Action</th>
-                                {{-- @endcan --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -28,13 +27,10 @@
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
+                                        <td>{{ $category->type->name }}</td>
                                         <td>
-                                            {{-- @can('edit owner') --}}
                                             <a href="{{ route('admin.categories.edit', ["id" => $category->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
-                                            {{-- @endcan --}}
-                                            {{-- @can('delete owner') --}}
                                             <button type="button" data-url="{{ route('admin.categories.destroy', ["id" => $category->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
-                                            {{-- @endcan --}}
                                         </td>
                                     </tr>
                                 @endforeach

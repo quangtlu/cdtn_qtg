@@ -15,19 +15,19 @@ class FaqService
     }
 
     public function getPaginate(){
-        $owners = $this->faqModel->latest()->paginate(10);
-        return $owners;
+        $faqs = $this->faqModel->latest()->paginate(10);
+        return $faqs;
     }
 
     public function getAll()
     {
-        $owners = $this->faqModel->all();
-        return $owners;
+        $faqs = $this->faqModel->all();
+        return $faqs;
     }
 
     public function getById($id){
-        $owner = $this->faqModel->findOrFail($id);
-        return $owner;
+        $faq = $this->faqModel->findOrFail($id);
+        return $faq;
     }
 
     public function create($request){
