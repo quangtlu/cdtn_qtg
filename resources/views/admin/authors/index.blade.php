@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>{{ $author->id }}</td>
                                         <td>{{ $author->name }}</td>
-                                        <td>{{ $author->gender }}</td>
+                                        <td>{{ Str::ucfirst($author->gender) }}</td>
                                         <td>{{ $author->dob }}</td>
                                         <td>{{ $author->email }}</td>
                                         <td>{{ $author->phone }}</td>

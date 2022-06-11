@@ -1,11 +1,10 @@
 @extends('layouts.signin_signup')
 @section('title', 'Đăng ký')
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endsection
-@section('js')
-<script src="{{ asset('js/avatar.js') }}"></script>
-@endsection
+
 @section('content')
     <!-- register -->
     <form method="POST" action="{{ route('register') }}" class="register-form" enctype="multipart/form-data">
@@ -48,7 +47,7 @@
                     </div>
                     <div class="form-row">
                         <label class="form-label" for="input">Ngày sinh</label>
-                        <input type="date" name="dob" class="form-text" @error('dob') is-invalid @enderror">
+                        <input type="datetime-local"  placeholder="yyyy-mm-dd" name="dob" class="form-text" style="background-color: #fff" @error('dob') is-invalid @enderror">
                         @error('dob')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -99,4 +98,11 @@
     </form>
     
     <!-- //register -->
+@endsection
+@section('js')
+    <script src="{{ asset('js/avatar.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[type=datetime-local]",{});
+    </script>
 @endsection

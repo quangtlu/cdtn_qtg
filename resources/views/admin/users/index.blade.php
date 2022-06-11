@@ -61,7 +61,7 @@
                                             <img class="avt-product index-avt" src=" {{ asset('image/profile/'.$user->image) }}" alt="">
                                         </td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->gender }}</td>
+                                        <td>{{ Str::ucfirst($user->gender) }}</td>
                                         <td>{{ $user->dob }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
