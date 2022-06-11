@@ -39,12 +39,12 @@ class Post extends Model
         return $this->hasMany(PostCategory::class);
     }
 
-    public function scopeSearch($query, $keywork)
+    public function scopeSearch($query, $keyword)
     {
-        return $query->where('title', 'LIKE', "%{$keywork}%")
-            ->orWhere('content', 'LIKE', "%{$keywork}%")
-            ->orWhereHas('user', function ($subQuery) use ($keywork) {
-                $subQuery->where('name', 'like', '%' . $keywork . '%');
+        return $query->where('title', 'LIKE', "%{$keyword}%")
+            ->orWhere('content', 'LIKE', "%{$keyword}%")
+            ->orWhereHas('user', function ($subQuery) use ($keyword) {
+                $subQuery->where('name', 'like', '%' . $keyword . '%');
             });
     }
 }

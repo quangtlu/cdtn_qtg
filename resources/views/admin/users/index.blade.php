@@ -25,7 +25,7 @@
                             <form class="form-inline" action="{{ route('admin.users.search') }}" method="GET">
                                 <div class="input-group input-group-sm">
                                     <input class="form-control form-control-navbar" name="keyword" required type="search"
-                                        placeholder="Tìm kiếm tiêu đề, nội dung..." aria-label="Search">
+                                        placeholder="Tìm kiếm theo ID, tiêu đề, nội dung..." aria-label="Search">
                                     <div class="input-group-append">
                                         <button class="btn btn-navbar" type="submit">
                                             <i class="fas fa-search"></i>

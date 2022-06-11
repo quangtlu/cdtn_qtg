@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TagSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(PostSeeder::class);
-        $this->call(OwnerSeeder::class);
-        $this->call(AuthorSeeder::class);
         $this->call(FaqSeeder::class);
+        $this->call(AuthorSeeder::class);
+        $this->call(OwnerSeeder::class);
     }
 }

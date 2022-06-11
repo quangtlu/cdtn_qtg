@@ -12,6 +12,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'image' => '1.jpg|2.jpg|3.jpg',
         'pub_date' => now(),
         'regis_date' => now(),
-        'owner_id' => rand(1,50)
+        'owner_id' => rand(1,20)
     ];
 });

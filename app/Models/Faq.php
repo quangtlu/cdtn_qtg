@@ -8,9 +8,10 @@ class Faq extends Model
 {
     protected $fillable = ['question', 'answer'];
 
-    public function scopeSearch($query, $keywork)
+    public function scopeSearch($query, $keyword)
     {
-        return $query->where('question', 'LIKE', "%{$keywork}%")
-            ->orWhere('answer', 'LIKE', "%{$keywork}%");
+        return $query->where('question', 'LIKE', "%{$keyword}%")
+            ->orWhere('answer', 'LIKE', "%{$keyword}%")
+            ->orWhere('id', 'LIKE', "%{$keyword}%");
     }
 }

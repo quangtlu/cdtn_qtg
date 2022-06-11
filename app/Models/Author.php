@@ -18,11 +18,11 @@ class Author extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    public function scopeSearch($query, $keywork)
+    public function scopeSearch($query, $keyword)
     {
-        return $query->where('name', 'LIKE', "%{$keywork}%")
-            ->orWhere('email', 'LIKE', "%{$keywork}%")
-            ->orWhere('phone', 'LIKE', "%{$keywork}%")
-            ->orWhere('id', 'LIKE', "%{$keywork}%");
+        return $query->where('name', 'LIKE', "%{$keyword}%")
+            ->orWhere('phone', 'LIKE', "%{$keyword}%")
+            ->orWhere('id', 'LIKE', "%{$keyword}%")
+            ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
 }

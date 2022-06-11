@@ -15,14 +15,13 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên<b class="field-require">*</b></label>
-                                <input type="text" name="name" class="form-control" >
+                                <input type="text" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                {{-- <input type="datetime-local"  placeholder="yyyy-mm-dd" name="dob" class="form-control" style="background-color: #fff"> --}}
                                 <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="" id="dob" placeholder="yyyy-mm-dd">
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -42,14 +41,16 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Số điện thoại<b class="field-require">*</b><b class="field-require">*</b></label>
+                                <label for="category_name">Số điện thoại<b class="field-require">*</b><b
+                                        class="field-require">*</b></label>
                                 <input type="text" name="phone" class="form-control">
                                 @error('phone')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Email<b class="field-require">*</b><b class="field-require">*</b></label>
+                                <label for="category_name">Email<b class="field-require">*</b><b
+                                        class="field-require">*</b></label>
                                 <input type="email" name="email" class="form-control">
                                 @error('email')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -69,9 +70,10 @@
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script>
-        $('#dob').datepicker({
-            language: 'vi',
-            orientation: 'bottom',
-        });
+        // $('#dob').datepicker({
+        //     language: 'vi',
+        //     orientation: 'bottom',
+        // });
+        flatpickr("input[type=datetime-local]", {})
     </script>
 @endsection

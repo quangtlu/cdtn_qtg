@@ -13,7 +13,8 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.products.create') }}">Thêm</a>
+                    <a class="col-md-1 btn btn-success btn-sm float-right m-2"
+                        href="{{ route('admin.products.create') }}">Thêm</a>
                     {{-- search --}}
                     <div class="nav-item col-md-10">
                         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -23,7 +24,7 @@
                             <form class="form-inline" action="{{ route('admin.products.search') }}" method="GET">
                                 <div class="input-group input-group-sm">
                                     <input class="form-control form-control-navbar" name="keyword" required type="search"
-                                        placeholder="Tìm kiếm tác phẩm, tác giả, chủ sở hữu..." aria-label="Search">
+                                        placeholder="Tìm kiếm theo ID, tên tác phẩm, tác giả, chủ sở hữu..." aria-label="Search">
                                     <div class="input-group-append">
                                         <button class="btn btn-navbar" type="submit">
                                             <i class="fas fa-search"></i>
@@ -36,6 +37,10 @@
                             </form>
                         </div>
                     </div>
+<<<<<<< HEAD
+                    {{-- end search --}}
+=======
+>>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
@@ -70,7 +75,8 @@
                                             {{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
                                         </td>
                                         <td>{{ $product->owner->name }}</td>
-                                        <td>{{ $product->categories->count() > 1 ? $product->categories->first()->name . ',...' : $product->categories->first()->name }}</td>
+                                        <td>{{ $product->categories->count() > 1 ? $product->categories->first()->name . ',...' : $product->categories->first()->name }}
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ['id' => $product->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>
