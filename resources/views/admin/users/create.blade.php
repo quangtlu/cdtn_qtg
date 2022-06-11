@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input type="datetime-local"  placeholder="yyyy-mm-dd" name="dob" class="form-control" style="background-color: #fff">
+                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="" id="dob" placeholder="yyyy-mm-dd">
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -37,7 +37,7 @@
                                 <label class="form-label">Giới tính</label>
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
-                                    <option value="Nam">Nam</option>
+                                    <option value="nam">Nam</option>
                                     <option value="Nữ">Nữ</option>
                                 </select>
                                 @error('gender')
@@ -106,9 +106,14 @@
     <script src="{{ asset('admin/user/create.js') }}"></script>
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
     <script src="{{ asset('js/avatar.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script>
-        flatpickr("input[type=datetime-local]",{});
+        $('#dob').datepicker({
+            language: 'vi',
+            orientation: 'bottom',
+            dateFormat: "Y-m-d",
+        });
     </script>
 @endsection
 

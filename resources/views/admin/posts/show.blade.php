@@ -72,7 +72,7 @@
                                 Thẻ tag:
                                 @php
                                 $tagsName = [];
-                                    foreach ($post->tag as $tagName){
+                                    foreach ($post->tags as $tagName){
                                         $tagsName[] = $tagName->name;
                                     }
                                     echo $tagsName = implode(", ", $tagsName);
@@ -82,7 +82,7 @@
                                 Danh mục:
                                 @php
                                 $categoriesName = [];
-                                    foreach ($post->category as $categoryName){
+                                    foreach ($post->categories as $categoryName){
                                         $categoriesName[] = $categoryName->name;
                                     }
                                     echo $categoriesName = implode(", ", $categoriesName);
