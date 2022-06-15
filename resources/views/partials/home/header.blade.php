@@ -81,8 +81,8 @@
                     <!-- cd-header-buttons -->
                 </div>
                 <div id="cd-search" class="cd-search">
-                    <form action="{{ route('posts.search') }}" method="GET">
-                        <input required name="keyword" type="search"
+                    <form id="header-search-form" action="{{ route('posts.search') }}" method="GET">
+                        <input id="search-input" required name="keyword" type="search"
                             placeholder="Tìm kiếm bài viết theo tiêu dề, nội dung,...">
                     </form>
                 </div>
