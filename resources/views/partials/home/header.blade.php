@@ -73,7 +73,7 @@
                         </ul>
                     </li>
                     <li><a href="{{ route('faq.index') }}">FAQ</a></li>
-                    <li><a href="{{ route('posts.index') }}">Diễn đàm</a></li>
+                    <li><a href="{{ route('posts.index') }}">Diễn đàn</a></li>
                     <li><a href="{{ route('messenger.index') }}">Trò chuyện</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
