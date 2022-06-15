@@ -24,7 +24,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12">
-                                    <label class="labels">Giới tính: {{ $profile->gender }}</label>
+                                    <label class="labels">Giới tính: {{ Str::ucfirst($profile->gender) }}</label>
                                 </div>
                             </div>
                             <div class="row mt-3">

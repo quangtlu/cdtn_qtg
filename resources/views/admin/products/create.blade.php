@@ -4,7 +4,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -24,16 +24,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
-                                <input type="datetime-local" placeholder="yyyy-mm-dd" name="pub_date" class="form-control"
-                                    style="background-color: #fff">
+                                {{-- <input type="datetime-local" placeholder="yyyy-mm-dd" name="pub_date" class="form-control" style="background-color: #fff"> --}}
+                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" name="pub_date" value=""  placeholder="yyyy-mm-dd">
                                 @error('pub_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
-                                <input type="datetime-local" placeholder="yyyy-mm-dd" name="regis_date"
-                                    class="form-control" style="background-color: #fff">
+                                {{-- <input type="datetime-local" placeholder="yyyy-mm-dd" name="regis_date" class="form-control" style="background-color: #fff"> --}}
+                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" name="regis_date" value=""  placeholder="yyyy-mm-dd">
                                 @error('regis_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -111,8 +111,13 @@
             height: 400
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script>
-        flatpickr("input[type=datetime-local]", {});
+        $('.date-time').datepicker({
+            language: 'vi',
+            orientation: 'bottom',
+            dateFormat: "Y-m-d",
+        });
     </script>
 @endsection

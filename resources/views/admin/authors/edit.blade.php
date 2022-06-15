@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('title', 'Sửa thông tin tác giả')
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -22,8 +22,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input value="{{ $author->dob }}" type="datetime-local" placeholder="yyyy-mm-dd"
-                                    name="dob" class="form-control" style="background-color: #fff">
+                                {{-- <input value="{{ $author->dob }}" type="datetime-local" placeholder="yyyy-mm-dd" name="dob" class="form-control" style="background-color: #fff"> --}}
+                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="{{ old('dob') ?? $author->dob }}" id="dob" placeholder="yyyy-mm-dd">
+
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -68,9 +69,12 @@
     </div>
 @endsection
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script>
-        flatpickr("input[type=datetime-local]", {
+        $('#dob').datepicker({
+            language: 'vi',
+            orientation: 'bottom',
         });
     </script>
 @endsection

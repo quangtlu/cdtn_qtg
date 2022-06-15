@@ -53,7 +53,8 @@ class UserController extends Controller
     {
         $user = $this->userService->getById($id);
         $roleOfUsers = $user->roles;
-        return view('admin.users.edit', compact('user', 'roleOfUsers'));
+        $userImg = $user->image;
+        return view('admin.users.edit', compact('user', 'roleOfUsers', 'userImg'));
     }
 
     public function update(UpdateUserRequest $request, $id)
