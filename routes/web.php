@@ -36,11 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.products')->group(function () {
             Route::prefix('/products')->group(function () {
                 Route::get('/', 'Admin\ProductController@index')->name('.index')->middleware('can:admin list product');
-<<<<<<< HEAD
-                Route::get('/search', 'Admin\ProductController@search')->name('.search')->middleware('can:admin list product');
-=======
                 Route::get('/search', 'Admin\ProductController@search')->name('.search');
->>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
                 Route::get('/create', 'Admin\ProductController@create')->name('.create')->middleware('can:admin add product');
                 Route::post('/store', 'Admin\ProductController@store')->name('.store')->middleware('can:admin add product');
                 Route::get('/edit/{id}', 'Admin\ProductController@edit')->name('.edit')->middleware('can:admin edit product');
@@ -53,11 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::name('.owners')->group(function () {
             Route::prefix('/owners')->group(function () {
                 Route::get('/', 'Admin\OwnerController@index')->name('.index')->middleware('can:admin list owner');
-<<<<<<< HEAD
-                Route::get('/search', 'Admin\OwnerController@search')->name('.search')->middleware('can:admin list owner');
-=======
                 Route::get('/search', 'Admin\OwnerController@search')->name('.search');
->>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
                 Route::get('/create', 'Admin\OwnerController@create')->name('.create')->middleware('can:admin add owner');
                 Route::post('/store', 'Admin\OwnerController@store')->name('.store')->middleware('can:admin add owner');
                 Route::get('/edit/{id}', 'Admin\OwnerController@edit')->name('.edit')->middleware('can:admin edit owner');
@@ -79,17 +71,10 @@ Route::middleware('auth')->group(function () {
 
         Route::name('.permissions')->group(function () {
             Route::prefix('/permissions')->group(function () {
-<<<<<<< HEAD
                 Route::get('/', 'Admin\PermissionController@index')->name('.index');
                 Route::get('/search', 'Admin\PermissionController@search')->name('.search');
                 Route::post('/store', 'Admin\PermissionController@store')->name('.store');
                 Route::get('/destroy/{id}', 'Admin\PermissionController@destroy')->name('.destroy');
-=======
-                Route::get('/', 'Admin\PermissionController@index')->name('.index')->middleware('can:admin list role');
-                Route::get('/search', 'Admin\PermissionController@search')->name('.search');
-                Route::post('/store', 'Admin\PermissionController@store')->name('.store')->middleware('can:admin add role');
-                Route::get('/destroy/{id}', 'Admin\PermissionController@destroy')->name('.destroy')->middleware('can:admin delete role');
->>>>>>> 0a0af2497473f1d62ba361d522c2c99db52d03b7
             });
         });
 
@@ -142,6 +127,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('/categories')->group(function () {
                 Route::get('/', 'Admin\CategoryController@index')->name('.index');
                 Route::get('/search', 'Admin\CategoryController@search')->name('.search');
+                Route::get('/get-type', 'Admin\CategoryController@getType')->name('.getType');
                 Route::get('/create', 'Admin\CategoryController@create')->name('.create');
                 Route::post('/store', 'Admin\CategoryController@store')->name('.store');
                 Route::get('/edit/{id}', 'Admin\CategoryController@edit')->name('.edit');

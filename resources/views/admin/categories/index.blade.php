@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý danh mục')
-@section('js')
-    <script src="{{ asset('js/alert.js') }}"></script>
-@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->

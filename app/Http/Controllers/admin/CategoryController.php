@@ -45,6 +45,13 @@ class CategoryController extends Controller
         return Redirect(route('admin.categories.index'))->with('success', 'Thêm danh mục thành công');
     }
 
+    public function getType(Request $request) {
+        $category_id = $request->category_id;
+        $type = $this->categoryService->getById($category_id)->type;
+        $htmlOption = "<option value='$type'>$type</option>";
+        return $htmlOption;
+    }
+
     public function getCategory($parentId)
     {
         $data = $this->categoryService->getAll();
