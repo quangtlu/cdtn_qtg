@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Services\FaqService;
+use Illuminate\Http\Request;
+
 use function view;
 
 class FaqController extends Controller
@@ -15,10 +17,14 @@ class FaqController extends Controller
         $this->faqService = $faqService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $faqs = $this->faqService->getPaginate();
         return view('home.faq.index', compact('faqs'));
+
+        if($request) {
+            $faqs = $this->faqService->search($request);
+        }
     }
 
 }
