@@ -21,11 +21,6 @@ class PermissionService
         return $permissions;
     }
 
-    public function search($request)
-    {
-        $permissions = ModelsPermission::search($request->keyword)->paginate(10);
-        return $permissions;
-    }
 
     public function getPaginate()
     {
