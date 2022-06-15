@@ -12,6 +12,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        Category::insert(config('consts.category_reference'));
         factory(Category::class, 100)->create();
     }
 }
