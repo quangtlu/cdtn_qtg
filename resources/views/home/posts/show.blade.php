@@ -170,7 +170,8 @@
     ul.tag li a
     {
         padding: 5px !important;
-        font-size: 8px !important;
+        font-size: 10px !important;
+        font-weight: bold;
     }
     .comments-grid-left
     {
