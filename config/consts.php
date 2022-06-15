@@ -11,5 +11,10 @@ return [
     'type' => [
         'post',
         'product'
+    ],
+    'category_reference' => [
+        'name' => 'Tài liệu tham khảo',
+        'parent_id' => 0,
+        'type' => 'post'
     ]
 ];

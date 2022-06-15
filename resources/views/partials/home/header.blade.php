@@ -65,9 +65,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="">Các khái niệm liên quan</a></li>
-                            <li><a href="">Luật sở hữu trí tuệ Việt Nam 2005</a></li>
-                            <li><a href="">Các vấn đề thường gặp</a></li>
+                            @if ($postReferences)
+                                @foreach ($postReferences as $post)
+                                    <li><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></li>
+                                @endforeach
+                            @endif
                         </ul>
                     </li>
                     <li><a href="{{ route('faq.index') }}">FAQ</a></li>
