@@ -18,7 +18,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Danh mục cha</label>
-                                <select name="parent_id" class="form-control" >
+                                <select id="category_parent" name="parent_id" class="form-control" >
                                     <option value="0">Chọn danh mục cha</option>
                                     {!! $htmlOption !!}
                                 </select>
@@ -28,11 +28,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Loại danh mục</label>
-                                <select name="type" class="form-control" >
-                                    <option value="">Chọn loại danh mục</option>
-                                    @foreach (config('consts.type') as $type)
-                                        <option value="{{ $type }}">{{ $type}}</option>
-                                    @endforeach
+                                <select id="selectType" name="type" class="form-control" >
+                                    
                                 </select>
                                 @error('type')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -47,4 +44,22 @@
         </div>
         <!-- /.content -->
     </div>
+@endsection
+@section('js')
+    <script>
+        $('#category_parent').on('change', function() {
+            var category_id = $(this).val();
+            $.ajax({
+                type: "get",
+                url: '{{ route('admin.categories.getType')}}',
+                data: {
+                    'category_id': category_id
+                },
+                dataType: 'html',
+                success: function (response) {
+                    $('#selectType').html(response);
+                }
+            });
+        })
+    </script>
 @endsection
