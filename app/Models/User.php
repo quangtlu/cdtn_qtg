@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -38,4 +39,8 @@ class User extends Authenticatable
             ->orWhere('id', 'LIKE', "%{$keyword}%")
             ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
+
+    protected $casts = [
+        'dob' => 'datetime:Y/m/d ',
+    ];
 }

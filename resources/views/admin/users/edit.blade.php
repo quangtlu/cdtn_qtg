@@ -113,6 +113,10 @@
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        flatpickr("input[type=datetime-local]",{});
+        var date = {{ date_format($user->dob,"Y/m/d H:i:s")}}
+        console.log(date);
+        flatpickr("input[type=datetime-local]",{
+            defaultDate: [date]
+        });
     </script>
 @endsection

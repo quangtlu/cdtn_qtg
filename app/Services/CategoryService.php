@@ -19,11 +19,6 @@ class CategoryService
         return $categories;
     }
 
-    public function search($request)
-    {
-        $categories = Category::search($request->keyword)->paginate(10);
-        return $categories;
-    }
 
     public function getAll()
     {
