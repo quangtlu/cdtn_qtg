@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\PostCategory;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -12,7 +13,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::insert(config('consts.category_reference'));
         factory(Category::class, 100)->create();
     }
 }
