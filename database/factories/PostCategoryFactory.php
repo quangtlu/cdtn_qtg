@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(PostCategory::class, function (Faker $faker) {
     return [
-        'post_id' => rand(1,100),
+        'post_id' => rand(2,100),
         'category_id' => rand(2,20)
     ];
 });
