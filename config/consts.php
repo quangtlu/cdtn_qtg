@@ -1359,6 +1359,7 @@ return [
         [
             'title' => 'Một số vấn đề cụ thể về QTG trong trường Đại học:',
             'user_id' => '1',
+            'created_at' => now(),
             'content' => '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
             mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
             </span></span></b><!--[endif]--><b><span style="font-size:13.0pt;line-height:
