@@ -25,14 +25,14 @@
         <h3>Bài viết mới nhất</h3>
         @foreach ($newestPosts as $post)
             <div class="agileits_popular_posts_grid">
-                <h4><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
-                <h5><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</h5>
+                <h4><a class="post-content-limit-line" href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h4>
+                <h5><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</h5>
             </div>
         @endforeach
     </div>
 
     <div class="w3l_categories">
-        <h3>Chuyên mục</h3>
+        <h3>Danh mục</h3>
         <ul>
             @foreach ($categories as $category)
                 <li>

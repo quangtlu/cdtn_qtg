@@ -12,12 +12,16 @@
                             <ul class="dropdown-menu dropdown-menu__user-info ">
                                 <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
                                         nhân</a></li>
-                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <li><a class="header-link user-name"
+                                        href="{{ route('posts.getPostByUser', ['id' => Auth::user()->id]) }}">Bài viết của
+                                        tôi</a></li>
+                                <li><a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                                        <span class="header-link-logout">Đăng xuất</span><i class="fa fa-sign-in text-danger"></i>
+                                        <span class="header-link-logout">Đăng xuất</span><i
+                                            class="fa fa-sign-in text-danger"></i>
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                         <input type="hidden" name="url_redirect_name" value="home.index">
                                     </form>
@@ -62,12 +66,14 @@
                 <ul class="nav navbar-nav">
                     <li><a class="active" href="{{ route('home.index') }}">Trang chủ</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @if ($postReferences)
                                 @foreach ($postReferences as $post)
-                                    <li><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></li>
+                                    <li><a
+                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
+                                    </li>
                                 @endforeach
                             @endif
                         </ul>
@@ -76,6 +82,39 @@
                     <li><a href="{{ route('products.index') }}">Tác phẩm</a></li>
                     <li><a href="{{ route('posts.index') }}">Diễn đàn</a></li>
                     <li><a href="{{ route('messenger.index') }}">Trò chuyện</a></li>
+                    @auth
+                        <li class="notice-nav">
+                            <i class="fa fa-bell notice-icon">
+                                @if (Auth::user()->unreadNotifications()->count() > 0)
+                                    <span class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                                @endif
+                            </i>
+                            <ul class="notice-list">
+                                @if (Auth::user()->notifications)
+                                    @foreach (Auth::user()->notifications as $notification)
+                                        <li class="notice-item"><a
+                                                href="{{ $notification->unread() ? route('notifications.markAsRead', ['id' => $notification->id]) : '#' . $notification->data['comment_id'] }}">
+                                                <div class="notice-item-wrap">
+                                                    <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
+                                                        alt="" class="notice-item__avatar">
+                                                    <div
+                                                        class="notice-item-content-wrap post-content-limit-line 
+                                                        {{ $notification->unread() ? '' : ' mark-as-read' }}
+                                                       ">
+                                                        {!! $notification->data['title'] !!}:
+                                                        '{{ $notification->data['content'] }}'
+                                                        <div class="notice-item-content__time">
+                                                            {{ $notification->created_at->diffForHumans() }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a></li>
+                                    @endforeach
+                                @endif
+                            </ul>
+
+                        </li>
+                    @endauth
                 </ul>
             </div><!-- /.navbar-collapse -->
             <div class="w3_agile_login">
