@@ -20,15 +20,12 @@ class OwnerController extends Controller
         $this->ownerService = $ownerService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $owners = $this->ownerService->getPaginate();
-        return view('admin.owners.index', compact('owners'));
-    }
-
-    public function search(Request $request)
-    {
-        $owners = $this->ownerService->search($request);
+        if($request->keyword) {
+            $owners = $this->ownerService->search($request);
+        }
         return view('admin.owners.index', compact('owners'));
     }
 

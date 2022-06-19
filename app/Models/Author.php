@@ -15,7 +15,7 @@ class Author extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'author_product');
     }
 
     public function scopeSearch($query, $keyword)

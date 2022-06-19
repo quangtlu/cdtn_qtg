@@ -19,15 +19,12 @@ class TagController extends Controller
         $this->tagService = $tagService;
     }
     
-    public function index()
+    public function index(Request $request)
     {
         $tags = $this->tagService->getPaginate();
-        return view('admin.tags.index', compact('tags'));
-    }
-
-    public function search(Request $request)
-    {
-        $tags = $this->tagService->search($request);
+        if($request->keyword) {
+            $tags = $this->tagService->search($request);
+        }
         return view('admin.tags.index', compact('tags'));
     }
 

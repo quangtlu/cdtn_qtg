@@ -2,7 +2,6 @@
 
 namespace App\Services;
 use App\Models\Product;
-use Illuminate\Support\Str;
 
 class ProductService
 
@@ -86,5 +85,17 @@ class ProductService
         $this->productModel->destroy($id);
         $product->author()->detach();
         $product->categories()->detach();
+    }
+
+    public function filter($request)
+    {
+        $products = Product::query()->filterOwner($request)->filterCategory($request)->filterAuthor($request)->paginate(10);
+        return $products;
+    }
+
+    public function searchAndFilter($request)
+    {
+        $products = Product::query()->filterOwner($request)->filterCategory($request)->filterAuthor($request)->search($request->keyword)->paginate(10);
+        return $products;
     }
 }

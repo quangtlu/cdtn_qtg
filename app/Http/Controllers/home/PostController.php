@@ -40,16 +40,17 @@ class PostController extends Controller
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $posts = $this->postService->getPaginate();
-        return view('home.posts.index', compact('posts'));
-    }
-
-    public function search(Request $request)
-    {
-        $posts = $this->postService->search($request);
-        return view('home.posts.index', compact('posts'));
+        if($request->keyword) {
+            $posts = $this->postService->search($request);
+        }
+        if ($posts->count() > 0) {
+            return view('home.posts.index', compact('posts'));
+        } else {
+            return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+        }
     }
 
     public function show($id)

@@ -28,12 +28,6 @@ class PermissionService
         return $permissions;
     }
 
-    public function search($request)
-    {
-        $permissions = Permission::search($request->keyword)->paginate(10);
-        return $permissions;
-    }
-
     public function getParentById($id)
     {
         $parents = $this->permissionModel->where('parent_id', $id)->get();

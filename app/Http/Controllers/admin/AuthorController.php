@@ -19,15 +19,12 @@ class AuthorController extends Controller
         $this->authorService = $authorService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $authors = $this->authorService->getPaginate();
-        return view('admin.authors.index', compact('authors'));
-    }
-
-    public function search(Request $request)
-    {
-        $authors = $this->authorService->search($request);
+        if($request->keyword) {
+            $authors = $this->authorService->search($request);
+        }
         return view('admin.authors.index', compact('authors'));
     }
 

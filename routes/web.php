@@ -36,7 +36,6 @@ Route::middleware('auth')->group(function () {
         Route::name('.products')->group(function () {
             Route::prefix('/products')->group(function () {
                 Route::get('/', 'Admin\ProductController@index')->name('.index')->middleware('can:admin list product');
-                Route::get('/search', 'Admin\ProductController@search')->name('.search');
                 Route::get('/create', 'Admin\ProductController@create')->name('.create')->middleware('can:admin add product');
                 Route::post('/store', 'Admin\ProductController@store')->name('.store')->middleware('can:admin add product');
                 Route::get('/edit/{id}', 'Admin\ProductController@edit')->name('.edit')->middleware('can:admin edit product');
@@ -148,6 +147,14 @@ Route::name('posts')->prefix('posts')->group(function () {
     Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('.getPostByCategory');
     Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('.getPostByUser');
     Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('.getPostByTag');
+});
+
+Route::name('products')->prefix('products')->group(function () {
+    Route::get('/', 'home\ProductController@index')->name('.index');
+    Route::get('/{id}', 'home\ProductController@show')->name('.show');
+    Route::get('/category/{id}', 'home\ProductController@getProductByCategory')->name('.getProductByCategory');
+    Route::get('/author/{id}', 'home\ProductController@getProductByAuthor')->name('.getProductByAuthor');
+    Route::get('/owner/{id}', 'home\ProductController@getProductByOwner')->name('.getProductByOwner');
 });
 
 Route::middleware('auth')->group(function () {
