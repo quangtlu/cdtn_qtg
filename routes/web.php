@@ -175,5 +175,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/update{id}', 'home\ProfileController@update')->name('.update');
         });
     });
+
+    Route::get('/notifications/{id}', 'home\NotificationController@markAsRead')->name('notifications.markAsRead');
+
 });    
 

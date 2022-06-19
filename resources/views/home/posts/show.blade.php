@@ -70,10 +70,10 @@
                             <li>
                                 @auth
                                     <a class="rep-comment comment-action-link"
-                                        data-userName="{{ $comment->user->name }}">Trảlời</a>
+                                        data-userName="{{ $comment->user->name }}">Trả lời</a>
                                 @endauth
                                 @guest
-                                    <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trảlời</a>
+                                    <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>
                                 @endguest
                                 <i>|</i>
                             </li>
