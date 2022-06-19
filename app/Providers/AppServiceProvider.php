@@ -32,10 +32,21 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::select('id','name')->where('parent_id', 0)->orderBy('created_at', 'desc')->get();
             $tags = Tag::select('id','name')->orderBy('created_at', 'desc')->get();
             $categoryReference = Category::where('name', config('consts.category_reference.name'))->first();
-            $postReferences = $categoryReference->posts;
-            view()->share('newestPosts', $newestPosts);
-            view()->share('categories', $categories);
-            view()->share('tags', $tags);
-            view()->share('postReferences', $postReferences);
+
+            if($categoryReference) {
+                $postReferences = $categoryReference->posts;
+            }
+            if($newestPosts) {
+                view()->share('newestPosts', $newestPosts);
+            }
+            if($categories) {
+                view()->share('categories', $categories);
+            }
+            if($tags) {
+                view()->share('tags', $tags);
+            }
+            if($postReferences) {
+                view()->share('postReferences', $postReferences);
+            }
     }
 }

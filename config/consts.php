@@ -12,6 +12,20 @@ return [
         'post',
         'product'
     ],
+
+    'owner' => [
+        'all' => 0,
+        'none' => -1, 
+    ],
+
+    'category' => [
+        'all' => 0,
+    ],
+
+    'author' => [
+        'all' => 0,
+    ],
+
     'category_reference' => [
         'name' => 'Tài liệu tham khảo',
         'parent_id' => 0,
@@ -22,203 +36,290 @@ return [
             'title' => 'Tóm tắt về quyền tác giả (QTG)',
             'user_id' => '1',
             'content' =>
-            '<p class="MsoNormal"><i><span lang="EN-US" style="font-size:12.0pt;line-height:
-                107%;mso-ansi-language:EN-US">Trường Đại học là nơi đào tạo nguồn nhân lực cao
-                cấp cho xã hội. Vì vậy tôn trọng và bảo hộ QTG là một nghĩa vụ, cũng là điều kiện
-                để Nhà trường hoàn thành sứ mạng ấy.<br>
-                <!--[if !supportLineBreakNewLine]--><br>
-                <!--[endif]--><o:p></o:p></span></i></p><p class="MsoNormal"><i><span lang="EN-US" style="font-size:12.0pt;line-height:
-                107%;mso-ansi-language:EN-US">Sử dụng hiệu quả và đúng luật các tác phẩn được bảo
-                hộ QTG trong trường đại học luôn là một nhiệm vụ phức tạp.<br>
-                <br>
-                Trường Đại học là môi trường lao động sáng tạo chất lượng cao, nơi sản sinh ra
-                các tác phẩm có giá trị; đồng thời cũng là một nơi sử dụng chủ yếu các tác phẩm
-                được bảo hộ QTG trong công việc (giảng dạy, học tập, NCKH, v.v.). Thư viện là một
-                trong các nguồn lực chính của một trường Đại học, nó cũng chính là một kho tàng
-                các tác phẩm được bảo hộ. Khai thác hiệu quả và đúng luật các nguồn lực này là
-                mối quan tâm lớn. <br>
-                <br>
-                Giáo dục / thư viên là hai lĩnh vực được áp dụng nhiều giới hạn và ngoại lệ QTG
-                theo luật. <o:p></o:p></span></i></p><p class="MsoNormal"><i><span lang="EN-US" style="font-size:12.0pt;line-height:
-                107%;mso-ansi-language:EN-US">Mục này liệt kê một số nội dung nổi bật trong vấn
-                đề này theo Luật SHTT Việt Nam, có tham khảo các trang web tương tự ở nước
-                ngoài (xem các link tương ứng).<o:p></o:p></span></i></p><p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
-                mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpFirst" style="margin-left:1.0in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">a.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Tác phẩm của giảng viên, nghiên cứu
-                viên được bảo hộ QTG:<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.0in;mso-add-space:
-                auto"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:
-                EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.75in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l3 level1 lfo2"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;font-family:Symbol;
-                mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
-                EN-US">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Giáo trình, sách chuyên khảo, tập bài
-                giảng, slides, và các học liệu khác phục vụ cho giảng dạy;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.75in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l3 level1 lfo2"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;font-family:Symbol;
-                mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
-                EN-US">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Phần mềm, các CSDL;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.75in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l3 level1 lfo2"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;font-family:Symbol;
-                mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
-                EN-US">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Bản ghi âm; ghi hình phục vụ cho giảng
-                dạy;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.75in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l3 level1 lfo2"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;font-family:Symbol;
-                mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
-                EN-US">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Các kết quả NCKH: bài báo, báo cáo
-                nghiên cứu, bộ dữ liệu v.v.<br>
-                và các tác phẩm khác theo quy định của Luật STTT<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.0in;mso-add-space:
-                auto"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:
-                EN-US">&nbsp; <o:p></o:p></span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.0in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">b.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">QTG và chủ sở hưcủa các tác phẩm của
-                giảng viên và nghiên cứu viên (gọi tắt chung là GV):<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:37.5pt"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">Theo các điều
-                37, 38, 39, Luật SHTT: <o:p></o:p></span></p><p class="MsoListParagraph" style="margin-left:.75in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
-                mso-bidi-font-family:&quot;Times New Roman&quot;">-<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Nếu GV là t</span><span lang="VI" style="font-size:13.0pt;line-height:107%">ác giả </span><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">(và đồng tác
-                giả) </span><span lang="VI" style="font-size:13.0pt;line-height:107%">sử dụng thời
-                gian, tài chính, cơ sở vật chất - kỹ thuật của mình để sáng tạo ra tác phẩm có
-                các quyền nhân thân quy định tại Điều 19 và các quyền tài sản quy định tại Điều
-                20 của Luật này.<o:p></o:p></span></p><p style="margin-top:.2in;margin-right:0in;margin-bottom:.2in;margin-left:.75in;
-                mso-para-margin-top:1.2gd;mso-para-margin-right:0in;mso-para-margin-bottom:
-                1.2gd;mso-para-margin-left:.75in;text-align:justify;text-indent:-.25in;
-                mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="VI">-<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI">Nếu
-                Nhà trường giao nhiệm vụ sáng tạo tác phẩm cho tác giả là người thuộc Trường,
-                Nhà trường là chủ sở hữu các quyền quy định tại Điều 20 và khoản 3 Điều 19 của
-                Luật này, trừ trường hợp có thoả thuận khác.<o:p></o:p></span></p><p style="margin-top:.2in;margin-right:0in;margin-bottom:.2in;margin-left:.75in;
-                mso-para-margin-top:1.2gd;mso-para-margin-right:0in;mso-para-margin-bottom:
-                1.2gd;mso-para-margin-left:.75in;text-align:justify;text-indent:-.25in;
-                mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="VI">-<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI">Nếu
-                Nhà trường hoặc cá nhân giao kết hợp đồng với GV là&nbsp; tác giả sáng tạo ra tác phẩm, Nhà trường và
-                cá nhân giao kết HĐ là chủ sở hữu các quyền quy định tại Điều 20 và khoản 3
-                Điều 19 của Luật này, trừ trường hợp có thoả thuận khác.<o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst" style="margin-left:.75in;mso-add-space:auto"><span lang="VI" style="font-size:13.0pt;line-height:107%">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.0in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
-                mso-bidi-font-family:&quot;Times New Roman&quot;">c.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;line-height:107%">QTG / chủ sở hữu QTG của các
-                bài báo công bố và các công trình công bố khác của GV:<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Tác giả ký HĐ / cam kết với Tạp chí, xuất bản phẩm
-                công bố bài báo /công trình.&nbsp; <o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Phải <span style="color:red">căn cứ vào HĐ / cam kết</span>.
-                Thường thì Tạp chí giữ gần như toàn bộ các quyền tài sản. <o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst"><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.0in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
-                mso-bidi-font-family:&quot;Times New Roman&quot;">d.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;line-height:107%">Chính sách của Trường ĐH đối
-                với các tác phẩm của GV:<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Trường có các quy định về giao nhiệm vụ, hỗ trợ, đầu
-                tư cho các tác giả. QTG và chủ sở hữu quyền cần có quy định càng chi tiết càng
-                tốt.<br>
-                <br>
-                Trường cần có các quy định về sử dụng / khai thác các tác phẩm thuộc quyền sở hữu
-                của Trường, phân biệt sử dụng nội bộ và sử dụng bởi người dùng bên ngoài.&nbsp; </span><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US"><o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst"><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.0in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
-                mso-bidi-font-family:&quot;Times New Roman&quot;">e.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;line-height:107%">Chính sách của Trường ĐH đối
-                với các tài nguyên GD được bảo hộ QTG:<br>
-                <br>
-                Các tài nguyên này gồm:<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.5in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l2 level1 lfo4"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;font-family:Symbol;mso-fareast-font-family:
-                Symbol;mso-bidi-font-family:Symbol">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">Sách, tạp chí, xuất bản phẩm để tại Thư viện;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.5in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l2 level1 lfo4"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;font-family:Symbol;mso-fareast-font-family:
-                Symbol;mso-bidi-font-family:Symbol">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">Các tài nguyên liên kết (thư viện, kho tư liệu, kho dữ liệu
-                chia sẻ với các đơn vị khác);<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.5in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l2 level1 lfo4"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;font-family:Symbol;mso-fareast-font-family:
-                Symbol;mso-bidi-font-family:Symbol">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">Kho phần mềm phục vụ giảng dạy;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.5in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l2 level1 lfo4"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;font-family:Symbol;mso-fareast-font-family:
-                Symbol;mso-bidi-font-family:Symbol">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">Các bộ dữ liệu phục vụ giảng dạy, nghiên cứu;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:1.5in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l2 level1 lfo4"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;font-family:Symbol;mso-fareast-font-family:
-                Symbol;mso-bidi-font-family:Symbol">·<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">Các tài nguyên phục vụ giảng dạy, học tập và NCKH khác.<br>
-                <br>
-                Trường cần có các quy định cụ thể về sở hữu, sử dụng đối với từng loại tài
-                nguyên trên.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.0in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
-                mso-bidi-font-family:&quot;Times New Roman&quot;">f.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;line-height:107%">Sử dụng tác phẩm được bảo hộ
-                QTG trong giảng dạy trên lớp:<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Sử dụng các tài nguyên do Trường là chủ sở hữu hoặc được
-                cấp phép: theo chính sách và quy định của Trường;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Sử dụng các tài nguyên được bảo hộ QTG của bên thứ 3: cần
-                có giấy phép;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Sử dụng các “hạn chế” và “ngoại lệ” theo điều 25, 26
-                Luật SHTT Việt Nam;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Sử dụng các tài liệu thuộc khu vực công;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Tham gia vào các dự án “Tài nguyên giáo dục mở” (giấy
-                phép CC, cộng đồng phần mềm nguồn mở): lưu ý tuân thủ quy định về giấy phép
-                trong phạm vi dự án.<o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst"><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.0in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level1 lfo3"><!--[if !supportLists]--><span lang="VI" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
-                mso-bidi-font-family:&quot;Times New Roman&quot;">g.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><!--[endif]--><span lang="VI" style="font-size:13.0pt;line-height:107%">Sử dụng tác phẩm được bảo hộ
-                QTG trong giảng dạy trực tuyến:<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Giống giảng dạy bình thường;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Lưu ý các sản phẩm trực tuyến: records bài giảng,
-                streamline lớp học; v.v.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Lưu ý không vi phạm các công cụ quản lý quyền số
-                (DRM);<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Sử dụng “gián tiếp” (transformative - tránh sao chép
-                “y nguyên”, trực tiếp);<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="VI" style="font-size:
-                13.0pt;line-height:107%">Tạo ra “tài nguyên số” của mình: chương trình, nội
-                dung, phần mềm và các tài nguyên trực tuyến khác. Áp dụng các giải pháp kỹ thuật
-                để quản lý QTG đối với các tài nguyên này. &nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst"><span lang="VI" style="font-size:13.0pt;
-                line-height:107%">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.5in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level2 lfo3"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">a.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Phần mềm tự do nguồn mở:<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Sử dụng sản phẩm phần mềm tự
-                do nguồn mở<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Phát triển các phần mềm tự do
-                nguồn mởi<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:1.0in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Lưu ý: các Giấy phép / Cộng đồng<o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.5in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level2 lfo3"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">b.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Học liệu mở:<o:p></o:p></span></p><p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
-                mso-ansi-language:EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Giáo trình, bài giảng, v.v. theo “tiêu chuẩn mở”;<o:p></o:p></span></p><p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
-                mso-ansi-language:EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Các bộ dữ liệu mở.<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <o:p></o:p></span></p><p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
-                mso-ansi-language:EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Lưu ý tuân thử các giấy phép và cam kết cộng đồng.<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="margin-left:1.5in;mso-add-space:auto;
-                text-indent:-.25in;mso-list:l0 level2 lfo3"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">c.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Các công cụ bảo vệ QTG trong môi trường
-                số:<o:p></o:p></span></p><p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
-                mso-ansi-language:EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Biện pháp quản lý;<o:p></o:p></span></p><p>
-                </p><p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
-                mso-ansi-language:EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Biện pháp công nghệ:
-                các công cụ DRM.&nbsp;<o:p></o:p></span></p>'
+            '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span></b><!--[endif]--><b><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tóm tắt về quyền tác giả (QTG):<o:p></o:p></span></b></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Quyền tác giả (QTG)</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">, tiếng Anh
+            là <i>Copyrights</i>, là một loại quyền đối với các <i>tác phẩm sáng tạo</i>
+            trong các lĩnh vực văn học, nghệ thuật và khoa học.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">2)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm sáng tạo</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">, tiếng Anh
+            là <i>Creative Works</i>, hoặc nói gọn là <i>Tác phẩm (Works)</i>, là thành quả
+            lao động sáng tạo (trí óc) của nhà văn, nhà thơ, nghệ sĩ, nhạc sĩ, nhà khoa học,
+            lập trình viên, và những người làm công việc sáng tạo khác, gọi chung là các <i>Tác
+            giả (Author)</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm sáng tạo phải có hai yếu tố cơ bản: là
+            tác phẩm <i>nguyên gốc</i> (không phải sao chép lại), và <i>có tính mới (sáng tạo)</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm là <i>tài sản trí tuệ</i> của tác giả. Thuật
+            ngữ <i>Sở hữu trí tuệ (SHTT)</i> là dịch từ tiếng Anh <i>Intellectual property
+            (IP)</i>. <i>IP </i>có thể dịch sang tiếng Việt thành “<i>tài sản trí tuệ</i>”,
+            tuy vậy thuật ngữ <i>“sở hữu trí tuệ”</i> đã được dùng quen.&nbsp;&nbsp; <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">3)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Luật pháp bảo vệ</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> tác phẩm, giống
+            như bảo vệ tài sản trí tuệ và các loại tài sản nói chung khác.&nbsp; <br>
+            <br>
+            Để làm được việc đó Luật pháp xác định các <i>quyền (right) </i>đối với tác phẩm,
+            tức các QTG. Đồng thời quy định các điều khoản để <i>bảo hộ (protect) </i>các
+            quyền đó.<br>
+            <br>
+            Có hai loại QTG: <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto;text-indent:-.25in;mso-list:l1 level1 lfo3"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">-<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">quyền nhân thân</span></i><span style="font-size:
+            13.0pt;line-height:107%;mso-ansi-language:EN-US"> (hay quyền đạo đức / tinh thần
+            (<i>moral rights</i>) – liên quan trực tiếp đến tác giả, thí dụ: đặt tên cho
+            tác phẩm, ghi tên hoặc bút danh; bảo vệ sự toàn vẹn (ngăn cấm việc cắt xén hoặc
+            bóp méo) tác phẩm …, và<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">-
+            quyền tài sản</span></i><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US"> (hay quyền kinh tế (<i>economic rights</i>) – liên
+            quan đến việc khai thác giá trị kinh tế của tác phẩm, thí dụ: sao chép (làm bản
+            sao), chuyển thể, trình diễn, và các quyền khác sẽ nói cụ thể sau.<br>
+            <!--[if !supportLineBreakNewLine]--><br>
+            <!--[endif]--><o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">4)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">Trên phạm vị quốc tế QTG được bảo hộ bởi <i>Công ước
+            Bern</i> về <i>bảo hộ các tác phẩm văn học nghệ thuật (</i></span><span class="alt-edited"><i><span lang="VI">1886</span></i></span><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">)</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">. Các nước
+            tham gia Công ước Bern phải ban hành <i>Luật quốc gia về quyền tác giả</i> để cam
+            kết và cụ thể hóa việc bảo hộ tại nước mình. &nbsp;<br>
+            <br>
+            Việt Nam tham gia Công ước Bern năm </span><span class="alt-edited"><span lang="VI">2007</span></span><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US"> trong quá trình gia nhập Tổ chức thương mại thế giới
+            (WTO), và ban hành <i>Luật Sở hữu trí tuệ Việt Nam (Luật SHTT)</i> năm 2005,
+            trong đó có một phần về QTG. Luật này được sửa đổi năm 2009 và hiện đang được
+            xem xét sửa đổi tiếp cho phù hợp với bối cảnh hội nhập kinh thế thế giới. Dưới
+            luật SHTT có các <i>Nghị định</i> của Chính phủ hướng dẫn thi hành. Gần đây nhất
+            là Nghị định </span><span lang="VI" style="font-size:12.0pt;line-height:107%;
+            mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+            color:black">Số: 22/2018/NĐ-CP</span><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">, NĐ này thay thế cho các nghị định tương tự ban
+            hành trước đó.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">5)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">&nbsp;Lưu ý trong tên
+            tiếng Anh của QTG – <i>copyrights – </i>có hai phần: <i>copy</i> và <i>rights.</i><o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">Rights</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> – <i>các</i>
+            <i>quyền</i>, chỉ ra rằng QTG gồm có <i>nhiều</i> quyền. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">Copy</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> – <i>sao
+            chép</i>, chỉ ra rằng các quyền này liên quan đến việc <i>sao chép</i>. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></i></p><p class="MsoListParagraphCxSpLast"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Hai chi tiết này nói rõ thực chất của QTG, cách dịch
+            <i>copyrights</i> sang tiếng Việt thành <i>quyền tác giả</i> không phản ảnh được
+            hết ngữ nghĩa (nội hàm) của khái niệm như trên, cần có sự giải thích.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Như vậy, QTG có liên quan đến việc <i>sao
+            chép tác phẩm</i>. Một tác phẩm chỉ sao chép được nếu nó đã được <i>định hình</i>
+            (cố định dưới một dạng thức vật lý), như viết ra, đánh máy ra, ghi âm, và các dạng
+            thức định hình khác mà có thể sao chép được. Ý tưởng chưa được định hình (thể
+            hiện) thì không sao chép được, nên <i>ý tưởng thuần túy</i> không có (không được
+            bảo hộ về) QTG. <br>
+            <br>
+            </span><i><span style="font-size:12.0pt;line-height:107%;mso-ansi-language:
+            EN-US">Để trình định hình tác phẩm, tác giả phải diễn đạt ý tưởng bằng sự sáng
+            tạo của mình thông qua hình tượng, ngôn ngữ, bố cục, màu sắc, hình khối, âm
+            thanh, v.v.. Đây là một quá trình sáng tạo vô tận. Nguyễn Du đọc “Đoạn trường
+            tân thanh”, tiếp thu ý tưởng của tác phẩm đó, có thể đã liên tưởng đến hoàn cảnh,
+            cuộc đời và số phận của mình và có lẽ của dân, nước mình, và sáng tạo nên “Truyện
+            Kiều” bằng tiếng Việt (Nôm), với ngôn ngữ, hình tượng, và đặc biệt thể thơ lục
+            bát. “Truyện Kiều” do vậy hoàn toàn là tác phẩm của Nguyễn Du, nó phóng tác “Đoạn
+            trường tân thanh” (mượn ý tưởng), nhưng diễn đạt hoàn toàn bằng các phương tiện
+            và hình thức mới.</span></i><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US"> <o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Về nguyên tắc tác phẩm được bảo hộ
+            QTG <i>ngay sau khi nó được định hình</i>, không cần bất kỳ thủ tục <i>đăng ký </i>nào.
+            Tuy nhiên trong một số Luật quốc gia có quy định về việc đăng ký nhằm thuận tiện
+            trong sử dụng và quản lý QTG.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">6)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Người sở hữu</span></i><span style="font-size:
+            13.0pt;line-height:107%;mso-ansi-language:EN-US"> tác phẩm: <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm ban đầu thuộc về người sinh ra nó (trong
+            <i>phần lớn</i> trường hợp chính là <i>tác giả</i>), tức tác giả là người sở hữu
+            tác phẩm. Quyền sở hữu này có thể được <i>chuyển giao</i> theo luật cho đối tượng
+            khác. Người được chuyển giao QTG trở thành <i>chủ sở hữu</i> <i>quyền</i>, hay <i>người
+            nắm quyền</i> (<i>rights holder)</i> tiếp theo đối với tác phẩm.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><i><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Chỉ có quyền tài sản mới có thể được
+            chuyển giao</span></i><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">. Để chuyển giao QTG, có thể dùng các hình thức: <i>nhượng
+            quyền</i> hoặc <i>cấp phép (cấp giấy phép - license) sử dụng</i> <i>quyền</i>. Các
+            Luật quốc gia quy định cụ thể các hình thức và quy trình chuyển giao QTG.<br>
+            <br>
+            Trong một số <i>bối cảnh cụ thể</i>, chủ sở hữu quyền có thể <i>“từ bỏ”</i>
+            QTG: thí dụ công bố tác phẩm lên internet (cho sử dụng tự do) hoặc cho sử dụng với
+            một số điều kiện (thí dụ không vì mục đích thương mại). Một trường hợp khác là <i>giấy
+            phép</i> <i>Creative Commons – CC</i>, hoặc <i>giấy phép</i> <i>GPL</i> (đối với
+            phần mềm nguồn mở). Các trường hợp này thường áp dụng đối với các trường hợp / dự
+            án cụ thể, và <i>vẫn căn cứ trên QTG – </i>dựa trên<i> các giấy phép</i>. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">7)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Bảo hộ QTG</span></i><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US"> dịch từ thuật ngữ tiếng Anh <i>copyrights
+            protect(ion)</i>. Khái niệm <i>protect</i> sẽ được dịch là “<i>bảo hộ</i>” đối
+            với các QTG, và được dịch là “<i>bảo vệ</i>” đối với tác giả, người nắm quyền. &nbsp;&nbsp;&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Bảo hộ gắn với việc trao cho chủ sở hữu
+            (tác giả hoặc người nắm quyền) <i>quyền độc quyền</i> (<i>exclusive rights</i>)
+            đối với việc khai thác tác phẩm. Tức là người nắm QTG có thể <i>tự thực hiện</i>,
+            <i>cho phép hoặc cấm</i> người khác thực hiện một số quyền tác giả. <br>
+            <br>
+            Khai thác quyền mà không được phép của chủ sở hữu gọi là <i>hành vi vi phạm</i>
+            quyền tác giả. Luật quốc gia quy định các hành vi vi phạm QTG cụ thể, cũng như
+            các hình thức xử lý đối với hành vi vi phạm đó.</span><o:p></o:p></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Để khai thác hợp pháp QTG phải <i>xin
+            phép</i> và được sự đồng ý của chủ sở hữu quyền, và trong nhiều trường hợp phải
+            <i>trả tiền đền bù</i> cho chủ sở hữu quyền, trừ một số trường hợp cụ thể được
+            quy định trong Luât quốc gia về các <i>hạn chế</i> (giới hạn – <i>limitation</i>)
+            và <i>ngoại lệ</i> (<i>exception</i>) đối với QTG. <o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">8)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Thời hạn</span></i><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US"> <i>bảo hộ QTG</i>: Các quyền tinh thần
+            thường không có thời hạn. Các quyền tài sản thường kéo dài một thời gian, thường
+            là 50 năm sau cái chết của tác giả.<br>
+            Các tác phẩm hết hạn bảo hộ QTG thuộc về <i>khu vực công</i> – là các tác phẩm
+            công cộng, có thể khai thác và sử dụng miễn phí các quyền tài sản, nhưng phải
+            tôn trọng các quyền tinh thần. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">9)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">Nguyên tắc chung của luật pháp về bảo hộ QTG là <i>bảo
+            vệ các lợi ích hợp pháp của tác giả và chủ sở hữu quyền,</i> đồng thời <i>không
+            xâm hại quyền lợi hợp pháp của người dùng</i>, cũng như các <i>lợi ích xã hội
+            và cộng đồng</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Luật QTG quốc gia quy định các điều khoản cụ thể
+            để đảm bảo điều hòa các lợi ích trên đây trong bối cảnh quốc gia, cũng như bối
+            cảnh hội nhập quốc tế có liên quan.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">10)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;"> </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">&nbsp;&nbsp;Bảo hộ QTG là một sự nghiệp, một nhiệm vụ phức
+            tạp và khó khăn, đặc biệt trong bối cảnh công nghệ hiện tại, có nhiều phương tiện
+            và công cụ vừa hỗ trợ cho việc bảo hộ, nhưng cũng tạo thuận lợi cho việc vi phạm.
+            <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Trong phạm vi quốc gia, một hệ thống thực hành (<i>execution</i>)
+            hiệu quả QTG bao gồm: luật về QTG, hệ thống thực thi <i>(enforcement)</i> xử lý
+            các vi phạm, và hệ thống quản trị - trong đó có các tổ chức <i>quản trị tập thể
+            quyền</i> (<i>collective rights management – CRM</i>). &nbsp;&nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Trong từng lĩnh vực lại có các vấn đề cụ thể
+            riêng về bảo hộ QTG. Thí dụ trong các Trường đại học, và trong giáo dục đại học
+            và giáo dục nói chung. các vấn đề bảo hộ QTG liên quan cả đến các tác giả, chủ
+            sở hữu quyền, và người sử dụng các tác phẩm được bảo hộ QTG. Áp dụng các <i>kinh
+            nghiệm thực tiễn tốt</i> (<i>best practices</i>) luôn là một chủ đề được quan
+            tâm hàng đầu. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </p><p class="MsoListParagraphCxSpLast"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Đây cũng là một lĩnh vực ứng dụng quan trọng các
+            công cụ Tin học, từ phát triển các thuật toán và phần mềm giải quyết các bài
+            toán cụ thể, đến xây dựng các CSDL và HTTT chuyên về QTG và bảo hộ QTG.<o:p></o:p></span></p>'
         ],
         [
             'title' => 'Một số quy định về QTG ở Việt Nam',
@@ -1253,218 +1354,292 @@ return [
             </tbody></table>'
         ],
         [
-            'title' => 'Tóm tắt về quyền tác giả (QTG)',
+            'title' => 'Một số vấn đề cụ thể về QTG trong trường Đại học:',
             'user_id' => '1',
-            'content' => '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">1)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Quyền tác giả (QTG)</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">,
-                tiếng Anh là <i>Copyrights</i>, là một loại quyền đối với các <i>tác phẩm sáng
-                tạo</i> trong các lĩnh vực văn học, nghệ thuật và khoa học.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">2)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Tác phẩm sáng tạo</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">,
-                tiếng Anh là <i>Creative Works</i>, hoặc nói gọn là <i>Tác phẩm (Works)</i>, là
-                thành quả lao động sáng tạo (trí óc) của nhà văn, nhà thơ, nghệ sĩ, nhạc sĩ,
-                nhà khoa học, lập trình viên, và những người làm công việc sáng tạo khác, gọi
-                chung là các <i>Tác giả (Author)</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Tác phẩm sáng tạo phải có hai yếu tố
-                cơ bản: là tác phẩm <i>nguyên gốc</i> (không phải sao chép lại), và <i>có tính mới
-                (sáng tạo)</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Tác phẩm là <i>tài sản trí tuệ</i> của
-                tác giả. Thuật ngữ <i>Sở hữu trí tuệ (SHTT)</i> là dịch từ tiếng Anh <i>Intellectual
-                property (IP)</i>. <i>IP </i>có thể dịch sang tiếng Việt thành “<i>tài sản trí
-                tuệ</i>”, tuy vậy thuật ngữ <i>“sở hữu trí tuệ”</i> đã được dùng quen.&nbsp;&nbsp; <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">3)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Luật pháp bảo vệ</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> tác
-                phẩm, giống như bảo vệ tài sản trí tuệ và các loại tài sản nói chung khác.&nbsp; <br>
-                <br>
-                Để làm được việc đó Luật pháp xác định các <i>quyền (right) </i>đối với tác phẩm,
-                tức các QTG. Đồng thời quy định các điều khoản để <i>bảo hộ (protect) </i>các
-                quyền đó.<br>
-                <br>
-                Có hai loại QTG: <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
-                auto;text-indent:-.25in;mso-list:l0 level1 lfo2"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">-<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">quyền nhân thân</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">
-                (hay quyền đạo đức / tinh thần (<i>moral rights</i>) – liên quan trực tiếp đến
-                tác giả, thí dụ: đặt tên cho tác phẩm, ghi tên hoặc bút danh; bảo vệ sự toàn vẹn
-                (ngăn cấm việc cắt xén hoặc bóp méo) tác phẩm …, và<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
-                auto"><i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:
-                EN-US">- quyền tài sản</span></i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US"> (hay quyền kinh tế (<i>economic rights</i>)
-                – liên quan đến việc khai thác giá trị kinh tế của tác phẩm, thí dụ: sao chép
-                (làm bản sao), chuyển thể, trình diễn, và các quyền khác sẽ nói cụ thể sau.<br>
-                <!--[if !supportLineBreakNewLine]--><br>
-                <!--[endif]--><o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">4)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Trên phạm vị quốc tế QTG được bảo hộ
-                bởi <i>Công ước Bern</i> về <i>bảo hộ các tác phẩm văn học nghệ thuật (</i></span><span class="alt-edited"><i><span lang="VI">1886</span></i></span><i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">)</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">.
-                Các nước tham gia Công ước Bern phải ban hành <i>Luật quốc gia về quyền tác giả</i>
-                để cam kết và cụ thể hóa việc bảo hộ tại nước mình. &nbsp;<br>
-                <br>
-                Việt Nam tham gia Công ước Bern năm </span><span class="alt-edited"><span lang="VI">2007</span></span><span lang="EN-US" style="font-size:13.0pt;line-height:
-                107%;mso-ansi-language:EN-US"> trong quá trình gia nhập Tổ chức thương mại thế
-                giới (WTO), và ban hành <i>Luật Sở hữu trí tuệ Việt Nam (Luật SHTT)</i> năm
-                2005, trong đó có một phần về QTG. Luật này được sửa đổi năm 2009 và hiện đang
-                được xem xét sửa đổi tiếp cho phù hợp với bối cảnh hội nhập kinh thế thế giới.
-                Dưới luật SHTT có các <i>Nghị định</i> của Chính phủ hướng dẫn thi hành. Gần
-                đây nhất là Nghị định </span><span lang="VI" style="font-size:12.0pt;line-height:
-                107%;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
-                color:black">Số: 22/2018/NĐ-CP</span><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">, NĐ này thay thế cho các nghị định
-                tương tự ban hành trước đó.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">5)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;Lưu ý trong tên tiếng Anh của QTG – <i>copyrights
-                – </i>có hai phần: <i>copy</i> và <i>rights.</i><o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
-                auto"><i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:
-                EN-US">Rights</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:
-                107%;mso-ansi-language:EN-US"> – <i>các</i> <i>quyền</i>, chỉ ra rằng QTG gồm
-                có <i>nhiều</i> quyền. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
-                auto"><i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:
-                EN-US">Copy</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:
-                107%;mso-ansi-language:EN-US"> – <i>sao chép</i>, chỉ ra rằng các quyền này
-                liên quan đến việc <i>sao chép</i>. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
-                auto"><i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:
-                EN-US">&nbsp;</span></i></p><p class="MsoListParagraphCxSpLast"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Hai chi tiết này nói rõ thực chất của
-                QTG, cách dịch <i>copyrights</i> sang tiếng Việt thành <i>quyền tác giả</i>
-                không phản ảnh được hết ngữ nghĩa (nội hàm) của khái niệm như trên, cần có sự
-                giải thích.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Như vậy, QTG có liên quan đến
-                việc <i>sao chép tác phẩm</i>. Một tác phẩm chỉ sao chép được nếu nó đã được <i>định
-                hình</i> (cố định dưới một dạng thức vật lý), như viết ra, đánh máy ra, ghi âm,
-                và các dạng thức định hình khác mà có thể sao chép được. Ý tưởng chưa được định
-                hình (thể hiện) thì không sao chép được, nên <i>ý tưởng thuần túy</i> không có
-                (không được bảo hộ về) QTG. <br>
-                <br>
-                </span><i><span lang="EN-US" style="font-size:12.0pt;line-height:107%;mso-ansi-language:
-                EN-US">Để trình định hình tác phẩm, tác giả phải diễn đạt ý tưởng bằng sự sáng
-                tạo của mình thông qua hình tượng, ngôn ngữ, bố cục, màu sắc, hình khối, âm
-                thanh, v.v.. Đây là một quá trình sáng tạo vô tận. Nguyễn Du đọc “Đoạn trường
-                tân thanh”, tiếp thu ý tưởng của tác phẩm đó, có thể đã liên tưởng đến hoàn cảnh,
-                cuộc đời và số phận của mình và có lẽ của dân, nước mình, và sáng tạo nên “Truyện
-                Kiều” bằng tiếng Việt (Nôm), với ngôn ngữ, hình tượng, và đặc biệt thể thơ lục
-                bát. “Truyện Kiều” do vậy hoàn toàn là tác phẩm của Nguyễn Du, nó phóng tác “Đoạn
-                trường tân thanh” (mượn ý tưởng), nhưng diễn đạt hoàn toàn bằng các phương tiện
-                và hình thức mới.</span></i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US"> <o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Về nguyên tắc tác phẩm được bảo
-                hộ QTG <i>ngay sau khi nó được định hình</i>, không cần bất kỳ thủ tục <i>đăng
-                ký </i>nào. Tuy nhiên trong một số Luật quốc gia có quy định về việc đăng ký nhằm
-                thuận tiện trong sử dụng và quản lý QTG.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">6)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Người sở hữu</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">
-                tác phẩm: <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Tác phẩm ban đầu thuộc về người sinh
-                ra nó (trong <i>phần lớn</i> trường hợp chính là <i>tác giả</i>), tức tác giả là
-                người sở hữu tác phẩm. Quyền sở hữu này có thể được <i>chuyển giao</i> theo luật
-                cho đối tượng khác. Người được chuyển giao QTG trở thành <i>chủ sở hữu</i> <i>quyền</i>,
-                hay <i>người nắm quyền</i> (<i>rights holder)</i> tiếp theo đối với tác phẩm.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Chỉ có quyền tài sản mới có thể được
-                chuyển giao</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:
-                107%;mso-ansi-language:EN-US">. Để chuyển giao QTG, có thể dùng các hình thức: <i>nhượng
-                quyền</i> hoặc <i>cấp phép (cấp giấy phép - license) sử dụng</i> <i>quyền</i>. Các
-                Luật quốc gia quy định cụ thể các hình thức và quy trình chuyển giao QTG.<br>
-                <br>
-                Trong một số <i>bối cảnh cụ thể</i>, chủ sở hữu quyền có thể <i>“từ bỏ”</i>
-                QTG: thí dụ công bố tác phẩm lên internet (cho sử dụng tự do) hoặc cho sử dụng với
-                một số điều kiện (thí dụ không vì mục đích thương mại). Một trường hợp khác là <i>giấy
-                phép</i> <i>Creative Commons – CC</i>, hoặc <i>giấy phép</i> <i>GPL</i> (đối với
-                phần mềm nguồn mở). Các trường hợp này thường áp dụng đối với các trường hợp / dự
-                án cụ thể, và <i>vẫn căn cứ trên QTG – </i>dựa trên<i> các giấy phép</i>. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">7)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Bảo hộ QTG</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> dịch
-                từ thuật ngữ tiếng Anh <i>copyrights protect(ion)</i>. Khái niệm <i>protect</i>
-                sẽ được dịch là “<i>bảo hộ</i>” đối với các QTG, và được dịch là “<i>bảo vệ</i>”
-                đối với tác giả, người nắm quyền. &nbsp;&nbsp;&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Bảo hộ gắn với việc trao cho
-                chủ sở hữu (tác giả hoặc người nắm quyền) <i>quyền độc quyền</i> (<i>exclusive
-                rights</i>) đối với việc khai thác tác phẩm. Tức là người nắm QTG có thể <i>tự
-                thực hiện</i>, <i>cho phép hoặc cấm</i> người khác thực hiện một số quyền tác
-                giả. <br>
-                <br>
-                Khai thác quyền mà không được phép của chủ sở hữu gọi là <i>hành vi vi phạm</i>
-                quyền tác giả. Luật quốc gia quy định các hành vi vi phạm QTG cụ thể, cũng như
-                các hình thức xử lý đối với hành vi vi phạm đó.</span><span lang="EN-US"><o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span lang="EN-US" style="font-size:
-                13.0pt;line-height:107%;mso-ansi-language:EN-US">Để khai thác hợp pháp QTG phải
-                <i>xin phép</i> và được sự đồng ý của chủ sở hữu quyền, và trong nhiều trường hợp
-                phải <i>trả tiền đền bù</i> cho chủ sở hữu quyền, trừ một số trường hợp cụ thể
-                được quy định trong Luât quốc gia về các <i>hạn chế</i> (giới hạn – <i>limitation</i>)
-                và <i>ngoại lệ</i> (<i>exception</i>) đối với QTG. <o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">8)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><i><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Thời hạn</span></i><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> <i>bảo hộ QTG</i>:
-                Các quyền tinh thần thường không có thời hạn. Các quyền tài sản thường kéo dài
-                một thời gian, thường là 50 năm sau cái chết của tác giả.<br>
-                Các tác phẩm hết hạn bảo hộ QTG thuộc về <i>khu vực công</i> – là các tác phẩm
-                công cộng, có thể khai thác và sử dụng miễn phí các quyền tài sản, nhưng phải
-                tôn trọng các quyền tinh thần. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">9)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Nguyên tắc chung của luật pháp về bảo
-                hộ QTG là <i>bảo vệ các lợi ích hợp pháp của tác giả và chủ sở hữu quyền,</i> đồng
-                thời <i>không xâm hại quyền lợi hợp pháp của người dùng</i>, cũng như các <i>lợi
-                ích xã hội và cộng đồng</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Luật QTG quốc gia quy định các điều
-                khoản cụ thể để đảm bảo điều hòa các lợi ích trên đây trong bối cảnh quốc gia,
-                cũng như bối cảnh hội nhập quốc tế có liên quan.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
-                &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
-                EN-US">10)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">
-                </span></span><!--[endif]--><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;&nbsp;Bảo hộ QTG là một sự nghiệp, một nhiệm vụ phức
-                tạp và khó khăn, đặc biệt trong bối cảnh công nghệ hiện tại, có nhiều phương tiện
-                và công cụ vừa hỗ trợ cho việc bảo hộ, nhưng cũng tạo thuận lợi cho việc vi phạm.
-                <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Trong phạm vi quốc gia, một hệ thống
-                thực hành (<i>execution</i>) hiệu quả QTG bao gồm: luật về QTG, hệ thống thực
-                thi <i>(enforcement)</i> xử lý các vi phạm, và hệ thống quản trị - trong đó có các
-                tổ chức <i>quản trị tập thể quyền</i> (<i>collective rights management – CRM</i>).
-                &nbsp;&nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Trong từng lĩnh vực lại có các vấn đề
-                cụ thể riêng về bảo hộ QTG. Thí dụ trong các Trường đại học, và trong giáo dục
-                đại học và giáo dục nói chung. các vấn đề bảo hộ QTG liên quan cả đến các tác
-                giả, chủ sở hữu quyền, và người sử dụng các tác phẩm được bảo hộ QTG. Áp dụng
-                các <i>kinh nghiệm thực tiễn tốt</i> (<i>best practices</i>) luôn là một chủ đề
-                được quan tâm hàng đầu. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p>
-                </p><p class="MsoListParagraphCxSpLast"><span lang="EN-US" style="font-size:13.0pt;
-                line-height:107%;mso-ansi-language:EN-US">Đây cũng là một lĩnh vực ứng dụng
-                quan trọng các công cụ Tin học, từ phát triển các thuật toán và phần mềm giải
-                quyết các bài toán cụ thể, đến xây dựng các CSDL và HTTT chuyên về QTG và bảo hộ
-                QTG.<o:p></o:p></span></p>'
+            'content' => '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span></b><!--[endif]--><b><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tóm tắt về quyền tác giả (QTG):<o:p></o:p></span></b></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Quyền tác giả (QTG)</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">, tiếng Anh
+            là <i>Copyrights</i>, là một loại quyền đối với các <i>tác phẩm sáng tạo</i>
+            trong các lĩnh vực văn học, nghệ thuật và khoa học.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">2)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm sáng tạo</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">, tiếng Anh
+            là <i>Creative Works</i>, hoặc nói gọn là <i>Tác phẩm (Works)</i>, là thành quả
+            lao động sáng tạo (trí óc) của nhà văn, nhà thơ, nghệ sĩ, nhạc sĩ, nhà khoa học,
+            lập trình viên, và những người làm công việc sáng tạo khác, gọi chung là các <i>Tác
+            giả (Author)</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm sáng tạo phải có hai yếu tố cơ bản: là
+            tác phẩm <i>nguyên gốc</i> (không phải sao chép lại), và <i>có tính mới (sáng tạo)</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm là <i>tài sản trí tuệ</i> của tác giả. Thuật
+            ngữ <i>Sở hữu trí tuệ (SHTT)</i> là dịch từ tiếng Anh <i>Intellectual property
+            (IP)</i>. <i>IP </i>có thể dịch sang tiếng Việt thành “<i>tài sản trí tuệ</i>”,
+            tuy vậy thuật ngữ <i>“sở hữu trí tuệ”</i> đã được dùng quen.&nbsp;&nbsp; <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">3)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Luật pháp bảo vệ</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> tác phẩm, giống
+            như bảo vệ tài sản trí tuệ và các loại tài sản nói chung khác.&nbsp; <br>
+            <br>
+            Để làm được việc đó Luật pháp xác định các <i>quyền (right) </i>đối với tác phẩm,
+            tức các QTG. Đồng thời quy định các điều khoản để <i>bảo hộ (protect) </i>các
+            quyền đó.<br>
+            <br>
+            Có hai loại QTG: <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto;text-indent:-.25in;mso-list:l1 level1 lfo3"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">-<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">quyền nhân thân</span></i><span style="font-size:
+            13.0pt;line-height:107%;mso-ansi-language:EN-US"> (hay quyền đạo đức / tinh thần
+            (<i>moral rights</i>) – liên quan trực tiếp đến tác giả, thí dụ: đặt tên cho
+            tác phẩm, ghi tên hoặc bút danh; bảo vệ sự toàn vẹn (ngăn cấm việc cắt xén hoặc
+            bóp méo) tác phẩm …, và<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">-
+            quyền tài sản</span></i><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US"> (hay quyền kinh tế (<i>economic rights</i>) – liên
+            quan đến việc khai thác giá trị kinh tế của tác phẩm, thí dụ: sao chép (làm bản
+            sao), chuyển thể, trình diễn, và các quyền khác sẽ nói cụ thể sau.<br>
+            <!--[if !supportLineBreakNewLine]--><br>
+            <!--[endif]--><o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">4)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">Trên phạm vị quốc tế QTG được bảo hộ bởi <i>Công ước
+            Bern</i> về <i>bảo hộ các tác phẩm văn học nghệ thuật (</i></span><span class="alt-edited"><i><span lang="VI">1886</span></i></span><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">)</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">. Các nước
+            tham gia Công ước Bern phải ban hành <i>Luật quốc gia về quyền tác giả</i> để cam
+            kết và cụ thể hóa việc bảo hộ tại nước mình. &nbsp;<br>
+            <br>
+            Việt Nam tham gia Công ước Bern năm </span><span class="alt-edited"><span lang="VI">2007</span></span><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US"> trong quá trình gia nhập Tổ chức thương mại thế giới
+            (WTO), và ban hành <i>Luật Sở hữu trí tuệ Việt Nam (Luật SHTT)</i> năm 2005,
+            trong đó có một phần về QTG. Luật này được sửa đổi năm 2009 và hiện đang được
+            xem xét sửa đổi tiếp cho phù hợp với bối cảnh hội nhập kinh thế thế giới. Dưới
+            luật SHTT có các <i>Nghị định</i> của Chính phủ hướng dẫn thi hành. Gần đây nhất
+            là Nghị định </span><span lang="VI" style="font-size:12.0pt;line-height:107%;
+            mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+            color:black">Số: 22/2018/NĐ-CP</span><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">, NĐ này thay thế cho các nghị định tương tự ban
+            hành trước đó.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">5)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">&nbsp;Lưu ý trong tên
+            tiếng Anh của QTG – <i>copyrights – </i>có hai phần: <i>copy</i> và <i>rights.</i><o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">Rights</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> – <i>các</i>
+            <i>quyền</i>, chỉ ra rằng QTG gồm có <i>nhiều</i> quyền. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">Copy</span></i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US"> – <i>sao
+            chép</i>, chỉ ra rằng các quyền này liên quan đến việc <i>sao chép</i>. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:.75in;mso-add-space:
+            auto"><i><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></i></p><p class="MsoListParagraphCxSpLast"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Hai chi tiết này nói rõ thực chất của QTG, cách dịch
+            <i>copyrights</i> sang tiếng Việt thành <i>quyền tác giả</i> không phản ảnh được
+            hết ngữ nghĩa (nội hàm) của khái niệm như trên, cần có sự giải thích.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Như vậy, QTG có liên quan đến việc <i>sao
+            chép tác phẩm</i>. Một tác phẩm chỉ sao chép được nếu nó đã được <i>định hình</i>
+            (cố định dưới một dạng thức vật lý), như viết ra, đánh máy ra, ghi âm, và các dạng
+            thức định hình khác mà có thể sao chép được. Ý tưởng chưa được định hình (thể
+            hiện) thì không sao chép được, nên <i>ý tưởng thuần túy</i> không có (không được
+            bảo hộ về) QTG. <br>
+            <br>
+            </span><i><span style="font-size:12.0pt;line-height:107%;mso-ansi-language:
+            EN-US">Để trình định hình tác phẩm, tác giả phải diễn đạt ý tưởng bằng sự sáng
+            tạo của mình thông qua hình tượng, ngôn ngữ, bố cục, màu sắc, hình khối, âm
+            thanh, v.v.. Đây là một quá trình sáng tạo vô tận. Nguyễn Du đọc “Đoạn trường
+            tân thanh”, tiếp thu ý tưởng của tác phẩm đó, có thể đã liên tưởng đến hoàn cảnh,
+            cuộc đời và số phận của mình và có lẽ của dân, nước mình, và sáng tạo nên “Truyện
+            Kiều” bằng tiếng Việt (Nôm), với ngôn ngữ, hình tượng, và đặc biệt thể thơ lục
+            bát. “Truyện Kiều” do vậy hoàn toàn là tác phẩm của Nguyễn Du, nó phóng tác “Đoạn
+            trường tân thanh” (mượn ý tưởng), nhưng diễn đạt hoàn toàn bằng các phương tiện
+            và hình thức mới.</span></i><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US"> <o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Về nguyên tắc tác phẩm được bảo hộ
+            QTG <i>ngay sau khi nó được định hình</i>, không cần bất kỳ thủ tục <i>đăng ký </i>nào.
+            Tuy nhiên trong một số Luật quốc gia có quy định về việc đăng ký nhằm thuận tiện
+            trong sử dụng và quản lý QTG.<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">6)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Người sở hữu</span></i><span style="font-size:
+            13.0pt;line-height:107%;mso-ansi-language:EN-US"> tác phẩm: <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Tác phẩm ban đầu thuộc về người sinh ra nó (trong
+            <i>phần lớn</i> trường hợp chính là <i>tác giả</i>), tức tác giả là người sở hữu
+            tác phẩm. Quyền sở hữu này có thể được <i>chuyển giao</i> theo luật cho đối tượng
+            khác. Người được chuyển giao QTG trở thành <i>chủ sở hữu</i> <i>quyền</i>, hay <i>người
+            nắm quyền</i> (<i>rights holder)</i> tiếp theo đối với tác phẩm.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><i><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Chỉ có quyền tài sản mới có thể được
+            chuyển giao</span></i><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">. Để chuyển giao QTG, có thể dùng các hình thức: <i>nhượng
+            quyền</i> hoặc <i>cấp phép (cấp giấy phép - license) sử dụng</i> <i>quyền</i>. Các
+            Luật quốc gia quy định cụ thể các hình thức và quy trình chuyển giao QTG.<br>
+            <br>
+            Trong một số <i>bối cảnh cụ thể</i>, chủ sở hữu quyền có thể <i>“từ bỏ”</i>
+            QTG: thí dụ công bố tác phẩm lên internet (cho sử dụng tự do) hoặc cho sử dụng với
+            một số điều kiện (thí dụ không vì mục đích thương mại). Một trường hợp khác là <i>giấy
+            phép</i> <i>Creative Commons – CC</i>, hoặc <i>giấy phép</i> <i>GPL</i> (đối với
+            phần mềm nguồn mở). Các trường hợp này thường áp dụng đối với các trường hợp / dự
+            án cụ thể, và <i>vẫn căn cứ trên QTG – </i>dựa trên<i> các giấy phép</i>. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpLast" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">7)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Bảo hộ QTG</span></i><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US"> dịch từ thuật ngữ tiếng Anh <i>copyrights
+            protect(ion)</i>. Khái niệm <i>protect</i> sẽ được dịch là “<i>bảo hộ</i>” đối
+            với các QTG, và được dịch là “<i>bảo vệ</i>” đối với tác giả, người nắm quyền. &nbsp;&nbsp;&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Bảo hộ gắn với việc trao cho chủ sở hữu
+            (tác giả hoặc người nắm quyền) <i>quyền độc quyền</i> (<i>exclusive rights</i>)
+            đối với việc khai thác tác phẩm. Tức là người nắm QTG có thể <i>tự thực hiện</i>,
+            <i>cho phép hoặc cấm</i> người khác thực hiện một số quyền tác giả. <br>
+            <br>
+            Khai thác quyền mà không được phép của chủ sở hữu gọi là <i>hành vi vi phạm</i>
+            quyền tác giả. Luật quốc gia quy định các hành vi vi phạm QTG cụ thể, cũng như
+            các hình thức xử lý đối với hành vi vi phạm đó.</span><o:p></o:p></p><p class="MsoNormal" style="margin-left:.5in"><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US">Để khai thác hợp pháp QTG phải <i>xin
+            phép</i> và được sự đồng ý của chủ sở hữu quyền, và trong nhiều trường hợp phải
+            <i>trả tiền đền bù</i> cho chủ sở hữu quyền, trừ một số trường hợp cụ thể được
+            quy định trong Luât quốc gia về các <i>hạn chế</i> (giới hạn – <i>limitation</i>)
+            và <i>ngoại lệ</i> (<i>exception</i>) đối với QTG. <o:p></o:p></span></p><p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">8)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><i><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Thời hạn</span></i><span style="font-size:13.0pt;
+            line-height:107%;mso-ansi-language:EN-US"> <i>bảo hộ QTG</i>: Các quyền tinh thần
+            thường không có thời hạn. Các quyền tài sản thường kéo dài một thời gian, thường
+            là 50 năm sau cái chết của tác giả.<br>
+            Các tác phẩm hết hạn bảo hộ QTG thuộc về <i>khu vực công</i> – là các tác phẩm
+            công cộng, có thể khai thác và sử dụng miễn phí các quyền tài sản, nhưng phải
+            tôn trọng các quyền tinh thần. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">9)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
+            </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;
+            mso-ansi-language:EN-US">Nguyên tắc chung của luật pháp về bảo hộ QTG là <i>bảo
+            vệ các lợi ích hợp pháp của tác giả và chủ sở hữu quyền,</i> đồng thời <i>không
+            xâm hại quyền lợi hợp pháp của người dùng</i>, cũng như các <i>lợi ích xã hội
+            và cộng đồng</i>.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Luật QTG quốc gia quy định các điều khoản cụ thể
+            để đảm bảo điều hòa các lợi ích trên đây trong bối cảnh quốc gia, cũng như bối
+            cảnh hội nhập quốc tế có liên quan.<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;mso-list:l2 level1 lfo2"><!--[if !supportLists]--><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
+            mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">10)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;"> </span></span><!--[endif]--><span style="font-size:13.0pt;line-height:107%;mso-ansi-language:EN-US">&nbsp;&nbsp;Bảo hộ QTG là một sự nghiệp, một nhiệm vụ phức
+            tạp và khó khăn, đặc biệt trong bối cảnh công nghệ hiện tại, có nhiều phương tiện
+            và công cụ vừa hỗ trợ cho việc bảo hộ, nhưng cũng tạo thuận lợi cho việc vi phạm.
+            <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Trong phạm vi quốc gia, một hệ thống thực hành (<i>execution</i>)
+            hiệu quả QTG bao gồm: luật về QTG, hệ thống thực thi <i>(enforcement)</i> xử lý
+            các vi phạm, và hệ thống quản trị - trong đó có các tổ chức <i>quản trị tập thể
+            quyền</i> (<i>collective rights management – CRM</i>). &nbsp;&nbsp;<o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Trong từng lĩnh vực lại có các vấn đề cụ thể
+            riêng về bảo hộ QTG. Thí dụ trong các Trường đại học, và trong giáo dục đại học
+            và giáo dục nói chung. các vấn đề bảo hộ QTG liên quan cả đến các tác giả, chủ
+            sở hữu quyền, và người sử dụng các tác phẩm được bảo hộ QTG. Áp dụng các <i>kinh
+            nghiệm thực tiễn tốt</i> (<i>best practices</i>) luôn là một chủ đề được quan
+            tâm hàng đầu. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">&nbsp;</span></p><p>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </p><p class="MsoListParagraphCxSpLast"><span style="font-size:13.0pt;line-height:
+            107%;mso-ansi-language:EN-US">Đây cũng là một lĩnh vực ứng dụng quan trọng các
+            công cụ Tin học, từ phát triển các thuật toán và phần mềm giải quyết các bài
+            toán cụ thể, đến xây dựng các CSDL và HTTT chuyên về QTG và bảo hộ QTG.<o:p></o:p></span></p>'
         ]
     ]
 ];

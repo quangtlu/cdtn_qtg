@@ -20,21 +20,18 @@ class FaqController extends Controller
         $this->faqService = $faqService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $faqs = $this->faqService->getPaginate();
-        return view('admin.faq.index', compact('faqs'));
-    }
-
-    public function search(Request $request)
-    {
-        $faqs = $this->faqService->search($request);
-        return view('admin.faq.index', compact('faqs'));
+        if($request->keyword) {
+            $faqs = $this->faqService->search($request);
+        }
+        return view('admin.faqs.index', compact('faqs'));
     }
 
     public function create()
     {
-        return view('admin.faq.create');
+        return view('admin.faqs.create');
     }
 
     public function store(StoreFaqRequest $request)
@@ -46,7 +43,7 @@ class FaqController extends Controller
     public function edit($id)
     {
         $faq = $this->faqService->getById($id);
-        return view('admin.faq.edit', compact('faq'));
+        return view('admin.faqs.edit', compact('faq'));
     }
 
     public function update(UpdateFaqRequest $request, $id)

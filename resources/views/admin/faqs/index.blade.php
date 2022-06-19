@@ -12,27 +12,6 @@
         <section class="content">
             <div class="row">
                 <a href="{{ route('admin.faqs.create') }}" class="btn btn-primary m-2">Thêm mới</a>
-                <div class="nav-item col-md-10">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline" action="{{ route('admin.faqs.search') }}" method="GET">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" name="keyword" required type="search"
-                                    placeholder="Tìm kiếm tiêu đề, nội dung..." aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
                 <div class="col-12" id="accordion">
                     @for($i = 0; $i < count($faqs); $i++)
                         <div class="card card-primary card-outline faq-card-wrap">
@@ -62,4 +41,10 @@
         </section>
         <!-- /.content -->
     </div>
+@endsection
+@section('js')
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.faqs.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm danh muc, ID...');
+    </script>
 @endsection

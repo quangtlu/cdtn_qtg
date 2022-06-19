@@ -76,7 +76,7 @@
                                     @endphp
                             </li>
                             <li>
-                                Chủ sở hữu: {{ $product->owner->name }}
+                                Chủ sở hữu: {{ ($product->owner->name) ?? '' }}
                             </li>
                             <li>
                                 Ngày sáng tác: {{ $product->pub_date }}

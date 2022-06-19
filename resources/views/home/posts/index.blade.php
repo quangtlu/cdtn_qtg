@@ -86,50 +86,53 @@
             </div>
         </div>
     </div>
-    @foreach ($posts as $post)
-        <div class="wthree-top-1">
-            <div class="w3agile-top">
-                <div class="col-md-3 w3agile-left">
-                    <ul class="post-info">
-                        <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                    class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
-                        </li>
-                        <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                    class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
-                        </li>
-                        <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                    class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
-                                BÌNH LUẬN</a></li>
-                        @auth
-                            @if (Auth::user()->id == $post->user->id)
-                                <li><a class="post-info__link btn-delete"
-                                        data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
-                                            class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                        data-target="#post-modal" data-title="{{ $post->title }}"
-                                        data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
-                            @endif
-                        @endauth
-                    </ul>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-body">
-                        <div class="col-md-9 w3agile-right">
-                            <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h3>
-                            <div class="post-content-limit-line">{!! $post->content !!}</div>
-                            <a class="agileits w3layouts" href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
-                                thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                    aria-hidden="true"></span></a>
-                        </div>
+    @if (isset($posts))
+        @foreach ($posts as $post)
+            <div class="wthree-top-1">
+                <div class="w3agile-top">
+                    <div class="col-md-3 w3agile-left">
+                        <ul class="post-info">
+                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                                        class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
+                            </li>
+                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                                        class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
+                            </li>
+                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                                        class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
+                                    BÌNH LUẬN</a></li>
+                            @auth
+                                @if (Auth::user()->id == $post->user->id)
+                                    <li><a class="post-info__link btn-delete"
+                                            data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
+                                                class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
+                                    <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
+                                            data-target="#post-modal" data-title="{{ $post->title }}"
+                                            data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
+                                                class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
+                                @endif
+                            @endauth
+                        </ul>
                     </div>
-                    <div class="panel-footer"></div>
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <div class="col-md-9 w3agile-right">
+                                <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h3>
+                                <div class="post-content-limit-line">{!! $post->content !!}</div>
+                                <a class="agileits w3layouts" href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
+                                    thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
+                                        aria-hidden="true"></span></a>
+                            </div>
+                        </div>
+                        <div class="panel-footer"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
             </div>
-        </div>
-    @endforeach
-    {{ $posts->withQueryString()->links() }}
+        @endforeach
+        {{ $posts->withQueryString()->links() }}
+    @endif
+
 @endsection
 @section('js')
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
@@ -179,5 +182,8 @@
             height: 400
         });
     </script>
-
+    <script>
+        $('#header-search-form').attr('action', '{{ route('posts.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết, tag, danh mục...');
+    </script>
 @endsection

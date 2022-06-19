@@ -21,15 +21,12 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $categories = $this->categoryService->getPaginate();
-        return view('admin.categories.index', compact('categories'));
-    }
-
-    public function search(Request $request)
-    {
-        $categories = $this->categoryService->search($request);
+        if($request->keyword) {
+            $categories = $this->categoryService->search($request);
+        }
         return view('admin.categories.index', compact('categories'));
     }
 

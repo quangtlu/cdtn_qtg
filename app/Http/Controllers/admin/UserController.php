@@ -26,15 +26,12 @@ class UserController extends Controller
         view()->share('roles', $roles);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $users = $this->userService->getPaginate();
-        return view('admin.users.index', compact('users'));
-    }
-
-    public function search(Request $request)
-    {
-        $users = $this->userService->search($request);
+        if($request->keyword) {
+            $users = $this->userService->search($request);
+        }
         return view('admin.users.index', compact('users'));
     }
 

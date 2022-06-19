@@ -16,29 +16,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.users.create') }}">Thêm</a>
-                    {{-- search --}}
-                    <div class="nav-item col-md-10">
-                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                            <i class="fas fa-search"></i>
-                        </a>
-                        <div class="navbar-search-block">
-                            <form class="form-inline" action="{{ route('admin.users.search') }}" method="GET">
-                                <div class="input-group input-group-sm">
-                                    <input class="form-control form-control-navbar" name="keyword" required type="search"
-                                        placeholder="Tìm kiếm theo ID, tiêu đề, nội dung..." aria-label="Search">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-navbar" type="submit">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    {{-- end search --}}
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
@@ -81,4 +58,10 @@
         </div>
         <!-- /.content -->
     </div>
+@endsection
+@section('js')
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.users.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên người dùng, email, giới tính, số điện thoại...');
+    </script>
 @endsection

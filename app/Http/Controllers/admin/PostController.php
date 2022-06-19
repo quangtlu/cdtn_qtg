@@ -26,15 +26,12 @@ class PostController extends Controller
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $posts = $this->postService->getPaginate();
-        return view('admin.posts.index', compact('posts'));
-    }
-
-    public function search(Request $request)
-    {
-        $posts = $this->postService->search($request);
+        if($request->keyword) {
+            $posts = $this->postService->search($request);
+        }
         return view('admin.posts.index', compact('posts'));
     }
 

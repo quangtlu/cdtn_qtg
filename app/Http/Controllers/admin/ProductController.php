@@ -37,15 +37,12 @@ class ProductController extends Controller
         view()->share(['authors' => $authors, 'owners' => $owners, 'categories' => $categories]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $products = $this->productService->getPaginate();
-        return view('admin.products.index', compact('products'));
-    }
-
-    public function search(Request $request)
-    {
-        $products = $this->productService->search($request);
+        if($request->keyword) {
+            $products = $this->productService->search($request);
+        }
         return view('admin.products.index', compact('products'));
     }
 

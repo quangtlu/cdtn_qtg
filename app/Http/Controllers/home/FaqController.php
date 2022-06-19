@@ -20,12 +20,10 @@ class FaqController extends Controller
     public function index(Request $request)
     {
         $faqs = $this->faqService->getPaginate();
-
         if($request) {
             $faqs = $this->faqService->search($request);
         }
         return view('home.faq.index', compact('faqs'));
-
     }
 
 }
