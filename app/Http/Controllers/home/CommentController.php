@@ -6,19 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Home\Comment\CommentRequest;
 use App\Services\CommentService;
 use Illuminate\Support\Facades\Auth;
+use App\Services\NotificationService;
 
 class CommentController extends Controller
 {
     private $commentService;
+    private $notificationService;
 
-    public function __construct(CommentService $commentService)
+    public function __construct(CommentService $commentService, NotificationService $notificationService)
     {
         $this->commentService = $commentService;
+        $this->notificationService = $notificationService;
     }
 
     public function store(CommentRequest $request)
     {
-        $this->commentService->create($request);
+        $comment = $this->commentService->create($request);
+        $userPost = $comment->post->user;
+
+        if($comment->user_id != $userPost->id){
+            $this->notificationService->create($comment, $userPost);
+        }
+                
         return redirect()->back();
     }
 

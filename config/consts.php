@@ -21,6 +21,7 @@ return [
         [
             'title' => 'Tóm tắt về quyền tác giả (QTG)',
             'user_id' => '1',
+            'created_at' => now(),
             'content' =>
             '<p class="MsoNormal"><i><span lang="EN-US" style="font-size:12.0pt;line-height:
                 107%;mso-ansi-language:EN-US">Trường Đại học là nơi đào tạo nguồn nhân lực cao
@@ -223,7 +224,9 @@ return [
         [
             'title' => 'Một số quy định về QTG ở Việt Nam',
             'user_id' => 1,
-            'content' => '<p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
+            'created_at' => now(),
+            'content' =>
+            '<p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
             mso-ansi-language:EN-US">Các điều khoản về QTG ở Việt Nam được quy định tại Phần
             2 Luật SHTT Việt Nam (Luật s</span><span lang="VI" style="font-size:13.0pt;
             line-height:107%">ố: 50/2005/QH11</span><span lang="EN-US" style="font-size:13.0pt;
@@ -1255,6 +1258,7 @@ return [
         [
             'title' => 'Tóm tắt về quyền tác giả (QTG)',
             'user_id' => '1',
+            'created_at' => now(),
             'content' => '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l1 level1 lfo1"><!--[if !supportLists]--><span lang="EN-US" style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:
                 &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:
                 EN-US">1)<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;
