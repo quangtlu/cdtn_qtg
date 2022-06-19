@@ -118,6 +118,7 @@
                             <label for="image">Ảnh</label>
                             <input type="file" multiple class="form-control-file" name="image[]" id="image">
                         </div>
+                        <input type="hidden" name="status" value="{{ config('consts.post.status.unsolved.value') }}">
                         <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Đăng bài</button>
                         <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
                     </form>
@@ -153,12 +154,27 @@
                                                 class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
                                 @endif
                             @endauth
+                            <li><a href="
+                                    @auth 
+                                        {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id])  }} 
+                                    @endauth
+                                    @guest
+                                        {{ route('posts.show', ['id' => $post->id])  }} 
+                                    @endguest
+                                "  
+                                class="post-info__link post-status 
+                                    {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
+                                    <i class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
+                                    {{ $post->status == config('consts.post.status.solved.value')? config('consts.post.status.solved.name'): config('consts.post.status.unsolved.name') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <div class="col-md-9 w3agile-right">
-                                <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h3>
+                                <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
+                                </h3>
                                 <div class="post-content-limit-line">{!! $post->content !!}</div>
                                 <a class="agileits w3layouts" href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
                                     thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
@@ -178,7 +194,7 @@
 @section('js')
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
         $('#post-modal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
@@ -208,9 +224,6 @@
         $('#summernote').summernote({
             height: 100
         });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
         $(function() {
             $('.select2_init').select2({
                 'placeholder': 'Chọn thẻ tag',
@@ -222,8 +235,6 @@
         $('#summernote').summernote({
             height: 400
         });
-    </script>
-    <script>
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết, tag, danh mục...');
     </script>

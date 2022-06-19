@@ -161,6 +161,7 @@ Route::middleware('auth')->group(function () {
     Route::name('posts')->prefix('posts')->group(function () {
         Route::post('/store', 'home\PostController@store')->name('.store')->middleware('can:user add post');
         Route::post('/update/{id}', 'home\PostController@update')->name('.update')->middleware('can:user edit post');
+        Route::get('/update/status/{id}', 'home\PostController@toogleStatus')->name('.toogleStatus')->middleware('can:user edit post');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('.destroy')->middleware('can:user delete post');
     });
 

@@ -86,6 +86,17 @@ class PostController extends Controller
         }
     }
 
+    public function toogleStatus($id)
+    {
+        $post = $this->postService->getById($id);
+        if ($post->user->id == Auth::user()->id) {
+            $this->postService->toogleStatus($id);
+            return Redirect()->back()->with('success', 'Cập nhật thành công');
+        } else {
+            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+        }
+    }
+
     public function destroy($id)
     {
         $post = $this->postService->getById($id);

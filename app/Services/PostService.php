@@ -43,6 +43,7 @@ class PostService
         $data = [
             "title" => $request->title,
             "content" => $request->content,
+            "status" => $request->status,
             "user_id" => $user->id,
         ];
         if ($files = $request->file('image')) {
@@ -65,6 +66,7 @@ class PostService
         $nameUser = Auth()->user()->id;
         $data = [
             "title" => $request->title,
+            "status" => $request->status,
             "content" => $request->content,
             "user_id" => $nameUser,
         ];
@@ -76,6 +78,13 @@ class PostService
         $post->update($data);
         $post->tags()->sync($request->tag_id);
         $post->categories()->sync($request->category_id);
+    }
+
+    public function toogleStatus($id)
+    {
+        $post = $this->getById($id);
+        $data = ['status' => !$post->status];
+        $post->update($data);
     }
 
     public function delete($id)
