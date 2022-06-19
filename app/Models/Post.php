@@ -47,4 +47,24 @@ class Post extends Model
                 $subQuery->where('name', 'like', '%' . $keyword . '%');
             });
     }
+
+    public function scopeFilterCategory($query, $request)
+    {
+        if ($request->category_id) {
+            $query->whereHas('categories', function ($subQuery) use ($request) {
+                $subQuery->where('category_id', $request->category_id);
+            });
+        }
+        return $query;
+    }
+
+    public function scopeFilterTag($query, $request)
+    {
+        if ($request->tag_id) {
+            $query->whereHas('tags', function ($subQuery) use ($request) {
+                $subQuery->where('tag_id', $request->tag_id);
+            });
+        }
+        return $query;
+    }
 }

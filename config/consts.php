@@ -26,6 +26,10 @@ return [
         'all' => 0,
     ],
 
+    'tag' => [
+        'all' => 0,
+    ],
+
     'category_reference' => [
         'name' => 'Tài liệu tham khảo',
         'parent_id' => 0,

@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-            $newestPosts = Post::select('id','title', 'created_at')->orderBy('created_at', 'desc')->limit(3)->get();
-            $categories = Category::select('id','name')->where('parent_id', 0)->orderBy('created_at', 'desc')->get();
-            $tags = Tag::select('id','name')->orderBy('created_at', 'desc')->get();
+            $newestPosts = Post::select('id','title', 'created_at')->orderBy('created_at', 'desc')->limit(5)->get();
+            $categories = Category::select('id','name')->where('parent_id', 0)->orderBy('created_at', 'desc')->limit(10)->get();
+            $tags = Tag::select('id','name')->orderBy('created_at', 'desc')->limit(10)->get();
             $categoryReference = Category::where('name', config('consts.category_reference.name'))->first();
 
             if($categoryReference) {

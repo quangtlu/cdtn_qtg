@@ -5,8 +5,47 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
+    <style>
+        .form-filters{
+            margin-bottom: 50px;
+        }
+    </style>
 @endsection
 @section('content')
+<div class="form-filters">
+    <form action="{{ route('posts.index') }}" method="get">
+        <div class="row col-md-12">
+            <div class="col-md-3">
+                <select name="tag_id" class="form-control">
+                    <option value="{{ config('consts.tag.all') }}" class="filter-option-dafault">Tag</option>
+                    <option value="{{ config('consts.tag.all') }}" class="filter-option-dafault">Tất cả</option>
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}"
+                            {{ request()->tag_id == $tag->id ? 'selected' : false }}>
+                            {{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="category_id" id="sort" class="form-control">
+                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Danh mục</option>
+                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Tất cả</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+</div>
     @auth
         <div class="panel panel-primary">
             <div class="panel-heading">Đăng bài viết</div>
@@ -86,6 +125,8 @@
             </div>
         </div>
     </div>
+
+
     @if (isset($posts))
         @foreach ($posts as $post)
             <div class="wthree-top-1">
