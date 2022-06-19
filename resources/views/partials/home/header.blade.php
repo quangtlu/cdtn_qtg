@@ -84,13 +84,15 @@
                     <li><a href="{{ route('messenger.index') }}">Trò chuyện</a></li>
                     @auth
                         <li class="notice-nav">
-                            <i class="fa fa-bell notice-icon">
-                                @if (Auth::user()->unreadNotifications()->count() > 0)
-                                    <span class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
-                                @endif
-                            </i>
-                            <ul class="notice-list">
-                                @if (Auth::user()->notifications)
+                            @if (Auth::user()->notifications)
+                                <i
+                                    class="fa fa-bell notice-icon {{ Auth::user()->notifications->first->unread() ? 'active' : '' }}">
+                                    @if (Auth::user()->unreadNotifications()->count() > 0)
+                                        <span
+                                            class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                                    @endif
+                                </i>
+                                <ul class="notice-list">
                                     @foreach (Auth::user()->notifications as $notification)
                                         <li class="notice-item"><a
                                                 href="{{ $notification->unread() ? route('notifications.markAsRead', ['id' => $notification->id]) : '#' . $notification->data['comment_id'] }}">
@@ -110,9 +112,8 @@
                                                 </div>
                                             </a></li>
                                     @endforeach
-                                @endif
-                            </ul>
-
+                                </ul>
+                            @endif
                         </li>
                     @endauth
                 </ul>
