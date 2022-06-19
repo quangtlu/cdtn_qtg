@@ -94,4 +94,16 @@ class PostService
         $post->categories()->detach();
         $post->tags()->detach();
     }
+
+    public function filter($request)
+    {
+        $posts = Post::query()->filterCategory($request)->filterTag($request)->paginate(10);
+        return $posts;
+    }
+
+    public function searchAndFilter($request)
+    {
+        $posts = Post::query()->filterCategory($request)->filterTag($request)->search($request->keyword)->paginate(10);
+        return $posts;
+    }
 }
