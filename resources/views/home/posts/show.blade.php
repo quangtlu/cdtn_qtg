@@ -11,11 +11,12 @@
             </li>
             <li title="
                                     @foreach ($post->tags as $tag) {{ $tag->name }} | @endforeach"><span
-                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $post->tags->count() }}
+                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#tag">{{ $post->tags->count() }}
                     Tags</a></li>
-            <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#">{{ $post->comments->count() }} bình
+            <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#{{ $post->comments->count() > 0 ? $post->comments->first()->id : 'comments'}}">{{ $post->comments->count() }} bình
                     luận</a></li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $post->updated_at }}</a></li>
+            <li><span class="fa fa-list-alt" aria-hidden="true"></span><a href="#category">{{ $post->categories->count() }} Danh mục</a></li>
+            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a></li>
         </ul>
         <p>{!! $post->content !!}</p>
     </div>
@@ -37,7 +38,7 @@
         </div>
     @endif
     <div class="category-tag">
-        <ul class="tag">
+        <ul id="category" class="tag">
             <li class="li-category-tag">
                 <span style="font-size:18px">Danh mục: </span>
                 @foreach ($post->categories as $category)
@@ -45,7 +46,7 @@
                 @endforeach
             </li>
         </ul>
-        <ul class="tag" style="margin-top:0 !important">
+        <ul id="tag" class="tag" style="margin-top:0 !important">
             <li class="li-category-tag">
                 <span style="margin-bottom:5px; font-size:18px">Tags: </span>
                 @foreach ($post->tags as $tag)
@@ -54,18 +55,18 @@
             </li>
         </ul>
     </div>
-    <div class="comments">
+    <div id="comments" class="comments">
         <h3 style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
             @foreach ($comments as $comment)
-                <div class="comments-grid">
+                <div id="{{ $comment->id }}" class="comments-grid">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
                     <div class="comments-grid-right">
-                        <h4><a href="#">{{ $comment->user->name }}</a></h4>
+                        <h4><a href="{{ route('posts.getPostByUser', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a></h4>
                         <ul>
-                            <li>{{ $comment->created_at }}<i>|</i></li>
+                            <li><a href="#{{ $comment->id }}">{{ $comment->created_at->diffForHumans() }}</a><i>|</i></li>
                             <li>
                                 @auth
                                     <a class="rep-comment comment-action-link"

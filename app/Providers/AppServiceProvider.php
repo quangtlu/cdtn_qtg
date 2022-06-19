@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $tags = Tag::select('id','name')->orderBy('created_at', 'desc')->get();
             $categoryReference = Category::where('name', config('consts.category_reference.name'))->first();
             $postReferences = $categoryReference->posts;
+
             view()->share('newestPosts', $newestPosts);
             view()->share('categories', $categories);
             view()->share('tags', $tags);

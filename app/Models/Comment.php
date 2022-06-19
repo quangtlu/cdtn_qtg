@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 class Comment extends Model
 {
     protected $fillable = ['user_id', 'post_id', 'comment'];
