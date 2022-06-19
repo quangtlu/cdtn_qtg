@@ -69,3 +69,12 @@
 .select2-container {
     width: 100% !important;
 }
+.post-status-solved {
+    color: green;
+    cursor: pointer;
+}
+
+.post-status-unsolved {
+    color: red;
+    cursor: pointer;
+}

@@ -54,6 +54,7 @@
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <input type="hidden" value="{{ config('consts.post.status.solved.value') }}" name="status">
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
                                 <input type="file" accept="image/*" multiple class="form-control-file" name="image[]" id="" cols="30" rows="5">
