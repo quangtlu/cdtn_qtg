@@ -43,6 +43,48 @@ class User extends Authenticatable
     }
 
     protected $casts = [
-        'dob' => 'datetime:Y/m/d ',
+        'dob' => 'datetime:Y/m/d',
     ];
+
+    public function scopeFilterName($query, $request)
+    {
+        if ($request->name) {
+                $query->where('name', $request->name);
+        }
+        return $query;
+    }
+
+    public function scopeFilterEmail($query, $request)
+    {
+        if ($request->email) {
+                $query->where('email', $request->email);
+        }
+        return $query;
+    }
+
+    public function scopeFilterGender($query, $request)
+    {
+        if ($request->gender) {
+                $query->where('gender', $request->gender);
+        }
+        return $query;
+    }
+
+    public function scopeFilterPhone($query, $request)
+    {
+        if ($request->phone) {
+                $query->where('phone', $request->phone);
+        }
+        return $query;
+    }
+
+    public function scopeFilterRole($query, $request)
+    {
+        if ($request->role_id) {
+            $query->whereHas('roles', function ($subQuery) use ($request) {
+                $subQuery->where('role_id', $request->role_id);
+            });
+        }
+        return $query;
+    }
 }

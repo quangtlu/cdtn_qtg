@@ -67,4 +67,12 @@ class Post extends Model
         }
         return $query;
     }
+
+    public function scopeFilterStatus($query, $request)
+    {
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+        return $query;
+    }
 }
