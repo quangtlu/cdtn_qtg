@@ -11,7 +11,7 @@ return [
             ],
             'unsolved' => [
                 'name' => 'Chưa được giải đáp',
-                'value' => 0
+                'value' => 2
             ],
         ]
     ],
@@ -39,6 +39,10 @@ return [
     ],
 
     'tag' => [
+        'all' => 0,
+    ],
+
+    'user' => [
         'all' => 0,
     ],
 

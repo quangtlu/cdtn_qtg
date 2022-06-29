@@ -112,7 +112,7 @@
         $('#dob').datepicker({
             language: 'vi',
             orientation: 'bottom',
-            dateFormat: "Y-m-d",
+            dateFormat: 'YY-mm-dd'
         });
     </script>
 @endsection

@@ -85,4 +85,22 @@ class UserService
         $this->userModel->destroy($id);
         $user->roles()->detach();
     }
+
+    public function filter($request)
+    {
+        $users = User::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->filterRole($request)->paginate(10);
+        return $users;
+    }
+
+    public function searchAndFilter($request)
+    {
+        $users = User::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->filterRole($request)->search($request->keyword)->paginate(10);
+        return $users;
+    }
+
+    public function getAll()
+    {
+        $userAll = User::all();
+        return $userAll;
+    }
 }
