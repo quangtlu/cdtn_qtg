@@ -106,4 +106,10 @@ class PostService
         $posts = Post::query()->filterCategory($request)->filterTag($request)->filterStatus($request)->search($request->keyword)->paginate(10);
         return $posts;
     }
+
+    public function getPostHome()
+    {
+        $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('image')->limit(3)->get();
+        return $posts;
+    }
 }
