@@ -64,8 +64,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = $this->postService->getById($id);
-        $postRelate = $this->postService->getPostRelate($id);
-        return view('home.posts.show', compact('post', 'postRelate'));
+        $postRelates = $this->postService->getPostRelate($id);
+        return view('home.posts.show', compact('post', 'postRelates'));
     }
 
     public function store(StorePostRequest $request)

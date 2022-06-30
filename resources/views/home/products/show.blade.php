@@ -7,9 +7,6 @@
     <div class="single-left1">
         <h3>{{ $product->name }}</h3>
         <ul>
-            {{-- <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <a href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
-            </li> --}}
             <li title="
                     @foreach ($product->author as $author) {{ $author->name }} | @endforeach">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">{{ $product->author->count() }}
@@ -18,8 +15,6 @@
                                     @foreach ($product->categories as $category) {{ $category->name }} | @endforeach"><span
                     class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $product->categories->count() }}
                     Danh mục</a></li>
-            {{-- <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#">{{ $product->comments->count() }} bình
-                    luận</a></li> --}}
             <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a></li>
         </ul>
         <div class="row">

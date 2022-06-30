@@ -67,7 +67,8 @@
                 <div class="w3agile-top">
                     <div class="col-md-3 w3agile-left">
                         <ul class="post-info">
-                            <li><a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                            <li>
+                                <a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
                                     <i class="fa  fa-user"
                                         aria-hidden="true"></i>{{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
                                 </a>
