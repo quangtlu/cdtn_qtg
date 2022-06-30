@@ -111,10 +111,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'home\CommentController@update')->name('update');
         Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
     });
-    Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
-    Route::get('/messages', 'MessageController@index');
-    Route::post('/messages', 'MessageController@store');
-    Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*');
+    Route::middleware('role:counselor')->group(function () {
+        Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
+        Route::get('/messages', 'MessageController@index');
+        Route::post('/messages', 'MessageController@store');
+        Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*');
+    });
 
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');
