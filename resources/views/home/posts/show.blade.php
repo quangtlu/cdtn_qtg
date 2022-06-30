@@ -58,7 +58,7 @@
     <div id="comments" class="comments">
         <h3 style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
-            @foreach ($comments as $comment)
+            @foreach ($post->comments as $comment)
                 <div id="{{ $comment->id }}" class="comments-grid">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
@@ -114,7 +114,6 @@
                     <div class="clearfix"> </div>
                 </div>
             @endforeach
-            {{ $comments->links() }}
         </div>
     </div>
     @guest
@@ -137,6 +136,19 @@
             </form>
         </div>
     @endauth
+    <div style="margin-top: 30px">
+        <h3 style="text-align: center">Bài viết liên quan</h3>
+        <div>
+            @foreach ( $postRelate as $post )
+                <ul>
+                    <li style="list-style-type: none; margin:5px 0px 5px 40px;">
+                        <a class='relate-post' style="text-decoration: none;color: black" href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
+                    </li>
+                </ul>
+            @endforeach
+        </div>
+        {{ $postRelate->links() }}
+    </div>
 @endsection
 @section('js')
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
@@ -187,5 +199,9 @@
         padding: 0 !important;
         border: 1px solid #ffac3a !important;
         border-radius: 50% !important;
+    }
+    .relate-post:hover
+    {
+        color: #ffac3a !important;
     }
 </style>
