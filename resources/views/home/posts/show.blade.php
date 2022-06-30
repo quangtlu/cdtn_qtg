@@ -2,21 +2,29 @@
 @section('title', $post->title)
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
     <div class="single-left1">
         <h3>{{ $post->title }}</h3>
         <ul>
-            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
+            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
+                    href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             </li>
-            <li title="
-                                    @foreach ($post->tags as $tag) {{ $tag->name }} | @endforeach"><span
-                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#tag">{{ $post->tags->count() }}
+            <li
+                title="
+                                    @foreach ($post->tags as $tag) {{ $tag->name }} | @endforeach">
+                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#tag">{{ $post->tags->count() }}
                     Tags</a></li>
-            <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#{{ $post->comments->count() > 0 ? $post->comments->first()->id : 'comments'}}">{{ $post->comments->count() }} bình
+            <li><span class="fa fa-comment" aria-hidden="true"></span><a
+                    href="#{{ $post->comments->count() > 0 ? $post->comments->first()->id : 'comments' }}">{{ $post->comments->count() }}
+                    bình
                     luận</a></li>
-            <li><span class="fa fa-list-alt" aria-hidden="true"></span><a href="#category">{{ $post->categories->count() }} Danh mục</a></li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a></li>
+            <li><span class="fa fa-list-alt" aria-hidden="true"></span><a
+                    href="#category">{{ $post->categories->count() }} Danh mục</a></li>
+            <li><span class="fa fa-calendar" aria-hidden="true"></span><a
+                    href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
+            </li>
         </ul>
         <p>{!! $post->content !!}</p>
     </div>
@@ -28,7 +36,8 @@
                         @foreach (explode('|', $post->image) as $image)
                             <li>
                                 <div class="w3agile_special_deals_grid_left_grid">
-                                    <img src="{{ asset('image/posts/' . $image) }}" class="img-responsive" alt="" />
+                                    <img src="{{ asset('image/posts/' . $image) }}" class="img-responsive"
+                                        alt="" />
                                 </div>
                             </li>
                         @endforeach
@@ -42,7 +51,8 @@
             <li class="li-category-tag">
                 <span style="font-size:18px">Danh mục: </span>
                 @foreach ($post->categories as $category)
-                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                    <a
+                        href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                 @endforeach
             </li>
         </ul>
@@ -64,13 +74,16 @@
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
                     <div class="comments-grid-right">
-                        <h4><a href="{{ route('posts.getPostByUser', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a></h4>
+                        <h4><a
+                                href="{{ route('posts.getPostByUser', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
+                        </h4>
                         <ul>
-                            <li><a href="#{{ $comment->id }}">{{ $comment->created_at->diffForHumans() }}</a><i>|</i></li>
+                            <li><a href="#{{ $comment->id }}">{{ $comment->created_at->diffForHumans() }}</a><i>|</i>
+                            </li>
                             <li>
                                 @auth
-                                    <a class="rep-comment comment-action-link"
-                                        data-userName="{{ $comment->user->name }}">Trả lời</a>
+                                    <a class="rep-comment comment-action-link" data-userName="{{ $comment->user->name }}">Trả
+                                        lời</a>
                                 @endauth
                                 @guest
                                     <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>
@@ -137,71 +150,134 @@
         </div>
     @endauth
     <div style="margin-top: 30px">
-        <h3 style="text-align: center">Bài viết liên quan</h3>
-        <div>
-            @foreach ( $postRelate as $post )
-                <ul>
-                    <li style="list-style-type: none; margin:5px 0px 5px 40px;">
-                        <a class='relate-post' style="text-decoration: none;color: black" href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                    </li>
-                </ul>
+        <h3 class="title-relate">Bài viết liên quan</h3>
+        @if (isset($postRelates))
+            @foreach ($postRelates as $post)
+                <div class="wthree-top-1">
+                    <div class="w3agile-top">
+                        <div class="col-md-3 w3agile-left">
+                            <ul class="post-info">
+                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                                            class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
+                                </li>
+                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
+                                </li>
+                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                                            class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
+                                        BÌNH LUẬN</a></li>
+                                @auth
+                                    @if (Auth::user()->id == $post->user->id)
+                                        <li><a class="post-info__link btn-delete"
+                                                data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
+                                                    class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
+                                        <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
+                                                data-target="#post-modal" data-title="{{ $post->title }}"
+                                                data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
+                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a>
+                                        </li>
+                                    @endif
+                                @endauth
+                                <li><a href="
+                                    @auth 
+                                        {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
+                                    @endauth
+                                    @guest
+                                        {{ route('posts.show', ['id' => $post->id]) }} 
+                                    @endguest
+                                "
+                                        class="post-info__link post-status 
+                                    {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
+                                        <i
+                                            class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
+                                        {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-9 w3agile-right">
+                                    <h3><a
+                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
+                                    </h3>
+                                    <div class="post-content-limit-line">{!! $post->content !!}</div>
+                                    <a class="agileits w3layouts"
+                                        href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
+                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
+                                            aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             @endforeach
-        </div>
-        {{ $postRelate->links() }}
+            {{ $postRelates->links() }}
+        @endif
     </div>
-@endsection
-@section('js')
-    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    @endsection
+    @section('js')
+        <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-    <script type="text/javascript">
-        $(window).load(function() {
+        <script type="text/javascript">
+            $(window).load(function() {
 
-            $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
-                $(this).closest('.comments-grid-right').children('.comment-content').toggle()
-            })
-            $('.rep-comment').on('click', function() {
-                var userName = $(this).attr('data-userName')
-                $('#leave-coment').text(userName)
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: $("#leave-coment").offset().top
-                }, 1000);
+                $('.btn-edit-comment').on('click', function() {
+                    $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+                    $(this).closest('.comments-grid-right').children('.comment-content').toggle()
+                })
+                $('.rep-comment').on('click', function() {
+                    var userName = $(this).attr('data-userName')
+                    $('#leave-coment').text(userName)
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#leave-coment").offset().top
+                    }, 1000);
 
-            })
-            $('.flexslider').flexslider({
-                animation: "slide",
-                start: function(slider) {
-                    $('body').removeClass('loading');
-                }
+                })
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    start: function(slider) {
+                        $('body').removeClass('loading');
+                    }
+                });
+
             });
+        </script>
+    @endsection
+    <style>
+        ul.tag li a {
+            padding: 5px !important;
+            font-size: 10px !important;
+            font-weight: bold;
+        }
 
-        });
-    </script>
-@endsection
-<style>
-    ul.tag li a
-    {
-        padding: 5px !important;
-        font-size: 10px !important;
-        font-weight: bold;
-    }
-    .comments-grid-left
-    {
-        width: 10% !important;
-    }
-    .comments-grid-right
-    {
-        width: 85% !important;
-    }
-    .comments-grid-left img
-    {
-        padding: 0 !important;
-        border: 1px solid #ffac3a !important;
-        border-radius: 50% !important;
-    }
-    .relate-post:hover
-    {
-        color: #ffac3a !important;
-    }
-</style>
+        .comments-grid-left {
+            width: 10% !important;
+        }
+
+        .comments-grid-right {
+            width: 85% !important;
+        }
+
+        .comments-grid-left img {
+            padding: 0 !important;
+            border: 1px solid #ffac3a !important;
+            border-radius: 50% !important;
+        }
+
+        .relate-post:hover {
+            color: #ffac3a !important;
+        }
+
+        .title-relate {
+            text-transform: uppercase;
+            font-size: 1.4em;
+            color: #212121;
+            padding-left: 0.8em;
+            border-left: 3px solid #FFAC3A;
+            font-weight: 600;
+        }
+    </style>

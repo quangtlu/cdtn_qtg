@@ -113,17 +113,28 @@ class PostService
         return $posts;
     }
 
-    public function getPostRelate($id)
+    public function getPostIdRelateByTable($postId, array $relateTables)
     {
-        $categories = $this->getById($id)->categories;
         $postIds = [];
-        foreach ($categories as $category) {
 
-            foreach($category->posts as $post) {
-
-                array_push($postIds, $post->id);
+        foreach ($relateTables as $relateTable) {
+            $tableCollections = $this->getById($postId)->$relateTable;
+            if ($tableCollections->count() > 0) {
+                foreach ($tableCollections as $item) {
+                    foreach ($item->posts as $post) {
+                        if($post->id != $postId) {
+                            array_push($postIds, $post->id);
+                        }
+                    }
+                }
             }
         }
+        return $postIds;
+    }
+
+    public function getPostRelate($id)
+    {
+        $postIds = $this->getPostIdRelateByTable($id, ['categories', 'tags']);
         return Post::whereIn('id', $postIds)->paginate(5);
     }
 }
