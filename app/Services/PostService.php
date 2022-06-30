@@ -56,7 +56,7 @@ class PostService
         $post->tags()->attach($request->tag_id);
         $post->categories()->attach($request->category_id);
         if ($post) {
-            $user->givePermissionTo(['user edit post', 'user delete post']);
+            $user->givePermissionTo(['edit post', 'delete post']);
         }
     }
 

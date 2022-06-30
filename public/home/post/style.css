@@ -70,11 +70,11 @@
     width: 100% !important;
 }
 .post-status-solved {
-    color: green;
+    color: green !important;
     cursor: pointer;
 }
 
 .post-status-unsolved {
-    color: red;
+    color: red !important;
     cursor: pointer;
 }

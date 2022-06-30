@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Comment;
 use Carbon\Carbon;
+use Exception;
+
 class CommentService
 
 {
@@ -40,6 +42,22 @@ class CommentService
             'updated_at' => Carbon::now()
         ];
         $comment->update($data);
+    }
+
+    public function toogleStatus($id)
+    {
+        $comment = $this->getById($id);
+        $post = $comment->post;
+        $data = ['status' => $comment->status == 0 ? config('consts.post.status.solved.value') : config('consts.post.status.unsolved.value')];
+        try {
+            $comment->update($data);
+            $post->update($data);
+            return true;
+        }
+        catch(Exception $ex) {
+            return false;
+        }
+
     }
 
     public function delete($id)

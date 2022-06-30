@@ -24,7 +24,7 @@
               <i class="fas fa-search"></i>
             </a>
             <div class="navbar-search-block">
-              <form class="form-inline" id="header-search-form">
+              <form class="form-inline" id="header-search-form" action="">
                 <div class="input-group input-group-sm">
                   <input class="form-control form-control-navbar" required name="keyword" type="search" 
                         id="search-input" placeholder="Tìm kiếm theo ID, tên tác phẩm, tác giả, chủ sở hữu..." aria-label="Search">
