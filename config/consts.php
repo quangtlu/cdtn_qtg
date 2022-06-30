@@ -7,11 +7,11 @@ return [
         'status' => [
             'solved' => [
                 'name' => 'Đã được giải đáp',
-                'value' => 1
+                'value' => true
             ],
             'unsolved' => [
                 'name' => 'Chưa được giải đáp',
-                'value' => 2
+                'value' => false
             ],
         ]
     ],

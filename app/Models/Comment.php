@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 class Comment extends Model
 {
-    protected $fillable = ['user_id', 'post_id', 'comment'];
+    protected $fillable = ['user_id', 'post_id', 'comment', 'status'];
 
     public function user()
     {
