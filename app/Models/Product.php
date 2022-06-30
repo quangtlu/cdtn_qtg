@@ -67,4 +67,16 @@ class Product extends Model
         }
         return $query;
     }
+
+    public function getPubDateAttribute()
+    {
+        if (empty($this->attributes['pub_date'])) return null;
+        return date('d/m/Y', strtotime($this->attributes['pub_date']));
+    }
+
+    public function getRegisDateAttribute()
+    {
+        if (empty($this->attributes['regis_date'])) return null;
+        return date('d/m/Y', strtotime($this->attributes['regis_date']));
+    }
 }

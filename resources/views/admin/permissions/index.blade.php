@@ -21,13 +21,13 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Chọn module</label>
-                                <select name="module_parents" id="" class="form-control">
+                                <select name="module" id="" class="form-control">
                                     <option></option>
-                                    @foreach (config('permission.module_parents') as $moduleItem)
+                                    @foreach (config('permission.module') as $moduleItem)
                                         <option value="{{ $moduleItem }}">{{ $moduleItem }}</option>
                                     @endforeach
                                 </select>
-                                @error('module_parents')
+                                @error('module')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -48,19 +48,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @foreach (config('permission.module_children') as $moduleItem)
+                                    @foreach (config('permission.action') as $moduleItem)
                                         <div class="col-md-2">
                                             <label>
-                                                <input type="checkbox" class="checkbox-children" name="module_children[]" value="{{ $moduleItem }}">
+                                                <input type="checkbox" class="checkbox-children" name="action[]" value="{{ $moduleItem }}">
                                                 {{ $moduleItem }}
                                             </label>
                                         </div>
                                     @endforeach
-                                    @error('module_children')
+                                    @error('action')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                @error('module_children'.' '.'module_parents')
+                                @error('action'.' '.'module')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

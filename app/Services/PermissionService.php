@@ -42,8 +42,8 @@ class PermissionService
 
     public function create($request)
     {
-        foreach ($request->module_children as $value) {
-            $this->permissionModel->create(['name' => $value.' '.$request->module_parents]);
+        foreach ($request->action as $value) {
+            $this->permissionModel->create(['name' => $value.' '.$request->module]);
         }
     }
 
