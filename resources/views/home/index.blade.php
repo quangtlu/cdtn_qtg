@@ -124,7 +124,7 @@
                     </div>
                     <div class="col-md-9 w3agile-right">
                         <h3><a href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->title }}</a></h3>
-                        <div class="post-content-limit-line">{!! $product->content !!}</div>
+                        <div class="post-content-limit-line">{!! $product->description !!}</div>
                         <a class="agileits w3layouts" href="{{ route('products.show', ['id' => $product->id]) }}">Xem
                             thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
                                 aria-hidden="true"></span></a>
