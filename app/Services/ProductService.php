@@ -98,4 +98,10 @@ class ProductService
         $products = Product::query()->filterOwner($request)->filterCategory($request)->filterAuthor($request)->search($request->keyword)->paginate(10);
         return $products;
     }
+
+    public function getProductHome()
+    {
+        $products = Product::orderBy('created_at', 'DESC')->limit(3)->get();
+        return $products;
+    }
 }

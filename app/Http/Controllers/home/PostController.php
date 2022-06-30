@@ -44,13 +44,13 @@ class PostController extends Controller
     {
         $posts = $this->postService->getPaginate();
 
-        if($request->keyword && ($request->category_id || $request->tag_id)) {
+        if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
             $posts = $this->postService->searchAndFilter($request);
         }
-        else if ($request->category_id || $request->tag_id) {
+        if ($request->category_id || $request->tag_id || $request->status) {
             $posts = $this->postService->filter($request);
         }
-        else if ($request->keyword) {
+        if ($request->keyword) {
             $posts = $this->postService->search($request);
         }
 

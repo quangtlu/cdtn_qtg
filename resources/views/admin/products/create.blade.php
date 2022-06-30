@@ -24,7 +24,6 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
-                                {{-- <input type="datetime-local" placeholder="yyyy-mm-dd" name="pub_date" class="form-control" style="background-color: #fff"> --}}
                                 <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" name="pub_date" value=""  placeholder="yyyy-mm-dd">
                                 @error('pub_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -32,7 +31,6 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
-                                {{-- <input type="datetime-local" placeholder="yyyy-mm-dd" name="regis_date" class="form-control" style="background-color: #fff"> --}}
                                 <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" name="regis_date" value=""  placeholder="yyyy-mm-dd">
                                 @error('regis_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

@@ -17,7 +17,7 @@
             <li title="
                                     @foreach ($product->categories as $category) {{ $category->name }} | @endforeach"><span
                     class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $product->categories->count() }}
-                    Tags</a></li>
+                    Danh mục</a></li>
             {{-- <li><span class="fa fa-comment" aria-hidden="true"></span><a href="#">{{ $product->comments->count() }} bình
                     luận</a></li> --}}
             <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a></li>

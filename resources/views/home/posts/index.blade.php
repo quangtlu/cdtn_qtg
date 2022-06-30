@@ -15,10 +15,10 @@
 <div class="form-filters">
     <form action="{{ route('posts.index') }}" method="get">
         <div class="row col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <select name="tag_id" class="form-control">
-                    <option value="{{ config('consts.tag.all') }}" class="filter-option-dafault">Tag</option>
-                    <option value="{{ config('consts.tag.all') }}" class="filter-option-dafault">Tất cả</option>
+                    <option value="" class="filter-option-dafault">Tag</option>
+                    <option value="" class="filter-option-dafault">Tất cả</option>
                     @foreach ($tags as $tag)
                         <option value="{{ $tag->id }}"
                             {{ request()->tag_id == $tag->id ? 'selected' : false }}>
@@ -26,15 +26,23 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <select name="category_id" id="sort" class="form-control">
-                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Danh mục</option>
-                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Tất cả</option>
+                    <option value="" class="filter-option-dafault">Danh mục</option>
+                    <option value="" class="filter-option-dafault">Tất cả</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
                             {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
                         </option>
                     @endforeach
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select name="status" id="sort" class="form-control">
+                    <option value="" class="filter-option-dafault">Giải đáp</option>
+                    <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">{{ config('consts.post.status.solved.name') }}</option>
+                    <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">{{ config('consts.post.status.unsolved.name') }}</option>
+
                 </select>
             </div>
             <div class="col-md-4">

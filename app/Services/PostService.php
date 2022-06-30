@@ -97,13 +97,19 @@ class PostService
 
     public function filter($request)
     {
-        $posts = Post::query()->filterCategory($request)->filterTag($request)->paginate(10);
+        $posts = Post::query()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
         return $posts;
     }
 
     public function searchAndFilter($request)
     {
-        $posts = Post::query()->filterCategory($request)->filterTag($request)->search($request->keyword)->paginate(10);
+        $posts = Post::query()->filterCategory($request)->filterTag($request)->filterStatus($request)->search($request->keyword)->paginate(10);
+        return $posts;
+    }
+
+    public function getPostHome()
+    {
+        $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
         return $posts;
     }
 }
