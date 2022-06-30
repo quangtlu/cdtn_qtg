@@ -16,6 +16,10 @@ class User extends Authenticatable
 
     protected $fillable = ["name", "email", "phone", "password", "image", "gender", "dob"];
 
+    protected $dates = [
+        'dob',
+    ];
+
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -42,7 +46,9 @@ class User extends Authenticatable
             ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
 
-    protected $casts = [
-        'dob' => 'datetime:Y/m/d ',
-    ];
+    public function getDobAttribute()
+    {
+        if (empty($this->attributes['dob'])) return null;
+        return date('d/m/Y', strtotime($this->attributes['dob']));
+    }
 }

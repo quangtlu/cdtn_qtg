@@ -15,16 +15,16 @@
                         <span class="fas fa-user"></span>
                         <label class="form-label" for="input">Email</label>
                         <input type="email" name="email" class="form-text">
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                           {{ $message }}
-                        </span>
-                        @enderror
                     </div>
                     <div class="form-row">
                         <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
                         <label class="form-label" for="input">Mật khẩu</label>
                         <input id="input-password" type="password" name="password" class="form-text">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                           {{ $message }}
+                        </span>
+                        @enderror
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}

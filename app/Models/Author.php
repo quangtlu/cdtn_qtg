@@ -25,4 +25,10 @@ class Author extends Model
             ->orWhere('id', 'LIKE', "%{$keyword}%")
             ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
+
+    public function getDobAttribute()
+    {
+        if (empty($this->attributes['dob'])) return null;
+        return date('d/m/Y', strtotime($this->attributes['dob']));
+    }
 }

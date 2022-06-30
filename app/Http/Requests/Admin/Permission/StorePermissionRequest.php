@@ -25,16 +25,16 @@ class StorePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'module_parents' => 'required',
-            'module_children' => 'required',
+            'module' => 'required',
+            'action' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'module_parents.required' => 'Vui lòng chọn moudle',
-            'module_children.required' => 'Vui lòng chọn action',
+            'module.required' => 'Vui lòng chọn moudle',
+            'action.required' => 'Vui lòng chọn action',
         ];
     }
 }
