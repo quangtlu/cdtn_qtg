@@ -112,4 +112,18 @@ class PostService
         $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
         return $posts;
     }
+
+    public function getPostRelate($id)
+    {
+        $categories = $this->getById($id)->categories;
+        $postIds = [];
+        foreach ($categories as $category) {
+
+            foreach($category->posts as $post) {
+
+                array_push($postIds, $post->id);
+            }
+        }
+        return Post::whereIn('id', $postIds)->paginate(5);
+    }
 }
