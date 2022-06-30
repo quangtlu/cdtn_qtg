@@ -101,7 +101,7 @@ class ProductService
 
     public function getProductHome()
     {
-        $products = Product::orderBy('created_at', 'DESC')->whereNotNull('image')->limit(3)->get();
+        $products = Product::orderBy('created_at', 'DESC')->limit(3)->get();
         return $products;
     }
 }

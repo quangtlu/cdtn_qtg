@@ -3,48 +3,57 @@
 @section('content')
         <h3 class="title-post-product">Bài viết mới nhất</h3>
         @foreach ($posts as $post)
-            <div class="wthree-top-1">
-                <div class="w3agile-top">
-                    <section class="slider">
-                        <div class="flexslider">
-                            <ul class="slides">
-                                    @foreach (explode('|', $post->image) as $image)
-                                        <li>
-                                            <div class="w3agile_special_deals_grid_left_grid">
-                                                <img src="{{ asset('image/posts/' . $image) }}" class="img-responsive" alt="" />
-                                            </div>
-                                        </li>
-                                    @endforeach
+        <div class="panel panel-primary">
+        <div class="wthree-top-1">
+                @if ($post->image)
+                    <div class="w3agile-top">
+                        <section class="slider">
+                            <div class="flexslider">
+                                <ul class="slides">
+                                        @foreach (explode('|', $post->image) as $image)
+                                            <li>
+                                                <div class="w3agile_special_deals_grid_left_grid">
+                                                    <img src="{{ asset('image/posts/' . $image) }}" class="img-responsive" alt="" />
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                </ul>
+                            </div>
+                        </section>
+                        <!-- flexSlider -->
+                        <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+                        <script type="text/javascript">
+                            $(window).load(function(){
+                                $('.flexslider').flexslider({
+                                    animation: "slide",
+                                    start: function(slider){
+                                        $('body').removeClass('loading');
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- //flexSlider -->
+
+                        <div class="w3agile-middle">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a></li>
+                                <li><a href="#"><i class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}</a></li>
+
                             </ul>
                         </div>
-                    </section>
-                    <!-- flexSlider -->
-                    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
-                    <script type="text/javascript">
-                        $(window).load(function(){
-                            $('.flexslider').flexslider({
-                                animation: "slide",
-                                start: function(slider){
-                                    $('body').removeClass('loading');
-                                }
-                            });
-                        });
-                    </script>
-                    <!-- //flexSlider -->
-
-                    <div class="w3agile-middle">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a></li>
-                            <li><a href="#"><i class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}</a></li>
-
-                        </ul>
                     </div>
-                </div>
+                @endif
 
-                <div class="w3agile-bottom">
+                <div class="w3agile-bottom" style="padding-top: 0px">
                     <div class="col-md-3 w3agile-left">
                         <li class="post-product-info">
                             <i class="fa fa-user" style="margin-right:4px" aria-hidden="true"></i>{{ $post->user->name }}
+                        </li>
+                        <li class="post-product-info">
+                            <i class="fa fa-calendar" style="margin-right:4px" aria-hidden="true"></i>{{ $post->created_at }}
+                        </li>
+                        <li class="post-product-info">
+                            <i class="fa fa-comment" style="margin-right:4px" aria-hidden="true"></i>{{ $post->comments->count() }}
                         </li>
                         <li class="post-product-info">
                             <a href="
@@ -72,48 +81,50 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
+        </div>
         @endforeach
-
-        <h3 class="title-post-product">Tác phẩm mới nhất</h3>
+        <h3 class="title-post-product" style="margin-top:50px">Tác phẩm mới nhất</h3>
         @foreach ($products as $product)
+        <div class="panel panel-primary">
             <div class="wthree-top-1">
-                <div class="w3agile-top">
-                    <section class="slider">
-                        <div class="flexslider">
-                            <ul class="slides">
-                                    @foreach (explode('|', $product->image) as $image)
-                                        <li>
-                                            <div class="w3agile_special_deals_grid_left_grid">
-                                                <img src="{{ asset('image/products/' . $image) }}" class="img-responsive" alt="" />
-                                            </div>
-                                        </li>
-                                    @endforeach
+                @if ($product->image)
+                    <div class="w3agile-top">
+                        <section class="slider">
+                            <div class="flexslider">
+                                <ul class="slides">
+                                        @foreach (explode('|', $product->image) as $image)
+                                            <li>
+                                                <div class="w3agile_special_deals_grid_left_grid">
+                                                    <img src="{{ asset('image/products/' . $image) }}" class="img-responsive" alt="" />
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                </ul>
+                            </div>
+                        </section>
+                        <!-- flexSlider -->
+                        <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+                        <script type="text/javascript">
+                            $(window).load(function(){
+                                $('.flexslider').flexslider({
+                                    animation: "slide",
+                                    start: function(slider){
+                                        $('body').removeClass('loading');
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- //flexSlider -->
+
+                        <div class="w3agile-middle">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ $product->author->count() }} <span>Tác giả</span></a></li>
                             </ul>
                         </div>
-                    </section>
-                    <!-- flexSlider -->
-                    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
-                    <script type="text/javascript">
-                        $(window).load(function(){
-                            $('.flexslider').flexslider({
-                                animation: "slide",
-                                start: function(slider){
-                                    $('body').removeClass('loading');
-                                }
-                            });
-                        });
-                    </script>
-                    <!-- //flexSlider -->
-
-                    <div class="w3agile-middle">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ $product->author->count() }} <span>Tác giả</span></a></li>
-                        </ul>
                     </div>
-                </div>
-
-                <div class="w3agile-bottom">
+                @endif
+                <div class="w3agile-bottom" style="padding-top: 0px">
                     <div class="col-md-3 w3agile-left">
                         <li class="post-product-info">
                             <i class="glyphicon glyphicon-user" style="margin-right:4px" aria-hidden="true"></i>{{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
@@ -132,6 +143,7 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
+        </div>
         @endforeach
 @endsection
 @section('css')
@@ -143,7 +155,7 @@
     }
     .title-post-product {
         text-align: center;
-        margin: 4px 0;
+        margin-bottom: 30px;
     }
 </style>
 @endsection

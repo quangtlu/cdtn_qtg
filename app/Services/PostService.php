@@ -109,7 +109,7 @@ class PostService
 
     public function getPostHome()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->whereNotNull('image')->limit(3)->get();
+        $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
         return $posts;
     }
 }
