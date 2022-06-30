@@ -111,7 +111,7 @@
                                         </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ Str::ucfirst($user->gender) }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($user->dob)) }}</td>
+                                        <td>{{ $user->dob }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>

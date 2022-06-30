@@ -42,10 +42,6 @@ class User extends Authenticatable
             ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
 
-    protected $casts = [
-        'dob' => 'datetime:Y/m/d',
-    ];
-
     public function scopeFilterName($query, $request)
     {
         if ($request->name) {
@@ -86,5 +82,11 @@ class User extends Authenticatable
             });
         }
         return $query;
+    }
+
+    public function getDobAttribute()
+    {
+        if (empty($this->attributes['dob'])) return null;
+        return date('d/m/Y', strtotime($this->attributes['dob']));
     }
 }
