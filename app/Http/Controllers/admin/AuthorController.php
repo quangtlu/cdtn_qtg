@@ -25,7 +25,22 @@ class AuthorController extends Controller
         if($request->keyword) {
             $authors = $this->authorService->search($request);
         }
-        return view('admin.authors.index', compact('authors'));
+        if($request->keyword && ($request->name || $request->gender || $request->email || $request->phone)) {
+            $authors = $this->authorService->searchAndFilter($request);
+        }
+        else if ($request->name || $request->gender || $request->email || $request->phone) {
+            $authors = $this->authorService->filter($request);
+        }
+        else if ($request->keyword) {
+            $authors = $this->authorService->search($request);
+        }
+        $authorAll = $this->authorService->getAll();
+        if ($authors->count() > 0) {
+            return view('admin.authors.index', compact('authors', 'authorAll'));
+        } else {
+            return redirect()->back()->with('error', 'Không có tác giả nào phù hợp');
+        }
+        return view('admin.authors.index', compact('authorAll'));
     }
 
     public function create()

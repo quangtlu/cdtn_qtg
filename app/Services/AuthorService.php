@@ -62,4 +62,16 @@ class AuthorService
     public function delete($id){
         $this->authorModel->destroy($id);
     }
+
+    public function filter($request)
+    {
+        $authors = Author::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->paginate(10);
+        return $authors;
+    }
+
+    public function searchAndFilter($request)
+    {
+        $authors = Author::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->search($request->keyword)->paginate(10);
+        return $authors;
+    }
 }

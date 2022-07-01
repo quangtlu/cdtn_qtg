@@ -26,6 +26,38 @@ class Author extends Model
             ->orWhere('email', 'LIKE', "%{$keyword}%");
     }
 
+    public function scopeFilterName($query, $request)
+    {
+        if ($request->name) {
+                $query->where('name', $request->name);
+        }
+        return $query;
+    }
+
+    public function scopeFilterEmail($query, $request)
+    {
+        if ($request->email) {
+                $query->where('email', $request->email);
+        }
+        return $query;
+    }
+
+    public function scopeFilterGender($query, $request)
+    {
+        if ($request->gender) {
+                $query->where('gender', $request->gender);
+        }
+        return $query;
+    }
+
+    public function scopeFilterPhone($query, $request)
+    {
+        if ($request->phone) {
+                $query->where('phone', $request->phone);
+        }
+        return $query;
+    }
+
     public function getDobAttribute()
     {
         if (empty($this->attributes['dob'])) return null;
