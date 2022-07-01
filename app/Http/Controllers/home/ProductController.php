@@ -61,7 +61,8 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productService->getById($id);
-        return view('home.products.show', compact('product'));
+        $productRelates = $this->productService->getProductRelate($id);
+        return view('home.products.show', compact('product', 'productRelates'));
     }
 
     function getProductByService($service, $id)
