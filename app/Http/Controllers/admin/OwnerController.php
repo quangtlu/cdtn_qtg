@@ -23,10 +23,22 @@ class OwnerController extends Controller
     public function index(Request $request)
     {
         $owners = $this->ownerService->getPaginate();
-        if($request->keyword) {
+        if($request->keyword && ($request->name || $request->email || $request->phone)) {
+            $owners = $this->ownerService->searchAndFilter($request);
+        }
+        else if ($request->name || $request->email || $request->phone) {
+            $owners = $this->ownerService->filter($request);
+        }
+        else if ($request->keyword) {
             $owners = $this->ownerService->search($request);
         }
-        return view('admin.owners.index', compact('owners'));
+        $ownerAll = $this->ownerService->getAll();
+        if ($owners->count() > 0) {
+            return view('admin.owners.index', compact('owners', 'ownerAll'));
+        } else {
+            return redirect()->back()->with('error', 'Không có tác giả nào phù hợp');
+        }
+        return view('admin.owners.index', compact('ownerAll'));
     }
 
     public function create()

@@ -40,10 +40,21 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productService->getPaginate();
-        if($request->keyword) {
+        if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
+            $products = $this->productService->searchAndFilter($request);
+        }
+        else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
+            $products = $this->productService->filter($request);
+        }
+        else if ($request->keyword) {
             $products = $this->productService->search($request);
         }
-        return view('admin.products.index', compact('products'));
+
+        if ($products->count() > 0) {
+            return view('admin.products.index', compact('products'));
+        } else {
+            return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
+        }
     }
 
     public function create()
