@@ -10,6 +10,56 @@
             <div class="container-fluid">
                 <div class="row">
                     <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.owners.create') }}">Thêm</a>
+                    <form action="{{ route('admin.owners.index') }}" method="get">
+                        <div class="row col-md-12 mb-2">
+                            <div class="col-2">
+                                <select name="name" id="sort" class="form-control">
+                                    <option value="{{ config("consts.user.all") }}" class="filter-option-dafault">Tên chủ sở hữu</option>
+                                    <option value="{{ config("consts.user.all") }}" class="filter-option-dafault">Tất cả</option>
+                                        @foreach ($owners as $owner)
+                                            <option value="{{ $owner->name }}" {{ request()->name == $owner->name ? 'selected' : false }}>
+                                                {{ $owner->name }}</option>
+                                        @endforeach
+                                        @foreach ($ownerAll as $owner)
+                                            <option value="{{ $owner->name }}">{{ $owner->name }}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select name="email" id="sort" class="form-control">
+                                    <option value="{{ config("consts.user.all") }}" class="filter-option-dafault">Email</option>
+                                    <option value="{{ config("consts.user.all") }}" class="filter-option-dafault">Tất cả</option>
+                                    @foreach ($owners as $owner)
+                                        <option value="{{ $owner->email }}"
+                                            {{ request()->email == $owner->email ? 'selected' : false }}>{{ $owner->email }}
+                                        </option>
+                                        @foreach ($ownerAll as $owner)
+                                            <option value="{{ $owner->email }}">{{ $owner->email }}</option>
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select name="phone" id="sort" class="form-control">
+                                    <option value="{{ config("consts.user.all") }}" class="filter-option-dafault">Phone</option>
+                                    <option value="{{ config("consts.user.all") }}" class="filter-option-dafault">Tất cả</option>
+                                    @foreach ($owners as $owner)
+                                        <option value="{{ $owner->phone }}" {{ request()->phone == $owner->phone ? 'selected' : false }}>
+                                            {{ $owner->phone }}</option>
+                                    @endforeach
+                                    @foreach ($ownerAll as $owner)
+                                        <option value="{{ $owner->phone }}">{{ $owner->phone }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" name="keyword" placeholder="Tìm kiếm tên, email, số điện thoại" class="form-control" value="{{ request()->keyword }}">
+                            </div>
+                            <div class="col-2" >
+                                <button type="submit" class="btn btn-primary ml-2">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="col-md-12">
                         <table class="table">
                             <thead>

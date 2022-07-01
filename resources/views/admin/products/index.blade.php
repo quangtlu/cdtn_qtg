@@ -15,6 +15,48 @@
                 <div class="row">
                     <a class="col-md-1 btn btn-success btn-sm float-right m-2"
                         href="{{ route('admin.products.create') }}">Thêm</a>
+                    <form action="{{ route('admin.products.index') }}" method="get">
+                        <div class="row col-md-12 mb-2">
+                            <div class="col-md-2">
+                                <select name="author_id" id="sort" class="form-control">
+                                    <option value="{{ config('consts.author.all') }}" class="filter-option-dafault">Tác giả</option>
+                                    <option value="{{ config('consts.author.all') }}" class="filter-option-dafault">Tất cả</option>
+                                    @foreach ($authors as $author)
+                                        <option value="{{ $author->id }}" {{ request()->author_id == $author->id ? 'selected' : false }}>
+                                            {{ $author->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select name="category_id" id="sort" class="form-control">
+                                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Danh mục</option>
+                                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Tất cả</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select name="owner_id" id="sort" class="form-control">
+                                    <option value="{{ config('consts.owner.all') }}" class="filter-option-dafault">Chủ sở hữu</option>
+                                    <option value="{{ config('consts.owner.all') }}" class="filter-option-dafault">Tất cả</option>
+                                    <option value="{{ config('consts.owner.none') }}" class="filter-option-dafault">Chưa có chủ sở hữu</option>
+                                    @foreach ($owners as $owner)
+                                        <option value="{{ $owner->id }}" {{ request()->owner_id == $owner->id ? 'selected' : false }}>
+                                            {{ $owner->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="keyword" placeholder="Tìm kiếm tác phẩm" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="col-md-12">
                         <table class="table">
                             <thead>

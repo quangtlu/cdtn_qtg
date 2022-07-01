@@ -58,4 +58,16 @@ class OwnerService
     public function delete($id){
         $this->ownerModel->destroy($id);
     }
+
+    public function filter($request)
+    {
+        $owners = Owner::query()->filterName($request)->filterEmail($request)->filterPhone($request)->paginate(10);
+        return $owners;
+    }
+
+    public function searchAndFilter($request)
+    {
+        $owners = Owner::query()->filterName($request)->filterEmail($request)->filterPhone($request)->search($request->keyword)->paginate(10);
+        return $owners;
+    }
 }
