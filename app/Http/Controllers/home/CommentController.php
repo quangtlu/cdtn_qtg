@@ -37,6 +37,15 @@ class CommentController extends Controller
         return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 
+    public function toogleStatus($id)
+    {
+        if ($this->commentService->toogleStatus($id)) {
+            return Redirect()->back()->with('success', 'Cập nhật thành công');
+        } else {
+            return Redirect()->back()->with('error', 'Cập nhật thất bại');
+        }
+    }
+
     public function destroy($id)
     {
         $comment = $this->commentService->getById($id);

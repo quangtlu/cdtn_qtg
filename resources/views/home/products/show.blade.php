@@ -178,11 +178,6 @@
     </script>
 @endsection
 <style>
-    ul.tag li a
-    {
-        padding: 5px !important;
-        font-size: 8px !important;
-    }
     .comments-grid-left
     {
         width: 10% !important;

@@ -109,6 +109,7 @@ Route::middleware('auth')->group(function () {
     Route::name('comments.')->prefix('comments')->group(function () {
         Route::post('/', 'home\CommentController@store')->name('store');
         Route::post('/update/{id}', 'home\CommentController@update')->name('update');
+        Route::get('/update/status/{id}', 'home\CommentController@toogleStatus')->name('toogleStatus');
         Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
     });
     Route::middleware('role:counselor')->group(function () {

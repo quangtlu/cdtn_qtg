@@ -25,6 +25,21 @@
             <li><span class="fa fa-calendar" aria-hidden="true"></span><a
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
+            <li><a href="
+                @auth 
+                    {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
+                @endauth
+                @guest
+                    {{ route('posts.show', ['id' => $post->id]) }} 
+                @endguest
+            "
+                class="post-info__link post-status 
+                {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
+                <i
+                    class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
+                {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
+            </a>
+        </li>
         </ul>
         <p>{!! $post->content !!}</p>
     </div>
@@ -65,6 +80,7 @@
             </li>
         </ul>
     </div>
+    {{-- Comment --}}
     <div id="comments" class="comments">
         <h3 style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
@@ -90,6 +106,12 @@
                                 @endguest
                                 <i>|</i>
                             </li>
+                            @if ($comment->status == config('consts.post.status.solved.value'))
+                                <li><a href="{{  route('comments.toogleStatus', ['id' => $comment->id]) }}" class="comment-action-link post-status-solved">Hữu ích nhất
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </a></li>
+                            @endif
+                        </li>
                             @auth
                                 @if ($comment->user->id == Auth::user()->id)
                                     <li><a class="comment-action-link btn-delete-comment"
@@ -101,6 +123,12 @@
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a></li>
                                     </li>
+                                @elseif($post->user_id == Auth::user()->id && $post->status != config('consts.post.status.solved.value'))
+                                    <li><a href="{{  route('comments.toogleStatus', ['id' => $comment->id]) }}" class="comment-action-link post-status-solved">Hữu ích nhất
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                        </a></li>
+                                    </li>
+                                </li>
                                 @endif
                             @endauth
                         </ul>
