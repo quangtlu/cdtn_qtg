@@ -2,6 +2,7 @@
 @section('title', $product->name)
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
     <div class="single-left1">
@@ -104,88 +105,48 @@
             </li>
         </ul>
     </div>
-    {{-- <div class="comments">
-        <h3 style="margin-top: 50px">Bình luận</h3>
-        <div class="comments-grids">
-            @foreach ($comments as $comment)
-                <div class="comments-grid">
-                    <div class="comments-grid-left">
-                        <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
-                    </div>
-                    <div class="comments-grid-right">
-                        <h4><a href="#">{{ $comment->user->name }}</a></h4>
-                        <ul>
-                            <li>{{ $comment->created_at }}<i>|</i></li>
-                            <li>
-                                @auth
-                                    <a class="rep-comment comment-action-link"
-                                        data-userName="{{ $comment->user->name }}">Trảlời</a>
-                                @endauth
-                                @guest
-                                    <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trảlời</a>
-                                @endguest
-                                <i>|</i>
-                            </li>
-                            @auth
-                                @if ($comment->user->id == Auth::user()->id)
-                                    <li><a class="comment-action-link btn-delete-comment"
-                                            data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>|</li>
-                                    </li>
-                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a></li>
-                                    </li>
-                                @endif
-                            @endauth
-                        </ul>
-                        <p class="comment-content">{{ $comment->comment }}</p>
-                        @auth
-                            @if ($comment->user->id == Auth::user()->id)
-                                <div class="leave-coment-form edit-comment-form">
-                                    <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
-                                        @csrf
-                                        <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
-                                        @error('comment')
-                                            <span class="mt-1 text-danger">{{ $message }}</span>
-                                        @enderror
-                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                        <div class="w3_single_submit">
-                                            <input type="submit" value="Cập nhật">
-                                        </div>
-                                    </form>
+    <div style="margin-top: 30px">
+        <h3 class="title-relate">Tác phẩm liên quan</h3>
+        @if (isset($productRelates))
+            @foreach ($productRelates as $product)
+                <div class="wthree-top-1">
+                    <div class="w3agile-top">
+                        <div class="col-md-3 w3agile-left">
+                            <ul class="post-info">
+                                <li>
+                                    <a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                                        <i class="fa  fa-user" aria-hidden="true"></i>
+                                            {{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
+                                    </a>
+                                </li>
+                                <li><a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="col-md-9 w3agile-right">
+                                    <h3><a
+                                            href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                                    </h3>
+                                    <div class="post-content-limit-line">{!! $product->description !!}</div>
+                                    <a class="agileits w3layouts"
+                                        href="{{  route('products.show', ['id' => $product->id]) }}">Xem
+                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
+                                            aria-hidden="true"></span></a>
                                 </div>
-                            @endif
-                        @endauth
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"> </div>
                 </div>
             @endforeach
-            {{ $comments->links() }}
-        </div>
+            {{ $productRelates->links() }}
+        @endif
     </div>
-    @guest
-        <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để bình luận<span
-                class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
-    @endguest
-    @auth
-        <div class="leave-coment-form">
-            <form action="{{ route('comments.store') }}" method="post">
-                @csrf
-                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
-                @error('comment')
-                    <span class="mt-1 text-danger">{{ $message }}</span>
-                @enderror
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <div class="w3_single_submit">
-                    <input type="submit" value="Bình luận">
-                </div>
-            </form>
-        </div>
-    @endauth --}}
 @endsection
 @section('js')
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
@@ -230,5 +191,13 @@
         padding: 0 !important;
         border: 1px solid #ffac3a !important;
         border-radius: 50% !important;
+    }        
+    .title-relate {
+        text-transform: uppercase;
+        font-size: 1.4em;
+        color: #212121;
+        padding-left: 0.8em;
+        border-left: 3px solid #FFAC3A;
+        font-weight: 600;
     }
 </style>

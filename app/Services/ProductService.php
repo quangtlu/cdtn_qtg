@@ -104,4 +104,29 @@ class ProductService
         $products = Product::orderBy('created_at', 'DESC')->limit(3)->get();
         return $products;
     }
+
+    public function getProductIdRelateByTable($productId, array $relateTables)
+    {
+        $productIds = [];
+
+        foreach ($relateTables as $relateTable) {
+            $tableCollections = $this->getById($productId)->$relateTable;
+            if ($tableCollections->count() > 0) {
+                foreach ($tableCollections as $item) {
+                    foreach ($item->products as $product) {
+                        if($product->id != $productId) {
+                            array_push($productIds, $product->id);
+                        }
+                    }
+                }
+            }
+        }
+        return $productIds;
+    }
+
+    public function getProductRelate($id)
+    {
+        $productIds = $this->getProductIdRelateByTable($id, ['categories', 'author']);
+        return Product::whereIn('id', $productIds)->paginate(5);
+    }
 }
