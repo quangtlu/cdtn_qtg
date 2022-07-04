@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -41,16 +41,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user)
+    public function handle($request, Closure $next, $guard = null)
     {
-        $request->session()->flash('success', 'Đăng nhập thành công');
-
-        if ($user->isAdmin()){
-            return redirect()->route('admin.dashboard');
-        }
-        else{
+        if (Auth::guard($guard)->check()) {
             return redirect()->route('home.index');
         }
+
+        return $next($request);
     }
 
     public function logout(Request $request)
