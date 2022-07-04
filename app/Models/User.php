@@ -26,14 +26,6 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function isAdmin()
-    {
-        if (Auth::user()->hasRole('user')) {
-            return false;
-        }
-        return true;
-    }
-
     public function scopeSearch($query, $keyword)
     {
         return $query->where('name', 'LIKE', "%{$keyword}%")
