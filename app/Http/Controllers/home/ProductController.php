@@ -51,6 +51,10 @@ class ProductController extends Controller
             $products = $this->productService->search($request);
         }
 
+        if($request->sort) {
+            $products = $this->productService->sortProductPublicRegisDate($request->sort);
+        }
+
         if ($products->count() > 0) {
             return view('home.products.index', compact('products'));
         } else {

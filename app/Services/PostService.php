@@ -43,7 +43,6 @@ class PostService
         $data = [
             "title" => $request->title,
             "content" => $request->content,
-            "status" => $request->status,
             "user_id" => $user->id,
         ];
         if ($files = $request->file('image')) {
@@ -136,5 +135,23 @@ class PostService
     {
         $postIds = $this->getPostIdRelateByTable($id, ['categories', 'tags']);
         return Post::whereIn('id', $postIds)->paginate(5);
+    }
+
+    public function sortPost($sortBy)
+    {
+        if ($sortBy == 'sort-new-post') {
+            $posts = Post::latest()->paginate(10);
+        } else if ($sortBy == 'sort-new-post') {
+            $posts = Post::leftJoin('comments', 'comments.post_id', '=', 'posts.id')
+            ->groupBy('posts.id')
+            ->orderByRaw('COALESCE(GREATEST(posts.created_at, MAX(comments.created_at)), posts.created_at) DESC')
+            ->select('posts.*')->paginate(10);
+        } else {
+            $posts = Post::leftJoin('comments', 'comments.post_id', '=', 'posts.id')
+            ->groupBy('posts.id')
+            ->orderByRaw('COALESCE(GREATEST(posts.created_at, MAX(comments.created_at)), posts.created_at) ASC')
+            ->select('posts.*')->paginate(10);
+        }
+        return $posts;
     }
 }

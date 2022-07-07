@@ -129,4 +129,14 @@ class ProductService
         $productIds = $this->getProductIdRelateByTable($id, ['categories', 'author']);
         return Product::whereIn('id', $productIds)->paginate(5);
     }
+
+    public function sortProductPublicRegisDate($sort)
+    {
+        if($sort == 'sort-public-date') {
+            $products = Product::orderBy('pub_date', 'desc')->paginate(10);
+        } else {
+            $products = Product::orderBy('regis_date', 'desc')->paginate(10);
+        }
+        return $products;
+    }
 }
