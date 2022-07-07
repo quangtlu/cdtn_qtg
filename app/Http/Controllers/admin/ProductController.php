@@ -50,11 +50,15 @@ class ProductController extends Controller
             $products = $this->productService->search($request);
         }
 
-        if ($products->count() > 0) {
-            return view('admin.products.index', compact('products'));
-        } else {
-            return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
+        if($request) {
+            if ($products->count() > 0) {
+                return view('admin.products.index', compact('products'));
+            } else {
+                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            }
         }
+
+        return view('admin.products.index', compact('products'));
     }
 
     public function create()

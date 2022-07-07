@@ -7,54 +7,17 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
     <style>
         .form-filters {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            margin: 0 0 60px -15px;
+        }
+        .sort-product {
+            margin: 0 0 13px 0px;
+
         }
     </style>
 @endsection
 @section('content')
-    <div class="form-filters">
-        <form action="{{ route('posts.index') }}" method="get">
-            <div class="row col-md-12">
-                <div class="col-md-2">
-                    <select name="tag_id" class="form-control">
-                        <option value="" class="filter-option-dafault">Tag</option>
-                        <option value="" class="filter-option-dafault">Tất cả</option>
-                        @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
-                                {{ $tag->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="category_id" id="sort" class="form-control">
-                        <option value="" class="filter-option-dafault">Danh mục</option>
-                        <option value="" class="filter-option-dafault">Tất cả</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="status" id="sort" class="form-control">
-                        <option value="" class="filter-option-dafault">Giải đáp</option>
-                        <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">
-                            {{ config('consts.post.status.solved.name') }}</option>
-                        <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">
-                            {{ config('consts.post.status.unsolved.name') }}</option>
 
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                </div>
-            </div>
-        </form>
-    </div>
     @auth
         <div class="panel panel-primary">
             <div class="panel-heading">Đăng bài viết</div>
@@ -77,6 +40,76 @@
         <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
                 class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
     @endguest
+    <div class="col my-auto" id="search" style="margin-top: 2px;">
+        <a class="card btn btn-default my-auto" data-toggle="collapse" href="#collapseSearch" aria-expanded="false"
+            aria-controls="collapseExample">
+                <i class="fa fa-search"></i>
+                <span>Tìm kiếm bài viết</span>
+        </a>
+    </div>
+    <div class="panel panel-primary" id="toggle" style="margin-top: 10px; display:none; padding: 15px">
+        <div>
+            <div class="sort-product">
+                <form action="{{ route('posts.index') }}" method="GET">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <select name="sort" id="" class="form-control">
+                                <option value="sort-new-comment">Comment mới</option>
+                                <option value="sort-new-post">Bài viết mới</option>
+                                <option value="sort-old-post">Bài viết cũ nhất</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary ">Sắp xếp</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="form-filters">
+                <form action="{{ route('posts.index') }}" method="get">
+                    <div class="row col-md-12">
+                        <div class="col-md-2">
+                            <select name="tag_id" class="form-control">
+                                <option value="" class="filter-option-dafault">Tag</option>
+                                <option value="" class="filter-option-dafault">Tất cả</option>
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
+                                        {{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="category_id" id="sort" class="form-control">
+                                <option value="" class="filter-option-dafault">Danh mục</option>
+                                <option value="" class="filter-option-dafault">Tất cả</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="status" id="sort" class="form-control">
+                                <option value="" class="filter-option-dafault">Giải đáp</option>
+                                <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">
+                                    {{ config('consts.post.status.solved.name') }}</option>
+                                <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">
+                                    {{ config('consts.post.status.unsolved.name') }}</option>
+        
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary" style="width:100%">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -137,8 +170,6 @@
             </div>
         </div>
     </div>
-
-
     @if (isset($posts))
         @foreach ($posts as $post)
             <div class="wthree-top-1">
@@ -149,7 +180,7 @@
                                         class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                        class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
+                                        class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                         class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
@@ -249,5 +280,15 @@
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết, tag, danh mục...');
+    </script>
+    <script>
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+        $('#search').click(function(){
+            $('#toggle').slideToggle();
+        });
+        });
     </script>
 @endsection

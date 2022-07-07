@@ -43,7 +43,6 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = $this->postService->getPaginate();
-
         if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
             $posts = $this->postService->searchAndFilter($request);
         }
@@ -52,6 +51,10 @@ class PostController extends Controller
         }
         if ($request->keyword) {
             $posts = $this->postService->search($request);
+        }
+
+        if ($request->sort) {
+            $posts = $this->postService->sortPost($request->sort);
         }
 
         if ($posts->count() > 0) {
