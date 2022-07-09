@@ -5,13 +5,13 @@ $BASE_PATH_IMAGE = 'image';
 return [
     'post' => [
         'status' => [
-            'solved' => [
-                'name' => 'Đã được giải đáp',
-                'value' => true
-            ],
             'unsolved' => [
                 'name' => 'Chưa được giải đáp',
-                'value' => false
+                'value' => 1
+            ],
+            'solved' => [
+                'name' => 'Đã được giải đáp',
+                'value' => 2
             ],
         ]
     ],

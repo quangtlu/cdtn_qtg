@@ -5,9 +5,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'FAQ', 'key' => 'Danh sách'])
-        <!-- /.content-header -->
         <!-- Main content -->
         <section class="content">
             <div class="row">

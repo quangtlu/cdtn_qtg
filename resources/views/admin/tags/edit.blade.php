@@ -2,7 +2,6 @@
 @section('title', 'Sửa thông tin tag')
 @section('content')
     <div class="content-wrapper">
-        @include('partials.admin.content_header', ['name' => 'Tag', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

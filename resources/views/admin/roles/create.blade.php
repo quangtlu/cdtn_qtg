@@ -12,7 +12,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.admin.content_header', ['name' => 'vai trò', 'key' => 'Thêm mới'])
         <div class="content">
             <div class="container-fluid">
                 <form action="{{ route('admin.roles.store') }}" method="POST" style="width: 100%">

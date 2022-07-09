@@ -7,9 +7,6 @@
 
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Cá nhân', 'key' => 'Thông tin'])
-        <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">

@@ -2,9 +2,6 @@
 @section('title', 'Quản lý danh mục')
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Danh mục', 'key' => 'Danh sách'])
-        <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">

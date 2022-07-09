@@ -133,6 +133,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.chatrooms.index')}}" class="nav-link">
+                        <i class="fas fa-comments"></i>
+                        <p>
+                            Quản lý phòng tư vấn
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

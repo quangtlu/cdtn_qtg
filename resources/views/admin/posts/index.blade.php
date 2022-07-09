@@ -1,14 +1,10 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý bài viết')
 @section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('admin/product/index.css') }}" />
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.admin.content_header', ['name' => 'Bài viết', 'key' => 'Danh sách'])
-        <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">

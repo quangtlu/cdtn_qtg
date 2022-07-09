@@ -14,8 +14,10 @@
             <li
                 title="
                                     @foreach ($post->tags as $tag) {{ $tag->name }} | @endforeach">
-                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#tag">{{ $post->tags->count() }}
-                    Tags</a></li>
+                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
+                    href="#tag">{{ $post->tags->count() }}
+                    Tags</a>
+            </li>
             <li><span class="fa fa-comment" aria-hidden="true"></span><a
                     href="#{{ $post->comments->count() > 0 ? $post->comments->first()->id : 'comments' }}">{{ $post->comments->count() }}
                     bình
@@ -33,13 +35,13 @@
                     {{ route('posts.show', ['id' => $post->id]) }} 
                 @endguest
             "
-                class="post-info__link post-status 
+                    class="post-info__link post-status 
                 {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
-                <i
-                    class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
-                {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
-            </a>
-        </li>
+                    <i
+                        class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
+                    {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
+                </a>
+            </li>
         </ul>
         <p>{!! $post->content !!}</p>
     </div>
@@ -107,11 +109,12 @@
                                 <i>|</i>
                             </li>
                             @if ($comment->status == config('consts.post.status.solved.value'))
-                                <li><a href="{{  route('comments.toogleStatus', ['id' => $comment->id]) }}" class="comment-action-link post-status-solved">Hữu ích nhất
-                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                </a></li>
+                                <li><a href="{{ route('comments.toogleStatus', ['id' => $comment->id]) }}"
+                                        class="comment-action-link post-status-solved">Hữu ích nhất
+                                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                    </a></li>
                             @endif
-                        </li>
+                            </li>
                             @auth
                                 @if ($comment->user->id == Auth::user()->id)
                                     <li><a class="comment-action-link btn-delete-comment"
@@ -124,11 +127,12 @@
                                         </a></li>
                                     </li>
                                 @elseif($post->user_id == Auth::user()->id && $post->status != config('consts.post.status.solved.value'))
-                                    <li><a href="{{  route('comments.toogleStatus', ['id' => $comment->id]) }}" class="comment-action-link post-status-solved">Hữu ích nhất
+                                    <li><a href="{{ route('comments.toogleStatus', ['id' => $comment->id]) }}"
+                                            class="comment-action-link post-status-solved">Hữu ích nhất
                                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                                         </a></li>
                                     </li>
-                                </li>
+                                    </li>
                                 @endif
                             @endauth
                         </ul>
@@ -245,67 +249,67 @@
             {{ $postRelates->links() }}
         @endif
     </div>
-    @endsection
-    @section('js')
-        <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+@endsection
+@section('js')
+    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
-        <script type="text/javascript">
-            $(window).load(function() {
+    <script type="text/javascript">
+        $(window).load(function() {
 
-                $('.btn-edit-comment').on('click', function() {
-                    $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
-                    $(this).closest('.comments-grid-right').children('.comment-content').toggle()
-                })
-                $('.rep-comment').on('click', function() {
-                    var userName = $(this).attr('data-userName')
-                    $('#leave-coment').text(userName)
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $("#leave-coment").offset().top
-                    }, 1000);
+            $('.btn-edit-comment').on('click', function() {
+                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+                $(this).closest('.comments-grid-right').children('.comment-content').toggle()
+            })
+            $('.rep-comment').on('click', function() {
+                var userName = $(this).attr('data-userName')
+                $('#leave-coment').text(userName)
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $("#leave-coment").offset().top
+                }, 1000);
 
-                })
-                $('.flexslider').flexslider({
-                    animation: "slide",
-                    start: function(slider) {
-                        $('body').removeClass('loading');
-                    }
-                });
-
+            })
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function(slider) {
+                    $('body').removeClass('loading');
+                }
             });
-        </script>
-    @endsection
-    <style>
-        ul.tag li a {
-            padding: 5px !important;
-            font-size: 10px !important;
-            font-weight: bold;
-        }
 
-        .comments-grid-left {
-            width: 10% !important;
-        }
+        });
+    </script>
+@endsection
+<style>
+    ul.tag li a {
+        padding: 5px !important;
+        font-size: 10px !important;
+        font-weight: bold;
+    }
 
-        .comments-grid-right {
-            width: 85% !important;
-        }
+    .comments-grid-left {
+        width: 10% !important;
+    }
 
-        .comments-grid-left img {
-            padding: 0 !important;
-            border: 1px solid #ffac3a !important;
-            border-radius: 50% !important;
-        }
+    .comments-grid-right {
+        width: 85% !important;
+    }
 
-        .relate-post:hover {
-            color: #ffac3a !important;
-        }
+    .comments-grid-left img {
+        padding: 0 !important;
+        border: 1px solid #ffac3a !important;
+        border-radius: 50% !important;
+    }
 
-        .title-relate {
-            text-transform: uppercase;
-            font-size: 1.4em;
-            color: #212121;
-            padding-left: 0.8em;
-            border-left: 3px solid #FFAC3A;
-            font-weight: 600;
-        }
-    </style>
+    .relate-post:hover {
+        color: #ffac3a !important;
+    }
+
+    .title-relate {
+        text-transform: uppercase;
+        font-size: 1.4em;
+        color: #212121;
+        padding-left: 0.8em;
+        border-left: 3px solid #FFAC3A;
+        font-weight: 600;
+    }
+</style>

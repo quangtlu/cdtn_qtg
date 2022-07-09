@@ -6,7 +6,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.admin.content_header', ['name' => 'Tác giả', 'key' => 'Sửa thông tin'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

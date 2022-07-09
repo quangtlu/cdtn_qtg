@@ -1,11 +1,5 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý người dùng')
-@section('js')
-    <script src="{{ asset('js/alert.js') }}"></script>
-    <script>
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-    </script>
-@endsection
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/product/index.css')}}"/>
     <style>
@@ -20,9 +14,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- /.content-header -->
-        <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -155,6 +146,11 @@
     <script>
         $('#header-search-form').attr('action', '{{ route('admin.users.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm tên người dùng, email, giới tính, số điện thoại...');
+        $(document).ready(function(){
+            $('#search').click(function(){
+                $('#toggle').slideToggle();
+            });
+        });
     </script>
 
     <script>
