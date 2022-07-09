@@ -79,6 +79,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/destroy/{id}', 'Admin\FaqController@destroy')->name('destroy')->middleware('can:delete faq');
         });
 
+        Route::name('chatrooms.')->prefix('/chatrooms')->group(function () {
+            Route::get('/', 'Admin\ChatroomController@index')->name('index')->middleware('can:list chatroom');
+            Route::get('/create', 'Admin\ChatroomController@create')->name('create')->middleware('can:add chatroom');
+            Route::post('/store', 'Admin\ChatroomController@store')->name('store')->middleware('can:add chatroom');
+            Route::get('/edit/{id}', 'Admin\ChatroomController@edit')->name('edit')->middleware('can:edit chatroom');
+            Route::post('/update/{id}', 'Admin\ChatroomController@update')->name('update')->middleware('can:edit chatroom');
+            Route::get('/destroy/{id}', 'Admin\ChatroomController@destroy')->name('destroy')->middleware('can:delete chatroom');
+        });
+
         Route::name('tags.')->prefix('/tags')->group(function () {
             Route::get('/', 'Admin\TagController@index')->name('index')->middleware('can:list tag');
             Route::get('/create', 'Admin\TagController@create')->name('create')->middleware('can:add tag');
@@ -112,12 +121,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/update/status/{id}', 'home\CommentController@toogleStatus')->name('toogleStatus');
         Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
     });
-    Route::middleware('role:counselor')->group(function () {
-        Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
-        Route::get('/messages', 'MessageController@index');
-        Route::post('/messages', 'MessageController@store');
-        Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*');
-    });
+    
+    Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
+    Route::get('/messages', 'MessageController@index');
+    Route::post('/messages', 'MessageController@store');
+    Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*');
 
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');

@@ -24,7 +24,7 @@
                     <div class="form-row">
                         <span class="fas fa-user"></span>
                         <label class="form-label" for="input">Họ tên</label>
-                        <input type="text" name="name" class="form-text" @error('name') is-invalid @enderror">
+                        <input type="text" value="{{ old('name') }}" name="name" class="form-text" @error('name') is-invalid @enderror">
                         @error('name')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -36,8 +36,8 @@
                         <label class="form-label" for="input">Giới tính</label>
                         <select name="gender" class="form-text" id="gender">
                             <option value=""></option>
-                            <option value="nam">Nam</option>
-                            <option value="nu">Nữ</option>
+                            <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
+                            <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
                         </select>
                         @error('gender')
                         <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-row">
                         <label class="form-label" for="input">Ngày sinh</label>
-                        <input type="datetime-local"  placeholder="yyyy-mm-dd" name="dob" class="form-text" style="background-color: #fff" @error('dob') is-invalid @enderror">
+                        <input type="datetime-local" placeholder="yyyy-mm-dd" name="dob" class="form-text" style="background-color: #fff" @error('dob') is-invalid @enderror">
                         @error('dob')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -57,7 +57,7 @@
                     <div class="form-row">
                         <span class="fas fa-envelope"></span>
                         <label class="form-label" for="input">E-mail</label>
-                        <input type="email" name="email" class="form-text" @error('email') is-invalid @enderror">
+                        <input type="email" name="email" value="{{ old('email') }}" class="form-text" @error('email') is-invalid @enderror">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                            {{ $message }}
@@ -67,7 +67,7 @@
                     <div class="form-row">
                         <span class="fas fa-mobile-alt"></span>
                         <label class="form-label" for="input">Số điện thoại</label>
-                        <input type="phone" name="phone" class="form-text" @error('phone') is-invalid @enderror">
+                        <input type="phone" name="phone" value="{{ old('phone') }}" class="form-text" @error('phone') is-invalid @enderror">
                         @error('phone')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -77,7 +77,7 @@
                     <div class="form-row">
                         <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
                         <label class="form-label" for="input">Mật khẩu</label>
-                        <input id="input-password" type="password" name="password"
+                        <input id="input-password" value="{{ old('password') }}" type="password" name="password"
                                autocomplete="new-password" class="form-text" id="password" type="password">
                         @error('password')
                         <span class="invalid-feedback" role="alert">

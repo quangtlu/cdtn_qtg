@@ -9,10 +9,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.admin.content_header', [
-            'name' => 'Người dùng',
-            'key' => 'Thêm mới',
-        ])
         <div class="content">
             <div class="container-fluid">
                 <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">

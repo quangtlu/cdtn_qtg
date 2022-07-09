@@ -170,6 +170,7 @@ return [
         'faq',
         'category',
         'tag',
+        'chatroom',
     ],
 
     'action' => [
@@ -181,7 +182,7 @@ return [
     ],
     'role' => [
         'admin',
-        'counselor',
+        'mod',
         'editor',
         'user',
     ]

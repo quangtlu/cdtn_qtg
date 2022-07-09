@@ -15,9 +15,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <!-- /.content-header -->
-        <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class MessengerController extends Controller
 {
     public function index () {
-        $data = ['user' => Auth::user(), 'rooms' => Chatroom::all()];
+        $user = Auth::user();
+        $data = ['user' => $user, 'rooms' => $user->chatrooms];
         return view('messenger', ['data' => $data]);
     }
 }

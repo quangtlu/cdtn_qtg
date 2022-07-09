@@ -38,6 +38,6 @@ class PermissionSeeder extends Seeder
         ]);
         $roleAdmin = Role::create(['name' => 'super-admin']);
         $roleAdmin->givePermissionTo(Permission::all());
-        $userAdmin->assignRole([$roleAdmin, 'admin', 'counselor']);
+        $userAdmin->assignRole([$roleAdmin, 'admin']);
     }
 }

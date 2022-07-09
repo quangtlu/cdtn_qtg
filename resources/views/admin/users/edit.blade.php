@@ -8,7 +8,6 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.admin.content_header', ['name' => 'Người dùng', 'key' => 'Sửa thông tin',])
         <div class="content">
             <div class="container-fluid">
                 <form action="{{ route('admin.users.update', ["id" => $user->id]) }}" method="POST" enctype="multipart/form-data">
