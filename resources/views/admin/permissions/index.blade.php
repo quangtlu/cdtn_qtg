@@ -9,6 +9,10 @@
 @endsection
 @section('js')
     <script src="{{ asset('admin/role/create.js') }}"></script>
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.permissions.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên quyền');
+    </script>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -99,10 +103,4 @@
         </div>
         <!-- /.content -->
     </div>
-@endsection
-@section('js')
-    <script>
-        $('#header-search-form').attr('action', '{{ route('admin.permissions.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm tên quyền, ID...');
-    </script>
 @endsection

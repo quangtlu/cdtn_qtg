@@ -18,14 +18,9 @@ class PermissionController extends Controller
         $this->permissionService = $permissionService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $permissions = $this->permissionService->getPaginate();
-        return view('admin.permissions.index', compact('permissions'));
-    }
-
-    public function search(Request $request)
-    {
         $permissions = $this->permissionService->search($request);
         return view('admin.permissions.index', compact('permissions'));
     }

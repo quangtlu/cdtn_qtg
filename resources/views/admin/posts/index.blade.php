@@ -9,48 +9,62 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.posts.create') }}">Thêm</a>
-                    <form action="{{ route('admin.posts.index') }}" method="get">
-                        <div class="row col-md-12 mb-2">
-                            <div class="col-md-2">
-                                <select name="tag_id" class="form-control">
-                                    <option value="" class="filter-option-dafault">Tag</option>
-                                    <option value="" class="filter-option-dafault">Tất cả</option>
-                                    @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
-                                            {{ $tag->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="category_id" id="sort" class="form-control">
-                                    <option value="" class="filter-option-dafault">Danh mục</option>
-                                    <option value="" class="filter-option-dafault">Tất cả</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                            {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <select name="status" id="sort" class="form-control">
-                                    <option value="" class="filter-option-dafault">Giải đáp</option>
-                                    <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">
-                                        {{ config('consts.post.status.solved.name') }}</option>
-                                    <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">
-                                        {{ config('consts.post.status.unsolved.name') }}</option>
-            
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                    <div class="row justify-content-between" style="width:100%">
+                        <div>
+                            <a class="btn btn-success btn-sm float-right m-2" href="{{ route('admin.posts.create') }}">Thêm mới</a>
+                        </div>
+                        <div class="mt-2" id="search">
+                            <a class="card btn btn-default my-auto float-left" data-toggle="collapse" href="#collapseSearch"
+                                aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fas fa-search pl-4 pr-4"></i>
+                            </a>
+                        </div>
+                        <div class="card" id="toggle" style="display: none">
+                            <div class="p-2">
+                                <form action="{{ route('admin.posts.index') }}" method="get">
+                                    <div class="row col-md-12 mb-2">
+                                        <div class="col-md-2">
+                                            <select name="tag_id" class="form-control">
+                                                <option value="" class="filter-option-dafault">Tag</option>
+                                                <option value="" class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($tags as $tag)
+                                                    <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
+                                                        {{ $tag->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="category_id" id="sort" class="form-control">
+                                                <option value="" class="filter-option-dafault">Danh mục</option>
+                                                <option value="" class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="status" id="sort" class="form-control">
+                                                <option value="" class="filter-option-dafault">Giải đáp</option>
+                                                <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">
+                                                    {{ config('consts.post.status.solved.name') }}</option>
+                                                <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">
+                                                    {{ config('consts.post.status.unsolved.name') }}</option>
+                        
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
@@ -105,5 +119,11 @@
     <script>
         $('#header-search-form').attr('action', '{{ route('admin.posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết, tag, danh muc...');
+
+        $(document).ready( function() {
+            $('#search').click(function(){
+                $('#toggle').slideToggle();
+            });
+        });
     </script>
 @endsection

@@ -65,9 +65,17 @@
                             <div class="form-group">
                                 <label for="category_name">Chủ sở hữu tác phẩm</label>
                                 <select name="owner_id" class="form-control" >
-                                    @foreach ($owners as $owner)
-                                        <option {{ $owner->id == $product->owner->id ? 'selected' : '' }} value="{{ $owner->id }}">{{ $owner->name }}</option>
-                                    @endforeach
+                                    @if ($product->owner_id)
+                                        @foreach ($owners as $owner)
+                                            <option {{ $owner->id == $product->owner->id }} value="{{ $owner->id }}">{{ $owner->name }}</option>
+                                         @endforeach
+                                    @else
+                                        <option value=""></option>
+                                        @foreach ($owners as $owner)
+                                            <option value="{{ $owner->id }}">{{ $owner->name }}</option>
+                                        @endforeach
+                                    @endif
+                                        {{-- <option {{ $owner->id == $product->owner->id ? 'selected' : '' }} value="{{ $owner->id }}">{{ $owner->name }}</option> --}}
                                 </select>
                                 @error('owner_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

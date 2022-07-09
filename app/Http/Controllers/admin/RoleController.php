@@ -10,7 +10,7 @@ use App\Services\RoleService;
 use function redirect;
 use function view;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -25,9 +25,10 @@ class RoleController extends Controller
         view()->share('permissions', $permissions);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $roles = $this->roleService->getPaginate();
+        $roles = $this->roleService->search($request);
         return view('admin.roles.index', compact('roles'));
     }
 

@@ -4,6 +4,10 @@
 @endsection
 @section('js')
     <script src="{{ asset('admin/role/create.js') }}"></script>
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.tags.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tag, ID...');
+    </script>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -57,11 +61,5 @@
         </div>
         <!-- /.content -->
     </div>
-@endsection
-@section('js')
-    <script>
-        $('#header-search-form').attr('action', '{{ route('admin.tags.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm tag, ID...');
-    </script>
 @endsection
 

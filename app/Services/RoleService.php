@@ -28,6 +28,12 @@ class RoleService
         return $role; 
     }
 
+    public function search($request)
+    {
+        $roles = Role::search($request->keyword)->paginate(10);
+        return $roles;
+    }
+
     public function create($request){
         $role = $this->roleModel->create(['name' => $request->name]);
         $role->givePermissionTo($request->permissionNames);
