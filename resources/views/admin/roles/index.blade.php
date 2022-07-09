@@ -2,6 +2,10 @@
 @section('title', 'Quản lý vai trò')
 @section('js')
     <script src="{{ asset('js/alert.js') }}"></script>
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.roles.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên vai trò');
+    </script>
 @endsection
 @section('content')
     <div class="content-wrapper">
