@@ -40,6 +40,12 @@ class PermissionService
         return $permission; 
     }
 
+    public function search($request)
+    {
+        $permissions = Permission::search($request->keyword)->paginate(10);
+        return $permissions;
+    }
+
     public function create($request)
     {
         foreach ($request->action as $value) {
