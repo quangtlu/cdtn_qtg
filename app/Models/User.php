@@ -31,12 +31,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Chatroom::class);
     }
 
-    public function isAdmin()
+    public function categories()
     {
-        if (Auth::user()->hasRole('user')) {
-            return false;
-        }
-        return true;
+        return $this->belongsToMany(Category::class, 'user_category');
     }
 
     public function scopeSearch($query, $keyword)

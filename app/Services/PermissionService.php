@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Permission as ModelsPermission;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 
 class PermissionService
 

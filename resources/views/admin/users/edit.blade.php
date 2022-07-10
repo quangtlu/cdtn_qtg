@@ -65,8 +65,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Nhóm quyền</label>
-                                <select name="role_id[]" class="form-control select2_init" multiple>
+                                <label for="category_name">Vai trò</label>
+                                <select id="role-select" name="role_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($roles as $role)
                                         <option
@@ -76,6 +76,20 @@
                                 </select>
                                 @error('roleNames')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group" style="display: {{ $user->categories->count() ? 'block' : 'none' }}" id="category-wrap">
+                                <label>Danh mục</label>
+                                <select name="" class="form-control select3_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        @if ($category->type === 'post')
+                                            <option {{ $user->categories->contains('id', $category->id) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary mb-2">Cập nhật</button>
@@ -108,11 +122,11 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('admin/user/create.js') }}"></script>
     <script src="{{ asset('js/avatar.js') }}"></script>
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
+    <script src="{{ asset('admin/user/main.js') }}"></script>
     <script>
         $('#dob').datepicker({
             language: 'vi',

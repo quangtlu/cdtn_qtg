@@ -53,6 +53,10 @@ class UserService
         ];
         
         $user = $this->userModel->create($data);
+
+        if($request->category_id) {
+            $user->categories()->attach($request->category_id);
+        }
         if ($request->roleNames) {
             $user->assignRole($request->roleNames);
         } else {
@@ -75,6 +79,13 @@ class UserService
             $data['image'] = $name;
         }
         $user->update($data);
+
+        if($request->category_id) {
+            $user->categories()->sync($request->category_id);
+        }
+        else {
+            $user->categories()->detach();
+        }
         if($request->role_id){
             $user->roles()->sync($request->role_id);
         }
@@ -84,6 +95,9 @@ class UserService
         $user = $this->getById($id);
         $this->userModel->destroy($id);
         $user->roles()->detach();
+        if($user->categories->count()) {
+            $user->categories()->detach();
+        }
     }
 
     public function filter($request)
