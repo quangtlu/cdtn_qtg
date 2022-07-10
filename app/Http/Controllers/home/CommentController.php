@@ -25,7 +25,7 @@ class CommentController extends Controller
         $userPost = $comment->post->user;
 
         if($comment->user_id != $userPost->id){
-            $this->notificationService->create($comment, $userPost);
+            $this->notificationService->notiComment($comment, $userPost);
         }
                 
         return redirect()->back();

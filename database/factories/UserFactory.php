@@ -21,9 +21,8 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'phone' => '09'.rand(100000000, 999999999),
+        'phone' => '09'.rand(10000000, 99999999),
         'email' => $faker->unique()->safeEmail,
-        'dob' => now(),
         'gender' => 'nam',
         'image' => 'avatar-nam.jpg',
         'password' => Hash::make('password'),

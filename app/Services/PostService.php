@@ -3,9 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
-use App\Models\Category;
-use App\Models\PostCategory;
-use App\Models\Tag;
+use App\Models\User;
 use App\traits\HandleImage;
 
 class PostService
@@ -36,6 +34,26 @@ class PostService
         $post = $this->postModel->findOrFail($id);
         return $post;
     }
+
+    public function getAllCounselor($id) {
+        $post = $this->getById($id);
+        $userId = $post->user_id;
+        $categories = $post->categories;
+        $categoryIds = [];
+        foreach ($categories as $category) {
+            array_push($categoryIds, $category->id);
+        }
+        
+        return User::whereHas('roles', function ($query){
+                        $query->where('name', 'counselor');
+                    })
+                    ->whereHas('categories', function ($query) use ($categoryIds) {
+                        $query->orWhereIn('categories.id', $categoryIds);
+                    })
+                    ->where('id', '!=', $userId)
+                    ->get();
+    }
+
 
     public function create($request)
     {

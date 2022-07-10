@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Models\Category;
+use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\CategoryService;
+use App\Services\ChatroomService;
+use App\Services\NotificationService;
 use App\Services\TagService;
 use App\Services\UserService;
 
@@ -20,7 +23,8 @@ class PostController extends Controller
     private $tagService;
     private $categoryService;
     private $userService;
-
+    private $chatroomService;
+    private $notificationService;
 
     /**
      * @param $postService
@@ -29,12 +33,16 @@ class PostController extends Controller
         PostService $postService,
         TagService $tagService,
         CategoryService $categoryService,
-        UserService $userService
+        UserService $userService,
+        ChatroomService $chatroomService,
+        NotificationService $notificationService
     ) {
         $this->postService = $postService;
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
         $this->userService = $userService;
+        $this->chatroomService = $chatroomService;
+        $this->notificationService = $notificationService;
         $tags = $this->tagService->getAll();
         $categories = $this->categoryService->getAll();
         view()->share(['tags' => $tags, 'categories' => $categories]);
@@ -68,7 +76,8 @@ class PostController extends Controller
     {
         $post = $this->postService->getById($id);
         $postRelates = $this->postService->getPostRelate($id);
-        return view('home.posts.show', compact('post', 'postRelates'));
+        $counselors = $this->postService->getAllCounselor($id);
+        return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
     }
 
     public function store(StorePostRequest $request)
@@ -133,5 +142,20 @@ class PostController extends Controller
     {
         $posts = $this->getPostByService($this->tagService, $id);
         return view('home.posts.index', compact('posts'));
+    }
+
+    public function connectToCounselor(Request $request, $id)
+    {
+        $chatroom = $this->chatroomService->create($request, $id);
+        $post = $this->postService->getById($id);        
+        
+        if($chatroom) {
+            $this->notificationService->notiConnectToUser($post, $request->counselor_id);
+            $this->notificationService->notiConnectToCounselor($post, $request->counselor_id);
+            return Redirect()->back()->with('success', 'Kết nối thành công');
+        }
+        else {
+            return Redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình kết nối');
+        }
     }
 }

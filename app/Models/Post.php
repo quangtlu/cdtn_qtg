@@ -34,9 +34,9 @@ class Post extends Model
         return $this->belongsToMany(Category::class, 'post_category');
     }
 
-    public function postCategory()
+    public function chatroom()
     {
-        return $this->hasMany(PostCategory::class);
+        return $this->hasOne(Chatroom::class);
     }
 
     public function scopeSearch($query, $keyword)

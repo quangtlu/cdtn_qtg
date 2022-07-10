@@ -94,23 +94,40 @@
                                 </i>
                                 <ul class="notice-list">
                                     @foreach (Auth::user()->notifications as $notification)
-                                        <li class="notice-item"><a
-                                                href="{{ $notification->unread() ? route('notifications.markAsRead', ['id' => $notification->id]) : '#' . $notification->data['comment_id'] }}">
-                                                <div class="notice-item-wrap">
-                                                    <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
-                                                        alt="" class="notice-item__avatar">
-                                                    <div
-                                                        class="notice-item-content-wrap post-content-limit-line 
-                                                        {{ $notification->unread() ? '' : ' mark-as-read' }}
-                                                       ">
-                                                        {!! $notification->data['title'] !!}:
-                                                        '{{ $notification->data['content'] }}'
-                                                        <div class="notice-item-content__time">
-                                                            {{ $notification->created_at->diffForHumans() }}
+                                        @if ($notification->type == 'App\Notifications\CommentNotification')
+                                            <li class="notice-item"><a
+                                                    href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                    <div class="notice-item-wrap">
+                                                        <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
+                                                            alt="" class="notice-item__avatar">
+                                                        <div
+                                                            class="notice-item-content-wrap post-content-limit-line 
+                                                            {{ $notification->unread() ? '' : ' mark-as-read' }}
+                                                        ">
+                                                            {!! $notification->data['title'] !!}:
+                                                            '{{ $notification->data['content'] }}'
+                                                            <div class="notice-item-content__time">
+                                                                {{ $notification->created_at->diffForHumans() }}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </a></li>
+                                                </a></li>
+                                        @elseif ($notification->type == 'App\Notifications\ConnectNotification')
+                                            <li class="notice-item">
+                                                <a href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                    <ul class="notification-item-list {{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                        <li><h4>{!! $notification->data['title'] !!}</h4></li>
+                                                        <li style="font-size: 12px;" class="post-content-limit-line"><p>{!! $notification->data['content'] !!}</p></li>
+                                                        <li class="notice-item-content__time"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $notification->created_at->diffForHumans() }}</li>
+                                                        <li>
+                                                            <button class="btn btn-primary btn-sm btn-block text-center">
+                                                                <a href="{{ route('rooms', ['id' => $notification->data['chatroom_id']]) }}">{{  $notification->data['text_btn']  }}</a>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             @endif

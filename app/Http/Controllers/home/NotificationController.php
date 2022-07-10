@@ -7,12 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    public function markAsRead($id)
+    public function getNotificationById($id)
     {
-        $notification = Auth::user()->notifications()->find($id);
-        if ($notification) {
-            $notification->markAsRead();
-            return redirect(route('posts.show', ['id' => $notification->data['post_id']]) . '#' . $notification->data['comment_id']);
-        }
+        return Auth::user()->notifications()->find($id);
+    }
+
+    public function showPost($id) {
+        $notification = $this->getNotificationById($id);
+        $notification->markAsRead();
+        return redirect(route('posts.show', ['id' => $notification->data['post_id']]));
+    }
+
+    public function markAsRead($id) {
+        $notification = $this->getNotificationById($id);
+        $notification->markAsRead();
+        return redirect()->back();
     }
 }
