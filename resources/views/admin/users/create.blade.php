@@ -1,11 +1,10 @@
 @extends('layouts.admin')
-
 @section('title', 'Thêm mới người dùng')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -24,13 +23,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="" id="dob" placeholder="yyyy-mm-dd">
+                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob"
+                                    value="" id="dob" placeholder="yyyy-mm-dd">
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Giới tính</label>
+                                <label class="form-label">Giới tính<b class="field-require">*</b></label>
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
                                     <option value="nam">Nam</option>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Vai trò</label>
-                                <select name="roleNames[]" class="form-control select2_init" multiple>
+                                <select id="role-select" name="roleNames[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
@@ -76,9 +76,23 @@
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group" style="display: none" id="category-wrap">
+                                <label>Danh mục</label>
+                                <select name="" class="form-control select3_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        @if ($category->type === 'post')
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-primary mb-2">Thêm mới</button>
                         </div>
-                        <div class="col-md-6" >
+                        <div class="col-md-6">
                             <div class="avatar-header mt-4">
                                 <div class="avatar-wrapper mt-5" title="Ảnh đại diện">
                                     <img class="profile-pic" src="{{ asset('image/profile/register.png') }}" />
@@ -99,17 +113,7 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('admin/user/create.js') }}"></script>
-    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-    <script src="{{ asset('js/avatar.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
-    <script>
-        $('#dob').datepicker({
-            language: 'vi',
-            orientation: 'bottom',
-            dateFormat: 'YY-mm-dd'
-        });
-    </script>
+    <script src="{{ asset('admin/user/main.js') }}"></script>
 @endsection
-

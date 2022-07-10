@@ -185,5 +185,6 @@ return [
         'mod',
         'editor',
         'user',
+        'counselor'
     ]
 ];

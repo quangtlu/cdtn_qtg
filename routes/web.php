@@ -8,11 +8,13 @@ Route::middleware('auth')->group(function () {
     //Admin
     Route::name('admin.')->prefix('admin')->middleware('role:admin')->group(function () {
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+        
         Route::name('profile.')->prefix('/profile-user')->group(function () {
             Route::get('/', 'Admin\ProfileController@index')->name('index');
             Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('edit');
             Route::post('/update{id}', 'Admin\ProfileController@update')->name('update');
         });
+
         Route::name('users.')->prefix('/users')->group(function () {
             Route::get('/', 'Admin\UserController@index')->name('index')->middleware('can:list user');
             Route::get('/create', 'Admin\UserController@create')->name('create')->middleware('can:add user');
@@ -21,6 +23,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', 'Admin\UserController@update')->name('update')->middleware('can:edit user');
             Route::get('/destroy/{id}', 'Admin\UserController@destroy')->name('destroy')->middleware('can:delete user');
         });
+
         Route::name('roles.')->prefix('/roles')->group(function () {
             Route::get('/', 'Admin\RoleController@index')->name('index')->middleware('can:list role');
             Route::get('/create', 'Admin\RoleController@create')->name('create')->middleware('can:add role');
@@ -29,11 +32,13 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', 'Admin\RoleController@update')->name('update')->middleware('can:edit role');
             Route::get('/destroy/{id}', 'Admin\RoleController@destroy')->name('destroy')->middleware('can:delete role');
         });
+
         Route::name('permissions.')->prefix('/permissions')->group(function () {
             Route::get('/', 'Admin\PermissionController@index')->name('index')->middleware('can:list permission');
             Route::post('/store', 'Admin\PermissionController@store')->name('store')->middleware('can:add permission');
             Route::get('/destroy/{id}', 'Admin\PermissionController@destroy')->name('destroy')->middleware('can:delete permission');
         });
+
         Route::name('authors.')->prefix('/authors')->group(function () {
             Route::get('/', 'Admin\AuthorController@index')->name('index')->middleware('can:list author');
             Route::get('/create', 'Admin\AuthorController@create')->name('create')->middleware('can:add author');
@@ -42,6 +47,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', 'Admin\AuthorController@update')->name('update')->middleware('can:edit author');
             Route::get('/destroy/{id}', 'Admin\AuthorController@destroy')->name('destroy')->middleware('can:delete author');
         });
+
         Route::name('products.')->prefix('/products')->group(function () {
             Route::get('/', 'Admin\ProductController@index')->name('index')->middleware('can:list product');
             Route::get('/create', 'Admin\ProductController@create')->name('create')->middleware('can:add product');
@@ -51,13 +57,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/show/{id}', 'Admin\ProductController@show')->name('show')->middleware('can:show product');
             Route::get('/destroy/{id}', 'Admin\ProductController@destroy')->name('destroy')->middleware('can:delete product');
         });
+
         Route::name('owners.')->prefix('/owners')->group(function () {
             Route::get('/', 'Admin\OwnerController@index')->name('index')->middleware('can:list owner');
-                Route::get('/create', 'Admin\OwnerController@create')->name('create')->middleware('can:add owner');
-                Route::post('/store', 'Admin\OwnerController@store')->name('store')->middleware('can:add owner');
-                Route::get('/edit/{id}', 'Admin\OwnerController@edit')->name('edit')->middleware('can:edit owner');
-                Route::post('/update/{id}', 'Admin\OwnerController@update')->name('update')->middleware('can:edit owner');
-                Route::get('/destroy/{id}', 'Admin\OwnerController@destroy')->name('destroy')->middleware('can:delete owner');
+            Route::get('/create', 'Admin\OwnerController@create')->name('create')->middleware('can:add owner');
+            Route::post('/store', 'Admin\OwnerController@store')->name('store')->middleware('can:add owner');
+            Route::get('/edit/{id}', 'Admin\OwnerController@edit')->name('edit')->middleware('can:edit owner');
+            Route::post('/update/{id}', 'Admin\OwnerController@update')->name('update')->middleware('can:edit owner');
+            Route::get('/destroy/{id}', 'Admin\OwnerController@destroy')->name('destroy')->middleware('can:delete owner');
         });
 
         Route::name('posts.')->prefix('/posts')->group(function () {
@@ -121,11 +128,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/update/status/{id}', 'home\CommentController@toogleStatus')->name('toogleStatus');
         Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
     });
-    
+
     Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('/messages', 'MessageController@index');
     Route::post('/messages', 'MessageController@store');
-    Route::get('/rooms/{any}', 'MessengerController@index')->where('any', '.*');
 
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');
