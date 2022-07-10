@@ -86,9 +86,7 @@ class UserService
         else {
             $user->categories()->detach();
         }
-        if($request->role_id){
-            $user->roles()->sync($request->role_id);
-        }
+        $user->roles()->sync($request->role_id);
     }
 
     public function delete($id){

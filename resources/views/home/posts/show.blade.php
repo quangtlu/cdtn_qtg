@@ -82,6 +82,51 @@
             </li>
         </ul>
     </div>
+    @auth
+        @if (Auth::user()->id == $post->user_id && $post->chatroom)
+            <a class="btn btn-success" style="margin-top: 10px"
+                href="{{ route('rooms', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
+                    class="fa fa-comments"></i></a>
+        @else
+            @role('mod|super-admin')
+                @if ($post->chatroom)
+                    <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                @else
+                    <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
+                        với
+                        chuyên gia <i class="fa fa-comments"></i></button>
+                    <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label>Chuyên gia tư vấn</label>
+                                            <select name="counselor_id" class="form-control select2_init">
+                                                @foreach ($counselors as $counselor)
+                                                    <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
+                                            nối</button>
+                                        <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endrole
+        @endif
+    @endauth
+
     {{-- Comment --}}
     <div id="comments" class="comments">
         <h3 style="margin-top: 50px">Bình luận</h3>

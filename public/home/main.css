@@ -121,3 +121,7 @@
 .mark-as-read {
     color: #ccc;
 }
+
+.notification-item-list li {
+    padding-bottom: 10px;
+}

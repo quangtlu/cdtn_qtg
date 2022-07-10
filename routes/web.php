@@ -118,6 +118,7 @@ Route::middleware('auth')->group(function () {
     Route::name('posts.')->prefix('posts')->group(function () {
         Route::post('/store', 'home\PostController@store')->name('store');
         Route::post('/update/{id}', 'home\PostController@update')->name('update');
+        Route::post('/connect-to-counselor/{id}', 'home\PostController@connectToCounselor')->name('connectToCounselor');
         Route::get('/update/status/{id}', 'home\PostController@toogleStatus')->name('toogleStatus');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('destroy');
     });
@@ -132,14 +133,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('/messages', 'MessageController@index');
     Route::post('/messages', 'MessageController@store');
-
+    Route::get('/rooms/{id}', 'MessengerController@index')->name('rooms'); // catch all routes or else it will return 404 with Vue router in history mode
+    
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');
         Route::get('/edit/{id}', 'home\ProfileController@edit')->name('edit');
         Route::post('/update{id}', 'home\ProfileController@update')->name('update');
     });
 
-    Route::get('/notifications/{id}', 'home\NotificationController@markAsRead')->name('notifications.markAsRead');
+    Route::get('/notifications/show-post/{id}', 'home\NotificationController@showPost')->name('notifications.showPost');
 });
 
 //No auth

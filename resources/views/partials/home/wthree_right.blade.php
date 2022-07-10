@@ -29,7 +29,7 @@
                     <li>
                         <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                            {{ $category->name.' ('.$category->posts->count().')' }}
+                            {{ $category->posts->count() ? $category->name.' ('.$category->posts->count().')' : $category->name }}
                         </a>
                     </li>
                 @endforeach
@@ -41,7 +41,7 @@
         <div class="w3l_wrap">
             <ul class="tag">
                 @foreach ($tags as $tag)
-                    <li><a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->name }}</a></li>
+                    <li><a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->posts->count() ? $tag->name.' ('.$tag->posts->count().')' : $tag->name }}</a></li>
                 @endforeach
             </ul>
         </div>
