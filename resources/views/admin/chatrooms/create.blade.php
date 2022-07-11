@@ -31,7 +31,7 @@
                                 <select name="user_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        <option value="{{ $user->id }}" {{ (collect(old('user_id'))->contains($user->id)) ? 'selected':'' }}>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('user_id')

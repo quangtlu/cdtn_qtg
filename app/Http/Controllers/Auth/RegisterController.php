@@ -98,7 +98,7 @@ class RegisterController extends Controller
             'image' => $nameImage,
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'dob' => $data['dob'],
+            'dob' => date('Y-m-d', strtotime(str_replace('/', '-', $data['dob']))),
             'password' => Hash::make($data['password']),
         ]);
 

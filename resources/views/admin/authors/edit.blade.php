@@ -14,16 +14,14 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên<b class="field-require">*</b></label>
-                                <input type="text" value="{{ $author->name }}" name="name" class="form-control">
+                                <input type="text" value="{{ old('name') ?? $author->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                {{-- <input value="{{ $author->dob }}" type="datetime-local" placeholder="yyyy-mm-dd" name="dob" class="form-control" style="background-color: #fff"> --}}
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="{{ old('dob') ?? $author->dob }}" id="dob" placeholder="yyyy-mm-dd">
-
+                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') ?? $author->dob }}" id="dob" placeholder="dd/mm/yyyy">
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -31,12 +29,12 @@
                             <div class="form-group">
                                 <label for="category_name">Giới tính<b class="field-require">*</b></label>
                                 <select name="gender" id="" class="form-control">
-                                    @if ($author->gender == 'Nam')
-                                        <option value="Nam" selected>Nam</option>
-                                        <option value="Nữ">Nữ</option>
+                                    @if ($author->gender == 'nam')
+                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} selected value="nam">Nam</option>
+                                        <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
                                     @else
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ" selected>Nữ</option>
+                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
+                                        <option {{ old('gender') == 'nu' ? 'selected' : '' }} selected value="nu">Nữ</option>
                                     @endif
                                 </select>
                                 @error('gender')
@@ -45,14 +43,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại <b class="field-require">*</b></label>
-                                <input value="{{ $author->phone }}" type="text" name="phone" class="form-control">
+                                <input value="{{ old('phone') ?? $author->phone }}" type="text" name="phone" class="form-control">
                                 @error('phone')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email <b class="field-require">*</b></label>
-                                <input value="{{ $author->email }}" type="email" name="email" class="form-control">
+                                <input value="{{ old('email') ?? $author->email }}" type="email" name="email" class="form-control">
                                 @error('email')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

@@ -10,7 +10,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên danh mục</label>
-                                <input type="text" value="{{ $category->name }}" name="name" class="form-control">
+                                <input type="text" value="{{ old('name') ?? $category->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

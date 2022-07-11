@@ -28,6 +28,7 @@ class StoreAuthorRequest extends FormRequest
             'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
             'email' => 'bail|required|unique:users|email:rfc,dns',
             'dob' => 'bail|required|before:today',
+            'gender' => 'required'
         ];
     }
 
@@ -44,6 +45,7 @@ class StoreAuthorRequest extends FormRequest
             'email.unique' => 'Email đã tồn tại',
             'dob.required' => 'Vui lòng nhập ngày sinh',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
+            'gender.required' => 'Vui lòng chọn giới tính',
         ];
     }
 }

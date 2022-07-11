@@ -17,7 +17,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên bài viết</label>
-                                <input type="text" value="{{ $post->title }}" name="title" class="form-control"
+                                <input type="text" value="{{ old('title') ?? $post->title }}" name="title" class="form-control"
                                     id="category_name">
                                 @error('title')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
-                                <textarea class="form-control" value="{{ $post->content }}" name="content" id="summernote" cols="30" rows="5">{{ $post->content }}</textarea>
+                                <textarea class="form-control" value="{{ old('content') ?? $post->content }}" name="content" id="summernote" cols="30" rows="5">{{ $post->content }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

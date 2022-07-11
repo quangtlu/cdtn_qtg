@@ -10,7 +10,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên danh mục</label>
-                                <input type="text" name="name" class="form-control" >
+                                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -28,7 +28,8 @@
                             <div class="form-group">
                                 <label for="category_name">Loại danh mục</label>
                                 <select id="selectType" name="type" class="form-control" >
-                                    
+                                    <option value="product">Tác phẩm</option>
+                                    <option value="post">Bài viết</option>
                                 </select>
                                 @error('type')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
