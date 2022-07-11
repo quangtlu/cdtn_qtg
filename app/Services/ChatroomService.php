@@ -59,6 +59,7 @@ class ChatroomService
             $data = [
                 "name" => $request->name,
                 "description" => $request->description,
+                "post_id" => $request->post_id
             ];
             $userIds = $request->user_id;
         }

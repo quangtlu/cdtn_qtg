@@ -13,6 +13,11 @@ class Chatroom extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class );
+    }
+
     public function post()
     {
         return $this->belongsTo(Post::class, 'post_id');

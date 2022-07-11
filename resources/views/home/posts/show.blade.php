@@ -85,7 +85,7 @@
     @auth
         @if (Auth::user()->id == $post->user_id && $post->chatroom)
             <a class="btn btn-success" style="margin-top: 10px"
-                href="{{ route('rooms', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
+                href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
                     class="fa fa-comments"></i></a>
         @else
             @role('mod|super-admin')

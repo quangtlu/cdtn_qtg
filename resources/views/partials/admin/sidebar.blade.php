@@ -39,7 +39,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @can('admin list user')
                 <li class="nav-item">
-                    <a href="{{route('admin.users.index')}}" class="nav-link">
+                    <a href="{{route('admin.users.index')}}" class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <p>
                             Quản lý người dùng
@@ -49,7 +49,7 @@
                 @endcan
                 @can('admin list author')
                 <li class="nav-item">
-                    <a href="{{route('admin.authors.index')}}" class="nav-link">
+                    <a href="{{route('admin.authors.index')}}" class="nav-link {{ Request::is('admin/authors*') ? 'active' : ''}} ">
                         <i class="fas fa-user-edit"></i>
                     <p>
                         Quản lý tác giả
@@ -59,7 +59,7 @@
                 @endcan
                 @can('admin list product')
                 <li class="nav-item">
-                    <a href="{{route('admin.products.index')}}" class="nav-link">
+                    <a href="{{route('admin.products.index')}}" class="nav-link {{ Request::is('admin/products*') ? 'active' : ''}}">
                         <i class="fas fa-book"></i>
                         <p>
                             Quản lý tác phẩm
@@ -69,7 +69,7 @@
                 @endcan
                 @can('admin list owner')
                 <li class="nav-item">
-                    <a href="{{route('admin.owners.index')}}" class="nav-link">
+                    <a href="{{route('admin.owners.index')}}" class="nav-link {{ Request::is('admin/owners*') ? 'active' : ''}}">
                         <i class="fas fa-user-tie"></i>
                         <p>
                             Quản lý chủ sở hữu
@@ -79,7 +79,7 @@
                 @endcan
                 @can('admin list post')
                 <li class="nav-item">
-                    <a href="{{route('admin.posts.index')}}" class="nav-link">
+                    <a href="{{route('admin.posts.index')}}" class="nav-link {{ Request::is('admin/posts*') ? 'active' : ''}}">
                         <i class="fas fa-book"></i>
                         <p>
                             Quản lý bài viết
@@ -89,7 +89,7 @@
                 @endcan
                 @can('admin list role')
                 <li class="nav-item">
-                    <a href="{{route('admin.roles.index')}}" class="nav-link">
+                    <a href="{{route('admin.roles.index')}}" class="nav-link {{ Request::is('admin/roles*') ? 'active' : ''}}">
                         <i class="fas fa-user-tag"></i>
                         <p>
                             Quản lý vai trò
@@ -99,7 +99,7 @@
                 @endcan
                 @can('admin list permission')
                 <li class="nav-item">
-                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
+                    <a href="{{route('admin.permissions.index')}}" class="nav-link {{ Request::is('admin/permissions*') ? 'active' : ''}}">
                         <i class="fas fa-user-shield"></i>
                         <p>
                             Quản lý quyền truy cập
@@ -109,7 +109,7 @@
                 @endcan
                 @can('list faq')
                 <li class="nav-item">
-                    <a href="{{route('admin.faqs.index')}}" class="nav-link">
+                    <a href="{{route('admin.faqs.index')}}" class="nav-link {{ Request::is('admin/faqs*') ? 'active' : ''}}">
                         <i class="fas fa-question-circle"></i>
                         <p>
                             Quản lý FAQ
@@ -118,7 +118,7 @@
                 </li>
                 @endcan
                 <li class="nav-item">
-                    <a href="{{route('admin.tags.index')}}" class="nav-link">
+                    <a href="{{route('admin.tags.index')}}" class="nav-link {{ Request::is('admin/tags*') ? 'active' : ''}}">
                         <i class="fas fa-tags"></i>
                         <p>
                             Quản lý Tags
@@ -126,7 +126,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.categories.index')}}" class="nav-link">
+                    <a href="{{route('admin.categories.index')}}" class="nav-link {{ Request::is('admin/categories*') ? 'active' : ''}}">
                         <i class="fas fa-list-alt"></i>
                         <p>
                             Quản lý danh mục
@@ -134,7 +134,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.chatrooms.index')}}" class="nav-link">
+                    <a href="{{route('admin.chatrooms.index')}}" class="nav-link {{ Request::is('admin/chatrooms*') ? 'active' : ''}}">
                         <i class="fas fa-comments"></i>
                         <p>
                             Quản lý phòng tư vấn

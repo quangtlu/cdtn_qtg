@@ -121,7 +121,7 @@
                                                         <li class="notice-item-content__time {{ $notification->unread() ? '' : ' mark-as-read' }}"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $notification->created_at->diffForHumans() }}</li>
                                                         <li>
                                                             <button class="btn btn-primary btn-sm btn-block text-center">
-                                                                <a style="color: white; font-size:16px" href="{{ route('rooms', ['id' => $notification->data['chatroom_id']]) }}">{{ $notification->data['text_btn'] }} <i class="fa fa-comments-o"></i></a>
+                                                                <a style="color: white; font-size:16px" href="{{ route('messenger.show', ['id' => $notification->data['chatroom_id']]) }}">{{ $notification->data['text_btn'] }} <i class="fa fa-comments-o"></i></a>
                                                             </button>
                                                         </li>
                                                     </ul>

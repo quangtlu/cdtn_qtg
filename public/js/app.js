@@ -56,7 +56,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$swal.fire({
                   toast: true,
                   icon: "success",
-                  title: "Gửi đánh thành công",
+                  title: "Gửi đánh giá thành công",
                   position: "top-end",
                   showCloseButton: true,
                   timer: 3000,
@@ -73,7 +73,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$swal.fire({
                   toast: true,
                   icon: "error",
-                  title: "Gửi đánh thất bại",
+                  title: "Gửi đánh giá thất bại",
                   position: "top-end",
                   showCloseButton: true,
                   timer: 3000,
@@ -349,7 +349,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _this2.$axios.get("/messages?room=".concat(_this2.$route.params.roomId));
+                return _this2.$axios.get("/messages/chatroom/".concat(_this2.$route.params.roomId));
 
               case 3:
                 response = _context.sent;
@@ -886,7 +886,7 @@ var render = function render() {
       key: room.id
     }, [_c("router-link", {
       attrs: {
-        to: "/rooms/".concat(room.id)
+        to: "/messenger/".concat(room.id)
       }
     }, [_c("div", {
       staticClass: "d-flex bd-highlight"
@@ -11577,7 +11577,7 @@ var routes = [{
   name: 'list.room',
   component: _pages_ListRoom__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: '/rooms/:roomId',
+  path: '/messenger/:roomId',
   name: 'room',
   component: _pages_Room__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];

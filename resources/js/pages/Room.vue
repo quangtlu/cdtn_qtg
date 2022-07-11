@@ -76,9 +76,7 @@ export default {
   methods: {
     async getMessages() {
       try {
-        const response = await this.$axios.get(
-          `/messages?room=${this.$route.params.roomId}`
-        );
+        const response = await this.$axios.get(`/messages/chatroom/${this.$route.params.roomId}`);
         this.messages = response.data;
         this.scrollToBottom(document.getElementById("shared_room"), false);
       } catch (error) {

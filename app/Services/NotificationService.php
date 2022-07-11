@@ -28,7 +28,7 @@ class NotificationService
         $data = [
             'chatroom_id' => $post->chatroom->id,
             'post_id' => $post->id,
-            'title' => '<strong class="text-danger"> Hệ thống </strong>' . ' đã kết nối bạn với chuyên gia tư vấn - '. '<strong>'.$counselor->name.'</strong>' ,
+            'title' => '<strong style="color: red"> Hệ thống </strong>' . ' đã kết nối bạn với chuyên gia tư vấn - '. '<strong>'.$counselor->name.'</strong>' ,
             'content' => '<b>Bài viết:</b> ' . $post->title,
             'text_btn' => 'Chat với chuyên gia tư vấn'
         ];
@@ -41,7 +41,7 @@ class NotificationService
         $data = [
             'chatroom_id' => $post->chatroom->id,
             'post_id' => $post->id,
-            'title' => '<strong class="text-danger"> Hệ thống </strong>' . ' đã kết nối bạn với '.'<b>'.$post->user->name.'</b>',
+            'title' => '<strong style="color: red"> Hệ thống </strong>' . ' đã kết nối bạn với '.'<b>'.$post->user->name.'</b>',
             'content' => '<b>Bài viết:</b> ' . $post->title,
             'text_btn' => 'Tư vấn'
         ];
