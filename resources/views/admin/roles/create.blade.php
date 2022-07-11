@@ -20,7 +20,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="category_name">Tên vai trò</label>
-                                <input type="text" name="name" class="form-control" >
+                                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

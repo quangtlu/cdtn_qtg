@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
             'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
             'email' => 'bail|required|unique:users|email:rfc,dns',
             'dob' => 'bail|before:today|nullable',
+            'gender' => 'required',
             'password' => [
                 'bail',
                 'required',
@@ -50,6 +51,7 @@ class StoreUserRequest extends FormRequest
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
+            'gender.required' => 'Vui lòng chọn giới tính',
         ];
     }
 }

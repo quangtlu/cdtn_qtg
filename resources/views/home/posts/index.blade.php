@@ -123,7 +123,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="title">Tiêu đề</label>
-                            <input type="text" name="title" class="form-control" id="title">
+                            <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}">
                             @error('title')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                             @enderror
@@ -133,7 +133,7 @@
                             <select name="tag_id[]" class="form-control select2_init" multiple>
                                 <option></option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    <option value="{{ $tag->id }}" {{ (collect(old('tag_id'))->contains($tag->id)) ? 'selected':'' }}>{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tag_id')
@@ -145,7 +145,7 @@
                             <select name="category_id[]" class="form-control select3_init" multiple>
                                 <option></option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ (collect(old('category_id'))->contains($category->id)) ? 'selected':'' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -154,7 +154,7 @@
                         </div>
                         <div class="form-group">
                             <label for="summernote">Nội dung</label>
-                            <textarea class="form-control" name="content" class="content" id="summernote" cols="30" rows="5"></textarea>
+                            <textarea class="form-control" name="content" class="content" id="summernote" cols="30" rows="5">{{ old('content') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="image">Ảnh</label>

@@ -37,11 +37,13 @@ class AuthorService
     }
 
     public function create($request){
+        $date = str_replace('/', '-', $request->dob);
+        $dob = date('Y-m-d', strtotime($date));
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
             "gender" => $request->gender,
-            "dob" => $request->dob,
+            "dob" => $dob,
             "email" => $request->email,
         ];
         $this->authorModel->create($data);
@@ -49,11 +51,13 @@ class AuthorService
 
     public function update($request, $id){
         $author = $this->getById($id);
+        $date = str_replace('/', '-', $request->dob);
+        $dob = date('Y-m-d', strtotime($date));
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
             "gender" => $request->gender,
-            "dob" => $request->dob,
+            "dob" => $dob,
             "email" => $request->email,
         ];
         $author->update($data);

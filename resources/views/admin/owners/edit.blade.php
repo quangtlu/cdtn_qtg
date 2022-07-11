@@ -10,21 +10,21 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên chủ sở hữu</label>
-                                <input type="text" value="{{ $owner->name }}" name="name" class="form-control" >
+                                <input type="text" value="{{ old('name') ?? $owner->name }}" name="name" class="form-control" >
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại</label>
-                                <input value="{{ $owner->phone }}" type="text" name="phone" class="form-control" >
+                                <input value="{{ old('phone') ?? $owner->phone }}" type="text" name="phone" class="form-control" >
                                 @error('phone')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email</label>
-                                <input value="{{ $owner->email }}" type="email" name="email" class="form-control" >
+                                <input value="{{ old('email') ?? $owner->email }}" type="email" name="email" class="form-control" >
                                 @error('email')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
