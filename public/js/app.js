@@ -22,8 +22,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       maxScore: 5,
       feedback: {
-        score: 3,
-        note: 'Tư vấn nhiệt tình, dễ hiểu,..'
+        score: 5,
+        note: "Ứng dụng tuyệt vời, rất hữu ích !"
       }
     };
   },
@@ -55,9 +55,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _this.$swal.fire({
                   toast: true,
-                  icon: 'success',
-                  title: 'Gửi đánh thành công',
-                  position: 'top-end',
+                  icon: "success",
+                  title: "Gửi đánh thành công",
+                  position: "top-end",
                   showCloseButton: true,
                   timer: 3000,
                   showConfirmButton: false
@@ -72,9 +72,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$swal.fire({
                   toast: true,
-                  icon: 'error',
-                  title: 'Gửi đánh thất bại',
-                  position: 'top-end',
+                  icon: "error",
+                  title: "Gửi đánh thất bại",
+                  position: "top-end",
                   showCloseButton: true,
                   timer: 3000,
                   showConfirmButton: false
@@ -5376,7 +5376,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.star-icon {\n  padding-right: 5px;\n  color: yellow;\n  cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.star-icon {\r\n  padding-right: 5px;\r\n  color: yellow;\r\n  cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
