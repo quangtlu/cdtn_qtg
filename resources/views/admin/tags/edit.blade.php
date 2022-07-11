@@ -10,7 +10,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên tag</label>
-                                <input type="text" value="{{ $tag->name }}" name="name" class="form-control" >
+                                <input type="text" value="{{ old('name') ?? $tag->name }}" name="name" class="form-control" >
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

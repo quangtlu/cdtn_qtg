@@ -16,14 +16,14 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Họ và tên <b class="field-require">*</b></label>
-                                <input type="text" value="{{ $user->name }}" name="name" class="form-control">
+                                <input type="text" value="{{ old('name') ?? $user->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="{{ old('dob') ?? $user->dob }}" id="dob" placeholder="yyyy-mm-dd">
+                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') ?? $user->dob }}" id="dob" placeholder="dd/mm/yyyy">
                                 @error('dob')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -32,11 +32,11 @@
                                 <label for="category_name">Giới tính</label>
                                 <select name="gender" id="" class="form-control">
                                     @if ($user->gender == 'nam')
-                                        <option value="nam" selected>Nam</option>
-                                        <option value="Nữ">Nữ</option>
+                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} selected value="nam">Nam</option>
+                                        <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
                                     @else
-                                        <option value="nam">Nam</option>
-                                        <option value="Nữ" selected>Nữ</option>
+                                    <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
+                                    <option {{ old('gender') == 'nu' ? 'selected' : '' }}  selected value="nu">Nữ</option>
                                     @endif
                                 </select>
                                 @error('gender')
@@ -45,21 +45,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Số điện thoại <b class="field-require">*</b></label>
-                                <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" >
+                                <input value="{{ old('phone') ?? $user->phone }}" type="text" name="phone" class="form-control" >
                                 @error('phone')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Email <b class="field-require">*</b></label>
-                                <input value="{{ $user->email }}" type="email" name="email" class="form-control" >
+                                <input value="{{ old('email') ?? $user->email }}" type="email" name="email" class="form-control" >
                                 @error('email')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mật khẩu <b class="field-require">*</b></label>
-                                <input id="password" data-toggle="password" type="password" name="password" class="form-control">
+                                <input id="password" data-toggle="password" type="password" name="password" class="form-control" value="{{ old('email') }}">
                                 @error('password')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

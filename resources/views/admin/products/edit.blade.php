@@ -23,14 +23,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" value="{{ $product->pub_date }}" name="pub_date"  placeholder="yyyy-mm-dd">
+                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control date-time" value="{{ $product->pub_date }}" name="pub_date"  placeholder="dd/mm/yyyy">
                                 @error('pub_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" value="{{ $product->regis_date }}" name="regis_date"  placeholder="yyyy-mm-dd">
+                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control date-time" value="{{ $product->regis_date }}" name="regis_date"  placeholder="dd/mm/yyyy">
                                 @error('regis_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -75,7 +75,6 @@
                                             <option value="{{ $owner->id }}">{{ $owner->name }}</option>
                                         @endforeach
                                     @endif
-                                        {{-- <option {{ $owner->id == $product->owner->id ? 'selected' : '' }} value="{{ $owner->id }}">{{ $owner->name }}</option> --}}
                                 </select>
                                 @error('owner_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

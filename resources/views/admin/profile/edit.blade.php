@@ -18,13 +18,13 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label class="labels">Họ tên</label>
-                                        <input type="text" value="{{ $profile->name }}" name="name" class="form-control" >
+                                        <input type="text" value="{{ old('name') ?? $profile->name }}" name="name" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label class="labels">Ngày sinh</label>
-                                        <input type="text" data-date-format='yyyy-mm-dd' class="form-control" name="dob" value="{{ old('dob') ?? $profile->dob }}" id="dob" placeholder="yyyy-mm-dd">
+                                        <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') ?? $profile->dob }}" id="dob" placeholder="dd/mm/yyyy">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -44,13 +44,13 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label class="labels">Email</label>
-                                        <input type="text" value="{{ $profile->email }}" name="email" class="form-control" >
+                                        <input type="text" value="{{ old('email') ?? $profile->email }}" name="email" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label class="labels">Điện thoại</label>
-                                        <input type="text" value="{{ $profile->phone }}" name="phone" class="form-control" >
+                                        <input type="text" value="{{ old('phone') ?? $profile->phone }}" name="phone" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">

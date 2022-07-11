@@ -32,8 +32,8 @@ class ProductService
     public function create($request){
         $data = [
             "name" => $request->name,
-            "pub_date" => $request->pub_date,
-            "regis_date" => $request->regis_date,
+            "pub_date" => date('Y-m-d', strtotime(str_replace('/', '-', $request->pub_date))),
+            "regis_date" => date('Y-m-d', strtotime(str_replace('/', '-', $request->regis_date))),
             "owner_id" => $request->owner_id,
             "categoryIds" => $request->categoryIds,
             "description" => $request->description,
@@ -59,8 +59,8 @@ class ProductService
         $product = $this->getById($id);
         $data = [
             "name" => $request->name,
-            "pub_date" => $request->pub_date,
-            "regis_date" => $request->regis_date,
+            "pub_date" => date('Y-m-d', strtotime(str_replace('/', '-', $request->pub_date))),
+            "regis_date" => date('Y-m-d', strtotime(str_replace('/', '-', $request->regis_date))),
             "owner_id" => $request->owner_id,
             "categoryIds" => $request->categoryIds,
             "description" => $request->description,

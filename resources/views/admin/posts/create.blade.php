@@ -15,7 +15,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tiêu đề</label>
-                                <input type="text" name="title" class="form-control" id="category_name">
+                                <input type="text" name="title" class="form-control" id="category_name" value="{{ old('title') }}">
                                 @error('title')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -25,7 +25,7 @@
                                 <select name="tag_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        <option value="{{ $tag->id }}" {{ (collect(old('tag_id'))->contains($tag->id)) ? 'selected':'' }}>{{ $tag->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('tag_id')
@@ -38,7 +38,7 @@
                                     <option></option>
                                     @foreach ($categories as $category)
                                         @if ($category->type === 'post')
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ (collect(old('category_id'))->contains($category->id)) ? 'selected':'' }}>{{ $category->name }}</option>
                                         @endif  
                                     @endforeach
                                 </select>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Nội dung</label>
-                                <textarea class="form-control" name="content" id="summernote" cols="30" rows="5"></textarea>
+                                <textarea class="form-control" name="content" id="summernote" cols="30" rows="5">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror

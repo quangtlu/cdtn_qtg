@@ -16,21 +16,21 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Tên tác phẩm</label>
-                                <input type="text" name="name" class="form-control">
+                                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày xuất bản</label>
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" name="pub_date" value=""  placeholder="yyyy-mm-dd">
+                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control date-time" name="pub_date" value=""  placeholder="dd/mm/yyyy" value="{{ old('pub_date') }}">
                                 @error('pub_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày đăng kí tác phẩm</label>
-                                <input type="text" data-date-format='yyyy-mm-dd' class="form-control date-time" name="regis_date" value=""  placeholder="yyyy-mm-dd">
+                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control date-time" name="regis_date" value=""  placeholder="dd/mm/yyyy" value="{{ old('pub_date') }}">
                                 @error('regis_date')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -40,7 +40,7 @@
                                 <select name="author_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($authors as $author)
-                                        <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                        <option value="{{ $author->id }}" {{ (collect(old('author_id'))->contains($author->id)) ? 'selected':'' }}>{{ $author->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('author_id')
@@ -53,7 +53,7 @@
                                     <option></option>
                                     @foreach ($categories as $category)
                                         @if ($category->type == 'product')
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ (collect(old('categoryIds'))->contains($category->id)) ? 'selected':'' }}>{{ $category->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -66,7 +66,7 @@
                                 <select name="owner_id" class="form-control">
                                     <option value=""></option>
                                     @foreach ($owners as $owner)
-                                        <option value="{{ $owner->id }}">{{ $owner->name }}</option>
+                                        <option value="{{ $owner->id }}" @if(old('owner_id') == $owner->id) selected @endif>{{ $owner->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('owner_id')
@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
-                                <textarea class="form-control" name="description" id="summernote" cols="30" rows="5"></textarea>
+                                <textarea class="form-control" name="description" id="summernote" cols="30" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -114,7 +114,6 @@
         $('.date-time').datepicker({
             language: 'vi',
             orientation: 'bottom',
-            dateFormat: "Y-m-d",
         });
     </script>
 @endsection
