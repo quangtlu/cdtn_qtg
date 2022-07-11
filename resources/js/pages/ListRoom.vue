@@ -16,7 +16,7 @@
         <div class="card-body contacts_body">
           <div class="contacts">
             <li v-for="room in filteredRooms" :key="room.id">
-              <router-link :to="`/rooms/${room.id}`">
+              <router-link :to="`/messenger/${room.id}`">
                 <div class="d-flex bd-highlight">
                   <div class="user_info">
                     <span>{{ room.name }} <i class="fas fa-comments"></i></span>

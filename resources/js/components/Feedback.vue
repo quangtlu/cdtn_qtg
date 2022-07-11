@@ -61,7 +61,7 @@ export default {
         this.$swal.fire({
           toast: true,
           icon: "success",
-          title: "Gửi đánh thành công",
+          title: "Gửi đánh giá thành công",
           position: "top-end",
           showCloseButton: true,
           timer: 3000,
@@ -71,7 +71,7 @@ export default {
         this.$swal.fire({
           toast: true,
           icon: "error",
-          title: "Gửi đánh thất bại",
+          title: "Gửi đánh giá thất bại",
           position: "top-end",
           showCloseButton: true,
           timer: 3000,
@@ -81,9 +81,7 @@ export default {
     },
     async fetchFeedback() {
       try {
-        const response = await this.$axios.get(
-          `/feedback/latest/${this.chatroom_id}`
-        );
+        const response = await this.$axios.get(`/feedback/latest/${this.chatroom_id}`);
         this.feedback.score = response.data.feedback.score;
         this.feedback.note = response.data.feedback.note;
       } catch (error) {

@@ -131,9 +131,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/messenger', 'home\MessengerController@index')->name('messenger.index');
-    Route::get('/messages', 'home\MessageController@index');
+    Route::get('/messenger/{id}', 'home\MessengerController@index')->name('messenger.show');
+    Route::get('/messages/chatroom/{chatroom_id}', 'home\MessageController@index');
     Route::post('/messages', 'home\MessageController@store');
-    Route::get('/rooms/{id}', 'home\MessengerController@index')->name('rooms'); // catch all routes or else it will return 404 with Vue router in history mode
     Route::post('/feedback', 'home\FeedbackController@update');
     Route::get('/feedback/latest/{chatroom_id}', 'home\FeedbackController@latest');
     

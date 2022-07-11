@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessagePosted;
+use App\Models\Chatroom;
 
 class MessageController
 {
-    public function index (Request $request) {
-        $messages = Message::with(['sender'])->where('room', $request->query('room', ''))->orderBy('created_at', 'asc')->get();
+    public function index ($chatroom_id) {
+        $messages = Message::with(['sender'])->where('room', $chatroom_id)->orderBy('created_at', 'asc')->get();
         return $messages;
     }
 
