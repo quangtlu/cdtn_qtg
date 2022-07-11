@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100 app-container">
+  <div class="app-container">
     <div class="container position-relative chat-container">
       <div class="d-flex app-header">
         <router-link to="/messenger" class="flex-grow-1" style="text-decoration: none;">
@@ -23,7 +23,12 @@ html {
   margin: 0;
 }
 
+body .swal2-height-auto {
+    height: 100% !important;
+}
+
 .app-container {
+  height: 100%;
   background: #0078d4;
   background-image: -o-linear-gradient(0deg, #0078d4, #00bcf2);
   background-image: -moz-linear-gradient(0deg, #0078d4, #00bcf2);
@@ -200,7 +205,7 @@ html {
 }
 
 .user_info span {
-  font-size: 20px;
+  font-size: 14px;
   color: white;
 }
 
