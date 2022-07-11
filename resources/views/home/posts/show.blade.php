@@ -146,7 +146,7 @@
                             <li>
                                 @auth
                                     <a class="rep-comment comment-action-link" data-userName="{{ $comment->user->name }}">Trả
-                                        lời</a>
+                                        lời <i class="fa fa-mail-reply"></i></a>
                                 @endauth
                                 @guest
                                     <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>

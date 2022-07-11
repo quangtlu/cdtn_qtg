@@ -22,7 +22,7 @@
               <span class="online_icon"></span>
             </div>
             <div class="user_info">
-              <span>{{ user.name }} {{ user.id === $root.user.id ? '(You)' : '' }}</span>
+              <span>{{ user.name }} {{ user.id === $root.user.id ? '(Bạn)' : '' }}</span>
               <span
                 class="badge badge-danger font-12px"
                 v-if="user.new_messages"
