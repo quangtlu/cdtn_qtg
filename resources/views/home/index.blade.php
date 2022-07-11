@@ -56,17 +56,6 @@
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                             class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
                                         BÌNH LUẬN</a></li>
-                                @auth
-                                    @if (Auth::user()->id == $post->user->id)
-                                        <li><a class="post-info__link btn-delete"
-                                                data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
-                                                    class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                        <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                                data-target="#post-modal" data-title="{{ $post->title }}"
-                                                data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
-                                    @endif
-                                @endauth
                                 <li><a href="
                                         @auth 
                                             {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id])  }} 
