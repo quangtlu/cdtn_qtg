@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessagePosted;
+use App\Models\Chatroom;
 
-class MessageController extends Controller
+class MessageController
 {
-    public function index (Request $request) {
-        $messages = Message::with(['sender'])->where('room', $request->query('room', ''))->orderBy('created_at', 'asc')->get();
-        return $messages;
+    public function index ($chatroom_id) {
+        $messages = Message::with(['sender'])->where('room', $chatroom_id)->orderBy('created_at', 'asc')->get();
+        $chatroom = Chatroom::findOrFail($chatroom_id);
+        return $chatroom->users->contains('id', Auth::user()->id) ? $messages : response()->json(['message' => 'Không có quyền truy cập'], 403);
     }
 
     public function store (Request $request) {

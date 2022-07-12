@@ -85,7 +85,7 @@
     @auth
         @if (Auth::user()->id == $post->user_id && $post->chatroom)
             <a class="btn btn-success" style="margin-top: 10px"
-                href="{{ route('rooms', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
+                href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
                     class="fa fa-comments"></i></a>
         @else
             @role('mod|super-admin')
@@ -146,7 +146,7 @@
                             <li>
                                 @auth
                                     <a class="rep-comment comment-action-link" data-userName="{{ $comment->user->name }}">Trả
-                                        lời</a>
+                                        lời <i class="fa fa-mail-reply"></i></a>
                                 @endauth
                                 @guest
                                     <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>

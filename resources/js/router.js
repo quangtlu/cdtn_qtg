@@ -4,7 +4,6 @@ import ListRoom from './pages/ListRoom'
 import Room from './pages/Room'
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/messenger',
@@ -12,7 +11,7 @@ const routes = [
     component: ListRoom
   },
   {
-    path: '/rooms/:roomId',
+    path: '/messenger/:roomId',
     name: 'room',
     component: Room
   },

@@ -6,7 +6,9 @@ use App\Services\ChatroomService;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Admin\Room\StoreChatroomRequest;
+use App\Http\Requests\Admin\Room\UpdateChatroomRequest;
+use App\Models\Post;
 
 class chatroomController extends Controller
 {
@@ -16,6 +18,7 @@ class chatroomController extends Controller
     {
         $this->chatroomService = $chatroomService;
         view()->share('users', User::all());
+        view()->share('posts', Post::all());
     }
 
     public function index(Request $request)
@@ -32,7 +35,7 @@ class chatroomController extends Controller
         return view('admin.chatrooms.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreChatroomRequest $request)
     {
         $this->chatroomService->create($request);
         return Redirect(route('admin.chatrooms.index'))->with('success', 'Thêm phòng tư vấn thành công');
@@ -44,7 +47,7 @@ class chatroomController extends Controller
         return view('admin.chatrooms.edit', compact('chatroom'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateChatroomRequest $request, $id)
     {
         $this->chatroomService->update($request, $id);
         return Redirect(route('admin.chatrooms.index'))->with('success', 'Cập nhật phòng tư vấn thành công');

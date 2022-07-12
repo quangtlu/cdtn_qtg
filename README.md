@@ -18,6 +18,6 @@
         + redis-cli shutdown
 - php artisan serve
 - npm run watch
-- laravel-echo-server start (Đăng nhập trước khi chạy)
+- laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
 - php artisan queue:work
 

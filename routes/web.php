@@ -130,15 +130,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', 'home\CommentController@destroy')->name('destroy');
     });
 
-    Route::get('/messenger', 'MessengerController@index')->name('messenger.index');
-    Route::get('/messages', 'MessageController@index');
-    Route::post('/messages', 'MessageController@store');
-    Route::get('/rooms/{id}', 'MessengerController@index')->name('rooms'); // catch all routes or else it will return 404 with Vue router in history mode
+    Route::get('/messenger', 'home\MessengerController@index')->name('messenger.index');
+    Route::get('/messenger/{id}', 'home\MessengerController@index')->name('messenger.show');
+    Route::get('/messages/chatroom/{chatroom_id}', 'home\MessageController@index');
+    Route::post('/messages', 'home\MessageController@store');
+    Route::post('/feedback', 'home\FeedbackController@update');
+    Route::get('/feedback/latest/{chatroom_id}', 'home\FeedbackController@latest');
     
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');
         Route::get('/edit/{id}', 'home\ProfileController@edit')->name('edit');
-        Route::post('/update{id}', 'home\ProfileController@update')->name('update');
+        Route::post('/update/{id}', 'home\ProfileController@update')->name('update');
     });
 
     Route::get('/notifications/show-post/{id}', 'home\NotificationController@showPost')->name('notifications.showPost');

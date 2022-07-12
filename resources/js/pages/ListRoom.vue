@@ -3,7 +3,7 @@
     <div class="col-md-8 chat">
       <div class="card mb-sm-3 mb-md-0 contacts_card">
         <div class="card-header">
-          <h3 class="d-flex text-white">Phòng trò chuyện<span class="badge badge-success ml-2">{{ $root.rooms.length
+          <h3 class="d-flex text-white">Phòng tư vấn<span class="badge badge-success ml-2">{{ $root.rooms.length
           }}</span></h3>
           <div class="input-group">
             <input v-model="searchQuery" type="text" placeholder="Nhập tên phòng..." name=""
@@ -16,7 +16,7 @@
         <div class="card-body contacts_body">
           <div class="contacts">
             <li v-for="room in filteredRooms" :key="room.id">
-              <router-link :to="`/rooms/${room.id}`">
+              <router-link :to="`/messenger/${room.id}`">
                 <div class="d-flex bd-highlight">
                   <div class="user_info">
                     <span>{{ room.name }} <i class="fas fa-comments"></i></span>

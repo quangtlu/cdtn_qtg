@@ -1379,7 +1379,7 @@ return [
             </tbody></table>'
         ],
         [
-            'title' => 'Một số vấn đề cụ thể về QTG trong trường Đại học:',
+            'title' => 'Một số vấn đề cụ thể về QTG trong trường Đại học',
             'user_id' => '1',
             'status' => 1,
             'created_at' => now(),

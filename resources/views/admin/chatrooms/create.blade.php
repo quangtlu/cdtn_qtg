@@ -15,16 +15,13 @@
                             <div class="form-group">
                                 <label for="name">Tên phòng tư vấn</label>
                                 <input type="text" value="{{ old('name') }}" name="name" class="form-control" id="name">
-                                @error('title')
+                                @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
                                 <textarea class="form-control" name="description" cols="30" rows="5"></textarea>
-                                @error('description')
-                                    <span class="mt-1 text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Thành viên</label>
@@ -35,6 +32,18 @@
                                     @endforeach
                                 </select>
                                 @error('user_id')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Bài viết</label>
+                                <select name="post_id" class="form-control">
+                                    <option></option>
+                                    @foreach ($posts as $post)
+                                        <option value="{{ $post->id }}" {{ (collect(old('user_id'))->contains($post->id)) ? 'selected':'' }}>{{ $post->title }}</option>
+                                    @endforeach
+                                </select>
+                                @error('post_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

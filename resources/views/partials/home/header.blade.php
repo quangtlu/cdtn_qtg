@@ -64,7 +64,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="active" href="{{ route('home.index') }}">Trang chủ</a></li>
+                    <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang chủ</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
@@ -78,10 +78,10 @@
                             @endif
                         </ul>
                     </li>
-                    <li><a href="{{ route('faq.index') }}">FAQ</a></li>
-                    <li><a href="{{ route('products.index') }}">Tác phẩm</a></li>
-                    <li><a href="{{ route('posts.index') }}">Diễn đàn</a></li>
-                    <li><a href="{{ route('messenger.index') }}">Trò chuyện</a></li>
+                    <li><a class="{{ Request::is('faq') ? 'active' : '' }}"  href="{{ route('faq.index') }}">FAQ</a></li>
+                    <li><a class="{{ Request::is('products/*') ? 'active' : '' }}" href="{{ route('products.index') }}">Tác phẩm</a></li>
+                    <li><a class="{{ Request::is('posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">Diễn đàn</a></li>
+                    <li><a href="{{ route('messenger.index') }}" style="font-size: 25px"><i class="fa fa-comments-o"></i></a></li>
                     @auth
                         <li class="notice-nav">
                             @if (Auth::user()->notifications)
@@ -115,13 +115,13 @@
                                         @elseif ($notification->type == 'App\Notifications\ConnectNotification')
                                             <li class="notice-item">
                                                 <a href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
-                                                    <ul class="notification-item-list {{ $notification->unread() ? '' : ' mark-as-read' }}">
-                                                        <li><h4>{!! $notification->data['title'] !!}</h4></li>
-                                                        <li style="font-size: 12px;" class="post-content-limit-line"><p>{!! $notification->data['content'] !!}</p></li>
-                                                        <li class="notice-item-content__time"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $notification->created_at->diffForHumans() }}</li>
+                                                    <ul class="notification-item-list">
+                                                        <li><h4 class="{{ $notification->unread() ? '' : ' mark-as-read' }}">{!! $notification->data['title'] !!}</h4></li>
+                                                        <li style="font-size: 12px;" class="post-content-limit-line {{ $notification->unread() ? '' : ' mark-as-read' }}"><p>{!! $notification->data['content'] !!}</p></li>
+                                                        <li class="notice-item-content__time {{ $notification->unread() ? '' : ' mark-as-read' }}"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $notification->created_at->diffForHumans() }}</li>
                                                         <li>
                                                             <button class="btn btn-primary btn-sm btn-block text-center">
-                                                                <a href="{{ route('rooms', ['id' => $notification->data['chatroom_id']]) }}">{{  $notification->data['text_btn']  }}</a>
+                                                                <a style="color: white; font-size:16px" href="{{ route('messenger.show', ['id' => $notification->data['chatroom_id']]) }}">{{ $notification->data['text_btn'] }} <i class="fa fa-comments-o"></i></a>
                                                             </button>
                                                         </li>
                                                     </ul>

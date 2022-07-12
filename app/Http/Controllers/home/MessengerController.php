@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Home;
 
-use Illuminate\Http\Request;
 use App\Models\Chatroom;
 use Illuminate\Support\Facades\Auth;
 
-class MessengerController extends Controller
+class MessengerController
 {
     public function index () {
         $user = Auth::user();

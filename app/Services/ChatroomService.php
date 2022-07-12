@@ -42,11 +42,12 @@ class ChatroomService
     public function create($request, $postId = null){
         // create from User page
         if($postId) {
+            $indexChatroom = Chatroom::count();
             $counselor = User::findOrFail($request->counselor_id);
             $post = Post::findOrFail($postId);
             $user = $post->user;
             $data = [
-                "name" => $counselor->name.' - '.$user->name,
+                "name" => 'Phòng '.$indexChatroom,
                 "description" => $post->title,
                 "post_id" => $post->id
             ];
@@ -58,6 +59,7 @@ class ChatroomService
             $data = [
                 "name" => $request->name,
                 "description" => $request->description,
+                "post_id" => $request->post_id
             ];
             $userIds = $request->user_id;
         }
