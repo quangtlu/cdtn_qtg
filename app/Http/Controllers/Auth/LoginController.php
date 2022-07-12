@@ -44,15 +44,15 @@ class LoginController extends Controller
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->route('home.index');
+            return Redirect()->route('home.index')->with('success', 'Đăng nhập thành công');
         }
 
-        return $next($request);
+        return $next($request)->with('success', 'Đăng nhập thành công');
     }
 
     public function logout(Request $request)
     {
         $this->performLogout($request);
-        return redirect()->route($request->url_redirect_name);
+        return Redirect()->route($request->url_redirect_name);
     }
 }

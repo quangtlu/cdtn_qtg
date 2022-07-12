@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['register' => true]);
 Route::middleware('auth')->group(function () {
     //Admin
-    Route::name('admin.')->prefix('admin')->middleware('role:admin')->group(function () {
-        Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
-        
+    Route::name('admin.')->prefix('admin')->middleware('role:admin')->group(function () {        
         Route::name('profile.')->prefix('/profile-user')->group(function () {
             Route::get('/', 'Admin\ProfileController@index')->name('index');
             Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('edit');

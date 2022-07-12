@@ -32,7 +32,7 @@
                 </div>
             @endauth
             <div class="logo">
-                <h1><a href="{{ route('home.index') }}">Quang Vinh Copyright</a></h1>
+                <h1><a href="{{ route('home.index') }}"><img src="{{ asset('image/logo.png') }}" alt=""></a></h1>
                 <p>Thanng Long University</p>
             </div>
             <div class="w3ls-social-icons">
