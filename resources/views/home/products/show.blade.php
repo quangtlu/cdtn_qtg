@@ -10,13 +10,18 @@
         <ul>
             <li title="
                     @foreach ($product->author as $author) {{ $author->name }} | @endforeach">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span><a href="#">{{ $product->author->count() }}
-                    Tác giả</a></li>
-            <li title="
-                                    @foreach ($product->categories as $category) {{ $category->name }} | @endforeach"><span
-                    class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#">{{ $product->categories->count() }}
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
+                    href="#">{{ $product->author->count() }}
+                    Tác giả</a>
+            </li>
+            <li
+                title="
+                                    @foreach ($product->categories as $category) {{ $category->name }} | @endforeach">
+                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
+                    href="#">{{ $product->categories->count() }}
                     Danh mục</a></li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a></li>
+            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
+            </li>
         </ul>
         <div class="row">
             <div class="col-md-12">
@@ -30,17 +35,16 @@
                         <br>
                         <li style="margin-top: 10px">
                             Tác giả:
-                                @php
-                                    foreach ($product->author as $value){
-                                        $a[] = $value->name;
-
-                                    }
-                                    echo $str = implode(", ", $a);
-                                @endphp
+                            @php
+                                foreach ($product->author as $value) {
+                                    $a[] = $value->name;
+                                }
+                                echo $str = implode(', ', $a);
+                            @endphp
                         </li>
                         <br>
                         <li style="margin-top: 10px">
-                            Chủ sở hữu: {{ ($product->owner->name) ?? '' }}
+                            Chủ sở hữu: {{ $product->owner->name ?? '' }}
                         </li>
                         <br>
                         <li style="margin-top: 10px">
@@ -53,7 +57,7 @@
                         <br>
                         <li>
                             Mô tả:<br>
-                                {!! $product->description !!}
+                            {!! $product->description !!}
                         </li>
                     </ul>
                 </div>
@@ -69,7 +73,8 @@
                         @foreach (explode('|', $product->image) as $image)
                             <li>
                                 <div class="w3agile_special_deals_grid_left_grid">
-                                    <img src="{{ asset('image/products/' . $image) }}" class="img-responsive" alt="" />
+                                    <img src="{{ asset('image/products/' . $image) }}" class="img-responsive"
+                                        alt="" />
                                 </div>
                             </li>
                         @endforeach
@@ -83,7 +88,8 @@
             <li class="li-category-tag">
                 <span style="font-size:18px">Danh mục: </span>
                 @foreach ($product->categories as $category)
-                    <a href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                    <a
+                        href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                 @endforeach
             </li>
         </ul>
@@ -91,16 +97,82 @@
             <li class="li-category-tag">
                 <span style="margin-bottom:5px; font-size:18px">Tác giả: </span>
                 @foreach ($product->author as $author)
-                    <a href="{{ route('products.getProductByAuthor', ['id' => $author->id]) }}">{{ $author->name }}</a>
-                @endforeach
+                    <a href="#" data-toggle="modal" data-target="#exampleModal{{ $author->id }}">{{ $author->name }}</a>
+                    
+                    <div class="modal fade" id="exampleModal{{ $author->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">Thông tin tác giả</h4>
+                        </div>
+                        <div class="modal-body" style="margin-left: 20px">
+                            <ul>
+                                <li>Họ và tên: {{ $author->name }}</li>
+                            </ul>
+                            <ul>
+                                <li>Giới tính: {{ $author->gender }}</li>
+                            </ul>
+                            <ul>
+                                <li>Ngày sinh: {{ $author->dob }}</li>
+                            </ul>
+                            <ul>
+                                <li>Email: {{ $author->email  }}</li>
+                            </ul>
+                            <ul>
+                                <li>Điện thoại: {{ $author->phone  }}</li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <a href="{{ route('products.getProductByAuthor', ['id' => $author->id]) }}">Các tác phẩm liên quan</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    @endforeach
+
             </li>
         </ul>
         <ul class="tag" style="margin-top:0 !important">
             <li class="li-category-tag">
                 <span style="margin-bottom:5px; font-size:18px">Chủ sở hữu: </span>
                 @if (!empty($product->owner_id))
-                    <a href="{{ route('products.getProductByOwner', ['id' => $product->owner->id]) }}">{{ $product->owner->name }}</a>
-                    
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">{{ $product->owner->name }}</a>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">Thông tin chủ sở hữu</h4>
+                            </div>
+                            <div class="modal-body" style="margin-left: 20px">
+                                <ul>
+                                    <li>Tên chủ sở hữu: {{ $product->owner->name }}</li>
+                                </ul>
+                                <ul>
+                                    <li>Email: {{ $product->owner->name  }}</li>
+                                </ul>
+                                <ul>
+                                    <li>Điện thoại: {{ $product->owner->name  }}</li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('products.getProductByOwner', ['id' => $product->owner->id]) }}">Tác phẩm thuộc quyền sở hữu {{ $product->owner->name }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                 @endif
             </li>
         </ul>
@@ -114,12 +186,14 @@
                         <div class="col-md-3 w3agile-left">
                             <ul class="post-info">
                                 <li>
-                                    <a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                                    <a class="post-info__link"
+                                        href="{{ route('products.show', ['id' => $product->id]) }}">
                                         <i class="fa  fa-user" aria-hidden="true"></i>
-                                            {{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
+                                        {{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
                                     </a>
                                 </li>
-                                <li><a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                                <li><a class="post-info__link"
+                                        href="{{ route('products.show', ['id' => $product->id]) }}">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}
                                     </a>
                                 </li>
@@ -133,7 +207,7 @@
                                     </h3>
                                     <div class="post-content-limit-line">{!! $product->description !!}</div>
                                     <a class="agileits w3layouts"
-                                        href="{{  route('products.show', ['id' => $product->id]) }}">Xem
+                                        href="{{ route('products.show', ['id' => $product->id]) }}">Xem
                                         thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
                                             aria-hidden="true"></span></a>
                                 </div>
@@ -178,20 +252,20 @@
     </script>
 @endsection
 <style>
-    .comments-grid-left
-    {
+    .comments-grid-left {
         width: 10% !important;
     }
-    .comments-grid-right
-    {
+
+    .comments-grid-right {
         width: 85% !important;
     }
-    .comments-grid-left img
-    {
+
+    .comments-grid-left img {
         padding: 0 !important;
         border: 1px solid #ffac3a !important;
         border-radius: 50% !important;
-    }        
+    }
+
     .title-relate {
         text-transform: uppercase;
         font-size: 1.4em;
