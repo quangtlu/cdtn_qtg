@@ -299,12 +299,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       usersOnline: []
     };
   },
-  created: function created() {
+  beforeCreate: function beforeCreate() {
     var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var time;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _this.$axios.get("/messages/chatroom/".concat(_this.$route.params.roomId));
+
+            case 3:
+              _context.next = 10;
+              break;
+
+            case 5:
+              _context.prev = 5;
+              _context.t0 = _context["catch"](0);
+              time = 2000;
+
+              _this.$swal.fire({
+                toast: true,
+                icon: "error",
+                title: "Không có quyền truy cập",
+                position: "center",
+                timer: time,
+                timerProgressBar: true,
+                showConfirmButton: false
+              });
+
+              setTimeout(function () {
+                return _this.$router.go(-1);
+              }, time);
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 5]]);
+    }))();
+  },
+  created: function created() {
+    var _this2 = this;
 
     this.getMessages();
     var index = this.$root.rooms.findIndex(function (item) {
-      return item.id === parseInt(_this.$route.params.roomId);
+      return item.id === parseInt(_this2.$route.params.roomId);
     });
 
     if (index > -1) {
@@ -312,23 +356,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       Echo.join("room.".concat(this.currentRoom.id)).here(function (users) {
         // gọi ngay thời điểm ta join vào phòng, trả về tổng số user hiện tại có trong phòng (cả ta)
-        _this.usersOnline = users;
+        _this2.usersOnline = users;
       }).joining(function (user) {
         // gọi khi có user mới join vào phòng
-        _this.usersOnline.push(user);
+        _this2.usersOnline.push(user);
       }).leaving(function (user) {
         // gọi khi có user rời phòng
-        var index = _this.usersOnline.findIndex(function (item) {
+        var index = _this2.usersOnline.findIndex(function (item) {
           return item.id === user.id;
         });
 
         if (index > -1) {
-          _this.usersOnline.splice(index, 1);
+          _this2.usersOnline.splice(index, 1);
         }
       }).listen("MessagePosted", function (e) {
-        _this.messages.push(e.message);
+        _this2.messages.push(e.message);
 
-        _this.scrollToBottom(document.getElementById("shared_room"), true);
+        _this2.scrollToBottom(document.getElementById("shared_room"), true);
       });
     }
   },
@@ -339,41 +383,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     getMessages: function getMessages() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _this2.$axios.get("/messages/chatroom/".concat(_this2.$route.params.roomId));
-
-              case 3:
-                response = _context.sent;
-                _this2.messages = response.data;
-
-                _this2.scrollToBottom(document.getElementById("shared_room"), false);
-
-                _context.next = 11;
-                break;
-
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
-
-              case 11:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 8]]);
-      }))();
-    },
-    saveMessage: function saveMessage(content) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -384,17 +393,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this3.$axios.post("/messages", {
-                  room: _this3.$route.params.roomId,
-                  content: content
-                });
+                return _this3.$axios.get("/messages/chatroom/".concat(_this3.$route.params.roomId));
 
               case 3:
                 response = _context2.sent;
+                _this3.messages = response.data;
 
-                _this3.messages.push(response.data.message);
-
-                _this3.scrollToBottom(document.getElementById("shared_room"), true);
+                _this3.scrollToBottom(document.getElementById("shared_room"), false);
 
                 _context2.next = 11;
                 break;
@@ -410,6 +415,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2, null, [[0, 8]]);
+      }))();
+    },
+    saveMessage: function saveMessage(content) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _this4.$axios.post("/messages", {
+                  room: _this4.$route.params.roomId,
+                  content: content
+                });
+
+              case 3:
+                response = _context3.sent;
+
+                _this4.messages.push(response.data.message);
+
+                _this4.scrollToBottom(document.getElementById("shared_room"), true);
+
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                console.log(_context3.t0);
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 8]]);
       }))();
     },
     scrollToBottom: function scrollToBottom(element) {

@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center h-100">
     <div class="col-md-3 chat">
-      <Feedback/>
+      <Feedback />
     </div>
     <div class="col-md-6 chat">
       <SharedRoom
@@ -25,7 +25,7 @@ export default {
   components: {
     ListUser,
     SharedRoom,
-    Feedback
+    Feedback,
   },
   data() {
     return {
@@ -33,6 +33,23 @@ export default {
       messages: [],
       usersOnline: [],
     };
+  },
+  async beforeCreate() {
+    try {
+      await this.$axios.get(`/messages/chatroom/${this.$route.params.roomId}`);
+    } catch (error) {
+      const time = 2000
+      this.$swal.fire({
+        toast: true,
+        icon: "error",
+        title: "Không có quyền truy cập",
+        position: "center",
+        timer: time,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+      setTimeout(() => this.$router.go(-1), time)
+    }
   },
   created() {
     this.getMessages();
@@ -76,7 +93,9 @@ export default {
   methods: {
     async getMessages() {
       try {
-        const response = await this.$axios.get(`/messages/chatroom/${this.$route.params.roomId}`);
+        const response = await this.$axios.get(
+          `/messages/chatroom/${this.$route.params.roomId}`
+        );
         this.messages = response.data;
         this.scrollToBottom(document.getElementById("shared_room"), false);
       } catch (error) {
