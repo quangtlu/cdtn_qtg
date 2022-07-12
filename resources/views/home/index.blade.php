@@ -36,7 +36,7 @@
 
                             <div class="w3agile-middle">
                                 <ul>
-                                    <li><a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a></li>
+                                    <li><a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a></li>
                                     <li><a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }} Bình luận</a></li>
 
                                 </ul>
@@ -51,7 +51,7 @@
                                             class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
+                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                             class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
@@ -120,7 +120,7 @@
 
                             <div class="w3agile-middle">
                                 <ul>
-                                    <li><a href="{{ route('products.show', ['id' => $product->id]) }}"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}</a></li>
+                                    <li><a href="{{ route('products.show', ['id' => $product->id]) }}"><i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at->diffForHumans() }}</a></li>
                                     <li><a href="{{ route('products.show', ['id' => $product->id]) }}"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ $product->author->count() }} <span>Tác giả</span></a></li>
                                 </ul>
                             </div>
@@ -136,7 +136,7 @@
                                         </a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
-                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}</a>
+                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at->diffForHumans() }}</a>
                                 </li>
                             </ul>
                         </div>
