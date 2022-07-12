@@ -12,7 +12,8 @@ class MessageController
 {
     public function index ($chatroom_id) {
         $messages = Message::with(['sender'])->where('room', $chatroom_id)->orderBy('created_at', 'asc')->get();
-        return $messages;
+        $chatroom = Chatroom::findOrFail($chatroom_id);
+        return $chatroom->users->contains('id', Auth::user()->id) ? $messages : response()->json(['message' => 'Không có quyền truy cập'], 403);
     }
 
     public function store (Request $request) {
