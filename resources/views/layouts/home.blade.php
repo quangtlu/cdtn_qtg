@@ -6,7 +6,7 @@
     <link href="{{ asset('template_blog/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap stylesheet -->
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen" property="" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('image/logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}">
     <!-- stylesheet -->
     <!-- meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">

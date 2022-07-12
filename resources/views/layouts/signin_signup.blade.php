@@ -11,7 +11,7 @@
 
     <!-- google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ asset('image/logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}">
 
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="{{ asset('template_signin_signup/css/style.css') }} " type="text/css" media="all" />
