@@ -78,7 +78,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên quyền</th>
-                                <th>Xóa</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
