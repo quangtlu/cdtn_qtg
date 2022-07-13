@@ -85,13 +85,15 @@
                     @auth
                         <li class="notice-nav">
                             @if (Auth::user()->notifications)
+                            <div class="ringing-bell">
                                 <i
-                                    class="fa fa-bell notice-icon {{ Auth::user()->notifications->first->unread() ? 'active' : '' }}">
+                                    class="fa fa-bell faa-ring fa-5x notice-icon {{ Auth::user()->notifications->first->unread() ? 'active animated' : '' }}">
                                     @if (Auth::user()->unreadNotifications()->count() > 0)
                                         <span
                                             class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
                                     @endif
                                 </i>
+                            </div>
                                 <ul class="notice-list">
                                     @foreach (Auth::user()->notifications as $notification)
                                         @if ($notification->type == 'App\Notifications\CommentNotification')
