@@ -2026,6 +2026,7 @@ h2.typoh2{
 .leave-coment-form input[type="text"],.leave-coment-form input[type="email"],.leave-coment-form textarea{
 	outline: none;
     border:2px solid #ececec;
+    border-radius: 1rem;
     background: none;
     padding: 10px;
     font-size: 13px;
@@ -2043,6 +2044,11 @@ h2.typoh2{
 }
 .w3_single_submit{
 	text-align:right;
+    border-radius: 1rem;
+}
+
+.w3_single_submit input{
+    border-radius: 5px;
 }
 .leave-coment-form input[type="submit"]{
 	outline: none;
