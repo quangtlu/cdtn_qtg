@@ -51,7 +51,7 @@ class ProductService
             $data['image'] = null;
         }
         $product = $this->productModel->create($data);
-        $product->author()->attach($request->author_id);
+        $product->authors()->attach($request->author_id);
         $product->categories()->attach($request->categoryIds);
     }
 
@@ -76,14 +76,14 @@ class ProductService
                 $data['image'] = implode("|",$images);
         }
         $product->update($data);
-        $product->author()->sync($request->author_id);
+        $product->authors()->sync($request->author_id);
         $product->categories()->sync($request->categoryIds);
     }
 
     public function delete($id){
         $product = $this->getById($id);
         $this->productModel->destroy($id);
-        $product->author()->detach();
+        $product->authors()->detach();
         $product->categories()->detach();
     }
 
@@ -108,7 +108,6 @@ class ProductService
     public function getProductIdRelateByTable($productId, array $relateTables)
     {
         $productIds = [];
-
         foreach ($relateTables as $relateTable) {
             $tableCollections = $this->getById($productId)->$relateTable;
             if ($tableCollections->count() > 0) {
@@ -126,7 +125,7 @@ class ProductService
 
     public function getProductRelate($id)
     {
-        $productIds = $this->getProductIdRelateByTable($id, ['categories', 'author']);
+        $productIds = $this->getProductIdRelateByTable($id, ['categories', 'authors']);
         return Product::whereIn('id', $productIds)->paginate(5);
     }
 

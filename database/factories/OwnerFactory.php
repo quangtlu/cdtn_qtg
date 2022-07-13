@@ -9,6 +9,6 @@ $factory->define(Owner::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'phone' => '09'.rand(100000000, 999999999),
+        'phone' => '09'.$faker->numerify('########'),
     ];
 });

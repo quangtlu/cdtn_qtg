@@ -1,9 +1,28 @@
 $(function() {
+
+    var messageSuccess = $('#wrapper').attr('data-messageSuccess')
+    var messageError = $('#wrapper').attr('data-messageError')
+    const time = 3000
+
+    if (messageSuccess != '' || messageError != '') {
+        Swal.fire({
+            toast: true,
+            icon: messageSuccess != '' ? "success" : "error",
+            title: messageSuccess != '' ? messageSuccess : messageError,
+            position: "top-end",
+            timer: time,
+            showConfirmButton: false,
+            showClass: {
+                popup: 'animate__animated animate__fadeInRight'
+              },
+            hideClass: {
+            popup: 'animate__animated animate__fadeOutRight'
+            }
+        });
+    }
+
     $(document).on('click', '.btn-delete', actionDelete)
 
-    $('.alert-dismissible').fadeTo(2000, 500).slideUp(500, function(){
-        $('.alert-dismissible').slideUp(500);
-    });
 })
 
 function actionDelete (){
@@ -25,11 +44,20 @@ function actionDelete (){
                 success: function (data) {
                     if(data.status = 200) {
                         that.parent().parent().fadeOut()
-                        Swal.fire(
-                            'Thành công!',
-                            'Bản ghi đã được xóa',
-                            'success'
-                        )
+                        Swal.fire({
+                            toast: true,
+                            icon: "success",
+                            title: 'Xóa thành công',
+                            position: "top-end",
+                            timer: 2000,
+                            showConfirmButton: false,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInRight'
+                              },
+                            hideClass: {
+                            popup: 'animate__animated animate__fadeOutRight'
+                            }
+                        });
                     }
                 }
             })

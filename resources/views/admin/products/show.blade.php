@@ -62,28 +62,28 @@
                     </h2>
                     <hr />
                     <div class="">
-                        <ul>
-                            <li>
-                                Tác giả:
-                                    @php
-                                        foreach ($product->author as $value){
-                                            $a[] = $value->name;
-
-                                        }
-                                        echo $str = implode(", ", $a);
-                                    @endphp
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Tác giả:  
+                                @if ($product->authors->count())
+                                    @foreach ($product->authors as $index => $author)
+                                        {{ $index != $product->authors->count() - 1 ? $author->name. ' ,' : $author->name}}
+                                    @endforeach
+                                @else
+                                    Chưa xác định
+                                @endif
                             </li>
-                            <li>
+                            <li class="list-group-item">
                                 Chủ sở hữu: {{ ($product->owner->name) ?? '' }}
                             </li>
-                            <li>
+                            <li class="list-group-item">
                                 Ngày sáng tác: {{ $product->pub_date }}
                             </li>
-                            <li>
+                            <li class="list-group-item">
                                 Ngày đăng kí bản quyền: {{ $product->regis_date }}
                             </li>
-                            <li>
-                                Mô tả:<br>
+                            <li class="list-group-item">
+                                Mô tả: 
                                     {!! $product->description !!}
                             </li>
                         </ul>

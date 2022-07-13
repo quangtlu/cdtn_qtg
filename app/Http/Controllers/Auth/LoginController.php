@@ -24,6 +24,10 @@ class LoginController extends Controller
     use AuthenticatesUsers {
         logout as performLogout;
     }
+
+    use AuthenticatesUsers {
+        redirectPath as laravelRedirectPath;
+    }
     /**
      * Where to redirect users after login.
      *
@@ -44,15 +48,21 @@ class LoginController extends Controller
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return Redirect()->route('home.index')->with('success', 'Đăng nhập thành công');
+            return Redirect()->route('home.index');
         }
 
-        return $next($request)->with('success', 'Đăng nhập thành công');
+        return $next($request);
     }
+
+    public function redirectPath()
+{
+    session()->flash('success', 'Đăng nhập thành công');
+    return $this->laravelRedirectPath();
+}
 
     public function logout(Request $request)
     {
         $this->performLogout($request);
-        return Redirect()->route($request->url_redirect_name);
+        return Redirect()->route('login');
     }
 }
