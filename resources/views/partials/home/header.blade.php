@@ -32,8 +32,8 @@
                 </div>
             @endauth
             <div class="logo">
-                <h1><a href="{{ route('home.index') }}"><img class="logo-img" src="{{ asset('logo.png') }}" alt=""></a></h1>
-                <p>Quang Vinh Copytight</p>
+                <h1><a href="{{ route('home.index') }}"><img class="logo-img animate__animated  animate__slideInDown" src="{{ asset('logo.png') }}" alt=""></a></h1>
+                <p class="animate__animated  animate__slideInUp">Quang Vinh Copytight</p>
             </div>
             <div class="w3ls-social-icons">
                 @guest

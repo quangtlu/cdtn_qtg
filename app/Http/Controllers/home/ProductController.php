@@ -31,15 +31,14 @@ class ProductController extends Controller
         $this->authorService = $authorService;
         $this->categoryService = $categoryService;
         $this->ownerService = $ownerService;
-        $authors = $this->authorService->getAll();
-        $categories = $this->categoryService->getAll();
-        $owners = $this->ownerService->getAll();
-        view()->share(['authors' => $authors, 'categories' => $categories, 'owners' => $owners]);
     }
 
     public function index(Request $request)
     {
         $products = $this->productService->getPaginate();
+        $authors = $this->authorService->getAll();
+        $categories = $this->categoryService->getAll();
+        $owners = $this->ownerService->getAll();
 
         if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
             $products = $this->productService->searchAndFilter($request);
@@ -55,11 +54,10 @@ class ProductController extends Controller
             $products = $this->productService->sortProductPublicRegisDate($request->sort);
         }
 
-        if ($products->count() > 0) {
-            return view('home.products.index', compact('products'));
-        } else {
+        if ($products->count() < 1) {
             return redirect()->route('products.index')->with('error', 'Không có tác phẩm nào phù hợp');
         }
+        return view('home.products.index', compact( 'products', 'authors', 'categories', 'owners',));
     }
 
     public function show($id)

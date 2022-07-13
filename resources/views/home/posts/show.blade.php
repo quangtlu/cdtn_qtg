@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1">
+    <div class="single-left1 wow fadeInUp">
         <h3 class="title-relate">{{ $post->title }}</h3>
         <ul class="panel">
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
@@ -43,7 +43,7 @@
         <div class="panel">{!! $post->content !!}</div>
     </div>
     @if ($post->image != null)
-        <div class="w3agile-top">
+        <div class="w3agile-top wow fadeInUp">
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
@@ -127,7 +127,7 @@
     @endauth
 
     {{-- Comment --}}
-    <div id="comments" class="comments">
+    <div id="comments" class="comments wow fadeInUp">
         <h3 class="title-relate" style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
             @foreach ($post->comments->sortByDesc('status')->all() as $comment)
@@ -216,7 +216,7 @@
                 class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
     @endguest
     @auth
-        <div class="leave-coment-form">
+        <div class="leave-coment-form wow fadeInUp">
             <form action="{{ route('comments.store') }}" method="post">
                 @csrf
                 <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
@@ -231,7 +231,7 @@
             </form>
         </div>
     @endauth
-    <div style="margin-top: 30px">
+    <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Bài viết liên quan</h3>
         @if (isset($postRelates))
             @foreach ($postRelates as $post)

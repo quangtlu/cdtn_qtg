@@ -18,7 +18,7 @@ use App\Services\UserService;
 
 class PostController extends Controller
 {
-    
+
     private $postService;
     private $tagService;
     private $categoryService;
@@ -43,15 +43,15 @@ class PostController extends Controller
         $this->userService = $userService;
         $this->chatroomService = $chatroomService;
         $this->notificationService = $notificationService;
-        $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getAll();
-        view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
     public function index(Request $request)
     {
         $posts = $this->postService->getPaginate();
-        if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
+        $tags = $this->tagService->getAll();
+        $categories = $this->categoryService->getAll();
+
+        if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
             $posts = $this->postService->searchAndFilter($request);
         }
         if ($request->category_id || $request->tag_id || $request->status) {
@@ -65,11 +65,10 @@ class PostController extends Controller
             $posts = $this->postService->sortPost($request->sort);
         }
 
-        if ($posts->count() > 0) {
-            return view('home.posts.index', compact('posts'));
-        } else {
+        if ($posts->count() < 1) {
             return redirect()->route('posts.index')->with('error', 'Không có bài viết nào phù hợp');
         }
+        return view('home.posts.index', compact('posts', 'tags', 'categories'));
     }
 
     public function show($id)
@@ -85,7 +84,7 @@ class PostController extends Controller
         $this->postService->create($request);
         return Redirect()->back()->with('success', 'Đăng bài thành công');
     }
-    
+
 
     public function update(UpdatePostRequest $request, $id)
     {
@@ -147,14 +146,13 @@ class PostController extends Controller
     public function connectToCounselor(Request $request, $id)
     {
         $chatroom = $this->chatroomService->create($request, $id);
-        $post = $this->postService->getById($id);        
-        
-        if($chatroom) {
+        $post = $this->postService->getById($id);
+
+        if ($chatroom) {
             $this->notificationService->notiConnectToUser($post, $request->counselor_id);
             $this->notificationService->notiConnectToCounselor($post, $request->counselor_id);
             return Redirect()->back()->with('success', 'Kết nối thành công');
-        }
-        else {
+        } else {
             return Redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình kết nối');
         }
     }
