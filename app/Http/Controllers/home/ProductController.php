@@ -58,7 +58,7 @@ class ProductController extends Controller
         if ($products->count() > 0) {
             return view('home.products.index', compact('products'));
         } else {
-            return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
+            return redirect()->route('products.index')->with('error', 'Không có tác phẩm nào phù hợp');
         }
     }
 

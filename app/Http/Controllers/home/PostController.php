@@ -68,7 +68,7 @@ class PostController extends Controller
         if ($posts->count() > 0) {
             return view('home.posts.index', compact('posts'));
         } else {
-            return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            return redirect()->route('posts.index')->with('error', 'Không có bài viết nào phù hợp');
         }
     }
 
