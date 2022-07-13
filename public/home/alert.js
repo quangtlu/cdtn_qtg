@@ -1,33 +1,32 @@
-$(function() {
-    
+$(function () {
+
     var messageSuccess = $('#container').attr('data-messageSuccess')
     var messageError = $('#container').attr('data-messageError')
+    const time = 3000
 
-    if(messageSuccess != '') {
+    if (messageSuccess != '' || messageError != '') {
         Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: messageSuccess,
+            toast: true,
+            icon: messageSuccess != '' ? "success" : "error",
+            title: messageSuccess != '' ? messageSuccess : messageError,
+            position: "top-end",
+            timer: time,
             showConfirmButton: false,
-            timer: 1500
-        })
-    }
-    if(messageError != '') {
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: messageError,
-            showConfirmButton: false,
-            timer: 1500
-        })
+            showClass: {
+                popup: 'animate__animated animate__fadeInRight'
+              },
+            hideClass: {
+            popup: 'animate__animated animate__fadeOutRight'
+            }
+        });
     }
 
     $(document).on('click', '.btn-delete', actionDeletePost)
     $(document).on('click', '.btn-delete-comment', actionDeleteComment)
-        
+
 })
 
-function actionDeletePost (){
+function actionDeletePost() {
     let urlRequest = $(this).data('url');
     let that = $(this)
     Swal.fire({
@@ -38,13 +37,13 @@ function actionDeletePost (){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 type: 'GET',
                 url: urlRequest,
                 success: function (data) {
-                    if(data.status = 200) {
+                    if (data.status = 200) {
                         that.closest('.wthree-top-1').fadeOut()
                         Swal.fire(
                             'Thành công!',
@@ -56,10 +55,10 @@ function actionDeletePost (){
             })
 
         }
-      })
+    })
 }
 
-function actionDeleteComment (){
+function actionDeleteComment() {
     let urlRequest = $(this).data('url');
     let that = $(this)
     Swal.fire({
@@ -70,13 +69,13 @@ function actionDeleteComment (){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Xóa'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 type: 'GET',
                 url: urlRequest,
                 success: function (data) {
-                    if(data.status = 200) {
+                    if (data.status = 200) {
                         that.closest('.comments-grid').fadeOut()
                         Swal.fire(
                             'Thành công!',
@@ -88,7 +87,7 @@ function actionDeleteComment (){
             })
 
         }
-      })
+    })
 }
 
 

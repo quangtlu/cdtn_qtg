@@ -10,8 +10,8 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->title,
         'description' => $faker->text,
         'image' => '1.jpg|2.jpg|3.jpg',
-        'pub_date' => now(),
-        'regis_date' => now(),
+        'pub_date' => $faker->dateTime('-2 years'),
+        'regis_date' => $faker->dateTime('-2 years'),
         'owner_id' => rand(1,20)
     ];
 });

@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(ProductCategory::class, function (Faker $faker) {
     return [
         'category_id' => rand(1,20),
-        'product_id' => rand(1,100)
+        'product_id' => rand(1,20)
     ];
 });

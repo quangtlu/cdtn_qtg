@@ -13,7 +13,7 @@ class Product extends Model
         return $this->belongsTo(Owner::class, 'owner_id');
     }
 
-    public function author()
+    public function authors()
     {
         return $this->belongsToMany(Author::class, 'author_product');
     }

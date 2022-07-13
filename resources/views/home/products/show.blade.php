@@ -8,18 +8,16 @@
     <div class="single-left1">
         <h3>{{ $product->name }}</h3>
         <ul>
-            <li title="
-                    @foreach ($product->author as $author) {{ $author->name }} | @endforeach">
+            <li>
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
-                    href="#">{{ $product->author->count() }}
-                    Tác giả</a>
+                    href="#">{{ $product->authors->count() }}Tác giả</a>
             </li>
-            <li
-                title="
-                                    @foreach ($product->categories as $category) {{ $category->name }} | @endforeach">
+            <li title="
+                @foreach ($product->categories as $category) {{ $category->name }} | @endforeach">
                 <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#">{{ $product->categories->count() }}
-                    Danh mục</a></li>
+                    Danh mục</a>
+            </li>
             <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
             </li>
         </ul>
@@ -35,12 +33,13 @@
                         <br>
                         <li style="margin-top: 10px">
                             Tác giả:
-                            @php
-                                foreach ($product->author as $value) {
-                                    $a[] = $value->name;
-                                }
-                                echo $str = implode(', ', $a);
-                            @endphp
+                            @if ($product->authors->count())
+                                @foreach ($product->authors as $index => $author)
+                                    {{ $index != $product->authors->count() - 1 ? $author->name . ' ,' : $author->name }}
+                                @endforeach
+                            @else
+                                Chưa xác định
+                            @endif
                         </li>
                         <br>
                         <li style="margin-top: 10px">
@@ -96,45 +95,35 @@
         <ul class="tag" style="margin-top:0 !important">
             <li class="li-category-tag">
                 <span style="margin-bottom:5px; font-size:18px">Tác giả: </span>
-                @foreach ($product->author as $author)
-                    <a href="#" data-toggle="modal" data-target="#exampleModal{{ $author->id }}">{{ $author->name }}</a>
-                    
-                    <div class="modal fade" id="exampleModal{{ $author->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="exampleModalLabel">Thông tin tác giả</h4>
-                        </div>
-                        <div class="modal-body" style="margin-left: 20px">
-                            <ul>
-                                <li>Họ và tên: {{ $author->name }}</li>
-                            </ul>
-                            <ul>
-                                <li>Giới tính: {{ $author->gender }}</li>
-                            </ul>
-                            <ul>
-                                <li>Ngày sinh: {{ $author->dob }}</li>
-                            </ul>
-                            <ul>
-                                <li>Email: {{ $author->email  }}</li>
-                            </ul>
-                            <ul>
-                                <li>Điện thoại: {{ $author->phone  }}</li>
-                            </ul>
-                            <ul>
-                                <li>
-                                    <a href="{{ route('products.getProductByAuthor', ['id' => $author->id]) }}">Các tác phẩm liên quan</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                @foreach ($product->authors as $author)
+                    <a href="#" data-toggle="modal"
+                        data-target="#exampleModal{{ $author->id }}">{{ $author->name }}</a>
+
+                    <div class="modal fade" id="exampleModal{{ $author->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="exampleModalLabel">Thông tin tác giả</h4>
+                                </div>
+                                <div class="modal-body" style="margin-left: 20px">
+                                    <h4 style="padding-top:10px">Họ và tên: {{ $author->name }}</h4>
+                                    <h4 style="padding-top:10px">Giới tính: {{ $author->gender }}</h4>
+                                    <h4 style="padding-top:10px">Ngày sinh: {{ $author->dob }}</h4>
+                                    <h4 style="padding-top:10px">Email: {{ $author->email }}</h4>
+                                    <h4 style="padding-top:10px">Điện thoại: {{ $author->phone }}</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="agileits w3layouts" href="{{ route('products.getProductByAuthor', ['id' => $author->id]) }}">Xem các tác phẩm
+                                        <span class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    @endforeach
+                @endforeach
 
             </li>
         </ul>
@@ -144,35 +133,29 @@
                 @if (!empty($product->owner_id))
                     <a href="#" data-toggle="modal" data-target="#exampleModal">{{ $product->owner->name }}</a>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="exampleModalLabel">Thông tin chủ sở hữu</h4>
-                            </div>
-                            <div class="modal-body" style="margin-left: 20px">
-                                <ul>
-                                    <li>Tên chủ sở hữu: {{ $product->owner->name }}</li>
-                                </ul>
-                                <ul>
-                                    <li>Email: {{ $product->owner->name  }}</li>
-                                </ul>
-                                <ul>
-                                    <li>Điện thoại: {{ $product->owner->name  }}</li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <a href="{{ route('products.getProductByOwner', ['id' => $product->owner->id]) }}">Tác phẩm thuộc quyền sở hữu {{ $product->owner->name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h3 class="modal-title" id="exampleModalLabel">Thông tin chủ sở hữu</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 style="padding-top: 10px">Họ tên: {{ $product->owner->name }}</h4>
+                                    <h4 style="padding-top: 10px">Email: {{ $product->owner->email }}</h4>
+                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->name }}</h4>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="agileits w3layouts" href="{{ route('products.getProductByOwner', ['id' => $product->owner->id]) }}">Xem các tác phẩm
+                                        <span class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 @endif
             </li>
         </ul>
@@ -189,7 +172,13 @@
                                     <a class="post-info__link"
                                         href="{{ route('products.show', ['id' => $product->id]) }}">
                                         <i class="fa  fa-user" aria-hidden="true"></i>
-                                        {{ $product->author->count() > 1 ? $product->author->first()->name . ',...' : $product->author->first()->name }}
+                                        @if ($product->authors->count())
+                                            @foreach ($product->authors as $index => $author)
+                                                {{ $index != $product->authors->count() - 1 ? $author->name . ' ,' : $author->name }}
+                                            @endforeach
+                                        @else
+                                            Chưa xác định
+                                        @endif
                                     </a>
                                 </li>
                                 <li><a class="post-info__link"

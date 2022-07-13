@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
     {
         factory(Author::class,100)->create();
         factory(Product::class, 100)->create();
-        factory(AuthorProduct::class, 100)->create();
         factory(ProductCategory::class, 100)->create();
+        factory(AuthorProduct::class, 100)->create();
     }
 }

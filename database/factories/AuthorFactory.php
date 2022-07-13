@@ -8,9 +8,9 @@ use Faker\Generator as Faker;
 $factory->define(Author::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'phone' => '09'.rand(100000000, 999999999),
+        'phone' => '09'.$faker->numerify('########'),
         'email' => $faker->unique()->safeEmail,
-        'dob' => now(),
-        'gender' => ['nam', 'nữ'][rand(0,1)],
+        'dob' => $faker->dateTime('-18 years'),
+        'gender' => $faker->randomElement(['Nam', 'Nữ']),
     ];
 });

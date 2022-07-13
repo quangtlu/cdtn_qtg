@@ -54,7 +54,7 @@ class ProductController extends Controller
             if ($products->count() > 0) {
                 return view('admin.products.index', compact('products'));
             } else {
-                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+                return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
             }
         }
 
@@ -82,7 +82,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productService->getById($id);
-        $productOfAuthors = $product->author;
+        $productOfAuthors = $product->authors;
         $productOfCategories = $product->categories;
         $productImg = explode("|", $product->image)[0];
         return view('admin.products.edit', compact('product', 'productOfAuthors', 'productImg', 'productOfCategories'));
