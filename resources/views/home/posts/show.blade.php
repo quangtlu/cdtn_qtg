@@ -7,7 +7,7 @@
 @section('content')
     <div class="single-left1">
         <h3 class="title-relate">{{ $post->title }}</h3>
-        <ul>
+        <ul class="panel">
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
                     href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             </li>
