@@ -28,8 +28,8 @@
                             <div class="form-group">
                                 <label for="category_name">Loại danh mục</label>
                                 <select id="selectType" name="type" class="form-control" >
-                                    <option value="product">Tác phẩm</option>
-                                    <option value="post">Bài viết</option>
+                                    <option value="product">Product</option>
+                                    <option value="post">Post</option>
                                 </select>
                                 @error('type')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
