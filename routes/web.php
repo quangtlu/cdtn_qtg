@@ -105,11 +105,11 @@ Route::middleware('auth')->group(function () {
         Route::name('categories.')->prefix('/categories')->group(function () {
             Route::get('/', 'Admin\CategoryController@index')->name('index')->middleware('can:list category');
             Route::get('/get-type', 'Admin\CategoryController@getType')->name('getType');
-            Route::get('/create', 'Admin\CategoryController@create')->name('create')->middleware('can:list category');
-            Route::post('/store', 'Admin\CategoryController@store')->name('store')->middleware('can:list category');
-            Route::get('/edit/{id}', 'Admin\CategoryController@edit')->name('edit')->middleware('can:list category');
-            Route::post('/update/{id}', 'Admin\CategoryController@update')->name('update')->middleware('can:list category');
-            Route::get('/destroy/{id}', 'Admin\CategoryController@destroy')->name('destroy')->middleware('can:list category');
+            Route::get('/create', 'Admin\CategoryController@create')->name('create')->middleware('can:add category');
+            Route::post('/store', 'Admin\CategoryController@store')->name('store')->middleware('can:add category');
+            Route::get('/edit/{id}', 'Admin\CategoryController@edit')->name('edit')->middleware('can:edit category');
+            Route::post('/update/{id}', 'Admin\CategoryController@update')->name('update')->middleware('can:edit category');
+            Route::get('/destroy/{id}', 'Admin\CategoryController@destroy')->name('destroy')->middleware('can:delete category');
         });
     });
     // User
