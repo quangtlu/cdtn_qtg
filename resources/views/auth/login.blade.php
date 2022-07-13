@@ -3,16 +3,14 @@
 @section('content')
     <!-- login -->
     <div class="login">
-        <span class="fas fa-sign-in-alt"></span>
-        <strong>Welcome!</strong>
-        <span>Đăng nhập tài khoản của bạn</span>
-
+        <img style="height: 150px" src="{{ asset('logo.png') }}" alt="">
+        <h3 style="color: #FF9F3A">Quang Vinh Copytight</h3>
         <form action="{{ route('login') }}" method="post" class="login-form">
             @csrf
             <fieldset>
                 <div class="form">
                     <div class="form-row">
-                        <span class="fas fa-user"></span>
+                        <span class="fas fa-envelope"></span>
                         <label class="form-label" for="input">Email</label>
                         <input type="email" name="email" class="form-text">
                     </div>
