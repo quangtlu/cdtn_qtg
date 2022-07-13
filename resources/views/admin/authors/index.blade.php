@@ -45,7 +45,7 @@
                                                 <select name="gender" id="sort" class="form-control">
                                                     <option value="{{ config('consts.user.all') }}"
                                                         class="filter-option-dafault">Giới tính</option>
-                                                    <option value="nam">Nam</option>
+                                                    <option value="Nam">Nam</option>
                                                     <option value="Nữ">Nữ</option>
                                                 </select>
                                             </div>

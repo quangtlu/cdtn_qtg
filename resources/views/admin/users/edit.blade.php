@@ -33,10 +33,10 @@
                                 <select name="gender" id="" class="form-control">
                                     @if ($user->gender == 'nam')
                                         <option {{ old('gender') == 'nam' ? 'selected' : '' }} selected value="nam">Nam</option>
-                                        <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
+                                        <option {{ old('gender') == 'nữ' ? 'selected' : '' }}  value="nữ">Nữ</option>
                                     @else
                                     <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                                    <option {{ old('gender') == 'nu' ? 'selected' : '' }}  selected value="nu">Nữ</option>
+                                    <option {{ old('gender') == 'nữ' ? 'selected' : '' }}  selected value="nữ">Nữ</option>
                                     @endif
                                 </select>
                                 @error('gender')

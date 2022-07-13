@@ -33,7 +33,7 @@
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
                                     <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                                    <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
+                                    <option {{ old('gender') == 'nữ' ? 'selected' : '' }}  value="nữ">Nữ</option>
                                 </select>
                                 @error('gender')
                                     <span class="mt-2 text-danger">

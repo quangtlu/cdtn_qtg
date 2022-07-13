@@ -29,12 +29,12 @@
                             <div class="form-group">
                                 <label for="category_name">Giới tính<b class="field-require">*</b></label>
                                 <select name="gender" id="" class="form-control">
-                                    @if ($author->gender == 'nam')
-                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} selected value="nam">Nam</option>
-                                        <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
+                                    @if ($author->gender == 'Nam')
+                                        <option {{ old('gender') == 'Nam' ? 'selected' : '' }} selected value="Nam">Nam</option>
+                                        <option {{ old('gender') == 'Nữ' ? 'selected' : '' }}  value="Nữ">Nữ</option>
                                     @else
-                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                                        <option {{ old('gender') == 'nu' ? 'selected' : '' }} selected value="nu">Nữ</option>
+                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="Nam">Nam</option>
+                                        <option {{ old('gender') == 'Nữ' ? 'selected' : '' }} selected value="Nữ">Nữ</option>
                                     @endif
                                 </select>
                                 @error('gender')
