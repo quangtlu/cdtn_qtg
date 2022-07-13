@@ -131,7 +131,7 @@
     <div id="comments" class="comments">
         <h3 style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
-            @foreach ($post->comments as $comment)
+            @foreach ($post->comments->sortByDesc('status')->all() as $comment)
                 <div id="{{ $comment->id }}" class="comments-grid">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
@@ -154,7 +154,7 @@
                                 <i>|</i>
                             </li>
                             @if ($comment->status == config('consts.post.status.solved.value'))
-                                <li><a href="{{ route('comments.toogleStatus', ['id' => $comment->id]) }}"
+                                <li><a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : "#".$comment->id}}"
                                         class="comment-action-link post-status-solved">Hữu ích nhất
                                         <i class="fa fa-check-circle" aria-hidden="true"></i>
                                     </a></li>

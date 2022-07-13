@@ -303,7 +303,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var time;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -313,29 +312,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.$axios.get("/messages/chatroom/".concat(_this.$route.params.roomId));
 
             case 3:
-              _context.next = 10;
+              _context.next = 8;
               break;
 
             case 5:
               _context.prev = 5;
               _context.t0 = _context["catch"](0);
-              time = 2000;
 
-              _this.$swal.fire({
-                toast: true,
-                icon: "error",
-                title: "Không có quyền truy cập",
-                position: "center",
-                timer: time,
-                timerProgressBar: true,
-                showConfirmButton: false
-              });
+              _this.$router.push('/messenger');
 
-              setTimeout(function () {
-                return _this.$router.go(-1);
-              }, time);
-
-            case 10:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -11651,8 +11637,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\CDTN Quyền tác giả\QTG-Web\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\CDTN Quyền tác giả\QTG-Web\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\CĐTN\cdtn_qtg\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\CĐTN\cdtn_qtg\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

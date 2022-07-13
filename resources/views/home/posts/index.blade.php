@@ -54,9 +54,9 @@
                     <div class="row">
                         <div class="col-md-10">
                             <select name="sort" id="" class="form-control">
-                                <option value="sort-new-comment">Comment mới</option>
-                                <option value="sort-new-post">Bài viết mới</option>
-                                <option value="sort-old-post">Bài viết cũ nhất</option>
+                                <option value="sort-new-post">Mới nhất</option>
+                                <option value="sort-new-comment">Hoạt động gần đây</option>
+                                <option value="sort-old-post">Cũ nhất</option>
                             </select>
                         </div>
                         <div class="col-md-2">

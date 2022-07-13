@@ -38,17 +38,7 @@ export default {
     try {
       await this.$axios.get(`/messages/chatroom/${this.$route.params.roomId}`);
     } catch (error) {
-      const time = 2000
-      this.$swal.fire({
-        toast: true,
-        icon: "error",
-        title: "Không có quyền truy cập",
-        position: "center",
-        timer: time,
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
-      setTimeout(() => this.$router.go(-1), time)
+      this.$router.push('/messenger')
     }
   },
   created() {
