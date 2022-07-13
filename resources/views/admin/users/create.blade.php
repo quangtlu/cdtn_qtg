@@ -115,6 +115,8 @@
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script src="{{ asset('admin/user/main.js') }}"></script>
+    <script src="{{ asset('js/avatar.js') }}"></script>
+
     <script>
         $('#dob').datepicker({
             language: 'vi',
