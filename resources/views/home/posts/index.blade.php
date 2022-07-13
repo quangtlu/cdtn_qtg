@@ -10,6 +10,7 @@
             margin-bottom: 60px;
             margin: 0 0 60px -15px;
         }
+
         .sort-product {
             margin: 0 0 13px 0px;
 
@@ -43,8 +44,8 @@
     <div class="col my-auto" id="search" style="margin-top: 2px;">
         <a class="card btn btn-default my-auto" data-toggle="collapse" href="#collapseSearch" aria-expanded="false"
             aria-controls="collapseExample">
-                <i class="fa fa-search"></i>
-                <span>Tìm kiếm bài viết</span>
+            <i class="fa fa-search"></i>
+            <span>Tìm kiếm bài viết</span>
         </a>
     </div>
     <div class="panel panel-primary" id="toggle" style="margin-top: 10px; display:none; padding: 15px">
@@ -73,7 +74,8 @@
                                 <option value="" class="filter-option-dafault">Tag</option>
                                 <option value="" class="filter-option-dafault">Tất cả</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
+                                    <option value="{{ $tag->id }}"
+                                        {{ request()->tag_id == $tag->id ? 'selected' : false }}>
                                         {{ $tag->name }}</option>
                                 @endforeach
                             </select>
@@ -84,7 +86,8 @@
                                 <option value="" class="filter-option-dafault">Tất cả</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
+                                        {{ request()->category_id == $category->id ? 'selected' : false }}>
+                                        {{ $category->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -92,11 +95,13 @@
                         <div class="col-md-2">
                             <select name="status" id="sort" class="form-control">
                                 <option value="" class="filter-option-dafault">Giải đáp</option>
-                                <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">
+                                <option value="{{ config('consts.post.status.solved.value') }}"
+                                    class="filter-option-dafault">
                                     {{ config('consts.post.status.solved.name') }}</option>
-                                <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">
+                                <option value="{{ config('consts.post.status.unsolved.value') }}"
+                                    class="filter-option-dafault">
                                     {{ config('consts.post.status.unsolved.name') }}</option>
-        
+
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -123,7 +128,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="title">Tiêu đề</label>
-                            <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}">
+                            <input type="text" name="title" class="form-control" id="title"
+                                value="{{ old('title') }}">
                             @error('title')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                             @enderror
@@ -133,7 +139,9 @@
                             <select name="tag_id[]" class="form-control select2_init" multiple>
                                 <option></option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}" {{ (collect(old('tag_id'))->contains($tag->id)) ? 'selected':'' }}>{{ $tag->name }}</option>
+                                    <option value="{{ $tag->id }}"
+                                        {{ collect(old('tag_id'))->contains($tag->id) ? 'selected' : '' }}>
+                                        {{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tag_id')
@@ -145,7 +153,9 @@
                             <select name="category_id[]" class="form-control select3_init" multiple>
                                 <option></option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ (collect(old('category_id'))->contains($category->id)) ? 'selected':'' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}"
+                                        {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                        {{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -180,7 +190,8 @@
                                         class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                        class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
+                                        class="fa fa-calendar"
+                                        aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                         class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
@@ -271,6 +282,7 @@
             $('.select2_init').select2({
                 'placeholder': 'Chọn thẻ tag',
             })
+            
             $('.select3_init').select2({
                 'placeholder': 'Chọn danh mục',
             })
@@ -282,13 +294,13 @@
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết, tag, danh mục...');
     </script>
     <script>
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+        src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" >
     </script>
     <script>
-        $(document).ready(function(){
-        $('#search').click(function(){
-            $('#toggle').slideToggle();
-        });
+        $(document).ready(function() {
+            $('#search').click(function() {
+                $('#toggle').slideToggle();
+            });
         });
     </script>
 @endsection

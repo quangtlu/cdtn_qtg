@@ -72,9 +72,6 @@ class PostService
         $post = $this->postModel->create($data);
         $post->tags()->attach($request->tag_id);
         $post->categories()->attach($request->category_id);
-        if ($post) {
-            $user->givePermissionTo(['edit post', 'delete post']);
-        }
     }
 
     public function update($request, $id)
