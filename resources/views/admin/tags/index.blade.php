@@ -46,7 +46,7 @@
                                             <input id="tag-name" class="form-control" value="{{ $tag->name }}" name="name" disabled="true" type="text">
                                         </td>
                                         <td>
-                                            <button type="button" data-url="{{ route('admin.tags.edit', ["id" => $tag->id]) }}" id="btn_edit" checked="checked" class="btn btn-info btn-sm">Sửa</button>
+                                            <a href="{{ route('admin.tags.edit', ["id" => $tag->id]) }}"><button type="button" id="btn_edit" checked="checked" class="btn btn-info btn-sm">Sửa</button></a>
                                             <button type="button" data-url="{{ route('admin.tags.destroy', ["id" => $tag->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
                                     </tr>

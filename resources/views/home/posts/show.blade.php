@@ -132,7 +132,7 @@
         <h3 style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
             @foreach ($post->comments->sortByDesc('status')->all() as $comment)
-                <div id="{{ $comment->id }}" class="comments-grid">
+                <div id="{{ $comment->id }}" class="comments-grid" style="margin-top: 25px; margin-bottom:5px">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
@@ -140,7 +140,7 @@
                         <h4><a
                                 href="{{ route('posts.getPostByUser', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
                         </h4>
-                        <ul>
+                        <ul style="padding: 8px 0 8px 0">
                             <li><a href="#{{ $comment->id }}">{{ $comment->created_at->diffForHumans() }}</a><i>|</i>
                             </li>
                             <li>
