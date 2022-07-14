@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mật khẩu <b class="field-require">*</b></label>
-                                <input id="password" data-toggle="password" type="password" name="password" class="form-control" value="{{ old('email') }}">
+                                <input id="password" data-toggle="password" type="password" name="password" class="form-control" value="{{ old('password') }}">
                                 @error('password')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
