@@ -39,7 +39,7 @@ class PostService
 
     public function getDetailPost($id)
     {
-        return Post::where('id', $id)->accepted()->get();
+        return Post::where('id', $id)->accepted()->first();
     }
 
     public function getByCategory($categoryId)
@@ -165,14 +165,13 @@ class PostService
 
     public function filter($request)
     {
-        $posts = Post::accepted()->query()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+        $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
         return $posts;
     }
 
     public function searchAndFilter($request)
     {
         $posts = Post::accepted()
-                    ->query()
                     ->filterCategory($request)
                     ->filterTag($request)
                     ->filterStatus($request)
