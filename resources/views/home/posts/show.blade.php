@@ -131,7 +131,7 @@
         <h3 class="title-relate" style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
             @foreach ($post->comments->sortByDesc('status')->all() as $comment)
-                <div id="{{ $comment->id }}" class="comments-grid">
+                <div id="{{ $comment->id }}" class="comments-grid" style="margin-top: 25px; margin-bottom:5px">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
