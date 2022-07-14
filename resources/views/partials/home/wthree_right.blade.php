@@ -1,4 +1,4 @@
-<div class="col-md-3 w3agile_blog_left">
+<div class="col-md-3 w3agile_blog_left wow fadeInRight">
     <div class="agileinfo_calender">
         <h3>Mạng xã hội</h3>
         <div class="w3ls-social-icons-1">
@@ -21,7 +21,7 @@
         @endforeach
     </div>
 
-    <div class="w3l_categories">
+    <div class="w3l_categories wow fadeInUp">
         <h3>Danh mục</h3>
         <div class="w3l_wrap">
             <ul>
@@ -36,7 +36,7 @@
             </ul>
         </div>
     </div>
-    <div class="w3l_tags">
+    <div class="w3l_tags wow fadeInUp">
         <h3>Tags</h3>
         <div class="w3l_wrap">
             <ul class="tag">

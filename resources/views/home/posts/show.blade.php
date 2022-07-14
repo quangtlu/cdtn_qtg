@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1 wow fadeInUp">
+    <div class="single-left1">
         <h3 class="title-relate">{{ $post->title }}</h3>
         <ul class="panel">
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a

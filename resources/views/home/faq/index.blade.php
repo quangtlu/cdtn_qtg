@@ -6,7 +6,7 @@
 @section('content')
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         @for($i = 0; $i < count($faqs); $i++)
-        <div class="panel panel-primary">
+        <div class="panel panel-primary {{ $i != 0 ? 'wow fadeInUp' : '' }}">
             <div class="panel-heading" role="tab" id="heading{{$i}}">
                 <h4 class="panel-title">
                     <i class="fa fa-question-circle icon-question"></i>

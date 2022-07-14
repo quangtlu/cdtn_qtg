@@ -21,7 +21,7 @@
             <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
             </li>
         </ul>
-        <div class="row">
+        <div class="row wow fadeInUp">
             <div class="col-md-12">
                 <h2 class="name">
                     {{-- {{ $product->name }} --}}
@@ -65,7 +65,7 @@
         </div>
     </div>
     @if ($product->image != null)
-        <div class="w3agile-top">
+        <div class="w3agile-top wow fadeInUp">
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
@@ -160,7 +160,7 @@
             </li>
         </ul>
     </div>
-    <div style="margin-top: 30px">
+    <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Tác phẩm liên quan</h3>
         @if (isset($productRelates))
             @foreach ($productRelates as $product)

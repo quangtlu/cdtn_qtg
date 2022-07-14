@@ -98,8 +98,8 @@
         </form>
     </div>
     @if (isset($products))
-        @foreach ($products as $product)
-            <div class="wthree-top-1">
+        @foreach ($products as $index => $product)
+            <div class="wthree-top-1 {{ $index != 0 ? 'wow fadeInUp' : '' }} ">
                 <div class="w3agile-top">
                     <div class="col-md-3 w3agile-left">
                         <ul class="post-info">

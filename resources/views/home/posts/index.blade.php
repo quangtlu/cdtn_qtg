@@ -189,8 +189,8 @@
         </div>
     </div>
     @if (isset($posts))
-        @foreach ($posts as $post)
-            <div class="wthree-top-1 wow fadeInUp">
+        @foreach ($posts as $index => $post)
+            <div class="wthree-top-1 {{ $index != 0 ? 'wow fadeInUp' : '' }}">
                 <div class="w3agile-top">
                     <div class="col-md-3 w3agile-left">
                         <ul class="post-info">
