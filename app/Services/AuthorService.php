@@ -19,6 +19,12 @@ class AuthorService
         return $authors;
     }
 
+    public function search($request)
+    {
+        $authors = Author::search($request->keyword)->paginate(10);
+        return $authors;
+    }
+
     public function getAll()
     {
         $authors = $this->authorModel->all();
@@ -31,23 +37,45 @@ class AuthorService
     }
 
     public function create($request){
+        $date = str_replace('/', '-', $request->dob);
+        $dob = date('Y-m-d', strtotime($date));
         $data = [
             "name" => $request->name,
-            "dob" => $request->dob,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
+            "dob" => $dob,
+            "email" => $request->email,
         ];
         $this->authorModel->create($data);
     }
 
     public function update($request, $id){
         $author = $this->getById($id);
+        $date = str_replace('/', '-', $request->dob);
+        $dob = date('Y-m-d', strtotime($date));
         $data = [
             "name" => $request->name,
-            "dob" => $request->dob,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
+            "dob" => $dob,
+            "email" => $request->email,
         ];
         $author->update($data);
     }
 
     public function delete($id){
         $this->authorModel->destroy($id);
+    }
+
+    public function filter($request)
+    {
+        $authors = Author::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->paginate(10);
+        return $authors;
+    }
+
+    public function searchAndFilter($request)
+    {
+        $authors = Author::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->search($request->keyword)->paginate(10);
+        return $authors;
     }
 }

@@ -9,28 +9,40 @@
 @endsection
 @section('js')
     <script src="{{ asset('admin/role/create.js') }}"></script>
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.permissions.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên quyền');
+    </script>
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('partials.content_header', ['name' => 'quyền', 'key' => 'Quản lý'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mt-4">
                         <form action="{{ route('admin.permissions.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Chọn module</label>
-                                <select name="module_parents" id="" class="form-control">
-                                    @foreach (config('permission.module_parents') as $moduleItem)
+                                <select name="module" id="" class="form-control">
+                                    <option></option>
+                                    @foreach (config('permission.module') as $moduleItem)
                                         <option value="{{ $moduleItem }}">{{ $moduleItem }}</option>
                                     @endforeach
                                 </select>
+                                @error('module')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <label>
+                                                    Action
+                                                </label>
+                                            </div>
                                             <div class="col-md-12">
                                                 <label>
                                                     <input type="checkbox" class="checkall">
@@ -39,17 +51,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @foreach (config('permission.module_children') as $moduleItem)
-                                        <div class="col-md-3">
+                                    @foreach (config('permission.action') as $moduleItem)
+                                        <div class="col-md-2">
                                             <label>
-                                                <input type="checkbox" class="checkbox-children" name="module_children[]" value="{{ $moduleItem }}">
+                                                <input type="checkbox" class="checkbox-children" name="action[]" value="{{ $moduleItem }}">
                                                 {{ $moduleItem }}
                                             </label>
                                         </div>
                                     @endforeach
+                                    @error('action')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
+                                @error('action'.' '.'module')
+                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @can('admin add permission')
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @endcan
                         </form>
                     </div>
                     <div class="col-md-6">
@@ -58,7 +78,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên quyền</th>
-                                <th>Xóa</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -75,7 +95,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $permissions->links() }}
+                        {{ $permissions->withQueryString()->links() }}
                     </div>
                 </div>
                 <!-- /.row -->
@@ -84,4 +104,3 @@
         <!-- /.content -->
     </div>
 @endsection
-

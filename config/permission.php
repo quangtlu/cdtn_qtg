@@ -159,7 +159,7 @@ return [
         'store' => 'default',
     ],
 
-    'module_parents' => [
+    'module' => [
         'user',
         'author',
         'product',
@@ -167,16 +167,24 @@ return [
         'role',
         'permission',
         'post',
-        'conservation',
-        'comment',
-        'message'
-
+        'faq',
+        'category',
+        'tag',
+        'chatroom',
     ],
 
-    'module_children' => [
+    'action' => [
         'list',
         'add',
         'edit',
         'delete',
+        'show',
+    ],
+    'role' => [
+        'admin',
+        'mod',
+        'editor',
+        'user',
+        'counselor'
     ]
 ];

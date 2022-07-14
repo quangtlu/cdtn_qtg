@@ -4,6 +4,7 @@
 
 use App\Models\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /*
@@ -20,9 +21,12 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'phone' => '09'.rand(100000000, 999999999),
-        'role_id' => rand(1, 10),
+        'phone' => '09'.$faker->numerify('########'),
+        'dob' => $faker->dateTime('-18 years'),
         'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'gender' => 'Nam',
+        'image' => 'avatar-nam.jpg',
+        'password' => Hash::make('password'),
+
     ];
 });

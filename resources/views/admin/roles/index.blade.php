@@ -1,18 +1,29 @@
 @extends('layouts.admin')
 @section('title', 'Quản lý vai trò')
 @section('js')
-    <script src="{{ asset('js/alertDelete.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
+    <script>
+        $('#header-search-form').attr('action', '{{ route('admin.roles.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên vai trò');
+    </script>
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'vai trò', 'key' => 'Danh sách'])
-        <!-- /.content-header -->
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="card w-100 mt-2">
+                        <div class="card-body">
+                            <div class="row justify-content-between">
+                                <div>
+                                    <a class="btn btn-success btn-sm float-right"
+                                        href="{{ route('admin.roles.create') }}">Thêm mới</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 card">
                         <table class="table">
                             <thead>
                             <tr>
@@ -35,9 +46,6 @@
                             </tbody>
                         </table>
                         {{ $roles->links() }}
-                    </div>
-                    <div class="col-md-12">
-                        <a href="{{ route('admin.roles.create') }}"><button class="btn btn-success float-right m-2">Thêm mới</button></a>
                     </div>
                 </div>
                 <!-- /.row -->

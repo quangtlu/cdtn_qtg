@@ -32,12 +32,10 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.content_header', ['name' => 'Tác phẩm', 'key' => 'Chi tiết'])
     <!-- product -->
         <div class="product-content product-wrap clearfix product-deatil">
-            @if (empty($productImgs)) 
-                <img class="no-image" src="{{ asset("image/products/no_image.jpg") }}" alt="">                                    
+            @if (empty($productImgs))
+                <img class="no-image" src="{{ asset("image/products/no_image.jpg") }}" alt="">
             @else
                 <div class="swiper">
                 <!-- Additional required wrapper -->
@@ -45,16 +43,16 @@
                         <!-- Slides -->
                         @foreach ($productImgs as $item)
                             <div class="swiper-slide">
-                                <img class="product-img" src="{{ asset("image/products/$item") }}" alt="">                                    
+                                <img class="product-img" src="{{ asset("image/products/$item") }}" alt="">
                             </div>
                         @endforeach
                     </div>
                     @if (count($productImgs)>1)
                         <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>                        
+                        <div class="swiper-button-next"></div>
                     @endif
                 </div>
-                        
+
             @endif
                 <!-- If we need scrollbar -->
             <div class="row">
@@ -64,28 +62,28 @@
                     </h2>
                     <hr />
                     <div class="">
-                        <ul>
-                            <li>
-                                Tác giả:
-                                    @php
-                                        foreach ($product->author as $value){
-                                            $a[] = $value->name;
-
-                                        }
-                                        echo $str = implode(", ", $a);
-                                    @endphp
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Tác giả:  
+                                @if ($product->authors->count())
+                                    @foreach ($product->authors as $index => $author)
+                                        {{ $index != $product->authors->count() - 1 ? $author->name. ' ,' : $author->name}}
+                                    @endforeach
+                                @else
+                                    Chưa xác định
+                                @endif
                             </li>
-                            <li>
-                                Chủ sở hữu: {{ $product->owner->name }}
+                            <li class="list-group-item">
+                                Chủ sở hữu: {{ ($product->owner->name) ?? '' }}
                             </li>
-                            <li>
+                            <li class="list-group-item">
                                 Ngày sáng tác: {{ $product->pub_date }}
                             </li>
-                            <li>
+                            <li class="list-group-item">
                                 Ngày đăng kí bản quyền: {{ $product->regis_date }}
                             </li>
-                            <li>
-                                Mô tả:<br>
+                            <li class="list-group-item">
+                                Mô tả: 
                                     {!! $product->description !!}
                             </li>
                         </ul>

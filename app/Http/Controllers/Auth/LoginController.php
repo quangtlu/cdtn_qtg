@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Closure;
 
 class LoginController extends Controller
 {
@@ -24,12 +24,16 @@ class LoginController extends Controller
     use AuthenticatesUsers {
         logout as performLogout;
     }
+
+    use AuthenticatesUsers {
+        redirectPath as laravelRedirectPath;
+    }
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -41,9 +45,24 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function handle($request, Closure $next, $guard = null)
+    {
+        if (Auth::guard($guard)->check()) {
+            return Redirect()->route('home.index');
+        }
+
+        return $next($request);
+    }
+
+    public function redirectPath()
+{
+    session()->flash('success', 'Đăng nhập thành công');
+    return $this->laravelRedirectPath();
+}
+
     public function logout(Request $request)
     {
         $this->performLogout($request);
-        return redirect()->route('login');
+        return Redirect()->route('login');
     }
 }

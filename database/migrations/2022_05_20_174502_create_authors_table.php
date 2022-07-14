@@ -16,7 +16,10 @@ class CreateAuthorsTable extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('dob');
+            $table->string('email')->unique();
+            $table->string('gender');
+            $table->string('phone')->unique();
+            $table->date('dob')->nullable();
             $table->timestamps();
         });
     }

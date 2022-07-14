@@ -1,9 +1,23 @@
-- git clone git@gitlab.com:quangtlu/qtg.git
-- php artisan key:generate
-- cp .env.example .env
-- config database trong .env 
+- git clone 
+- Cài đặt redis
+- redis-server
 - composer install
-- composer require spatie/laravel-permission
-- Khởi chạy XAMPP
+- composer dump-autoload 
+- npm install
+- cp .env.example .env
+- php artisan key:generate
+- npm install -g laravel-echo-server
 - php artisan migrate --seed
+- laravel-echo-server init và thiết lập như hình
+![alt text](https://images.viblo.asia/d5e28b10-7d75-454b-ade0-d91dfe406246.png)
+
+<!-- Chạy ứng dụng, mỗi lệnh 1 terminal -->
+- redis-server
+    nếu gặp lỗi thì chạy lệnh này: 
+        + redis-cli ping
+        + redis-cli shutdown
 - php artisan serve
+- npm run watch
+- laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
+- php artisan queue:work
+

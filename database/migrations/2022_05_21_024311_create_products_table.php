@@ -17,10 +17,10 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->date('pub_date');
-            $table->date('regis_date');
-            $table->integer('owner_id');
+            $table->date('regis_date')->nullable();
+            $table->integer('owner_id')->nullable();
             $table->text('description');
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

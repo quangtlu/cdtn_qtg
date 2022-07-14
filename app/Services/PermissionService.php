@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Services;
-use Spatie\Permission\Models\Permission;
+
+use App\Models\Permission;
 
 class PermissionService
 
@@ -18,6 +19,7 @@ class PermissionService
         $permissions = $this->permissionModel->all();
         return $permissions;
     }
+
 
     public function getPaginate()
     {
@@ -37,10 +39,16 @@ class PermissionService
         return $permission; 
     }
 
+    public function search($request)
+    {
+        $permissions = Permission::search($request->keyword)->paginate(10);
+        return $permissions;
+    }
+
     public function create($request)
     {
-        foreach ($request->module_children as $value) {
-            $this->permissionModel->create(['name' => $value.' '.$request->module_parents]);
+        foreach ($request->action as $value) {
+            $this->permissionModel->create(['name' => $value.' '.$request->module]);
         }
     }
 

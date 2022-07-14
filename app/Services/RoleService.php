@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 
 class RoleService
 
@@ -26,6 +26,12 @@ class RoleService
     public function getById($id){
         $role = $this->roleModel->findOrFail($id);   
         return $role; 
+    }
+
+    public function search($request)
+    {
+        $roles = Role::search($request->keyword)->paginate(10);
+        return $roles;
     }
 
     public function create($request){
