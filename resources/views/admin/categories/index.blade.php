@@ -6,8 +6,17 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <a class="col-md-1 btn btn-success btn-sm float-right m-2" href="{{ route('admin.categories.create') }}">Thêm</a>
-                    <div class="col-md-12">
+                    <div class="card w-100 mt-2">
+                        <div class="card-body">
+                            <div class="row justify-content-between">
+                                <div>
+                                    <a class="btn btn-success btn-sm float-right"
+                                        href="{{ route('admin.users.create') }}">Thêm mới</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 card">
                         <table class="table">
                             <thead>
                             <tr>
