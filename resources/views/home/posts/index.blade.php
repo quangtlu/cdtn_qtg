@@ -178,8 +178,6 @@
                             <label for="image">Ảnh</label>
                             <input type="file" multiple class="form-control-file" name="image[]" id="image">
                         </div>
-                        <input type="hidden" name="status"
-                            value="{{ config('consts.post.status.unsolved.value') }}">
                         <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Đăng
                             bài</button>
                         <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
@@ -215,19 +213,29 @@
                                                 class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
                                 @endif
                             @endauth
-                            <li><a href="
-                                    @auth 
-                                        {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
-                                    @endauth
-                                    @guest
-                                        {{ route('posts.show', ['id' => $post->id]) }} 
-                                    @endguest
-                                "
-                                    class="post-info__link post-status 
-                                    {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
-                                    <i
-                                        class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
-                                    {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
+                            <li>
+                                <a href="
+                                        @auth
+                                            @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value'))
+                                                {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
+                                            @endif 
+                                        @endauth
+                                        @guest
+                                            {{ route('posts.show', ['id' => $post->id]) }} 
+                                        @endguest
+                                    "
+                                        class=" 
+                                        @foreach (config('consts.post.status') as $item)
+                                            @if ($post->status == $item['value'])
+                                                {{ $item['class'] }}
+                                            @endif
+                                        @endforeach
+                                    ">
+                                    @foreach (config('consts.post.status') as $item)
+                                        @if ($post->status == $item['value'])
+                                            {{ $item['name'] }}
+                                        @endif
+                                    @endforeach
                                 </a>
                             </li>
                         </ul>
@@ -299,7 +307,7 @@
             height: 400
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết, tag, danh mục...');
+        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết...');
     </script>
     <script>
         src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" >

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Services\PostService;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     private $postService;
-    private $productService;
 
     public function __construct(PostService $postService, ProductService $productService)
     {
@@ -16,11 +16,14 @@ class HomeController extends Controller
         $this->productService = $productService;
     }
 
-
-    public function index ()
+    public function index (Request $request)
     {
-        $posts = $this->postService->getPostHome();
-        $products = $this->productService->getProductHome();
-        return view('home.index', compact('posts', 'products'));
+        $posts = $this->postService->getReferencePosts();
+
+        if ($request->keyword) {
+            $posts = $this->postService->search($request);
+        }
+
+        return view('home.index', compact('posts'));
     }
 }

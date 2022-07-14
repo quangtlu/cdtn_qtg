@@ -5,14 +5,30 @@ $BASE_PATH_IMAGE = 'image';
 return [
     'post' => [
         'status' => [
+            'request' => [
+                'value' => 1,
+                'name' => 'Chưa được phê duyệt',
+                'class' => 'btn btn-sm btn-warning'
+            ],
+            'refuse' => [
+                'value' => 2,
+                'name' => 'Đã bị từ chối',
+                'class' => 'btn btn-sm btn-danger'
+            ],
             'unsolved' => [
+                'value' => 3,
                 'name' => 'Chưa được giải đáp',
-                'value' => 1
+                'class' => 'btn btn-sm btn-primary'
             ],
             'solved' => [
                 'name' => 'Đã được giải đáp',
-                'value' => 2
+                'class' => 'btn btn-sm btn-success',
+                'value' => 4
             ],
+        ],
+        'action' => [
+            'accept' =>  'Chấp nhận',
+            'refuse' => 'Từ chối',
         ]
     ],
     'image' => [
@@ -56,7 +72,7 @@ return [
             'title' => 'Tóm tắt về quyền tác giả (QTG)',
             'user_id' => '1',
             'created_at' => now(),
-            'status' => 1,
+            'status' => 4,
             'content' =>
             '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
             mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;
@@ -346,7 +362,7 @@ return [
         [
             'title' => 'Một số quy định về QTG ở Việt Nam',
             'user_id' => 1,
-            'status' => 1,
+            'status' => 4,
             'created_at' => now(),
             'content' =>
             '<p class="MsoNormal"><span lang="EN-US" style="font-size:13.0pt;line-height:107%;
@@ -1381,7 +1397,7 @@ return [
         [
             'title' => 'Một số vấn đề cụ thể về QTG trong trường Đại học',
             'user_id' => '1',
-            'status' => 1,
+            'status' => 4,
             'created_at' => now(),
             'content' => '<p class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span style="font-size:13.0pt;line-height:107%;mso-fareast-font-family:&quot;Times New Roman&quot;;
             mso-bidi-font-family:&quot;Times New Roman&quot;;mso-ansi-language:EN-US">1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;

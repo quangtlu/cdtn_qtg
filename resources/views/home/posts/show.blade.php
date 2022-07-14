@@ -7,7 +7,7 @@
 @section('content')
     <div class="single-left1">
         <h3 class="title-relate">{{ $post->title }}</h3>
-        <ul class="panel">
+        <ul>
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
                     href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             </li>
@@ -24,22 +24,27 @@
             <li><span class="fa fa-calendar" aria-hidden="true"></span><a
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
-            <li><a href="
-                @auth 
-                    {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
+        </ul>
+        <a href="
+                @auth
+                    @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
                 @endauth
                 @guest
                     {{ route('posts.show', ['id' => $post->id]) }} 
                 @endguest
             "
-                    class="post-info__link post-status 
-                {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
-                    <i
-                        class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
-                    {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
-                </a>
-            </li>
-        </ul>
+            class=" 
+                @foreach (config('consts.post.status') as $item)
+                    @if ($post->status == $item['value'])
+                        {{ $item['class'] }} @endif
+                @endforeach
+            ">
+            @foreach (config('consts.post.status') as $item)
+                @if ($post->status == $item['value'])
+                    {{ $item['name'] }}
+                @endif
+            @endforeach
+        </a>
         <div class="panel">{!! $post->content !!}</div>
     </div>
     @if ($post->image != null)
@@ -260,19 +265,26 @@
                                         </li>
                                     @endif
                                 @endauth
-                                <li><a href="
-                                    @auth 
-                                        {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
-                                    @endauth
-                                    @guest
-                                        {{ route('posts.show', ['id' => $post->id]) }} 
-                                    @endguest
-                                "
-                                        class="post-info__link post-status 
-                                    {{ $post->status == config('consts.post.status.solved.value') ? 'post-status-solved' : 'post-status-unsolved' }}">
-                                        <i
-                                            class="fa  {{ $post->status == config('consts.post.status.solved.value') ? 'fa-check-circle' : 'fa-times-circle ' }} "aria-hidden="true"></i>
-                                        {{ $post->status == config('consts.post.status.solved.value') ? config('consts.post.status.solved.name') : config('consts.post.status.unsolved.name') }}
+                                <li>
+                                    <a href="
+                                            @auth
+                                                @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
+                                            @endauth
+                                            @guest
+                                                {{ route('posts.show', ['id' => $post->id]) }} 
+                                            @endguest
+                                        "
+                                        class="post-status 
+                                            @foreach (config('consts.post.status') as $item)
+                                                @if ($post->status == $item['value'])
+                                                    {{ $item['class'] }} @endif
+                                            @endforeach
+                                        ">
+                                        @foreach (config('consts.post.status') as $item)
+                                            @if ($post->status == $item['value'])
+                                                {{ $item['name'] }}
+                                            @endif
+                                        @endforeach
                                     </a>
                                 </li>
                             </ul>

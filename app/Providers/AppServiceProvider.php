@@ -28,14 +28,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $newestPosts = Post::select('id', 'title', 'created_at')->orderBy('created_at', 'desc')->limit(5)->get();
+        $newestPosts = Post::accepted()->select('id', 'title', 'created_at')->orderBy('created_at', 'desc')->limit(5)->get();
         $categories = Category::where('parent_id', 0)->latest()->get();
         $tags = Tag::latest()->get();
-        $categoryReference = Category::where('name', config('consts.category_reference.name'))->first();
+        $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();
 
-        if ($categoryReference) {
-            $postReferences = $categoryReference->posts;
-        }
         if ($newestPosts) {
             view()->share('newestPosts', $newestPosts);
         }
