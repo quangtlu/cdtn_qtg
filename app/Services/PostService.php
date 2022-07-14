@@ -165,7 +165,11 @@ class PostService
 
     public function filter($request)
     {
-        $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+        if($request->status == config('consts.post.status.refuse.value') || $request->status == config('consts.post.status.request.value')) {
+            $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->where('user_id', Auth::user()->id)->paginate(10);
+        } else {
+            $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+        }
         return $posts;
     }
 
