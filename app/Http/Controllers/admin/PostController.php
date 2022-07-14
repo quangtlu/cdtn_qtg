@@ -28,7 +28,7 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getPaginate();
+        $posts = $this->postService->getAllPaginate();
         if($request->keyword) {
             $posts = $this->postService->search($request);
         }
