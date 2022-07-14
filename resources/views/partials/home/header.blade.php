@@ -7,8 +7,7 @@
                         <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
                             alt="avatar">
                         <div class="dropdown">
-                            <span class="user-info__name dropdown-toggle"
-                                data-toggle="dropdown">{{ Auth::user()->name }}</span>
+                            <span class="user-info__name dropdown-toggle">{{ Auth::user()->name }}</span>
                             <ul class="dropdown-menu dropdown-menu__user-info ">
                                 <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
                                         nhân</a></li>
@@ -40,10 +39,6 @@
                     <a class="header-link" href="{{ route('login') }}">Đăng nhập <i class="fa fa-sign-in"></i></a>
                     <a class="header-link" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
                 @endguest
-                @auth
-
-
-                @endauth
             </div>
         </div>
     </div>
@@ -76,6 +71,7 @@
                                             href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </li>
                                 @endforeach
+                                <li><a class="active" href="{{ route('home.index')}}">Xem tất cả</a></li>
                             @endif
                         </ul>
                     </li>
@@ -90,15 +86,8 @@
                     @auth
                         <li class="notice-nav">
                             @if (Auth::user()->notifications)
-                                <div class="ringing-bell">
-                                    <i
-                                        class="fa fa-bell faa-ring fa-5x notice-icon {{ Auth::user()->notifications->first->unread() ? 'active animated' : '' }}">
-                                        @if (Auth::user()->unreadNotifications()->count() > 0)
-                                            <span
-                                                class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
-                                        @endif
-                                    </i>
-                                </div>
+                                <span
+                                    class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell active' : '' }}"></span>
                                 <ul class="notice-list">
                                     @foreach (Auth::user()->notifications as $notification)
                                         @if ($notification->type == 'App\Notifications\CommentNotification')
@@ -148,7 +137,8 @@
                                                     </ul>
                                                 </a>
                                             </li>
-                                        @elseif ($notification->type == 'App\Notifications\PostRequestNotification' || $notification->type == 'App\Notifications\PostResultNotification')
+                                        @elseif ($notification->type == 'App\Notifications\PostRequestNotification' ||
+                                            $notification->type == 'App\Notifications\PostResultNotification')
                                             <li class="notice-item panel">
                                                 <a
                                                     href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
@@ -169,12 +159,19 @@
                                                         </li>
                                                         @if ($notification->type == 'App\Notifications\PostRequestNotification')
                                                             <li class="panel-footer">
-                                                                <form action="{{ route('posts.handleRequest', ['id' => $notification->data['post_id']]) }}" method="post">
+                                                                <form
+                                                                    action="{{ route('posts.handleRequest', ['id' => $notification->data['post_id']]) }}"
+                                                                    method="post">
                                                                     @csrf
-                                                                    <input type="hidden" name="noti_id" value="{{ $notification->id }}">
+                                                                    <input type="hidden" name="noti_id"
+                                                                        value="{{ $notification->id }}">
                                                                     <div style="display: flex; justify-content: center;">
-                                                                        <input style="margin-right: 5px" type="submit" name="action" class="btn btn-danger" value="{{ config('consts.post.action.refuse') }}">
-                                                                        <input style="margin-left: 5px" type="submit" name="action" class="btn btn-success" value="{{ config('consts.post.action.accept') }}">
+                                                                        <input style="margin-right: 5px" type="submit"
+                                                                            name="action" class="btn btn-danger"
+                                                                            value="{{ config('consts.post.action.refuse') }}">
+                                                                        <input style="margin-left: 5px" type="submit"
+                                                                            name="action" class="btn btn-success"
+                                                                            value="{{ config('consts.post.action.accept') }}">
                                                                     </div>
                                                                 </form>
                                                             </li>

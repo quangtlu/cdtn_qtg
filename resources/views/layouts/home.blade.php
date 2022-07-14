@@ -2,14 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>@yield('title')</title>
+    <title>
+        @auth
+            @if (Auth::user()->unreadNotifications()->count() > 0)
+                ({{ Auth::user()->unreadNotifications()->count() }})
+            @endif
+        @endauth
+        @yield('title')
+    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="{{ asset('template_blog/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all" />
     <!-- fontawesome -->
     <link href="{{ asset('template_blog/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="all" />
     <!-- Bootstrap stylesheet -->
     <link rel="stylesheet" href="{{ asset('home/WOW-master/css/libs/animate.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen"
         property="" />
@@ -105,7 +112,7 @@
 
         });
     </script>
-    
+
     <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
     <script src="{{ asset('home/WOW-master/dist/wow.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

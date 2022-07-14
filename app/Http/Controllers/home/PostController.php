@@ -116,16 +116,22 @@ class PostController extends Controller
     public function handleRequest(Request $request, $id)
     {
         $action = $request->action;
-        $post = $this->postService->handleRequestPost($id, $action);
-        $this->notificationService->sendNotiResult($post, $action);
         $this->notificationService->destroy($request->noti_id);
-        $message = $action == 'Accept' ? 'Phê duyệt thành công' : 'Từ chối thành công';
-        $user = Auth::user();
-        if($user->hasAnyRole('mod', 'super-admin')) {
-            return redirect()->back()->with('success', $message);
-        } else {
-            return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');
+        if($this->postService->getById($id)->status != config('consts.post.status.request.value')) {
+            return redirect()->back()->with('error', 'Bài viết đã được xét duyệt');
         }
+        else {
+            $post = $this->postService->handleRequestPost($id, $action);
+            $this->notificationService->sendNotiResult($post, $action);
+            $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
+            $user = Auth::user();
+            if($user->hasAnyRole('mod', 'super-admin')) {
+                return redirect()->back()->with('success', $message);
+            } else {
+                return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');
+            }
+        }
+
     }
 
     public function toogleStatus($id)
