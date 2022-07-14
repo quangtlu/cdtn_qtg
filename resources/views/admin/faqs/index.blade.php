@@ -8,8 +8,17 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <a href="{{ route('admin.faqs.create') }}" class="btn btn-primary m-2">Thêm mới</a>
-                <div class="col-12" id="accordion">
+                <div class="card w-100 mt-2">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div>
+                                <a class="btn btn-success btn-sm float-right"
+                                    href="{{ route('admin.faqs.create') }}">Thêm mới</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 card" id="accordion">
                     @for($i = 0; $i < count($faqs); $i++)
                         <div class="card card-primary card-outline faq-card-wrap">
                             <i class="fas fa-ellipsis-v dropdown-toggle menu-icon text-secondary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
