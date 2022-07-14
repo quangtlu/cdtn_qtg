@@ -148,7 +148,6 @@ class PostService
                     $data = ['status' => config('consts.post.status.refuse.value')];
                     break;
                 default:
-                    $data = ['status' => config('consts.post.status.request.value')];
                     break;
             }
             $post->update($data);
