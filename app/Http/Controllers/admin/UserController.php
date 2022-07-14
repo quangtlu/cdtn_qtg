@@ -6,9 +6,7 @@ use App\Http\Requests\Admin\User\StoreUserRequest;
 use App\Http\Requests\Admin\User\UpdateUserRequest;
 use App\Services\RoleService;
 use App\Services\UserService;
-use Illuminate\Support\Facades\Log;
 use function redirect;
-use function response;
 use function view;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -60,7 +58,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $this->userService->create($request);
-        return Redirect(route('admin.users.index'))->with('success', 'Thêm người dùng thành công');
+        return Redirect(route('admin.users.index'))->with('success', 'Thêm thành công');
     }
 
     public function edit($id)
@@ -74,7 +72,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $this->userService->update($request, $id);
-        return Redirect(route('admin.users.index'))->with('success', 'Cập nhật người dùng thành công');
+        return Redirect(route('admin.users.index'))->with('success', 'Cập nhật thành công');
     }
 
     public function destroy($id)

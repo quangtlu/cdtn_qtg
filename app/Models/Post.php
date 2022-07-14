@@ -39,6 +39,32 @@ class Post extends Model
         return $this->hasOne(Chatroom::class);
     }
 
+    public function scopeAccepted($query)
+    {
+        return $query->whereNotIn('posts.status', [config('consts.post.status.refuse.value'), config('consts.post.status.request.value')]);
+    }
+
+    public function scopeHasCategory($query, $categoryId)
+    {
+        return $query->whereHas('categories', function ($subQuery) use ($categoryId) {
+            $subQuery->where('categories.id', $categoryId);
+        });
+    }
+
+    public function scopeHasTag($query, $categoryId)
+    {
+        return $query->whereHas('tags', function ($subQuery) use ($categoryId) {
+            $subQuery->where('tags.id', $categoryId);
+        });
+    }
+
+    public function scopeReference($query)
+    {
+        return $query->whereHas('categories', function ($subQuery) {
+            $subQuery->where('categories.name', config('consts.category_reference.name'));
+        });
+    }
+
     public function scopeSearch($query, $keyword)
     {
         return $query->where('title', 'LIKE', "%{$keyword}%")

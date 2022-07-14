@@ -114,10 +114,12 @@ Route::middleware('auth')->group(function () {
     });
     // User
     Route::name('posts.')->prefix('posts')->group(function () {
+        Route::get('/my-post', 'home\PostController@getMyPost')->name('myPost');
         Route::post('/store', 'home\PostController@store')->name('store');
         Route::post('/update/{id}', 'home\PostController@update')->name('update');
-        Route::post('/connect-to-counselor/{id}', 'home\PostController@connectToCounselor')->name('connectToCounselor');
         Route::get('/update/status/{id}', 'home\PostController@toogleStatus')->name('toogleStatus');
+        Route::post('/handle-request-post/{id}', 'home\PostController@handleRequest')->name('handleRequest');
+        Route::post('/connect-to-counselor/{id}', 'home\PostController@connectToCounselor')->name('connectToCounselor');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('destroy');
     });
 

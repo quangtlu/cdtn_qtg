@@ -5,37 +5,65 @@ namespace App\Services;
 use App\Models\Post;
 use App\Models\User;
 use App\traits\HandleImage;
+use Illuminate\Support\Facades\Auth;
 
 class PostService
 {
     use HandleImage;
 
     private $postModel;
+    private $notificationService;
 
-    public function __construct(Post $postModel)
+    public function __construct(Post $postModel, NotificationService $notificationService)
     {
         $this->postModel = $postModel;
+        $this->notificationService = $notificationService;
     }
 
     public function getPaginate()
     {
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::accepted()->latest()->paginate(10);
         return $posts;
     }
 
     public function search($request)
     {
-        $posts = Post::search($request->keyword)->paginate(10);
+        $posts = Post::accepted()->search($request->keyword)->paginate(10);
         return $posts;
     }
 
     public function getById($id)
     {
-        $post = $this->postModel->findOrFail($id);
-        return $post;
+        return $this->postModel->findOrFail($id);
     }
 
-    public function getAllCounselor($id) {
+    public function getDetailPost($id)
+    {
+        return Post::where('id', $id)->accepted()->get();
+    }
+
+    public function getByCategory($categoryId)
+    {
+        return Post::hasCategory($categoryId)->accepted()->latest()->paginate(10);
+    }
+
+    public function getByTag($tagId)
+    {
+        return Post::hasCategory($tagId)->accepted()->latest()->paginate(10);
+    }
+
+    public function getByUser($userId)
+    {
+        return Post::accepted()->where('user_id', $userId)->latest()->paginate(10);
+    }
+
+    public function myPost()
+    {
+        return Post::where('user_id', Auth::user()->id)->latest()->paginate(10);
+    }
+
+    public function getAllCounselor($id)
+    {
         $post = $this->getById($id);
         $userId = $post->user_id;
         $categories = $post->categories;
@@ -43,15 +71,15 @@ class PostService
         foreach ($categories as $category) {
             array_push($categoryIds, $category->id);
         }
-        
-        return User::whereHas('roles', function ($query){
-                        $query->where('name', 'counselor');
-                    })
-                    ->whereHas('categories', function ($query) use ($categoryIds) {
-                        $query->orWhereIn('categories.id', $categoryIds);
-                    })
-                    ->where('id', '!=', $userId)
-                    ->get();
+
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'counselor');
+        })
+            ->whereHas('categories', function ($query) use ($categoryIds) {
+                $query->orWhereIn('categories.id', $categoryIds);
+            })
+            ->where('id', '!=', $userId)
+            ->get();
     }
 
 
@@ -62,6 +90,7 @@ class PostService
             "title" => $request->title,
             "content" => $request->content,
             "user_id" => $user->id,
+            'status' => config('consts.post.status.request.value')
         ];
         if ($files = $request->file('image')) {
             $images = $this->uploadMutilpleImage($files);
@@ -72,17 +101,19 @@ class PostService
         $post = $this->postModel->create($data);
         $post->tags()->attach($request->tag_id);
         $post->categories()->attach($request->category_id);
+
+        return $post;
     }
 
     public function update($request, $id)
     {
         $post = $this->getById($id);
-        $nameUser = Auth()->user()->id;
+        $user_id = Auth()->user()->id;
         $data = [
             "title" => $request->title,
             "status" => $request->status,
             "content" => $request->content,
-            "user_id" => $nameUser,
+            "user_id" => $user_id,
         ];
 
         if ($files = $request->file('image')) {
@@ -94,11 +125,35 @@ class PostService
         $post->categories()->sync($request->category_id);
     }
 
-    public function toogleStatus($id)
+    public function toogleSovled($id)
     {
         $post = $this->getById($id);
-        $data = ['status' => !$post->status];
+        if ($post->status == config('consts.post.status.solved.value')) {
+            $data = ['status' => config('consts.post.status.unsolved.value')];
+        } else {
+            $data = ['status' => config('consts.post.status.solved.value')];
+        }
         $post->update($data);
+    }
+
+    public function handleRequestPost($id, $action)
+    {
+        $post = $this->getById($id);
+        if ($post->status == config('consts.post.status.request.value')) {
+            switch ($action) {
+                case config('consts.post.action.accept'):
+                    $data = ['status' => config('consts.post.status.unsolved.value')];
+                    break;
+                case config('consts.post.action.refuse'):
+                    $data = ['status' => config('consts.post.status.refuse.value')];
+                    break;
+                default:
+                    $data = ['status' => config('consts.post.status.request.value')];
+                    break;
+            }
+            $post->update($data);
+        }
+        return $post;
     }
 
     public function delete($id)
@@ -111,20 +166,25 @@ class PostService
 
     public function filter($request)
     {
-        $posts = Post::query()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+        $posts = Post::accepted()->query()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
         return $posts;
     }
 
     public function searchAndFilter($request)
     {
-        $posts = Post::query()->filterCategory($request)->filterTag($request)->filterStatus($request)->search($request->keyword)->paginate(10);
+        $posts = Post::accepted()
+                    ->query()
+                    ->filterCategory($request)
+                    ->filterTag($request)
+                    ->filterStatus($request)
+                    ->search($request->keyword)
+                    ->paginate(10);
         return $posts;
     }
 
-    public function getPostHome()
+    public function getReferencePosts()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
-        return $posts;
+        return Post::accepted()->reference()->paginate(10);
     }
 
     public function getPostIdRelateByTable($postId, array $relateTables)
@@ -136,7 +196,7 @@ class PostService
             if ($tableCollections->count() > 0) {
                 foreach ($tableCollections as $item) {
                     foreach ($item->posts as $post) {
-                        if($post->id != $postId) {
+                        if ($post->id != $postId) {
                             array_push($postIds, $post->id);
                         }
                     }
@@ -149,23 +209,23 @@ class PostService
     public function getPostRelate($id)
     {
         $postIds = $this->getPostIdRelateByTable($id, ['categories', 'tags']);
-        return Post::whereIn('id', $postIds)->paginate(5);
+        return Post::accepted()->whereIn('id', $postIds)->paginate(5);
     }
 
     public function sortPost($sortBy)
     {
         if ($sortBy == 'sort-new-post') {
-            $posts = Post::latest()->paginate(10);
-        } else if ($sortBy == 'sort-new-post') {
-            $posts = Post::leftJoin('comments', 'comments.post_id', '=', 'posts.id')
-            ->groupBy('posts.id')
-            ->orderByRaw('COALESCE(GREATEST(posts.created_at, MAX(comments.created_at)), posts.created_at) DESC')
-            ->select('posts.*')->paginate(10);
+            $posts = Post::accepted()->latest()->paginate(10);
+        } else if ($sortBy == 'sort-new-comment') {
+            $posts = Post::accepted()->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
+                ->groupBy('posts.id')
+                ->orderByRaw('COALESCE(GREATEST(posts.created_at, MAX(comments.created_at)), posts.created_at) DESC')
+                ->select('posts.*')->paginate(10);
         } else {
-            $posts = Post::leftJoin('comments', 'comments.post_id', '=', 'posts.id')
-            ->groupBy('posts.id')
-            ->orderByRaw('COALESCE(GREATEST(posts.created_at, MAX(comments.created_at)), posts.created_at) ASC')
-            ->select('posts.*')->paginate(10);
+            $posts = Post::accepted()->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
+                ->groupBy('posts.id')
+                ->orderByRaw('COALESCE(GREATEST(posts.created_at, MAX(comments.created_at)), posts.created_at) ASC')
+                ->select('posts.*')->paginate(10);
         }
         return $posts;
     }

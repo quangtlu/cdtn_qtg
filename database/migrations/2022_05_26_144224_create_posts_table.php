@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->integer('user_id');
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(config('consts.post.status.request.value'));
             $table->text('image')->nullable();
             $table->timestamps();
         });

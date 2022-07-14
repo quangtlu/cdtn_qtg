@@ -12,8 +12,7 @@
                             <ul class="dropdown-menu dropdown-menu__user-info ">
                                 <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
                                         nhân</a></li>
-                                <li><a class="header-link user-name"
-                                        href="{{ route('posts.getPostByUser', ['id' => Auth::user()->id]) }}">Bài viết của
+                                <li><a class="header-link user-name" href="{{ route('posts.myPost') }}">Bài viết của
                                         tôi</a></li>
                                 <li><a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -32,8 +31,9 @@
                 </div>
             @endauth
             <div class="logo">
-                <h1><a href="{{ route('home.index') }}"><img class="logo-img animate__animated  animate__slideInDown" src="{{ asset('logo.png') }}" alt=""></a></h1>
-                <p class="animate__animated  animate__slideInUp">Quang Vinh Copytight</p>
+                <h1><a href="{{ route('home.index') }}"><img class="logo-img animate__animated  animate__slideInDown"
+                            src="{{ asset('logo.png') }}" alt=""></a></h1>
+                <p class="animate__animated  animate__slideInUp">Quang Vinh Copyright</p>
             </div>
             <div class="w3ls-social-icons">
                 @guest
@@ -64,7 +64,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang chủ</a></li>
+                    <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
+                            chủ</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
@@ -78,22 +79,26 @@
                             @endif
                         </ul>
                     </li>
-                    <li><a class="{{ Request::is('faq') ? 'active' : '' }}"  href="{{ route('faq.index') }}">FAQ</a></li>
-                    <li><a class="{{ Request::is('products/*') ? 'active' : '' }}" href="{{ route('products.index') }}">Tác phẩm</a></li>
-                    <li><a class="{{ Request::is('posts/*') ? 'active' : '' }}" href="{{ route('posts.index') }}">Diễn đàn</a></li>
-                    <li><a href="{{ route('messenger.index') }}" style="font-size: 25px"><i class="fa fa-comments-o"></i></a></li>
+                    <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
+                            href="{{ route('faq.index') }}">FAQ</a></li>
+                    <li><a class="{{ Request::is('products/*') ? 'active' : '' }}"
+                            href="{{ route('products.index') }}">Tác phẩm</a></li>
+                    <li><a class="{{ Request::is('posts/*') ? 'active' : '' }}"
+                            href="{{ route('posts.index') }}">Diễn đàn</a></li>
+                    <li><a href="{{ route('messenger.index') }}" style="font-size: 25px"><i
+                                class="fa fa-comments-o"></i></a></li>
                     @auth
                         <li class="notice-nav">
                             @if (Auth::user()->notifications)
-                            <div class="ringing-bell">
-                                <i
-                                    class="fa fa-bell faa-ring fa-5x notice-icon {{ Auth::user()->notifications->first->unread() ? 'active animated' : '' }}">
-                                    @if (Auth::user()->unreadNotifications()->count() > 0)
-                                        <span
-                                            class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
-                                    @endif
-                                </i>
-                            </div>
+                                <div class="ringing-bell">
+                                    <i
+                                        class="fa fa-bell faa-ring fa-5x notice-icon {{ Auth::user()->notifications->first->unread() ? 'active animated' : '' }}">
+                                        @if (Auth::user()->unreadNotifications()->count() > 0)
+                                            <span
+                                                class="count-notice">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                                        @endif
+                                    </i>
+                                </div>
                                 <ul class="notice-list">
                                     @foreach (Auth::user()->notifications as $notification)
                                         @if ($notification->type == 'App\Notifications\CommentNotification')
@@ -116,16 +121,64 @@
                                                 </a></li>
                                         @elseif ($notification->type == 'App\Notifications\ConnectNotification')
                                             <li class="notice-item">
-                                                <a href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                <a
+                                                    href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
                                                     <ul class="notification-item-list">
-                                                        <li><h4 class="{{ $notification->unread() ? '' : ' mark-as-read' }}">{!! $notification->data['title'] !!}</h4></li>
-                                                        <li style="font-size: 12px;" class="post-content-limit-line {{ $notification->unread() ? '' : ' mark-as-read' }}"><p>{!! $notification->data['content'] !!}</p></li>
-                                                        <li class="notice-item-content__time {{ $notification->unread() ? '' : ' mark-as-read' }}"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $notification->created_at->diffForHumans() }}</li>
+                                                        <li>
+                                                            <h5
+                                                                class="{{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                                {!! $notification->data['title'] !!}</h5>
+                                                        </li>
+                                                        <li style="font-size: 12px;"
+                                                            class="post-content-limit-line {{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                            <p>{!! $notification->data['content'] !!}</p>
+                                                        </li>
+                                                        <li
+                                                            class="notice-item-content__time {{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                            {{ $notification->created_at->diffForHumans() }}
+                                                        </li>
                                                         <li>
                                                             <button class="btn btn-primary btn-sm btn-block text-center">
-                                                                <a style="color: white; font-size:16px" href="{{ route('messenger.show', ['id' => $notification->data['chatroom_id']]) }}">{{ $notification->data['text_btn'] }} <i class="fa fa-comments-o"></i></a>
+                                                                <a style="color: white; font-size:14px"
+                                                                    href="{{ route('messenger.show', ['id' => $notification->data['chatroom_id']]) }}">{{ $notification->data['text_btn'] }}
+                                                                    <i class="fa fa-comments-o"></i></a>
                                                             </button>
                                                         </li>
+                                                    </ul>
+                                                </a>
+                                            </li>
+                                        @elseif ($notification->type == 'App\Notifications\PostRequestNotification' || $notification->type == 'App\Notifications\PostResultNotification')
+                                            <li class="notice-item panel">
+                                                <a
+                                                    href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                    <ul class="notification-item-list">
+                                                        <li class="panel-header">
+                                                            <h4
+                                                                class="{{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                                {!! $notification->data['title'] !!}</h4>
+                                                        </li>
+                                                        <li style="font-size: 12px;"
+                                                            class="post-content-limit-line {{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                            <p>{!! $notification->data['content'] !!}</p>
+                                                        </li>
+                                                        <li
+                                                            class="notice-item-content__time {{ $notification->unread() ? '' : ' mark-as-read' }}">
+                                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                            {{ $notification->created_at->diffForHumans() }}
+                                                        </li>
+                                                        @if ($notification->type == 'App\Notifications\PostRequestNotification')
+                                                            <li class="panel-footer">
+                                                                <form action="{{ route('posts.handleRequest', ['id' => $notification->data['post_id']]) }}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="noti_id" value="{{ $notification->id }}">
+                                                                    <div style="display: flex; justify-content: center;">
+                                                                        <input style="margin-right: 5px" type="submit" name="action" class="btn btn-danger" value="{{ config('consts.post.action.refuse') }}">
+                                                                        <input style="margin-left: 5px" type="submit" name="action" class="btn btn-success" value="{{ config('consts.post.action.accept') }}">
+                                                                    </div>
+                                                                </form>
+                                                            </li>
+                                                        @endif
                                                     </ul>
                                                 </a>
                                             </li>

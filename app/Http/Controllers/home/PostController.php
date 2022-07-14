@@ -5,8 +5,6 @@ namespace App\Http\Controllers\home;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\StorePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
-use App\Models\Category;
-use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +12,13 @@ use App\Services\CategoryService;
 use App\Services\ChatroomService;
 use App\Services\NotificationService;
 use App\Services\TagService;
-use App\Services\UserService;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User;
 
 class PostController extends Controller
 {
+    use HasRoles;
 
     private $postService;
     private $tagService;
@@ -33,14 +34,12 @@ class PostController extends Controller
         PostService $postService,
         TagService $tagService,
         CategoryService $categoryService,
-        UserService $userService,
         ChatroomService $chatroomService,
         NotificationService $notificationService
     ) {
         $this->postService = $postService;
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
-        $this->userService = $userService;
         $this->chatroomService = $chatroomService;
         $this->notificationService = $notificationService;
     }
@@ -71,18 +70,34 @@ class PostController extends Controller
         return view('home.posts.index', compact('posts', 'tags', 'categories'));
     }
 
+    public function getMyPost()
+    {
+        $posts = $this->postService->myPost();
+        return view('home.posts.index', compact('posts'));
+    }
+
     public function show($id)
     {
-        $post = $this->postService->getById($id);
+        $postContainUnaccept = $this->postService->getById($id);
+        $post = $this->postService->getDetailPost($id);
+        $user = Auth::user();
+        if (isset($user) && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'super-admin'))) {
+            $post = $postContainUnaccept;
+        }
+        if ($post->count() < 1) {
+            abort(404);
+        }
         $postRelates = $this->postService->getPostRelate($id);
         $counselors = $this->postService->getAllCounselor($id);
         return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
+
     }
 
     public function store(StorePostRequest $request)
     {
-        $this->postService->create($request);
-        return Redirect()->back()->with('success', 'Đăng bài thành công');
+        $post = $this->postService->create($request);
+        $this->notificationService->notiRequestPost($post);
+        return Redirect()->back()->with('success', 'Bài viết đang chờ phê duyệt');
     }
 
 
@@ -97,11 +112,26 @@ class PostController extends Controller
         }
     }
 
+    public function handleRequest(Request $request, $id)
+    {
+        $action = $request->action;
+        $post = $this->postService->handleRequestPost($id, $action);
+        $this->notificationService->sendNotiResult($post, $action);
+        $this->notificationService->destroy($request->noti_id);
+        $message = $action == 'Accept' ? 'Phê duyệt thành công' : 'Từ chối thành công';
+        $user = Auth::user();
+        if($user->hasAnyRole('mod', 'super-admin')) {
+            return redirect()->back()->with('success', $message);
+        } else {
+            return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');
+        }
+    }
+
     public function toogleStatus($id)
     {
         $post = $this->postService->getById($id);
         if ($post->user->id == Auth::user()->id) {
-            $this->postService->toogleStatus($id);
+            $this->postService->toogleSovled($id);
             return Redirect()->back()->with('success', 'Cập nhật thành công');
         } else {
             return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
@@ -118,28 +148,21 @@ class PostController extends Controller
         }
     }
 
-    function getPostByService($service, $id)
+    public function getPostByCategory($categoryId)
     {
-        $object = $service->getById($id);
-        $posts = $object->posts()->paginate(10);
-        return $posts;
-    }
-
-    public function getPostByCategory($id)
-    {
-        $posts = $this->getPostByService($this->categoryService, $id);
+        $posts = $this->postService->getByCategory($categoryId);
         return view('home.posts.index', compact('posts'));
     }
 
-    public function getPostByUser($id)
+    public function getPostByUser($userId)
     {
-        $posts = $this->getPostByService($this->userService, $id);
+        $posts = $this->postService->getByUser($userId);
         return view('home.posts.index', compact('posts'));
     }
 
-    public function getPostByTag($id)
+    public function getPostByTag($tagId)
     {
-        $posts = $this->getPostByService($this->tagService, $id);
+        $posts = $this->postService->getByTag($tagId);
         return view('home.posts.index', compact('posts'));
     }
 

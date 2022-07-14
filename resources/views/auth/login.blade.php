@@ -4,7 +4,7 @@
     <!-- login -->
     <div class="login">
         <img style="height: 150px" src="{{ asset('logo.png') }}" alt="">
-        <h3 style="color: #FF9F3A">Quang Vinh Copytight</h3>
+        <h3 style="color: #FF9F3A">Quang Vinh Copyright</h3>
         <form action="{{ route('login') }}" method="post" class="login-form">
             @csrf
             <fieldset>
