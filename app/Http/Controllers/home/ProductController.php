@@ -31,15 +31,15 @@ class ProductController extends Controller
         $this->authorService = $authorService;
         $this->categoryService = $categoryService;
         $this->ownerService = $ownerService;
+        $authors = $this->authorService->getAll();
+        $categories = $this->categoryService->getAll();
+        $owners = $this->ownerService->getAll();
+        view()->share(['authors' => $authors, 'categories' => $categories, 'owners' => $owners]);
     }
 
     public function index(Request $request)
     {
         $products = $this->productService->getPaginate();
-        $authors = $this->authorService->getAll();
-        $categories = $this->categoryService->getAll();
-        $owners = $this->ownerService->getAll();
-
         if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
             $products = $this->productService->searchAndFilter($request);
         }

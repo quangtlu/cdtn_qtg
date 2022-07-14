@@ -39,10 +39,6 @@
                     <a class="header-link" href="{{ route('login') }}">Đăng nhập <i class="fa fa-sign-in"></i></a>
                     <a class="header-link" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
                 @endguest
-                @auth
-
-
-                @endauth
             </div>
         </div>
     </div>
@@ -75,6 +71,7 @@
                                             href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </li>
                                 @endforeach
+                                <li><a class="active" href="{{ route('home.index')}}">Xem tất cả</a></li>
                             @endif
                         </ul>
                     </li>

@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', 'Home')
+@section('title', 'Trang chủ')
 @section('content')
         <h3 class="title-post-product">Tài liệu quyền tác giả</h3>
         @foreach ($posts as $index => $post)
