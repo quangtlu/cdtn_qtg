@@ -39,7 +39,7 @@ class PostService
 
     public function getDetailPost($id)
     {
-        return Post::where('id', $id)->accepted()->get();
+        return Post::where('id', $id)->accepted()->first();
     }
 
     public function getByCategory($categoryId)
@@ -166,14 +166,17 @@ class PostService
 
     public function filter($request)
     {
-        $posts = Post::accepted()->query()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+        if($request->status == config('consts.post.status.refuse.value') || $request->status == config('consts.post.status.request.value')) {
+            $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->where('user_id', Auth::user()->id)->paginate(10);
+        } else {
+            $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+        }
         return $posts;
     }
 
     public function searchAndFilter($request)
     {
         $posts = Post::accepted()
-                    ->query()
                     ->filterCategory($request)
                     ->filterTag($request)
                     ->filterStatus($request)

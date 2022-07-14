@@ -31,7 +31,7 @@ class Product extends Model
             ->orWhereHas('owner', function ($subQuery) use ($keywork) {
                 $subQuery->where('name', 'like', '%' . $keywork . '%');
             })
-            ->orWhereHas('author', function ($subQuery) use ($keywork) {
+            ->orWhereHas('authors', function ($subQuery) use ($keywork) {
                 $subQuery->where('name', 'like', '%' . $keywork . '%');
             });
     }
@@ -61,7 +61,7 @@ class Product extends Model
     public function scopeFilterAuthor($query, $request)
     {
         if ($request->author_id) {
-            $query->whereHas('author', function ($subQuery) use ($request) {
+            $query->whereHas('authors', function ($subQuery) use ($request) {
                 $subQuery->where('author_id', $request->author_id);
             });
         }

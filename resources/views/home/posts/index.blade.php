@@ -94,14 +94,14 @@
                         </div>
                         <div class="col-md-2">
                             <select name="status" id="sort" class="form-control">
-                                <option value="" class="filter-option-dafault">Giải đáp</option>
-                                <option value="{{ config('consts.post.status.solved.value') }}"
-                                    class="filter-option-dafault">
-                                    {{ config('consts.post.status.solved.name') }}</option>
-                                <option value="{{ config('consts.post.status.unsolved.value') }}"
-                                    class="filter-option-dafault">
-                                    {{ config('consts.post.status.unsolved.name') }}</option>
-
+                                <option value="" class="filter-option-dafault">Trạng thái</option>
+                                @foreach (config('consts.post.status') as $status)
+                                @if (isset($isMyPost) && $isMyPost == true && ($status['value'] == config('consts.post.status.request.value') || $status['value'] == config('consts.post.status.refuse.value')))
+                                        <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
+                                    @elseif (($status['value'] != config('consts.post.status.request.value') && $status['value'] != config('consts.post.status.refuse.value')))
+                                        <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-3">

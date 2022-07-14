@@ -152,7 +152,7 @@
                                             <li class="notice-item panel">
                                                 <a
                                                     href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
-                                                    <ul class="notification-item-list">
+                                                    <ul class="notification-item-list" style="list-style: none">
                                                         <li class="panel-header">
                                                             <h4
                                                                 class="{{ $notification->unread() ? '' : ' mark-as-read' }}">
