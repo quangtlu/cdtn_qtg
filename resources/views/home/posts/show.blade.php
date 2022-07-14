@@ -5,16 +5,13 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1">
-        <h3>{{ $post->title }}</h3>
-        <ul>
+    <div class="single-left1 wow fadeInUp">
+        <h3 class="title-relate">{{ $post->title }}</h3>
+        <ul class="panel">
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
                     href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
             </li>
-            <li
-                title="
-                                    @foreach ($post->tags as $tag) {{ $tag->name }} | @endforeach">
-                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
+            <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#tag">{{ $post->tags->count() }}
                     Tags</a>
             </li>
@@ -43,10 +40,10 @@
                 </a>
             </li>
         </ul>
-        <p>{!! $post->content !!}</p>
+        <div class="panel">{!! $post->content !!}</div>
     </div>
     @if ($post->image != null)
-        <div class="w3agile-top">
+        <div class="w3agile-top wow fadeInUp">
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
@@ -90,7 +87,8 @@
         @else
             @role('mod|super-admin')
                 @if ($post->chatroom)
-                    <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                    <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
+                            class="fa fa-check-circle" aria-hidden="true"></i></button>
                 @else
                     <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
                         với
@@ -116,7 +114,8 @@
                                         </div>
                                         <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
                                             nối</button>
-                                        <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn-modal-post btn btn-danger"
+                                            data-dismiss="modal">Đóng</button>
                                     </form>
                                 </div>
                             </div>
@@ -128,24 +127,30 @@
     @endauth
 
     {{-- Comment --}}
-    <div id="comments" class="comments">
-        <h3 style="margin-top: 50px">Bình luận</h3>
+    <div id="comments" class="comments wow fadeInUp">
+        <h3 class="title-relate" style="margin-top: 50px">Bình luận</h3>
         <div class="comments-grids">
             @foreach ($post->comments->sortByDesc('status')->all() as $comment)
                 <div id="{{ $comment->id }}" class="comments-grid" style="margin-top: 25px; margin-bottom:5px">
                     <div class="comments-grid-left">
                         <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
-                    <div class="comments-grid-right">
+                    <div class="comments-grid-right panel">
                         <h4><a
                                 href="{{ route('posts.getPostByUser', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
                         </h4>
-                        <ul style="padding: 8px 0 8px 0">
+                        @if ($comment->user->id == $post->user_id)
+                            <h6
+                                style="color:#4599ff; background-color:#c5defd; padding: 5px 10px; width:fit-content; border-radius:6px">
+                                Tác giả <i class="fa fa-pencil-square-o" aria-hidden="true"></i></h6>
+                        @endif
+                        <ul>
                             <li><a href="#{{ $comment->id }}">{{ $comment->created_at->diffForHumans() }}</a><i>|</i>
                             </li>
                             <li>
                                 @auth
-                                    <a class="rep-comment comment-action-link" data-userName="{{ $comment->user->name }}">Trả
+                                    <a class="rep-comment comment-action-link"
+                                        data-userName="{{ $comment->user->name }}">Trả
                                         lời <i class="fa fa-mail-reply"></i></a>
                                 @endauth
                                 @guest
@@ -154,7 +159,7 @@
                                 <i>|</i>
                             </li>
                             @if ($comment->status == config('consts.post.status.solved.value'))
-                                <li><a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : "#".$comment->id}}"
+                                <li><a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
                                         class="comment-action-link post-status-solved">Hữu ích nhất
                                         <i class="fa fa-check-circle" aria-hidden="true"></i>
                                     </a></li>
@@ -211,7 +216,7 @@
                 class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
     @endguest
     @auth
-        <div class="leave-coment-form">
+        <div class="leave-coment-form wow fadeInUp">
             <form action="{{ route('comments.store') }}" method="post">
                 @csrf
                 <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
@@ -226,7 +231,7 @@
             </form>
         </div>
     @endauth
-    <div style="margin-top: 30px">
+    <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Bài viết liên quan</h3>
         @if (isset($postRelates))
             @foreach ($postRelates as $post)
@@ -285,7 +290,7 @@
                                             aria-hidden="true"></span></a>
                                 </div>
                             </div>
-                            <div class="panel-footer"></div>
+
                         </div>
                         <div class="clearfix"></div>
                     </div>

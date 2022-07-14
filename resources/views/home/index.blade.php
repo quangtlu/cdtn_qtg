@@ -3,7 +3,7 @@
 @section('content')
     <h3 class="title-post-product">Bài viết mới nhất</h3>
     @foreach ($posts as $post)
-        <div class="panel panel-primary">
+        <div class="panel panel-primary wow fadeInUp">
             <div class="wthree-top-1">
                 @if ($post->image)
                     <div class="w3agile-top">
@@ -93,7 +93,7 @@
     @endforeach
     <h3 class="title-post-product" style="margin-top:50px">Tác phẩm mới nhất</h3>
     @foreach ($products as $product)
-        <div class="panel panel-primary">
+        <div class="panel panel-primary wow fadeInUp">
             <div class="wthree-top-1">
                 @if ($product->image)
                     <div class="w3agile-top">

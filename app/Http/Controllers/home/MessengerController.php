@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Models\Chatroom;
 use Illuminate\Support\Facades\Auth;
 
 class MessengerController

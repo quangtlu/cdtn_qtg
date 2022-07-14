@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer"></div>
+
         </div>
     @endauth
     @guest
@@ -153,9 +153,17 @@
                             <select name="category_id[]" class="form-control select3_init" multiple>
                                 <option></option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                        {{ $category->name }}</option>
+                                    @if ($category->name == config('consts.category_reference.name'))
+                                        @role('super-admin|editor')
+                                            <option value="{{ $category->id }}"
+                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                                {{ $category->name }}</option>
+                                        @endrole
+                                    @else
+                                        <option value="{{ $category->id }}"
+                                            {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                            {{ $category->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -182,7 +190,7 @@
     </div>
     @if (isset($posts))
         @foreach ($posts as $post)
-            <div class="wthree-top-1">
+            <div class="wthree-top-1 wow fadeInUp">
                 <div class="w3agile-top">
                     <div class="col-md-3 w3agile-left">
                         <ul class="post-info">
@@ -235,7 +243,7 @@
                                         aria-hidden="true"></span></a>
                             </div>
                         </div>
-                        <div class="panel-footer"></div>
+
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -282,7 +290,7 @@
             $('.select2_init').select2({
                 'placeholder': 'Chọn thẻ tag',
             })
-            
+
             $('.select3_init').select2({
                 'placeholder': 'Chọn danh mục',
             })
@@ -299,7 +307,7 @@
     <script>
         $(document).ready(function() {
             $('#search').click(function() {
-                $('#toggle').slideToggle();
+                $('#toggle').fadeToggle();
             });
         });
     </script>

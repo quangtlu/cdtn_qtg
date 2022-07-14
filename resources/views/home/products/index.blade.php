@@ -133,7 +133,7 @@
                                         aria-hidden="true"></span></a>
                             </div>
                         </div>
-                        <div class="panel-footer"></div>
+                        
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -155,7 +155,7 @@
     <script>
         $(document).ready(function() {
             $('#search').click(function() {
-                $('#toggle').slideToggle();
+                $('#toggle').fadeToggle();
             });
         });
     </script>
