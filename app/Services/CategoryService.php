@@ -31,12 +31,14 @@ class CategoryService
         return $categories;
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $category = $this->categoryModel->findOrFail($id);   
         return $category; 
     }
 
-    public function create($request){
+    public function create($request)
+    {
         $data = [
             "name" => $request->name,
             "parent_id" => $request->parent_id,
@@ -45,7 +47,8 @@ class CategoryService
         $this->categoryModel->create($data);
     }
 
-    public function update($request, $id){
+    public function update($request, $id)
+    {
         $category = $this->getById($id);
         $data = [
             "name" => $request->name,
@@ -55,7 +58,13 @@ class CategoryService
         $category->update($data);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $this->categoryModel->destroy($id);
+    }
+
+    public function getBytype($type)
+    {
+        return Category::type($type)->get();
     }
 }

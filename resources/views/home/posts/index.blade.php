@@ -18,7 +18,7 @@
     </style>
 @endsection
 @section('content')
-
+    {{-- add/update post --}}
     @auth
         <div class="panel panel-primary">
             <div class="panel-heading">Đăng bài viết</div>
@@ -36,6 +36,7 @@
             </div>
 
         </div>
+    @include('home.component.posts.modal', ['categories' => $categories, 'tags' => $tags])
     @endauth
     @guest
         <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
@@ -115,143 +116,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="post-modalLabel">Tạo bài viết</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="title">Tiêu đề</label>
-                            <input type="text" name="title" class="form-control" id="title"
-                                value="{{ old('title') }}">
-                            @error('title')
-                                <span class="mt-1 text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Thẻ tag</label>
-                            <select name="tag_id[]" class="form-control select2_init" multiple>
-                                <option></option>
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}"
-                                        {{ collect(old('tag_id'))->contains($tag->id) ? 'selected' : '' }}>
-                                        {{ $tag->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('tag_id')
-                                <span class="mt-1 text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Danh mục</label>
-                            <select name="category_id[]" class="form-control select3_init" multiple>
-                                <option></option>
-                                @foreach ($categories as $category)
-                                    @if ($category->name == config('consts.category_reference.name'))
-                                        @role('super-admin|editor')
-                                            <option value="{{ $category->id }}"
-                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                {{ $category->name }}</option>
-                                        @endrole
-                                    @else
-                                        <option value="{{ $category->id }}"
-                                            {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                            {{ $category->name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                                <span class="mt-1 text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="summernote">Nội dung</label>
-                            <textarea class="form-control" name="content" class="content" id="summernote" cols="30" rows="5">{{ old('content') }}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Ảnh</label>
-                            <input type="file" multiple class="form-control-file" name="image[]" id="image">
-                        </div>
-                        <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Đăng
-                            bài</button>
-                        <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if (isset($posts))
-        @foreach ($posts as $index => $post)
-            <div class="wthree-top-1 {{ $index != 0 ? 'wow fadeInUp' : '' }}">
-                <div class="w3agile-top">
-                    <div class="col-md-3 w3agile-left">
-                        <ul class="post-info">
-                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                        class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
-                            </li>
-                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                        class="fa fa-clock-o"
-                                        aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
-                            </li>
-                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
-                                <i class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
-                                    BÌNH LUẬN
-                                </a>
-                            </li>
-                            <li>
-                                @foreach (config('consts.post.status') as $item)
-                                    @if ($post->status == $item['value'])
-                                        <a class="{{ $item['className'] }}" 
-                                        href="
-                                        {{ Auth::user()->id == $post->user_id 
-                                            && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
-                                            ? route('posts.toogleStatus', ['id' => $post->id]) 
-                                            : route('posts.show', ['id' => $post->id]) 
-                                        }}">
-                                        <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
-                                        {{ $item['name'] }}</a>
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </li>
-                            @auth
-                                @if (Auth::user()->id == $post->user->id)
-                                    <li><a class="post-info__link btn-delete"
-                                            data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
-                                                class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                    <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                            data-target="#post-modal" data-title="{{ $post->title }}"
-                                            data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                                class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
-                                @endif
-                            @endauth
-                        </ul>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-body">
-                            <div class="col-md-9 w3agile-right post-content-limit-line">
-                                <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                                </h3>
-                                <div class="post-content-limit-line">{!! $post->content !!}</div>
-                                <a class="agileits w3layouts" href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
-                                    thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                        aria-hidden="true"></span></a>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        @endforeach
-        {{ $posts->withQueryString()->links() }}
-    @endif
+    @include('home.component.posts.list', ['posts' => $posts])
 
 @endsection
 @section('js')

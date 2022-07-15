@@ -98,6 +98,9 @@ class PostService
             "user_id" => $user->id,
             'status' => config('consts.post.status.request.value')
         ];
+        if($user->hasAnyRole('mod', 'super-admin')) {
+            $data['status'] = config('consts.post.status.unsolved.value');
+        }
         if ($files = $request->file('image')) {
             $images = $this->uploadMutilpleImage($files);
             $data['image'] = implode("|", $images);
@@ -117,7 +120,6 @@ class PostService
         $user_id = Auth()->user()->id;
         $data = [
             "title" => $request->title,
-            "status" => $request->status,
             "content" => $request->content,
             "user_id" => $user_id,
         ];

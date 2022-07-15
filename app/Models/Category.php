@@ -30,4 +30,9 @@ class Category extends Model
             ->orWhere('type', 'LIKE', "%{$keywork}%");
     }
 
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
+
 }

@@ -22,3 +22,6 @@
     display: block;
     cursor: pointer;
 }
+.product-info-content {
+    color: #000 !important;
+}

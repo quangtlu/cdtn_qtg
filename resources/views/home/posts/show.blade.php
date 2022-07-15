@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1">
+    <div class="single-left1 panel" style="padding: 10px !important">
         <h3 class="title-relate">{{ $post->title }}</h3>
         <ul>
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
@@ -25,7 +25,7 @@
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
         </ul>
-        <div class="panel">{!! $post->content !!}</div>
+        <div style="padding-top: 10px">{!! $post->content !!}</div>
     </div>
     @if ($post->image != null)
         <div class="w3agile-top wow fadeInUp">
@@ -50,8 +50,7 @@
             <li class="li-category-tag">
                 <span style="font-size:18px">Danh mục: </span>
                 @foreach ($post->categories as $category)
-                    <a
-                        href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                 @endforeach
             </li>
         </ul>
@@ -235,72 +234,7 @@
     @endauth
     <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Bài viết liên quan</h3>
-        @if (isset($postRelates))
-            @foreach ($postRelates as $post)
-                <div class="wthree-top-1">
-                    <div class="w3agile-top">
-                        <div class="col-md-3 w3agile-left">
-                            <ul class="post-info">
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
-                                </li>
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-clock-o" aria-hidden="true"></i>{{ $post->created_at }}</a>
-                                </li>
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
-                                        BÌNH LUẬN</a></li>
-                                <li>
-                                    @foreach (config('consts.post.status') as $item)
-                                        @if ($post->status == $item['value'])
-                                            <a class="{{ $item['className'] }}" 
-                                            href="
-                                            {{Auth::user() && Auth::user()->id == $post->user_id 
-                                                && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
-                                                ? route('posts.toogleStatus', ['id' => $post->id]) 
-                                                : route('posts.show', ['id' => $post->id]) 
-                                            }}">
-                                            <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
-                                            {{ $item['name'] }}</a>
-                                            </a>
-                                        @endif
-                                    @endforeach
-                                </li>
-                                @auth
-                                    @if (Auth::user()->id == $post->user->id)
-                                        <li><a class="post-info__link btn-delete"
-                                                data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
-                                                    class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                        <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                                data-target="#post-modal" data-title="{{ $post->title }}"
-                                                data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a>
-                                        </li>
-                                    @endif
-                                @endauth
-                            </ul>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="col-md-9 w3agile-right">
-                                    <h3><a
-                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                                    </h3>
-                                    <div class="post-content-limit-line">{!! $post->content !!}</div>
-                                    <a class="agileits w3layouts"
-                                        href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
-                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                            aria-hidden="true"></span></a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            @endforeach
-            {{ $postRelates->links() }}
-        @endif
+        @include('home.component.posts.list', ['posts' => $postRelates])
     </div>
 @endsection
 @section('js')
