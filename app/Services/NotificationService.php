@@ -50,10 +50,10 @@ class NotificationService
         ];
         switch ($action) {
             case config('consts.post.action.accept'):
-                $data['title'] = '<span class="text-success">Bài viết của bạn đã được phê duyệt</span>';
+                $data['title'] = '<span>Bài viết của bạn đã được phê duyệt</span>';
                 break;
             case config('consts.post.action.refuse'):
-                $data['title'] = '<span class="text-danger">Bài viết của bạn đã bị từ chối</span>';
+                $data['title'] = '<span>Bài viết của bạn đã bị từ chối</span>';
                 break;
             default:
                 break;

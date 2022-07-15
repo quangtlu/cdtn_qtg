@@ -20,16 +20,39 @@
             </div>
         @endforeach
     </div>
-
+    <div class="w3ls_popular_posts">
+        <h3>Tác phẩm mới xuất bản</h3>
+        @foreach ($newestProducts as $product)
+            <div class="agileits_popular_posts_grid">
+                <h4><a class="post-content-limit-line" href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->name}}</a></h4>
+                <h5><i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->pub_date }}</h5>
+            </div>
+        @endforeach
+    </div>
     <div class="w3l_categories wow fadeInUp">
-        <h3>Danh mục</h3>
+        <h3>Danh mục tác phẩm</h3>
         <div class="w3l_wrap">
             <ul>
-                @foreach ($categories as $category)
+                @foreach ($productCategories as $category)
+                    <li>
+                        <a href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">
+                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                            {{ $category->products->count() ? $category->name.' ('.$category->products->count().')' : $category->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    <div class="w3l_categories wow fadeInUp">
+        <h3>Danh mục bài viết</h3>
+        <div class="w3l_wrap">
+            <ul>
+                @foreach ($postCategories as $category)
                     <li>
                         <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                            {{ $category->posts->count() ? $category->name.' ('.$category->posts->count().')' : $category->name }}
+                            {{ $category->posts->count() ? $category->name.' ('.$category->products->count().')' : $category->name }}
                         </a>
                     </li>
                 @endforeach
