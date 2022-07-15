@@ -91,7 +91,7 @@
                                 <ul class="notice-list">
                                     @foreach (Auth::user()->notifications as $notification)
                                         @if ($notification->type == 'App\Notifications\CommentNotification')
-                                            <li class="notice-item"><a
+                                            <li class="notice-item panel"><a
                                                     href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
                                                     <div class="notice-item-wrap">
                                                         <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
@@ -109,7 +109,7 @@
                                                     </div>
                                                 </a></li>
                                         @elseif ($notification->type == 'App\Notifications\ConnectNotification')
-                                            <li class="notice-item">
+                                            <li class="notice-item panel">
                                                 <a
                                                     href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
                                                     <ul class="notification-item-list">
