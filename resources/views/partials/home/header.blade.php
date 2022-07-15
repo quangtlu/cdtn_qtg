@@ -6,8 +6,8 @@
                     <div class="user-info">
                         <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
                             alt="avatar">
-                        <div class="dropdown">
-                            <span class="user-info__name dropdown-toggle">{{ Auth::user()->name }}</span>
+                        <div>
+                            <span class="user-info__name">{{ Auth::user()->name }}</span>
                             <ul class="dropdown-menu dropdown-menu__user-info ">
                                 <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
                                         nhân</a></li>
@@ -61,7 +61,7 @@
                 <ul class="nav navbar-nav">
                     <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                             chủ</a></li>
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -71,10 +71,10 @@
                                             href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                     </li>
                                 @endforeach
-                                <li><a class="active" href="{{ route('home.index')}}">Xem tất cả</a></li>
+                                <li><a href="{{ route('home.index')}}">Xem tất cả</a></li>
                             @endif
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                             href="{{ route('faq.index') }}">FAQ</a></li>
                     <li><a class="{{ Request::is('products/*') ? 'active' : '' }}"

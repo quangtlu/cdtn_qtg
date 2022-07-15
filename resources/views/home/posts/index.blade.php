@@ -242,7 +242,7 @@
                     </div>
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            <div class="col-md-9 w3agile-right">
+                            <div class="col-md-9 w3agile-right post-content-limit-line">
                                 <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
                                 </h3>
                                 <div class="post-content-limit-line">{!! $post->content !!}</div>

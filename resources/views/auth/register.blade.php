@@ -7,7 +7,7 @@
 
 @section('content')
     <!-- register -->
-    <form method="POST" action="{{ route('register') }}" class="register-form" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('register') }}" class="register-form animate__animated animate__fadeInDown" enctype="multipart/form-data">
         @csrf
         <div class="register">
             <div class="avatar-header" title="Ảnh đại diện">
