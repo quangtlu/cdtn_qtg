@@ -18,6 +18,11 @@
                     href="#">{{ $product->categories->count() }}
                     Danh mục</a>
             </li>
+<<<<<<< HEAD
+=======
+            <li><span class="fa fa-clock-o" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
+            </li>
+>>>>>>> 6ea84eb1d3e238b65c5bc4e0dadfcfea06896b37
         </ul>
         <div class="row wow fadeInUp">
             <div class="col-md-12">
