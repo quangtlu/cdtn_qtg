@@ -6,8 +6,8 @@
         <meta name="description" content="Realtime chat app using Laravel, VueJS, Redis, Laravel Echo, SocketIO">
         <meta name="keywords" content="Realtime chat app, Laravel, VueJS, Laravel Echo, Redis, SocketIO">
 
-        <title>Phòng tư vấn</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}">
+        <title>Trò chuyện</title>
+
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font_awesome/all.min.css') }}">
         <link rel="icon favicon" href="{{ asset('images/favicon.png') }}">
@@ -15,6 +15,7 @@
     </head>
     <body>
         <div id="app" class="h-100"></div>
+
         <script>window.__app__ = @json($data)</script>
         <script src="http://localhost:6001/socket.io/socket.io.js"></script>
         <script src="{{ mix('js/manifest.js') }}"></script>
