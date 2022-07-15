@@ -10,15 +10,13 @@
             v-for="score in maxScore"
             :key="score"
             :class="score <= feedback.score ? 'fas ' : 'far '"
-            :title="getTitle(score)"
             class="fa-star star-icon"
             @click="rate(score)"
-            data-toggle="tooltip" data-placement="top"
           >
           </i>
         </div>
         <div class="form-group">
-          <label class="form-label text-white">Nhận xét:</label>
+          <label class="form-label text-white">Nhận xét</label>
           <textarea
             v-model="feedback.note"
             class="form-control"
@@ -83,31 +81,13 @@ export default {
     },
     async fetchFeedback() {
       try {
-        const response = await this.$axios.get(
-          `/feedback/latest/${this.chatroom_id}`
-        );
+        const response = await this.$axios.get(`/feedback/latest/${this.chatroom_id}`);
         this.feedback.score = response.data.feedback.score;
         this.feedback.note = response.data.feedback.note;
       } catch (error) {
         console.log(error);
       }
     },
-    getTitle(score) {
-      switch (score) {
-        case 1:
-          return 'Rất tệ'
-        case 2:
-          return 'Không hài lòng'
-        case 3:
-          return 'Bình thường'
-        case 4:
-          return 'Tuyệt vời'
-        case 5:
-          return 'Rất hài lòng'
-        default:
-          return 'Rất hài lòng'
-      }
-    }
   },
   computed: {
     chatroom_id() {

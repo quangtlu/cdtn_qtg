@@ -40,16 +40,6 @@
     left: -39px;
 }
 
-.dropdown-menu__user-info::before {
-    content: '';
-    top: -8px;
-    right: 73px;
-    position: absolute;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 7px solid #ccc;
-}
 
 .notice-list::-webkit-scrollbar {
     display: none;
@@ -84,8 +74,6 @@
 
 .notice-item {
     padding: 5px;
-    margin-bottom: 5px;
-
 }
 
 .notice-nav {
