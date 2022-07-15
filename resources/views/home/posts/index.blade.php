@@ -199,9 +199,27 @@
                                         class="fa fa-calendar"
                                         aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                             </li>
-                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                        class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
-                                    BÌNH LUẬN</a></li>
+                            <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
+                                <i class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
+                                    BÌNH LUẬN
+                                </a>
+                            </li>
+                            <li>
+                                @foreach (config('consts.post.status') as $item)
+                                    @if ($post->status == $item['value'])
+                                        <a class="{{ $item['className'] }}" 
+                                        href="
+                                        {{ Auth::user()->id == $post->user_id 
+                                            && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
+                                            ? route('posts.toogleStatus', ['id' => $post->id]) 
+                                            : route('posts.show', ['id' => $post->id]) 
+                                        }}">
+                                        <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                                        {{ $item['name'] }}</a>
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </li>
                             @auth
                                 @if (Auth::user()->id == $post->user->id)
                                     <li><a class="post-info__link btn-delete"
@@ -213,31 +231,6 @@
                                                 class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
                                 @endif
                             @endauth
-                            <li>
-                                <a href="
-                                        @auth
-                                            @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value'))
-                                                {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} 
-                                            @endif 
-                                        @endauth
-                                        @guest
-                                            {{ route('posts.show', ['id' => $post->id]) }} 
-                                        @endguest
-                                    "
-                                        class=" 
-                                        @foreach (config('consts.post.status') as $item)
-                                            @if ($post->status == $item['value'])
-                                                {{ $item['class'] }}
-                                            @endif
-                                        @endforeach
-                                    ">
-                                    @foreach (config('consts.post.status') as $item)
-                                        @if ($post->status == $item['value'])
-                                            {{ $item['name'] }}
-                                        @endif
-                                    @endforeach
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     <div class="panel panel-primary">

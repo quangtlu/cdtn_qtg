@@ -36,8 +36,8 @@
             </div>
             <div class="w3ls-social-icons">
                 @guest
-                    <a class="header-link" href="{{ route('login') }}">Đăng nhập <i class="fa fa-sign-in"></i></a>
-                    <a class="header-link" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
+                    <a class="btn btn-sm btn-success" href="{{ route('login') }}">Đăng nhập <i class="fa fa-sign-in"></i></a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
                 @endguest
             </div>
         </div>
@@ -114,9 +114,9 @@
                                                     href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
                                                     <ul class="notification-item-list">
                                                         <li>
-                                                            <h5
+                                                            <p
                                                                 class="{{ $notification->unread() ? '' : ' mark-as-read' }}">
-                                                                {!! $notification->data['title'] !!}</h5>
+                                                                {!! $notification->data['title'] !!}</p>
                                                         </li>
                                                         <li style="font-size: 12px;"
                                                             class="post-content-limit-line {{ $notification->unread() ? '' : ' mark-as-read' }}">
@@ -144,9 +144,9 @@
                                                     href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
                                                     <ul class="notification-item-list" style="list-style: none">
                                                         <li class="panel-header">
-                                                            <h4
+                                                            <p
                                                                 class="{{ $notification->unread() ? '' : ' mark-as-read' }}">
-                                                                {!! $notification->data['title'] !!}</h4>
+                                                                {!! $notification->data['title'] !!}</p>
                                                         </li>
                                                         <li style="font-size: 12px;"
                                                             class="post-content-limit-line {{ $notification->unread() ? '' : ' mark-as-read' }}">

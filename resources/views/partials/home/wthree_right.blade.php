@@ -1,4 +1,4 @@
-<div class="col-md-3 w3agile_blog_left wow fadeInRight">
+<div class="col-md-2 w3agile_blog_left wow fadeInRight">
     <div class="agileinfo_calender">
         <h3>Mạng xã hội</h3>
         <div class="w3ls-social-icons-1">

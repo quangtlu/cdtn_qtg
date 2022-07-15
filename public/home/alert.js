@@ -2,22 +2,15 @@ $(function () {
 
     var messageSuccess = $('#container').attr('data-messageSuccess')
     var messageError = $('#container').attr('data-messageError')
-    const time = 3000
+    const time = 1500
 
     if (messageSuccess != '' || messageError != '') {
         Swal.fire({
-            toast: true,
             icon: messageSuccess != '' ? "success" : "error",
             title: messageSuccess != '' ? messageSuccess : messageError,
-            position: "top-end",
+            position: "center",
             timer: time,
             showConfirmButton: false,
-            showClass: {
-                popup: 'animate__animated animate__fadeInRight'
-              },
-            hideClass: {
-            popup: 'animate__animated animate__fadeOutRight'
-            }
         });
     }
 
@@ -47,7 +40,7 @@ function actionDeletePost() {
                         that.closest('.wthree-top-1').fadeOut()
                         Swal.fire(
                             'Thành công!',
-                            'Bản ghi đã được xóa',
+                            'Xóa thành công',
                             'success'
                         )
                     }
@@ -79,7 +72,7 @@ function actionDeleteComment() {
                         that.closest('.comments-grid').fadeOut()
                         Swal.fire(
                             'Thành công!',
-                            'Bản ghi đã được xóa',
+                            'Xóa thành công',
                             'success'
                         )
                     }
