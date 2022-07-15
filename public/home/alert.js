@@ -16,7 +16,7 @@ $(function () {
                 popup: 'animate__animated animate__fadeInRight'
               },
             hideClass: {
-            popup: 'animate__animated animate__fadeOutRight'
+                popup: 'animate__animated animate__fadeOutRight'
             }
         });
     }

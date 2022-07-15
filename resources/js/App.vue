@@ -23,10 +23,6 @@ html {
   margin: 0;
 }
 
-body .swal2-height-auto {
-    height: 100% !important;
-}
-
 .app-container {
   height: 100%;
   background: #0078d4;
@@ -218,9 +214,9 @@ body .swal2-height-auto {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 10px;
-  border-radius: 25px;
+  border-radius: 18px;
   background-color: #00a0e5;
-  padding: 10px;
+  padding: 5px 10px;
   position: relative;
   color: white;
   word-break: break-word;
@@ -231,9 +227,9 @@ body .swal2-height-auto {
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
-  border-radius: 25px;
+  border-radius: 18px;
   background-color: #42e274;
-  padding: 10px;
+  padding: 5px 10px;
   position: relative;
   color: white;
   word-break: break-word;
@@ -325,13 +321,12 @@ body .swal2-height-auto {
     overflow-y: scroll;
 
     .msg_container_send {
-      padding: 5px 10px 5px 10px !important;
       border-radius: 15px !important;
       max-width: 165px;
     }
 
     .msg_container {
-      padding: 5px 10px 5px 10px !important;
+      padding: 5px 10px !important;
       border-radius: 15px !important;
       max-width: 165px;
     }
