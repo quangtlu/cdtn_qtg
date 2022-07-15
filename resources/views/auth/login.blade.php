@@ -2,9 +2,11 @@
 @section('title', 'Đăng nhập')
 @section('content')
     <!-- login -->
-    <div class="login">
-        <img style="height: 150px" src="{{ asset('logo.png') }}" alt="">
-        <h3 style="color: #FF9F3A">Quang Vinh Copyright</h3>
+    <div class="login animate__animated animate__fadeIn">
+        <div class="animate__animated animate__heartBeat">
+            <img style="height: 150px" src="{{ asset('logo.png') }}" alt="">
+            <h3 style="color: #FF9F3A">Quang Vinh Copyright</h3>
+        </div>
         <form action="{{ route('login') }}" method="post" class="login-form">
             @csrf
             <fieldset>

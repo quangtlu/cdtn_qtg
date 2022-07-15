@@ -26,6 +26,12 @@ class PostService
         return $posts;
     }
 
+    public function getAllPaginate()
+    {
+        $posts = Post::latest()->paginate(10);
+        return $posts;
+    }
+
     public function search($request)
     {
         $posts = Post::accepted()->search($request->keyword)->paginate(10);

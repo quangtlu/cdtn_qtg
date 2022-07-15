@@ -3,3 +3,7 @@ $('.notice-nav').on('click', function() {
     $('.notice-icon').toggleClass('active')
 })
 
+$('.user-info__name').on('click', function (){
+    $('.dropdown-menu__user-info').slideToggle();
+})
+
