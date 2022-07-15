@@ -1,3 +1,4 @@
+Cài đặt:
 - git clone 
 - Cài đặt redis
 - redis-server
@@ -10,14 +11,17 @@
 - php artisan migrate --seed
 - laravel-echo-server init và thiết lập như hình
 ![alt text](https://images.viblo.asia/d5e28b10-7d75-454b-ade0-d91dfe406246.png)
+------------------------------------------------------------------------------
+Chạy ứng dụng:
+ *Cách 1: Chạy 1 file init.sh bằng 1 lệnh duy nhất: sh init.sh
 
-<!-- Chạy ứng dụng, mỗi lệnh 1 terminal -->
-- redis-server
-    nếu gặp lỗi thì chạy lệnh này: 
-        + redis-cli ping
-        + redis-cli shutdown
-- php artisan serve
-- npm run watch
-- laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
-- php artisan queue:work
+ *Cách 2: Mỗi lệnh 1 terminal:
+        - redis-server
+            nếu gặp lỗi thì chạy lệnh này: 
+                + redis-cli ping
+                + redis-cli shutdown
+        - php artisan serve
+        - npm run watch
+        - laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
+        - php artisan queue:work
 

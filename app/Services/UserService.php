@@ -74,10 +74,11 @@ class UserService
             "name" => $request->name,
             "phone" => $request->phone,
             "gender" => $request->gender,
-            "dob" => $dob,
-            "password" => Hash::make($request->password),
             "email" => $request->email,
         ];
+        if($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
         if($file=$request->file('image')) {
             $name = $this->uploadSingleImage($file);
             $data['image'] = $name;

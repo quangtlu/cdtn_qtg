@@ -2,15 +2,22 @@ $(function () {
 
     var messageSuccess = $('#container').attr('data-messageSuccess')
     var messageError = $('#container').attr('data-messageError')
-    const time = 1500
+    const time = 3000
 
     if (messageSuccess != '' || messageError != '') {
         Swal.fire({
+            toast: true,
             icon: messageSuccess != '' ? "success" : "error",
             title: messageSuccess != '' ? messageSuccess : messageError,
-            position: "center",
+            position: "top-end",
             timer: time,
             showConfirmButton: false,
+            showClass: {
+                popup: 'animate__animated animate__fadeInRight'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutRight'
+            }
         });
     }
 
@@ -38,11 +45,20 @@ function actionDeletePost() {
                 success: function (data) {
                     if (data.status = 200) {
                         that.closest('.wthree-top-1').fadeOut()
-                        Swal.fire(
-                            'Thành công!',
-                            'Xóa thành công',
-                            'success'
-                        )
+                        Swal.fire({
+                            toast: true,
+                            icon: messageSuccess != '' ? "success" : "error",
+                            title: messageSuccess != '' ? messageSuccess : messageError,
+                            position: "top-end",
+                            timer: 3000,
+                            showConfirmButton: false,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInRight'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutRight'
+                            }
+                        })
                     }
                 }
             })
@@ -70,11 +86,14 @@ function actionDeleteComment() {
                 success: function (data) {
                     if (data.status = 200) {
                         that.closest('.comments-grid').fadeOut()
-                        Swal.fire(
-                            'Thành công!',
-                            'Xóa thành công',
-                            'success'
-                        )
+                        Swal.fire({
+                            toast: true,
+                            icon: "success",
+                            title: "Bình luận đã được xóa",
+                            position: "top-end",
+                            timer: time,
+                            showConfirmButton: false,
+                        })
                     }
                 }
             })

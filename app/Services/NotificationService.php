@@ -36,7 +36,7 @@ class NotificationService
             'post_id' => $post->id,
             'content' => $post->title,
         ];
-        $users = User::role('mod')->get();
+        $users = User::role(['mod', 'super-admin'])->get();
         foreach($users as $user) {
             $user->notify(new PostRequestNotification($data));
         }

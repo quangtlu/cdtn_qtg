@@ -80,17 +80,23 @@ class PostController extends Controller
     public function show($id)
     {
         $postContainUnaccept = $this->postService->getById($id);
-        $post = $this->postService->getDetailPost($id);
         $user = Auth::user();
-        if (isset($user) && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'super-admin'))) {
+        if (
+            ($postContainUnaccept->status == config('consts.post.status.request.value') || $postContainUnaccept->status == config('consts.post.status.refuse.value')) 
+            && $user 
+            && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'super-admin'))) {
             $post = $postContainUnaccept;
+        } else{
+            $post = $this->postService->getDetailPost($id);
         }
-        if ($post->count() < 1) {
-            abort(404);
+
+        if($post) {
+            $postRelates = $this->postService->getPostRelate($id);
+            $counselors = $this->postService->getAllCounselor($id);
+            return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
+        } else {
+            abort('404');
         }
-        $postRelates = $this->postService->getPostRelate($id);
-        $counselors = $this->postService->getAllCounselor($id);
-        return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
 
     }
 
