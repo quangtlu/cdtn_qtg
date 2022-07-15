@@ -116,7 +116,7 @@
                                 </a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
-                                        class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}</a>
+                                        class="fa fa-clock-o" aria-hidden="true"></i>{{ $product->created_at }}</a>
                             </li>
                         </ul>
                     </div>

@@ -18,7 +18,7 @@
                     href="#">{{ $product->categories->count() }}
                     Danh mục</a>
             </li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
+            <li><span class="fa fa-clock-o" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
             </li>
         </ul>
         <div class="row wow fadeInUp">
@@ -183,7 +183,7 @@
                                 </li>
                                 <li><a class="post-info__link"
                                         href="{{ route('products.show', ['id' => $product->id]) }}">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>{{ $product->created_at }}
                                     </a>
                                 </li>
                             </ul>

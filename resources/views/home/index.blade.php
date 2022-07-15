@@ -37,7 +37,7 @@
     
                             <div class="w3agile-middle">
                                 <ul>
-                                    <li><a href="{{ route('posts.show', ['id' => $post->id]) }}" class="text-primary"><i class="fa fa-calendar"
+                                    <li><a href="{{ route('posts.show', ['id' => $post->id]) }}" class="text-primary"><i class="fa fa-clock-o"
                                                 aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a></li>
                                     <li><a href="{{ route('posts.show', ['id' => $post->id]) }}" class="text-success"><i class="fa fa-comment"
                                                 aria-hidden="true"></i>{{ $post->comments->count() }} Bình luận</a></li>
@@ -55,7 +55,7 @@
                                             class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-calendar"
+                                            class="fa fa-clock-or"
                                             aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i

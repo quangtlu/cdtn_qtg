@@ -21,7 +21,7 @@
                     luận</a></li>
             <li><span class="fa fa-list-alt" aria-hidden="true"></span><a
                     href="#category">{{ $post->categories->count() }} Danh mục</a></li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a
+            <li><span class="fa fa-clock-o" aria-hidden="true"></span><a
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
         </ul>
@@ -248,7 +248,7 @@
                                             class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
+                                            class="fa fa-clock-o" aria-hidden="true"></i>{{ $post->created_at }}</a>
                                 </li>
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                             class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}

@@ -52,7 +52,8 @@
                                                     {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
                                                     {{ $category->name }}</option>
                                             @endif
-                                        @endforeach
+                                        @endif
+                                    @endforeach
                                 </select>
                                 @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

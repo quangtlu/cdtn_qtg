@@ -196,7 +196,7 @@
                                         class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                        class="fa fa-calendar"
+                                        class="fa fa-clock-o"
                                         aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                             </li>
                             <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
