@@ -16,7 +16,7 @@
         @foreach ($newestPosts as $post)
             <div class="agileits_popular_posts_grid">
                 <h4><a class="post-content-limit-line" href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title}}</a></h4>
-                <h5><i class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</h5>
+                <h5><i class="fa fa-clock-o" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</h5>
             </div>
         @endforeach
     </div>
