@@ -137,7 +137,7 @@
 }
 
 .notification-item-list li {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .logo-img{
@@ -245,3 +245,8 @@
   100% { transform: rotate(0); }
 }
 /*  */
+
+.status-name-link {
+    text-decoration: none !important;
+    font-weight: bold;
+}

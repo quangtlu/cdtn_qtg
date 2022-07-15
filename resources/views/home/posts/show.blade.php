@@ -25,26 +25,6 @@
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
         </ul>
-        <a href="
-                @auth
-                    @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
-                @endauth
-                @guest
-                    {{ route('posts.show', ['id' => $post->id]) }} 
-                @endguest
-            "
-            class=" 
-                @foreach (config('consts.post.status') as $item)
-                    @if ($post->status == $item['value'])
-                        {{ $item['class'] }} @endif
-                @endforeach
-            ">
-            @foreach (config('consts.post.status') as $item)
-                @if ($post->status == $item['value'])
-                    {{ $item['name'] }}
-                @endif
-            @endforeach
-        </a>
         <div class="panel">{!! $post->content !!}</div>
     </div>
     @if ($post->image != null)
@@ -75,14 +55,31 @@
                 @endforeach
             </li>
         </ul>
-        <ul id="tag" class="tag" style="margin-top:0 !important">
+        <ul id="tag" class="tag" style="margin-top:0 !important; margin-bottom:0 !important">
             <li class="li-category-tag">
-                <span style="margin-bottom:5px; font-size:18px">Tags: </span>
+                <span style="margin-top:10px; font-size:18px">Tags: </span>
                 @foreach ($post->tags as $tag)
                     <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->name }}</a>
                 @endforeach
             </li>
         </ul>
+        <span style="margin-top:10px; font-size:18px">Trạng thái : </span>
+        @auth
+        @foreach (config('consts.post.status') as $item)
+            @if ($post->status == $item['value'])
+                <a class="{{ $item['className'] }}" 
+                href="
+                {{ Auth::user() && Auth::user()->id == $post->user_id 
+                    && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
+                    ? route('posts.toogleStatus', ['id' => $post->id]) 
+                    : route('posts.show', ['id' => $post->id]) 
+                }}">
+                <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                {{ $item['name'] }}</a>
+                </a>
+            @endif
+        @endforeach
+        @endauth
     </div>
     @auth
         @if (Auth::user()->id == $post->user_id && $post->chatroom)
@@ -222,7 +219,7 @@
     @endguest
     @auth
         <div class="leave-coment-form wow fadeInUp">
-            <form action="{{ route('comments.store') }}" method="post">
+            <form id="form-create-comment" action="{{ route('comments.store') }}" method="post">
                 @csrf
                 <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
                 @error('comment')
@@ -253,6 +250,22 @@
                                 <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                             class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
                                         BÌNH LUẬN</a></li>
+                                <li>
+                                    @foreach (config('consts.post.status') as $item)
+                                        @if ($post->status == $item['value'])
+                                            <a class="{{ $item['className'] }}" 
+                                            href="
+                                            {{Auth::user() && Auth::user()->id == $post->user_id 
+                                                && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
+                                                ? route('posts.toogleStatus', ['id' => $post->id]) 
+                                                : route('posts.show', ['id' => $post->id]) 
+                                            }}">
+                                            <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                                            {{ $item['name'] }}</a>
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </li>
                                 @auth
                                     @if (Auth::user()->id == $post->user->id)
                                         <li><a class="post-info__link btn-delete"
@@ -265,28 +278,6 @@
                                         </li>
                                     @endif
                                 @endauth
-                                <li>
-                                    <a href="
-                                            @auth
-                                                @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
-                                            @endauth
-                                            @guest
-                                                {{ route('posts.show', ['id' => $post->id]) }} 
-                                            @endguest
-                                        "
-                                        class="post-status 
-                                            @foreach (config('consts.post.status') as $item)
-                                                @if ($post->status == $item['value'])
-                                                    {{ $item['class'] }} @endif
-                                            @endforeach
-                                        ">
-                                        @foreach (config('consts.post.status') as $item)
-                                            @if ($post->status == $item['value'])
-                                                {{ $item['name'] }}
-                                            @endif
-                                        @endforeach
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                         <div class="panel panel-primary">
@@ -337,7 +328,6 @@
                     $('body').removeClass('loading');
                 }
             });
-
         });
     </script>
 @endsection

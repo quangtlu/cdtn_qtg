@@ -8,22 +8,26 @@ return [
             'request' => [
                 'value' => 1,
                 'name' => 'Chưa được phê duyệt',
-                'class' => 'btn btn-sm btn-warning'
+                'classIcon' => 'fa-circle text-warning',
+                'className' => 'status-name-link text-warning',
             ],
             'refuse' => [
                 'value' => 2,
                 'name' => 'Đã bị từ chối',
-                'class' => 'btn btn-sm btn-danger'
+                'classIcon' => 'fa-times-circle',
+                'className' => 'status-name-link text-danger',
             ],
             'unsolved' => [
                 'value' => 3,
                 'name' => 'Chưa được giải đáp',
-                'class' => 'btn btn-sm btn-primary'
+                'classIcon' => 'fa-question-circle',
+                'className' => 'status-name-link text-primary',
             ],
             'solved' => [
+                'value' => 4,
                 'name' => 'Đã được giải đáp',
-                'class' => 'btn btn-sm btn-success',
-                'value' => 4
+                'classIcon' => 'fa-check-circle',
+                'className' => 'status-name-link text-success',
             ],
         ],
         'action' => [

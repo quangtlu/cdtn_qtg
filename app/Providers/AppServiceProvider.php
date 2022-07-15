@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $newestPosts = Post::accepted()->select('id', 'title', 'created_at')->orderBy('created_at', 'desc')->limit(5)->get();
+        $newestPosts = Post::accepted()->latest()->limit(5)->get();
         $categories = Category::where('parent_id', 0)->latest()->get();
         $tags = Tag::latest()->get();
         $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();

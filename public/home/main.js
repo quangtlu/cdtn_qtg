@@ -7,3 +7,4 @@ $('.user-info__name').on('click', function (){
     $('.dropdown-menu__user-info').slideToggle();
 })
 
+$('[data-toggle="tooltip"]').tooltip()
