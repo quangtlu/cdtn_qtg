@@ -42,13 +42,14 @@ class PostController extends Controller
         $this->categoryService = $categoryService;
         $this->chatroomService = $chatroomService;
         $this->notificationService = $notificationService;
+        $tags = $this->tagService->getAll();
+        $categories = $this->categoryService->getBytype('post');
+        view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
     public function index(Request $request)
     {
         $posts = $this->postService->getPaginate();
-        $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getAll();
 
         if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
             $posts = $this->postService->searchAndFilter($request);
@@ -67,7 +68,7 @@ class PostController extends Controller
         if ($posts->count() < 1) {
             return redirect()->route('posts.index')->with('error', 'Không có bài viết nào phù hợp');
         }
-        return view('home.posts.index', compact('posts', 'tags', 'categories'));
+        return view('home.posts.index', compact('posts'));
     }
 
     public function getMyPost()

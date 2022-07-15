@@ -47,8 +47,8 @@ function actionDeletePost() {
                         that.closest('.wthree-top-1').fadeOut()
                         Swal.fire({
                             toast: true,
-                            icon: messageSuccess != '' ? "success" : "error",
-                            title: messageSuccess != '' ? messageSuccess : messageError,
+                            icon: "success",
+                            title: "Bài viết đã được xóa",
                             position: "top-end",
                             timer: 3000,
                             showConfirmButton: false,
@@ -60,7 +60,7 @@ function actionDeletePost() {
                             }
                         })
                     }
-                }
+                },
             })
 
         }
@@ -91,8 +91,14 @@ function actionDeleteComment() {
                             icon: "success",
                             title: "Bình luận đã được xóa",
                             position: "top-end",
-                            timer: time,
+                            timer: 3000,
                             showConfirmButton: false,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInRight'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutRight'
+                            }
                         })
                     }
                 }

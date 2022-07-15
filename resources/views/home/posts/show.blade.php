@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1">
+    <div class="single-left1 panel" style="padding: 10px !important">
         <h3 class="title-relate">{{ $post->title }}</h3>
         <ul>
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
@@ -25,7 +25,7 @@
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
         </ul>
-        <div class="panel">{!! $post->content !!}</div>
+        <div style="padding-top: 10px">{!! $post->content !!}</div>
     </div>
     @if ($post->image != null)
         <div class="w3agile-top wow fadeInUp">
