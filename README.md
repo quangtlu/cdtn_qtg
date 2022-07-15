@@ -1,6 +1,7 @@
 Cài đặt:
 - git clone 
 - Cài đặt redis
+*Cách 1:
 - redis-server
 - composer install
 - composer dump-autoload 
@@ -11,9 +12,13 @@ Cài đặt:
 - php artisan migrate --seed
 - laravel-echo-server init và thiết lập như hình
 ![alt text](https://images.viblo.asia/d5e28b10-7d75-454b-ade0-d91dfe406246.png)
-------------------------------------------------------------------------------
+
+* Cách 2:
+$ sh init.sh
+và thiết lập laravel-echo-server như hình cách 1
+--------------------------------------------------------------------
 Chạy ứng dụng:
- *Cách 1: Chạy 1 file init.sh bằng 1 lệnh duy nhất: sh init.sh
+ *Cách 1: $ sh run-app.sh
 
  *Cách 2: Mỗi lệnh 1 terminal:
         - redis-server
