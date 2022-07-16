@@ -46,11 +46,6 @@ return [
         'posts' => $BASE_PATH_IMAGE . '/posts/',
         'products' => $BASE_PATH_IMAGE . '/products/',
     ],
-    'type' => [
-        'post',
-        'product'
-    ],
-
     'owner' => [
         'all' => 0,
         'none' => -1, 
@@ -58,6 +53,20 @@ return [
 
     'category' => [
         'all' => 0,
+        'type' => [
+            'post' => [
+                'value' => 1,
+                'name' => 'Bài viết'
+            ],
+            'post_reference' => [
+                'value' => 2,
+                'name' => 'Tài liệu tham khảo'
+            ],
+            'product' => [
+                'value' => 3,
+                'name' => 'Tác phẩm'
+            ],
+        ],
     ],
 
     'author' => [
@@ -82,12 +91,6 @@ return [
                 'image' => 'avatar-nu.jpg'
             ]
         ]
-    ],
-
-    'category_reference' => [
-        'name' => 'Tài liệu tham khảo',
-        'parent_id' => 0,
-        'type' => 'post'
     ],
     'post_reference' => [
         [

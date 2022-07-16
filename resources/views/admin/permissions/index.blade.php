@@ -26,7 +26,7 @@
                                 <label for="category_name">Chọn module</label>
                                 <select name="module" id="" class="form-control">
                                     <option></option>
-                                    @foreach (config('permission.module') as $moduleItem)
+                                    @foreach (config('permission.module-all') as $moduleItem)
                                         <option value="{{ $moduleItem }}">{{ $moduleItem }}</option>
                                     @endforeach
                                 </select>
@@ -67,9 +67,7 @@
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            @can('admin add permission')
-                                <button type="submit" class="btn btn-primary">Thêm mới</button>
-                            @endcan
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
                         </form>
                     </div>
                     <div class="col-md-6">

@@ -30,3 +30,9 @@ Chạy ứng dụng:
         - laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
         - php artisan queue:work
 
+-----------------------------
+Account trong file seed:
+ - admin: admin@gmail.com
+ - mod: mod@gmail.com
+ - editor: editor@gmail.com
+ - counselor: counselor@gmail.com
