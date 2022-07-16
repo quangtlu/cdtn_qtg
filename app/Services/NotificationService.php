@@ -20,11 +20,11 @@ class NotificationService
     public function notiComment($comment, $userPost)
     {
         $data = [
-            'post_id' => $comment->post_id,
-            'comment_id' => $comment->id,
-            'user_image' => $comment->user->image,
             'title' => '<strong>' . $comment->user->name . '</strong>' . ' đã bình luận về bài viết bạn của bạn',
             'content' => $comment->comment,
+            'comment_id' => $comment->id,
+            'user_image' => $comment->user->image,
+            'post_id' => $comment->post_id,
         ];
         $userPost->notify(new CommentNotification($data));
     }
@@ -34,7 +34,7 @@ class NotificationService
         $data = [
             'title' => '<strong>' . $post->user->name . '</strong>'. ' đã yêu cầu phê duyệt bài viết',
             'post_id' => $post->id,
-            'content' => $post->title,
+            'content' => '<b>Bài viết:</b> ' . $post->title,
         ];
         $users = User::role(['mod', 'super-admin'])->get();
         foreach($users as $user) {
@@ -46,14 +46,14 @@ class NotificationService
     {
         $data = [
             'post_id' => $post->id,
-            'content' => $post->title,
+            'content' => '<b>Bài viết:</b> ' . $post->title,
         ];
         switch ($action) {
             case config('consts.post.action.accept'):
-                $data['title'] = '<span>Bài viết của bạn đã được phê duyệt</span>';
+                $data['title'] = '<span class="text-success">Bài viết của bạn đã được phê duyệt</span>';
                 break;
             case config('consts.post.action.refuse'):
-                $data['title'] = '<span>Bài viết của bạn đã bị từ chối</span>';
+                $data['title'] = '<span class="text-danger">Bài viết của bạn đã bị từ chối</span>';
                 break;
             default:
                 break;
@@ -65,8 +65,8 @@ class NotificationService
     {
         $counselor = User::find($counselorId);
         $data = [
-            'chatroom_id' => $post->chatroom->id,
             'post_id' => $post->id,
+            'chatroom_id' => $post->chatroom->id,
             'title' => '<strong style="color: red"> Hệ thống </strong>' . ' đã kết nối bạn với chuyên gia tư vấn - '. '<strong>'.$counselor->name.'</strong>' ,
             'content' => '<b>Bài viết:</b> ' . $post->title,
             'text_btn' => 'Chat với chuyên gia tư vấn'
@@ -78,8 +78,8 @@ class NotificationService
     {
         $counselor = User::find($counselorId);
         $data = [
-            'chatroom_id' => $post->chatroom->id,
             'post_id' => $post->id,
+            'chatroom_id' => $post->chatroom->id,
             'title' => '<strong style="color: red"> Hệ thống </strong>' . ' đã kết nối bạn với '.'<b>'.$post->user->name.'</b>',
             'content' => '<b>Bài viết:</b> ' . $post->title,
             'text_btn' => 'Tư vấn'

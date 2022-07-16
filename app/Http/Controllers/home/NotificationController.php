@@ -21,9 +21,21 @@ class NotificationController extends Controller
         return redirect(route('posts.show', ['id' => $notification->data['post_id']]));
     }
 
-    public function markAsRead($id) {
-        $notification = $this->getNotificationById($id);
-        $notification->markAsRead();
-        return redirect()->back();
+    public function markAsReadAll() {
+        $notifications = Auth::user()->notifications;
+        foreach($notifications as $notification) {
+            if($notification->unread()) {
+                $notification->markAsRead();
+            }
+        }
+        return redirect()->back()->with('success', 'Thành công');
+    }
+
+    public function deleteAll() {
+        $notifications = Auth::user()->notifications;
+        foreach($notifications as $notification) {
+            $this->notificationService->destroy($notification->id);
+        }
+        return redirect()->back()->with('success', 'Xóa tất cả thông báo thành công');
     }
 }
