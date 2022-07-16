@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('title', 'Thêm mới FAQ')
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+@endsection
 @section('content')
     <div class="content-wrapper">
         <div class="content">
@@ -10,14 +13,14 @@
                             @csrf
                             <div class="form-group">
                                 <label for="category_name">Câu hỏi</label>
-                                <textarea class="form-control" name="question" cols="30" rows="5">{{ old('question') }}</textarea>
+                                <textarea class="form-control summernote" name="question" cols="30" rows="5">{{ old('question') }}</textarea>
                                 @error('question')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Câu trả lời</label>
-                                <textarea class="form-control" name="answer" cols="30" rows="5">{{ old('answer') }}</textarea>
+                                <textarea class="form-control summernote" name="answer" cols="30" rows="5">{{ old('answer') }}</textarea>
                                 @error('answer')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -31,5 +34,13 @@
         </div>
         <!-- /.content -->
     </div>
+@endsection
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script>
+    $('.summernote').summernote({
+        height: 400
+    });
+</script>
 @endsection
 

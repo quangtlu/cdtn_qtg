@@ -30,13 +30,13 @@
                             <a class="d-block w-100" data-toggle="collapse" href="#collapse{{$i}}">
                                 <div class="card-header">
                                     <h4 class="card-title w-100">
-                                        {{  $faqs[$i]->question   }}
+                                        {!!  $faqs[$i]->question   !!}
                                     </h4>
                                 </div>
                             </a>
                             <div id="collapse{{$i}}" class="collapse" data-parent="#accordion">
                                 <div class="card-body">
-                                    {{  $faqs[$i]['answer']  }}
+                                    {!!  $faqs[$i]['answer']  !!}
                                 </div>
                             </div>
                         </div>

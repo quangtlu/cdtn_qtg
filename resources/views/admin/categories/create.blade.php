@@ -28,8 +28,9 @@
                             <div class="form-group">
                                 <label for="category_name">Loại danh mục</label>
                                 <select id="selectType" name="type" class="form-control" >
-                                    <option value="product">Product</option>
-                                    <option value="post">Post</option>
+                                    @foreach (config('consts.category.type') as $type)
+                                        <option value="{{ $type['value'] }}">{{ $type['name'] }}</option>
+                                    @endforeach
                                 </select>
                                 @error('type')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

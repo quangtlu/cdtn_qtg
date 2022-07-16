@@ -11,7 +11,7 @@
                             <div class="row justify-content-between">
                                 <div>
                                     <a class="btn btn-success btn-sm float-right"
-                                        href="{{ route('admin.users.create') }}">Thêm mới</a>
+                                        href="{{ route('admin.categories.create') }}">Thêm mới</a>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,13 @@
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->type }}</td>
+                                        <td>
+                                            @foreach (config('consts.category.type') as $type)
+                                                @if($type['value'] == $category->type)
+                                                    {{ $type['name'] }}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.categories.edit', ["id" => $category->id]) }}"><button class="btn btn-info btn-sm">Sửa</button></a>
                                             <button type="button" data-url="{{ route('admin.categories.destroy', ["id" => $category->id]) }}" class="btn btn-danger btn-sm btn-delete">Xóa</button>

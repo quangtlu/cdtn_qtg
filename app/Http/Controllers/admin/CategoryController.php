@@ -44,9 +44,25 @@ class CategoryController extends Controller
 
     public function getType(Request $request) {
         $category_id = $request->category_id;
-        $type = $this->categoryService->getById($category_id)->type;
-        $htmlOption = "<option value='$type'>$type</option>";
-        return $htmlOption;
+        if ($category_id) {
+            $typeValue = $this->categoryService->getById($category_id)->type;
+            $typeName = '';
+            foreach (config('consts.category.type') as $type) {
+                if($type['value'] == $typeValue) {
+                    $typeName = $type['name'];
+                }
+            }
+            $htmlOptions = "<option value='$typeValue'>$typeName</option>";
+        }
+        else {
+            $htmlOptions = '';
+            foreach (config('consts.category.type') as $type) {
+                $typeValue = $type['value'];
+                $typeName = $type['name'];
+                $htmlOptions .= "<option value='$typeValue'>$typeName</option>";
+            }
+        }
+        return $htmlOptions;
     }
 
     public function getCategory($parentId)
