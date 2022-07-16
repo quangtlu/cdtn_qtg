@@ -39,6 +39,9 @@
                                     <div class="col-md-12">
                                         <label class="labels">Họ tên:</label>
                                         <input type="text" value="{{ $profile->name }}" name="name" class="form-control" >
+                                        @error('name')
+                                            <span class="mt-1 text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row my-3">
@@ -50,6 +53,9 @@
                                                 <option {{ (old('gender') == $gender['value'] || $profile->gender == $gender['value']) ? 'selected' : '' }}  
                                                 value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
                                             @endforeach
+                                            @error('gender')
+                                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                             @enderror
                                         </select>
                                     </div>
                                 </div>
@@ -66,18 +72,27 @@
                                     <div class="col-md-12">
                                         <label class="labels">Email:</label>
                                         <input type="text" value="{{ $profile->email }}" name="email" class="form-control" >
+                                        @error('email')
+                                            <span class="mt-1 text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-md-12">
                                         <label class="labels">Điện thoại:</label>
                                         <input type="text" value="{{ $profile->phone }}" name="phone" class="form-control" >
+                                        @error('phone')
+                                            <span class="mt-1 text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-md-12">
                                         <label class="labels">Password</label>
                                         <input id="password" data-toggle="password" type="password" name="password" class="form-control">
+                                        @error('password')
+                                            <span class="mt-1 text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

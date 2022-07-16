@@ -28,21 +28,26 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getAllPaginate();
-        if($request->keyword) {
-            $posts = $this->postService->search($request);
+        try {
+            $posts = $this->postService->getAllPaginate();
+            if($request->keyword) {
+                $posts = $this->postService->search($request);
+            }
+            if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
+                $posts = $this->postService->searchAndFilter($request);
+            }
+            if ($request->category_id || $request->tag_id || $request->status) {
+                $posts = $this->postService->filter($request);
+            }
+            if ($posts->count() > 0) {
+                return view('admin.posts.index', compact('posts'));
+            } else {
+                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
-            $posts = $this->postService->searchAndFilter($request);
-        }
-        if ($request->category_id || $request->tag_id || $request->status) {
-            $posts = $this->postService->filter($request);
-        }
-        if ($posts->count() > 0) {
-            return view('admin.posts.index', compact('posts'));
-        } else {
-            return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
-        }
+        
     }
 
     public function create()

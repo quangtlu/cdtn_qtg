@@ -1,4 +1,5 @@
 const time = 3000
+const position = 'top'
 const dataSuccess = {
     icon: 'success',
     message: $('#container').attr('data-messageSuccess'),
@@ -19,7 +20,7 @@ $(function () {
             toast: true,
             icon: dataSuccess.message != '' != '' ? dataSuccess.icon : dataError.icon,
             title: dataSuccess.message != '' ? dataSuccess.message : dataError.message,
-            position: "top-start",
+            position: position,
             timer: time,
             showConfirmButton: false,
             showClass: {
@@ -60,7 +61,7 @@ function actionDeletePost() {
                             toast: true,
                             icon: dataSuccess.icon,
                             title: "Bài viết đã được xóa",
-                            position: "top-start",
+                            position: position,
                             timer: time,
                             showConfirmButton: false,
                             background: dataSuccess.background,
@@ -101,9 +102,9 @@ function actionDeleteComment() {
                         that.closest('.comments-grid').fadeOut()
                         Swal.fire({
                             toast: true,
-                            icon: "success",
+                            icon: dataSuccess.icon,
                             title: "Bình luận đã được xóa",
-                            position: "top-start",
+                            position: position,
                             timer: time,
                             showConfirmButton: false,
                             background: dataSuccess.background,
