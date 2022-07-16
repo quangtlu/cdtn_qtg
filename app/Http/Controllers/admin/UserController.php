@@ -9,19 +9,23 @@ use App\Services\UserService;
 use function redirect;
 use function view;
 use App\Http\Controllers\Controller;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private $userService;
     private $roleSercice;
+    private $categoryService;
 
-    public function __construct(UserService $userService, RoleService $roleSercice)
+    public function __construct(UserService $userService, RoleService $roleSercice, CategoryService $categoryService)
     {
         $this->userService = $userService;
         $this->roleSercice = $roleSercice;
+        $this->categoryService = $categoryService;
         $roles = $this->roleSercice->getAll();
-        view()->share('roles', $roles);
+        $categories = $this->categoryService->getBytype('post');
+        view()->share(['roles' => $roles, 'categories' => $categories]);
     }
 
     public function index(Request $request)

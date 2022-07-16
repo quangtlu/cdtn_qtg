@@ -79,6 +79,9 @@ class UserService
         if($request->password) {
             $data['password'] = Hash::make($request->password);
         }
+        if($request->password) {
+            $data['dob'] = $dob;
+        }
         if($file=$request->file('image')) {
             $name = $this->uploadSingleImage($file);
             $data['image'] = $name;

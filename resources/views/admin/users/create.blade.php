@@ -80,9 +80,7 @@
                                 <select name="" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type === 'post')
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endif
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')

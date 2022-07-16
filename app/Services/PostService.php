@@ -68,9 +68,9 @@ class PostService
         return Post::where('user_id', Auth::user()->id)->latest()->paginate(10);
     }
 
-    public function getAllCounselor($id)
+    public function getAllCounselor($postId)
     {
-        $post = $this->getById($id);
+        $post = $this->getById($postId);
         $userId = $post->user_id;
         $categories = $post->categories;
         $categoryIds = [];

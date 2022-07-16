@@ -1,6 +1,8 @@
 @extends('layouts.home')
 @section('title', $post->title)
 @section('css')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
@@ -81,50 +83,56 @@
         @endauth
     </div>
     @auth
-        @if (Auth::user()->id == $post->user_id && $post->chatroom)
-            <a class="btn btn-success" style="margin-top: 10px"
+        @if (Auth::user()->id == $post->user_id)
+            @if($post->chatroom)
+                <a class="btn btn-success" style="margin-top: 10px"
                 href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
                     class="fa fa-comments"></i></a>
-        @else
-            @role('mod|super-admin')
-                @if ($post->chatroom)
-                    <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
-                            class="fa fa-check-circle" aria-hidden="true"></i></button>
-                @else
-                    <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
-                        với
-                        chuyên gia <i class="fa fa-comments"></i></button>
-                    <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label>Chuyên gia tư vấn</label>
-                                            <select name="counselor_id" class="form-control select2_init">
-                                                @foreach ($counselors as $counselor)
-                                                    <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
-                                            nối</button>
-                                        <button type="button" class="btn-modal-post btn btn-danger"
-                                            data-dismiss="modal">Đóng</button>
-                                    </form>
-                                </div>
+            @endif
+            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                Sửa bài viết
+            </button>
+            @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
+        @endif
+        @role('mod|super-admin')
+            @if ($post->chatroom)
+                <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
+                        class="fa fa-check-circle" aria-hidden="true"></i></button>
+            @else
+                <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
+                    với
+                    chuyên gia <i class="fa fa-comments"></i></button>
+                <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label>Chuyên gia tư vấn</label>
+                                        <select name="counselor_id" class="form-control">
+                                            @foreach ($counselors as $counselor)
+                                                <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
+                                        nối</button>
+                                    <button type="button" class="btn-modal-post btn btn-danger"
+                                        data-dismiss="modal">Đóng</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                @endif
-            @endrole
-        @endif
+                </div>
+            @endif
+        @endrole
     @endauth
 
     {{-- Comment --}}
@@ -240,28 +248,29 @@
 @section('js')
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-        $(window).load(function() {
+        $('.summernote').summernote({
+            height: 200
+        });
+        $('.select2_init').select2()
+        $('.btn-edit-comment').on('click', function() {
+            $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+            $(this).closest('.comments-grid-right').children('.comment-content').toggle()
+        })
+        $('.rep-comment').on('click', function() {
+            var userName = $(this).attr('data-userName')
+            $('#leave-coment').text(userName)
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#leave-coment").offset().top
+            }, 1000);
 
-            $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
-                $(this).closest('.comments-grid-right').children('.comment-content').toggle()
-            })
-            $('.rep-comment').on('click', function() {
-                var userName = $(this).attr('data-userName')
-                $('#leave-coment').text(userName)
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: $("#leave-coment").offset().top
-                }, 1000);
-
-            })
-            $('.flexslider').flexslider({
-                animation: "slide",
-                start: function(slider) {
-                    $('body').removeClass('loading');
-                }
-            });
+        })
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function(slider) {
+                $('body').removeClass('loading');
+            }
         });
     </script>
 @endsection
