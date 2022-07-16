@@ -144,6 +144,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/notifications/show-post/{id}', 'home\NotificationController@showPost')->name('notifications.showPost');
+    Route::get('/notifications/mark-as-read-all', 'home\NotificationController@markAsReadAll')->name('notifications.markAsReadAll');
+    Route::get('/notifications/delete-all', 'home\NotificationController@deleteAll')->name('notifications.deleteAll');
 });
 
 //No auth

@@ -45,13 +45,8 @@
                                     <div class="col-md-12">
                                         <label class="labels">Giới tính:</label>
                                         <select name="gender" id="" class="form-control">
-                                            @if ($profile->gender == 'Nam')
-                                                <option value="Nam" selected>Nam</option>
-                                                <option value="Nữ">Nữ</option>
-                                            @else
-                                                <option value="Nam">Nam</option>
-                                                <option value="Nữ" selected>Nữ</option>
-                                            @endif
+                                            <option value="Nam" {{ $profile->gender == 'Nam' ? 'selected' : '' }}>Nam</option>
+                                            <option value="Nữ" {{ $profile->gender == 'Nữ' ? 'selected' : '' }}>Nữ</option>
                                         </select>
                                     </div>
                                 </div>
