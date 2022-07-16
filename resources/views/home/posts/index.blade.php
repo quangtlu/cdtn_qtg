@@ -28,15 +28,14 @@
                         <img id="avt-user" src="{{ asset('image/profile/' . Auth::user()->image) }}" alt="">
                     </div>
                     <div class="col-md-11">
-                        <span data-toggle="modal" data-target="#post-modal" id="create-post" class="form-control">
+                        <span data-toggle="modal" data-target="#add-modal" id="create-post" class="form-control">
                             {{ Auth::user()->name }} ơi, đăng bài lên diễn đàm để cùng thảo luận nào
                         </span>
                     </div>
                 </div>
             </div>
-
         </div>
-    @include('home.component.posts.modal', ['categories' => $categories, 'tags' => $tags])
+        @include('home.component.posts.modal-add', ['categories' => $categories, 'tags' => $tags])
     @endauth
     @guest
         <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
@@ -97,9 +96,13 @@
                             <select name="status" id="sort" class="form-control">
                                 <option value="" class="filter-option-dafault">Trạng thái</option>
                                 @foreach (config('consts.post.status') as $status)
-                                @if (isset($isMyPost) && $isMyPost == true && ($status['value'] == config('consts.post.status.request.value') || $status['value'] == config('consts.post.status.refuse.value')))
+                                    @if (isset($isMyPost) &&
+                                        $isMyPost == true &&
+                                        ($status['value'] == config('consts.post.status.request.value') ||
+                                            $status['value'] == config('consts.post.status.refuse.value')))
                                         <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
-                                    @elseif (($status['value'] != config('consts.post.status.request.value') && $status['value'] != config('consts.post.status.refuse.value')))
+                                    @elseif ($status['value'] != config('consts.post.status.request.value') &&
+                                        $status['value'] != config('consts.post.status.refuse.value'))
                                         <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
                                     @endif
                                 @endforeach
@@ -124,58 +127,15 @@
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script type="text/javascript">
-        $('#post-modal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var modal = $(this)
-
-            if (button.attr('id') == 'edit-post') {
-                var title = button.data('title')
-                var content = button.data('content')
-                var id = button.data('id')
-
-                modal.find('.modal-title').text('Sửa bài viết')
-                modal.find('#title').val(title)
-                modal.find('#submit-btn').text('Cập nhật')
-                $('#summernote').summernote('code', content);
-
-                var urlUpdate = '{{ route('posts.index') }}' + '/update/' + id
-                modal.find('form').attr('action', urlUpdate)
-            } else {
-                modal.find('.modal-title').text('Tạo bài viết')
-                modal.find('#submit-btn').text('Đăng bài')
-                modal.find('form').trigger("reset");
-                $('#summernote').summernote('reset');
-                var urlUpdate = '{{ route('posts.store') }}'
-                modal.find('form').attr('action', urlUpdate)
-            }
-        })
-        $('#summernote').summernote({
-            height: 100
-        });
-        $(function() {
-            $('.select2_init').select2({
-                'placeholder': 'Chọn thẻ tag',
-            })
-
-            $('.select3_init').select2({
-                'placeholder': 'Chọn danh mục',
-            })
-        })
-        $('#summernote').summernote({
-            height: 400
+    <script>
+        $('#search').click(function() {
+            $('#toggle').fadeToggle();
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết...');
-    </script>
-    <script>
-        src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" >
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#search').click(function() {
-                $('#toggle').fadeToggle();
-            });
+        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
+        $('.summernote').summernote({
+            height: 200
         });
+        $('.select2_init').select2()
     </script>
 @endsection

@@ -1,22 +1,37 @@
 <?php
 
 namespace App\Http\Controllers\Home;
+
 use App\Http\Controllers\Controller;
+use App\Services\CategoryService;
 use App\Services\PostService;
-use App\Services\ProductService;
+use App\Services\TagService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     private $postService;
+    private $tagService;
+    private $categoryService;
 
-    public function __construct(PostService $postService, ProductService $productService)
-    {
+    /**
+     * @param $postService
+     */
+    public function __construct(
+        PostService $postService,
+        TagService $tagService,
+        CategoryService $categoryService
+    ) {
         $this->postService = $postService;
-        $this->productService = $productService;
+        $this->tagService = $tagService;
+        $this->categoryService = $categoryService;
+
+        $tags = $this->tagService->getAll();
+        $categories = $this->categoryService->getBytype('post');
+        view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
-    public function index (Request $request)
+    public function index(Request $request)
     {
         $posts = $this->postService->getReferencePosts();
 

@@ -7,9 +7,8 @@
                     <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
                                 class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                     </li>
-                    <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                class="fa fa-calendar"
-                                aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
+                    <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
                     </li>
                     <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
                         <i class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
@@ -37,10 +36,12 @@
                             <li><a class="post-info__link btn-delete"
                                     data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
                                         class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                            <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                    data-target="#post-modal" data-title="{{ $post->title }}"
-                                    data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                        class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a></li>
+                            <li>
+                                <a id="edit-post" class="post-info__link btn-edit" data-toggle="modal" data-target="#edit-modal">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                                    Sửa bài viết
+                                </a>
+                            </li>
                         @endif
                     @endauth
                 </ul>
@@ -61,6 +62,7 @@
             <div class="clearfix"></div>
         </div>
     </div>
+    @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
 @endforeach
 {{ $posts->withQueryString()->links() }}
 @endif

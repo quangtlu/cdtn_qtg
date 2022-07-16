@@ -5,8 +5,8 @@
             <div class="col-md-3 w3agile-left">
                 <ul class="post-info">
                     <li>
-                        <a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
-                            <i class="fa  fa-user" aria-hidden="true"></i>
+                        <a data-toggle="tooltip" data-placement="top" title="Tác giả" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                            <i class="fa  fa-users" aria-hidden="true"></i>
                             @if ($product->authors->count())
                                 @foreach ($product->authors as $index => $author)
                                     {{ $index != $product->authors->count() - 1 ? $author->name . ' ,' : $author->name }}
@@ -16,9 +16,18 @@
                             @endif
                         </a>
                     </li>
-                    <li><a class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
-                                class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}</a>
+                    <li><a data-toggle="tooltip" data-placement="top" title="Ngày xuất bản" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
+                                class="fa fa-calendar" aria-hidden="true"></i>{{ $product->pub_date }}</a>
                     </li>
+                    <li>
+                        <a data-toggle="tooltip" data-placement="top" title="Chủ sở hữu" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                            <i class="fa  fa-user" aria-hidden="true"></i>
+                            {{ $product->owner->name ?? 'Chưa xác định' }}
+                        </a>
+                    </li>
+                    <li><a data-toggle="tooltip" data-placement="top" title="Ngày đăng ký bản quyền" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
+                        class="fa fa-calendar-o" aria-hidden="true"></i>{{ $product->regis_date }}</a>
+            </li>
                 </ul>
             </div>
             <div class="panel panel-primary">
