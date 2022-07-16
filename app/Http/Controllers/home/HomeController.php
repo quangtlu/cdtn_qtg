@@ -33,12 +33,18 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getReferencePosts();
-
-        if ($request->keyword) {
-            $posts = $this->postService->search($request);
+        try {
+            $posts = $this->postService->getReferencePosts();
+            if ($request->keyword) {
+                $posts = $this->postService->search($request);
+                if ($posts->count() < 1) {
+                    return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+                }
+            }
+            return view('home.index', compact('posts'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình lấy dữ liệu');
         }
-
-        return view('home.index', compact('posts'));
+        
     }
 }

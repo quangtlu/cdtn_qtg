@@ -1,26 +1,37 @@
+const time = 3000
+const dataSuccess = {
+    icon: 'success',
+    message: $('#container').attr('data-messageSuccess'),
+    color: '#fff',
+    background: '#21ba45',
+}
+const dataError = {
+    icon: 'error',
+    message: $('#container').attr('data-messageError'),
+    color: '#000',
+    background: '#fff',
+}
+
 $(function () {
 
-    var messageSuccess = $('#container').attr('data-messageSuccess')
-    var messageError = $('#container').attr('data-messageError')
-    const time = 3000
-
-    if (messageSuccess != '' || messageError != '') {
+    if (dataSuccess.message != '' || dataError.message != '') {
         Swal.fire({
             toast: true,
-            icon: messageSuccess != '' ? "success" : "error",
-            title: messageSuccess != '' ? messageSuccess : messageError,
-            position: "top-end",
+            icon: dataSuccess.message != '' != '' ? dataSuccess.icon : dataError.icon,
+            title: dataSuccess.message != '' ? dataSuccess.message : dataError.message,
+            position: "top-start",
             timer: time,
             showConfirmButton: false,
             showClass: {
-                popup: 'animate__animated animate__fadeInRight'
+                popup: 'animate__animated animate__fadeInDown'
             },
             hideClass: {
-                popup: 'animate__animated animate__fadeOutRight'
-            }
+                popup: 'animate__animated animate__fadeOutUp'
+            },
+            background: dataSuccess.message != '' ? dataSuccess.background : dataError.background,
+            color: dataSuccess.message != '' ? dataSuccess.color : dataError.color,
         });
     }
-
     $(document).on('click', '.btn-delete', actionDeletePost)
     $(document).on('click', '.btn-delete-comment', actionDeleteComment)
 
@@ -47,16 +58,18 @@ function actionDeletePost() {
                         that.closest('.wthree-top-1').fadeOut()
                         Swal.fire({
                             toast: true,
-                            icon: "success",
+                            icon: dataSuccess.icon,
                             title: "Bài viết đã được xóa",
-                            position: "top-end",
-                            timer: 3000,
+                            position: "top-start",
+                            timer: time,
                             showConfirmButton: false,
+                            background: dataSuccess.background,
+                            color: dataSuccess.color,
                             showClass: {
-                                popup: 'animate__animated animate__fadeInRight'
+                                popup: 'animate__animated animate__fadeInDown'
                             },
                             hideClass: {
-                                popup: 'animate__animated animate__fadeOutRight'
+                                popup: 'animate__animated animate__fadeOutUp'
                             }
                         })
                     }
@@ -90,18 +103,21 @@ function actionDeleteComment() {
                             toast: true,
                             icon: "success",
                             title: "Bình luận đã được xóa",
-                            position: "top-end",
-                            timer: 3000,
+                            position: "top-start",
+                            timer: time,
                             showConfirmButton: false,
+                            background: dataSuccess.background,
+                            color: dataSuccess.color,
                             showClass: {
-                                popup: 'animate__animated animate__fadeInRight'
+                                popup: 'animate__animated animate__fadeInDown'
                             },
                             hideClass: {
-                                popup: 'animate__animated animate__fadeOutRight'
+                                popup: 'animate__animated animate__fadeOutUp'
                             }
                         })
                     }
                 }
+                
             })
 
         }

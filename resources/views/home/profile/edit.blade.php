@@ -44,9 +44,12 @@
                                 <div class="row my-3">
                                     <div class="col-md-12">
                                         <label class="labels">Giới tính:</label>
-                                        <select name="gender" id="" class="form-control">
-                                            <option value="Nam" {{ $profile->gender == 'Nam' ? 'selected' : '' }}>Nam</option>
-                                            <option value="Nữ" {{ $profile->gender == 'Nữ' ? 'selected' : '' }}>Nữ</option>
+                                        <select name="gender" class="form-control" id="gender">
+                                            <option value=""></option>
+                                            @foreach (config('consts.user.gender') as $gender)
+                                                <option {{ (old('gender') == $gender['value'] || $profile->gender == $gender['value']) ? 'selected' : '' }}  
+                                                value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

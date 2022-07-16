@@ -24,8 +24,8 @@ $factory->define(User::class, function (Faker $faker) {
         'phone' => '09'.$faker->numerify('########'),
         'dob' => $faker->dateTime('-18 years'),
         'email' => $faker->unique()->safeEmail,
-        'gender' => 'Nam',
-        'image' => 'avatar-nam.jpg',
+        'gender' => config('consts.user.gender.male.value'),
+        'image' => config('consts.user.gender.male.image'),
         'password' => Hash::make('password'),
 
     ];

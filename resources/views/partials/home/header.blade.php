@@ -77,9 +77,9 @@
                     </li> --}}
                     <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                             href="{{ route('faq.index') }}">FAQ</a></li>
-                    <li><a class="{{ Request::is('products/*') ? 'active' : '' }}"
+                    <li><a class="{{ Request::is('products*') ? 'active' : '' }}"
                             href="{{ route('products.index') }}">Tác phẩm</a></li>
-                    <li><a class="{{ Request::is('posts/*') ? 'active' : '' }}"
+                    <li><a class="{{ Request::is('posts*') ? 'active' : '' }}"
                             href="{{ route('posts.index') }}">Diễn đàn</a></li>
                     <li><a href="{{ route('messenger.index') }}" style="font-size: 25px"><i
                                 class="fa fa-comments-o"></i></a></li>

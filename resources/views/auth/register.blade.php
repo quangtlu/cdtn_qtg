@@ -34,10 +34,12 @@
                     <div class="form-row">
                         <span class="fas fa-venus-mars"></span>
                         <label class="form-label" for="input">Giới tính</label>
-                        <select name="gender" class="form-text" id="gender">
+                        <select name="gender" class="form-control" id="gender">
                             <option value=""></option>
-                            <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                            <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
+                            @foreach (config('consts.user.gender') as $gender)
+                                <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
+                                value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
+                            @endforeach
                         </select>
                         @error('gender')
                         <span class="invalid-feedback" role="alert">
