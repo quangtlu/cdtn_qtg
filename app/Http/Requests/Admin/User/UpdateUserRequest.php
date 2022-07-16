@@ -40,7 +40,7 @@ class UpdateUserRequest extends FormRequest
             'phone.unique' => 'Số điện thoại đã tồn tại',
             'phone.regex' => 'vui lòng nhập đúng số điện thoại',
             'phone.max' => 'Số điện thoại tối đa 10 số',
-            'email.required' => 'Vui lòng email',
+            'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng nhập đúng email',
             'email.unique' => 'Email đã tồn tại',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',

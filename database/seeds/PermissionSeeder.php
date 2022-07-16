@@ -32,8 +32,8 @@ class PermissionSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'phone' => '0123456789',
-            'gender' => 'nam',
-            'image' => 'avatar-nam.jpg',
+            'gender' => config('consts.user.gender.male.value'),
+            'image' => config('consts.user.gender.male.image'),
             'password' => Hash::make('password')
         ]);
         $roleAdmin = Role::create(['name' => 'super-admin']);

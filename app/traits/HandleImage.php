@@ -26,6 +26,6 @@ trait HandleImage {
 
     function getAvatarDefault($gender)
     {
-        return $gender == 'nam' ? 'avatar-nam.jpg' : 'avatar-nu.jpg';
+        return $gender == config('consts.user.gender.male.value') ? config('consts.user.gender.male.image') : config('consts.user.gender.female.image');
     }
 }

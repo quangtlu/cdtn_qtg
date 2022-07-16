@@ -143,7 +143,13 @@
                                                 src=" {{ asset('image/profile/' . $user->image) }}" alt="">
                                         </td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ Str::ucfirst($user->gender) }}</td>
+                                        <td>
+                                            @foreach (config('consts.user.gender') as $gender)
+                                                @if ($gender['value'] == $user->gender)
+                                                    {{ $gender['name'] }}
+                                                @endif 
+                                            @endforeach
+                                        </td>
                                         <td>{{ $user->dob }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>

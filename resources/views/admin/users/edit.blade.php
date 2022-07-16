@@ -30,14 +30,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Giới tính</label>
-                                <select name="gender" id="" class="form-control">
-                                    @if ($user->gender == 'nam')
-                                        <option {{ old('gender') == 'nam' ? 'selected' : '' }} selected value="nam">Nam</option>
-                                        <option {{ old('gender') == 'nữ' ? 'selected' : '' }}  value="nữ">Nữ</option>
-                                    @else
-                                    <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                                    <option {{ old('gender') == 'nữ' ? 'selected' : '' }}  selected value="nữ">Nữ</option>
-                                    @endif
+                                <select name="gender" class="form-control" id="gender">
+                                    <option value=""></option>
+                                    @foreach (config('consts.user.gender') as $gender)
+                                        <option {{ (old('gender') == $gender['value'] || $user->gender == $gender['value']) ? 'selected' : '' }}  
+                                        value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
+                                    @endforeach
                                 </select>
                                 @error('gender')
                                 <span class="mt-1 text-danger">{{ $message }}</span>

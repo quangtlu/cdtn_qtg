@@ -11,6 +11,6 @@ $factory->define(Author::class, function (Faker $faker) {
         'phone' => '09'.$faker->numerify('########'),
         'email' => $faker->unique()->safeEmail,
         'dob' => $faker->dateTime('-18 years'),
-        'gender' => $faker->randomElement(['Nam', 'Nữ']),
+        'gender' => $faker->randomElement([config('consts.user.gender.female.value'), config('consts.user.gender.male.value')]),
     ];
 });

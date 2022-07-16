@@ -38,7 +38,7 @@
         @include('home.component.posts.modal-add', ['categories' => $categories, 'tags' => $tags])
     @endauth
     @guest
-        <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
+        <a style="margin-bottom: 10px" class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
                 class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
     @endguest
     <div class="col my-auto" id="search" style="margin-top: 2px;">

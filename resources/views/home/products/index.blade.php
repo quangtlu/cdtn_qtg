@@ -38,8 +38,8 @@
                 <div class="row">
                     <div class="col-md-10" style="width:78.333333%">
                         <select name="sort" id="" class="form-control">
-                            <option value="sort-public-date">Tác phẩm mới</option>
-                            <option value="sort-regis-date">Tác phẩm đăng kí bản quyền mới</option>
+                            <option value="sort-public-date">Xuất bản gần đây</option>
+                            <option value="sort-regis-date">Đăng ký bản quyền gần đây</option>
                         </select>
                     </div>
                     <div class="col-md-2">

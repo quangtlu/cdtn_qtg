@@ -3,6 +3,12 @@
 $BASE_PATH_IMAGE = 'image';
 
 return [
+    'message' => [
+        'error' => [
+            'getData' => 'Có lỗi xảy ra trong quá trình lấy dữ liệu',
+            'connect' => 'Có lỗi xảy ra trong quá trình kết nối',
+        ]
+    ],
     'post' => [
         'status' => [
             'request' => [
@@ -64,6 +70,18 @@ return [
 
     'user' => [
         'all' => 0,
+        'gender' => [
+            'male' => [
+                'value' => 1,
+                'name' => 'Nam',
+                'image' => 'avatar-nam.jpg'
+            ],
+            'female' => [
+                'value' => 2,
+                'name' => 'Nữ',
+                'image' => 'avatar-nu.jpg'
+            ]
+        ]
     ],
 
     'category_reference' => [

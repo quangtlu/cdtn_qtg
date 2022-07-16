@@ -65,7 +65,7 @@
                     <div class="">
                         <ul>
                             <li>
-                                Tác giả: {{ $post->user->name}}
+                                Tác giả: {{ $post->user->name ?? 'Không xác định'}}
                             </li>
                             <li>
                                 Thẻ tag:

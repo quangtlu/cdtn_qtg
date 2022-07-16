@@ -49,26 +49,29 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getPaginate();
-
-        if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
-            $posts = $this->postService->searchAndFilter($request);
+        try {
+            $posts = $this->postService->getPaginate();
+            if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
+                $posts = $this->postService->searchAndFilter($request);
+            }
+            if ($request->category_id || $request->tag_id || $request->status) {
+                $posts = $this->postService->filter($request);
+            }
+            if ($request->keyword) {
+                $posts = $this->postService->search($request);
+            }
+    
+            if ($request->sort) {
+                $posts = $this->postService->sortPost($request->sort);
+            }
+            if($posts->count() < 1) {
+                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            }
+            return view('home.posts.index', compact('posts'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        if ($request->category_id || $request->tag_id || $request->status) {
-            $posts = $this->postService->filter($request);
-        }
-        if ($request->keyword) {
-            $posts = $this->postService->search($request);
-        }
-
-        if ($request->sort) {
-            $posts = $this->postService->sortPost($request->sort);
-        }
-
-        if ($posts->count() < 1) {
-            return redirect()->route('posts.index')->with('error', 'Không có bài viết nào phù hợp');
-        }
-        return view('home.posts.index', compact('posts'));
+        
     }
 
     public function getMyPost()
@@ -189,15 +192,14 @@ class PostController extends Controller
 
     public function connectToCounselor(Request $request, $id)
     {
-        $chatroom = $this->chatroomService->create($request, $id);
-        $post = $this->postService->getById($id);
-
-        if ($chatroom) {
+        try {
+            $this->chatroomService->create($request, $id);
+            $post = $this->postService->getById($id);
             $this->notificationService->notiConnectToUser($post, $request->counselor_id);
             $this->notificationService->notiConnectToCounselor($post, $request->counselor_id);
             return Redirect()->back()->with('success', 'Kết nối thành công');
-        } else {
-            return Redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình kết nối');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.connect'));
         }
     }
 }
