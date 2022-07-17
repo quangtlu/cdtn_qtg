@@ -30,9 +30,7 @@
                 </div>
             @endauth
             <div class="logo">
-                <h1><a href="{{ route('home.index') }}"><img class="logo-img"
-                            src="{{ asset('logo.png') }}" alt=""></a></h1>
-                <p>Quang Vinh Copyright</p>
+                <h1><a href="{{ route('home.index') }}"><img class="logo-img" src="{{ asset('image/logo.gif') }}" alt=""></a></h1>
             </div>
             <div class="w3ls-social-icons">
                 @guest

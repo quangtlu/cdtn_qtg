@@ -3,7 +3,7 @@
 @section('content')
     <!-- login -->
     <div class="login animate__animated animate__fadeInDown">
-        <img style="height: 150px" src="{{ asset('logo.png') }}" alt="">
+        <img style="height: 150px" src="{{ asset('image/logo.gif') }}" alt="">
         <h3 style="color: #FF9F3A">Quang Vinh Copyright</h3>
         <form action="{{ route('login') }}" method="post" class="login-form">
             @csrf
