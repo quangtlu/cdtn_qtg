@@ -2,7 +2,7 @@
 /dump.rdb
 /public/hot
 /public/storage
-# /public/image
+/public/image
 /storage/*.key
 /vendor
 .env
