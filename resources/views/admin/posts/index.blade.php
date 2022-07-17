@@ -49,12 +49,10 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <select name="status" id="sort" class="form-control">
-                                                    <option value="" class="filter-option-dafault">Giải đáp</option>
-                                                    <option value="{{ config('consts.post.status.solved.value') }}" class="filter-option-dafault">
-                                                        {{ config('consts.post.status.solved.name') }}</option>
-                                                    <option value="{{ config('consts.post.status.unsolved.value') }}" class="filter-option-dafault">
-                                                        {{ config('consts.post.status.unsolved.name') }}</option>
-                            
+                                                    <option value="" class="filter-option-dafault">Trạng thái</option>
+                                                    @foreach (config('consts.post.status') as $status)
+                                                        <option value="{{ $status['value'] }}" class="filter-option-dafault">{{ $status['name'] }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
@@ -77,6 +75,7 @@
                                     <th>Ảnh</th>
                                     <th>Tên bài viết</th>
                                     <th>Tác giả</th>
+                                    <th>Trạng thái</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -97,6 +96,15 @@
 
                                         <td>{{ Str::ucfirst($post->title) }}</td>
                                         <td>{{ $post->user->name ?? 'Không xác định' }}</td>
+                                        <td>
+                                            @foreach (config('consts.post.status') as $status)
+                                                @if ($post->status == $status['value'])
+                                                    <a class="{{ $status['className'] }}">
+                                                        {{ $status['name'] }}
+                                                    </a> 
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>

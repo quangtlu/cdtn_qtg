@@ -43,7 +43,7 @@ class PostController extends Controller
         $this->chatroomService = $chatroomService;
         $this->notificationService = $notificationService;
         $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getBytype('post');
+        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
@@ -60,7 +60,6 @@ class PostController extends Controller
             if ($request->keyword) {
                 $posts = $this->postService->search($request);
             }
-    
             if ($request->sort) {
                 $posts = $this->postService->sortPost($request->sort);
             }
@@ -88,7 +87,7 @@ class PostController extends Controller
         if (
             ($postContainUnaccept->status == config('consts.post.status.request.value') || $postContainUnaccept->status == config('consts.post.status.refuse.value')) 
             && $user 
-            && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'super-admin'))) {
+            && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'admin'))) {
             $post = $postContainUnaccept;
         } else{
             $post = $this->postService->getDetailPost($id);
@@ -108,7 +107,7 @@ class PostController extends Controller
     {
         $post = $this->postService->create($request);
         $message = 'Bài viết đang chờ phê duyệt';
-        if(Auth::user()->hasAnyRole('mod', 'super-admin')) {
+        if(Auth::user()->hasAnyRole('mod', 'admin')) {
             $message = 'Đăng bài thành công';
         }
         else {
@@ -142,7 +141,7 @@ class PostController extends Controller
             $this->notificationService->sendNotiResult($post, $action);
             $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
             $user = Auth::user();
-            if($user->hasAnyRole('mod', 'super-admin')) {
+            if($user->hasAnyRole('mod', 'admin')) {
                 return redirect()->back()->with('success', $message);
             } else {
                 return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');

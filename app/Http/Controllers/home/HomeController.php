@@ -27,7 +27,7 @@ class HomeController extends Controller
         $this->categoryService = $categoryService;
 
         $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getBytype('post');
+        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 

@@ -93,7 +93,7 @@
             </button>
             @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
         @endif
-        @role('mod|super-admin')
+        @role('mod|admin')
             @if ($post->chatroom)
                 <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
                         class="fa fa-check-circle" aria-hidden="true"></i></button>

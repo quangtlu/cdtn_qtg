@@ -29,10 +29,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
         $newestPosts = Post::accepted()->latest()->limit(5)->get();
         $newestProducts = Product::limit(5)->orderBy('pub_date', 'desc')->get();
-        $postCategories = Category::where('parent_id', 0)->type('post')->get();
-        $productCategories = Category::where('parent_id', 0)->type('product')->get();
+        $postCategories = Category::where('parent_id', 0)->type([config('consts.category.type.post.value')])->get();
+        $productCategories = Category::where('parent_id', 0)->type([config('consts.category.type.product.value')])->get();
         $tags = Tag::latest()->get();
         $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();
 

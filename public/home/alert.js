@@ -75,6 +75,24 @@ function actionDeletePost() {
                         })
                     }
                 },
+                error: function (res) {
+                    Swal.fire({
+                        toast: true,
+                        icon: dataError.icon,
+                        title: "Có lỗi xảy ra trong quá trình xóa",
+                        position: position,
+                        timer: time,
+                        showConfirmButton: false,
+                        background: dataError.background,
+                        color: dataError.color,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                }
             })
 
         }
@@ -117,6 +135,24 @@ function actionDeleteComment() {
                             }
                         })
                     }
+                },
+                error: function (res) {
+                    Swal.fire({
+                        toast: true,
+                        icon: dataError.icon,
+                        title: "Có lỗi xảy ra trong quá trình xóa",
+                        position: position,
+                        timer: time,
+                        showConfirmButton: false,
+                        background: dataError.background,
+                        color: dataError.color,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
                 }
                 
             })

@@ -9,7 +9,7 @@ use App\Services\PostService;
 use App\Services\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -22,7 +22,7 @@ class PostController extends Controller
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
         $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getAll();
+        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
@@ -71,6 +71,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = $this->postService->getById($id);
+        if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+           return back()->with('error', 'Bạn không có quyền truy cập');
+        }
         $postUser = $post->user;
         $postOfTags = $post->tags;
         $postOfCategories = $post->categories;
@@ -86,6 +89,10 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        $post = $this->postService->getById($id);
+        if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+            abort(403);
+        }
         $this->postService->delete($id);
     }
 }
