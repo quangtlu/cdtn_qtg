@@ -112,6 +112,7 @@ class PostController extends Controller
         }
         else {
             $this->notificationService->notiRequestPost($post);
+            $this->notificationService->sendNotiResult($post, '');
         }
         return Redirect()->back()->with('success', $message);
         

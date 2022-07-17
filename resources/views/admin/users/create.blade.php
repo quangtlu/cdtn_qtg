@@ -78,7 +78,7 @@
                                 @enderror
                             </div>
                             <div class="form-group" style="display: none" id="category-wrap">
-                                <label>Danh mục</label>
+                                <label>Mục lục</label>
                                 <select name="" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)

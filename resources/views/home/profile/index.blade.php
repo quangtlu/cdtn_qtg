@@ -65,13 +65,20 @@
                                     <label class="labels">Điện thoại: {{ $profile->phone }}</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row btn-edit">
-                        <div class="text-center">
-                            <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
-                                <button class="btn btn-info">Chỉnh sửa</button>
-                            </a>
+                            @role('counselor')
+                                <div class="row my-3">
+                                    <div class="col-md-12">
+                                        <ul id="category" class="tag" style="margin-top: 0 !important">
+                                            <li class="li-category-tag">
+                                                <label class="labels">Mục lục:</label>
+                                                @foreach ($profile->categories as $category)
+                                                    <a class="m-3" href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name ?? 'Chưa rõ' }}</a>
+                                                @endforeach
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endrole
                         </div>
                     </div>
                 </div>
@@ -85,7 +92,15 @@
                     </div>
                 </div>
             </div>
+            <div class="row btn-edit">
+                <div class="text-center">
+                    <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
+                        <button class="btn btn-info">Chỉnh sửa</button>
+                    </a>
+                </div>
+            </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
 @endsection
+

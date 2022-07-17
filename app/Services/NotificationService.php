@@ -56,6 +56,7 @@ class NotificationService
                 $data['title'] = '<span class="text-danger">Bài viết của bạn đã bị từ chối</span>';
                 break;
             default:
+                $data['title'] = '<span class="text-primary">Bài viết của bạn đang được xét duyệt</span>';
                 break;
         }
         $post->user->notify(new PostResultNotification($data));

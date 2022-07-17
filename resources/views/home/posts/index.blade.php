@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-md-2">
                             <select name="category_id" id="sort" class="form-control">
-                                <option value="" class="filter-option-dafault">Danh mục</option>
+                                <option value="" class="filter-option-dafault">Mục lục</option>
                                 <option value="" class="filter-option-dafault">Tất cả</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
@@ -124,12 +124,8 @@
 
 @endsection
 @section('js')
-    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script type="text/javascript" 
-        src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
-</script>
     <script>
         $('#search').click(function() {
             $('#toggle').fadeToggle();

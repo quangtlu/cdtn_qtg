@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <select name="category_id" id="sort" class="form-control">
-                                                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Danh mục</option>
+                                                    <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">mục lục</option>
                                                     <option value="{{ config('consts.category.all') }}" class="filter-option-dafault">Tất cả</option>
                                                     @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}"

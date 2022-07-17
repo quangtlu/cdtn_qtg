@@ -16,7 +16,7 @@
                 @foreach ($product->categories as $category) {{ $category->name }} | @endforeach">
                 <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#">{{ $product->categories->count() }}
-                    Danh mục</a>
+                    Mục lục</a>
             </li>
         </ul>
         <div class="row wow fadeInUp">
@@ -88,7 +88,7 @@
     <div class="category-tag">
         <ul class="tag">
             <li class="li-category-tag">
-                <span style="font-size:18px">Danh mục: </span>
+                <span style="font-size:18px">Mục lục: </span>
                 @foreach ($product->categories as $category)
                     <a
                         href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Sửa thông tin danh mục')
+@section('title', 'Sửa thông tin mục lục')
 @section('content')
     <div class="content-wrapper">
         <div class="content">
@@ -9,16 +9,16 @@
                         <form action="{{ route('admin.categories.update', ['id' => $category->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên danh mục</label>
+                                <label for="category_name">Tên mục lục</label>
                                 <input type="text" value="{{ old('name') ?? $category->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Danh mục cha</label>
+                                <label for="category_name">mục lục cha</label>
                                 <select id="category_parent" name="parent_id" class="form-control">
-                                    <option value="0">Chọn danh mục cha</option>
+                                    <option value="0">Chọn mục lục cha</option>
                                     {!! $htmlOption !!}
                                 </select>
                                 @error('parent_id')
@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Loại danh mục</label>
+                                <label for="category_name">Loại mục lục</label>
                                 <select id="selectType" name="type" class="form-control">
                                     <option value="{{ $category->type }}">{{ $category->type }}</option>
                                 </select>

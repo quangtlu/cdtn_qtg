@@ -30,7 +30,7 @@
         @endforeach
     </div>
     <div class="w3l_categories wow fadeInUp">
-        <h3>Danh mục tác phẩm</h3>
+        <h3>Mục lục tác phẩm</h3>
         <div class="w3l_wrap">
             <ul>
                 @foreach ($productCategories as $category)
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div class="w3l_categories wow fadeInUp">
-        <h3>Danh mục bài viết</h3>
+        <h3>Mục lục bài viết</h3>
         <div class="w3l_wrap">
             <ul>
                 @foreach ($postCategories as $category)

@@ -39,7 +39,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $this->categoryService->create($request);
-        return Redirect(route('admin.categories.index'))->with('success', 'Thêm danh mục thành công');
+        return Redirect(route('admin.categories.index'))->with('success', 'Thêm mục lục thành công');
     }
 
     public function getType(Request $request) {
@@ -83,7 +83,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, $id)
     {
         $this->categoryService->update($request, $id);
-        return Redirect(route('admin.categories.index'))->with('success', 'Câp nhật danh mục thành công');
+        return Redirect(route('admin.categories.index'))->with('success', 'Câp nhật mục lục thành công');
     }
 
     public function destroy($id)

@@ -162,6 +162,17 @@
   font-size: 20px;
 }
 
+.number-notification {
+    position: absolute;
+    font-size: 10px;
+    top: 39px;
+    left: 21px;
+    color: #fff;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
 .no-notification-img {
     height: 200px;
     margin: -6px -5px 5px -5px;
