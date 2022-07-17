@@ -113,7 +113,13 @@
                                 </div>
                                 <div class="modal-body" style="margin-left: 20px">
                                     <h4 style="padding-top:10px">Họ và tên: {{ $author->name }}</h4>
-                                    <h4 style="padding-top:10px">Giới tính: {{ $author->gender }}</h4>
+                                    <h4 style="padding-top:10px">Giới tính: 
+                                        @foreach (config('consts.user.gender') as $gender)
+                                            @if ($gender['value'] == $author->gender)
+                                                {{ $gender['name'] }}
+                                            @endif
+                                        @endforeach
+                                    </h4>
                                     <h4 style="padding-top:10px">Ngày sinh: {{ $author->dob }}</h4>
                                     <h4 style="padding-top:10px">Email: {{ $author->email }}</h4>
                                     <h4 style="padding-top:10px">Điện thoại: {{ $author->phone }}</h4>
@@ -148,7 +154,7 @@
                                 <div class="modal-body">
                                     <h4 style="padding-top: 10px">Họ tên: {{ $product->owner->name }}</h4>
                                     <h4 style="padding-top: 10px">Email: {{ $product->owner->email }}</h4>
-                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->name }}</h4>
+                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->phone }}</h4>
                                     
                                 </div>
                                 <div class="modal-footer">

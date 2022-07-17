@@ -37,7 +37,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Mục lục</label>
+                                <label>Danh mục</label>
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
@@ -84,7 +84,7 @@
                 'placeholder': 'Chọn thẻ tag'
             })
             $('.select3_init').select2({
-                'placeholder': 'Chọn mục lục'
+                'placeholder': 'Chọn danh mục'
             })
             $('#summernote').summernote({
                 height: 400

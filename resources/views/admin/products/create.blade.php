@@ -52,9 +52,9 @@
                                 <select name="categoryIds[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type == 'product')
-                                            <option value="{{ $category->id }}" {{ (collect(old('categoryIds'))->contains($category->id)) ? 'selected':'' }}>{{ $category->name }}</option>
-                                        @endif
+                                            <option value="{{ $category->id }}"
+                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                                {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('categoryIds')
