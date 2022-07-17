@@ -3,7 +3,6 @@
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
     <style>
         .form-filters {
@@ -96,8 +95,11 @@
                             <select name="status" id="sort" class="form-control">
                                 <option value="" class="filter-option-dafault">Trạng thái</option>
                                 @foreach (config('consts.post.status') as $status)
-                                    @if ((isset($isMyPost) && $isMyPost == true) || (Auth::user() && Auth::user()->hasAnyRole('mod|admin')) &&
-                                        ($status['value'] == config('consts.post.status.request.value') || $status['value'] == config('consts.post.status.refuse.value')))
+                                    @if ((isset($isMyPost) && $isMyPost == true) ||
+                                        (Auth::user() &&
+                                            Auth::user()->hasAnyRole('mod|admin') &&
+                                            ($status['value'] == config('consts.post.status.request.value') ||
+                                                $status['value'] == config('consts.post.status.refuse.value'))))
                                         <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
                                     @elseif ($status['value'] != config('consts.post.status.request.value') &&
                                         $status['value'] != config('consts.post.status.refuse.value'))
@@ -125,6 +127,9 @@
     <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript" 
+        src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
+</script>
     <script>
         $('#search').click(function() {
             $('#toggle').fadeToggle();
@@ -135,5 +140,24 @@
             height: 200
         });
         $('.select2_init').select2()
+
+        var htmlMessage = `<ul style='text-align:left'>`
+        
+        @if ($errors->any())
+            console.log('{{ $errors }}');
+            @foreach($errors->all() as $error)
+                htmlMessage += `<li class='text-danger' style="padding-top: 5px">${'{{ $error }}'}</li>`
+            @endforeach
+        @endif
+        htmlMessage += `</ul>`
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Dữ liệu không hợp lệ',
+                html: htmlMessage,
+                timer: 10000,
+                timerProgressBar: true,
+            })
+        @endif
     </script>
 @endsection

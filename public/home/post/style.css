@@ -66,9 +66,7 @@
     cursor: pointer;
 }
 
-.select2-container {
-    width: 100% !important;
-}
+
 .post-status-solved {
     color: green !important;
     cursor: pointer;
@@ -77,4 +75,13 @@
 .post-status-unsolved {
     color: red !important;
     cursor: pointer;
+}
+.select2-container {
+    width: 100% !important;
+}
+.select2-selection__choice{
+    background-color: #28a745 !important;
+}
+.select2-selection__choice__remove{
+    color: red !important;
 }

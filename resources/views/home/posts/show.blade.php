@@ -87,7 +87,7 @@
                 href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
                     class="fa fa-comments"></i></a>
             @endif
-            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">
+            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal-{{ $post->id }}">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
                 Sửa bài viết
             </button>
@@ -184,6 +184,13 @@
                 $('body').removeClass('loading');
             }
         });
+        
+        @if ($errors->any())
+            var modalElement = '#edit-modal-' + '{{ $post->id }}'
+            $(function () {
+                $(modalElement).modal()
+            });
+        @endif
     </script>
 @endsection
 <style>
