@@ -97,8 +97,15 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = $this->postService->create($request);
-        $this->notificationService->notiRequestPost($post);
-        return Redirect()->back()->with('success', 'Bài viết đang chờ phê duyệt');
+        $message = 'Bài viết đang chờ phê duyệt';
+        if(Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
+            $message = 'Đăng bài thành công';
+        }
+        else {
+            $this->notificationService->notiRequestPost($post);
+        }
+        return Redirect()->back()->with('success', $message);
+        
     }
 
 

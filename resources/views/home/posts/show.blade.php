@@ -47,7 +47,7 @@
         </a>
         <div class="panel">{!! $post->content !!}</div>
     </div>
-    @if ($post->image != null)
+    @if ($post->image)
         <div class="w3agile-top wow fadeInUp">
             <section class="slider">
                 <div class="flexslider">
@@ -313,7 +313,7 @@
     </div>
 @endsection
 @section('js')
-    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
     <script type="text/javascript">
