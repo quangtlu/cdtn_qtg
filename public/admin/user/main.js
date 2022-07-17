@@ -3,7 +3,7 @@ $(function () {
         'placeholder': 'Chọn vai trò (mặc định: user)',
     })
     $('.select3_init').select2({
-        'placeholder': 'Chọn danh mục',
+        'placeholder': 'Chọn mục lục',
     })
     $('#dob').datepicker({
         language: 'vi',

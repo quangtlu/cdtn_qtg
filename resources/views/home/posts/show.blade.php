@@ -22,7 +22,7 @@
                     bình
                     luận</a></li>
             <li><span class="fa fa-list-alt" aria-hidden="true"></span><a
-                    href="#category">{{ $post->categories->count() }} Danh mục</a></li>
+                    href="#category">{{ $post->categories->count() }} Mục lục</a></li>
             <li><span class="fa fa-clock-o" aria-hidden="true"></span><a
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
@@ -50,7 +50,7 @@
     <div class="category-tag">
         <ul id="category" class="tag">
             <li class="li-category-tag">
-                <span style="font-size:18px">Danh mục: </span>
+                <span style="font-size:18px">Mục lục: </span>
                 @foreach ($post->categories as $category)
                     <a
                         href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>

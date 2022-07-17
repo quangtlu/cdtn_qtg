@@ -36,7 +36,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title.required' => 'Vui lòng nhập tiêu đề bài viết',
             'tag_id.required' => 'Vui lòng chọn thẻ tag',
-            'category_id.required' => 'Vui lòng chọn danh mục',
+            'category_id.required' => 'Vui lòng chọn mục lục',
             'content.required' => 'Vui lòng nhập nội dung',
         ];
     }

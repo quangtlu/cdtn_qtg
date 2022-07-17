@@ -29,7 +29,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="category">Danh mục</label>
+                        <label for="category">Mục lục</label>
                         <select name="category_id[]" class="form-control select2_init" multiple>
                             @foreach ($categories as $category)
                                 @if ($category->type == config('consts.category.type.post_reference.value'))

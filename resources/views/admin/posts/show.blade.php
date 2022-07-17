@@ -78,7 +78,7 @@
                                 @endphp
                             </li>
                             <li>
-                                Danh mục:
+                                Mục lục:
                                 @php
                                 $categoriesName = [];
                                     foreach ($post->categories as $categoryName){
