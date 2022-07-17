@@ -81,9 +81,7 @@
                                 <select name="" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type === 'post')
-                                            <option {{ $user->categories->contains('id', $category->id) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endif
+                                        <option {{ $user->categories->contains($category->id) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')

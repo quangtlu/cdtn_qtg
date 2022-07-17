@@ -40,19 +40,9 @@
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type === 'post')
-                                            @if ($category->name == config('consts.category_reference.name'))
-                                                @role('super-admin|editor')
-                                                    <option value="{{ $category->id }}"
-                                                        {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                        {{ $category->name }}</option>
-                                                @endrole
-                                            @else
-                                                <option value="{{ $category->id }}"
-                                                    {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                    {{ $category->name }}</option>
-                                            @endif
-                                        @endif
+                                            <option value="{{ $category->id }}"
+                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                                {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')

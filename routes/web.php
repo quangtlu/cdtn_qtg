@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => true]);
 Route::middleware('auth')->group(function () {
-    //Role: super-admin
+    //Role: admin
     Route::name('admin.')->prefix('admin')->group(function () {        
         Route::name('users.')->prefix('/users')->group(function () {
             Route::get('/', 'Admin\UserController@index')->name('index')->middleware('can:list-user');
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', 'Admin\ChatroomController@update')->name('update')->middleware('can:edit-chatroom');
             Route::get('/destroy/{id}', 'Admin\ChatroomController@destroy')->name('destroy')->middleware('can:delete-chatroom');
         });
-        // Role:editor or super-admin
+        // Role:editor or admin
         Route::name('authors.')->prefix('/authors')->group(function () {
             Route::get('/', 'Admin\AuthorController@index')->name('index')->middleware('can:list-author');
             Route::get('/create', 'Admin\AuthorController@create')->name('create')->middleware('can:add-author');
@@ -106,7 +106,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/destroy/{id}', 'Admin\CategoryController@destroy')->name('destroy')->middleware('can:delete-category');
         });
 
-        Route::name('profile.')->prefix('/profile-user')->middleware('role:super-admin|editor')->group(function () {
+        Route::name('profile.')->prefix('/profile-user')->middleware('role:admin|editor')->group(function () {
             Route::get('/', 'Admin\ProfileController@index')->name('index');
             Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('edit');
             Route::post('/update{id}', 'Admin\ProfileController@update')->name('update');

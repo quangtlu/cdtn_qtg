@@ -36,7 +36,7 @@ class NotificationService
             'post_id' => $post->id,
             'content' => '<b>Bài viết:</b> ' . $post->title,
         ];
-        $users = User::role(['mod', 'super-admin'])->get();
+        $users = User::role(['mod', 'admin'])->get();
         foreach($users as $user) {
             $user->notify(new PostRequestNotification($data));
         }

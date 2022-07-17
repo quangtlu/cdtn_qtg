@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Tiêu đề</label>
-                        <input type="text" name="title" class="form-control" id="title"
+                        <input  type="text" name="title" class="form-control" id="title"
                             value="{{ old('title') }}">
                         @error('title')
                             <span class="mt-1 text-danger">{{ $message }}</span>
@@ -37,7 +37,7 @@
                             <option></option>
                             @foreach ($categories as $category)
                                 @if ($category->name == config('consts.category_reference.name'))
-                                    @role('super-admin|editor')
+                                    @role('admin|editor')
                                         <option value="{{ $category->id }}"
                                             {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
                                             {{ $category->name }}</option>

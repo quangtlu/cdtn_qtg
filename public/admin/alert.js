@@ -53,17 +53,35 @@ function actionDelete (){
                 type: 'GET',
                 url: urlRequest,
                 success: function (data) {
-                    if(data.status = 200) {
-                        that.parent().parent().fadeOut()
+                    that.parent().parent().fadeOut()
+                    Swal.fire({
+                        toast: true,
+                        icon: dataSuccess.icon,
+                        title: "Xóa thành công",
+                        position: position,
+                        timer: time,
+                        showConfirmButton: false,
+                        background: dataSuccess.background,
+                        color: dataSuccess.color,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                },
+                error: function (res) {
+                    if(res.status == 403) {
                         Swal.fire({
                             toast: true,
-                            icon: dataSuccess.icon,
-                            title: "Xóa thành công",
+                            icon: dataError.icon,
+                            title: "Bạn không có quyền truy cập",
                             position: position,
                             timer: time,
                             showConfirmButton: false,
-                            background: dataSuccess.background,
-                            color: dataSuccess.color,
+                            background: dataError.background,
+                            color: dataError.color,
                             showClass: {
                                 popup: 'animate__animated animate__fadeInDown'
                             },
@@ -73,6 +91,7 @@ function actionDelete (){
                         })
                     }
                 }
+                
             })
 
         }

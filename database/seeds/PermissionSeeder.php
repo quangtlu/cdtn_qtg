@@ -71,7 +71,7 @@ class PermissionSeeder extends Seeder
         $counselor = $this->createUser('counselor', '0900000004');
 
         // assignRole to user
-        $admin->assignRole([$roleAdmin]);
+        $admin->assignRole([$roleAdmin, $roleMod]);
         $editor->assignRole([$roleEditor, $userRole]);
         $mod->assignRole([$roleMod, $userRole]);
         $counselor->assignRole([$counselorRole, $userRole]);

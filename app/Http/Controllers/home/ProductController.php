@@ -32,7 +32,7 @@ class ProductController extends Controller
         $this->categoryService = $categoryService;
         $this->ownerService = $ownerService;
         $authors = $this->authorService->getAll();
-        $categories = $this->categoryService->getBytype('product');
+        $categories = $this->categoryService->getBytype([config('consts.category.type.product.value')]);
         $owners = $this->ownerService->getAll();
         view()->share(['authors' => $authors, 'categories' => $categories, 'owners' => $owners]);
     }

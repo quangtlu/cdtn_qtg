@@ -62,7 +62,9 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
+    @auth
+        @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
+    @endauth
 @endforeach
 {{ $posts->withQueryString()->links() }}
 @endif

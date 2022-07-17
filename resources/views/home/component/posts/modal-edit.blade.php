@@ -21,14 +21,7 @@
                         <label>Thẻ tag</label>
                         <select name="tag_id[]" class="form-control select2_init" multiple>
                             @foreach ($tags as $tag)
-                                <option value="{{ $tag->id }}"
-                                    @if (old('tag_id'))
-                                        {{ collect(old('tag_id'))->contains($tag->id) ? 'selected' : '' }}>
-                                    @else
-                                        {{ $post->tags->contains($tag->id) ? 'selected' : '' }}>
-                                    @endif
-                                        {{ $tag->name }}
-                                </option>
+                                <option {{ $post->tags->contains($tag) || old('category_id') ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
                             @endforeach
                         </select>
                         @error('tag_id')
@@ -39,26 +32,12 @@
                         <label for="category">Danh mục</label>
                         <select name="category_id[]" class="form-control select2_init" multiple>
                             @foreach ($categories as $category)
-                                @if ($category->name == config('consts.category_reference.name'))
-                                    @role('super-admin|editor')
-                                        <option value="{{ $category->id }}"
-                                            @if (old('category_id'))
-                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                            @else
-                                                {{ $post->categories->contains($category->id) ? 'selected' : '' }}>
-                                            @endif
-                                            {{ $category->name }}
-                                        </option>
+                                @if ($category->type == config('consts.category.type.post_reference.value'))
+                                    @role('admin|editor')
+                                        <option {{ $post->categories->contains($category) || old('category_id') ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endrole
                                 @else
-                                    <option value="{{ $category->id }}"
-                                        @if (old('category_id'))
-                                            {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                        @else
-                                            {{ $post->categories->contains($category->id) ? 'selected' : '' }}>
-                                        @endif
-                                        {{ $category->name }}
-                                    </option>>
+                                    <option {{ $post->categories->contains($category) || old('category_id') ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endif
                             @endforeach
                         </select>
