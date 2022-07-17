@@ -32,8 +32,10 @@
                                 <label class="form-label">Giới tính<b class="field-require">*</b></label>
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
-                                    <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                                    <option {{ old('gender') == 'nữ' ? 'selected' : '' }}  value="nữ">Nữ</option>
+                                    @foreach (config('consts.user.gender') as $gender)
+                                        <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
+                                        value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
+                                    @endforeach
                                 </select>
                                 @error('gender')
                                     <span class="mt-2 text-danger">
@@ -80,9 +82,7 @@
                                 <select name="" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type === 'post')
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endif
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')

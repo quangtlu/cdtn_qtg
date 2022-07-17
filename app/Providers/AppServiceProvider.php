@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Tag;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,16 +29,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $newestPosts = Post::accepted()->select('id', 'title', 'created_at')->orderBy('created_at', 'desc')->limit(5)->get();
-        $categories = Category::where('parent_id', 0)->latest()->get();
+
+        $newestPosts = Post::accepted()->latest()->limit(5)->get();
+        $newestProducts = Product::limit(5)->orderBy('pub_date', 'desc')->get();
+        $postCategories = Category::where('parent_id', 0)->type([config('consts.category.type.post.value')])->get();
+        $productCategories = Category::where('parent_id', 0)->type([config('consts.category.type.product.value')])->get();
         $tags = Tag::latest()->get();
         $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();
 
         if ($newestPosts) {
             view()->share('newestPosts', $newestPosts);
         }
-        if ($categories) {
-            view()->share('categories', $categories);
+        if ($newestProducts) {
+            view()->share('newestProducts', $newestProducts);
+        }
+        if ($postCategories) {
+            view()->share('postCategories', $postCategories);
+        }
+        if ($productCategories) {
+            view()->share('productCategories', $productCategories);
         }
         if ($tags) {
             view()->share('tags', $tags);

@@ -9,7 +9,7 @@ use App\Services\PostService;
 use App\Services\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -22,27 +22,32 @@ class PostController extends Controller
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
         $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getAll();
+        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getAllPaginate();
-        if($request->keyword) {
-            $posts = $this->postService->search($request);
+        try {
+            $posts = $this->postService->getAllPaginate();
+            if($request->keyword) {
+                $posts = $this->postService->search($request);
+            }
+            if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
+                $posts = $this->postService->searchAndFilter($request);
+            }
+            if ($request->category_id || $request->tag_id || $request->status) {
+                $posts = $this->postService->filter($request);
+            }
+            if ($posts->count() > 0) {
+                return view('admin.posts.index', compact('posts'));
+            } else {
+                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
-            $posts = $this->postService->searchAndFilter($request);
-        }
-        if ($request->category_id || $request->tag_id || $request->status) {
-            $posts = $this->postService->filter($request);
-        }
-        if ($posts->count() > 0) {
-            return view('admin.posts.index', compact('posts'));
-        } else {
-            return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
-        }
+        
     }
 
     public function create()
@@ -66,6 +71,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = $this->postService->getById($id);
+        if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+           return back()->with('error', 'Bạn không có quyền truy cập');
+        }
         $postUser = $post->user;
         $postOfTags = $post->tags;
         $postOfCategories = $post->categories;
@@ -81,6 +89,10 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        $post = $this->postService->getById($id);
+        if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+            abort(403);
+        }
         $this->postService->delete($id);
     }
 }

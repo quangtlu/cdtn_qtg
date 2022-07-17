@@ -61,7 +61,7 @@ class Post extends Model
     public function scopeReference($query)
     {
         return $query->whereHas('categories', function ($subQuery) {
-            $subQuery->where('categories.name', config('consts.category_reference.name'));
+            $subQuery->where('categories.type', config('consts.category.type.post_reference.value'));
         });
     }
 

@@ -25,7 +25,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                @can('admin list user')
+                @can('list-user')
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}"
                             class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}">
@@ -36,7 +36,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list author')
+                @can('list-author')
                     <li class="nav-item">
                         <a href="{{ route('admin.authors.index') }}"
                             class="nav-link {{ Request::is('admin/authors*') ? 'active' : '' }} ">
@@ -47,7 +47,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list product')
+                @can('list-product')
                     <li class="nav-item">
                         <a href="{{ route('admin.products.index') }}"
                             class="nav-link {{ Request::is('admin/products*') ? 'active' : '' }}">
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list owner')
+                @can('list-owner')
                     <li class="nav-item">
                         <a href="{{ route('admin.owners.index') }}"
                             class="nav-link {{ Request::is('admin/owners*') ? 'active' : '' }}">
@@ -69,7 +69,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list post')
+                @can('list-post')
                     <li class="nav-item">
                         <a href="{{ route('admin.posts.index') }}"
                             class="nav-link {{ Request::is('admin/posts*') ? 'active' : '' }}">
@@ -80,7 +80,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list role')
+                @can('list-role')
                     <li class="nav-item">
                         <a href="{{ route('admin.roles.index') }}"
                             class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
@@ -91,7 +91,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list permission')
+                @can('list-permission')
                     <li class="nav-item">
                         <a href="{{ route('admin.permissions.index') }}"
                             class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
@@ -102,7 +102,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('list faq')
+                @can('list-faq')
                     <li class="nav-item">
                         <a href="{{ route('admin.faqs.index') }}"
                             class="nav-link {{ Request::is('admin/faqs*') ? 'active' : '' }}">
@@ -113,33 +113,39 @@
                         </a>
                     </li>
                 @endcan
-                <li class="nav-item">
-                    <a href="{{ route('admin.tags.index') }}"
-                        class="nav-link {{ Request::is('admin/tags*') ? 'active' : '' }}">
-                        <i class="fas fa-tags"></i>
-                        <p>
-                            Quản lý Tags
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.categories.index') }}"
-                        class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
-                        <i class="fas fa-list-alt"></i>
-                        <p>
-                            Quản lý danh mục
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.chatrooms.index') }}"
-                        class="nav-link {{ Request::is('admin/chatrooms*') ? 'active' : '' }}">
-                        <i class="fas fa-comments"></i>
-                        <p>
-                            Quản lý phòng tư vấn
-                        </p>
-                    </a>
-                </li>
+                @can('list-tag')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.tags.index') }}"
+                            class="nav-link {{ Request::is('admin/tags*') ? 'active' : '' }}">
+                            <i class="fas fa-tags"></i>
+                            <p>
+                                Quản lý Tags
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-category')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.categories.index') }}"
+                            class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
+                            <i class="fas fa-list-alt"></i>
+                            <p>
+                                Quản lý danh mục
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-chatroom')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.chatrooms.index') }}"
+                            class="nav-link {{ Request::is('admin/chatrooms*') ? 'active' : '' }}">
+                            <i class="fas fa-comments"></i>
+                            <p>
+                                Quản lý phòng tư vấn
+                            </p>
+                        </a>
+                    </li>                    
+                @endcan
                 <li class="nav-item">
                     <a class="btn btn-danger nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

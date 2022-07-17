@@ -68,10 +68,9 @@ class PostService
         return Post::where('user_id', Auth::user()->id)->latest()->paginate(10);
     }
 
-    public function getAllCounselor($id)
+    public function getAllCounselor($postId)
     {
-        $post = $this->getById($id);
-        $userId = $post->user_id;
+        $post = $this->getById($postId);
         $categories = $post->categories;
         $categoryIds = [];
         foreach ($categories as $category) {
@@ -79,13 +78,12 @@ class PostService
         }
 
         return User::whereHas('roles', function ($query) {
-            $query->where('name', 'counselor');
-        })
-            ->whereHas('categories', function ($query) use ($categoryIds) {
-                $query->orWhereIn('categories.id', $categoryIds);
-            })
-            ->where('id', '!=', $userId)
-            ->get();
+                        $query->where('name', 'counselor');
+                    })
+                    ->orWhereHas('categories', function ($query) use ($categoryIds) {
+                        $query->orWhereIn('categories.id', $categoryIds);
+                    })
+                    ->get();
     }
 
 
@@ -98,6 +96,9 @@ class PostService
             "user_id" => $user->id,
             'status' => config('consts.post.status.request.value')
         ];
+        if($user->hasAnyRole('mod', 'admin', 'editor')) {
+            $data['status'] = config('consts.post.status.unsolved.value');
+        }
         if ($files = $request->file('image')) {
             $images = $this->uploadMutilpleImage($files);
             $data['image'] = implode("|", $images);
@@ -117,7 +118,6 @@ class PostService
         $user_id = Auth()->user()->id;
         $data = [
             "title" => $request->title,
-            "status" => $request->status,
             "content" => $request->content,
             "user_id" => $user_id,
         ];
@@ -172,8 +172,14 @@ class PostService
     public function filter($request)
     {
         if($request->status == config('consts.post.status.refuse.value') || $request->status == config('consts.post.status.request.value')) {
-            $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->where('user_id', Auth::user()->id)->paginate(10);
-        } else {
+            if (Auth::user()->hasAnyRole('mod', 'admin')) {
+                $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
+            }
+            else {
+                $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->where('user_id', Auth::user()->id)->paginate(10);
+            }
+        } 
+        else {
             $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
         }
         return $posts;

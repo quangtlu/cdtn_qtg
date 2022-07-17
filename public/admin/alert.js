@@ -1,23 +1,34 @@
+const time = 3000
+const position = 'top'
+const dataSuccess = {
+    icon: 'success',
+    message: $('#wrapper').attr('data-messageSuccess'),
+    color: '#fff',
+    background: '#21ba45',
+}
+const dataError = {
+    icon: 'error',
+    message: $('#wrapper').attr('data-messageError'),
+    color: '#000',
+    background: '#fff',
+}
 $(function() {
-
-    var messageSuccess = $('#wrapper').attr('data-messageSuccess')
-    var messageError = $('#wrapper').attr('data-messageError')
-    const time = 3000
-
-    if (messageSuccess != '' || messageError != '') {
+    if (dataSuccess.message != '' || dataError.message != '') {
         Swal.fire({
             toast: true,
-            icon: messageSuccess != '' ? "success" : "error",
-            title: messageSuccess != '' ? messageSuccess : messageError,
-            position: "top-end",
+            icon: dataSuccess.message != '' != '' ? dataSuccess.icon : dataError.icon,
+            title: dataSuccess.message != '' ? dataSuccess.message : dataError.message,
+            position: position,
             timer: time,
             showConfirmButton: false,
             showClass: {
-                popup: 'animate__animated animate__fadeInRight'
-              },
+                popup: 'animate__animated animate__fadeInDown'
+            },
             hideClass: {
-            popup: 'animate__animated animate__fadeOutRight'
-            }
+                popup: 'animate__animated animate__fadeOutUp'
+            },
+            background: dataSuccess.message != '' ? dataSuccess.background : dataError.background,
+            color: dataSuccess.message != '' ? dataSuccess.color : dataError.color,
         });
     }
 
@@ -42,24 +53,45 @@ function actionDelete (){
                 type: 'GET',
                 url: urlRequest,
                 success: function (data) {
-                    if(data.status = 200) {
-                        that.parent().parent().fadeOut()
+                    that.parent().parent().fadeOut()
+                    Swal.fire({
+                        toast: true,
+                        icon: dataSuccess.icon,
+                        title: "Xóa thành công",
+                        position: position,
+                        timer: time,
+                        showConfirmButton: false,
+                        background: dataSuccess.background,
+                        color: dataSuccess.color,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                },
+                error: function (res) {
+                    if(res.status == 403) {
                         Swal.fire({
                             toast: true,
-                            icon: "success",
-                            title: 'Xóa thành công',
-                            position: "top-end",
-                            timer: 2000,
+                            icon: dataError.icon,
+                            title: "Bạn không có quyền truy cập",
+                            position: position,
+                            timer: time,
                             showConfirmButton: false,
+                            background: dataError.background,
+                            color: dataError.color,
                             showClass: {
-                                popup: 'animate__animated animate__fadeInRight'
-                              },
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
                             hideClass: {
-                            popup: 'animate__animated animate__fadeOutRight'
+                                popup: 'animate__animated animate__fadeOutUp'
                             }
-                        });
+                        })
                     }
                 }
+                
             })
 
         }

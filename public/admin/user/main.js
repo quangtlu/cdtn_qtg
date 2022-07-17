@@ -10,6 +10,8 @@ $(function () {
         orientation: 'bottom',
         dateFormat: 'yyyy-mm-dd'
     });
+    
+    
     $('#role-select').on('change', function() {
         let roleSelected = $(this).select2('data')
         let categoryWrap = $('#category-wrap')

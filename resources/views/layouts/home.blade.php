@@ -97,7 +97,7 @@
     <div class="container" id="container" data-messageSuccess="{{ Session::get('success') }}"
         data-messageError="{{ Session::get('error') }}">
         <div class="banner-btm-agile">
-            <div class="col-md-9 btm-wthree-left wow fadeInLeft">@yield('content')</div>
+            <div class="col-md-10 btm-wthree-left wow fadeInLeft">@yield('content')</div>
             @include('partials.home.wthree_right')
             <div class="clearfix"></div>
         </div>

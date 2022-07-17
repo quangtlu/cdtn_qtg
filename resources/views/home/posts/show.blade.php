@@ -1,11 +1,13 @@
 @extends('layouts.home')
 @section('title', $post->title)
 @section('css')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1">
+    <div class="single-left1 panel" style="padding: 10px !important">
         <h3 class="title-relate">{{ $post->title }}</h3>
         <ul>
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
@@ -21,31 +23,11 @@
                     luận</a></li>
             <li><span class="fa fa-list-alt" aria-hidden="true"></span><a
                     href="#category">{{ $post->categories->count() }} Danh mục</a></li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a
+            <li><span class="fa fa-clock-o" aria-hidden="true"></span><a
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
         </ul>
-        <a href="
-                @auth
-                    @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
-                @endauth
-                @guest
-                    {{ route('posts.show', ['id' => $post->id]) }} 
-                @endguest
-            "
-            class=" 
-                @foreach (config('consts.post.status') as $item)
-                    @if ($post->status == $item['value'])
-                        {{ $item['class'] }} @endif
-                @endforeach
-            ">
-            @foreach (config('consts.post.status') as $item)
-                @if ($post->status == $item['value'])
-                    {{ $item['name'] }}
-                @endif
-            @endforeach
-        </a>
-        <div class="panel">{!! $post->content !!}</div>
+        <div style="padding-top: 10px">{!! $post->content !!}</div>
     </div>
     @if ($post->image)
         <div class="w3agile-top wow fadeInUp">
@@ -70,274 +52,137 @@
             <li class="li-category-tag">
                 <span style="font-size:18px">Danh mục: </span>
                 @foreach ($post->categories as $category)
-                    <a
-                        href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                 @endforeach
             </li>
         </ul>
-        <ul id="tag" class="tag" style="margin-top:0 !important">
+        <ul id="tag" class="tag" style="margin-top:0 !important; margin-bottom:0 !important">
             <li class="li-category-tag">
-                <span style="margin-bottom:5px; font-size:18px">Tags: </span>
+                <span style="margin-top:10px; font-size:18px">Tags: </span>
                 @foreach ($post->tags as $tag)
                     <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->name }}</a>
                 @endforeach
             </li>
         </ul>
+        <span style="margin-top:10px; font-size:18px">Trạng thái : </span>
+        @foreach (config('consts.post.status') as $item)
+            @if ($post->status == $item['value'])
+                <a class="{{ $item['className'] }}" 
+                href="
+                {{ Auth::user() && Auth::user()->id == $post->user_id 
+                    && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
+                    ? route('posts.toogleStatus', ['id' => $post->id]) 
+                    : route('posts.show', ['id' => $post->id]) 
+                }}">
+                <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                {{ $item['name'] }}</a>
+                </a>
+            @endif
+        @endforeach
     </div>
     @auth
-        @if (Auth::user()->id == $post->user_id && $post->chatroom)
-            <a class="btn btn-success" style="margin-top: 10px"
+        @if (Auth::user()->id == $post->user_id)
+            @if($post->chatroom)
+                <a class="btn btn-success" style="margin-top: 10px"
                 href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
                     class="fa fa-comments"></i></a>
-        @else
-            @role('mod|super-admin')
-                @if ($post->chatroom)
-                    <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
-                            class="fa fa-check-circle" aria-hidden="true"></i></button>
-                @else
-                    <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
-                        với
-                        chuyên gia <i class="fa fa-comments"></i></button>
-                    <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label>Chuyên gia tư vấn</label>
-                                            <select name="counselor_id" class="form-control select2_init">
-                                                @foreach ($counselors as $counselor)
-                                                    <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
-                                            nối</button>
-                                        <button type="button" class="btn-modal-post btn btn-danger"
-                                            data-dismiss="modal">Đóng</button>
-                                    </form>
-                                </div>
+            @endif
+            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                Sửa bài viết
+            </button>
+            @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
+        @endif
+        @role('mod|admin')
+            @if ($post->chatroom)
+                <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
+                        class="fa fa-check-circle" aria-hidden="true"></i></button>
+            @else
+                <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
+                    với
+                    chuyên gia <i class="fa fa-comments"></i></button>
+                <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label>Chuyên gia tư vấn</label>
+                                        <select name="counselor_id" class="form-control">
+                                            @foreach ($counselors as $counselor)
+                                                <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
+                                        nối</button>
+                                    <button type="button" class="btn-modal-post btn btn-danger"
+                                        data-dismiss="modal">Đóng</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                @endif
-            @endrole
-        @endif
+                </div>
+            @endif
+        @endrole
     @endauth
 
     {{-- Comment --}}
     <div id="comments" class="comments wow fadeInUp">
         <h3 class="title-relate" style="margin-top: 50px">Bình luận</h3>
-        <div class="comments-grids">
-            @foreach ($post->comments->sortByDesc('status')->all() as $comment)
-                <div id="{{ $comment->id }}" class="comments-grid" style="margin-top: 25px; margin-bottom:5px">
-                    <div class="comments-grid-left">
-                        <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
-                    </div>
-                    <div class="comments-grid-right panel">
-                        <h4><a
-                                href="{{ route('posts.getPostByUser', ['id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
-                        </h4>
-                        @if ($comment->user->id == $post->user_id)
-                            <h6
-                                style="color:#4599ff; background-color:#c5defd; padding: 5px 10px; width:fit-content; border-radius:6px">
-                                Tác giả <i class="fa fa-pencil-square-o" aria-hidden="true"></i></h6>
-                        @endif
-                        <ul>
-                            <li><a href="#{{ $comment->id }}">{{ $comment->created_at->diffForHumans() }}</a><i>|</i>
-                            </li>
-                            <li>
-                                @auth
-                                    <a class="rep-comment comment-action-link"
-                                        data-userName="{{ $comment->user->name }}">Trả
-                                        lời <i class="fa fa-mail-reply"></i></a>
-                                @endauth
-                                @guest
-                                    <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>
-                                @endguest
-                                <i>|</i>
-                            </li>
-                            @if ($comment->status == config('consts.post.status.solved.value'))
-                                <li><a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
-                                        class="comment-action-link post-status-solved">Hữu ích nhất
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                    </a></li>
-                            @endif
-                            </li>
-                            @auth
-                                @if ($comment->user->id == Auth::user()->id)
-                                    <li><a class="comment-action-link btn-delete-comment"
-                                            data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>|</li>
-                                    </li>
-                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a></li>
-                                    </li>
-                                @elseif($post->user_id == Auth::user()->id && $post->status != config('consts.post.status.solved.value'))
-                                    <li><a href="{{ route('comments.toogleStatus', ['id' => $comment->id]) }}"
-                                            class="comment-action-link post-status-solved">Hữu ích nhất
-                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                        </a></li>
-                                    </li>
-                                    </li>
-                                @endif
-                            @endauth
-                        </ul>
-                        <p class="comment-content">{{ $comment->comment }}</p>
-                        @auth
-                            @if ($comment->user->id == Auth::user()->id)
-                                <div class="leave-coment-form edit-comment-form">
-                                    <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
-                                        @csrf
-                                        <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
-                                        @error('comment')
-                                            <span class="mt-1 text-danger">{{ $message }}</span>
-                                        @enderror
-                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                        <div class="w3_single_submit">
-                                            <input type="submit" value="Cập nhật">
-                                        </div>
-                                    </form>
-                                </div>
-                            @endif
-                        @endauth
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-            @endforeach
-        </div>
+        @include('home.component.posts.comments', ['post' => $post])
     </div>
-    @guest
-        <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để bình luận<span
-                class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
-    @endguest
-    @auth
-        <div class="leave-coment-form wow fadeInUp">
-            <form action="{{ route('comments.store') }}" method="post">
-                @csrf
-                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
-                @error('comment')
-                    <span class="mt-1 text-danger">{{ $message }}</span>
-                @enderror
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <div class="w3_single_submit">
-                    <input type="submit" value="Bình luận">
-                </div>
-            </form>
-        </div>
-    @endauth
+    <div class="leave-coment-form wow fadeInUp">
+        <form id="form-create-comment" action="{{ route('comments.store') }}" method="post">
+            @csrf
+            <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
+            @error('comment')
+                <span class="mt-1 text-danger">{{ $message }}</span>
+            @enderror
+            <input type="hidden" name="user_id" value="{{ Auth::user() && Auth::user()->id }}">
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <div class="w3_single_submit">
+                <input type="submit" value="Bình luận">
+            </div>
+        </form>
+    </div>
     <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Bài viết liên quan</h3>
-        @if (isset($postRelates))
-            @foreach ($postRelates as $post)
-                <div class="wthree-top-1">
-                    <div class="w3agile-top">
-                        <div class="col-md-3 w3agile-left">
-                            <ul class="post-info">
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
-                                </li>
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
-                                </li>
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
-                                        BÌNH LUẬN</a></li>
-                                @auth
-                                    @if (Auth::user()->id == $post->user->id)
-                                        <li><a class="post-info__link btn-delete"
-                                                data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
-                                                    class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                        <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                                data-target="#post-modal" data-title="{{ $post->title }}"
-                                                data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a>
-                                        </li>
-                                    @endif
-                                @endauth
-                                <li>
-                                    <a href="
-                                            @auth
-                                                @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
-                                            @endauth
-                                            @guest
-                                                {{ route('posts.show', ['id' => $post->id]) }} 
-                                            @endguest
-                                        "
-                                        class="post-status 
-                                            @foreach (config('consts.post.status') as $item)
-                                                @if ($post->status == $item['value'])
-                                                    {{ $item['class'] }} @endif
-                                            @endforeach
-                                        ">
-                                        @foreach (config('consts.post.status') as $item)
-                                            @if ($post->status == $item['value'])
-                                                {{ $item['name'] }}
-                                            @endif
-                                        @endforeach
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="col-md-9 w3agile-right">
-                                    <h3><a
-                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                                    </h3>
-                                    <div class="post-content-limit-line">{!! $post->content !!}</div>
-                                    <a class="agileits w3layouts"
-                                        href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
-                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                            aria-hidden="true"></span></a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            @endforeach
-            {{ $postRelates->links() }}
-        @endif
+        @include('home.component.posts.list', ['posts' => $postRelates])
     </div>
 @endsection
 @section('js')
     <script src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-        $(window).load(function() {
+        $('.summernote').summernote({
+            height: 200
+        });
+        $('.select2_init').select2()
+        $('.btn-edit-comment').on('click', function() {
+            $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+            $(this).closest('.comments-grid-right').children('.comment-content').toggle()
+        })
+        $('.rep-comment').on('click', function() {
+            var userName = $(this).attr('data-userName')
+            $('#leave-coment').text(userName)
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#leave-coment").offset().top
+            }, 1000);
 
-            $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
-                $(this).closest('.comments-grid-right').children('.comment-content').toggle()
-            })
-            $('.rep-comment').on('click', function() {
-                var userName = $(this).attr('data-userName')
-                $('#leave-coment').text(userName)
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: $("#leave-coment").offset().top
-                }, 1000);
-
-            })
-            $('.flexslider').flexslider({
-                animation: "slide",
-                start: function(slider) {
-                    $('body').removeClass('loading');
-                }
-            });
-
+        })
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function(slider) {
+                $('body').removeClass('loading');
+            }
         });
     </script>
 @endsection

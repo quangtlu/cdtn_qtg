@@ -41,7 +41,13 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-12">
-                                    <label class="labels">Giới tính: {{ $profile->gender }}</label>
+                                    <label class="labels">Giới tính:
+                                        @foreach (config('consts.user.gender') as $gender)
+                                            @if ($gender['value'] == $profile->gender)
+                                                {{ $gender['name'] }}
+                                            @endif
+                                        @endforeach
+                                    </label>
                                 </div>
                             </div>
                             <div class="row my-3">

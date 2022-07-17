@@ -159,18 +159,35 @@ return [
         'store' => 'default',
     ],
 
-    'module' => [
+    'module-all' => [
         'user',
+        'role',
+        'permission',
+        'chatroom',
         'author',
         'product',
         'owner',
-        'role',
-        'permission',
         'post',
         'faq',
         'category',
         'tag',
+    ],
+
+    'module-admin' => [
+        'user',
+        'role',
+        'permission',
         'chatroom',
+    ],
+
+    'module-editor' => [
+        'author',
+        'product',
+        'owner',
+        'post',
+        'faq',
+        'category',
+        'tag',
     ],
 
     'action' => [
@@ -180,11 +197,5 @@ return [
         'delete',
         'show',
     ],
-    'role' => [
-        'admin',
-        'mod',
-        'editor',
-        'user',
-        'counselor'
-    ]
+
 ];

@@ -117,7 +117,13 @@
                                     <tr>
                                         <td>{{ $author->id }}</td>
                                         <td>{{ $author->name }}</td>
-                                        <td>{{ Str::ucfirst($author->gender) }}</td>
+                                        <td>
+                                            @foreach (config('consts.user.gender') as $gender)
+                                                @if ($gender['value'] == $author->gender)
+                                                    {{ $gender['name'] }}
+                                                @endif 
+                                            @endforeach
+                                        </td>
                                         <td>{{ $author->dob }}</td>
                                         <td>{{ $author->email }}</td>
                                         <td>{{ $author->phone }}</td>

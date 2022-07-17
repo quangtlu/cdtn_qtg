@@ -42,32 +42,35 @@ class PostController extends Controller
         $this->categoryService = $categoryService;
         $this->chatroomService = $chatroomService;
         $this->notificationService = $notificationService;
+        $tags = $this->tagService->getAll();
+        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getPaginate();
-        $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getAll();
-
-        if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
-            $posts = $this->postService->searchAndFilter($request);
+        try {
+            $posts = $this->postService->getPaginate();
+            if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
+                $posts = $this->postService->searchAndFilter($request);
+            }
+            if ($request->category_id || $request->tag_id || $request->status) {
+                $posts = $this->postService->filter($request);
+            }
+            if ($request->keyword) {
+                $posts = $this->postService->search($request);
+            }
+            if ($request->sort) {
+                $posts = $this->postService->sortPost($request->sort);
+            }
+            if($posts->count() < 1) {
+                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            }
+            return view('home.posts.index', compact('posts'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        if ($request->category_id || $request->tag_id || $request->status) {
-            $posts = $this->postService->filter($request);
-        }
-        if ($request->keyword) {
-            $posts = $this->postService->search($request);
-        }
-
-        if ($request->sort) {
-            $posts = $this->postService->sortPost($request->sort);
-        }
-
-        if ($posts->count() < 1) {
-            return redirect()->route('posts.index')->with('error', 'Không có bài viết nào phù hợp');
-        }
-        return view('home.posts.index', compact('posts', 'tags', 'categories'));
+        
     }
 
     public function getMyPost()
@@ -80,17 +83,23 @@ class PostController extends Controller
     public function show($id)
     {
         $postContainUnaccept = $this->postService->getById($id);
-        $post = $this->postService->getDetailPost($id);
         $user = Auth::user();
-        if (isset($user) && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'super-admin'))) {
+        if (
+            ($postContainUnaccept->status == config('consts.post.status.request.value') || $postContainUnaccept->status == config('consts.post.status.refuse.value')) 
+            && $user 
+            && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'admin'))) {
             $post = $postContainUnaccept;
+        } else{
+            $post = $this->postService->getDetailPost($id);
         }
-        if ($post->count() < 1) {
-            abort(404);
+
+        if($post) {
+            $postRelates = $this->postService->getPostRelate($id);
+            $counselors = $this->postService->getAllCounselor($id);
+            return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
+        } else {
+            abort('404');
         }
-        $postRelates = $this->postService->getPostRelate($id);
-        $counselors = $this->postService->getAllCounselor($id);
-        return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
 
     }
 
@@ -132,7 +141,7 @@ class PostController extends Controller
             $this->notificationService->sendNotiResult($post, $action);
             $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
             $user = Auth::user();
-            if($user->hasAnyRole('mod', 'super-admin')) {
+            if($user->hasAnyRole('mod', 'admin')) {
                 return redirect()->back()->with('success', $message);
             } else {
                 return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');
@@ -182,15 +191,14 @@ class PostController extends Controller
 
     public function connectToCounselor(Request $request, $id)
     {
-        $chatroom = $this->chatroomService->create($request, $id);
-        $post = $this->postService->getById($id);
-
-        if ($chatroom) {
+        try {
+            $this->chatroomService->create($request, $id);
+            $post = $this->postService->getById($id);
             $this->notificationService->notiConnectToUser($post, $request->counselor_id);
             $this->notificationService->notiConnectToCounselor($post, $request->counselor_id);
             return Redirect()->back()->with('success', 'Kết nối thành công');
-        } else {
-            return Redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình kết nối');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.connect'));
         }
     }
 }
