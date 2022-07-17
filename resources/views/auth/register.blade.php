@@ -24,18 +24,17 @@
                     <div class="form-row">
                         <span class="fas fa-user"></span>
                         <label class="form-label" for="input">Họ tên</label>
-                        <input type="text" value="{{ old('name') }}" name="name" class="form-text" @error('name') is-invalid @enderror">
+                        <input type="text" value="{{ old('name') }}" name="name" class="form-text">
                         @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            {{ $message }}
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
                     <div class="form-row">
                         <span class="fas fa-venus-mars"></span>
                         <label class="form-label" for="input">Giới tính</label>
-                        <select name="gender" class="form-control" id="gender">
-                            <option value=""></option>
+                        <select name="gender" class="form-text" id="gender">
                             @foreach (config('consts.user.gender') as $gender)
                                 <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
                                 value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
@@ -48,6 +47,7 @@
                         @enderror
                     </div>
                     <div class="form-row">
+                        <span class="fas fa-calendar-alt"></span>
                         <label class="form-label" for="input">Ngày sinh</label>
                         <input type="datetime-local" data-date-format='d/m/Y' placeholder="dd/mm/yyyy" name="dob" class="form-text" style="background-color: #fff" @error('dob') is-invalid @enderror" value="{{ old('dob') }}">
                         @error('dob')

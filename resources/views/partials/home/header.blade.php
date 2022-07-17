@@ -53,26 +53,10 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                             chủ</a></li>
-                    {{-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @if ($postReferences)
-                                @foreach ($postReferences as $post)
-                                    <li><a
-                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                                    </li>
-                                @endforeach
-                                <li><a href="{{ route('home.index')}}">Xem tất cả</a></li>
-                            @endif
-                        </ul>
-                    </li> --}}
                     <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                             href="{{ route('faq.index') }}">FAQ</a></li>
                     <li><a class="{{ Request::is('products*') ? 'active' : '' }}"
@@ -84,7 +68,11 @@
                     @auth
                         <li class="notice-nav">
                             @if (Auth::user()->notifications->count())
-                                <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell active' : '' }}"></span>
+                                <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell active' : '' }}">
+                                </span>
+                                @if (Auth::user()->unreadNotifications()->count() > 0)
+                                    <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
+                                @endif
                                 <div class="notification-container">
                                     <div class="row no-gutters justify-content-between align-items-center header-noti-wrap">
                                         <a class="col-md-6 text-primary read-all-noti-link" href="{{ route('notifications.markAsReadAll') }}"><i class="fa fa-check"></i> Đánh dấu tất cả là đã đọc</a>
