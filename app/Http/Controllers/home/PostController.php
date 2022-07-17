@@ -107,7 +107,7 @@ class PostController extends Controller
     {
         $post = $this->postService->create($request);
         $message = 'Bài viết đang chờ phê duyệt';
-        if(Auth::user()->hasAnyRole('mod', 'admin')) {
+        if(Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
             $message = 'Đăng bài thành công';
         }
         else {

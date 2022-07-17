@@ -29,7 +29,7 @@
         </ul>
         <div style="padding-top: 10px">{!! $post->content !!}</div>
     </div>
-    @if ($post->image != null)
+    @if ($post->image)
         <div class="w3agile-top wow fadeInUp">
             <section class="slider">
                 <div class="flexslider">
@@ -87,7 +87,7 @@
                 href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
                     class="fa fa-comments"></i></a>
             @endif
-            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal">
+            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal-{{ $post->id }}">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
                 Sửa bài viết
             </button>
@@ -158,7 +158,7 @@
     </div>
 @endsection
 @section('js')
-    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
@@ -184,6 +184,13 @@
                 $('body').removeClass('loading');
             }
         });
+        
+        @if ($errors->any())
+            var modalElement = '#edit-modal-' + '{{ $post->id }}'
+            $(function () {
+                $(modalElement).modal()
+            });
+        @endif
     </script>
 @endsection
 <style>

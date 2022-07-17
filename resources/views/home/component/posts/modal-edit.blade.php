@@ -1,4 +1,4 @@
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+<div class="modal fade" id="edit-modal-{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
@@ -21,7 +21,7 @@
                         <label>Thẻ tag</label>
                         <select name="tag_id[]" class="form-control select2_init" multiple>
                             @foreach ($tags as $tag)
-                                <option {{ $post->tags->contains($tag) || old('category_id') ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                <option {{ $post->tags->contains($tag) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
                             @endforeach
                         </select>
                         @error('tag_id')
@@ -34,10 +34,10 @@
                             @foreach ($categories as $category)
                                 @if ($category->type == config('consts.category.type.post_reference.value'))
                                     @role('admin|editor')
-                                        <option {{ $post->categories->contains($category) || old('category_id') ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option {{ $post->categories->contains($category) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endrole
                                 @else
-                                    <option {{ $post->categories->contains($category) || old('category_id') ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option {{ $post->categories->contains($category) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endif
                             @endforeach
                         </select>

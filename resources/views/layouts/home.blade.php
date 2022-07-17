@@ -72,20 +72,6 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            $(".dropdown").hover(
-                function() {
-                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                    $(this).toggleClass('open');
-                },
-                function() {
-                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                    $(this).toggleClass('open');
-                }
-            );
-        });
-    </script>
     <link rel="stylesheet" href="{{ asset('home/main.css') }}">
     @yield('css')
 
@@ -97,7 +83,7 @@
     <div class="container" id="container" data-messageSuccess="{{ Session::get('success') }}"
         data-messageError="{{ Session::get('error') }}">
         <div class="banner-btm-agile">
-            <div class="col-md-10 btm-wthree-left wow fadeInLeft">@yield('content')</div>
+            <div class="col-md-10 btm-wthree-left">@yield('content')</div>
             @include('partials.home.wthree_right')
             <div class="clearfix"></div>
         </div>
@@ -105,11 +91,9 @@
     @include('partials.home.footer')
     <script type="text/javascript">
         $(document).ready(function() {
-
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
-
         });
     </script>
 
