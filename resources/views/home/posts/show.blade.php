@@ -141,11 +141,11 @@
     {{-- Comment --}}
     <div id="comments" class="comments wow fadeInUp">
         <h3 class="title-relate" style="margin-top: 50px">Bình luận</h3>
-        <div class="comments-grids">
+        <div id="comment-wrap" class="comments-grids">
             @foreach ($post->comments->sortByDesc('status')->all() as $comment)
                 <div id="{{ $comment->id }}" class="comments-grid" style="margin-top: 25px; margin-bottom:5px">
                     <div class="comments-grid-left">
-                        <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
+                        <img src="{{asset('image/profile') .'/'. $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
                     <div class="comments-grid-right panel">
                         <h4><a
@@ -185,7 +185,7 @@
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>|</li>
                                     </li>
-                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
+                                    <li><a data-id="{{ $comment->id }}" class="comment-action-link btn-edit-comment">Chỉnh sửa
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a></li>
                                     </li>
@@ -202,14 +202,13 @@
                         <p class="comment-content">{{ $comment->comment }}</p>
                         @auth
                             @if ($comment->user->id == Auth::user()->id)
-                                <div class="leave-coment-form edit-comment-form">
-                                    <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
+                                <div class="leave-coment-form edit-comment-wrap">
+                                    <form class="edit-comment-form" action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
                                         @csrf
                                         <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
                                         @error('comment')
                                             <span class="mt-1 text-danger">{{ $message }}</span>
                                         @enderror
-                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                                         <div class="w3_single_submit">
                                             <input type="submit" value="Cập nhật">
@@ -232,7 +231,6 @@
                 @error('comment')
                     <span class="mt-1 text-danger">{{ $message }}</span>
                 @enderror
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                 <div class="w3_single_submit">
                     <input type="submit" value="Bình luận">
@@ -253,35 +251,153 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-        $('.summernote').summernote({
-            height: 200
-        });
-        $('.select2_init').select2()
-        $('.btn-edit-comment').on('click', function() {
-            $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
-            $(this).closest('.comments-grid-right').children('.comment-content').toggle()
-        })
-        $('.rep-comment').on('click', function() {
-            var userName = $(this).attr('data-userName')
-            $('#leave-coment').text(userName)
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#leave-coment").offset().top
-            }, 1000);
-
-        })
+    // init libary
         $('.flexslider').flexslider({
             animation: "slide",
             start: function(slider) {
                 $('body').removeClass('loading');
             }
         });
+        $('.summernote').summernote({
+            height: 200
+        });
+        $('.select2_init').select2()
 
-        @if ($errors->any())
+    // Alert validate edit post
+         @if ($errors->any())
             var modalElement = '#edit-modal-' + '{{ $post->id }}'
             $(function() {
                 $(modalElement).modal()
             });
         @endif
+
+    // function 
+        function repComment() {
+            let userName = $(this).attr('data-userName')
+            $('#leave-coment').text(userName)
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#leave-coment").offset().top
+            }, 1000);
+        }
+        function toogleEditCommentWrap() {
+            $(this).closest('.comments-grid-right').children('.edit-comment-wrap').toggle()
+        }
+        function updateComment(e) {
+            e.preventDefault();
+            const action = $(this).attr('action')
+            const that = $(this)
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function (response) {
+                    const newComment = response.comment.comment
+                    const message = response.message
+                    that.closest('.comments-grid-right').children('.comment-content').text(newComment)
+                    that.closest('.edit-comment-wrap').hide()
+                    Swal.fire({
+                        toast: true,
+                        icon: 'success',
+                        title: message,
+                        position: 'top',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        },
+                        background: '#21ba45',
+                        color: '#fff',
+                    });
+                }
+            });
+        }
+
+        $('.rep-comment').on('click', repComment)
+
+        // call update comment
+        $('.btn-edit-comment').on('click', toogleEditCommentWrap)
+        $('.edit-comment-form').submit(updateComment);
+
+        // call create comment 
+        $('#form-create-comment').submit(function (e) { 
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('comments.store') }}",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function (res) {
+                    const comment = res.comment
+                    const orther = res.ortherData
+                    const userAuthId = @auth {{ Auth::user()->id }} @endauth
+
+                    $('#form-create-comment').trigger("reset");
+
+                    var html = `
+                        <div id="${comment.id}" class="comments-grid animate__animated animate__fadeInUp" style="margin-top: 25px; margin-bottom:5px">
+                            <div class="comments-grid-left">
+                                <img src="${orther.userImage}" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="comments-grid-right panel">
+                                <h4><a
+                                        href="${orther.GetPostByUser}">${comment.user.name}</a>
+                                </h4>`
+
+                                if (comment.user_id == comment.post.user_id) {
+                                    html += ` <h6 style="color:#4599ff; background-color:#c5defd; padding: 5px 10px; width:fit-content; border-radius:6px">
+                                        Tác giả <i class="fa fa-pencil-square-o" aria-hidden="true"></i></h6>`
+                                }
+
+                                html += `
+                                <ul>
+                                    <li><a href="#${comment.id}">${orther.time}</a><i>|</i>
+                                    </li>
+                                    <li>
+                                        <a class="rep-comment comment-action-link"
+                                            data-userName="${comment.user.name}">Trả
+                                            lời <i class="fa fa-mail-reply"></i></a>
+                                            |
+                                    </li>
+                                    <li><a class="comment-action-link btn-delete-comment"
+                                            data-url="${orther.destroyComment}">Xóa
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>|</li>
+                                    </li>
+                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a></li>
+                                    </li>
+                                </ul>
+                                <p class="comment-content">${comment.comment}</p>
+                                    <div class="leave-coment-form edit-comment-wrap">
+                                        <form class="edit-comment-form" action="${orther.updateComment}" method="post">
+                                            @csrf
+                                            <textarea name="comment" placeholder="Nhập bình luận..." required="">${comment.comment}</textarea>
+                                            @error('comment')
+                                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="hidden" name="post_id" value="${comment.post.id}">
+                                            <div class="w3_single_submit">
+                                                <input type="submit" value="Cập nhật">
+                                            </div>
+                                        </form>
+                                    </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>`
+
+                    $('#comment-wrap').append(html)
+                    $('.btn-edit-comment').on('click', toogleEditCommentWrap)
+                    $('.edit-comment-form').submit(updateComment)
+
+                    $('.rep-comment').on('click', repComment)
+                }
+            });
+        });
     </script>
 @endsection
 <style>

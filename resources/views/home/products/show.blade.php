@@ -182,7 +182,7 @@
         $(window).load(function() {
 
             $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+                $(this).closest('.comments-grid-right').children('.edit-comment-wrap').toggle()
                 $(this).closest('.comments-grid-right').children('.comment-content').toggle()
             })
             $('.rep-comment').on('click', function() {
