@@ -50,13 +50,13 @@ class NotificationService
         ];
         switch ($action) {
             case config('consts.post.action.accept'):
-                $data['title'] = '<span class="text-success">Bài viết của bạn đã được phê duyệt</span>';
+                $data['title'] = '<strong class="text-success">Bài viết của bạn đã được phê duyệt</strong>';
                 break;
             case config('consts.post.action.refuse'):
-                $data['title'] = '<span class="text-danger">Bài viết của bạn đã bị từ chối</span>';
+                $data['title'] = '<strong class="text-danger">Bài viết của bạn đã bị từ chối</strong>';
                 break;
             default:
-                $data['title'] = '<span class="text-primary">Bài viết của bạn đang được xét duyệt</span>';
+                $data['title'] = '<strong class="text-primary">Bài viết của bạn đang được xét duyệt</strong>';
                 break;
         }
         $post->user->notify(new PostResultNotification($data));
