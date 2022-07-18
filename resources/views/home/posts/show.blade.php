@@ -205,7 +205,7 @@
                                 <div class="leave-coment-form edit-comment-wrap">
                                     <form class="edit-comment-form" action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
                                         @csrf
-                                        <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
+                                        <textarea name="comment" placeholder="Nhập bình luận...">{{ $comment->comment }}</textarea>
                                         @error('comment')
                                             <span class="mt-1 text-danger">{{ $message }}</span>
                                         @enderror
@@ -227,7 +227,7 @@
         @auth
             <form id="form-create-comment" action="{{ route('comments.store') }}" method="post">
                 @csrf
-                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
+                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..."></textarea>
                 @error('comment')
                     <span class="mt-1 text-danger">{{ $message }}</span>
                 @enderror
@@ -271,6 +271,26 @@
             });
         @endif
 
+        function alertMessage(message, type, time)
+        {
+            Swal.fire({
+                toast: true,
+                icon: type == 'success' ? 'success' : 'error',
+                title: message,
+                position: 'top',
+                timer:time,
+                showConfirmButton: false,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                },
+                background: type == 'success' ? '#21ba45' : '#fff',
+                color: type == 'success' ? '#fff' : '#000',
+            });
+        }
+
     // function 
         function repComment() {
             let userName = $(this).attr('data-userName')
@@ -280,7 +300,7 @@
             }, 1000);
         }
         function toogleEditCommentWrap() {
-            $(this).closest('.comments-grid-right').children('.edit-comment-wrap').toggle()
+            $(this).closest('.comments-grid-right').children('.edit-comment-wrap').fadeToggle()
         }
         function updateComment(e) {
             e.preventDefault();
@@ -295,23 +315,12 @@
                     const newComment = response.comment.comment
                     const message = response.message
                     that.closest('.comments-grid-right').children('.comment-content').text(newComment)
-                    that.closest('.edit-comment-wrap').hide()
-                    Swal.fire({
-                        toast: true,
-                        icon: 'success',
-                        title: message,
-                        position: 'top',
-                        timer: 3000,
-                        showConfirmButton: false,
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        },
-                        background: '#21ba45',
-                        color: '#fff',
-                    });
+                    that.closest('.edit-comment-wrap').fadeOut()
+                    alertMessage(message, 'success', 3000)
+                },
+                error: function(errors) {
+                    let message = errors.responseJSON.errors.comment
+                    alertMessage(message, 'error', 3000)
                 }
             });
         }
@@ -393,8 +402,11 @@
                     $('#comment-wrap').append(html)
                     $('.btn-edit-comment').on('click', toogleEditCommentWrap)
                     $('.edit-comment-form').submit(updateComment)
-
                     $('.rep-comment').on('click', repComment)
+                },
+                error: function(errors) {
+                    let message = errors.responseJSON.errors.comment
+                    alertMessage(message, 'error', 3000)
                 }
             });
         });
