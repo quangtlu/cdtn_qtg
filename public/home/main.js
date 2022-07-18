@@ -26,6 +26,21 @@ $('.read-all-noti-link').click(function (e) {
     });
 });
 
+function renderNoNotication() {
+    let noNotiImg = $('.notice-nav').data('noimg')
+    $('.notification-icon').removeClass('bell');
+    $('.number-notification').remove();
+    $('#has-notification').slideUp();
+    $('#has-notification').remove();
+    $('.notice-nav').append(`
+        <div class="notification-container animate__animated animate__fadeIn">
+            <img class="no-notification-img" src="${noNotiImg}" alt="">
+            <h4 style="padding: 10px 0" class="active">Bạn không có thông báo nào</h4>
+        </div>
+    `)
+    $('.notification-container').slideDown();
+}
+
 $('.remove-all-noti-link').click(function (e) { 
     e.preventDefault();
     $.ajax({
@@ -33,20 +48,38 @@ $('.remove-all-noti-link').click(function (e) {
         url: $(this).attr('href'),
         dataType: "json",
         success: function (response) {
-            let noNotiImg = $('.notice-nav').data('noimg')
             alertMessage(response.message, 'success')
-            $('.notification-icon').removeClass('bell');
-            $('.number-notification').hide();
-            $('#has-notification').slideUp();
-            $('#has-notification').remove();
-            $('.notice-nav').append(`
-                <div class="notification-container animate__animated animate__fadeIn">
-                    <img class="no-notification-img" src="${noNotiImg}" alt="">
-                    <h4 style="padding: 10px 0" class="active">Bạn không có thông báo nào</h4>
-                </div>
-            `)
-            $('.notification-container').slideDown();
+            renderNoNotication()
         }
+    });
+});
+
+$('.action-btn').click(function (e) { 
+    e.preventDefault();
+    var url = $(this).closest('.hanle-request-form').attr('action')
+    var data = $(this).closest('.hanle-request-form').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    data.action = $(this).data('action')
+    const that = $(this)
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "json",
+        success: function (response) {
+            $(that).closest('.notice-item').remove()
+            if(!$('.notice-item').length){
+                renderNoNotication()
+            }
+            alertMessage(response.message, 'success')
+        },
+        error: function(errors) {
+            let message = errors.responseJSON.errors
+            console.log(errors);
+        }
+        
     });
 });
 
@@ -100,7 +133,7 @@ function actionDeleteComment() {
                     that.closest('.comments-grid').fadeOut()
                     alertMessage(res.message, 'success')
                 },
-                eerror: function(errors) {
+                error: function(errors) {
                     let message = errors.responseJSON.errors.message
                     alertMessage(message, 'error')
                 }
@@ -109,6 +142,7 @@ function actionDeleteComment() {
         }
     })
 }
+
 
 $(function () {
     const messageSuccess = $('#container').attr('data-messageSuccess')

@@ -65,22 +65,24 @@
                 @endforeach
             </li>
         </ul>
-        <span style="margin-top:10px; font-size:18px">Trạng thái : </span>
-        @foreach (config('consts.post.status') as $item)
-            @if ($post->status == $item['value'])
-                <a class="{{ $item['className'] }}"
-                    href="
-                {{ Auth::user() &&
-                Auth::user()->id == $post->user_id &&
-                ($post->status == config('consts.post.status.unsolved.value') ||
-                    $post->status == config('consts.post.status.solved.value'))
-                    ? route('posts.toogleStatus', ['id' => $post->id])
-                    : route('posts.show', ['id' => $post->id]) }}">
-                    <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
-                    {{ $item['name'] }}</a>
-                </a>
-            @endif
-        @endforeach
+        @if (!$post->categories->contains('type', config('consts.category.type.post_reference.value')))
+            <span style="margin-top:10px; font-size:18px">Trạng thái : </span>
+            @foreach (config('consts.post.status') as $item)
+                @if ($post->status == $item['value'])
+                    <a class="{{ $item['className'] }}"
+                        href="
+                    {{ Auth::user() &&
+                    Auth::user()->id == $post->user_id &&
+                    ($post->status == config('consts.post.status.unsolved.value') ||
+                        $post->status == config('consts.post.status.solved.value'))
+                        ? route('posts.toogleStatus', ['id' => $post->id])
+                        : route('posts.show', ['id' => $post->id]) }}">
+                        <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                        {{ $item['name'] }}</a>
+                    </a>
+                @endif
+            @endforeach
+        @endif
     </div>
     @auth
         @if (Auth::user()->id == $post->user_id)
@@ -101,40 +103,42 @@
             ])
         @endif
         @role('mod|admin')
-            @if ($post->chatroom)
-                <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
-                        class="fa fa-check-circle" aria-hidden="true"></i></button>
-            @else
-                <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
-                    với
-                    chuyên gia <i class="fa fa-comments"></i></button>
-                <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label>Chuyên gia tư vấn</label>
-                                        <select name="counselor_id" class="form-control">
-                                            @foreach ($counselors as $counselor)
-                                                <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
-                                        nối</button>
-                                    <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
-                                </form>
+            @if ($post->user_id != Auth::user()->id)
+                @if ($post->chatroom)
+                    <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
+                            class="fa fa-check-circle" aria-hidden="true"></i></button>
+                @else
+                    <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
+                        với
+                        chuyên gia <i class="fa fa-comments"></i></button>
+                    <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="post-modalLabel">Kết nối với chuyên gia tư vấn</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('posts.connectToCounselor', ['id' => $post->id]) }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label>Chuyên gia tư vấn</label>
+                                            <select name="counselor_id" class="form-control">
+                                                @foreach ($counselors as $counselor)
+                                                    <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
+                                            nối</button>
+                                        <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @endif
         @endrole
     @endauth
@@ -172,7 +176,8 @@
                                     <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>
                                 @endguest
                             </li>
-                            @if ($comment->status == config('consts.post.status.solved.value'))
+                            @if ($comment->status == config('consts.post.status.solved.value') && 
+                                !$post->categories->contains('type', config('consts.category.type.post_reference.value')))
                                 <li>| <a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
                                         class="comment-action-link post-status-solved">Hữu ích nhất
                                         <i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -188,8 +193,11 @@
                                     <li><a data-id="{{ $comment->id }}" class="comment-action-link btn-edit-comment">Chỉnh sửa
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a></li>
-                                    </li>
-                                @elseif($post->user_id == Auth::user()->id && $post->status != config('consts.post.status.solved.value'))
+                                    </li>                                    
+                                @endif
+                                @if($post->user_id == Auth::user()->id && $post->status == config('consts.post.status.unsolved.value') &&
+                                    !$post->categories->contains('type', config('consts.category.type.post_reference.value'))
+                                    )
                                     <li><a href="{{ route('comments.toogleStatus', ['id' => $comment->id]) }}"
                                             class="comment-action-link post-status-solved">Hữu ích nhất
                                             <i class="fa fa-check-circle" aria-hidden="true"></i>

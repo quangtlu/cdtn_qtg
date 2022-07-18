@@ -69,9 +69,11 @@
                         <li class="notice-nav" data-noimg="{{ asset('image/notification/no_notification.gif') }}">
                             @if (Auth::user()->notifications->count())
                                 <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell' : '' }}"></span>
-                                @if (Auth::user()->unreadNotifications()->count() > 0)
-                                    <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
-                                @endif
+                                <span class="fake-element">
+                                    @if (Auth::user()->unreadNotifications()->count() > 0)
+                                        <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
+                                    @endif
+                                </span>
                                 <div id="has-notification" class="notification-container">
                                     <div class="row no-gutters justify-content-between align-items-center header-noti-wrap">
                                         <a class="col-md-6 text-primary read-all-noti-link" href="{{ route('notifications.markAsReadAll') }}"><i class="fa fa-check"></i> Đánh dấu tất cả là đã đọc</a>
@@ -144,19 +146,19 @@
                                                             {{-- handle request --}}
                                                             @if ($notification->type == 'App\Notifications\PostRequestNotification')
                                                                 <li>
-                                                                    <form
+                                                                    <form class="hanle-request-form"
                                                                         action="{{ route('posts.handleRequest', ['id' => $notification->data['post_id']]) }}"
                                                                         method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="noti_id"
                                                                             value="{{ $notification->id }}">
                                                                         <div style="display: flex; justify-content: center;">
-                                                                            <input style="margin-right: 5px" type="submit"
-                                                                                name="action" class="btn btn-danger"
-                                                                                value="{{ config('consts.post.action.refuse') }}">
-                                                                            <input style="margin-left: 5px" type="submit"
-                                                                                name="action" class="btn btn-success"
-                                                                                value="{{ config('consts.post.action.accept') }}">
+                                                                            <button data-action="{{ config('consts.post.action.refuse') }}" style="margin-right: 5px" class="btn btn-danger action-btn">
+                                                                                {{ config('consts.post.action.refuse') }}
+                                                                            </button>
+                                                                            <button data-action="{{ config('consts.post.action.accept') }}" class="action-btn btn btn-success" style="margin-left: 5px">
+                                                                               {{ config('consts.post.action.accept') }}
+                                                                            </button>
                                                                         </div>
                                                                     </form>
                                                                 </li>

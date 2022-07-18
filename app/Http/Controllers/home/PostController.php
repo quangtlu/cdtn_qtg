@@ -135,7 +135,7 @@ class PostController extends Controller
         $action = $request->action;
         $this->notificationService->destroy($request->noti_id);
         if($this->postService->getById($id)->status != config('consts.post.status.request.value')) {
-            return redirect()->back()->with('error', 'Bài viết đã được xét duyệt');
+            return response()->json(['message' => 'Bài viết đã được xét duyệt']);
         }
         else {
             $post = $this->postService->handleRequestPost($id, $action);
@@ -143,7 +143,7 @@ class PostController extends Controller
             $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
             $user = Auth::user();
             if($user->hasAnyRole('mod', 'admin')) {
-                return redirect()->back()->with('success', $message);
+                return response()->json(['post' => $post, 'message' => $message]);
             } else {
                 abort(403);
             }
