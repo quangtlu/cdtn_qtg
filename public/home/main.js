@@ -37,6 +37,7 @@ $('.remove-all-noti-link').click(function (e) {
             alertMessage(response.message, 'success')
             $('.notification-icon').removeClass('bell');
             $('.number-notification').hide();
+            $('#has-notification').slideUp();
             $('#has-notification').remove();
             $('.notice-nav').append(`
                 <div class="notification-container animate__animated animate__fadeIn">
@@ -65,12 +66,13 @@ function actionDeletePost() {
             $.ajax({
                 type: 'GET',
                 url: urlRequest,
-                success: function (data) {
+                success: function (res) {
                     that.closest('.wthree-top-1').fadeOut()
-                    alertMessage('Bài viết đã được xóa', 'success')
+                    alertMessage(res.message, 'success')
                 },
-                error: function (res) {
-                    alertMessage('Có lỗi xảy ra trong quá trình xóa bài viết', 'error')
+                error: function(errors) {
+                    let message = errors.responseJSON.errors.message
+                    alertMessage(message, 'error')
                 }
             })
 
@@ -94,12 +96,13 @@ function actionDeleteComment() {
             $.ajax({
                 type: 'GET',
                 url: urlRequest,
-                success: function (data) {
+                success: function (res) {
                     that.closest('.comments-grid').fadeOut()
-                    alertMessage('Bình luận đã được xóa', 'success')
+                    alertMessage(res.message, 'success')
                 },
-                error: function (res) {
-                    alertMessage('Có lỗi xảy ra trong quá trình xóa bình luận', 'error')
+                eerror: function(errors) {
+                    let message = errors.responseJSON.errors.message
+                    alertMessage(message, 'error')
                 }
             })
 

@@ -107,6 +107,7 @@ class UserService
         if($user->categories->count()) {
             $user->categories()->detach();
         }
+        return $user;
     }
 
     public function filter($request)

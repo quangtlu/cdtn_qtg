@@ -85,6 +85,7 @@ class ProductService
         $this->productModel->destroy($id);
         $product->authors()->detach();
         $product->categories()->detach();
+        return $product;
     }
 
     public function filter($request)

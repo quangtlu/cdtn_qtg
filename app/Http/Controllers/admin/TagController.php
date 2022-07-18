@@ -53,7 +53,7 @@ class TagController extends Controller
 
     public function destroy($id)
     {
-        $this->tagService->delete($id);
-        return Redirect(route('admin.tags.index'));
+        $tag = $this->tagService->delete($id);
+        return response()->json(['tag' => $tag, 'message' => 'Xóa tag thành công']);
     }
 }

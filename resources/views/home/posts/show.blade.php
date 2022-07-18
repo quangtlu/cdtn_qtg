@@ -250,6 +250,7 @@
     <script src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="module" src="{{ asset('js/alert.js') }}"></script>
     <script type="text/javascript">
     // init libary
         $('.flexslider').flexslider({
@@ -385,7 +386,7 @@
                                     <div class="leave-coment-form edit-comment-wrap">
                                         <form class="edit-comment-form" action="${orther.updateComment}" method="post">
                                             @csrf
-                                            <textarea name="comment" placeholder="Nhập bình luận..." required="">${comment.comment}</textarea>
+                                            <textarea name="comment" placeholder="Nhập bình luận...">${comment.comment}</textarea>
                                             @error('comment')
                                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                             @enderror
