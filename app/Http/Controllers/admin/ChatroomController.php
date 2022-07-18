@@ -55,6 +55,7 @@ class chatroomController extends Controller
 
     public function destroy($id)
     {
-        $this->chatroomService->delete($id);
+        $chatroom = $this->chatroomService->delete($id);
+        return response()->json(['chatroom' => $chatroom, 'message' => 'Xóa phòng tư vấn thành công']);
     }
 }

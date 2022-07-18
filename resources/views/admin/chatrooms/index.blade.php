@@ -52,8 +52,7 @@
                                                         {{ Str::ucfirst($chatroom->name) }}
                                                     </a>
                                                     <li class="list-group-item list-group-item-action"><b>Bài viết: </b>
-                                                        <a
-                                                            href="{{ route('posts.show', ['id' => $chatroom->post->id]) }}">{{ $chatroom->post->title }}</a>
+                                                        <a href="{{ route('posts.show', ['id' => $chatroom->post->id]) }}">{{ $chatroom->post->title }}</a>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">

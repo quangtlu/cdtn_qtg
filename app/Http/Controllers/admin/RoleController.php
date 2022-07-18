@@ -58,6 +58,7 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        $this->roleService->delete($id);
+        $role = $this->roleService->delete($id);
+        return response()->json(['role' => $role, 'message' => 'Xóa vài trò thành công']);
     }
 }

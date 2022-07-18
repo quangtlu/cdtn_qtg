@@ -54,6 +54,7 @@ class FaqController extends Controller
 
     public function destroy($id)
     {
-        $this->faqService->delete($id);
+        $faq = $this->faqService->delete($id);
+        return response()->json(['faq' => $faq, 'message' => 'Xóa FAQ thành công']);
     }
 }

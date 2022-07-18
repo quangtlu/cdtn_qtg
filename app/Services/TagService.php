@@ -51,6 +51,6 @@ class TagService
     }
 
     public function delete($id){
-        $this->tagModel->destroy($id);
+        return $this->tagModel->destroy($id);
     }
 }

@@ -54,6 +54,6 @@ class FaqService
     }
 
     public function delete($id){
-        $this->faqModel->destroy($id);
+        return $this->faqModel->destroy($id);
     }
 }

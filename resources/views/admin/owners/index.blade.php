@@ -109,14 +109,11 @@
                                         <td>{{ $owner->email }}</td>
                                         <td>{{ $owner->phone }}</td>
                                         <td>
-                                            {{-- @can('edit owner') --}}
                                             <a href="{{ route('admin.owners.edit', ['id' => $owner->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>
-                                            {{-- @endcan --}}
-                                            {{-- @can('delete owner') --}}
-                                            <a href="{{ route('admin.owners.destroy', ['id' => $owner->id]) }}"><button
-                                                    class="btn btn-danger btn-sm">Xóa</button></a>
-                                            {{-- @endcan --}}
+                                            <button type="button"
+                                                data-url="{{ route('admin.owners.destroy', ['id' => $owner->id]) }}"
+                                                class="btn btn-danger btn-sm btn-delete">Xóa</button>
                                         </td>
                                     </tr>
                                 @endforeach

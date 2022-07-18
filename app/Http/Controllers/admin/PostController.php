@@ -72,7 +72,7 @@ class PostController extends Controller
     {
         $post = $this->postService->getById($id);
         if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
-           return back()->with('error', 'Bạn không có quyền truy cập');
+           abort(403);
         }
         $postUser = $post->user;
         $postOfTags = $post->tags;
@@ -93,6 +93,7 @@ class PostController extends Controller
         if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
             abort(403);
         }
-        $this->postService->delete($id);
+        $post = $this->postService->delete($id);
+        return response()->json(['post' => $post, 'message' => 'Xóa bài viết thành công']);
     }
 }

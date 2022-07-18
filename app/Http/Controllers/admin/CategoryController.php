@@ -88,6 +88,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $this->categoryService->delete($id);
+        $category = $this->categoryService->delete($id);
+        return response()->json(['category' => $category, 'message' => 'Xóa mục lục thành công']);
     }
 }

@@ -66,6 +66,7 @@ class OwnerController extends Controller
 
     public function destroy($id)
     {
-        $this->ownerService->delete($id);
+        $owner = $this->ownerService->delete($id);
+        return response()->json(['owner' => $owner, 'message' => 'Xóa chủ sở hữu thành công']);
     }
 }

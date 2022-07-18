@@ -126,7 +126,7 @@ class PostController extends Controller
             $this->postService->update($request, $id);
             return Redirect()->back()->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 
@@ -145,7 +145,7 @@ class PostController extends Controller
             if($user->hasAnyRole('mod', 'admin')) {
                 return redirect()->back()->with('success', $message);
             } else {
-                return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');
+                abort(403);
             }
         }
 
@@ -158,7 +158,7 @@ class PostController extends Controller
             $this->postService->toogleSovled($id);
             return Redirect()->back()->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 
@@ -166,9 +166,10 @@ class PostController extends Controller
     {
         $post = $this->postService->getById($id);
         if ($post->user->id == Auth::user()->id) {
-            $this->postService->delete($id);
+            $post = $this->postService->delete($id);
+            return response()->json(['post' => $post, 'message' => 'Xóa bài viết thành công']);
         } else {
-            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 

@@ -82,5 +82,6 @@ class ChatroomService
         $chatroom = $this->getById($id);
         $this->chatroomModel->destroy($id);
         $chatroom->users()->detach();
+        return $chatroom;
     }
 }

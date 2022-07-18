@@ -36,7 +36,7 @@ class ProfileController extends Controller
             $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
             return view('home.profile.edit', compact('profile', 'categories'));
         } else {
-            return Redirect(route('home.profile.index'))->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 
@@ -46,7 +46,7 @@ class ProfileController extends Controller
             $this->userService->update($request, $id);
             return Redirect(route('profile.index'))->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect(route('profile.index'))->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 

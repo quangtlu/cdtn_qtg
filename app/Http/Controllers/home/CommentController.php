@@ -55,10 +55,10 @@ class CommentController extends Controller
     {
         $comment = $this->commentService->getById($id);
         if (Auth::user()->id != $comment->user->id ) {
-            return redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
         else {
-            $this->commentService->delete($id);
+            return response()->json(['message' => 'Xóa bình luận thành công']);
         }
     }
 

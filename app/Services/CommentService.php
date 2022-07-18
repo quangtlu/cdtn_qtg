@@ -64,6 +64,6 @@ class CommentService
 
     public function delete($id)
     {
-        $this->commentModel->destroy($id);
+        return $this->commentModel->destroy($id);
     }
 }

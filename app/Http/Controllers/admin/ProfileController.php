@@ -34,7 +34,7 @@ class ProfileController extends Controller
             $profileImg = $profile->image;
             return view('admin.profile.edit', compact('profile', 'profileImg'));
         } else {
-            return Redirect(route('admin.profile.index'))->with('error', 'Bạn không có quyền truy cập');
+           abort(403);
         }
     }
 
@@ -44,7 +44,7 @@ class ProfileController extends Controller
             $this->userService->update($request, $id);
             return Redirect(route('admin.profile.index'))->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect(route('admin.profile.index'))->with('error', 'Bạn không có quyền truy cập');
+           abort(403);
         }
     }
 
