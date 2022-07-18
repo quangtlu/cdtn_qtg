@@ -28,7 +28,7 @@ class NotificationController extends Controller
                 $notification->markAsRead();
             }
         }
-        return redirect()->back()->with('success', 'Thành công');
+        return response()->json(['message' => 'Đánh dấu đã đọc thành công']);
     }
 
     public function deleteAll() {
@@ -36,6 +36,6 @@ class NotificationController extends Controller
         foreach($notifications as $notification) {
             $this->notificationService->destroy($notification->id);
         }
-        return redirect()->back()->with('success', 'Xóa tất cả thông báo thành công');
+        return response()->json(['message' => 'Xóa tất cả thông báo thành công']);
     }
 }
