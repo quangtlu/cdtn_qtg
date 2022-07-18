@@ -69,9 +69,11 @@
                         <li class="notice-nav" data-noimg="{{ asset('image/notification/no_notification.gif') }}">
                             @if (Auth::user()->notifications->count())
                                 <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell' : '' }}"></span>
-                                @if (Auth::user()->unreadNotifications()->count() > 0)
-                                    <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
-                                @endif
+                                <span class="fake-element">
+                                    @if (Auth::user()->unreadNotifications()->count() > 0)
+                                        <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
+                                    @endif
+                                </span>
                                 <div id="has-notification" class="notification-container">
                                     <div class="row no-gutters justify-content-between align-items-center header-noti-wrap">
                                         <a class="col-md-6 text-primary read-all-noti-link" href="{{ route('notifications.markAsReadAll') }}"><i class="fa fa-check"></i> Đánh dấu tất cả là đã đọc</a>

@@ -96,10 +96,10 @@
                                 <option value="" class="filter-option-dafault">Trạng thái</option>
                                 @foreach (config('consts.post.status') as $status)
                                     @if ((isset($isMyPost) && $isMyPost == true) ||
-                                        (Auth::user() &&
-                                            Auth::user()->hasAnyRole('mod|admin') &&
-                                            ($status['value'] == config('consts.post.status.request.value') ||
-                                                $status['value'] == config('consts.post.status.refuse.value'))))
+                                        (Auth::user() && Auth::user()->hasAnyRole('mod|admin') &&
+                                        ($status['value'] == config('consts.post.status.request.value') ||
+                                        $status['value'] == config('consts.post.status.refuse.value'))))
+                                        
                                         <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
                                     @elseif ($status['value'] != config('consts.post.status.request.value') &&
                                         $status['value'] != config('consts.post.status.refuse.value'))
@@ -138,10 +138,10 @@
         $('.select2_init').select2()
 
         var htmlMessage = `<ul style='text-align:left'>`
-        
+
         @if ($errors->any())
             console.log('{{ $errors }}');
-            @foreach($errors->all() as $error)
+            @foreach ($errors->all() as $error)
                 htmlMessage += `<li class='text-danger' style="padding-top: 5px">${'{{ $error }}'}</li>`
             @endforeach
         @endif

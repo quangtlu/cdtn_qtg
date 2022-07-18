@@ -15,22 +15,24 @@
                                 BÌNH LUẬN
                             </a>
                         </li>
-                        <li>
-                            @foreach (config('consts.post.status') as $item)
-                                @if ($post->status == $item['value'])
-                                    <a class="{{ $item['className'] }}" 
-                                    href="
-                                    {{ Auth::user() && Auth::user()->id == $post->user_id 
-                                        && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
-                                        ? route('posts.toogleStatus', ['id' => $post->id]) 
-                                        : route('posts.show', ['id' => $post->id]) 
-                                    }}">
-                                    <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
-                                    {{ $item['name'] }}</a>
-                                    </a>
-                                @endif
-                            @endforeach
-                        </li>
+                        @if (!$post->categories->contains('type', config('consts.category.type.post_reference.value')))
+                            <li>
+                                @foreach (config('consts.post.status') as $item)
+                                    @if ($post->status == $item['value'])
+                                        <a class="{{ $item['className'] }}" 
+                                        href="
+                                        {{ Auth::user() && Auth::user()->id == $post->user_id 
+                                            && ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) 
+                                            ? route('posts.toogleStatus', ['id' => $post->id]) 
+                                            : route('posts.show', ['id' => $post->id]) 
+                                        }}">
+                                        <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                                        {{ $item['name'] }}</a>
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </li>
+                        @endif
                         @auth
                             @if (Auth::user()->id == $post->user->id)
                                 <li><a class="post-info__link btn-delete"
