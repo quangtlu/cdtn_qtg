@@ -278,7 +278,7 @@
                 icon: type == 'success' ? 'success' : 'error',
                 title: message,
                 position: 'top',
-                timer:time,
+                timer: 2000,
                 showConfirmButton: false,
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -316,11 +316,11 @@
                     const message = response.message
                     that.closest('.comments-grid-right').children('.comment-content').text(newComment)
                     that.closest('.edit-comment-wrap').fadeOut()
-                    alertMessage(message, 'success', 3000)
+                    alertMessage(message, 'success')
                 },
                 error: function(errors) {
                     let message = errors.responseJSON.errors.comment
-                    alertMessage(message, 'error', 3000)
+                    alertMessage(message, 'error')
                 }
             });
         }
@@ -376,7 +376,7 @@
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>|</li>
                                     </li>
-                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
+                                    <li><a class="comment-action-link btn-edit-comment btn-edit-comment-ajax">Chỉnh sửa
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a></li>
                                     </li>
@@ -399,14 +399,15 @@
                             <div class="clearfix"> </div>
                         </div>`
 
-                    $('#comment-wrap').append(html)
-                    $('.btn-edit-comment').on('click', toogleEditCommentWrap)
+                    
+                        $('#comment-wrap').append(html)
+                    $('.btn-edit-comment-ajax').on('click', toogleEditCommentWrap)
                     $('.edit-comment-form').submit(updateComment)
                     $('.rep-comment').on('click', repComment)
                 },
                 error: function(errors) {
                     let message = errors.responseJSON.errors.comment
-                    alertMessage(message, 'error', 3000)
+                    alertMessage(message, 'error')
                 }
             });
         });

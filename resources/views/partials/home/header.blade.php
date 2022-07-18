@@ -68,7 +68,7 @@
                     @auth
                         <li class="notice-nav">
                             @if (Auth::user()->notifications->count())
-                                <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell active' : '' }}">
+                                <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell' : '' }}">
                                 </span>
                                 @if (Auth::user()->unreadNotifications()->count() > 0)
                                     <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
