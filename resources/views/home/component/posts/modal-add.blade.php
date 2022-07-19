@@ -7,19 +7,16 @@
                 <h4 class="modal-title" id="post-modalLabel">Tạo bài viết</h4>
             </div>
             <div class="modal-body">
-                <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="add-post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
+                    <div id="title" class="form-group">
                         <label for="title">Tiêu đề</label>
-                        <input  type="text" name="title" class="form-control" id="title"
+                        <input  type="text" name="title" class="form-control"
                             value="{{ old('title') }}">
-                        @error('title')
-                            <span class="mt-1 text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
-                    <div class="form-group">
+                    <div id="tag_id" class="form-group">
                         <label>Thẻ tag</label>
-                        <select name="tag_id[]" class="form-control select2_init" multiple>
+                        <select name="tag_id[]" class="form-control select-tag-add" multiple>
                             <option></option>
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}"
@@ -27,13 +24,10 @@
                                     {{ $tag->name }}</option>
                             @endforeach
                         </select>
-                        @error('tag_id')
-                            <span class="mt-1 text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
-                    <div class="form-group">
+                    <div id="category_id" class="form-group">
                         <label for="category">Mục lục</label>
-                        <select name="category_id[]" class="form-control select2_init" multiple>
+                        <select name="category_id[]" class="form-control select-category-add" multiple>
                             <option></option>
                             @foreach ($categories as $category)
                                 @if ($category->name == config('consts.category_reference.name'))
@@ -49,19 +43,16 @@
                                 @endif
                             @endforeach
                         </select>
-                        @error('category_id')
-                            <span class="mt-1 text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
-                        <textarea class="summernote" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
+                        <textarea class="summernote-add" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Ảnh</label>
                         <input type="file" multiple class="form-control-file" name="image[]" id="image">
                     </div>
-                    <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Đăng
+                    <button type="submit" id="submit-btn-add" class="btn-modal-post btn btn-success mb-2">Đăng
                         bài</button>
                     <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Hủy</button>
                 </form>

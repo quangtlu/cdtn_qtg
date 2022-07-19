@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>mục lục</label>
+                                <label>Mục lục</label>
                                 <select name="categoryIds[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)

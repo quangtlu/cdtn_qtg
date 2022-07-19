@@ -103,6 +103,28 @@ class PostController extends Controller
 
     }
 
+    public function getOrtherData($post, $isUpdate = false)
+    {
+        $ortherData['getPostByUser'] = route('posts.getPostByUser', ['id' => $post->user_id]);
+        $ortherData['showPost'] =  route('posts.show', ['id' => $post->id]);
+        $ortherData['toogleStatus'] =  route('posts.toogleStatus', ['id' => $post->id]);
+        $ortherData['destroyPost'] =  route('posts.destroy', ['id' => $post->id]);
+        $ortherData['updatePost'] =  route('posts.update', ['id' => $post->id]);
+        $ortherData['time'] =  $isUpdate ? $post->created_at->diffForHumans() : $post->updated_at->diffForHumans();
+        $ortherData['userName'] =  $post->user->name;
+        $ortherData['tags'] = $post->tags;
+        $ortherData['isUpdate'] = $isUpdate;
+        foreach (config('consts.post.status') as $status) {
+            if($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
+                $ortherData['status']['name'] =  $status['name'];
+                $ortherData['status']['className'] =  $status['className'];
+                $ortherData['status']['classIcon'] =  $status['classIcon'];
+            }
+        }
+
+        return $ortherData;
+    }
+
     public function store(StorePostRequest $request)
     {
         $post = $this->postService->create($request);
@@ -114,17 +136,19 @@ class PostController extends Controller
             $this->notificationService->notiRequestPost($post);
             $this->notificationService->sendNotiResult($post, '');
         }
-        return Redirect()->back()->with('success', $message);
-        
+        $ortherData = $this->getOrtherData($post);
+
+        return response()->json(['post' => $post,'orther' =>  $ortherData, 'message' => $message]);        
     }
 
 
-    public function update(UpdatePostRequest $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
         $post = $this->postService->getById($id);
-        if ($post->user->id == Auth::user()->id) {
-            $this->postService->update($request, $id);
-            return Redirect()->back()->with('success', 'Cập nhật thành công');
+        if ($post->user_id == Auth::user()->id) {
+            $postUpdated = $this->postService->update($request, $id);
+            $ortherData = $this->getOrtherData($postUpdated, true);
+            return response()->json(['post' => $postUpdated, 'orther' =>  $ortherData, 'message' => 'Cập nhật thành công']);
         } else {
             abort(403);
         }

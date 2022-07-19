@@ -47,7 +47,7 @@
             <span>Tìm kiếm bài viết</span>
         </a>
     </div>
-    <div class="panel panel-primary" id="toggle" style="margin-top: 10px; display:none; padding: 15px">
+    <div class="panel panel-primary search-and-filter" id="toggle" style="margin-top: 10px; display:none; padding: 15px">
         <div>
             <div class="sort-product">
                 <form action="{{ route('posts.index') }}" method="GET">
@@ -132,28 +132,165 @@
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
-        $('.summernote').summernote({
+        $('.summernote-add').summernote({
             height: 200
         });
-        $('.select2_init').select2()
+        $('.summernote-edit').summernote({
+            height: 200
+        });
+        $('.select-tag-add').select2()
+        $('.select-category-add').select2()
+        $('.select-tag-edit').select2()
+        $('.select-category-edit').select2()
 
-        var htmlMessage = `<ul style='text-align:left'>`
-
-        @if ($errors->any())
-            console.log('{{ $errors }}');
-            @foreach ($errors->all() as $error)
-                htmlMessage += `<li class='text-danger' style="padding-top: 5px">${'{{ $error }}'}</li>`
-            @endforeach
-        @endif
-        htmlMessage += `</ul>`
-        @if ($errors->any())
+        function alertMessage(message, type, time)
+        {
             Swal.fire({
-                icon: 'error',
-                title: 'Dữ liệu không hợp lệ',
-                html: htmlMessage,
-                timer: 10000,
-                timerProgressBar: true,
-            })
-        @endif
+                toast: true,
+                icon: type == 'success' ? 'success' : 'error',
+                title: message,
+                position: 'top',
+                timer: 2000,
+                showConfirmButton: false,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                },
+                background: type == 'success' ? '#21ba45' : '#fff',
+                color: type == 'success' ? '#fff' : '#000',
+            });
+        }
+       
+        function resetForm(formElement, action)
+        {
+            $('#post-modalLabel').text('Đăng bài viết')
+            formElement.trigger("reset");
+            formElement.attr('action', action)
+            $(".select-tag-add").val([]).change();
+            $(".select-category-add").val([]).change();
+            $('.summernote-add').summernote('reset')
+            $('#submit-btn-add').text('Đăng bài')
+        }
+
+        function changeFormToEdit(title, content, categoryIds, tagIds, action) {
+            $('#add-modal').modal()
+            $('#add-post-form').attr('action', action)
+            $('#post-modalLabel').text('Sửa bài viết')
+            $('#add-modal').find('input[name="title"]').val(title)
+            $('.select-tag-add').val(tagIds)
+            $('.select-category-add').val(categoryIds)
+            $('.select-tag-add').trigger('change')
+            $('.select-category-add').trigger('change')
+            $('#submit-btn-add').text('Cập nhật')
+            $(".summernote-add").summernote("code", content);
+        }
+
+        function renderValidateMessage(id, message)
+        {
+            if(!$('#error-' + id).length) {
+                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`); 
+            }
+        }
+
+        $('#add-post-form').submit(function (e) { 
+            e.preventDefault();
+            const that = $(this)
+            const unsolvedStatus = {{ config('consts.post.status.unsolved.value') }}
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: new FormData(this),
+                contentType:false,
+                processData:false,
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    $('#add-modal').modal('hide')
+                    resetForm(that)
+                    alertMessage(response.message, 'success')
+                    if(response.post.status == unsolvedStatus){
+                        let showPostUrl = response.orther.showPost
+                        var html = 
+                            `
+                                <div class="post-ajax-${response.post.id} wthree-top-1 animate__animated animate__fadeInUp">
+                                    <div class="w3agile-top">
+                                        <div class="col-md-3 w3agile-left">
+                                            <ul class="post-info">
+                                                <li><a class="post-info__link" href="${response.orther.getPostByUser}"><i
+                                                            class="fa  fa-user" aria-hidden="true"></i>${response.orther.userName}</a>
+                                                </li>
+                                                <li><a class="post-info__link" href="${showPostUrl}">
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>${response.orther.time}</a>
+                                                </li>
+                                                <li><a class="post-info__link" href="${showPostUrl}">
+                                                    <i class="fa fa-comment" aria-hidden="true"></i>0
+                                                        BÌNH LUẬN
+                                                    </a>
+                                                </li>`;
+                                                if (response.orther.status) {
+                                                    html += 
+                                                    `<li>
+                                                        <a class="${response.orther.status.className}" href="${response.orther.toogleStatus}">
+                                                            <i class="fa ${response.orther.status.classIcon}" aria-hidden="true"></i>
+                                                            ${response.orther.status.name}
+                                                        </a>
+                                                    </li>`
+                                                }
+                                                    
+                                            html += `
+                                                <li><a class="post-info__link btn-delete"
+                                                        data-url="${response.orther.destroyPost}"><i
+                                                            class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
+                                                <li>
+                                                    <a style="color: #0c84ff; cursor: pointer;" class="post-info__link btn-edit-ajax">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                                                        Sửa bài viết
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body">
+                                                <div class="col-md-9 w3agile-right post-content-limit-line">
+                                                    <h3><a href="${showPostUrl}">${response.post.title}</a></h3>
+                                                    <div class="post-content-limit-line">${response.post.content}</div>
+                                                    <a class="agileits w3layouts" href="${showPostUrl}">Xem
+                                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
+                                                            aria-hidden="true"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            `
+                        $('.search-and-filter').after(html)
+                        $('.btn-edit-ajax').click(function (e) {
+                            tagIds = response.post.tags.map((tag) => tag.id)
+                            categoryIds = response.post.categories.map((category) => category.id)
+                            changeFormToEdit(response.post.title, response.post.content, categoryIds, tagIds, response.orther.updatePost)
+                            $('#create-post').click(function (e) { 
+                                resetForm(that, that.attr('action'))
+                            });
+                        });
+
+                        if(response.orther.isUpdate) {
+                            $('.post-ajax-' + response.post.id).remove()
+                            $('.search-and-filter').after(html)
+                        }
+                    }
+                },
+                error: function (errors) {
+                    let messageError = errors.responseJSON.errors
+                    for (let obj in messageError) {
+                        if(obj) {
+                            renderValidateMessage(obj, messageError[obj][0])
+                        }
+                    }
+                }
+            });
+        });
     </script>
 @endsection

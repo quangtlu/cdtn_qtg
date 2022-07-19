@@ -25,9 +25,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'tag_id' => 'required',
-            'category_id' => 'required',
-            'content' => 'required',
         ];
     }
 
@@ -35,9 +32,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng nhập tiêu đề',
-            'tag_id.required' => 'Vui lòng chọn thẻ tag',
-            'category_id.required' => 'Vui lòng chọn mục lục',
-            'content.required' => 'Vui lòng nhập nội dung',
         ];
     }
 }

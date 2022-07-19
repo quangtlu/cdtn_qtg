@@ -115,20 +115,16 @@ class PostService
     public function update($request, $id)
     {
         $post = $this->getById($id);
-        $user_id = Auth()->user()->id;
-        $data = [
-            "title" => $request->title,
-            "content" => $request->content,
-            "user_id" => $user_id,
-        ];
-
+        $post->title = $request->title;
+        $post->content = $request->content;
         if ($files = $request->file('image')) {
             $images = $this->uploadMutilpleImage($files);
-            $data['image'] = implode("|", $images);
+            $post->image = implode("|", $images);
         }
-        $post->update($data);
         $post->tags()->sync($request->tag_id);
         $post->categories()->sync($request->category_id);
+        $post->save();
+        return $post;
     }
 
     public function toogleSovled($id)

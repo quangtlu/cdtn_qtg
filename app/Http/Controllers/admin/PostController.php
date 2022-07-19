@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Post\StorePostRequest;
-use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Services\CategoryService;
 use App\Services\PostService;
 use App\Services\TagService;
@@ -81,7 +80,7 @@ class PostController extends Controller
         return view('admin.posts.edit', compact('post', 'postUser', 'postImgs', 'postOfTags', 'postOfCategories'));
     }
 
-    public function update(UpdatePostRequest $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
         $this->postService->update($request, $id);
         return Redirect(route('admin.posts.index'))->with('success', 'Cập nhật bài viết thành công');
