@@ -112,6 +112,7 @@ class PostController extends Controller
         }
         else {
             $this->notificationService->notiRequestPost($post);
+            $this->notificationService->sendNotiResult($post, '');
         }
         return Redirect()->back()->with('success', $message);
         
@@ -125,7 +126,7 @@ class PostController extends Controller
             $this->postService->update($request, $id);
             return Redirect()->back()->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 
@@ -134,7 +135,7 @@ class PostController extends Controller
         $action = $request->action;
         $this->notificationService->destroy($request->noti_id);
         if($this->postService->getById($id)->status != config('consts.post.status.request.value')) {
-            return redirect()->back()->with('error', 'Bài viết đã được xét duyệt');
+            return response()->json(['message' => 'Bài viết đã được xét duyệt']);
         }
         else {
             $post = $this->postService->handleRequestPost($id, $action);
@@ -142,9 +143,9 @@ class PostController extends Controller
             $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
             $user = Auth::user();
             if($user->hasAnyRole('mod', 'admin')) {
-                return redirect()->back()->with('success', $message);
+                return response()->json(['post' => $post, 'message' => $message]);
             } else {
-                return redirect()->back()->with('error', 'Bạn không có quyền phê duyệt');
+                abort(403);
             }
         }
 
@@ -157,7 +158,7 @@ class PostController extends Controller
             $this->postService->toogleSovled($id);
             return Redirect()->back()->with('success', 'Cập nhật thành công');
         } else {
-            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 
@@ -165,9 +166,10 @@ class PostController extends Controller
     {
         $post = $this->postService->getById($id);
         if ($post->user->id == Auth::user()->id) {
-            $this->postService->delete($id);
+            $post = $this->postService->delete($id);
+            return response()->json(['post' => $post, 'message' => 'Xóa bài viết thành công']);
         } else {
-            return Redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
     }
 

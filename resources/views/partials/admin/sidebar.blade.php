@@ -36,6 +36,28 @@
                         </a>
                     </li>
                 @endcan
+                @can('list-role')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.roles.index') }}"
+                            class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
+                            <i class="fas fa-user-tag"></i>
+                            <p>
+                                Quản lý vai trò
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-permission')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.permissions.index') }}"
+                            class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
+                            <i class="fas fa-user-shield"></i>
+                            <p>
+                                Quản lý quyền truy cập
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @can('list-author')
                     <li class="nav-item">
                         <a href="{{ route('admin.authors.index') }}"
@@ -80,28 +102,6 @@
                         </a>
                     </li>
                 @endcan
-                @can('list-role')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.roles.index') }}"
-                            class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
-                            <i class="fas fa-user-tag"></i>
-                            <p>
-                                Quản lý vai trò
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('list-permission')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.permissions.index') }}"
-                            class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
-                            <i class="fas fa-user-shield"></i>
-                            <p>
-                                Quản lý quyền truy cập
-                            </p>
-                        </a>
-                    </li>
-                @endcan
                 @can('list-faq')
                     <li class="nav-item">
                         <a href="{{ route('admin.faqs.index') }}"
@@ -130,7 +130,7 @@
                             class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
                             <i class="fas fa-list-alt"></i>
                             <p>
-                                Quản lý danh mục
+                                Quản lý mục lục
                             </p>
                         </a>
                     </li>
@@ -147,10 +147,11 @@
                     </li>                    
                 @endcan
                 <li class="nav-item">
-                    <a class="btn btn-danger nav-link" href="{{ route('logout') }}"
+                    <a class="nav-link text-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                        Đăng xuất<i class="fas fa-sign-out-alt ml-2"></i>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <p>Đăng xuất</p>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

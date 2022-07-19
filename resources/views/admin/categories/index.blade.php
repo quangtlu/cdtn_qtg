@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Quản lý danh mục')
+@section('title', 'Quản lý mục lục')
 @section('content')
     <div class="content-wrapper">
         <!-- Main content -->
@@ -21,8 +21,8 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tên danh mục</th>
-                                <th>Loại danh mục</th>
+                                <th>Tên mục lục</th>
+                                <th>Loại mục lục</th>
                                 <th>Action</th>
                             </tr>
                             </thead>

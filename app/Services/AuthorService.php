@@ -64,7 +64,7 @@ class AuthorService
     }
 
     public function delete($id){
-        $this->authorModel->destroy($id);
+        return $this->authorModel->destroy($id);
     }
 
     public function filter($request)

@@ -53,26 +53,10 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                             chủ</a></li>
-                    {{-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">Quyền tác giả<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @if ($postReferences)
-                                @foreach ($postReferences as $post)
-                                    <li><a
-                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                                    </li>
-                                @endforeach
-                                <li><a href="{{ route('home.index')}}">Xem tất cả</a></li>
-                            @endif
-                        </ul>
-                    </li> --}}
                     <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                             href="{{ route('faq.index') }}">FAQ</a></li>
                     <li><a class="{{ Request::is('products*') ? 'active' : '' }}"
@@ -82,10 +66,15 @@
                     <li><a href="{{ route('messenger.index') }}" style="font-size: 25px"><i
                                 class="fa fa-comments-o"></i></a></li>
                     @auth
-                        <li class="notice-nav">
+                        <li class="notice-nav" data-noimg="{{ asset('image/notification/no_notification.gif') }}">
                             @if (Auth::user()->notifications->count())
-                                <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell active' : '' }}"></span>
-                                <div class="notification-container">
+                                <span class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell' : '' }}"></span>
+                                <span class="fake-element">
+                                    @if (Auth::user()->unreadNotifications()->count() > 0)
+                                        <span class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span> 
+                                    @endif
+                                </span>
+                                <div id="has-notification" class="notification-container">
                                     <div class="row no-gutters justify-content-between align-items-center header-noti-wrap">
                                         <a class="col-md-6 text-primary read-all-noti-link" href="{{ route('notifications.markAsReadAll') }}"><i class="fa fa-check"></i> Đánh dấu tất cả là đã đọc</a>
                                         <a class="col-md-6 text-danger remove-all-noti-link" href="{{ route('notifications.deleteAll') }}"><i class="fa  fa-trash-o"></i> Xóa tất cả</a>
@@ -157,19 +146,19 @@
                                                             {{-- handle request --}}
                                                             @if ($notification->type == 'App\Notifications\PostRequestNotification')
                                                                 <li>
-                                                                    <form
+                                                                    <form class="hanle-request-form"
                                                                         action="{{ route('posts.handleRequest', ['id' => $notification->data['post_id']]) }}"
                                                                         method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="noti_id"
                                                                             value="{{ $notification->id }}">
                                                                         <div style="display: flex; justify-content: center;">
-                                                                            <input style="margin-right: 5px" type="submit"
-                                                                                name="action" class="btn btn-danger"
-                                                                                value="{{ config('consts.post.action.refuse') }}">
-                                                                            <input style="margin-left: 5px" type="submit"
-                                                                                name="action" class="btn btn-success"
-                                                                                value="{{ config('consts.post.action.accept') }}">
+                                                                            <button data-action="{{ config('consts.post.action.refuse') }}" style="margin-right: 5px" class="btn btn-danger action-btn">
+                                                                                {{ config('consts.post.action.refuse') }}
+                                                                            </button>
+                                                                            <button data-action="{{ config('consts.post.action.accept') }}" class="action-btn btn btn-success" style="margin-left: 5px">
+                                                                               {{ config('consts.post.action.accept') }}
+                                                                            </button>
                                                                         </div>
                                                                     </form>
                                                                 </li>
@@ -180,7 +169,7 @@
                                             @endif
                                         @endforeach
                                     </ul>
-                                </div>
+                                </div>  
                             @else 
                                 <span class="fa fa-bell notification-icon"></span>
                                 <div class="notification-container">

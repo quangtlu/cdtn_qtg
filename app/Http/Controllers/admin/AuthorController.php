@@ -68,6 +68,7 @@ class AuthorController extends Controller
 
     public function destroy($id)
     {
-        $this->authorService->delete($id);
+        $author = $this->authorService->delete($id);
+        return response()->json(['author' => $author, 'message' => 'Xóa tác giả thành công']);
     }
 }

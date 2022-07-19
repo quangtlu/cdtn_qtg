@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Comment;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class CommentService
 
@@ -25,7 +26,7 @@ class CommentService
     public function create($request)
     {
         $data = [
-            'user_id' => $request->user_id,
+            'user_id' => Auth::user()->id,
             'post_id' => $request->post_id,
             'comment' => $request->comment,
         ];
@@ -36,12 +37,13 @@ class CommentService
     {
         $comment = $this->getById($id);
         $data = [
-            'user_id' => $request->user_id,
+            'user_id' => Auth::user()->id,
             'post_id' => $request->post_id,
             'comment' => $request->comment,
             'updated_at' => Carbon::now()
         ];
         $comment->update($data);
+        return $comment;
     }
 
     public function toogleStatus($id)
@@ -62,6 +64,6 @@ class CommentService
 
     public function delete($id)
     {
-        $this->commentModel->destroy($id);
+        return $this->commentModel->destroy($id);
     }
 }

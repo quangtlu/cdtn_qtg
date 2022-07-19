@@ -60,7 +60,7 @@ class CategoryService
 
     public function delete($id)
     {
-        $this->categoryModel->destroy($id);
+        return $this->categoryModel->destroy($id);
     }
 
     public function getBytype($type)

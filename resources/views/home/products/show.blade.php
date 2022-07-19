@@ -16,7 +16,7 @@
                 @foreach ($product->categories as $category) {{ $category->name }} | @endforeach">
                 <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#">{{ $product->categories->count() }}
-                    Danh mục</a>
+                    Mục lục</a>
             </li>
         </ul>
         <div class="row wow fadeInUp">
@@ -88,7 +88,7 @@
     <div class="category-tag">
         <ul class="tag">
             <li class="li-category-tag">
-                <span style="font-size:18px">Danh mục: </span>
+                <span style="font-size:18px">Mục lục: </span>
                 @foreach ($product->categories as $category)
                     <a
                         href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
@@ -113,7 +113,13 @@
                                 </div>
                                 <div class="modal-body" style="margin-left: 20px">
                                     <h4 style="padding-top:10px">Họ và tên: {{ $author->name }}</h4>
-                                    <h4 style="padding-top:10px">Giới tính: {{ $author->gender }}</h4>
+                                    <h4 style="padding-top:10px">Giới tính: 
+                                        @foreach (config('consts.user.gender') as $gender)
+                                            @if ($gender['value'] == $author->gender)
+                                                {{ $gender['name'] }}
+                                            @endif
+                                        @endforeach
+                                    </h4>
                                     <h4 style="padding-top:10px">Ngày sinh: {{ $author->dob }}</h4>
                                     <h4 style="padding-top:10px">Email: {{ $author->email }}</h4>
                                     <h4 style="padding-top:10px">Điện thoại: {{ $author->phone }}</h4>
@@ -148,7 +154,7 @@
                                 <div class="modal-body">
                                     <h4 style="padding-top: 10px">Họ tên: {{ $product->owner->name }}</h4>
                                     <h4 style="padding-top: 10px">Email: {{ $product->owner->email }}</h4>
-                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->name }}</h4>
+                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->phone }}</h4>
                                     
                                 </div>
                                 <div class="modal-footer">
@@ -176,7 +182,7 @@
         $(window).load(function() {
 
             $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+                $(this).closest('.comments-grid-right').children('.edit-comment-wrap').toggle()
                 $(this).closest('.comments-grid-right').children('.comment-content').toggle()
             })
             $('.rep-comment').on('click', function() {

@@ -49,5 +49,6 @@ class RoleService
         $role = $this->getById($id);
         $this->roleModel->destroy($id);
         $role->permissions()->detach();
+        return $role;
     }
 }

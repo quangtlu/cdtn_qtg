@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-md-2">
                             <select name="category_id" id="sort" class="form-control">
-                                <option value="" class="filter-option-dafault">Danh mục</option>
+                                <option value="" class="filter-option-dafault">Mục lục</option>
                                 <option value="" class="filter-option-dafault">Tất cả</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
@@ -96,10 +96,10 @@
                                 <option value="" class="filter-option-dafault">Trạng thái</option>
                                 @foreach (config('consts.post.status') as $status)
                                     @if ((isset($isMyPost) && $isMyPost == true) ||
-                                        (Auth::user() &&
-                                            Auth::user()->hasAnyRole('mod|admin') &&
-                                            ($status['value'] == config('consts.post.status.request.value') ||
-                                                $status['value'] == config('consts.post.status.refuse.value'))))
+                                        (Auth::user() && Auth::user()->hasAnyRole('mod|admin') &&
+                                        ($status['value'] == config('consts.post.status.request.value') ||
+                                        $status['value'] == config('consts.post.status.refuse.value'))))
+                                        
                                         <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
                                     @elseif ($status['value'] != config('consts.post.status.request.value') &&
                                         $status['value'] != config('consts.post.status.refuse.value'))
@@ -124,12 +124,8 @@
 
 @endsection
 @section('js')
-    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script type="text/javascript" 
-        src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
-</script>
     <script>
         $('#search').click(function() {
             $('#toggle').fadeToggle();
@@ -142,10 +138,10 @@
         $('.select2_init').select2()
 
         var htmlMessage = `<ul style='text-align:left'>`
-        
+
         @if ($errors->any())
             console.log('{{ $errors }}');
-            @foreach($errors->all() as $error)
+            @foreach ($errors->all() as $error)
                 htmlMessage += `<li class='text-danger' style="padding-top: 5px">${'{{ $error }}'}</li>`
             @endforeach
         @endif

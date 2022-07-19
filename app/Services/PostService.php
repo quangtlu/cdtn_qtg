@@ -167,6 +167,7 @@ class PostService
         $this->postModel->destroy($id);
         $post->categories()->detach();
         $post->tags()->detach();
+        return $post;
     }
 
     public function filter($request)

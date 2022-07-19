@@ -33,10 +33,10 @@ class UpdateCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên danh mục',
-            'name.unique' => 'Tên danh mục đã tồn tại',
-            'parent_id.required' => 'Vui lòng chọn danh mục cha',
-            'type.required' => 'Vui lòng chọn loại danh mục',
+            'name.required' => 'Vui lòng nhập tên mục lục',
+            'name.unique' => 'Tên mục lục đã tồn tại',
+            'parent_id.required' => 'Vui lòng chọn mục lục cha',
+            'type.required' => 'Vui lòng chọn loại mục lục',
         ];
     }
 }

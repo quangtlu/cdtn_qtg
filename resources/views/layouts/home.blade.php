@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>
         @auth
@@ -100,8 +99,7 @@
     <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
     <script src="{{ asset('home/WOW-master/dist/wow.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('home/alert.js') }}"></script>
-    <script src="{{ asset('home/main.js') }}"></script>
+    <script type="module" src="{{ asset('home/main.js') }}"></script>
     <script>
         new WOW().init();
     </script>

@@ -81,6 +81,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $this->userService->delete($id);
+        $user = $this->userService->delete($id);
+        return response()->json(['user' => $user, 'message' => 'Xóa người dùng thành công']);
     }
 }

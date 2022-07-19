@@ -54,6 +54,6 @@ class PermissionService
 
     public function delete($id)
     {
-        $this->permissionModel->destroy($id);
+        return $this->permissionModel->destroy($id);
     }
 }
