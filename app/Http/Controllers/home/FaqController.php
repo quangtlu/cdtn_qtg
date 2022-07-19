@@ -21,7 +21,7 @@ class FaqController extends Controller
     {
         try {
             $faqs = $this->faqService->getPaginate();
-            if($request) {
+            if($request->keword) {
                 $faqs = $this->faqService->search($request);
             }
             if($faqs->count() < 1) {
