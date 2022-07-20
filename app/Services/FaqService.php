@@ -21,7 +21,7 @@ class FaqService
 
     public function search($request)
     {
-        $faqs = Faq::search($request->keyword)->paginate(10);
+        $faqs = Faq::search($request->keyword)->latest()->paginate(10);
         return $faqs;
     }
 
