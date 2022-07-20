@@ -85,3 +85,15 @@
 .select2-selection__choice__remove{
     color: red !important;
 }
+
+.user-post-avt{
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid #fca003;
+    margin-right: 5px;
+}
+
+.post-info-list{
+    display: flex;
+    align-items: center;
+}

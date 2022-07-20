@@ -9,9 +9,10 @@
 @section('content')
     <div id="post-info-wrap" class="single-left1 panel" style="padding: 10px !important">
         <h3 id="post-title" class="title-relate">{{ $post->title }}</h3>
-        <ul>
-            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
-                    href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
+        <ul class="post-info-list">
+            <li class="user-post-info-wrap">
+                <img class="user-post-avt" src="{{ asset('image/profile') .'/' . $post->user->image }}" alt="">
+                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
             </li>
             <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#tag" id="number-tag">{{ $post->tags->count() }}
@@ -313,6 +314,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="module" src="{{ asset('js/alert.js') }}"></script>
     <script type="text/javascript">
+    $('#header-search-form').attr('action', '{{ route('posts.index') }}');
+    $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
     // init libary
         $('.flexslider').flexslider({
             animation: "slide",

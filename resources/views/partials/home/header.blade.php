@@ -63,7 +63,7 @@
                             href="{{ route('products.index') }}">Tác phẩm</a></li>
                     <li><a class="{{ Request::is('posts*') ? 'active' : '' }}"
                             href="{{ route('posts.index') }}">Diễn đàn</a></li>
-                    <li><a href="{{ route('messenger.index') }}" style="font-size: 25px"><i
+                    <li><a href="{{ route('messenger.index') }}"><i style="font-size: 25px"
                                 class="fa fa-comments-o"></i></a></li>
                     @auth
                         <li class="notice-nav" data-noimg="{{ asset('image/notification/no_notification.gif') }}">
