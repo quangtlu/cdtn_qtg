@@ -103,42 +103,33 @@ class PostController extends Controller
 
     }
 
-    public function getOrtherData($post, $isUpdate = false)
-    {
-        $ortherData['getPostByUser'] = route('posts.getPostByUser', ['id' => $post->user_id]);
-        $ortherData['showPost'] =  route('posts.show', ['id' => $post->id]);
-        $ortherData['toogleStatus'] =  route('posts.toogleStatus', ['id' => $post->id]);
-        $ortherData['destroyPost'] =  route('posts.destroy', ['id' => $post->id]);
-        $ortherData['updatePost'] =  route('posts.update', ['id' => $post->id]);
-        $ortherData['time'] =  $isUpdate ? $post->created_at->diffForHumans() : $post->updated_at->diffForHumans();
-        $ortherData['userName'] =  $post->user->name;
-        $ortherData['tags'] = $post->tags;
-        $ortherData['isUpdate'] = $isUpdate;
-        foreach (config('consts.post.status') as $status) {
-            if($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
-                $ortherData['status']['name'] =  $status['name'];
-                $ortherData['status']['className'] =  $status['className'];
-                $ortherData['status']['classIcon'] =  $status['classIcon'];
-            }
-        }
-
-        return $ortherData;
-    }
-
     public function store(StorePostRequest $request)
     {
         $post = $this->postService->create($request);
+        
         $message = 'Bài viết đang chờ phê duyệt';
         if(Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
+            $orther['getPostByUser'] = route('posts.getPostByUser', ['id' => $post->user_id]);
+            $orther['showPost'] =  route('posts.show', ['id' => $post->id]);
+            $orther['destroyPost'] =  route('posts.destroy', ['id' => $post->id]);
+            $orther['time'] =  $post->created_at->diffForHumans();
+            $orther['userName'] =  $post->user->name;
+            foreach (config('consts.post.status') as $status) {
+                if($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
+                    $orther['status']['name'] =  $status['name'];
+                    $orther['status']['className'] =  $status['className'];
+                    $orther['status']['classIcon'] =  $status['classIcon'];
+                }
+            }
             $message = 'Đăng bài thành công';
+            return response()->json(['post' => $post,'orther' =>  $orther, 'message' => $message]);        
+
         }
         else {
             $this->notificationService->notiRequestPost($post);
             $this->notificationService->sendNotiResult($post, '');
+            return response()->json(['message' => $message]);        
         }
-        $ortherData = $this->getOrtherData($post);
-
-        return response()->json(['post' => $post,'orther' =>  $ortherData, 'message' => $message]);        
     }
 
 
@@ -147,8 +138,9 @@ class PostController extends Controller
         $post = $this->postService->getById($id);
         if ($post->user_id == Auth::user()->id) {
             $postUpdated = $this->postService->update($request, $id);
-            $ortherData = $this->getOrtherData($postUpdated, true);
-            return response()->json(['post' => $postUpdated, 'orther' =>  $ortherData, 'message' => 'Cập nhật thành công']);
+            $postUpdated->tags;
+            $postUpdated->categories;
+            return response()->json(['post' => $postUpdated, 'message' => 'Cập nhật thành công']);
         } else {
             abort(403);
         }

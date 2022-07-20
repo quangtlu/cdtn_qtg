@@ -34,7 +34,69 @@
                 </div>
             </div>
         </div>
-        @include('home.component.posts.modal-add', ['categories' => $categories, 'tags' => $tags])
+        {{-- Modal add post --}}
+        <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="post-modalLabel">Tạo bài viết</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add-post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div id="title" class="form-group">
+                                <label for="title">Tiêu đề</label>
+                                <input  type="text" name="title" class="form-control"
+                                    value="{{ old('title') }}">
+                            </div>
+                            <div id="tag_id" class="form-group">
+                                <label>Thẻ tag</label>
+                                <select name="tag_id[]" class="form-control select2_init" multiple>
+                                    <option></option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}"
+                                            {{ collect(old('tag_id'))->contains($tag->id) ? 'selected' : '' }}>
+                                            {{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div id="category_id" class="form-group">
+                                <label for="category">Mục lục</label>
+                                <select name="category_id[]" class="form-control select2_init" multiple>
+                                    <option></option>
+                                    @foreach ($categories as $category)
+                                        @if ($category->name == config('consts.category_reference.name'))
+                                            @role('admin|editor')
+                                                <option value="{{ $category->id }}"
+                                                    {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                                    {{ $category->name }}</option>
+                                            @endrole
+                                        @else
+                                            <option value="{{ $category->id }}"
+                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                                {{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nội dung</label>
+                                <textarea class="summernote" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Ảnh</label>
+                                <input type="file" multiple class="form-control-file" name="image[]" id="image">
+                            </div>
+                            <button type="submit" id="submit-btn-add" class="btn-modal-post btn btn-success mb-2">Đăng
+                                bài</button>
+                            <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Hủy</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>        
     @endauth
     @guest
         <a style="margin-bottom: 10px" class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
@@ -132,16 +194,11 @@
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
-        $('.summernote-add').summernote({
+        $('.summernote').summernote({
             height: 200
         });
-        $('.summernote-edit').summernote({
-            height: 200
-        });
-        $('.select-tag-add').select2()
-        $('.select-category-add').select2()
-        $('.select-tag-edit').select2()
-        $('.select-category-edit').select2()
+        $('.select2_init').select2()
+
 
         function alertMessage(message, type, time)
         {
@@ -174,18 +231,6 @@
             $('#submit-btn-add').text('Đăng bài')
         }
 
-        function changeFormToEdit(title, content, categoryIds, tagIds, action) {
-            $('#add-modal').modal()
-            $('#add-post-form').attr('action', action)
-            $('#post-modalLabel').text('Sửa bài viết')
-            $('#add-modal').find('input[name="title"]').val(title)
-            $('.select-tag-add').val(tagIds)
-            $('.select-category-add').val(categoryIds)
-            $('.select-tag-add').trigger('change')
-            $('.select-category-add').trigger('change')
-            $('#submit-btn-add').text('Cập nhật')
-            $(".summernote-add").summernote("code", content);
-        }
 
         function renderValidateMessage(id, message)
         {
@@ -243,12 +288,6 @@
                                                 <li><a class="post-info__link btn-delete"
                                                         data-url="${response.orther.destroyPost}"><i
                                                             class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                                <li>
-                                                    <a style="color: #0c84ff; cursor: pointer;" class="post-info__link btn-edit-ajax">
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-                                                        Sửa bài viết
-                                                    </a>
-                                                </li>
                                             </ul>
                                         </div>
                                         <div class="panel panel-primary">
@@ -267,19 +306,6 @@
                                 </div>
                             `
                         $('.search-and-filter').after(html)
-                        $('.btn-edit-ajax').click(function (e) {
-                            tagIds = response.post.tags.map((tag) => tag.id)
-                            categoryIds = response.post.categories.map((category) => category.id)
-                            changeFormToEdit(response.post.title, response.post.content, categoryIds, tagIds, response.orther.updatePost)
-                            $('#create-post').click(function (e) { 
-                                resetForm(that, that.attr('action'))
-                            });
-                        });
-
-                        if(response.orther.isUpdate) {
-                            $('.post-ajax-' + response.post.id).remove()
-                            $('.search-and-filter').after(html)
-                        }
                     }
                 },
                 error: function (errors) {

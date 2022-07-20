@@ -56,6 +56,7 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        dd($request->all());
         $this->postService->create($request);
         return Redirect(route('admin.posts.index'))->with('success', 'Thêm mới bài viết thành công');
     }

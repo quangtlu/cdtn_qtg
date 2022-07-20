@@ -38,12 +38,6 @@
                                 <li><a class="post-info__link btn-delete"
                                         data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
                                             class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                <li>
-                                    <a id="edit-post" class="post-info__link btn-edit" data-toggle="modal" data-target="#edit-modal-{{ $post->id }}">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-                                        Sửa bài viết
-                                    </a>
-                                </li>
                             @endif
                         @endauth
                     </ul>
@@ -63,9 +57,6 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        @auth
-            @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
-        @endauth 
     @endforeach
     {{ $posts->withQueryString()->links() }}
 @endif
