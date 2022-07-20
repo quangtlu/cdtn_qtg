@@ -4,8 +4,9 @@
             <div class="w3agile-top">
                 <div class="col-md-3 w3agile-left">
                     <ul class="post-info">
-                        <li><a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i
-                                    class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
+                        <li class="user-post-info-wrap">
+                            <img class="user-post-avt" src="{{ asset('image/profile') .'/' . $post->user->image }}" alt="">
+                            <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
                         </li>
                         <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
