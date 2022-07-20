@@ -106,25 +106,41 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = $this->postService->create($request);
+        
         $message = 'Bài viết đang chờ phê duyệt';
         if(Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
+            $orther['getPostByUser'] = route('posts.getPostByUser', ['id' => $post->user_id]);
+            $orther['showPost'] =  route('posts.show', ['id' => $post->id]);
+            $orther['destroyPost'] =  route('posts.destroy', ['id' => $post->id]);
+            $orther['time'] =  $post->created_at->diffForHumans();
+            $orther['userName'] =  $post->user->name;
+            foreach (config('consts.post.status') as $status) {
+                if($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
+                    $orther['status']['name'] =  $status['name'];
+                    $orther['status']['className'] =  $status['className'];
+                    $orther['status']['classIcon'] =  $status['classIcon'];
+                }
+            }
             $message = 'Đăng bài thành công';
+            return response()->json(['post' => $post,'orther' =>  $orther, 'message' => $message]);        
+
         }
         else {
             $this->notificationService->notiRequestPost($post);
             $this->notificationService->sendNotiResult($post, '');
+            return response()->json(['message' => $message]);        
         }
-        return Redirect()->back()->with('success', $message);
-        
     }
 
 
-    public function update(UpdatePostRequest $request, $id)
+    public function update(StorePostRequest $request, $id)
     {
         $post = $this->postService->getById($id);
-        if ($post->user->id == Auth::user()->id) {
-            $this->postService->update($request, $id);
-            return Redirect()->back()->with('success', 'Cập nhật thành công');
+        if ($post->user_id == Auth::user()->id) {
+            $postUpdated = $this->postService->update($request, $id);
+            $postUpdated->tags;
+            $postUpdated->categories;
+            return response()->json(['post' => $postUpdated, 'message' => 'Cập nhật thành công']);
         } else {
             abort(403);
         }

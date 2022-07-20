@@ -75,11 +75,6 @@ $('.action-btn').click(function (e) {
             }
             alertMessage(response.message, 'success')
         },
-        error: function(errors) {
-            let message = errors.responseJSON.errors
-            console.log(errors);
-        }
-        
     });
 });
 
@@ -102,10 +97,6 @@ function actionDeletePost() {
                 success: function (res) {
                     that.closest('.wthree-top-1').fadeOut()
                     alertMessage(res.message, 'success')
-                },
-                error: function(errors) {
-                    let message = errors.responseJSON.errors.message
-                    alertMessage(message, 'error')
                 }
             })
 
@@ -133,10 +124,6 @@ function actionDeleteComment() {
                     that.closest('.comments-grid').fadeOut()
                     alertMessage(res.message, 'success')
                 },
-                error: function(errors) {
-                    let message = errors.responseJSON.errors.message
-                    alertMessage(message, 'error')
-                }
             })
 
         }

@@ -4,7 +4,7 @@
             <div class="w3agile-top">
                 <div class="col-md-3 w3agile-left">
                     <ul class="post-info">
-                        <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
+                        <li><a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i
                                     class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                         </li>
                         <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
@@ -38,12 +38,6 @@
                                 <li><a class="post-info__link btn-delete"
                                         data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
                                             class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                <li>
-                                    <a id="edit-post" class="post-info__link btn-edit" data-toggle="modal" data-target="#edit-modal-{{ $post->id }}">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-                                        Sửa bài viết
-                                    </a>
-                                </li>
                             @endif
                         @endauth
                     </ul>
@@ -51,8 +45,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <div class="col-md-9 w3agile-right post-content-limit-line">
-                            <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                            </h3>
+                            <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a></h3>
                             <div class="post-content-limit-line">{!! $post->content !!}</div>
                             <a class="agileits w3layouts" href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
                                 thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
@@ -64,9 +57,6 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        @auth
-            @include('home.component.posts.modal-edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags])
-        @endauth 
     @endforeach
     {{ $posts->withQueryString()->links() }}
 @endif
