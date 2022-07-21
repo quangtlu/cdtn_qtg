@@ -43,9 +43,10 @@ class UserController extends Controller
         } else if ($request->keyword) {
             $users = $this->userService->search($request);
         }
+
         $userAll = $this->userService->getAll();
 
-        return view('admin.users.index', compact('usersAll'));
+        return view('admin.users.index', compact('users', 'userAll'));
     }
 
     public function create()

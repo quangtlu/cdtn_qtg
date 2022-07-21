@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Chatroom;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ChatroomService
 
@@ -49,7 +50,8 @@ class ChatroomService
             $data = [
                 "name" => 'Phòng '.$indexChatroom,
                 "description" => $post->title,
-                "post_id" => $post->id
+                "post_id" => $post->id,
+                "connector" => Auth::user()->id,
             ];
             $userIds[] = $counselor->id;
             $userIds[] = $user->id;

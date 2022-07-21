@@ -48,7 +48,7 @@
                                                             value="{{ request()->name }}">
                                                             {{ $user->name }}</option>
                                                     @endforeach
-                                                    @foreach ($users as $user)
+                                                    @foreach ($userAll as $user)
                                                         <option value="{{ $user->name }}">{{ $user->name }}</option>
                                                     @endforeach
                                                 </select>

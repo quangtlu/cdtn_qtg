@@ -138,18 +138,10 @@
                 color: type == 'success' ? '#fff' : '#000',
             });
         }
-
-        function CKupdate(){
-            for ( instance in CKEDITOR.instances ){
-                CKEDITOR.instances[instance].updateElement();
-                CKEDITOR.instances[instance].setData('');
-            }
-        }
        
         function resetForm(formElement, action)
         {
             formElement.trigger("reset");
-            CKupdate()
             $(".select2_init").val([]).change();
         }
 
@@ -173,10 +165,9 @@
                 processData:false,
                 dataType: "json",
                 success: function (response) {
-                    console.log(response);
                     $('#add-modal').modal('hide')
-                    resetForm(that)
                     alertMessage(response.message, 'success')
+                    resetForm(that)
                     if(response.post.status == unsolvedStatus){
                         let showPostUrl = response.orther.showPost
                         var html = 
