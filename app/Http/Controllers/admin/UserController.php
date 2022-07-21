@@ -9,19 +9,23 @@ use App\Services\UserService;
 use function redirect;
 use function view;
 use App\Http\Controllers\Controller;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private $userService;
     private $roleSercice;
+    private $categoryService;
 
-    public function __construct(UserService $userService, RoleService $roleSercice)
+    public function __construct(UserService $userService, RoleService $roleSercice, CategoryService $categoryService)
     {
         $this->userService = $userService;
         $this->roleSercice = $roleSercice;
+        $this->categoryService = $categoryService;
         $roles = $this->roleSercice->getAll();
-        view()->share('roles', $roles);
+        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        view()->share(['roles' => $roles, 'categories' => $categories]);
     }
 
     public function index(Request $request)
@@ -77,6 +81,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $this->userService->delete($id);
+        $user = $this->userService->delete($id);
+        return response()->json(['user' => $user, 'message' => 'Xóa người dùng thành công']);
     }
 }

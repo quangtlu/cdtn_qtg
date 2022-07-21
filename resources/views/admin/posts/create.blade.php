@@ -36,23 +36,14 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Danh mục</label>
+                                <label>Mục lục</label>
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type === 'post')
-                                            @if ($category->name == config('consts.category_reference.name'))
-                                                @role('super-admin|editor')
-                                                    <option value="{{ $category->id }}"
-                                                        {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                        {{ $category->name }}</option>
-                                                @endrole
-                                            @else
-                                                <option value="{{ $category->id }}"
-                                                    {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                    {{ $category->name }}</option>
-                                            @endif
-                                        @endforeach
+                                            <option value="{{ $category->id }}"
+                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                                {{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -91,7 +82,7 @@
                 'placeholder': 'Chọn thẻ tag',
             })
             $('.select3_init').select2({
-                'placeholder': 'Chọn danh mục',
+                'placeholder': 'Chọn mục lục',
             })
         })
         $('#summernote').summernote({

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>
         @auth
@@ -20,7 +19,7 @@
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen"
         property="" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('image/logo.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Quang Vinh copyright" />
@@ -72,20 +71,6 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function() {
-            $(".dropdown").hover(
-                function() {
-                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                    $(this).toggleClass('open');
-                },
-                function() {
-                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                    $(this).toggleClass('open');
-                }
-            );
-        });
-    </script>
     <link rel="stylesheet" href="{{ asset('home/main.css') }}">
     @yield('css')
 
@@ -97,7 +82,7 @@
     <div class="container" id="container" data-messageSuccess="{{ Session::get('success') }}"
         data-messageError="{{ Session::get('error') }}">
         <div class="banner-btm-agile">
-            <div class="col-md-9 btm-wthree-left wow fadeInLeft">@yield('content')</div>
+            <div class="col-md-10 btm-wthree-left">@yield('content')</div>
             @include('partials.home.wthree_right')
             <div class="clearfix"></div>
         </div>
@@ -105,19 +90,16 @@
     @include('partials.home.footer')
     <script type="text/javascript">
         $(document).ready(function() {
-
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
-
         });
     </script>
 
     <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
     <script src="{{ asset('home/WOW-master/dist/wow.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('home/alert.js') }}"></script>
-    <script src="{{ asset('home/main.js') }}"></script>
+    <script type="module" src="{{ asset('home/main.js') }}"></script>
     <script>
         new WOW().init();
     </script>

@@ -48,12 +48,12 @@ class PermissionService
     public function create($request)
     {
         foreach ($request->action as $value) {
-            $this->permissionModel->create(['name' => $value.' '.$request->module]);
+            $this->permissionModel->create(['name' => $value.'-'.$request->module]);
         }
     }
 
     public function delete($id)
     {
-        $this->permissionModel->destroy($id);
+        return $this->permissionModel->destroy($id);
     }
 }

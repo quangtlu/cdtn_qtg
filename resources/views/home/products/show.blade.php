@@ -10,52 +10,55 @@
         <ul>
             <li>
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
-                    href="#">{{ $product->authors->count() }}Tác giả</a>
+                    href="#">{{ $product->authors->count() }} Tác giả</a>
             </li>
             <li title="
                 @foreach ($product->categories as $category) {{ $category->name }} | @endforeach">
                 <span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#">{{ $product->categories->count() }}
-                    Danh mục</a>
-            </li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a href="#">{{ $product->created_at }}</a>
+                    Mục lục</a>
             </li>
         </ul>
         <div class="row wow fadeInUp">
             <div class="col-md-12">
-                <h2 class="name">
-                    {{-- {{ $product->name }} --}}
-                </h2>
                 <hr />
                 <div class="">
                     <ul>
-                        <li>Tác phẩm: {{ $product->name }}</li>
+                        <li>
+                            <span class="product-info-label" >Tác phẩm: </span> 
+                            <span class="product-info-content">{{ $product->name }}</span> 
+                        </li>
                         <br>
                         <li style="margin-top: 10px">
-                            Tác giả:
+                            <span class="product-info-label" >Tác giả: </span>
                             @if ($product->authors->count())
                                 @foreach ($product->authors as $index => $author)
-                                    {{ $index != $product->authors->count() - 1 ? $author->name . ' ,' : $author->name }}
+                                    <span class="product-info-content">
+                                        {{ $product->owner->name ?? '' }}</span>  {{ $index != $product->authors->count() - 1 ? $author->name . ' ,' : $author->name }}
+                                    </span>
                                 @endforeach
                             @else
-                                Chưa xác định
+                                <span class="product-info-content">Chưa xác định</span>
                             @endif
                         </li>
                         <br>
                         <li style="margin-top: 10px">
-                            Chủ sở hữu: {{ $product->owner->name ?? '' }}
+                            <span class="product-info-label" >Chủ sở hữu: </span>
+                            <span class="product-info-content">{{ $product->owner->name ?? '' }}</span> 
                         </li>
                         <br>
                         <li style="margin-top: 10px">
-                            Ngày sáng tác: {{ $product->pub_date }}
+                            <span class="product-info-label" ><span class="fa fa-calendar" aria-hidden="true"></span> Ngày sáng xuất bản: </span>
+                            <span class="product-info-content">{{ $product->pub_date }}</span> 
                         </li>
                         <br>
                         <li style="margin: 10px 0">
-                            Ngày đăng kí bản quyền: {{ $product->regis_date }}
+                            <span class="product-info-label" ><span class="fa fa-calendar" aria-hidden="true"></span> Ngày đăng ký bản quyền: </span> 
+                            <span class="product-info-content">{{ $product->regis_date }}</span> 
                         </li>
                         <br>
                         <li>
-                            Mô tả:<br>
+                            <span class="product-info-label" >Mô tả tác phẩm: </span>
                             {!! $product->description !!}
                         </li>
                     </ul>
@@ -85,7 +88,7 @@
     <div class="category-tag">
         <ul class="tag">
             <li class="li-category-tag">
-                <span style="font-size:18px">Danh mục: </span>
+                <span style="font-size:18px">Mục lục: </span>
                 @foreach ($product->categories as $category)
                     <a
                         href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
@@ -110,7 +113,13 @@
                                 </div>
                                 <div class="modal-body" style="margin-left: 20px">
                                     <h4 style="padding-top:10px">Họ và tên: {{ $author->name }}</h4>
-                                    <h4 style="padding-top:10px">Giới tính: {{ $author->gender }}</h4>
+                                    <h4 style="padding-top:10px">Giới tính: 
+                                        @foreach (config('consts.user.gender') as $gender)
+                                            @if ($gender['value'] == $author->gender)
+                                                {{ $gender['name'] }}
+                                            @endif
+                                        @endforeach
+                                    </h4>
                                     <h4 style="padding-top:10px">Ngày sinh: {{ $author->dob }}</h4>
                                     <h4 style="padding-top:10px">Email: {{ $author->email }}</h4>
                                     <h4 style="padding-top:10px">Điện thoại: {{ $author->phone }}</h4>
@@ -145,7 +154,7 @@
                                 <div class="modal-body">
                                     <h4 style="padding-top: 10px">Họ tên: {{ $product->owner->name }}</h4>
                                     <h4 style="padding-top: 10px">Email: {{ $product->owner->email }}</h4>
-                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->name }}</h4>
+                                    <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->phone }}</h4>
                                     
                                 </div>
                                 <div class="modal-footer">
@@ -162,53 +171,7 @@
     </div>
     <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Tác phẩm liên quan</h3>
-        @if (isset($productRelates))
-            @foreach ($productRelates as $product)
-                <div class="wthree-top-1">
-                    <div class="w3agile-top">
-                        <div class="col-md-3 w3agile-left">
-                            <ul class="post-info">
-                                <li>
-                                    <a class="post-info__link"
-                                        href="{{ route('products.show', ['id' => $product->id]) }}">
-                                        <i class="fa  fa-user" aria-hidden="true"></i>
-                                        @if ($product->authors->count())
-                                            @foreach ($product->authors as $index => $author)
-                                                {{ $index != $product->authors->count() - 1 ? $author->name . ' ,' : $author->name }}
-                                            @endforeach
-                                        @else
-                                            Chưa xác định
-                                        @endif
-                                    </a>
-                                </li>
-                                <li><a class="post-info__link"
-                                        href="{{ route('products.show', ['id' => $product->id]) }}">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>{{ $product->created_at }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="col-md-9 w3agile-right">
-                                    <h3><a
-                                            href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->name }}</a>
-                                    </h3>
-                                    <div class="post-content-limit-line">{!! $product->description !!}</div>
-                                    <a class="agileits w3layouts"
-                                        href="{{ route('products.show', ['id' => $product->id]) }}">Xem
-                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                            aria-hidden="true"></span></a>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            @endforeach
-            {{ $productRelates->links() }}
-        @endif
+        @include('home.component.products.list', ['products' => $productRelates])
     </div>
 @endsection
 @section('js')
@@ -219,7 +182,7 @@
         $(window).load(function() {
 
             $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
+                $(this).closest('.comments-grid-right').children('.edit-comment-wrap').toggle()
                 $(this).closest('.comments-grid-right').children('.comment-content').toggle()
             })
             $('.rep-comment').on('click', function() {

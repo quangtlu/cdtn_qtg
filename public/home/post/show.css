@@ -10,7 +10,7 @@
     color: rgb(38, 182, 218) !important;
 }
 
-.edit-comment-form {
+.edit-comment-wrap {
     display: none;
 }
 
@@ -21,4 +21,7 @@
     padding: 5px 0;
     display: block;
     cursor: pointer;
+}
+.product-info-content {
+    color: #000 !important;
 }

@@ -48,14 +48,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Danh mục</label>
+                                <label>Mục lục</label>
                                 <select name="categoryIds[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        @if ($category->type == 'product')
-                                            <option  {{ $productOfCategories->contains('id', $category->id) ? 'selected' : '' }}
-                                            value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endif
+                                            <option {{ $productOfCategories->contains('id', $category->id) ? 'selected' : '' }}
+                                                value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('categoryIds')

@@ -33,7 +33,7 @@ class ProductController extends Controller
         $this->categoryService = $categoryService;
         $authors = $this->authorService->getAll();
         $owners = $this->ownerService->getAll();
-        $categories = $this->categoryService->getAll();
+        $categories = $this->categoryService->getBytype([config('consts.category.type.product.value')]);
         view()->share(['authors' => $authors, 'owners' => $owners, 'categories' => $categories]);
     }
 
@@ -96,6 +96,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $this->productService->delete($id);
+        $product = $this->productService->delete($id);
+        return response()->json(['product' => $product, 'message' => 'Xóa tác phẩm thành công']);
     }
 }

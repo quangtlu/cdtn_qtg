@@ -14,7 +14,10 @@ class PostCategorySeeder extends Seeder
      */
     public function run()
     {
-        $category = Category::create(config('consts.category_reference'));
+        $category = Category::create([
+            'name' => config('consts.category.type.post_reference.name'),
+            'type' => config('consts.category.type.post_reference.value'),
+        ]);
         Post::insert(config('consts.post_reference'));
         $postIds = [1, 2, 3];
         foreach($postIds as $postId) {

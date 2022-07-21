@@ -65,7 +65,7 @@
                     <div class="">
                         <ul>
                             <li>
-                                Tác giả: {{ $post->user->name}}
+                                Tác giả: {{ $post->user->name ?? 'Không xác định'}}
                             </li>
                             <li>
                                 Thẻ tag:
@@ -78,7 +78,7 @@
                                 @endphp
                             </li>
                             <li>
-                                Danh mục:
+                                Mục lục:
                                 @php
                                 $categoriesName = [];
                                     foreach ($post->categories as $categoryName){

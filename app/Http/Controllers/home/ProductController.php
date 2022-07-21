@@ -32,32 +32,40 @@ class ProductController extends Controller
         $this->categoryService = $categoryService;
         $this->ownerService = $ownerService;
         $authors = $this->authorService->getAll();
-        $categories = $this->categoryService->getAll();
+        $categories = $this->categoryService->getBytype([config('consts.category.type.product.value')]);
         $owners = $this->ownerService->getAll();
         view()->share(['authors' => $authors, 'categories' => $categories, 'owners' => $owners]);
     }
 
     public function index(Request $request)
     {
-        $products = $this->productService->getPaginate();
-        if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
-            $products = $this->productService->searchAndFilter($request);
-        }
-        else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
-            $products = $this->productService->filter($request);
-        }
-        else if ($request->keyword) {
-            $products = $this->productService->search($request);
-        }
+        try {
+            $products = $this->productService->getPaginate();
+            if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
+                $products = $this->productService->searchAndFilter($request);
+            }
+            else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
+                $products = $this->productService->filter($request);
+            }
+            else if ($request->keyword) {
+                $products = $this->productService->search($request);
+            }
 
-        if($request->sort) {
-            $products = $this->productService->sortProductPublicRegisDate($request->sort);
-        }
+            if($request->sort) {
+                $products = $this->productService->sortProductPublicRegisDate($request->sort);
+            }
 
-        if ($products->count() < 1) {
-            return redirect()->route('products.index')->with('error', 'Không có tác phẩm nào phù hợp');
+            if ($products->count() < 1) {
+                return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
+            }
+
+            return view('home.products.index', compact( 'products'));
+
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        return view('home.products.index', compact( 'products', 'authors', 'categories', 'owners',));
+        
+        
     }
 
     public function show($id)

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('image/logo.png') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -27,7 +27,7 @@
     <script src={{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
     <script src={{ asset('AdminLTE/dist/js/adminlte.min.js') }}></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('admin/alert.js') }}"></script>
+    <script type="module" src="{{ asset('admin/main.js') }}"></script>
 
     @yield('js')
 </body>

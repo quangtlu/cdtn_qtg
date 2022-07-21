@@ -41,7 +41,13 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-md-12">
-                                    <label class="labels">Giới tính: {{ $profile->gender }}</label>
+                                    <label class="labels">Giới tính:
+                                        @foreach (config('consts.user.gender') as $gender)
+                                            @if ($gender['value'] == $profile->gender)
+                                                {{ $gender['name'] }}
+                                            @endif
+                                        @endforeach
+                                    </label>
                                 </div>
                             </div>
                             <div class="row my-3">
@@ -59,13 +65,20 @@
                                     <label class="labels">Điện thoại: {{ $profile->phone }}</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row btn-edit">
-                        <div class="text-center">
-                            <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
-                                <button class="btn btn-info">Chỉnh sửa</button>
-                            </a>
+                            @role('counselor')
+                                <div class="row my-3">
+                                    <div class="col-md-12">
+                                        <ul id="category" class="tag" style="margin-top: 0 !important">
+                                            <label class="labels">Mục lục:</label>
+                                            @foreach ($profile->categories as $category)
+                                                <li class="li-category-tag">
+                                                    <a class="m-3" href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name ?? 'Chưa rõ' }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endrole
                         </div>
                     </div>
                 </div>
@@ -79,7 +92,15 @@
                     </div>
                 </div>
             </div>
+            <div class="row btn-edit">
+                <div class="text-center">
+                    <a href="{{ route('profile.edit', ['id' => $profile->id]) }}">
+                        <button class="btn btn-info">Chỉnh sửa</button>
+                    </a>
+                </div>
+            </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
 @endsection
+

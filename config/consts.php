@@ -3,27 +3,37 @@
 $BASE_PATH_IMAGE = 'image';
 
 return [
+    'message' => [
+        'error' => [
+            'getData' => 'Có lỗi xảy ra trong quá trình lấy dữ liệu',
+            'connect' => 'Có lỗi xảy ra trong quá trình kết nối',
+        ]
+    ],
     'post' => [
         'status' => [
             'request' => [
                 'value' => 1,
                 'name' => 'Chưa được phê duyệt',
-                'class' => 'btn btn-sm btn-warning'
+                'classIcon' => 'fa-circle text-warning',
+                'className' => 'status-name-link text-warning',
             ],
             'refuse' => [
                 'value' => 2,
                 'name' => 'Đã bị từ chối',
-                'class' => 'btn btn-sm btn-danger'
+                'classIcon' => 'fa-times-circle',
+                'className' => 'status-name-link text-danger',
             ],
             'unsolved' => [
                 'value' => 3,
                 'name' => 'Chưa được giải đáp',
-                'class' => 'btn btn-sm btn-primary'
+                'classIcon' => 'fa-question-circle',
+                'className' => 'status-name-link text-primary',
             ],
             'solved' => [
+                'value' => 4,
                 'name' => 'Đã được giải đáp',
-                'class' => 'btn btn-sm btn-success',
-                'value' => 4
+                'classIcon' => 'fa-check-circle',
+                'className' => 'status-name-link text-success',
             ],
         ],
         'action' => [
@@ -36,11 +46,6 @@ return [
         'posts' => $BASE_PATH_IMAGE . '/posts/',
         'products' => $BASE_PATH_IMAGE . '/products/',
     ],
-    'type' => [
-        'post',
-        'product'
-    ],
-
     'owner' => [
         'all' => 0,
         'none' => -1, 
@@ -48,6 +53,20 @@ return [
 
     'category' => [
         'all' => 0,
+        'type' => [
+            'post' => [
+                'value' => 1,
+                'name' => 'Bài viết'
+            ],
+            'post_reference' => [
+                'value' => 2,
+                'name' => 'Tài liệu tham khảo'
+            ],
+            'product' => [
+                'value' => 3,
+                'name' => 'Tác phẩm'
+            ],
+        ],
     ],
 
     'author' => [
@@ -60,12 +79,18 @@ return [
 
     'user' => [
         'all' => 0,
-    ],
-
-    'category_reference' => [
-        'name' => 'Tài liệu tham khảo',
-        'parent_id' => 0,
-        'type' => 'post'
+        'gender' => [
+            'male' => [
+                'value' => 1,
+                'name' => 'Nam',
+                'image' => 'avatar-nam.jpg'
+            ],
+            'female' => [
+                'value' => 2,
+                'name' => 'Nữ',
+                'image' => 'avatar-nu.jpg'
+            ]
+        ]
     ],
     'post_reference' => [
         [

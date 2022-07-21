@@ -56,7 +56,7 @@ class OwnerService
     }
 
     public function delete($id){
-        $this->ownerModel->destroy($id);
+        return $this->ownerModel->destroy($id);
     }
 
     public function filter($request)

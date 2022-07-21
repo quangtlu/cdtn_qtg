@@ -4,7 +4,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home.index') }}" class="brand-link">
-        <img src={{ asset('logo.png') }} alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+        <img src={{ asset('image/logo.gif') }} alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">Trang chủ</span>
     </a>
 
@@ -25,7 +25,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                @can('admin list user')
+                @can('list-user')
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}"
                             class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}">
@@ -36,51 +36,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list author')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.authors.index') }}"
-                            class="nav-link {{ Request::is('admin/authors*') ? 'active' : '' }} ">
-                            <i class="fas fa-user-edit"></i>
-                            <p>
-                                Quản lý tác giả
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('admin list product')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.products.index') }}"
-                            class="nav-link {{ Request::is('admin/products*') ? 'active' : '' }}">
-                            <i class="fas fa-book"></i>
-                            <p>
-                                Quản lý tác phẩm
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('admin list owner')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.owners.index') }}"
-                            class="nav-link {{ Request::is('admin/owners*') ? 'active' : '' }}">
-                            <i class="fas fa-user-tie"></i>
-                            <p>
-                                Quản lý chủ sở hữu
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('admin list post')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.posts.index') }}"
-                            class="nav-link {{ Request::is('admin/posts*') ? 'active' : '' }}">
-                            <i class="fas fa-book"></i>
-                            <p>
-                                Quản lý bài viết
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('admin list role')
+                @can('list-role')
                     <li class="nav-item">
                         <a href="{{ route('admin.roles.index') }}"
                             class="nav-link {{ Request::is('admin/roles*') ? 'active' : '' }}">
@@ -91,7 +47,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('admin list permission')
+                @can('list-permission')
                     <li class="nav-item">
                         <a href="{{ route('admin.permissions.index') }}"
                             class="nav-link {{ Request::is('admin/permissions*') ? 'active' : '' }}">
@@ -102,7 +58,51 @@
                         </a>
                     </li>
                 @endcan
-                @can('list faq')
+                @can('list-author')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.authors.index') }}"
+                            class="nav-link {{ Request::is('admin/authors*') ? 'active' : '' }} ">
+                            <i class="fas fa-user-edit"></i>
+                            <p>
+                                Quản lý tác giả
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-product')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.products.index') }}"
+                            class="nav-link {{ Request::is('admin/products*') ? 'active' : '' }}">
+                            <i class="fas fa-book"></i>
+                            <p>
+                                Quản lý tác phẩm
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-owner')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.owners.index') }}"
+                            class="nav-link {{ Request::is('admin/owners*') ? 'active' : '' }}">
+                            <i class="fas fa-user-tie"></i>
+                            <p>
+                                Quản lý chủ sở hữu
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-post')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.posts.index') }}"
+                            class="nav-link {{ Request::is('admin/posts*') ? 'active' : '' }}">
+                            <i class="fas fa-book"></i>
+                            <p>
+                                Quản lý bài viết
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-faq')
                     <li class="nav-item">
                         <a href="{{ route('admin.faqs.index') }}"
                             class="nav-link {{ Request::is('admin/faqs*') ? 'active' : '' }}">
@@ -113,38 +113,45 @@
                         </a>
                     </li>
                 @endcan
+                @can('list-tag')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.tags.index') }}"
+                            class="nav-link {{ Request::is('admin/tags*') ? 'active' : '' }}">
+                            <i class="fas fa-tags"></i>
+                            <p>
+                                Quản lý Tags
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-category')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.categories.index') }}"
+                            class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
+                            <i class="fas fa-list-alt"></i>
+                            <p>
+                                Quản lý mục lục
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('list-chatroom')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.chatrooms.index') }}"
+                            class="nav-link {{ Request::is('admin/chatrooms*') ? 'active' : '' }}">
+                            <i class="fas fa-comments"></i>
+                            <p>
+                                Quản lý phòng tư vấn
+                            </p>
+                        </a>
+                    </li>                    
+                @endcan
                 <li class="nav-item">
-                    <a href="{{ route('admin.tags.index') }}"
-                        class="nav-link {{ Request::is('admin/tags*') ? 'active' : '' }}">
-                        <i class="fas fa-tags"></i>
-                        <p>
-                            Quản lý Tags
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.categories.index') }}"
-                        class="nav-link {{ Request::is('admin/categories*') ? 'active' : '' }}">
-                        <i class="fas fa-list-alt"></i>
-                        <p>
-                            Quản lý danh mục
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.chatrooms.index') }}"
-                        class="nav-link {{ Request::is('admin/chatrooms*') ? 'active' : '' }}">
-                        <i class="fas fa-comments"></i>
-                        <p>
-                            Quản lý phòng tư vấn
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-danger nav-link" href="{{ route('logout') }}"
+                    <a class="nav-link text-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                        Đăng xuất<i class="fas fa-sign-out-alt ml-2"></i>
+                        <i class="fas fa-sign-out-alt"></i>
+                        <p>Đăng xuất</p>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

@@ -10,7 +10,7 @@
 
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font_awesome/all.min.css') }}">
-        <link rel="icon favicon" href="{{ asset('images/favicon.png') }}">
+        <link rel="icon" href="{{ asset('image/logo.png') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>

@@ -1,57 +1,40 @@
 @extends('layouts.home')
 @section('title', $post->title)
 @section('css')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <div class="single-left1">
-        <h3 class="title-relate">{{ $post->title }}</h3>
-        <ul>
-            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a
-                    href="{{ route('posts.getPostByUser', ['id' => $post->user->id]) }}">{{ $post->user->name }}</a>
+    <div id="post-info-wrap" class="single-left1 panel" style="padding: 10px !important">
+        <h3 id="post-title" class="title-relate">{{ $post->title }}</h3>
+        <ul class="post-info-list">
+            <li class="user-post-info-wrap">
+                <img class="user-post-avt" src="{{ asset('image/profile') .'/' . $post->user->image }}" alt="">
+                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
             </li>
             <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
-                    href="#tag">{{ $post->tags->count() }}
-                    Tags</a>
+                    href="#tag" id="number-tag">{{ $post->tags->count() }}
+                    Tag</a>
             </li>
-            <li><span class="fa fa-comment" aria-hidden="true"></span><a
+            <li><span class="fa fa-comment" aria-hidden="true"></span><a id="number-comment"
                     href="#{{ $post->comments->count() > 0 ? $post->comments->first()->id : 'comments' }}">{{ $post->comments->count() }}
                     bình
                     luận</a></li>
-            <li><span class="fa fa-list-alt" aria-hidden="true"></span><a
-                    href="#category">{{ $post->categories->count() }} Danh mục</a></li>
-            <li><span class="fa fa-calendar" aria-hidden="true"></span><a
+            <li><span class="fa fa-list-alt" aria-hidden="true"></span><a id="number-category"
+                    href="#category">{{ $post->categories->count() }} Mục lục</a></li>
+            <li><span class="fa fa-clock-o" aria-hidden="true"></span><a
                     href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->created_at->diffForHumans() }}</a>
             </li>
         </ul>
-        <a href="
-                @auth
-                    @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
-                @endauth
-                @guest
-                    {{ route('posts.show', ['id' => $post->id]) }} 
-                @endguest
-            "
-            class=" 
-                @foreach (config('consts.post.status') as $item)
-                    @if ($post->status == $item['value'])
-                        {{ $item['class'] }} @endif
-                @endforeach
-            ">
-            @foreach (config('consts.post.status') as $item)
-                @if ($post->status == $item['value'])
-                    {{ $item['name'] }}
-                @endif
-            @endforeach
-        </a>
-        <div class="panel">{!! $post->content !!}</div>
+        <div id="post-content" style="padding-top: 10px">{!! $post->content !!}</div>
     </div>
-    @if ($post->image != null)
-        <div class="w3agile-top wow fadeInUp">
+    @if ($post->image)
+        <div id="post-image-wrap" class="w3agile-top wow fadeInUp">
             <section class="slider">
                 <div class="flexslider">
-                    <ul class="slides">
+                    <ul id="slide-image" class="slides">
                         @foreach (explode('|', $post->image) as $image)
                             <li>
                                 <div class="w3agile_special_deals_grid_left_grid">
@@ -66,31 +49,115 @@
         </div>
     @endif
     <div class="category-tag">
-        <ul id="category" class="tag">
-            <li class="li-category-tag">
-                <span style="font-size:18px">Danh mục: </span>
-                @foreach ($post->categories as $category)
-                    <a
-                        href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                @endforeach
-            </li>
+        <ul id="category-list" class="tag">
+            <span style="font-size:18px">Mục lục: </span>
+            @foreach ($post->categories as $category)
+                <li class="li-category-tag">
+                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                </li>   
+            @endforeach
         </ul>
-        <ul id="tag" class="tag" style="margin-top:0 !important">
-            <li class="li-category-tag">
-                <span style="margin-bottom:5px; font-size:18px">Tags: </span>
-                @foreach ($post->tags as $tag)
+        <ul id="tag-list" class="tag" style="margin-top:0 !important; margin-bottom:0 !important">
+            <span style="margin-top:10px; font-size:18px">Tags: </span>
+            @foreach ($post->tags as $tag)
+                <li class="li-category-tag">
                     <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}">{{ $tag->name }}</a>
-                @endforeach
-            </li>
+                </li>
+            @endforeach
         </ul>
+        @if (!$post->categories->contains('type', config('consts.category.type.post_reference.value')))
+            <div class="post-status-wrap">
+                <span style="margin-top:10px; font-size:18px">Trạng thái : </span>
+                @foreach (config('consts.post.status') as $item)
+                    @if ($post->status == $item['value'])
+                        <a class="{{ $item['className'] }}"
+                            href="
+                        {{ Auth::user() &&
+                        Auth::user()->id == $post->user_id &&
+                        ($post->status == config('consts.post.status.unsolved.value') ||
+                            $post->status == config('consts.post.status.solved.value'))
+                            ? route('posts.toogleStatus', ['id' => $post->id])
+                            : route('posts.show', ['id' => $post->id]) }}">
+                            <i class="fa {{ $item['classIcon'] }}" aria-hidden="true"></i>
+                            {{ $item['name'] }}</a>
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        @endif
     </div>
     @auth
-        @if (Auth::user()->id == $post->user_id && $post->chatroom)
-            <a class="btn btn-success" style="margin-top: 10px"
-                href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
-                    class="fa fa-comments"></i></a>
-        @else
-            @role('mod|super-admin')
+        @if (Auth::user()->id == $post->user_id)
+            @if ($post->chatroom)
+                <a class="btn btn-success" style="margin-top: 10px"
+                    href="{{ route('messenger.show', ['id' => $post->chatroom->id]) }}">Trò chuyện với chuyên gia tư vấn <i
+                        class="fa fa-comments"></i></a>
+            @endif
+            <button style="margin-top:10px" id="edit-post" class="btn btn-primary" data-toggle="modal"
+                data-target="#edit-modal">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                Sửa bài viết
+            </button>
+            {{-- modal edit post --}}
+            <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="post-modalLabel">Sửa bài viết</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="edit-post-form" action="{{ route('posts.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div id="title" class="form-group">
+                                    <label for="title">Tiêu đề</label>
+                                    <input  type="text" name="title" class="form-control"
+                                        value="{{ old('title') ? old('title') : $post->title}}">
+                                    @error('title')
+                                        <span class="mt-1 text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div id="tag_id" class="form-group">
+                                    <label>Thẻ tag</label>
+                                    <select name="tag_id[]" class="form-control select2_init" multiple>
+                                        @foreach ($tags as $tag)
+                                            <option {{ $post->tags->contains($tag) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div  id="category_id" class="form-group">
+                                    <label for="category">Mục lục</label>
+                                    <select name="category_id[]" class="form-control select2_init" multiple>
+                                        @foreach ($categories as $category)
+                                            @if ($category->type == config('consts.category.type.post_reference.value'))
+                                                @role('admin|editor')
+                                                    <option {{ $post->categories->contains($category) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endrole
+                                            @else
+                                                <option {{ $post->categories->contains($category) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nội dung</label>
+                                    <textarea class="summernote" value="{{ old('content') ?? $post->content }}" name="content" cols="30" rows="5">{{ $post->content }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Ảnh</label>
+                                    <input type="file" multiple class="form-control-file" name="image[]" id="image">
+                                </div>
+                                <button type="submit" id="submit-btn-edit" class="btn-modal-post btn btn-success mb-2">Cập nhật</button>
+                                <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Hủy</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        @endif
+        @role('mod|admin')
+            @if ($post->user_id != Auth::user()->id)
                 @if ($post->chatroom)
                     <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
                             class="fa fa-check-circle" aria-hidden="true"></i></button>
@@ -111,7 +178,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label>Chuyên gia tư vấn</label>
-                                            <select name="counselor_id" class="form-control select2_init">
+                                            <select name="counselor_id" class="form-control">
                                                 @foreach ($counselors as $counselor)
                                                     <option value="{{ $counselor->id }}">{{ $counselor->name }}</option>
                                                 @endforeach
@@ -119,26 +186,24 @@
                                         </div>
                                         <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
                                             nối</button>
-                                        <button type="button" class="btn-modal-post btn btn-danger"
-                                            data-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endif
-            @endrole
-        @endif
+            @endif
+        @endrole
     @endauth
-
     {{-- Comment --}}
     <div id="comments" class="comments wow fadeInUp">
         <h3 class="title-relate" style="margin-top: 50px">Bình luận</h3>
-        <div class="comments-grids">
+        <div id="comment-wrap" class="comments-grids">
             @foreach ($post->comments->sortByDesc('status')->all() as $comment)
                 <div id="{{ $comment->id }}" class="comments-grid" style="margin-top: 25px; margin-bottom:5px">
                     <div class="comments-grid-left">
-                        <img src="/image/profile/{{ $comment->user->image }}" alt=" " class="img-responsive" />
+                        <img src="{{asset('image/profile') .'/'. $comment->user->image }}" alt=" " class="img-responsive" />
                     </div>
                     <div class="comments-grid-right panel">
                         <h4><a
@@ -157,19 +222,21 @@
                                     <a class="rep-comment comment-action-link"
                                         data-userName="{{ $comment->user->name }}">Trả
                                         lời <i class="fa fa-mail-reply"></i></a>
+                                    @if ($comment->user->id == Auth::user()->id)
+                                        |
+                                    @endif
                                 @endauth
                                 @guest
                                     <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>
                                 @endguest
-                                <i>|</i>
                             </li>
-                            @if ($comment->status == config('consts.post.status.solved.value'))
-                                <li><a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
+                            @if ($comment->status == config('consts.post.status.solved.value') && 
+                                !$post->categories->contains('type', config('consts.category.type.post_reference.value')))
+                                <li>| <a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
                                         class="comment-action-link post-status-solved">Hữu ích nhất
                                         <i class="fa fa-check-circle" aria-hidden="true"></i>
                                     </a></li>
                             @endif
-                            </li>
                             @auth
                                 @if ($comment->user->id == Auth::user()->id)
                                     <li><a class="comment-action-link btn-delete-comment"
@@ -177,11 +244,14 @@
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>|</li>
                                     </li>
-                                    <li><a class="comment-action-link btn-edit-comment">Chỉnh sửa
+                                    <li><a data-id="{{ $comment->id }}" class="comment-action-link btn-edit-comment">Chỉnh sửa
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a></li>
-                                    </li>
-                                @elseif($post->user_id == Auth::user()->id && $post->status != config('consts.post.status.solved.value'))
+                                    </li>                                    
+                                @endif
+                                @if($post->user_id == Auth::user()->id && $post->status == config('consts.post.status.unsolved.value') &&
+                                    !$post->categories->contains('type', config('consts.category.type.post_reference.value'))
+                                    )
                                     <li><a href="{{ route('comments.toogleStatus', ['id' => $comment->id]) }}"
                                             class="comment-action-link post-status-solved">Hữu ích nhất
                                             <i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -194,14 +264,13 @@
                         <p class="comment-content">{{ $comment->comment }}</p>
                         @auth
                             @if ($comment->user->id == Auth::user()->id)
-                                <div class="leave-coment-form edit-comment-form">
-                                    <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
+                                <div class="leave-coment-form edit-comment-wrap">
+                                    <form class="edit-comment-form" action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post">
                                         @csrf
-                                        <textarea name="comment" placeholder="Nhập bình luận..." required="">{{ $comment->comment }}</textarea>
+                                        <textarea name="comment" placeholder="Nhập bình luận...">{{ $comment->comment }}</textarea>
                                         @error('comment')
                                             <span class="mt-1 text-danger">{{ $message }}</span>
                                         @enderror
-                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                                         <div class="w3_single_submit">
                                             <input type="submit" value="Cập nhật">
@@ -216,129 +285,246 @@
             @endforeach
         </div>
     </div>
-    @guest
-        <a class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để bình luận<span
-                class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
-    @endguest
-    @auth
-        <div class="leave-coment-form wow fadeInUp">
-            <form action="{{ route('comments.store') }}" method="post">
+    <div class="leave-coment-form wow fadeInUp">
+        @auth
+            <form id="form-create-comment" action="{{ route('comments.store') }}" method="post">
                 @csrf
-                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..." required=""></textarea>
+                <textarea id="leave-coment" name="comment" placeholder="Nhập bình luận..."></textarea>
                 @error('comment')
                     <span class="mt-1 text-danger">{{ $message }}</span>
                 @enderror
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                 <div class="w3_single_submit">
                     <input type="submit" value="Bình luận">
                 </div>
             </form>
-        </div>
-    @endauth
+        @endauth
+        @guest
+            <a style="margin-bottom: 10px" class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để bình luận<span class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
+        @endguest
+    </div>
     <div class="wow fadeInUp" style="margin-top: 30px">
         <h3 class="title-relate">Bài viết liên quan</h3>
-        @if (isset($postRelates))
-            @foreach ($postRelates as $post)
-                <div class="wthree-top-1">
-                    <div class="w3agile-top">
-                        <div class="col-md-3 w3agile-left">
-                            <ul class="post-info">
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa  fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
-                                </li>
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-calendar" aria-hidden="true"></i>{{ $post->created_at }}</a>
-                                </li>
-                                <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}"><i
-                                            class="fa fa-comment" aria-hidden="true"></i>{{ $post->comments->count() }}
-                                        BÌNH LUẬN</a></li>
-                                @auth
-                                    @if (Auth::user()->id == $post->user->id)
-                                        <li><a class="post-info__link btn-delete"
-                                                data-url="{{ route('posts.destroy', ['id' => $post->id]) }}"><i
-                                                    class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                        <li><a id="edit-post" class="post-info__link btn-edit" data-toggle="modal"
-                                                data-target="#post-modal" data-title="{{ $post->title }}"
-                                                data-content="{{ $post->content }}" data-id="{{ $post->id }}}"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa bài viết</a>
-                                        </li>
-                                    @endif
-                                @endauth
-                                <li>
-                                    <a href="
-                                            @auth
-                                                @if ($post->status == config('consts.post.status.unsolved.value') || $post->status == config('consts.post.status.solved.value')) {{ Auth::user()->id == $post->user_id ? route('posts.toogleStatus', ['id' => $post->id]) : route('posts.show', ['id' => $post->id]) }} @endif 
-                                            @endauth
-                                            @guest
-                                                {{ route('posts.show', ['id' => $post->id]) }} 
-                                            @endguest
-                                        "
-                                        class="post-status 
-                                            @foreach (config('consts.post.status') as $item)
-                                                @if ($post->status == $item['value'])
-                                                    {{ $item['class'] }} @endif
-                                            @endforeach
-                                        ">
-                                        @foreach (config('consts.post.status') as $item)
-                                            @if ($post->status == $item['value'])
-                                                {{ $item['name'] }}
-                                            @endif
-                                        @endforeach
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="col-md-9 w3agile-right">
-                                    <h3><a
-                                            href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
-                                    </h3>
-                                    <div class="post-content-limit-line">{!! $post->content !!}</div>
-                                    <a class="agileits w3layouts"
-                                        href="{{ route('posts.show', ['id' => $post->id]) }}">Xem
-                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                            aria-hidden="true"></span></a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            @endforeach
-            {{ $postRelates->links() }}
-        @endif
+        @include('home.component.posts.list', ['posts' => $postRelates])
     </div>
 @endsection
 @section('js')
-    <script defer src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('template_blog/js/jquery.flexslider.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="module" src="{{ asset('js/alert.js') }}"></script>
     <script type="text/javascript">
-        $(window).load(function() {
+    $('#header-search-form').attr('action', '{{ route('posts.index') }}');
+    $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
+    // init libary
+        $('.flexslider').flexslider({
+            animation: "slide",
+            start: function(slider) {
+                $('body').removeClass('loading');
+            }
+        });
+        $('.summernote').summernote({
+            height: 200
+        });
+        $('.select2_init').select2()
 
-            $('.btn-edit-comment').on('click', function() {
-                $(this).closest('.comments-grid-right').children('.edit-comment-form').toggle()
-                $(this).closest('.comments-grid-right').children('.comment-content').toggle()
-            })
-            $('.rep-comment').on('click', function() {
-                var userName = $(this).attr('data-userName')
-                $('#leave-coment').text(userName)
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: $("#leave-coment").offset().top
-                }, 1000);
+        function alertMessage(message, type, time)
+        {
+            Swal.fire({
+                toast: true,
+                icon: type == 'success' ? 'success' : 'error',
+                title: message,
+                position: 'top',
+                timer: 2000,
+                showConfirmButton: false,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                },
+                background: type == 'success' ? '#21ba45' : '#fff',
+                color: type == 'success' ? '#fff' : '#000',
+            });
+        }
 
-            })
-            $('.flexslider').flexslider({
-                animation: "slide",
-                start: function(slider) {
-                    $('body').removeClass('loading');
+        function renderValidateMessage(id, message)
+        {
+            if(!$('#error-' + id).length) {
+                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`); 
+            }
+        }
+
+    // function 
+        function repComment() {
+            let userName = $(this).attr('data-userName')
+            $('#leave-coment').text(userName)
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#leave-coment").offset().top
+            }, 1000);
+        }
+        function toogleEditCommentWrap() {
+            $(this).closest('.comments-grid-right').children('.edit-comment-wrap').fadeToggle()
+        }
+        function updateComment(e) {
+            e.preventDefault();
+            const action = $(this).attr('action')
+            const that = $(this)
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function (response) {
+                    const newComment = response.comment.comment
+                    const message = response.message
+                    that.closest('.comments-grid-right').children('.comment-content').text(newComment)
+                    that.closest('.edit-comment-wrap').fadeOut()
+                    alertMessage(message, 'success')
+                },
+                error: function(errors) {
+                    let message = errors.responseJSON.errors.comment
+                    alertMessage(message, 'error')
                 }
             });
+        }
 
+        $('.rep-comment').on('click', repComment)
+
+        // call update comment
+        $('.btn-edit-comment').on('click', toogleEditCommentWrap)
+        $('.edit-comment-form').submit(updateComment);
+
+        // call create comment 
+        $('#form-create-comment').submit(function (e) { 
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('comments.store') }}",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function (res) {
+                    const comment = res.comment
+                    const orther = res.ortherData
+                    const userAuthId = @auth {{ Auth::user()->id }} @endauth
+
+                    $('#form-create-comment').trigger("reset");
+
+                    var html = `
+                        <div id="${comment.id}" class="comments-grid animate__animated animate__fadeInUp" style="margin-top: 25px; margin-bottom:5px">
+                            <div class="comments-grid-left">
+                                <img src="${orther.userImage}" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="comments-grid-right panel">
+                                <h4><a
+                                        href="${orther.GetPostByUser}">${comment.user.name}</a>
+                                </h4>`
+
+                                if (comment.user_id == comment.post.user_id) {
+                                    html += ` <h6 style="color:#4599ff; background-color:#c5defd; padding: 5px 10px; width:fit-content; border-radius:6px">
+                                        Tác giả <i class="fa fa-pencil-square-o" aria-hidden="true"></i></h6>`
+                                }
+
+                                html += `
+                                <ul>
+                                    <li><a href="#${comment.id}">${orther.time}</a><i>|</i>
+                                    </li>
+                                    <li>
+                                        <a class="rep-comment comment-action-link"
+                                            data-userName="${comment.user.name}">Trả
+                                            lời <i class="fa fa-mail-reply"></i></a>
+                                            |
+                                    </li>
+                                    <li><a class="comment-action-link btn-delete-comment"
+                                            data-url="${orther.destroyComment}">Xóa
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>|</li>
+                                    </li>
+                                    <li><a class="comment-action-link btn-edit-comment btn-edit-comment-ajax">Chỉnh sửa
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a></li>
+                                    </li>
+                                </ul>
+                                <p class="comment-content">${comment.comment}</p>
+                                    <div class="leave-coment-form edit-comment-wrap">
+                                        <form class="edit-comment-form" action="${orther.updateComment}" method="post">
+                                            @csrf
+                                            <textarea name="comment" placeholder="Nhập bình luận...">${comment.comment}</textarea>
+                                            @error('comment')
+                                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="hidden" name="post_id" value="${comment.post.id}">
+                                            <div class="w3_single_submit">
+                                                <input type="submit" value="Cập nhật">
+                                            </div>
+                                        </form>
+                                    </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>`
+
+                    
+                    $('#comment-wrap').append(html)
+                    let totalCommentBefore = Number($('#number-comment').text().replace(/\D/g, "")) 
+                    $('#number-comment').text(totalCommentBefore + 1 + ' bình luận')
+                    $('.btn-edit-comment-ajax').on('click', toogleEditCommentWrap)
+                    $('.edit-comment-form').submit(updateComment)
+                    $('.rep-comment').on('click', repComment)
+                },
+                error: function(errors) {
+                    let message = errors.responseJSON.errors.comment
+                    alertMessage(message, 'error')
+                }
+            });
         });
+
+        $('#edit-post-form').submit(function (e) { 
+            e.preventDefault();
+            const referenceType = {{ config('consts.category.type.post_reference.value') }}
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: new FormData(this),
+                contentType:false,
+                processData:false,
+                dataType: "json",
+                success: function (response) {
+                    $('#edit-modal').modal('hide')
+                    alertMessage(response.message, 'success')
+                    post =  response.post
+                    $('#post-title').text(post.title)
+                    $('#post-content').html(post.content)
+                    $('#number-tag').text(post.tags.length + ' Tag')
+                    $('#number-category').text(post.categories.length + ' Mục lục')
+
+                    var htmlTag = `<span style="margin-top:10px; font-size:18px">Tags: </span>`
+                    var htmlCategory = `<span style="margin-top:10px; font-size:18px">Mục lục: </span>`
+                    if(post.tags.length) {
+                        post.tags.forEach(tag => {
+                            htmlTag += `<li class="li-category-tag"><a href="/posts/tag/${tag.id}">${tag.name}</a></li>`
+                        });
+                    }
+                    if(post.categories.length) {
+                        post.categories.forEach(category => {
+                            category.type == referenceType ? $('.post-status-wrap').hide() : $('.post-status-wrap').show()
+                            htmlCategory += `<li class="li-category-tag"><a href="/posts/category/${category.id}">${category.name}</a></li>`
+                        });
+                    }
+                    $('#tag-list').html(htmlTag)
+                    $('#category-list').html(htmlCategory)
+
+                },
+                error: function (errors) {
+                    let messageError = errors.responseJSON.errors
+                    for (let obj in messageError) {
+                        if(obj) {
+                            renderValidateMessage(obj, messageError[obj][0])
+                        }
+                    }
+                }
+            });
+        });
+
     </script>
 @endsection
 <style>

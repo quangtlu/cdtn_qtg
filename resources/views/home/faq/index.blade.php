@@ -5,31 +5,30 @@
 @endsection
 @section('content')
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        @for($i = 0; $i < count($faqs); $i++)
-        <div class="panel panel-primary {{ $i != 0 ? 'wow fadeInUp' : '' }}">
-            <div class="panel-heading" role="tab" id="heading{{$i}}">
-                <h4 class="panel-title">
-                    <i class="fa fa-question-circle icon-question"></i>
-                    <a class="question-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-expanded="true" aria-controls="collapse{{$i}}">
-                        {!! $faqs[$i]->question  !!}
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse{{$i}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$i}}">
-                <div class="panel-body">
-                    {!! $faqs[$i]['answer'] !!}
+        @foreach ($faqs as $faq)
+            <div class="panel panel-primary">
+                <div class="panel-heading" role="tab" id="heading{{ $faq->id }}">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $faq->id }}"
+                            aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
+                            {!! $faq->question !!}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse{{ $faq->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $faq->id }}">
+                    <div class="panel-body">
+                        {!! $faq->answer !!}
+                    </div>
                 </div>
             </div>
-        </div>
-        @endfor
+        @endforeach
     </div>
     {{ $faqs->withQueryString()->links() }}
+
 @endsection
 @section('js')
     <script>
-       $('#header-search-form').attr('action', '{{ route('faq.index') }}');
-       $('#search-input').attr('placeholder', 'Tìm kiếm theo câu hỏi, câu trả lời...');
+        $('#header-search-form').attr('action', '{{ route('faq.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm theo câu hỏi, câu trả lời...');
     </script>
 @endsection
-
-

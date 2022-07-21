@@ -19,11 +19,19 @@ class FaqController extends Controller
 
     public function index(Request $request)
     {
-        $faqs = $this->faqService->getPaginate();
-        if($request) {
-            $faqs = $this->faqService->search($request);
+        try {
+            $faqs = $this->faqService->getPaginate();
+            if($request->keword) {
+                $faqs = $this->faqService->search($request);
+            }
+            if($faqs->count() < 1) {
+                return redirect()->back()->with('error', 'Không FAQ nào phù hợp');
+            }
+            return view('home.faq.index', compact('faqs'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        return view('home.faq.index', compact('faqs'));
+        
     }
 
 }

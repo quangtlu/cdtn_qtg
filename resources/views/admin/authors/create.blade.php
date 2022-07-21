@@ -30,8 +30,10 @@
                                 <label class="form-label">Giới tính<b class="field-require">*</b></label>
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
-                                    <option {{ old('gender') == 'nam' ? 'selected' : '' }} value="nam">Nam</option>
-                                    <option {{ old('gender') == 'nu' ? 'selected' : '' }}  value="nu">Nữ</option>
+                                    @foreach (config('consts.user.gender') as $gender)
+                                        <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
+                                        value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
+                                    @endforeach
                                 </select>
                                 @error('gender')
                                     <span class="mt-1 text-danger" role="alert">

@@ -66,9 +66,7 @@
     cursor: pointer;
 }
 
-.select2-container {
-    width: 100% !important;
-}
+
 .post-status-solved {
     color: green !important;
     cursor: pointer;
@@ -77,4 +75,35 @@
 .post-status-unsolved {
     color: red !important;
     cursor: pointer;
+}
+.select2-container {
+    width: 100% !important;
+}
+.select2-selection__choice{
+    background-color: #28a745 !important;
+}
+.select2-selection__choice__remove{
+    color: red !important;
+}
+
+.user-post-avt{
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid #fca003;
+    margin-right: 5px;
+}
+
+.post-info-list{
+    display: flex;
+    align-items: center;
+}
+
+.form-filters {
+    margin-bottom: 60px;
+    margin: 0 0 60px -15px;
+}
+
+.sort-product {
+    margin: 0 0 13px 0px;
+
 }

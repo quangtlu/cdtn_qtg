@@ -27,14 +27,19 @@ class CommentController extends Controller
         if($comment->user_id != $userPost->id){
             $this->notificationService->notiComment($comment, $userPost);
         }
-                
-        return redirect()->back();
+        $ortherData['GetPostByUser'] = route('posts.getPostByUser', ['id' => $comment->user_id]);
+        $ortherData['destroyComment'] =  route('comments.destroy', ['id' => $comment->id]);
+        $ortherData['updateComment'] =  route('comments.update', ['id' => $comment->id]);
+        $ortherData['userImage'] =  asset('image/profile') .'/'. $comment->user->image;
+        $ortherData['time'] =  $comment->created_at->diffForHumans();
+
+        return response()->json(['comment' => $comment, 'ortherData' => $ortherData]);
     }
 
     public function update(CommentRequest $request, $id)
     {
-        $this->commentService->update($request, $id);
-        return redirect()->back()->with('success', 'Cập nhật thành công');
+        $comment = $this->commentService->update($request, $id);
+        return response()->json(['message' => 'Cập nhật thành công', 'comment' => $comment]);
     }
 
     public function toogleStatus($id)
@@ -50,10 +55,10 @@ class CommentController extends Controller
     {
         $comment = $this->commentService->getById($id);
         if (Auth::user()->id != $comment->user->id ) {
-            return redirect()->back()->with('error', 'Bạn không có quyền truy cập');
+            abort(403);
         }
         else {
-            $this->commentService->delete($id);
+            return response()->json(['message' => 'Xóa bình luận thành công']);
         }
     }
 

@@ -39,14 +39,30 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $this->categoryService->create($request);
-        return Redirect(route('admin.categories.index'))->with('success', 'Thêm danh mục thành công');
+        return Redirect(route('admin.categories.index'))->with('success', 'Thêm mục lục thành công');
     }
 
     public function getType(Request $request) {
         $category_id = $request->category_id;
-        $type = $this->categoryService->getById($category_id)->type;
-        $htmlOption = "<option value='$type'>$type</option>";
-        return $htmlOption;
+        if ($category_id) {
+            $typeValue = $this->categoryService->getById($category_id)->type;
+            $typeName = '';
+            foreach (config('consts.category.type') as $type) {
+                if($type['value'] == $typeValue) {
+                    $typeName = $type['name'];
+                }
+            }
+            $htmlOptions = "<option value='$typeValue'>$typeName</option>";
+        }
+        else {
+            $htmlOptions = '';
+            foreach (config('consts.category.type') as $type) {
+                $typeValue = $type['value'];
+                $typeName = $type['name'];
+                $htmlOptions .= "<option value='$typeValue'>$typeName</option>";
+            }
+        }
+        return $htmlOptions;
     }
 
     public function getCategory($parentId)
@@ -67,11 +83,12 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, $id)
     {
         $this->categoryService->update($request, $id);
-        return Redirect(route('admin.categories.index'))->with('success', 'Câp nhật danh mục thành công');
+        return Redirect(route('admin.categories.index'))->with('success', 'Câp nhật mục lục thành công');
     }
 
     public function destroy($id)
     {
-        $this->categoryService->delete($id);
+        $category = $this->categoryService->delete($id);
+        return response()->json(['category' => $category, 'message' => 'Xóa mục lục thành công']);
     }
 }

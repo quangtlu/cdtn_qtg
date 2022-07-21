@@ -1931,6 +1931,7 @@ h2.typoh2{
 }
 .single-left1 p{
 	margin: 10px 0;
+    padding-left: 10px;
 }
 .admin{
 	padding:2em;
@@ -2010,7 +2011,7 @@ h2.typoh2{
 .comments-grid-right p{
 	font-size:14px;
     padding: 10px;
-	color:#999;
+	color:#000;
 	line-height:1.8em;
 	margin:0;
     word-wrap: break-word;
@@ -2042,6 +2043,7 @@ h2.typoh2{
 	resize:none;
 	width:100% !important;
 	margin:1em 0 0.8em;
+    border: 1px solid #ffac3a;
 }
 .w3_single_submit{
 	text-align:right;

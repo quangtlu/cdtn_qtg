@@ -40,11 +40,6 @@
     left: -39px;
 }
 
-
-.notice-list::-webkit-scrollbar {
-    display: none;
-}
-
 .notice-nav a {
   position: relative;
   text-decoration: none;
@@ -52,28 +47,52 @@
   text-align: left;
 }
 
-.notice-list {
+.notification-container {
   display: none;
   z-index: 1;
   position: absolute;
-  background-color: rgb(249 249 249 / 98%);;
-  list-style: none;
-  width: 400px;
-  max-height: 600px;
-  padding: 15px 5px;
+  background-color: rgb(235 224 224 / 98%);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  scroll-behavior: smooth;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   border-radius: 15px;
   left: 50%;
+  padding: 5px;
   transform: translateX(-50%);
 }
 
+.notice-list::-webkit-scrollbar {
+    display: none;
+}
+
+.notice-list {
+    list-style: none;
+    padding: 5px;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    width: 400px;
+    max-height: 600px;
+}
+
+.header-noti-wrap{
+    padding: 10px 0;
+    background-color: #ffac3a;
+    margin: -6px -6px 5px -6px;
+    border-radius: 15px 15px 0 0;
+}
+
+.header-noti-wrap a{
+    text-align: center;
+    color: #fff;
+}
+
+.remove-all-noti-link {
+    border-left: 1px solid #fff;
+}
 
 .notice-item {
     padding: 5px;
+    margin-bottom: 5px !important;
 }
 
 .notice-nav {
@@ -85,9 +104,7 @@
     color: #000;
     border-radius: 15px;
 }
-.notice-item:hover .mark-as-read {
-    color: #000;
-}
+
 
 .notice-item-wrap {
     max-height: 80px;
@@ -113,20 +130,11 @@
 }
 .notice-icon{
     position: relative;
-    font-size: 22px;
+    font-size: 25px;
 }
-.count-notice{
-    position: absolute;
-    top: -8px;
-    right: -6px;
-    background-color: rgb(235, 64, 64);
-    color: #fff;
-    border-radius: 50%;
-    padding: 2px 4px;
-    font-size: 16px;
-}
-.mark-as-read {
-    color: #ccc;
+
+.unread {
+    background-color: #ffeace;
 }
 
 .notification-item-list{
@@ -135,14 +143,35 @@
 }
 
 .notification-item-list li {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .logo-img{
-  height: 150px;
+  height: 200px;
 }
 .notification-icon {
   font-size: 20px;
+}
+.fake-element {
+    position: relative;
+}
+.number-notification {
+    position: absolute;
+    border: 1px solid #fff;
+    left: 52%;
+    top: -50px;
+    font-size: 8px;
+    color: #fff;
+    background-color: red;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+.no-notification-img {
+    height: 200px;
+    margin: -6px -5px 5px -5px;
+    border-radius: 50;
+    border-radius: 15px 15px 0 0;
 }
 /* Bell animation */
 
@@ -243,3 +272,8 @@
   100% { transform: rotate(0); }
 }
 /*  */
+
+.status-name-link {
+    text-decoration: none !important;
+    font-weight: bold;
+}
