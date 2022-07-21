@@ -51,7 +51,7 @@ class ChatroomService
                 "name" => 'Phòng '.$indexChatroom,
                 "description" => $post->title,
                 "post_id" => $post->id,
-                "connector" => Auth::user()->id,
+                "connector_id" => Auth::user()->id,
             ];
             $userIds[] = $counselor->id;
             $userIds[] = $user->id;
@@ -61,7 +61,8 @@ class ChatroomService
             $data = [
                 "name" => $request->name,
                 "description" => $request->description,
-                "post_id" => $request->post_id
+                "post_id" => $request->post_id,
+                "connector_id" => $request->post_id,
             ];
             $userIds = $request->user_id;
         }
