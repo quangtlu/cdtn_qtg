@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'Admin\PostController@store')->name('store')->middleware('can:add-post');
             Route::get('/edit/{id}', 'Admin\PostController@edit')->name('edit')->middleware('can:edit-post');
             Route::post('/update/{id}', 'Admin\PostController@update')->name('update')->middleware('can:edit-post');
-            Route::get('/show/{id}', 'Admin\PostController@show')->name('show')->middleware('can:show post');
+            Route::get('/show/{id}', 'Admin\PostController@show')->name('show')->middleware('can:show-post');
             Route::get('/destroy/{id}', 'Admin\PostController@destroy')->name('destroy')->middleware('can:delete-post');
         });
 

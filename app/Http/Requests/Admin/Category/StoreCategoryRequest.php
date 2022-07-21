@@ -24,7 +24,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:categories',
+            'name' => 'required',
             'parent_id' => 'required',
             'type' => 'required',
         ];
@@ -34,7 +34,6 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name.required' => 'Vui lòng nhập tên mục lục',
-            'name.unique' => 'Tên mục lục đã tồn tại',
             'parent_id.required' => 'Vui lòng chọn mục lục cha',
             'type.required' => 'Vui lòng chọn loại mục lục',
         ];

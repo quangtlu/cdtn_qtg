@@ -60,9 +60,6 @@ class PostController extends Controller
             if ($request->sort) {
                 $posts = $this->postService->sortPost($request->sort);
             }
-            if(!$posts->count()) {
-                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
-            }
             return view('home.posts.index', compact('posts'));
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.getData'));

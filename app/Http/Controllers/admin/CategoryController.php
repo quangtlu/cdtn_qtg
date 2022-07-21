@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
-use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Http\Controllers\Controller;
-use App\Services\TypeService;
-
 class CategoryController extends Controller
 {    
     private $categoryService;
-    private $typeService;
 
     public function __construct(CategoryService $categoryService)
     {
@@ -80,7 +75,7 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category', 'htmlOption'));
     }
 
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(StoreCategoryRequest $request, $id)
     {
         $this->categoryService->update($request, $id);
         return Redirect(route('admin.categories.index'))->with('success', 'Câp nhật mục lục thành công');

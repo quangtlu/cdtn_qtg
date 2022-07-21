@@ -13,6 +13,16 @@ class Category extends Model
         return $this->belongsToMany(Post::class, 'post_category');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_category');

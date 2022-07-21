@@ -3,7 +3,7 @@
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Mô tả</label>
-                                <textarea class="form-control" name="description" id="summernote" cols="30" rows="5">{{ old('description') }}</textarea>
+                                <textarea class="form-control" name="description" id="editor" cols="30" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -96,24 +96,23 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.2/tinymce.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
         $(function() {
             $('.select2_init').select2({})
         })
-        $('#summernote').summernote({
-            height: 400
-        });
-    </script>
-    <script src="{{ asset('js/datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
-    <script>
         $('.date-time').datepicker({
             language: 'vi',
             orientation: 'bottom',
         });
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endsection

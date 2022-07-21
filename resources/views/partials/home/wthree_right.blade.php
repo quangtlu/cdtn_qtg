@@ -11,6 +11,33 @@
             <a class="linkedin" href="#"><i class="fa fa-behance"></i></a>
         </div>
     </div>
+    <div class="w3l_categories wow fadeInUp">
+        <h3>Chuyên mục</h3>
+        <div class="w3l_wrap">
+            <ul>
+                @foreach ($refrenceCategories as $index => $category)
+                    <li>
+                        <a style="font-size: 16px; font-weight:bold" href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
+                            {{ $index}}.
+                            {{$category->name }}
+                        </a>
+                        @if ($category->categories->count())
+                            <ul style="padding-left: 35px">
+                                @foreach ($category->categories as $categoryChild)
+                                    <li>
+                                        <a href="{{ route('posts.getPostByCategory', ['id' => $categoryChild->id]) }}">
+                                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                                            {{ $categoryChild->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
     <div class="w3ls_popular_posts">
         <h3>Bài viết mới nhất</h3>
         @foreach ($newestPosts as $post)
@@ -44,21 +71,6 @@
             </ul>
         </div>
     </div>
-    <div class="w3l_categories wow fadeInUp">
-        <h3>Mục lục bài viết</h3>
-        <div class="w3l_wrap">
-            <ul>
-                @foreach ($postCategories as $category)
-                    <li>
-                        <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
-                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                            {{ $category->posts->count() ? $category->name.' ('.$category->products->count().')' : $category->name }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
     <div class="w3l_tags wow fadeInUp">
         <h3>Tags</h3>
         <div class="w3l_wrap">
@@ -73,9 +85,6 @@
 <style>
     .w3l_tags{
         margin-top: 4rem;
-    }
-    .w3l_wrap ul {
-        max-height: 500px;
     }
     .w3l_wrap {
         overflow: scroll;

@@ -73,10 +73,12 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Ảnh</th>
-                                    <th>Tên bài viết</th>
+                                    <th>Tiêu đề</th>
                                     <th>Tác giả</th>
                                     <th>Trạng thái</th>
-                                    <th>Action</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                    <th>Xem</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,13 +109,13 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}"><button
-                                                    class="btn btn-info btn-sm">Sửa</button></a>
-                                            <button type="button"
-                                                data-url="{{ route('admin.posts.destroy', ['id' => $post->id]) }}"
-                                                class="btn btn-danger btn-sm btn-delete">Xoá</i></button>
-                                            <a href="{{ route('admin.posts.show', ['id' => $post->id]) }}"><button
-                                                    class="btn btn-info btn-sm">Chi tiết</button></a>
+                                                    class="btn btn-info btn-sm"><i class="fas fa-edit"></i></button></a>
                                         </td>
+                                        <td><button type="button"
+                                            data-url="{{ route('admin.posts.destroy', ['id' => $post->id]) }}"
+                                            class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash-alt"></i></i></button></td>
+                                        <td><a href="{{ route('admin.posts.show', ['id' => $post->id]) }}"><button
+                                            class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

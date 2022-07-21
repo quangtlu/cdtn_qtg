@@ -14,9 +14,11 @@ class PostController extends Controller
 {
     private $postService;
 
-    public function __construct(PostService $postService,
-                                TagService $tagService, CategoryService $categoryService)
-    {
+    public function __construct(
+        PostService $postService,
+        TagService $tagService,
+        CategoryService $categoryService
+    ) {
         $this->postService = $postService;
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
@@ -29,24 +31,19 @@ class PostController extends Controller
     {
         try {
             $posts = $this->postService->getAllPaginate();
-            if($request->keyword) {
+            if ($request->keyword) {
                 $posts = $this->postService->search($request);
             }
-            if($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
+            if ($request->keyword && ($request->category_id || $request->tag_id || $request->status)) {
                 $posts = $this->postService->searchAndFilter($request);
             }
             if ($request->category_id || $request->tag_id || $request->status) {
                 $posts = $this->postService->filter($request);
             }
-            if ($posts->count() > 0) {
-                return view('admin.posts.index', compact('posts'));
-            } else {
-                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
-            }
+            return view('admin.posts.index', compact('posts'));
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        
     }
 
     public function create()
@@ -56,7 +53,6 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        dd($request->all());
         $this->postService->create($request);
         return Redirect(route('admin.posts.index'))->with('success', 'Thêm mới bài viết thành công');
     }
@@ -71,8 +67,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = $this->postService->getById($id);
-        if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
-           abort(403);
+        if ($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+            abort(403);
         }
         $postUser = $post->user;
         $postOfTags = $post->tags;
@@ -90,7 +86,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = $this->postService->getById($id);
-        if($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+        if ($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
             abort(403);
         }
         $post = $this->postService->delete($id);

@@ -6,10 +6,7 @@ use App\Http\Requests\Admin\Owner\StoreOwnerRequest;
 use App\Http\Requests\Admin\Owner\UpdateOwnerRequest;
 use App\Services\OwnerService;
 use Illuminate\Http\Request;
-use function redirect;
-use function view;
 use App\Http\Controllers\Controller;
-
 
 class OwnerController extends Controller
 {
@@ -23,13 +20,11 @@ class OwnerController extends Controller
     public function index(Request $request)
     {
         $owners = $this->ownerService->getPaginate();
-        if($request->keyword && ($request->name || $request->email || $request->phone)) {
+        if ($request->keyword && ($request->name || $request->email || $request->phone)) {
             $owners = $this->ownerService->searchAndFilter($request);
-        }
-        else if ($request->name || $request->email || $request->phone) {
+        } else if ($request->name || $request->email || $request->phone) {
             $owners = $this->ownerService->filter($request);
-        }
-        else if ($request->keyword) {
+        } else if ($request->keyword) {
             $owners = $this->ownerService->search($request);
         }
         $ownerAll = $this->ownerService->getAll();

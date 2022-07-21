@@ -35,7 +35,7 @@
                                                             {{ request()->name == $author->name ? 'selected' : false }}>
                                                             {{ $author->name }}</option>
                                                     @endforeach
-                                                    @foreach ($authorAll as $author)
+                                                    @foreach ($authors as $author)
                                                         <option value="{{ $author->name }}">{{ $author->name }}
                                                         </option>
                                                     @endforeach
@@ -60,7 +60,7 @@
                                                             {{ request()->email == $author->email ? 'selected' : false }}>
                                                             {{ $author->email }}
                                                         </option>
-                                                        @foreach ($authorAll as $author)
+                                                        @foreach ($authors as $author)
                                                             <option value="{{ $author->email }}">
                                                                 {{ $author->email }}
                                                             </option>
@@ -79,7 +79,7 @@
                                                             {{ request()->phone == $author->phone ? 'selected' : false }}>
                                                             {{ $author->phone }}</option>
                                                     @endforeach
-                                                    @foreach ($authorAll as $author)
+                                                    @foreach ($authors as $author)
                                                         <option value="{{ $author->phone }}">{{ $author->phone }}
                                                         </option>
                                                     @endforeach
