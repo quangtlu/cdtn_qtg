@@ -88,7 +88,7 @@
                                 @endphp
                             </li>
                             <li>
-                                Mô tả:<br>
+                                Nội dung:<br>
                                     {!! $post->content !!}
                             </li>
                         </ul>

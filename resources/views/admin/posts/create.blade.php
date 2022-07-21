@@ -3,7 +3,6 @@
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -40,9 +39,9 @@
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
                                     @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                {{ $category->name }}</option>
+                                        <option value="{{ $category->id }}"
+                                            {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
+                                            {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')
@@ -51,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Nội dung</label>
-                                <textarea class="form-control" name="content" id="summernote" cols="30" rows="5">{{ old('content') }}</textarea>
+                                <textarea class="form-control" name="content" id="editor" cols="30" rows="5">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -74,9 +73,14 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
         $(function() {
             $('.select2_init').select2({
                 'placeholder': 'Chọn thẻ tag',
@@ -88,5 +92,6 @@
         $('#summernote').summernote({
             height: 400
         });
+        
     </script>
 @endsection

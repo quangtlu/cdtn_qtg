@@ -28,8 +28,8 @@
                             <div class="form-group">
                                 <label for="category_name">Loại mục lục</label>
                                 <select id="selectType" name="type" class="form-control">
-                                    @foreach (config('consts.category.type') as $type)
-                                        <option value="{{ $category->type == $type['value'] }}">{{ $type['name'] }}</option>
+                                    @foreach (config('consts.category.type') as $type) 
+                                        <option {{ $category->type == $type['value'] ? 'selected' : '' }}  value="{{$type['value']}}">{{ $type['name'] }}</option>
                                     @endforeach
                                 </select>
                                 @error('type')

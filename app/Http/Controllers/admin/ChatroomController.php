@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Room\StoreChatroomRequest;
 use App\Http\Requests\Admin\Room\UpdateChatroomRequest;
 use App\Models\Post;
-
 class chatroomController extends Controller
 {
     private $chatroomService;
@@ -24,7 +23,7 @@ class chatroomController extends Controller
     public function index(Request $request)
     {
         $chatrooms = $this->chatroomService->getPaginate();
-        if($request->keyword) {
+        if ($request->keyword) {
             $chatrooms = $this->chatroomService->search($request);
         }
         return view('admin.chatrooms.index', compact('chatrooms'));

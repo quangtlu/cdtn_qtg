@@ -6,11 +6,7 @@ use App\Http\Requests\Admin\Faq\StoreFaqRequest;
 use App\Http\Requests\Admin\Faq\UpdateFaqRequest;
 use App\Services\FaqService;
 use Illuminate\Http\Request;
-use function redirect;
-use function view;
 use App\Http\Controllers\Controller;
-
-
 class FaqController extends Controller
 {
     private $faqService;
@@ -23,7 +19,7 @@ class FaqController extends Controller
     public function index(Request $request)
     {
         $faqs = $this->faqService->getPaginate();
-        if($request->keyword) {
+        if ($request->keyword) {
             $faqs = $this->faqService->search($request);
         }
         return view('admin.faqs.index', compact('faqs'));

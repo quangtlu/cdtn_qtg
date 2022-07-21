@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
         $newestPosts = Post::accepted()->latest()->limit(5)->get();
         $newestProducts = Product::limit(5)->orderBy('pub_date', 'desc')->get();
-        $postCategories = Category::where('parent_id', 0)->type([config('consts.category.type.post.value')])->get();
+        $refrenceCategories = Category::where('parent_id', 0)->type([config('consts.category.type.post_reference.value')])->get();
         $productCategories = Category::where('parent_id', 0)->type([config('consts.category.type.product.value')])->get();
         $tags = Tag::latest()->get();
         $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();
@@ -43,8 +43,8 @@ class AppServiceProvider extends ServiceProvider
         if ($newestProducts) {
             view()->share('newestProducts', $newestProducts);
         }
-        if ($postCategories) {
-            view()->share('postCategories', $postCategories);
+        if ($refrenceCategories) {
+            view()->share('refrenceCategories', $refrenceCategories);
         }
         if ($productCategories) {
             view()->share('productCategories', $productCategories);
