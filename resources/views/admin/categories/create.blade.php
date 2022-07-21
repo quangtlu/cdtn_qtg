@@ -19,7 +19,16 @@
                                 <label for="category_name">mục lục cha</label>
                                 <select id="category_parent" name="parent_id" class="form-control" >
                                     <option value="0">Chọn mục lục cha</option>
-                                    {!! $htmlOption !!}
+                                    @foreach ($categories as $index => $category)
+                                        @if ($category->parent_id == 0)
+                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                @if ($category->categories->count())
+                                                    @foreach ($category->categories as $indexChild => $categoryChild)
+                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                        @endif
+                                    @endforeach
                                 </select>
                                 @error('parent_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
