@@ -62,6 +62,7 @@ $('.action-btn').click(function (e) {
         return obj;
     }, {});
     data.action = $(this).data('action')
+    const screen = $(this).data('screen')
     const that = $(this)
     $.ajax({
         type: "POST",
@@ -69,9 +70,13 @@ $('.action-btn').click(function (e) {
         data: data,
         dataType: "json",
         success: function (response) {
-            $(that).closest('.notice-item').remove()
-            if(!$('.notice-item').length){
-                renderNoNotication()
+            if(screen == 'header') {
+                $(that).closest('.notice-item').remove()
+                if(!$('.notice-item').length){
+                    renderNoNotication()
+                }
+            } else {
+                that.closest('.wthree-top-1').remove()
             }
             alertMessage(response.message, 'success')
         },
@@ -95,7 +100,7 @@ function actionDeletePost() {
                 type: 'GET',
                 url: urlRequest,
                 success: function (res) {
-                    that.closest('.wthree-top-1').fadeOut()
+                    that.closest('.wthree-top-1').remove()
                     alertMessage(res.message, 'success')
                 }
             })
@@ -103,6 +108,8 @@ function actionDeletePost() {
         }
     })
 }
+
+
 
 function actionDeleteComment() {
     let urlRequest = $(this).data('url');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\StorePostRequest;
-use App\Http\Requests\Admin\Post\UpdatePostRequest;
+use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +13,6 @@ use App\Services\ChatroomService;
 use App\Services\NotificationService;
 use App\Services\TagService;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Foundation\Auth\User;
-
 class PostController extends Controller
 {
     use HasRoles;
@@ -71,6 +68,21 @@ class PostController extends Controller
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
         
+    }
+
+    public function getPotRequest()
+    {
+        try {
+            $posts = $this->postService->getPostRequest();
+            if(!$posts->count()) {
+                return redirect()->back()->with('error', 'Không có bài viết nào yêu cầu phê duyệt');
+            } else {
+                return view('home.posts.post-request', compact('posts'));
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
+        }
+
     }
 
     public function getMyPost()
@@ -149,7 +161,9 @@ class PostController extends Controller
     public function handleRequest(Request $request, $id)
     {
         $action = $request->action;
-        $this->notificationService->destroy($request->noti_id);
+        if($request->noti_id) {
+            $this->notificationService->destroy($request->noti_id);
+        } 
         if($this->postService->getById($id)->status != config('consts.post.status.request.value')) {
             return response()->json(['message' => 'Bài viết đã được xét duyệt']);
         }
