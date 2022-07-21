@@ -54,18 +54,26 @@
                                 <label for="category">Mục lục</label>
                                 <select name="category_id[]" class="form-control select2_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                        @if ($category->name == config('consts.category_reference.name'))
-                                            @role('admin|editor')
-                                                <option value="{{ $category->id }}"
-                                                    {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                    {{ $category->name }}</option>
-                                            @endrole
+                                    @foreach ($categories as $index => $category)
+                                        @hasanyrole('admin|editor')
+                                            @if ($category->type == config('consts.category.type.post_reference.value') && $category->parent_id == 0)
+                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                @if ($category->categories->count())
+                                                    @foreach ($category->categories as $indexChild => $categoryChild)
+                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            @endif
                                         @else
-                                            <option value="{{ $category->id }}"
-                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                {{ $category->name }}</option>
-                                        @endif
+                                            @if ($category->type != config('consts.category.type.post_reference.value') && $category->parent_id == 0)
+                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                @if ($category->categories->count())
+                                                    @foreach ($category->categories as $indexChild => $categoryChild)
+                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        @endhasanyrole
                                     @endforeach
                                 </select>
                             </div>
@@ -130,16 +138,19 @@
                 color: type == 'success' ? '#fff' : '#000',
             });
         }
+
+        function CKupdate(){
+            for ( instance in CKEDITOR.instances ){
+                CKEDITOR.instances[instance].updateElement();
+                CKEDITOR.instances[instance].setData('');
+            }
+        }
        
         function resetForm(formElement, action)
         {
-            $('#post-modalLabel').text('Đăng bài viết')
             formElement.trigger("reset");
-            formElement.attr('action', action)
-            $(".select-tag-add").val([]).change();
-            $(".select-category-add").val([]).change();
-            $('.summernote-add').summernote('reset')
-            $('#submit-btn-add').text('Đăng bài')
+            CKupdate()
+            $(".select2_init").val([]).change();
         }
 
 

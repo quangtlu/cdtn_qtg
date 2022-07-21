@@ -1,4 +1,4 @@
-<div class="col-md-2 w3agile_blog_left">
+<div class="col-md-3 w3agile_blog_left">
     <div class="agileinfo_calender">
         <h3>Mạng xã hội</h3>
         <div class="w3ls-social-icons-1">
@@ -18,16 +18,15 @@
                 @foreach ($refrenceCategories as $index => $category)
                     <li>
                         <a style="font-size: 16px; font-weight:bold" href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
-                            {{ $index}}.
-                            {{$category->name }}
+                            {{ $index}}.{{$category->name }}
                         </a>
                         @if ($category->categories->count())
                             <ul style="padding-left: 35px">
-                                @foreach ($category->categories as $categoryChild)
+                                @foreach ($category->categories as $indexChild => $categoryChild)
                                     <li>
                                         <a href="{{ route('posts.getPostByCategory', ['id' => $categoryChild->id]) }}">
                                             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                            {{ $categoryChild->name }}
+                                            {{ $index.'.'.($indexChild+1).'. '.$categoryChild->name }}
                                         </a>
                                     </li>
                                 @endforeach
