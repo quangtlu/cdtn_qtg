@@ -97,3 +97,13 @@
     display: flex;
     align-items: center;
 }
+
+.form-filters {
+    margin-bottom: 60px;
+    margin: 0 0 60px -15px;
+}
+
+.sort-product {
+    margin: 0 0 13px 0px;
+
+}
