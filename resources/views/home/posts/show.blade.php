@@ -325,9 +325,6 @@
         });
         ClassicEditor
             .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
         $('.select2_init').select2()
 
         function alertMessage(message, type, time)
