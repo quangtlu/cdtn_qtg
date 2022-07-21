@@ -33,7 +33,7 @@ class OwnerController extends Controller
         } else {
             return redirect()->back()->with('error', 'Không có tác giả nào phù hợp');
         }
-        return view('admin.owners.index', compact('ownerAll'));
+        return view('admin.owners.index', compact('ownerAll', 'owners'));
     }
 
     public function create()
