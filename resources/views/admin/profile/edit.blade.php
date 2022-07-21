@@ -33,7 +33,7 @@
                                         <select name="gender" class="form-control" id="gender">
                                             <option value=""></option>
                                             @foreach (config('consts.user.gender') as $gender)
-                                                <option {{ (old('gender') == $gender['value'] || $user->gender == $gender['value']) ? 'selected' : '' }}  
+                                                <option {{ (old('gender') == $gender['value'] || $profile->gender == $gender['value']) ? 'selected' : '' }}  
                                                 value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
                                             @endforeach
                                         </select>
