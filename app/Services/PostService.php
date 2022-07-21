@@ -198,6 +198,12 @@ class PostService
         return Post::accepted()->reference()->paginate(10);
     }
 
+    public function getPostRequest()
+    {
+        $posts = Post::where('status', config('consts.post.status.request.value'))->latest()->paginate(10);
+        return $posts;
+    }
+
     public function getPostIdRelateByTable($postId, array $relateTables)
     {
         $postIds = [];

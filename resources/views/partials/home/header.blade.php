@@ -13,6 +13,9 @@
                                         nhân</a></li>
                                 <li><a class="header-link user-name" href="{{ route('posts.myPost') }}">Bài viết của
                                         tôi</a></li>
+                                @hasanyrole('admin|mod')
+                                    <li><a class="header-link user-name" href="{{ route('posts.getPotRequest') }}">Kiểm duyệt bài viết</a></li>
+                                @endhasanyrole
                                 <li><a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -153,10 +156,10 @@
                                                                         <input type="hidden" name="noti_id"
                                                                             value="{{ $notification->id }}">
                                                                         <div style="display: flex; justify-content: center;">
-                                                                            <button data-action="{{ config('consts.post.action.refuse') }}" style="margin-right: 5px" class="btn btn-danger action-btn">
+                                                                            <button data-screen='header' data-action="{{ config('consts.post.action.refuse') }}" style="margin-right: 5px" class="btn btn-danger action-btn">
                                                                                 {{ config('consts.post.action.refuse') }}
                                                                             </button>
-                                                                            <button data-action="{{ config('consts.post.action.accept') }}" class="action-btn btn btn-success" style="margin-left: 5px">
+                                                                            <button data-screen='header' data-action="{{ config('consts.post.action.accept') }}" class="action-btn btn btn-success" style="margin-left: 5px">
                                                                                {{ config('consts.post.action.accept') }}
                                                                             </button>
                                                                         </div>
