@@ -77,7 +77,7 @@ class PostController extends Controller
     {
         $posts = $this->postService->myPost();
         $isMyPost = true; 
-        return view('home.posts.index', compact('posts', 'isMyPost'));
+        return view('home.posts.my-post', compact('posts'));
     }
 
     public function show($id)
