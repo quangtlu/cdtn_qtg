@@ -22,7 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên mục lục</th>
-                                <th>Danh mục cha</th>
+                                <th>Mục lục cha</th>
                                 <th>Loại mục lục</th>
                                 <th>Action</th>
                             </tr>
