@@ -28,7 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = $this->categoryService->getAll();
-        return view('admin.categories.create', compact('htmlOption', 'categories'));
+        return view('admin.categories.create', compact('categories'));
     }
 
     public function store(StoreCategoryRequest $request)

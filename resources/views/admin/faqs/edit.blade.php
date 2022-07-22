@@ -11,11 +11,17 @@
                             @csrf
                             <div class="form-group">
                                 <label>Câu hỏi</label>
-                                <textarea class="form-control" name="question" class="editor" cols="30" rows="5">{!! $faq->question !!}</textarea>
+                                <textarea class="form-control" name="question" id="question" cols="30" rows="5">{!! $faq->question !!}</textarea>
+                                @error('question')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Câu trả lời</label>
-                                <textarea class="form-control" name="answer" class="editor" cols="30" rows="5">{!! $faq->answer !!}</textarea>
+                                <textarea class="form-control" name="answer" id="answer" cols="30" rows="5">{!! $faq->answer !!}</textarea>
+                                @error('answer')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary m-2">Cập nhật</button>
                         </form>
@@ -31,9 +37,15 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create(document.querySelector('.editor'))
+            .create(document.querySelector('#question'))
             .catch(error => {
                 console.error(error);
             });
+        ClassicEditor
+        .create(document.querySelector('#answer'))
+        .catch(error => {
+            console.error(error);
+        });
     </script>
 @endsection
+
