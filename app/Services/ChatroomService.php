@@ -62,7 +62,7 @@ class ChatroomService
                 "name" => $request->name,
                 "description" => $request->description,
                 "post_id" => $request->post_id,
-                "connector_id" => Auth::user()->id,
+                "connector_id" => $request->post_id,
             ];
             $userIds = $request->user_id;
         }

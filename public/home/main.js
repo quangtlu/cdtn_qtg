@@ -69,8 +69,11 @@ $('.action-btn').click(function (e) {
         dataType: "json",
         success: function (response) {
             if(screen == 'header') {
+                let totalNoti = $('.notice-item').length
+                totalNoti--;
                 $(that).closest('.notice-item').remove()
-                if(!$('.notice-item').length){
+                $('.number-notification').text(totalNoti)
+                if(totalNoti < 1){
                     renderNoNotication()
                 }
             } else {
