@@ -219,6 +219,7 @@
                                 </div>
                             `
                         $('.search-and-filter').after(html)
+                        $('.alert-no-post').hide()
                     }
                 },
                 error: function (errors) {

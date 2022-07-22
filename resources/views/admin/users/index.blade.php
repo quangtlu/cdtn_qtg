@@ -32,91 +32,90 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="row" id="toggle" style="display: none">
-                                <div class="p-2">
-                                    <form action="{{ route('admin.users.index') }}" method="get">
-                                        <div class="row">
-                                            <div class="filter-user">
-                                                <select name="name" id="sort" class="form-control">
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Tên người dùng</option>
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Tất cả</option>
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->name }}"
-                                                            {{ request()->name == $user->name ? 'selected' : false }}
-                                                            value="{{ request()->name }}">
-                                                            {{ $user->name }}</option>
-                                                    @endforeach
-                                                    @foreach ($userAll as $user)
-                                                        <option value="{{ $user->name }}">{{ $user->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="filter-user">
-                                                <select name="gender" id="sort" class="form-control">
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Giới tính</option>
-                                                    <option value="nam">Nam</option>
-                                                    <option value="Nữ">Nữ</option>
-                                                </select>
-                                            </div>
-                                            <div class="filter-user">
-                                                <select name="email" id="sort" class="form-control">
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Email</option>
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Tất cả</option>
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->email }}"
-                                                            {{ request()->email == $user->email ? 'selected' : false }}>
-                                                            {{ $user->email }}
-                                                        </option>
-                                                        @foreach ($userAll as $user)
-                                                            <option value="{{ $user->email }}">{{ $user->email }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="filter-user">
-                                                <select name="phone" id="sort" class="form-control">
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Số điện thoại</option>
-                                                    <option value="{{ config('consts.user.all') }}"
-                                                        class="filter-option-dafault">Tất cả</option>
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->phone }}"
-                                                            {{ request()->phone == $user->phone ? 'selected' : false }}>
-                                                            {{ $user->phone }}</option>
-                                                    @endforeach
-                                                    @foreach ($userAll as $user)
-                                                        <option value="{{ $user->phone }}">{{ $user->phone }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="filter-user">
-                                                <select name="role_id" id="sort" class="form-control">
-                                                    <option value="0" class="filter-option-dafault">Quyền</option>
-                                                    <option value="0" class="filter-option-dafault">Tất cả</option>
-                                                    @foreach ($roles as $role)
-                                                        <option value="{{ $role->id }}"
-                                                            {{ request()->id == $role->id ? 'selected' : false }}>
-                                                            {{ $role->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="filter-user">
-                                                <input type="text" name="keyword"
-                                                    placeholder="Tìm kiếm tên, email, số điện thoại" class="form-control"
-                                                    value="{{ request()->keyword }}">
-                                            </div>
-                                            <div class="col-md-2" style="display: contents;">
-                                                <button type="submit" class="btn btn-primary ml-2">Tìm kiếm</button>
-                                            </div>
+                            <div class="row pt-2" id="toggle" style="display: none">
+                                <form action="{{ route('admin.users.index') }}" class="w-100"  method="get">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <select name="name" id="sort" class="form-control">
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Tên người dùng</option>
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->name }}"
+                                                        {{ request()->name == $user->name ? 'selected' : false }}
+                                                        value="{{ request()->name }}">
+                                                        {{ $user->name }}</option>
+                                                @endforeach
+                                                @foreach ($userAll as $user)
+                                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col-md-1">
+                                            <select name="gender" id="sort" class="form-control">
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Giới tính</option>
+                                                @foreach (config('consts.user.gender') as $gender)
+                                                    <option value="{{ $gender['value'] }}">{{ $gender['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="email" id="sort" class="form-control">
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Email</option>
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->email }}"
+                                                        {{ request()->email == $user->email ? 'selected' : false }}>
+                                                        {{ $user->email }}
+                                                    </option>
+                                                    @foreach ($userAll as $user)
+                                                        <option value="{{ $user->email }}">{{ $user->email }}
+                                                        </option>
+                                                    @endforeach
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="phone" id="sort" class="form-control">
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Số điện thoại</option>
+                                                <option value="{{ config('consts.user.all') }}"
+                                                    class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->phone }}"
+                                                        {{ request()->phone == $user->phone ? 'selected' : false }}>
+                                                        {{ $user->phone }}</option>
+                                                @endforeach
+                                                @foreach ($userAll as $user)
+                                                    <option value="{{ $user->phone }}">{{ $user->phone }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="role_id" id="sort" class="form-control">
+                                                <option value="0" class="filter-option-dafault">Quyền</option>
+                                                <option value="0" class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}"
+                                                        {{ request()->id == $role->id ? 'selected' : false }}>
+                                                        {{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="text" name="keyword"
+                                                placeholder="Tìm kiếm tên, email, số điện thoại" class="form-control"
+                                                value="{{ request()->keyword }}">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-info btn-block"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
