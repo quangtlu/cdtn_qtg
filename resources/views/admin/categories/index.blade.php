@@ -61,6 +61,6 @@
 @section('js')
     <script>
         $('#header-search-form').attr('action', '{{ route('admin.categories.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm danh muc, ID...');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên danh muc,...');
     </script>
 @endsection
