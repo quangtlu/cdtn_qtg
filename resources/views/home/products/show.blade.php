@@ -87,13 +87,12 @@
     @endif
     <div class="category-tag">
         <ul class="tag">
-            <li class="li-category-tag">
-                <span style="font-size:18px">Mục lục: </span>
-                @foreach ($product->categories as $category)
-                    <a
-                        href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                @endforeach
-            </li>
+            <span style="font-size:18px">Mục lục: </span>
+            @foreach ($product->categories as $category)
+                <li class="li-category-tag">
+                    <a href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                </li>
+            @endforeach
         </ul>
         <ul class="tag" style="margin-top:0 !important">
             <li class="li-category-tag">
