@@ -7,10 +7,10 @@
     @if ($faqs->count())
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             @foreach ($faqs as $faq)
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading{{ $faq->id }}">
                         <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $faq->id }}"
+                            <a class="collapsed" role="button" style="text-decoration: none" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $faq->id }}"
                                 aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
                                 {!! $faq->question !!}
                             </a>

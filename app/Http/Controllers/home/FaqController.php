@@ -21,7 +21,7 @@ class FaqController extends Controller
     {
         try {
             $faqs = $this->faqService->getPaginate();
-            if($request->keword) {
+            if($request->keyword) {
                 $faqs = $this->faqService->search($request);
                 if (!$faqs->count()) {
                     return redirect()->back()->with('error', 'Không có FAQ nào được tìm thấy');
