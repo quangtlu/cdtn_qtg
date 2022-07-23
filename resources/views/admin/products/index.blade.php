@@ -98,13 +98,13 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.products.edit', ['id' => $product->id]) }}"><button
-                                                    class="btn btn-info btn-sm">Sửa</button></a>
-                                            <button type="button"
-                                                data-url="{{ route('admin.products.destroy', ['id' => $product->id]) }}"
-                                                class="btn btn-danger btn-sm btn-delete">Xoá</i></button>
-                                            <a href="{{ route('admin.products.show', ['id' => $product->id]) }}"><button
-                                                    class="btn btn-info btn-sm">Chi tiết</button></a>
+                                                    class="btn btn-info btn-sm"><i class="fas fa-edit"></i></button></a>
                                         </td>
+                                        <td><button type="button"
+                                            data-url="{{ route('admin.products.destroy', ['id' => $product->id]) }}"
+                                            class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash-alt"></i></i></button></td>
+                                        <td><a href="{{ route('admin.products.show', ['id' => $product->id]) }}"><button
+                                            class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button></a></td>
 
                                     </tr>
                                 @endforeach

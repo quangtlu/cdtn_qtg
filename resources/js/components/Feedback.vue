@@ -11,6 +11,7 @@
             :key="score"
             :class="score <= feedback.score ? 'fas ' : 'far '"
             class="fa-star star-icon"
+            data-toggle="tooltip" data-placement="top" :title="toolTipRate(score)"
             @click="rate(score)"
           >
           </i>
@@ -88,12 +89,34 @@ export default {
         console.log(error);
       }
     },
+    toolTipRate(score) {
+      switch (score) {
+        case 1:
+          return 'Rất tệ'
+        case 2:
+          return 'Chưa hài lòng'
+        case 3:
+          return 'Khá ổn'
+        case 4:
+          return 'Rất tuyệt'
+        case 5:
+          return 'Rất hài lòng'
+        
+        default:
+          break;
+      }
+    }
   },
   computed: {
     chatroom_id() {
       return this.$route.params.roomId;
     },
   },
+  mounted () {
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  }
 };
 </script>
 
