@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'Admin\ProductController@store')->name('store')->middleware('can:add-product');
             Route::get('/edit/{id}', 'Admin\ProductController@edit')->name('edit')->middleware('can:edit-product');
             Route::post('/update/{id}', 'Admin\ProductController@update')->name('update')->middleware('can:edit-product');
-            Route::get('/show/{id}', 'Admin\ProductController@show')->name('show')->middleware('can:show product');
+            Route::get('/show/{id}', 'Admin\ProductController@show')->name('show')->middleware('can:show-product');
             Route::get('/destroy/{id}', 'Admin\ProductController@destroy')->name('destroy')->middleware('can:delete-product');
         });
 

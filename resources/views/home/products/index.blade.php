@@ -106,9 +106,6 @@
         $('#search-input').attr('placeholder', 'Tìm kiếm tác phẩm, tác giả, chủ sở hữu...');
     </script>
     <script>
-        src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" >
-    </script>
-    <script>
         $(document).ready(function() {
             $('#search').click(function() {
                 $('#toggle').fadeToggle();
