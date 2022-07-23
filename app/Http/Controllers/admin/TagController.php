@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Tag\StoreTagRequest;
 use App\Http\Requests\Admin\Tag\UpdateTagRequest;
-use App\Models\Tag;
 use App\Services\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 
 class TagController extends Controller
 {
@@ -18,11 +16,11 @@ class TagController extends Controller
     {
         $this->tagService = $tagService;
     }
-    
+
     public function index(Request $request)
     {
         $tags = $this->tagService->getPaginate();
-        if($request->keyword) {
+        if ($request->keyword) {
             $tags = $this->tagService->search($request);
         }
         return view('admin.tags.index', compact('tags'));

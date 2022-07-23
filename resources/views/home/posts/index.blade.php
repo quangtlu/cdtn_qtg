@@ -1,7 +1,6 @@
 @extends('layouts.home')
 @section('title', 'Bài viết')
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
@@ -55,24 +54,32 @@
                                 <label for="category">Mục lục</label>
                                 <select name="category_id[]" class="form-control select2_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                        @if ($category->name == config('consts.category_reference.name'))
-                                            @role('admin|editor')
-                                                <option value="{{ $category->id }}"
-                                                    {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                    {{ $category->name }}</option>
-                                            @endrole
+                                    @foreach ($categories as $index => $category)
+                                        @hasanyrole('admin|editor')
+                                            @if ($category->type == config('consts.category.type.post_reference.value') && $category->parent_id == 0)
+                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                @if ($category->categories->count())
+                                                    @foreach ($category->categories as $indexChild => $categoryChild)
+                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            @endif
                                         @else
-                                            <option value="{{ $category->id }}"
-                                                {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                                {{ $category->name }}</option>
-                                        @endif
+                                            @if ($category->type != config('consts.category.type.post_reference.value') && $category->parent_id == 0)
+                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                @if ($category->categories->count())
+                                                    @foreach ($category->categories as $indexChild => $categoryChild)
+                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        @endhasanyrole
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea class="summernote" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
+                                <textarea id="editor" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="image">Ảnh</label>
@@ -95,18 +102,21 @@
     @include('home.component.posts.list', ['posts' => $posts])
 @endsection
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+        $('.select2_init').select2()
+
         $('#search').click(function() {
             $('#toggle').fadeToggle();
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
-        $('.summernote').summernote({
-            height: 200
-        });
-        $('.select2_init').select2()
 
 
         function alertMessage(message, type, time)
@@ -131,13 +141,8 @@
        
         function resetForm(formElement, action)
         {
-            $('#post-modalLabel').text('Đăng bài viết')
             formElement.trigger("reset");
-            formElement.attr('action', action)
-            $(".select-tag-add").val([]).change();
-            $(".select-category-add").val([]).change();
-            $('.summernote-add').summernote('reset')
-            $('#submit-btn-add').text('Đăng bài')
+            $(".select2_init").val([]).change();
         }
 
 
@@ -160,10 +165,9 @@
                 processData:false,
                 dataType: "json",
                 success: function (response) {
-                    console.log(response);
                     $('#add-modal').modal('hide')
-                    resetForm(that)
                     alertMessage(response.message, 'success')
+                    resetForm(that)
                     if(response.post.status == unsolvedStatus){
                         let showPostUrl = response.orther.showPost
                         var html = 
@@ -215,6 +219,7 @@
                                 </div>
                             `
                         $('.search-and-filter').after(html)
+                        $('.alert-no-post').hide()
                     }
                 },
                 error: function (errors) {

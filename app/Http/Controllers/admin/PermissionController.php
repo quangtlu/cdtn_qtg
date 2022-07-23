@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Permission\StorePermissionRequest;
 use App\Services\PermissionService;
-use function redirect;
-use function view;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,15 +28,14 @@ class PermissionController extends Controller
         try {
             $this->permissionService->create($request);
             return Redirect(route('admin.permissions.index'))->with('success', 'Thêm quyền thành công');
-        }
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return Redirect(route('admin.permissions.index'))->with('error', 'Thêm quyền thất bại');
         }
     }
 
     public function destroy($id)
     {
-       $permission = $this->permissionService->delete($id);
-       return response()->json(['permission' => $permission, 'message' => 'Xóa quyền thành công']);
+        $permission = $this->permissionService->delete($id);
+        return response()->json(['permission' => $permission, 'message' => 'Xóa quyền thành công']);
     }
 }

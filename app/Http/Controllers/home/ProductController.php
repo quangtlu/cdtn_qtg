@@ -54,9 +54,10 @@ class ProductController extends Controller
             if($request->sort) {
                 $products = $this->productService->sortProductPublicRegisDate($request->sort);
             }
-
-            if ($products->count() < 1) {
-                return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
+            if($request->keyword) {
+                if (!$products->count()) {
+                    return redirect()->back()->with('error', 'Không có tác phẩm nào được tìm thấy');
+                }
             }
 
             return view('home.products.index', compact( 'products'));

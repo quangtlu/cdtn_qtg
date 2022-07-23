@@ -60,8 +60,10 @@ class PostController extends Controller
             if ($request->sort) {
                 $posts = $this->postService->sortPost($request->sort);
             }
-            if(!$posts->count()) {
-                return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
+            if($request->keyword) {
+                if (!$posts->count()) {
+                    return redirect()->back()->with('error', 'Không có bài viết nào được tìm thấy');
+                }
             }
             return view('home.posts.index', compact('posts'));
         } catch (\Throwable $th) {
@@ -168,11 +170,11 @@ class PostController extends Controller
             return response()->json(['message' => 'Bài viết đã được xét duyệt']);
         }
         else {
-            $post = $this->postService->handleRequestPost($id, $action);
-            $this->notificationService->sendNotiResult($post, $action);
-            $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
             $user = Auth::user();
             if($user->hasAnyRole('mod', 'admin')) {
+                $post = $this->postService->handleRequestPost($id, $action);
+                $this->notificationService->sendNotiResult($post, $action);
+                $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
                 return response()->json(['post' => $post, 'message' => $message]);
             } else {
                 abort(403);

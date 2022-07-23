@@ -22,6 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên mục lục</th>
+                                <th>Mục lục cha</th>
                                 <th>Loại mục lục</th>
                                 <th>Action</th>
                             </tr>
@@ -31,6 +32,7 @@
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
+                                        <td>{{ $category->category->name ?? 'Danh mục cha' }}</td>
                                         <td>
                                             @foreach (config('consts.category.type') as $type)
                                                 @if($type['value'] == $category->type)

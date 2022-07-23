@@ -4,27 +4,30 @@
     <link rel="stylesheet" href="{{ asset('home/faq/style.css') }}">
 @endsection
 @section('content')
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        @foreach ($faqs as $faq)
-            <div class="panel panel-primary">
-                <div class="panel-heading" role="tab" id="heading{{ $faq->id }}">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $faq->id }}"
-                            aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
-                            {!! $faq->question !!}
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse{{ $faq->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $faq->id }}">
-                    <div class="panel-body">
-                        {!! $faq->answer !!}
+    @if ($faqs->count())
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            @foreach ($faqs as $faq)
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading{{ $faq->id }}">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" style="text-decoration: none" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $faq->id }}"
+                                aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
+                                {!! $faq->question !!}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ $faq->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $faq->id }}">
+                        <div class="panel-body">
+                            {!! $faq->answer !!}
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
-    {{ $faqs->withQueryString()->links() }}
-
+            @endforeach
+        </div>
+        {{ $faqs->withQueryString()->links() }}
+    @else
+        <div class="alert alert-info" style="margin-top: 10px" role="alert">FAQ đang được cập nhật...</div>
+    @endif
 @endsection
 @section('js')
     <script>

@@ -37,7 +37,7 @@ class HomeController extends Controller
             $posts = $this->postService->getReferencePosts();
             if ($request->keyword) {
                 $posts = $this->postService->search($request);
-                if ($posts->count() < 1) {
+                if (!$posts->count()) {
                     return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
                 }
             }

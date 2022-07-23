@@ -28,9 +28,8 @@ $('.read-all-noti-link').click(function (e) {
 
 function renderNoNotication() {
     let noNotiImg = $('.notice-nav').data('noimg')
-    $('.notification-icon').removeClass('bell');
+    $('.notification-icon').removeClass('bell active');
     $('.number-notification').remove();
-    $('#has-notification').slideUp();
     $('#has-notification').remove();
     $('.notice-nav').append(`
         <div class="notification-container animate__animated animate__fadeIn">
@@ -38,7 +37,6 @@ function renderNoNotication() {
             <h4 style="padding: 10px 0" class="active">Bạn không có thông báo nào</h4>
         </div>
     `)
-    $('.notification-container').slideDown();
 }
 
 $('.remove-all-noti-link').click(function (e) { 
@@ -71,8 +69,11 @@ $('.action-btn').click(function (e) {
         dataType: "json",
         success: function (response) {
             if(screen == 'header') {
+                let totalNoti = $('.notice-item').length
+                totalNoti--;
                 $(that).closest('.notice-item').remove()
-                if(!$('.notice-item').length){
+                $('.number-notification').text(totalNoti)
+                if(totalNoti < 1){
                     renderNoNotication()
                 }
             } else {

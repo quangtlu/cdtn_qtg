@@ -4,7 +4,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/product/index.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -16,7 +16,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên bài viết</label>
+                                <label for="category_name">Tiêu đề</label>
                                 <input type="text" value="{{ old('title') ?? $post->title }}" name="title" class="form-control"
                                     id="category_name">
                                 @error('title')
@@ -50,8 +50,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mô tả</label>
-                                <textarea class="form-control" value="{{ old('content') ?? $post->content }}" name="content" id="summernote" cols="30" rows="5">{{ $post->content }}</textarea>
+                                <label for="category_name">Nội dung</label>
+                                <textarea class="form-control" value="{{ old('content') ?? $post->content }}" name="content" id="editor" cols="30" rows="5">{{ $post->content }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -76,7 +76,7 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
         $(function() {
@@ -86,8 +86,10 @@
             $('.select3_init').select2({
                 'placeholder': 'Chọn danh mục'
             })
-            $('#summernote').summernote({
-                height: 400
+            ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
             });
         })
     </script>

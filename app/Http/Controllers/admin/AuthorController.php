@@ -6,10 +6,7 @@ use App\Http\Requests\Admin\Author\StoreAuthorRequest;
 use App\Http\Requests\Admin\Author\UpdateAuthorRequest;
 use App\Services\AuthorService;
 use Illuminate\Http\Request;
-use function redirect;
-use function view;
 use App\Http\Controllers\Controller;
-
 class AuthorController extends Controller
 {
     private $authorService;
@@ -35,12 +32,7 @@ class AuthorController extends Controller
             $authors = $this->authorService->search($request);
         }
         $authorAll = $this->authorService->getAll();
-        if ($authors->count() > 0) {
-            return view('admin.authors.index', compact('authors', 'authorAll'));
-        } else {
-            return redirect()->back()->with('error', 'Không có tác giả nào phù hợp');
-        }
-        return view('admin.authors.index', compact('authorAll'));
+        return view('admin.authors.index', compact('authors', 'authorAll'));
     }
 
     public function create()

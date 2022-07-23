@@ -21,12 +21,11 @@ class ProductController extends Controller
     private $categoryService;
 
     public function __construct(
-        ProductService $productService, 
-        OwnerService $ownerService, 
+        ProductService $productService,
+        OwnerService $ownerService,
         AuthorService $authorService,
         CategoryService $categoryService
-    )
-    {
+    ) {
         $this->productService = $productService;
         $this->ownerService = $ownerService;
         $this->authorService = $authorService;
@@ -40,22 +39,12 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productService->getPaginate();
-        if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
+        if ($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
             $products = $this->productService->searchAndFilter($request);
-        }
-        else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
+        } else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
             $products = $this->productService->filter($request);
-        }
-        else if ($request->keyword) {
+        } else if ($request->keyword) {
             $products = $this->productService->search($request);
-        }
-
-        if($request) {
-            if ($products->count() > 0) {
-                return view('admin.products.index', compact('products'));
-            } else {
-                return redirect()->back()->with('error', 'Không có tác phẩm nào phù hợp');
-            }
         }
 
         return view('admin.products.index', compact('products'));

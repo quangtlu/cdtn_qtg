@@ -16,10 +16,19 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">mục lục cha</label>
+                                <label for="category_name">Mục lục cha</label>
                                 <select id="category_parent" name="parent_id" class="form-control">
                                     <option value="0">Chọn mục lục cha</option>
-                                    {!! $htmlOption !!}
+                                    @foreach ($categories as $index => $category)
+                                        @if ($category->parent_id == 0)
+                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                @if ($category->categories->count())
+                                                    @foreach ($category->categories as $indexChild => $categoryChild)
+                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                        @endif
+                                    @endforeach
                                 </select>
                                 @error('parent_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -28,8 +37,8 @@
                             <div class="form-group">
                                 <label for="category_name">Loại mục lục</label>
                                 <select id="selectType" name="type" class="form-control">
-                                    @foreach (config('consts.category.type') as $type)
-                                        <option value="{{ $category->type == $type['value'] }}">{{ $type['name'] }}</option>
+                                    @foreach (config('consts.category.type') as $type) 
+                                        <option {{ $category->type == $type['value'] ? 'selected' : '' }}  value="{{$type['value']}}">{{ $type['name'] }}</option>
                                     @endforeach
                                 </select>
                                 @error('type')

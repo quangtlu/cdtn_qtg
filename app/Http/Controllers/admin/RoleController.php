@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Role\StoreRoleRequest;
 use App\Http\Requests\Admin\Role\UpdateRoleRequest;
-use App\Models\Permission;
 use App\Services\PermissionService;
 use App\Services\RoleService;
-use function redirect;
-use function view;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

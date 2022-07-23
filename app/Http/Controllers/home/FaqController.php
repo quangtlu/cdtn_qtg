@@ -21,11 +21,11 @@ class FaqController extends Controller
     {
         try {
             $faqs = $this->faqService->getPaginate();
-            if($request->keword) {
+            if($request->keyword) {
                 $faqs = $this->faqService->search($request);
-            }
-            if($faqs->count() < 1) {
-                return redirect()->back()->with('error', 'Không FAQ nào phù hợp');
+                if (!$faqs->count()) {
+                    return redirect()->back()->with('error', 'Không có FAQ nào được tìm thấy');
+                }
             }
             return view('home.faq.index', compact('faqs'));
         } catch (\Throwable $th) {

@@ -32,26 +32,21 @@ class UserController extends Controller
     {
         $users = $this->userService->getPaginate();
 
-        if($request->keyword) {
+        if ($request->keyword) {
             $users = $this->userService->search($request);
         }
 
-        if($request->keyword && ($request->name || $request->gender || $request->email || $request->phone || $request->role_id)) {
+        if ($request->keyword && ($request->name || $request->gender || $request->email || $request->phone || $request->role_id)) {
             $users = $this->userService->searchAndFilter($request);
-        }
-        else if ($request->name || $request->gender || $request->email || $request->phone || $request->role_id) {
+        } else if ($request->name || $request->gender || $request->email || $request->phone || $request->role_id) {
             $users = $this->userService->filter($request);
-        }
-        else if ($request->keyword) {
+        } else if ($request->keyword) {
             $users = $this->userService->search($request);
         }
+
         $userAll = $this->userService->getAll();
-        if ($users->count() > 0) {
-            return view('admin.users.index', compact('users', 'userAll'));
-        } else {
-            return redirect()->back()->with('error', 'Không có người dùng nào phù hợp');
-        }
-        return view('admin.users.index', compact('usersAll'));
+
+        return view('admin.users.index', compact('users', 'userAll'));
     }
 
     public function create()
