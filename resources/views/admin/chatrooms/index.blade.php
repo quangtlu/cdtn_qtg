@@ -69,46 +69,53 @@
                                                                         <b>Người được tư vấn:
                                                                         </b> <span
                                                                             class="text-danger text-bold">{{ $chatroom->post->user->name }}</span>
-                                                                        @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
-                                                                            @if ($feedback->user_id == $chatroom->post->user->id)
-                                                                                <div><i
-                                                                                        class="far fa-clock text-primary"></i>
-                                                                                    {{ $feedback->updated_at->diffForHumans() }}
-                                                                                </div>
-                                                                                @for ($i = 0; $i <= $feedback->score; $i++)
-                                                                                    <i style="color: rgb(255, 238, 0)"
-                                                                                        class="fas fa-star"></i>
-                                                                                @endfor
-                                                                                <div>{{ $feedback->note }}</div>
-                                                                            @endif
-                                                                        @endforeach
+                                                                        <ul class="list-group">
+                                                                            @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
+                                                                                @if ($feedback->user_id == $chatroom->post->user->id)
+                                                                                    <li class="list-group-item">
+                                                                                        <div style="color: #000">{{ $feedback->note }}</div>
+                                                                                        @for ($i = 0; $i <= $feedback->score; $i++)
+                                                                                            <i style="color: rgb(255, 238, 0)"
+                                                                                            class="fas fa-star"></i>
+                                                                                            @endfor
+                                                                                            <div><i
+                                                                                                    class="far fa-calendar text-primary"></i>
+                                                                                                {{ $feedback->updated_at }}
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </li>
+                                                                            @endforeach
+                                                                        </ul>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <ul class="list-group">
                                                                     <li class="list-group-item list-group-item-info">
-                                                                        <b>Chuyên gia tư vấn:
-                                                                        </b>
+                                                                        <b>Chuyên gia tư vấn:</b>
                                                                         @foreach ($chatroom->users as $user)
                                                                             @if ($user->hasRole('counselor'))
                                                                                 <span
                                                                                     class="text-danger text-bold">{{ $user->name }}</span>
                                                                             @endif
                                                                         @endforeach
-                                                                        @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
-                                                                            @if ($feedback->user_id != $chatroom->post->user->id)
-                                                                                <div><i
-                                                                                        class="far fa-clock text-primary"></i>
-                                                                                    {{ $feedback->updated_at->diffForHumans() }}
-                                                                                </div>
-                                                                                @for ($i = 0; $i <= $feedback->score; $i++)
-                                                                                    <i style="color: rgb(255, 238, 0)"
-                                                                                        class="fas fa-star"></i>
-                                                                                @endfor
-                                                                                <div>{{ $feedback->note }}</div>
-                                                                            @endif
-                                                                        @endforeach
+                                                                        <ul class="list-group">
+                                                                            @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
+                                                                                @if ($feedback->user_id != $chatroom->post->user->id)
+                                                                                    <li class="list-group-item">
+                                                                                        <div style="color: #000">{{ $feedback->note }}</div>
+                                                                                        @for ($i = 0; $i <= $feedback->score; $i++)
+                                                                                            <i style="color: rgb(255, 238, 0)"
+                                                                                            class="fas fa-star"></i>
+                                                                                            @endfor
+                                                                                            <div><i
+                                                                                                    class="far fa-calendar text-primary"></i>
+                                                                                                {{ $feedback->updated_at }}
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </li>
+                                                                            @endforeach
+                                                                        </ul>
                                                                     </li>
                                                                 </ul>
                                                             </div>

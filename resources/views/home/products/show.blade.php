@@ -151,7 +151,7 @@
                                     <h3 class="modal-title" id="exampleModalLabel">Thông tin chủ sở hữu</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <h4 style="padding-top: 10px">Họ tên: {{ $product->owner->name }}</h4>
+                                    <h4 style="padding-top: 10px">Tên chủ sơ hữu: {{ $product->owner->name }}</h4>
                                     <h4 style="padding-top: 10px">Email: {{ $product->owner->email }}</h4>
                                     <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->phone }}</h4>
                                     

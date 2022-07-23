@@ -21,7 +21,13 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12">
-                                    <label class="labels">Giới tính: {{ Str::ucfirst($profile->gender) }}</label>
+                                    <label class="labels">Giới tính:
+                                        @foreach (config('consts.user.gender') as $gender)
+                                            @if ($profile->gender == $gender['value'])
+                                                {{ $gender['name'] }}
+                                            @endif
+                                        @endforeach
+                                    </label>
                                 </div>
                             </div>
                             <div class="row mt-3">
