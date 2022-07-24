@@ -130,7 +130,7 @@
                         @role('counselor')
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label class="labels">Mục lục:</label>
+                                    <label class="labels">Chuyên mục:</label>
                                     <select name="category_id[]" class="form-control select2_init" multiple>
                                         <option></option>
                                         @foreach ($categories as $category)

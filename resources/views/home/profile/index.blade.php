@@ -69,7 +69,7 @@
                                 <div class="row my-3">
                                     <div class="col-md-12">
                                         <ul id="category" class="tag" style="margin-top: 0 !important">
-                                            <label class="labels">Mục lục:</label>
+                                            <label class="labels">Chuyên mục:</label>
                                             @foreach ($profile->categories as $category)
                                                 <li class="li-category-tag">
                                                     <a class="m-3" href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name ?? 'Chưa rõ' }}</a>
