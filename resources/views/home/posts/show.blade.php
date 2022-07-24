@@ -367,6 +367,7 @@
         }
         function toogleEditCommentWrap() {
             $(this).closest('.comments-grid-right').children('.edit-comment-wrap').fadeToggle()
+            $(this).closest('.comments-grid-right').children('.comment-content').fadeToggle()
         }
         function updateComment(e) {
             e.preventDefault();
@@ -382,6 +383,7 @@
                     const message = response.message
                     that.closest('.comments-grid-right').children('.comment-content').text(newComment)
                     that.closest('.edit-comment-wrap').fadeOut()
+                    that.closest('.comments-grid-right').children('.comment-content').fadeToggle()
                     alertMessage(message, 'success')
                 },
                 error: function(errors) {
