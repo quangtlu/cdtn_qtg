@@ -120,12 +120,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2, null, [[0, 8]]);
       }))();
+    },
+    toolTipRate: function toolTipRate(score) {
+      switch (score) {
+        case 1:
+          return 'Rất tệ';
+
+        case 2:
+          return 'Chưa hài lòng';
+
+        case 3:
+          return 'Khá ổn';
+
+        case 4:
+          return 'Rất tuyệt';
+
+        case 5:
+          return 'Rất hài lòng';
+
+        default:
+          break;
+      }
     }
   },
   computed: {
     chatroom_id: function chatroom_id() {
       return this.$route.params.roomId;
     }
+  },
+  mounted: function mounted() {
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 });
 
@@ -550,6 +576,11 @@ var render = function render() {
       key: score,
       staticClass: "fa-star star-icon",
       "class": score <= _vm.feedback.score ? "fas " : "far ",
+      attrs: {
+        "data-toggle": "tooltip",
+        "data-placement": "top",
+        title: _vm.toolTipRate(score)
+      },
       on: {
         click: function click($event) {
           return _vm.rate(score);
@@ -11637,8 +11668,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\CDTN Quyền tác giả\QTG-Web\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\CDTN Quyền tác giả\QTG-Web\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\CĐTN\cdtn_qtg\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\CĐTN\cdtn_qtg\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

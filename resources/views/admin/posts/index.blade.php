@@ -23,47 +23,50 @@
                                 </div>
                             </div>
                             <div class="row" id="toggle" style="display: none">
-                                <div class="p-2">
-                                    <form action="{{ route('admin.posts.index') }}" method="get">
-                                        <div class="row col-md-12 mb-2">
-                                            <div class="col-md-2">
-                                                <select name="tag_id" class="form-control">
-                                                    <option value="" class="filter-option-dafault">Tag</option>
-                                                    <option value="" class="filter-option-dafault">Tất cả</option>
-                                                    @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
-                                                            {{ $tag->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <select name="category_id" id="sort" class="form-control">
-                                                    <option value="" class="filter-option-dafault">mục lục</option>
-                                                    <option value="" class="filter-option-dafault">Tất cả</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}"
-                                                            {{ request()->category_id == $category->id ? 'selected' : false }}>{{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <select name="status" id="sort" class="form-control">
-                                                    <option value="" class="filter-option-dafault">Trạng thái</option>
-                                                    @foreach (config('consts.post.status') as $status)
-                                                        <option value="{{ $status['value'] }}" class="filter-option-dafault">{{ $status['name'] }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                            </div>
+                                <form class="w-100" action="{{ route('admin.posts.index') }}" method="get">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <select name="tag_id" class="form-control">
+                                                <option value="" class="filter-option-dafault">Tag</option>
+                                                <option value="" class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($tags as $tag)
+                                                    <option value="{{ $tag->id }}" {{ request()->tag_id == $tag->id ? 'selected' : false }}>
+                                                        {{ $tag->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col-md-3">
+                                            <select name="category_id" id="sort" class="form-control">
+                                                <option value="" class="filter-option-dafault">mục lục</option>
+                                                <option value="" class="filter-option-dafault">Tất cả</option>
+                                                @foreach ($categories as $index => $category)
+                                                    @if ($category->parent_id == 0)
+                                                            <option {{ request()->category_id == $category->id ? 'selected' : false }} value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                            @if ($category->categories->count())
+                                                                @foreach ($category->categories as $indexChild => $categoryChild)
+                                                                    <option {{ request()->category_id == $category->id ? 'selected' : false }} value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="status" id="sort" class="form-control">
+                                                <option value="" class="filter-option-dafault">Trạng thái</option>
+                                                @foreach (config('consts.post.status') as $status)
+                                                    <option value="{{ $status['value'] }}" class="filter-option-dafault">{{ $status['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="keyword" placeholder="Tìm kiếm bài viết" class="form-control">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-info btn-block"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

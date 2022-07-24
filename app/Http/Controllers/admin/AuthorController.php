@@ -31,8 +31,8 @@ class AuthorController extends Controller
         else if ($request->keyword) {
             $authors = $this->authorService->search($request);
         }
-
-        return view('admin.authors.index', compact('authors'));
+        $authorAll = $this->authorService->getAll();
+        return view('admin.authors.index', compact('authors', 'authorAll'));
     }
 
     public function create()

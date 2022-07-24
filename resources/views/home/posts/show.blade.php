@@ -232,10 +232,10 @@
                             </li>
                             @if ($comment->status == config('consts.post.status.solved.value') && 
                                 !$post->categories->contains('type', config('consts.category.type.post_reference.value')))
-                                <li>| <a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
+                                <li> <a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
                                         class="comment-action-link post-status-solved">Hữu ích nhất
                                         <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                    </a></li>
+                                    </a>|</li>
                             @endif
                             @auth
                                 @if ($comment->user->id == Auth::user()->id)
@@ -325,9 +325,6 @@
         });
         ClassicEditor
             .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
         $('.select2_init').select2()
 
         function alertMessage(message, type, time)

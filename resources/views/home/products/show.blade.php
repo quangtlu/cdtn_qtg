@@ -87,13 +87,12 @@
     @endif
     <div class="category-tag">
         <ul class="tag">
-            <li class="li-category-tag">
-                <span style="font-size:18px">Mục lục: </span>
-                @foreach ($product->categories as $category)
-                    <a
-                        href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                @endforeach
-            </li>
+            <span style="font-size:18px">Mục lục: </span>
+            @foreach ($product->categories as $category)
+                <li class="li-category-tag">
+                    <a href="{{ route('products.getProductByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                </li>
+            @endforeach
         </ul>
         <ul class="tag" style="margin-top:0 !important">
             <li class="li-category-tag">
@@ -152,7 +151,7 @@
                                     <h3 class="modal-title" id="exampleModalLabel">Thông tin chủ sở hữu</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <h4 style="padding-top: 10px">Họ tên: {{ $product->owner->name }}</h4>
+                                    <h4 style="padding-top: 10px">Tên chủ sơ hữu: {{ $product->owner->name }}</h4>
                                     <h4 style="padding-top: 10px">Email: {{ $product->owner->email }}</h4>
                                     <h4 style="padding-top: 10px">Số Điện thoại: {{ $product->owner->phone }}</h4>
                                     

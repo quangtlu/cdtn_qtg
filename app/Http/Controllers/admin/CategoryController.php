@@ -27,8 +27,8 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $htmlOption = $this->getCategory($parentId = '');
-        return view('admin.categories.create', compact('htmlOption'));
+        $categories = $this->categoryService->getAll();
+        return view('admin.categories.create', compact('categories'));
     }
 
     public function store(StoreCategoryRequest $request)
@@ -71,8 +71,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->categoryService->getById($id);
-        $htmlOption = $this->getCategory($category->parent_id);
-        return view('admin.categories.edit', compact('category', 'htmlOption'));
+        $categories = $this->categoryService->getAll();
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
     public function update(StoreCategoryRequest $request, $id)

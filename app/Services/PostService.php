@@ -55,7 +55,7 @@ class PostService
 
     public function getByTag($tagId)
     {
-        return Post::hasCategory($tagId)->accepted()->latest()->paginate(10);
+        return Post::hasTag($tagId)->accepted()->latest()->paginate(10);
     }
 
     public function getByUser($userId)
@@ -130,11 +130,7 @@ class PostService
     public function toogleSovled($id)
     {
         $post = $this->getById($id);
-        if ($post->status == config('consts.post.status.solved.value')) {
-            $data = ['status' => config('consts.post.status.unsolved.value')];
-        } else {
-            $data = ['status' => config('consts.post.status.solved.value')];
-        }
+        $data = ['status' => $post->status == config('consts.post.status.unsolved.value') ? config('consts.post.status.solved.value') : config('consts.post.status.unsolved.value')];
         $post->update($data);
     }
 

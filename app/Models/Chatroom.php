@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chatroom extends Model
 {
-    protected $fillable = ['name', 'description', 'post_id'];
+    protected $fillable = ['name', 'description', 'post_id', 'connector_id'];
 
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function connector()
+    {
+        return $this->belongsTo(User::class, 'connector_id');
     }
 
     public function feedbacks()

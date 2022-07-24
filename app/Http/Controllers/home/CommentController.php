@@ -58,7 +58,10 @@ class CommentController extends Controller
             abort(403);
         }
         else {
-            return response()->json(['message' => 'Xóa bình luận thành công']);
+            $commentDeleted = $this->commentService->delete($id);
+            if($commentDeleted) {
+                return response()->json(['message' => 'Xóa bình luận thành công', 'comment' => $comment]);
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', 'Bài viết')
+@section('title', 'Diễn đàn')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
@@ -29,7 +29,7 @@
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="post-modalLabel">Tạo bài viết</h4>
+                        <h4 class="modal-title" id="post-modalLabel">Đăng bài viết</h4>
                     </div>
                     <div class="modal-body">
                         <form id="add-post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
@@ -56,13 +56,11 @@
                                     <option></option>
                                     @foreach ($categories as $index => $category)
                                         @hasanyrole('admin|editor')
-                                            @if ($category->type == config('consts.category.type.post_reference.value') && $category->parent_id == 0)
-                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
-                                                @if ($category->categories->count())
-                                                    @foreach ($category->categories as $indexChild => $categoryChild)
-                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
-                                                    @endforeach
-                                                @endif
+                                            <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                            @if ($category->categories->count())
+                                                @foreach ($category->categories as $indexChild => $categoryChild)
+                                                    <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                @endforeach
                                             @endif
                                         @else
                                             @if ($category->type != config('consts.category.type.post_reference.value') && $category->parent_id == 0)
@@ -138,18 +136,10 @@
                 color: type == 'success' ? '#fff' : '#000',
             });
         }
-
-        function CKupdate(){
-            for ( instance in CKEDITOR.instances ){
-                CKEDITOR.instances[instance].updateElement();
-                CKEDITOR.instances[instance].setData('');
-            }
-        }
        
         function resetForm(formElement, action)
         {
             formElement.trigger("reset");
-            CKupdate()
             $(".select2_init").val([]).change();
         }
 
@@ -173,10 +163,9 @@
                 processData:false,
                 dataType: "json",
                 success: function (response) {
-                    console.log(response);
                     $('#add-modal').modal('hide')
-                    resetForm(that)
                     alertMessage(response.message, 'success')
+                    resetForm(that)
                     if(response.post.status == unsolvedStatus){
                         let showPostUrl = response.orther.showPost
                         var html = 
@@ -228,6 +217,7 @@
                                 </div>
                             `
                         $('.search-and-filter').after(html)
+                        $('.alert-no-post').hide()
                     }
                 },
                 error: function (errors) {

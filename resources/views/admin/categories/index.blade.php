@@ -22,7 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên mục lục</th>
-                                <th>Danh mục cha</th>
+                                <th>Mục lục cha</th>
                                 <th>Loại mục lục</th>
                                 <th>Action</th>
                             </tr>
@@ -61,6 +61,6 @@
 @section('js')
     <script>
         $('#header-search-form').attr('action', '{{ route('admin.categories.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm danh muc, ID...');
+        $('#search-input').attr('placeholder', 'Tìm kiếm tên danh muc,...');
     </script>
 @endsection

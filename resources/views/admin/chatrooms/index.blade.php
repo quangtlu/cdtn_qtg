@@ -18,7 +18,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên phòng</th>
-                                    <th>Thành viên</th>
+                                    <th>Chuyên gia tư vấn</th>
+                                    <th>Người được tư vấn</th>
+                                    <th>Người kết nối</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -27,11 +29,14 @@
                                     <tr>
                                         <td>{{ $chatroom->id }}</td>
                                         <td>{{ Str::ucfirst($chatroom->name) }}</td>
-                                        <td>
-                                            @foreach ($chatroom->users as $index => $user)
-                                                {{ $index != count($chatroom->users) - 1 ? $user->name . ' - ' : $user->name }}
-                                            @endforeach
-                                        </td>
+                                        @foreach ($chatroom->users as $user)
+                                            @if ($user->hasRole('counselor'))
+                                                <td>{{ $user->name }}</td>
+                                            @else
+                                                <td>{{ $user->name }}</td>
+                                            @endif
+                                        @endforeach
+                                        <td>{{ $chatroom->connector->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.chatrooms.edit', ['id' => $chatroom->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>
@@ -42,6 +47,7 @@
                                                 data-target="#bd-example-modal-lg-{{ $chatroom->id }}">Chi tiết</button>
                                         </td>
                                     </tr>
+                                    {{-- modal detail --}}
                                     <div class="modal fade" id="bd-example-modal-lg-{{ $chatroom->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
@@ -52,7 +58,8 @@
                                                         {{ Str::ucfirst($chatroom->name) }}
                                                     </a>
                                                     <li class="list-group-item list-group-item-action"><b>Bài viết: </b>
-                                                        <a href="{{ route('posts.show', ['id' => $chatroom->post->id]) }}">{{ $chatroom->post->title }}</a>
+                                                        <a
+                                                            href="{{ route('posts.show', ['id' => $chatroom->post->id]) }}">{{ $chatroom->post->title }}</a>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <div class="row">
@@ -60,44 +67,55 @@
                                                                 <ul class="listgroup">
                                                                     <li class="list-group-item list-group-item-success">
                                                                         <b>Người được tư vấn:
-                                                                        </b> <span class="text-danger text-bold">{{ $chatroom->post->user->name }}</span>
-                                                                        @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
-                                                                            @if ($feedback->user_id == $chatroom->post->user->id)
-                                                                                <div><i class="far fa-clock text-primary"></i>
-                                                                                    {{ $feedback->updated_at->diffForHumans() }}
-                                                                                </div>
-                                                                                @for ($i = 0; $i <= $feedback->score; $i++)
-                                                                                    <i style="color: rgb(255, 238, 0)"
-                                                                                        class="fas fa-star"></i>
-                                                                                @endfor
-                                                                                <div>{{ $feedback->note }}</div>
-                                                                            @endif
-                                                                        @endforeach
+                                                                        </b> <span
+                                                                            class="text-danger text-bold">{{ $chatroom->post->user->name }}</span>
+                                                                        <ul class="list-group">
+                                                                            @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
+                                                                                @if ($feedback->user_id == $chatroom->post->user->id)
+                                                                                    <li class="list-group-item">
+                                                                                        <div style="color: #000">{{ $feedback->note }}</div>
+                                                                                        @for ($i = 0; $i <= $feedback->score; $i++)
+                                                                                            <i style="color: rgb(255, 238, 0)"
+                                                                                            class="fas fa-star"></i>
+                                                                                            @endfor
+                                                                                            <div><i
+                                                                                                    class="far fa-calendar text-primary"></i>
+                                                                                                {{ $feedback->updated_at }}
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </li>
+                                                                            @endforeach
+                                                                        </ul>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <ul class="list-group">
                                                                     <li class="list-group-item list-group-item-info">
-                                                                        <b>Chuyên gia tư vấn:
-                                                                        </b>
+                                                                        <b>Chuyên gia tư vấn:</b>
                                                                         @foreach ($chatroom->users as $user)
-                                                                            @if ($user->id != $chatroom->post->user->id)
-                                                                            <span class="text-danger text-bold">{{ $user->name }}</span>
+                                                                            @if ($user->hasRole('counselor'))
+                                                                                <span
+                                                                                    class="text-danger text-bold">{{ $user->name }}</span>
                                                                             @endif
                                                                         @endforeach
-                                                                        @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
-                                                                            @if ($feedback->user_id != $chatroom->post->user->id)
-                                                                                <div><i class="far fa-clock text-primary"></i>
-                                                                                    {{ $feedback->updated_at->diffForHumans() }}
-                                                                                </div>
-                                                                                @for ($i = 0; $i <= $feedback->score; $i++)
-                                                                                    <i style="color: rgb(255, 238, 0)"
-                                                                                        class="fas fa-star"></i>
-                                                                                @endfor
-                                                                                <div>{{ $feedback->note }}</div>
-                                                                            @endif
-                                                                        @endforeach
+                                                                        <ul class="list-group">
+                                                                            @foreach ($chatroom->feedbacks->sortByDesc('updated_at')->all() as $feedback)
+                                                                                @if ($feedback->user_id != $chatroom->post->user->id)
+                                                                                    <li class="list-group-item">
+                                                                                        <div style="color: #000">{{ $feedback->note }}</div>
+                                                                                        @for ($i = 0; $i <= $feedback->score; $i++)
+                                                                                            <i style="color: rgb(255, 238, 0)"
+                                                                                            class="fas fa-star"></i>
+                                                                                            @endfor
+                                                                                            <div><i
+                                                                                                    class="far fa-calendar text-primary"></i>
+                                                                                                {{ $feedback->updated_at }}
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </li>
+                                                                            @endforeach
+                                                                        </ul>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -107,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Large modal -->
+                                    <!--  -->
                                 @endforeach
                             </tbody>
                         </table>
