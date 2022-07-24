@@ -21,6 +21,7 @@
                                     <th>Chuyên gia tư vấn</th>
                                     <th>Người được tư vấn</th>
                                     <th>Người kết nối</th>
+                                    <th>Ngày kết nối</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -37,6 +38,7 @@
                                             @endif
                                         @endforeach
                                         <td>{{ $chatroom->connector->name }}</td>
+                                        <td>{{ $chatroom->created_at }}</td>
                                         <td>
                                             <a href="{{ route('admin.chatrooms.edit', ['id' => $chatroom->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>
