@@ -29,7 +29,7 @@
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="post-modalLabel">Tạo bài viết</h4>
+                        <h4 class="modal-title" id="post-modalLabel">Đăng bài viết</h4>
                     </div>
                     <div class="modal-body">
                         <form id="add-post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
@@ -56,13 +56,11 @@
                                     <option></option>
                                     @foreach ($categories as $index => $category)
                                         @hasanyrole('admin|editor')
-                                            @if ($category->type == config('consts.category.type.post_reference.value') && $category->parent_id == 0)
-                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
-                                                @if ($category->categories->count())
-                                                    @foreach ($category->categories as $indexChild => $categoryChild)
-                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
-                                                    @endforeach
-                                                @endif
+                                            <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                            @if ($category->categories->count())
+                                                @foreach ($category->categories as $indexChild => $categoryChild)
+                                                    <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                @endforeach
                                             @endif
                                         @else
                                             @if ($category->type != config('consts.category.type.post_reference.value') && $category->parent_id == 0)
