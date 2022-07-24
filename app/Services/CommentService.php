@@ -29,6 +29,7 @@ class CommentService
             'user_id' => Auth::user()->id,
             'post_id' => $request->post_id,
             'comment' => $request->comment,
+            'status' => config('consts.post.status.unsolved.value')
         ];
         return $this->commentModel->create($data);
     }
@@ -50,7 +51,7 @@ class CommentService
     {
         $comment = $this->getById($id);
         $post = $comment->post;
-        $data = ['status' => $comment->status == 0 ? config('consts.post.status.solved.value') : config('consts.post.status.unsolved.value')];
+        $data = ['status' => $comment->status == config('consts.post.status.unsolved.value') ? config('consts.post.status.solved.value') : config('consts.post.status.unsolved.value')];
         try {
             $comment->update($data);
             $post->update($data);
