@@ -55,7 +55,7 @@ class PostService
 
     public function getByTag($tagId)
     {
-        return Post::hasCategory($tagId)->accepted()->latest()->paginate(10);
+        return Post::hasTag($tagId)->accepted()->latest()->paginate(10);
     }
 
     public function getByUser($userId)

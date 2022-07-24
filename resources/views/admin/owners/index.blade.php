@@ -96,9 +96,7 @@
                                     <th>Tên chủ sơ hữu</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    {{-- @can('add owner | edit owner') --}}
                                     <th>Action</th>
-                                    {{-- @endcan --}}
                                 </tr>
                             </thead>
                             <tbody>

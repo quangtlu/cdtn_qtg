@@ -51,10 +51,10 @@ class Post extends Model
         });
     }
 
-    public function scopeHasTag($query, $categoryId)
+    public function scopeHasTag($query, $tagId)
     {
-        return $query->whereHas('tags', function ($subQuery) use ($categoryId) {
-            $subQuery->where('tags.id', $categoryId);
+        return $query->whereHas('tags', function ($subQuery) use ($tagId) {
+            $subQuery->where('tags.id', $tagId);
         });
     }
 

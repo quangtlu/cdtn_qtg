@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', 'Bài viết')
+@section('title', 'Diễn đàn')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
@@ -136,18 +136,10 @@
                 color: type == 'success' ? '#fff' : '#000',
             });
         }
-
-        function CKupdate(){
-            for ( instance in CKEDITOR.instances ){
-                CKEDITOR.instances[instance].updateElement();
-                CKEDITOR.instances[instance].setData('');
-            }
-        }
        
         function resetForm(formElement, action)
         {
             formElement.trigger("reset");
-            CKupdate()
             $(".select2_init").val([]).change();
         }
 
@@ -171,10 +163,9 @@
                 processData:false,
                 dataType: "json",
                 success: function (response) {
-                    console.log(response);
                     $('#add-modal').modal('hide')
-                    resetForm(that)
                     alertMessage(response.message, 'success')
+                    resetForm(that)
                     if(response.post.status == unsolvedStatus){
                         let showPostUrl = response.orther.showPost
                         var html = 
@@ -226,6 +217,7 @@
                                 </div>
                             `
                         $('.search-and-filter').after(html)
+                        $('.alert-no-post').hide()
                     }
                 },
                 error: function (errors) {

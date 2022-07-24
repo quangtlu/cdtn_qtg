@@ -108,9 +108,7 @@
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
     $(function () {
-        $('.select2_init').select2({
-            'placeholder': 'Chọn tác giả'
-        })
+        $('.select2_init').select2()
         $('.date-time').datepicker({
             language: 'vi',
             orientation: 'bottom',

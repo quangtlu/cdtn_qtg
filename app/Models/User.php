@@ -23,6 +23,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function rooms()
+    {
+        return $this->hasMany(Chatroom::class, 'connector_id');
+    }
+
     public function chatrooms()
     {
         return $this->belongsToMany(Chatroom::class);
