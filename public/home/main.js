@@ -81,6 +81,16 @@ $('.action-btn').click(function (e) {
             }
             alertMessage(response.message, 'success')
         },
+        error: function (errors) {
+            let totalNoti = $('.notice-item').length
+            totalNoti--;
+            $(that).closest('.notice-item').remove()
+            $('.number-notification').text(totalNoti)
+            if(totalNoti < 1){
+                renderNoNotication()
+            }
+            alertMessage('Có lỗi xảy ra', 'error')
+        }
     });
 });
 
