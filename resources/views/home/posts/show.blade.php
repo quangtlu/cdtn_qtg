@@ -11,8 +11,7 @@
         <h3 id="post-title" class="title-relate">{{ $post->title }}</h3>
         <ul class="post-info-list">
             <li class="user-post-info-wrap">
-                <img class="user-post-avt" src="{{ asset('image/profile') .'/' . $post->user->image }}" alt="">
-                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
+                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i class="fa fa-user" aria-hidden="true"></i> {{ $post->user->name }}</a>
             </li>
             <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#tag" id="number-tag">{{ $post->tags->count() }}
