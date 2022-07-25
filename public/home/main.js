@@ -130,6 +130,8 @@ function actionDeleteComment() {
                 url: urlRequest,
                 success: function (res) {
                     that.closest('.comments-grid').fadeOut()
+                    let totalCommentBefore = Number($('#number-comment').text().replace(/\D/g, "")) 
+                    $('#number-comment').text(totalCommentBefore - 1 + ' bình luận')
                     alertMessage(res.message, 'success')
                 },
             })
