@@ -83,5 +83,5 @@
     @endforeach
     {{ $posts->withQueryString()->links() }}
 @else
-    <div class="alert alert-info alert-no-post" style="margin-top: 10px" role="alert">Bài viết đang được cập nhật...</div>
+    <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có bài viết nào</div>
 @endif
