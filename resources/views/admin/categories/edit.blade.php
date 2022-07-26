@@ -9,14 +9,14 @@
                         <form action="{{ route('admin.categories.update', ['id' => $category->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên mục lục</label>
+                                <label class="label-required" for="category_name">Tên mục lục</label>
                                 <input type="text" value="{{ old('name') ?? $category->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mục lục cha</label>
+                                <label class="label-required" for="category_name">Mục lục cha</label>
                                 <select id="category_parent" name="parent_id" class="form-control">
                                     <option value="0">Chọn mục lục cha</option>
                                     @foreach ($categories as $index => $category)
@@ -35,7 +35,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Loại mục lục</label>
+                                <label class="label-required" for="category_name">Loại mục lục</label>
                                 <select id="selectType" name="type" class="form-control">
                                     @foreach (config('consts.category.type') as $type) 
                                         <option {{ $category->type == $type['value'] ? 'selected' : '' }}  value="{{$type['value']}}">{{ $type['name'] }}</option>

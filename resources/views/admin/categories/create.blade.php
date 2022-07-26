@@ -9,14 +9,14 @@
                         <form action="{{ route('admin.categories.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên mục lục</label>
+                                <label class="label-required" for="category_name">Tên mục lục</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">mục lục cha</label>
+                                <label class="label-required" for="category_name">mục lục cha</label>
                                 <select id="category_parent" name="parent_id" class="form-control" >
                                     <option value="0">Chọn mục lục cha</option>
                                     @foreach ($categories as $index => $category)
@@ -35,7 +35,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Loại mục lục</label>
+                                <label class="label-required" for="category_name">Loại mục lục</label>
                                 <select id="selectType" name="type" class="form-control" >
                                     @foreach (config('consts.category.type') as $type)
                                         <option value="{{ $type['value'] }}">{{ $type['name'] }}</option>

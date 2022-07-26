@@ -10,14 +10,14 @@
                         <form action="{{ route('admin.faqs.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Câu hỏi</label>
+                                <label class="label-required" for="category_name">Câu hỏi</label>
                                 <textarea class="form-control" id="question" name="question" cols="30" rows="5">{{ old('question') }}</textarea>
                                 @error('question')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Câu trả lời</label>
+                                <label class="label-required" for="category_name">Câu trả lời</label>
                                 <textarea class="form-control" id="answer" name="answer" cols="30" rows="5">{{ old('answer') }}</textarea>
                                 @error('answer')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

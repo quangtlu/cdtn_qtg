@@ -8,7 +8,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="card w-100 mt-2">
+                <div class="card w-100 mt-2 mx-2">
                     <div class="card-body">
                         <div class="row justify-content-between">
                             <div>

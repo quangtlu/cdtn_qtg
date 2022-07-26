@@ -15,19 +15,19 @@
                             <div class="p-3 form-profile">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Họ tên</label>
+                                        <label class="labels label-required">Họ tên</label>
                                         <input type="text" value="{{ old('name') ?? $profile->name }}" name="name" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Ngày sinh</label>
+                                        <label class="labels label-required">Ngày sinh</label>
                                         <input type="date"  class="form-control" name="dob" value="{{ old('dob') ?? $profile->dob }}" id="dob" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Giới tính</label>
+                                        <label class="labels label-required">Giới tính</label>
                                         <select name="gender" class="form-control" id="gender">
                                             <option value=""></option>
                                             @foreach (config('consts.user.gender') as $gender)
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Email</label>
+                                        <label class="labels label-required">Email</label>
                                         <input type="text" value="{{ old('email') ?? $profile->email }}" name="email" class="form-control" >
                                     </div>
                                 </div>

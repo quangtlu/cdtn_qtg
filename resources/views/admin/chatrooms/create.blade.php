@@ -13,18 +13,18 @@
                         <form action="{{ route('admin.chatrooms.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Tên phòng tư vấn</label>
+                                <label class="label-required" for="name">Tên phòng tư vấn</label>
                                 <input type="text" value="{{ old('name') }}" name="name" class="form-control" id="name">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mô tả</label>
+                                <label class="label-required" for="category_name">Mô tả</label>
                                 <textarea class="form-control" name="description" cols="30" rows="5"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Thành viên</label>
+                                <label class="label-required">Thành viên</label>
                                 <select name="user_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($users as $user)
@@ -36,7 +36,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Bài viết</label>
+                                <label class="label-required">Bài viết</label>
                                 <select name="post_id" class="form-control">
                                     <option></option>
                                     @foreach ($posts as $post)

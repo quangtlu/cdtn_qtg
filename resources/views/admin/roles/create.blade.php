@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="category_name">Tên vai trò</label>
+                                <label class="label-required" for="category_name">Tên vai trò</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="card border-primary col-md-12">
                                     <div class="card-header bg-success">
-                                        <label>
+                                        <label class="label-required">
                                             Danh sách quyền
                                         </label>
                                     </div>

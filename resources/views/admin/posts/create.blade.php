@@ -13,7 +13,7 @@
                         <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tiêu đề</label>
+                                <label class="label-required" for="category_name">Tiêu đề</label>
                                 <input type="text" name="title" class="form-control" id="category_name"
                                     value="{{ old('title') }}">
                                 @error('title')
@@ -30,9 +30,6 @@
                                             {{ $tag->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('tag_id')
-                                    <span class="mt-1 text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Mục lục</label>
@@ -44,12 +41,9 @@
                                             {{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('category_id')
-                                    <span class="mt-1 text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Nội dung</label>
+                                <label class="label-required" for="category_name">Nội dung</label>
                                 <textarea class="form-control" name="content" id="editor" cols="30" rows="5">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
