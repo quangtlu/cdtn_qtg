@@ -44,8 +44,9 @@
                                             <select name="gender" id="sort" class="form-control">
                                                 <option value="{{ config('consts.user.all') }}"
                                                     class="filter-option-dafault">Giới tính</option>
-                                                <option value="Nam">Nam</option>
-                                                <option value="Nữ">Nữ</option>
+                                                    @foreach (config('consts.user.gender') as $gender)
+                                                        <option value="{{ $gender['value'] }}">{{ $gender['name'] }}</option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-2">
