@@ -28,6 +28,7 @@ class UpdateProductRequest extends FormRequest
             'pub_date' => 'before:today',
             'author_id' => 'required',
             'description' => 'required',
+            'regis_date' => 'before:today|after:pub_date'
         ];
     }
 
@@ -39,6 +40,8 @@ class UpdateProductRequest extends FormRequest
             'pub_date.before' => 'Ngày xuất bản tác phẩm không được là ngày trong tương lai',
             'author_id.required' => 'Vui lòng chọn tác giả',
             'description.required' => 'Vui lòng nhập miêu tả',
+            'regis_date.before' => 'Ngày xuất bản tác phẩm không được là ngày trong tương lai',
+            'regis_date.after' => 'Ngày đăng kí tác phẩm sau ngày xuất bản',
         ];
     }
 }
