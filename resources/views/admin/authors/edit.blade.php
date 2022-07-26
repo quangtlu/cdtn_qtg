@@ -2,7 +2,6 @@
 @section('title', 'Sửa thông tin tác giả')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -21,7 +20,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') ?? $author->dob }}" id="dob" placeholder="dd/mm/yyyy">
+                                <input type="date"  class="form-control" name="dob" value="{{ old('dob') ?? $author->dob }}" id="dob" >
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -62,14 +61,4 @@
         </div>
         <!-- /.content -->
     </div>
-@endsection
-@section('js')
-    <script src="{{ asset('js/datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
-    <script>
-        $('#dob').datepicker({
-            language: 'vi',
-            orientation: 'bottom',
-        });
-    </script>
 @endsection

@@ -25,8 +25,8 @@ class UpdateAuthorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => ['bail', 'required', 'regex:/(0)[0-9]{9}/', 'max:10', Rule::unique('users','phone')->ignore($this->id)],
-            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('users','email')->ignore($this->id)],
+            'phone' => ['bail', 'required', 'regex:/(0)[0-9]{9}/', 'max:10', Rule::unique('authors','phone')->ignore($this->id)],
+            'email' => ['bail', 'required', 'email:rfc,dns', Rule::unique('authors','email')->ignore($this->id)],
             'dob' => 'bail|before:today|nullable',
         ];
     }

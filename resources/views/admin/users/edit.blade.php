@@ -4,7 +4,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -23,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') ?? $user->dob }}" id="dob" placeholder="dd/mm/yyyy">
+                                <input type="date" class="form-control" name="dob" value="{{ old('dob') ?? $user->dob }}" id="dob">
                                 @error('dob')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -120,13 +119,5 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/avatar.js') }}"></script>
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-    <script src="{{ asset('js/datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
     <script src="{{ asset('admin/user/main.js') }}"></script>
-    <script>
-        $('#dob').datepicker({
-            language: 'vi',
-            orientation: 'bottom',
-        });
-    </script>
 @endsection

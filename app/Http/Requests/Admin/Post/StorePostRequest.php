@@ -25,12 +25,14 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'content' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
+            'content.required' => 'Vui lòng nhập nội dung',
             'title.required' => 'Vui lòng nhập tiêu đề',
         ];
     }

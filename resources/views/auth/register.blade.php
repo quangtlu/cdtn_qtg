@@ -49,7 +49,7 @@
                     <div class="form-row">
                         <span class="fas fa-calendar-alt"></span>
                         <label class="form-label" for="input">Ngày sinh</label>
-                        <input type="datetime-local" data-date-format='d/m/Y' placeholder="dd/mm/yyyy" name="dob" class="form-text" style="background-color: #fff" @error('dob') is-invalid @enderror" value="{{ old('dob') }}">
+                        <input type="datetime-local" data-date-format='d/m/Y'  name="dob" class="form-text" style="background-color: #fff" @error('dob') is-invalid @enderror" value="{{ old('dob') }}">
                         @error('dob')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}

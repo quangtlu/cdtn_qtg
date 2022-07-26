@@ -89,7 +89,11 @@ $('.action-btn').click(function (e) {
             if(totalNoti < 1){
                 renderNoNotication()
             }
-            alertMessage('Có lỗi xảy ra', 'error')
+            if (errors.status == 404) {
+                alertMessage('Bài viết không tồn tại', 'error')
+            } else {
+                alertMessage('Có lỗi xảy ra', 'error')
+            }
         }
     });
 });
