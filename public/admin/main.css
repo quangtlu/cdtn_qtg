@@ -68,3 +68,9 @@
     width: 40px !important;
     margin-left: 3px;
 }
+
+.label-required::after {
+    content: "*";
+    color: red;
+    padding-left: 2px;
+}

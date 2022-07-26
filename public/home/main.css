@@ -184,6 +184,13 @@
     border-radius: 50;
     border-radius: 15px 15px 0 0;
 }
+
+.label-required::after {
+    content: "*";
+    color: red;
+    padding-left: 2px;
+}
+
 /* Bell animation */
 
 .bell{

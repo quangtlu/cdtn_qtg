@@ -2,9 +2,7 @@
 @section('title', 'Thông tin cá nhân')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
-
 @section('content')
     <div class="content-wrapper">
         <!-- Main content -->
@@ -17,19 +15,19 @@
                             <div class="p-3 form-profile">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Họ tên</label>
+                                        <label class="labels label-required">Họ tên</label>
                                         <input type="text" value="{{ old('name') ?? $profile->name }}" name="name" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Ngày sinh</label>
-                                        <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') ?? $profile->dob }}" id="dob" placeholder="dd/mm/yyyy">
+                                        <label class="labels label-required">Ngày sinh</label>
+                                        <input type="date"  class="form-control" name="dob" value="{{ old('dob') ?? $profile->dob }}" id="dob" >
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Giới tính</label>
+                                        <label class="labels label-required">Giới tính</label>
                                         <select name="gender" class="form-control" id="gender">
                                             <option value=""></option>
                                             @foreach (config('consts.user.gender') as $gender)
@@ -41,7 +39,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Email</label>
+                                        <label class="labels label-required">Email</label>
                                         <input type="text" value="{{ old('email') ?? $profile->email }}" name="email" class="form-control" >
                                     </div>
                                 </div>
@@ -93,12 +91,4 @@
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/avatar.js') }}"></script>
-    <script src="{{ asset('js/datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
-    <script>
-        $('#dob').datepicker({
-            language: 'vi',
-            orientation: 'bottom',
-        });
-    </script>
 @endsection

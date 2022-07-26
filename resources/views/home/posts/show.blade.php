@@ -110,7 +110,7 @@
                             <form id="edit-post-form" action="{{ route('posts.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div id="title" class="form-group">
-                                    <label for="title">Tiêu đề</label>
+                                    <label class="label-required" for="title">Tiêu đề</label>
                                     <input  type="text" name="title" class="form-control"
                                         value="{{ old('title') ? old('title') : $post->title}}">
                                     @error('title')
@@ -140,7 +140,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nội dung</label>
+                                    <label class="label-required">Nội dung</label>
                                     <textarea id="editor" value="{{ old('content') ?? $post->content }}" name="content" cols="30" rows="5">{{ $post->content }}</textarea>
                                 </div>
                                 <div class="form-group">

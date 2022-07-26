@@ -10,14 +10,14 @@
                         <form action="{{ route('admin.faqs.update', ['id' => $faq->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label>Câu hỏi</label>
+                                <label class="label-required">Câu hỏi</label>
                                 <textarea class="form-control" name="question" id="question" cols="30" rows="5">{!! $faq->question !!}</textarea>
                                 @error('question')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Câu trả lời</label>
+                                <label class="label-required">Câu trả lời</label>
                                 <textarea class="form-control" name="answer" id="answer" cols="30" rows="5">{!! $faq->answer !!}</textarea>
                                 @error('answer')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

@@ -29,7 +29,7 @@ class PermissionController extends Controller
             $this->permissionService->create($request);
             return Redirect(route('admin.permissions.index'))->with('success', 'Thêm quyền thành công');
         } catch (\Exception $exception) {
-            return Redirect(route('admin.permissions.index'))->with('error', 'Thêm quyền thất bại');
+            return Redirect(route('admin.permissions.index'))->with('error', $exception->getMessage());
         }
     }
 

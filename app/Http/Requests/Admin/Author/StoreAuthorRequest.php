@@ -25,9 +25,9 @@ class StoreAuthorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
-            'email' => 'bail|required|unique:users|email:rfc,dns',
-            'dob' => 'bail|required|before:today',
+            'phone' => 'bail|required|unique:authors|regex:/(0)[0-9]{9}/|max:10',
+            'email' => 'bail|required|unique:authors|email:rfc,dns',
+            'dob' => 'before:today|nullable',
             'gender' => 'required'
         ];
     }
@@ -43,7 +43,6 @@ class StoreAuthorRequest extends FormRequest
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng nhập đúng email',
             'email.unique' => 'Email đã tồn tại',
-            'dob.required' => 'Vui lòng nhập ngày sinh',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
             'gender.required' => 'Vui lòng chọn giới tính',
         ];

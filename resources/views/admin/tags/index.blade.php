@@ -18,7 +18,7 @@
                         <form action="{{ route('admin.tags.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tên tag</label>
+                                <label for="category_name" class="label-required">Tên tag</label>
                                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
