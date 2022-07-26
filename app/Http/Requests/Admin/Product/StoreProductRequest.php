@@ -26,7 +26,7 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|unique:products',
             'pub_date' => 'before:today',
-            'regis_date' => 'before:today',
+            'regis_date' => 'nullable|before:today',
             'author_id' => 'required',
             'owner_id' => 'required',
             'description' => 'required',
