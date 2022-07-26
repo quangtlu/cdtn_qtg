@@ -25,8 +25,8 @@ class StoreAuthorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
-            'email' => 'bail|required|unique:users|email:rfc,dns',
+            'phone' => 'bail|required|unique:authors|regex:/(0)[0-9]{9}/|max:10',
+            'email' => 'bail|required|unique:authors|email:rfc,dns',
             'dob' => 'bail|required|before:today',
             'gender' => 'required'
         ];

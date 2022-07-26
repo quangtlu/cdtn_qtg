@@ -35,8 +35,6 @@ class UserService
     }
 
     public function create($request){
-        $date = str_replace('/', '-', $request->dob);
-        $dob = date('Y-m-d', strtotime($date));
         if($file = $request->file('image')) {
             $image = $this->uploadSingleImage($file);
         }
@@ -49,7 +47,7 @@ class UserService
             "gender" => $request->gender,
             "image" => $image,
             "phone" => $request->phone,
-            "dob" => $dob,
+            "dob" => $request->dob,
             "email" => $request->email,
             "password" => Hash::make($request->password),
         ];
@@ -68,8 +66,6 @@ class UserService
 
     public function update($request, $id){
         $user = $this->getById($id);
-        $date = str_replace('/', '-', $request->dob);
-        $dob = date('Y-m-d', strtotime($date));
         $data = [
             "name" => $request->name,
             "phone" => $request->phone,
@@ -79,8 +75,8 @@ class UserService
         if($request->password) {
             $data['password'] = Hash::make($request->password);
         }
-        if($request->password) {
-            $data['dob'] = $dob;
+        if($request->dob) {
+            $data['dob'] = $request->dob;
         }
         if($file=$request->file('image')) {
             $name = $this->uploadSingleImage($file);

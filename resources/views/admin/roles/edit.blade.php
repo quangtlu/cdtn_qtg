@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <!-- /.row -->
-                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    <button type="submit" class="btn btn-primary mb-3">Cập nhật</button>
                 </form>
             </div><!-- /.container-fluid -->
         </div>

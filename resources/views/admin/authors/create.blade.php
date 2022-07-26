@@ -2,7 +2,6 @@
 @section('title', 'Thêm mới tác giả')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datepicker.min.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -21,7 +20,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ngày sinh</label>
-                                    <input type="text" data-date-format='dd/mm/yyyy' class="form-control" name="dob" value="{{ old('dob') }}" id="dob" placeholder="dd/mm/yyyy">
+                                    <input type="date" class="form-control" name="dob" value="{{ old('dob') }}" id="dob">
                                 @error('dob')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -42,16 +41,14 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Số điện thoại<b class="field-require">*</b><b
-                                        class="field-require">*</b></label>
+                                <label for="category_name">Số điện thoại<b class="field-require">*</b></label>
                                 <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
                                 @error('phone')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Email<b class="field-require">*</b><b
-                                        class="field-require">*</b></label>
+                                <label for="category_name">Email<b class="field-require">*</b></label>
                                 <input type="email" name="email" class="form-control" value="{{ old('email') }}">
                                 @error('email')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
@@ -67,14 +64,5 @@
         <!-- /.content -->
     </div>
 @endsection
-@section('js')
-    <script src="{{ asset('js/datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/datepicker.vi.min.js') }}"></script>
-    <script>
-        $('#dob').datepicker({
-            language: 'vi',
-            orientation: 'bottom',
-            dateFormat: 'YY-mm-dd'
-        });
-    </script>
-@endsection
+
+

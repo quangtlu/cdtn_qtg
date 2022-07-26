@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <!-- /.row -->
-                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    <button type="submit" class="btn btn-primary mb-3">Thêm mới</button>
                 </form>
             </div><!-- /.container-fluid -->
         </div>
