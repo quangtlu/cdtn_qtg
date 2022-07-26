@@ -76,7 +76,7 @@
                                                                                 @if ($feedback->user_id == $chatroom->post->user->id)
                                                                                     <li class="list-group-item">
                                                                                         <div style="color: #000">{{ $feedback->note }}</div>
-                                                                                        @for ($i = 0; $i <= $feedback->score; $i++)
+                                                                                        @for ($i = 0; $i < $feedback->score; $i++)
                                                                                             <i style="color: rgb(255, 238, 0)"
                                                                                             class="fas fa-star"></i>
                                                                                             @endfor
@@ -106,7 +106,7 @@
                                                                                 @if ($feedback->user_id != $chatroom->post->user->id)
                                                                                     <li class="list-group-item">
                                                                                         <div style="color: #000">{{ $feedback->note }}</div>
-                                                                                        @for ($i = 0; $i <= $feedback->score; $i++)
+                                                                                        @for ($i = 0; $i < $feedback->score; $i++)
                                                                                             <i style="color: rgb(255, 238, 0)"
                                                                                             class="fas fa-star"></i>
                                                                                             @endfor
