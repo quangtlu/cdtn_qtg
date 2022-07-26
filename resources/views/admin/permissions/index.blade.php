@@ -59,12 +59,9 @@
                                             </label>
                                         </div>
                                     @endforeach
-                                    @error('action')
-                                    <span class="mt-1 text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
-                                @error('action'.' '.'module')
-                                <span class="mt-1 text-danger">{{ $message }}</span>
+                                @error('action')
+                                    <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm mới</button>

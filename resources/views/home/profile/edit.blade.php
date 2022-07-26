@@ -44,7 +44,7 @@
                             <div class="">
                                 <div class="row my-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Họ tên:</label>
+                                        <label class="labels label-required">Họ tên:</label>
                                         <input type="text" value="{{ $profile->name }}" name="name"
                                             class="form-control">
                                         @error('name')
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Giới tính:</label>
+                                        <label class="labels label-required">Giới tính:</label>
                                         <select name="gender" class="form-control" id="gender">
                                             <option value=""></option>
                                             @foreach (config('consts.user.gender') as $gender)
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Email:</label>
+                                        <label class="labels label-required">Email:</label>
                                         <input type="text" value="{{ $profile->email }}" name="email"
                                             class="form-control">
                                         @error('email')
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-md-12">
-                                        <label class="labels">Điện thoại:</label>
+                                        <label class="labels label-required">Điện thoại:</label>
                                         <input type="text" value="{{ $profile->phone }}" name="phone"
                                             class="form-control">
                                         @error('phone')
