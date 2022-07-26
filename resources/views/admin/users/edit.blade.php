@@ -14,21 +14,21 @@
                         <div class="col-md-6">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Họ và tên <b class="field-require">*</b></label>
+                                <label class="label-required" for="category_name">Họ và tên</label>
                                 <input type="text" value="{{ old('name') ?? $user->name }}" name="name" class="form-control">
                                 @error('name')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Ngày sinh</label>
+                                <label class="label-required" for="category_name">Ngày sinh</label>
                                 <input type="date" class="form-control" name="dob" value="{{ old('dob') ?? $user->dob }}" id="dob">
                                 @error('dob')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Giới tính</label>
+                                <label class="label-required" for="category_name">Giới tính</label>
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
                                     @foreach (config('consts.user.gender') as $gender)
@@ -41,21 +41,21 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Số điện thoại <b class="field-require">*</b></label>
+                                <label class="label-required" for="category_name">Số điện thoại</label>
                                 <input value="{{ old('phone') ?? $user->phone }}" type="text" name="phone" class="form-control" >
                                 @error('phone')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Email <b class="field-require">*</b></label>
+                                <label class="label-required" for="category_name">Email</label>
                                 <input value="{{ old('email') ?? $user->email }}" type="email" name="email" class="form-control" >
                                 @error('email')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mật khẩu <b class="field-require">*</b></label>
+                                <label for="category_name">Mật khẩu</label>
                                 <input id="password" data-toggle="password" type="password" name="password" class="form-control" value="{{ old('password') }}">
                                 @error('password')
                                 <span class="mt-1 text-danger">{{ $message }}</span>
@@ -90,19 +90,17 @@
                             <button type="submit" class="btn btn-primary mb-2">Cập nhật</button>
                         </div>
                         <div class="col-md-6">
-                            <div class="">
-                                <div class="d-flex flex-column align-items-center text-center">
-                                    <div class="avatar-header mt-4">
-                                        <div class="avatar-wrapper mt-5" title="Ảnh đại diện">
-                                            <img class="profile-pic" src="
-                                            @if ($user->image)
-                                                {{ asset('image/profile/'.$user->image)}}
-                                            @endif "/>
-                                            <div class="upload-button">
-                                                <i class="fas fa-camera camera-icon" aria-hidden="true"></i>
-                                            </div>
-                                            <input class="file-upload" name="image" type="file" accept="image/*"/>
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <div class="avatar-header mt-4">
+                                    <div class="avatar-wrapper mt-5" title="Ảnh đại diện">
+                                        <img class="profile-pic" src="
+                                        @if ($user->image)
+                                            {{ asset('image/profile/'.$user->image)}}
+                                        @endif "/>
+                                        <div class="upload-button">
+                                            <i class="fas fa-camera camera-icon" aria-hidden="true"></i>
                                         </div>
+                                        <input class="file-upload" name="image" type="file" accept="image/*"/>
                                     </div>
                                 </div>
                             </div>

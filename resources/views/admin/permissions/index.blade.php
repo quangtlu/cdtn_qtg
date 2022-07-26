@@ -23,7 +23,7 @@
                         <form action="{{ route('admin.permissions.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Chọn module</label>
+                                <label class="label-required" for="category_name">Chọn module</label>
                                 <select name="module" id="" class="form-control">
                                     <option></option>
                                     @foreach (config('permission.module-all') as $moduleItem)
@@ -39,7 +39,7 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <label>
+                                                <label class="label-required">
                                                     Action
                                                 </label>
                                             </div>

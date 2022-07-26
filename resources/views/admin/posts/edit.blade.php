@@ -16,7 +16,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="category_name">Tiêu đề</label>
+                                <label class="label-required" for="category_name">Tiêu đề</label>
                                 <input type="text" value="{{ old('title') ?? $post->title }}" name="title" class="form-control"
                                     id="category_name">
                                 @error('title')
@@ -50,7 +50,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Nội dung</label>
+                                <label class="label-required" for="category_name">Nội dung</label>
                                 <textarea class="form-control" value="{{ old('content') ?? $post->content }}" name="content" id="editor" cols="30" rows="5">{{ $post->content }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
