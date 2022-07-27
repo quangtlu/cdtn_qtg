@@ -57,10 +57,4 @@ class Author extends Model
         }
         return $query;
     }
-
-    public function getDobAttribute()
-    {
-        if (empty($this->attributes['dob'])) return null;
-        return date('d/m/Y', strtotime($this->attributes['dob']));
-    }
 }
