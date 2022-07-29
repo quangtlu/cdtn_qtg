@@ -11,8 +11,7 @@
         <h3 id="post-title" class="title-relate">{{ $post->title }}</h3>
         <ul class="post-info-list">
             <li class="user-post-info-wrap">
-                <img class="user-post-avt" src="{{ asset('image/profile') .'/' . $post->user->image }}" alt="">
-                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
+                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i class="fa fa-user" aria-hidden="true"></i> {{ $post->user->name }}</a>
             </li>
             <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
                     href="#tag" id="number-tag">{{ $post->tags->count() }}
@@ -111,7 +110,7 @@
                             <form id="edit-post-form" action="{{ route('posts.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div id="title" class="form-group">
-                                    <label for="title">Tiêu đề</label>
+                                    <label class="label-required" for="title">Tiêu đề</label>
                                     <input  type="text" name="title" class="form-control"
                                         value="{{ old('title') ? old('title') : $post->title}}">
                                     @error('title')
@@ -141,7 +140,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nội dung</label>
+                                    <label class="label-required">Nội dung</label>
                                     <textarea id="editor" value="{{ old('content') ?? $post->content }}" name="content" cols="30" rows="5">{{ $post->content }}</textarea>
                                 </div>
                                 <div class="form-group">
@@ -364,6 +363,7 @@
         }
         function toogleEditCommentWrap() {
             $(this).closest('.comments-grid-right').children('.edit-comment-wrap').fadeToggle()
+            $(this).closest('.comments-grid-right').children('.comment-content').fadeToggle()
         }
         function updateComment(e) {
             e.preventDefault();
@@ -379,6 +379,7 @@
                     const message = response.message
                     that.closest('.comments-grid-right').children('.comment-content').text(newComment)
                     that.closest('.edit-comment-wrap').fadeOut()
+                    that.closest('.comments-grid-right').children('.comment-content').fadeToggle()
                     alertMessage(message, 'success')
                 },
                 error: function(errors) {

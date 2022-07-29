@@ -5,11 +5,6 @@ $(function () {
     $('.select3_init').select2({
         'placeholder': 'Chọn mục lục',
     })
-    $('#dob').datepicker({
-        language: 'vi',
-        orientation: 'bottom',
-        dateFormat: 'yyyy-mm-dd'
-    });
     
     
     $('#role-select').on('change', function() {

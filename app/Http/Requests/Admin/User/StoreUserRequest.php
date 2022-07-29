@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required',
             'phone' => 'bail|required|unique:users|regex:/(0)[0-9]{9}/|max:10',
-            'email' => 'bail|required|unique:users|email:rfc,dns',
+            'email' => 'bail|required|unique:users',
             'dob' => 'bail|before:today|nullable',
             'gender' => 'required',
             'password' => [
@@ -46,7 +46,6 @@ class StoreUserRequest extends FormRequest
             'phone.regex' => 'vui lòng nhập đúng số điện thoại',
             'phone.max' => 'Số điện thoại tối đa 10 số',
             'email.required' => 'Vui lòng email',
-            'email.email' => 'Vui lòng nhập đúng email',
             'email.unique' => 'Email đã tồn tại',
             'dob.before' => 'Ngày sinh không được là ngày trong tương lai',
             'password.required' => 'Vui lòng nhập mật khẩu',

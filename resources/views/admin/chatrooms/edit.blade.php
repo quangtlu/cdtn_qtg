@@ -13,21 +13,21 @@
                         <form action="{{ route('admin.chatrooms.update', ['id' => $chatroom->id]) }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="name">Tên phòng tư vấn</label>
+                                <label class="label-required" for="name">Tên phòng tư vấn</label>
                                 <input type="text" value="{{$chatroom->name ??  old('name') }}" name="name" class="form-control" id="name">
                                 @error('title')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="category_name">Mô tả</label>
+                                <label class="label-required" for="category_name">Mô tả</label>
                                 <textarea class="form-control" name="description" cols="30" rows="5">{{$chatroom->description ??  old('description') }}</textarea>
                                 @error('description')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Thành viên</label>
+                                <label class="label-required">Thành viên</label>
                                 <select name="user_id[]" class="form-control select2_init" multiple>
                                     <option></option>
                                     @foreach ($users as $user)

@@ -81,6 +81,20 @@ $('.action-btn').click(function (e) {
             }
             alertMessage(response.message, 'success')
         },
+        error: function (errors) {
+            let totalNoti = $('.notice-item').length
+            totalNoti--;
+            $(that).closest('.notice-item').remove()
+            $('.number-notification').text(totalNoti)
+            if(totalNoti < 1){
+                renderNoNotication()
+            }
+            if (errors.status == 404) {
+                alertMessage('Bài viết không tồn tại', 'error')
+            } else {
+                alertMessage('Có lỗi xảy ra', 'error')
+            }
+        }
     });
 });
 
@@ -130,6 +144,8 @@ function actionDeleteComment() {
                 url: urlRequest,
                 success: function (res) {
                     that.closest('.comments-grid').fadeOut()
+                    let totalCommentBefore = Number($('#number-comment').text().replace(/\D/g, "")) 
+                    $('#number-comment').text(totalCommentBefore - 1 + ' bình luận')
                     alertMessage(res.message, 'success')
                 },
             })

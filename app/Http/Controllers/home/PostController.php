@@ -199,6 +199,9 @@ class PostController extends Controller
         $post = $this->postService->getById($id);
         if ($post->user->id == Auth::user()->id) {
             $post = $this->postService->delete($id);
+            if($post->chatroom) {
+                $this->chatroomService->delete($post->chatroom->id);
+            }
             return response()->json(['post' => $post, 'message' => 'Xóa bài viết thành công']);
         } else {
             abort(403);

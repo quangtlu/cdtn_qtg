@@ -51,5 +51,5 @@
     @endforeach
     {{ $products->withQueryString()->links() }}
 @else
-    <div class="alert alert-info" style="margin-top: 10px" role="alert">Tác phẩm đang được cập nhật...</div>
+<div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có tác phẩm nào</div>
 @endif

@@ -4,12 +4,9 @@
             <div class="w3agile-top">
                 <div class="col-md-3 w3agile-left">
                     <ul class="post-info">
-                        <li class="user-post-info-wrap">
-                            <img class="user-post-avt" src="{{ asset('image/profile') . '/' . $post->user->image }}"
-                                alt="">
-                            <a class="post-info__link"
-                                href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
-                        </li>
+                        <a class="post-info__link"
+                            href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i class="fa fa-user"
+                            aria-hidden="true"></i>{{ $post->user->name }}</a>
                         <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
                                 <i class="fa fa-clock-o"
                                     aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
@@ -86,5 +83,5 @@
     @endforeach
     {{ $posts->withQueryString()->links() }}
 @else
-    <div class="alert alert-info alert-no-post" style="margin-top: 10px" role="alert">Bài viết đang được cập nhật...</div>
+    <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có bài viết nào</div>
 @endif
