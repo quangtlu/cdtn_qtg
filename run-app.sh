@@ -1,4 +1,3 @@
-redis-server &
 php artisan serve &
 npm run watch &
 laravel-echo-server start &
