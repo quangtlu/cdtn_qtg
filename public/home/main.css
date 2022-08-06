@@ -18,7 +18,6 @@
 
 .user-info {
     position: absolute;
-    top: 55px;
     display: flex;
     right: 0;
     flex-direction: column;
