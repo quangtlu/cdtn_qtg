@@ -544,12 +544,12 @@
 
     .comments-grid-left img {
         padding: 0 !important;
-        border: 1px solid #ffac3a !important;
+        border: 1px solid #060a52 !important;
         border-radius: 50% !important;
     }
 
     .relate-post:hover {
-        color: #ffac3a !important;
+        color: #060a52 !important;
     }
 
     .title-relate {
@@ -557,7 +557,7 @@
         font-size: 1.4em;
         color: #212121;
         padding-left: 0.8em;
-        border-left: 3px solid #FFAC3A;
+        border-left: 3px solid #060a52;
         font-weight: 600;
     }
 </style>

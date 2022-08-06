@@ -1,17 +1,5 @@
 <div class="col-md-3 w3agile_blog_left">
-    <div class="agileinfo_calender">
-        <h3>Mạng xã hội</h3>
-        <div class="w3ls-social-icons-1">
-            <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-            <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-            <a class="pinterest" href="#"><i class="fa fa-pinterest-p"></i></a>
-            <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-            <a class="linkedin" href="#"><i class="fa fa-google-plus"></i></a>
-            <a class="linkedin" href="#"><i class="fa fa-rss"></i></a>
-            <a class="linkedin" href="#"><i class="fa fa-behance"></i></a>
-        </div>
-    </div>
-    <div class="w3l_categories wow fadeInUp">
+    <div class="w3l_categories">
         <h3>Chuyên mục</h3>
         <div class="w3l_wrap">
             <ul>
@@ -55,7 +43,7 @@
             </div>
         @endforeach
     </div>
-    <div class="w3l_categories wow fadeInUp">
+    <div class="w3l_categories">
         <h3>Mục lục tác phẩm</h3>
         <div class="w3l_wrap">
             <ul>
@@ -70,7 +58,7 @@
             </ul>
         </div>
     </div>
-    <div class="w3l_tags wow fadeInUp">
+    <div class="w3l_tags">
         <h3>Tags</h3>
         <div class="w3l_wrap">
             <ul class="tag">
