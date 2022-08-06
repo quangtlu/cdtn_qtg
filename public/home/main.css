@@ -1,3 +1,4 @@
+
 .ck-editor__editable[role="textbox"] {
     /* editing area */
     min-height: 200px;
@@ -7,6 +8,16 @@
     /* block images */
     max-width: 80%;
     margin: 20px auto;
+}
+
+.navbar-custom {
+    padding: 10px 0;
+}
+
+.logo-tlu{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
 }
 
 .swal2-popup {
@@ -29,13 +40,13 @@
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    border: 1px solid #FFAC3A
+    border: 1px solid #060a52
 }
 
 .user-info__name {
     display: block;
     text-align: center;
-    color: #FFAC3A;
+    color: #060a52;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -86,7 +97,7 @@
 
 .header-noti-wrap{
     padding: 10px 0;
-    background-color: #ffac3a;
+    background-color: #060a52;
     margin: -6px -6px 5px -6px;
     border-radius: 15px 15px 0 0;
 }
@@ -133,7 +144,7 @@
     width: 85%;
 }
 .active {
-    color: #FFAC3A;
+    color: #D91E1E;
 }
 #logout-form{
     display: none;
@@ -160,7 +171,8 @@
   height: 200px;
 }
 .notification-icon {
-  font-size: 20px;
+  font-size: 17px;
+  color: var(--primary-color);
 }
 .fake-element {
     position: relative;
@@ -172,7 +184,7 @@
     top: -50px;
     font-size: 8px;
     color: #fff;
-    background-color: red;
+    background-color: var(--red-color);
     padding: 2px 5px;
     border-radius: 50%;
 }
@@ -186,7 +198,7 @@
 
 .label-required::after {
     content: "*";
-    color: red;
+    color: var(--red-color);
     padding-left: 2px;
 }
 

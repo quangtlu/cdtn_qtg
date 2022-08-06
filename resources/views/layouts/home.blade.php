@@ -61,16 +61,6 @@
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="{{ asset('template_blog/js/move-top.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template_blog/js/easing.js') }}"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $(".scroll").click(function(event) {
-                event.preventDefault();
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
-                }, 1000);
-            });
-        });
-    </script>
     <link rel="stylesheet" href="{{ asset('home/main.css') }}">
     @yield('css')
 
@@ -79,7 +69,7 @@
 <body>
     <!-- header -->
     @include('partials.home.header')
-    <div class="container" id="container" data-messageSuccess="{{ Session::get('success') }}"
+    <div class="container" style="padding-top: 89px" id="container" data-messageSuccess="{{ Session::get('success') }}"
         data-messageError="{{ Session::get('error') }}">
         <div class="banner-btm-agile">
             <div class="col-md-9 btm-wthree-left">@yield('content')</div>

@@ -6,21 +6,26 @@
         .my-3 {
             margin: 6px 0;
         }
-        .btn-edit{
+
+        .btn-edit {
             margin-top: 32px;
         }
+
         .labels {
             font-size: x-large;
             font-weight: 400;
         }
-        .image-border{
+
+        .image-border {
             border-left: 1px solid #b2c2d2;
         }
-        .profile-content{
+
+        .profile-content {
             margin-top: 50px;
         }
+
         .avata-img {
-            border: 1px solid #ffac3a;
+            border: 1px solid #060a52;
         }
     </style>
 @endsection
@@ -72,7 +77,8 @@
                                             <label class="labels">Chuyên mục:</label>
                                             @foreach ($profile->categories as $category)
                                                 <li class="li-category-tag">
-                                                    <a class="m-3" href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name ?? 'Chưa rõ' }}</a>
+                                                    <a class="m-3"
+                                                        href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name ?? 'Chưa rõ' }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -103,4 +109,3 @@
         </div><!-- /.container-fluid -->
     </div>
 @endsection
-
