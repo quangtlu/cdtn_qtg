@@ -4,11 +4,7 @@
       <Feedback />
     </div>
     <div class="col-md-6 chat">
-      <SharedRoom
-        :messages="messages"
-        :currentRoom="currentRoom"
-        @saveMessage="saveMessage"
-      />
+      <SharedRoom :messages="messages" :currentRoom="currentRoom" @saveMessage="saveMessage" />
     </div>
     <div class="col-md-3 chat">
       <ListUser :usersOnline="usersOnline" />

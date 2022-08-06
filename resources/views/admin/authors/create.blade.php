@@ -18,7 +18,8 @@
                     </div>
                     <div class="form-group">
                         <label for="category_name">Ngày sinh</label>
-                            <input type="date" class="form-control" name="dob" value="{{ old('dob') }}" id="dob">
+                        <input type="date" class="form-control" name="dob" value="{{ old('dob') }}"
+                            id="dob">
                         @error('dob')
                             <span class="mt-1 text-danger">{{ $message }}</span>
                         @enderror
@@ -28,8 +29,8 @@
                         <select name="gender" class="form-control" id="gender">
                             <option value=""></option>
                             @foreach (config('consts.user.gender') as $gender)
-                                <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
-                                value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
+                                <option {{ old('gender') == $gender['value'] ? 'selected' : '' }}
+                                    value="{{ $gender['value'] }}">{{ $gender['name'] }}</option>
                             @endforeach
                         </select>
                         @error('gender')
@@ -58,5 +59,3 @@
         </div>
     </div>
 @endsection
-
-
