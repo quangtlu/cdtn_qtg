@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OwnerSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(AuthorSeeder::class);
-        // $this->call(TagSeeder::class);
-        // $this->call(FaqSeeder::class);
+        $this->call(TagSeeder::class);
+        $this->call(FaqSeeder::class);
     }
 }
