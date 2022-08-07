@@ -149,7 +149,7 @@ label{
 	height: 3px;
 	width: 8px;
 	background: var(--red-color);
-	bottom: 3px;
+	bottom: 4px;
 	right: 11px;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
@@ -166,7 +166,7 @@ label{
 	left: 0;
 
 }
-.cd-search-trigger span::before, .cd-search-trigger span::after {
+.icon-search-header span::before, .icon-search-header span::after {
 	/* close icon */
 	content: '';
 	position: absolute;
@@ -191,38 +191,39 @@ label{
 	-moz-transition: opacity 0.3s, -moz-transform 0.3s;
 	transition: opacity 0.3s, transform 0.3s;
 }
-.cd-search-trigger span::before {
+.icon-search-header span::before {
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
 	transform: rotate(45deg);
 }
-.cd-search-trigger span::after {
+.icon-search-header span::after {
 	-webkit-transform: rotate(-45deg);
 	-moz-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
 	-o-transform: rotate(-45deg);
 	transform: rotate(-45deg);
+    color: var(--red-color);
 }
-.cd-search-trigger.search-is-visible::before, .cd-search-trigger.search-is-visible::after {
+.icon-search-header.search-is-visible::before, .icon-search-header.search-is-visible::after {
 	/* hide search icon */
 	-moz-opacity: 0;
 	opacity: 0;
 }
-.cd-search-trigger.search-is-visible span::before, .cd-search-trigger.search-is-visible span::after {
+.icon-search-header.search-is-visible span::before, .icon-search-header.search-is-visible span::after {
 	/* show close icon */
 	-moz-opacity: 1;
 	opacity: 1;
 }
-.cd-search-trigger.search-is-visible span::before {
+.icon-search-header.search-is-visible span::before {
 	-webkit-transform: rotate(135deg);
 	-moz-transform: rotate(135deg);
 	-ms-transform: rotate(135deg);
 	-o-transform: rotate(135deg);
 	transform: rotate(135deg);
 }
-.cd-search-trigger.search-is-visible span::after {
+.icon-search-header.search-is-visible span::after {
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);

@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
 	});
 
 	//open search form
-	$('.cd-search-trigger').on('click', function(event){
+	$('.icon-search-header').on('click', function(event){
 		event.preventDefault();
 		toggleSearch();
 		closeNav();
@@ -59,12 +59,12 @@ jQuery(document).ready(function($){
 		if(type=="close") {
 			//close serach 
 			$('.cd-search').removeClass('is-visible');
-			$('.cd-search-trigger').removeClass('search-is-visible');
+			$('.icon-search-header').removeClass('search-is-visible');
 			$('.cd-overlay').removeClass('search-is-visible');
 		} else {
 			//toggle search visibility
 			$('.cd-search').toggleClass('is-visible');
-			$('.cd-search-trigger').toggleClass('search-is-visible');
+			$('.icon-search-header').toggleClass('search-is-visible');
 			$('.cd-overlay').toggleClass('search-is-visible');
 			if($(window).width() > MqL && $('.cd-search').hasClass('is-visible')) $('.cd-search').find('input[type="search"]').focus();
 			($('.cd-search').hasClass('is-visible')) ? $('.cd-overlay').addClass('is-visible') : $('.cd-overlay').removeClass('is-visible') ;

@@ -183,7 +183,7 @@ if (pc.matches) {
             header.style.top = "0";
             // scroll down
         } else if (currentScrollPos != 1) {
-            header.style.top = "-112px";
+            header.style.top = "-122px";
         }
         prevScrollpos = currentScrollPos;
     };
