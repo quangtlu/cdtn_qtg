@@ -11,13 +11,17 @@
 }
 
 .navbar-custom {
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 .logo-tlu{
     max-width: 100%;
     height: auto;
     vertical-align: middle;
+}
+
+.icon-search-header{
+    color: var(--red-color) !important;
 }
 
 .swal2-popup {
