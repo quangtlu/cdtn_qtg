@@ -16,7 +16,6 @@ npm-debug.log
 yarn-error.log
 laravel-echo-server.lock
 dump.rdb
-.env
 laravel-echo-server.json
 package-lock.json
 public/js/app.js

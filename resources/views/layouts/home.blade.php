@@ -73,7 +73,6 @@
         data-messageError="{{ Session::get('error') }}">
         <div class="banner-btm-agile">
             <div class="col-md-9 btm-wthree-left">@yield('content')</div>
-            @include('partials.home.wthree_right')
             <div class="clearfix"></div>
         </div>
     </div>
@@ -94,7 +93,6 @@
         new WOW().init();
     </script>
     @yield('js')
-
 </body>
 
 </html>
