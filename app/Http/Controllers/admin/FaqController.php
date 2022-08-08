@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Faq\UpdateFaqRequest;
 use App\Services\FaqService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 class FaqController extends Controller
 {
     private $faqService;

@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('title', $post->title)
 @section('css')
-    
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
@@ -53,7 +53,7 @@
             @foreach ($post->categories as $category)
                 <li class="li-category-tag">
                     <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                </li>   
+                </li>
             @endforeach
         </ul>
         <ul id="tag-list" class="tag" style="margin-top:0 !important; margin-bottom:0 !important">
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
         @endif
         @role('mod|admin')
             @if ($post->user_id != Auth::user()->id)
@@ -229,13 +229,15 @@
                                     <a class="rep-comment comment-action-link" href="{{ route('login') }}">Trả lời</a>
                                 @endguest
                             </li>
-                            @if ($comment->status == config('consts.post.status.solved.value') && 
-                                !$post->categories->contains('type', config('consts.category.type.post_reference.value')))
-                                <li> <a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
-                                        class="comment-action-link post-status-solved">Hữu ích nhất
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                    </a>|</li>
-                            @endif
+                            @auth
+                                @if ($comment->status == config('consts.post.status.solved.value') &&
+                                    !$post->categories->contains('type', config('consts.category.type.post_reference.value')))
+                                    <li> <a href="{{ Auth::user()->id == $post->user_id ? route('comments.toogleStatus', ['id' => $comment->id]) : '#' . $comment->id }}"
+                                            class="comment-action-link post-status-solved">Hữu ích nhất
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                        </a>|</li>
+                                @endif
+                            @endauth
                             @auth
                                 @if ($comment->user->id == Auth::user()->id)
                                     <li><a class="comment-action-link btn-delete-comment"
@@ -246,7 +248,7 @@
                                     <li><a data-id="{{ $comment->id }}" class="comment-action-link btn-edit-comment">Chỉnh sửa
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a></li>
-                                    </li>                                    
+                                    </li>
                                 @endif
                                 @if($post->user_id == Auth::user()->id && $post->status == config('consts.post.status.unsolved.value') &&
                                     !$post->categories->contains('type', config('consts.category.type.post_reference.value'))
@@ -349,11 +351,11 @@
         function renderValidateMessage(id, message)
         {
             if(!$('#error-' + id).length) {
-                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`); 
+                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`);
             }
         }
 
-    // function 
+    // function
         function repComment() {
             let userName = $(this).attr('data-userName')
             $('#leave-coment').text(userName)
@@ -395,8 +397,8 @@
         $('.btn-edit-comment').on('click', toogleEditCommentWrap)
         $('.edit-comment-form').submit(updateComment);
 
-        // call create comment 
-        $('#form-create-comment').submit(function (e) { 
+        // call create comment
+        $('#form-create-comment').submit(function (e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
@@ -463,9 +465,9 @@
                             <div class="clearfix"> </div>
                         </div>`
 
-                    
+
                     $('#comment-wrap').append(html)
-                    let totalCommentBefore = Number($('#number-comment').text().replace(/\D/g, "")) 
+                    let totalCommentBefore = Number($('#number-comment').text().replace(/\D/g, ""))
                     $('#number-comment').text(totalCommentBefore + 1 + ' bình luận')
                     $('.btn-edit-comment-ajax').on('click', toogleEditCommentWrap)
                     $('.edit-comment-form').submit(updateComment)
@@ -478,7 +480,7 @@
             });
         });
 
-        $('#edit-post-form').submit(function (e) { 
+        $('#edit-post-form').submit(function (e) {
             e.preventDefault();
             const referenceType = {{ config('consts.category.type.post_reference.value') }}
             $.ajax({

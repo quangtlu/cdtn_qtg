@@ -81,7 +81,9 @@
             </div>
         </div>
     @endforeach
-    {{ $posts->withQueryString()->links() }}
+    @if ($paginate)
+        {{ $posts->withQueryString()->links() }}
+    @endif
 @else
     <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có bài viết nào</div>
 @endif

@@ -23,6 +23,15 @@ class UserService
         return $users;
     }
 
+    public function getTopCounselor($number)
+    {
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'counselor');
+        })
+        ->limit($number)
+        ->get();
+    }
+
     public function search($request)
     {
         $users = User::search($request->keyword)->paginate(10);
@@ -51,7 +60,7 @@ class UserService
             "email" => $request->email,
             "password" => Hash::make($request->password),
         ];
-        
+
         $user = $this->userModel->create($data);
 
         if($request->category_id) {
@@ -90,7 +99,7 @@ class UserService
         else {
             $user->categories()->detach();
         }
-        
+
         if($request->role_id) {
             $user->roles()->sync($request->role_id);
         }

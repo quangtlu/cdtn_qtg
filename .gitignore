@@ -4,7 +4,7 @@
 /public/js
 /public/css
 /public/storage
-/public/image
+# /public/image
 /storage/*.key
 /vendor
 .env
@@ -16,7 +16,6 @@ npm-debug.log
 yarn-error.log
 laravel-echo-server.lock
 dump.rdb
-.env
 laravel-echo-server.json
 package-lock.json
 public/js/app.js
