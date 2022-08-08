@@ -146,6 +146,17 @@
                         </a>
                     </li>                    
                 @endcan
+                @can('list-documentLaw')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.documentLaws.index') }}"
+                            class="nav-link {{ Request::is('admin/documentLaws*') ? 'active' : '' }}">
+                            <i class="fas fa-book"></i>
+                            <p>
+                                Quản lý văn bản pháp luật
+                            </p>
+                        </a>
+                    </li>                    
+                 @endcan
                 <li class="nav-item">
                     <a class="nav-link text-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
