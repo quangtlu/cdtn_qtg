@@ -1,6 +1,6 @@
 @if ($posts->count())
     @foreach ($posts as $index => $post)
-        <div class="wthree-top-1 {{ $index != 0 ? 'wow fadeInUp' : '' }}">
+        <div class="wthree-top-1">
             <div class="w3agile-top">
                 <div class="col-md-3 w3agile-left">
                     <ul class="post-info">
