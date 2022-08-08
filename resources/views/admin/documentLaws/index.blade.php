@@ -63,7 +63,7 @@
                                     <th>ID</th>
                                     <th>Thumbnail</th>
                                     <th>Tên văn bản</th>
-                                    <th>Link văn bản</th>
+                                    <th>Tệp đính kèm</th>
                                     <th>Mô tả</th>
                                     <th>Action</th>
                                 </tr>

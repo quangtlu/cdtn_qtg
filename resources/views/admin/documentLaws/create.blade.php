@@ -17,9 +17,9 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="label-required" for="category_name">Link văn bản</label>
-                        <input type="file" accept="file/*" multiple class="form-control-file" name="url"
-                            id="" cols="30" rows="5">
+                        <label class="label-required" for="category_name">Tệp đính kèm</label>
+                        <input type="file" accept="file_extension" multiple class="form-control-file" name="url"
+                            id="" cols="30" rows="5" value="{{ old('url') }}">
                         @error('url')
                             <span class="mt-1 text-danger">{{ $message }}</span>
                         @enderror

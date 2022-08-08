@@ -177,3 +177,7 @@ Route::name('products')->prefix('products')->group(function () {
     Route::get('/author/{id}', 'home\ProductController@getProductByAuthor')->name('.getProductByAuthor');
     Route::get('/owner/{id}', 'home\ProductController@getProductByOwner')->name('.getProductByOwner');
 });
+
+Route::name('documentLaws')->prefix('documentLaws')->group(function () {
+    Route::get('/', 'home\DocumentLawController@index')->name('.index');
+});
