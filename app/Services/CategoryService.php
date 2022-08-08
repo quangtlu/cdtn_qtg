@@ -19,6 +19,11 @@ class CategoryService
         return $categories;
     }
 
+    public function getByPopular($limit)
+    {
+        return $this->categoryModel->limit($limit)->latest()->get();
+    }
+
     public function search($request)
     {
         $categories = Category::search($request->keyword)->paginate(10);
@@ -33,8 +38,8 @@ class CategoryService
 
     public function getById($id)
     {
-        $category = $this->categoryModel->findOrFail($id);   
-        return $category; 
+        $category = $this->categoryModel->findOrFail($id);
+        return $category;
     }
 
     public function create($request)

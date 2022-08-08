@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Attribute;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -12,6 +14,23 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = ["name", "email", "phone", "password", "image", "gender", "dob"];
+
+    protected $append = ['age', 'gender_text'];
+
+    public function getAgeAttribute()
+    {
+        $age = Carbon::parse($this->attributes['dob'])->age;
+        return $age > 0 ? $age : 'Chưa rõ';
+    }
+
+    public function getGenderTextAttribute()
+    {
+        foreach (config('consts.user.gender') as $gender) {
+            if($this->gender == $gender['value']) {
+                return $gender['name'];
+            }
+        }
+    }
 
     public function posts()
     {
