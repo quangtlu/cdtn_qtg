@@ -130,7 +130,8 @@
                                         <li><b>Chuyên môn: </b>
                                             @if ($user->categories->count())
                                                 @foreach ($user->categories as $index => $category)
-                                                    <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
+                                                    <a
+                                                        href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                                                         {{ $index + 1 != $categories->count() ? $category->name . ', ' : $category->name }}
                                                     </a>
                                                 @endforeach
