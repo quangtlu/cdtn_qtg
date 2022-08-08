@@ -13,7 +13,7 @@
                                     href="{{ route('home.index') }}">Trang
                                     chủ</a></li>
                             <li><a href="" class="">Về QSHTT</a></li>
-                            <li><a href="" class="">Văn bản pháp luật</a></li>
+                            <li><a href="{{ route('documentLaws.index') }}" class="">Văn bản pháp luật</a></li>
                             <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                                     href="{{ route('faq.index') }}">FAQ</a></li>
                             <span style="color: #D91E1E">|</span>

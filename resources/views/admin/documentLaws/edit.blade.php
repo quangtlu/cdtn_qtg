@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Sửa thông tin tác giả')
+@section('title', 'Sửa văn bản pháp luật')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/product/index.css') }}">
@@ -18,17 +18,20 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="label-required" for="category_name">Link văn bản</label>
-                        <input type="file" accept="file/*" multiple class="form-control-file" name="url" id="" cols="30"
-                            rows="5" value="{{ old('url') ?? $documentLaw->url }}">
+                        <label class="label-required" for="category_name">Tệp đính kèm</label>
+                        <input type="file" accept="file/*" class="form-control-file" name="url" id="" cols="30"
+                            rows="5" value="{{ $url }}">
+                            <a href="{{ asset("document/$url") }}"></a>
+                        @error('url')
+                            <span class="mt-1 text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label class="label-required" for="category_name">Thumbnail</label>
-                        <input type="file" accept="image/*" multiple class="form-control-file" name="thumbnail" id="" cols="30"
-                            rows="5" value="">
-                        <div class="picture">
-                            <img class="" style="width: 50%; height:50%" src="{{ asset("image/documentLaws/$thumbnail") }}" alt="">
-                        </div>
+                        <input type="file" accept="image/*" class="form-control-file" name="thumbnail" id="" cols="30" rows="5" value="{{ $thumbnail }}">
+                        <img class="product-img" style="width:50%; height:50%" src="{{ asset("image/documentLaws/$thumbnail") }}" alt="">
+                        @error('thumbnail')
+                            <span class="mt-1 text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label  for="category_name">Mô tả</label>
