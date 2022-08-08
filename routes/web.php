@@ -112,6 +112,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/update{id}', 'Admin\ProfileController@update')->name('update');
         });
 
+        Route::name('documentLaws.')->prefix('/documentLaws')->group(function () {
+            Route::get('/', 'Admin\DocumentLawController@index')->name('index')->middleware('can:list-documentLaw');
+            Route::get('/create', 'Admin\DocumentLawController@create')->name('create')->middleware('can:add-documentLaw');
+            Route::post('/store', 'Admin\DocumentLawController@store')->name('store')->middleware('can:add-documentLaw');
+            Route::get('/edit/{id}', 'Admin\DocumentLawController@edit')->name('edit')->middleware('can:edit-documentLaw');
+            Route::post('/update/{id}', 'Admin\DocumentLawController@update')->name('update')->middleware('can:edit-documentLaw');
+            Route::get('/destroy/{id}', 'Admin\DocumentLawController@destroy')->name('destroy')->middleware('can:delete-documentLaw');
+        });
+
     });
     // User
     Route::name('posts.')->prefix('posts')->group(function () {
