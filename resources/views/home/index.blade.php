@@ -1,12 +1,13 @@
 @extends('layouts.home')
 @section('title', 'Trang chủ')
 @section('css')
-    
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    <h3 style="border-left: 3px solid #ffac3a; margin-bottom: 15px; padding-left: 10px; text-transform:uppercase">Tài liệu quyền tác giả</h3>
+    <h3 style="border-left: 3px solid #060a52; margin-bottom: 15px; padding-left: 10px; text-transform:uppercase">Tài liệu
+        quyền tác giả</h3>
     @include('home.component.posts.search-filter', ['categories' => $categories, 'tags' => $tags])
     @include('home.component.posts.list', ['posts' => $posts])
 @endsection

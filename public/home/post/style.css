@@ -45,10 +45,13 @@
 
 .post-info__link {
     text-decoration: none !important;
-    color: #fca003;
     font-size: 14px;
     padding: 5px 0;
     display: block;
+}
+
+.post-info__link:hover {
+    color: #d91e1e;
 }
 
 .error-message {
