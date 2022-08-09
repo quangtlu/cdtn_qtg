@@ -169,23 +169,20 @@ $(function () {
     $(document).on("click", ".btn-delete-comment", actionDeleteComment);
 
     var prevScrollpos = window.pageYOffset;
-    var pc = window.matchMedia("(min-width: 1024px)");
-    if (pc.matches) {
-        window.onscroll = function (e) {
-            //hide header when scroll down
-            //and show when scroll up
-            var currentScrollPos = window.pageYOffset;
-            const header = document.querySelector("header");
-            //scroll up
-            if (prevScrollpos > currentScrollPos) {
-                header.style.top = "0";
-                // scroll down
-            } else if (currentScrollPos != 1) {
-                header.style.top = "-150px";
-            }
-            prevScrollpos = currentScrollPos;
-        };
-    }
+    window.onscroll = function (e) {
+        //hide header when scroll down
+        //and show when scroll up
+        var currentScrollPos = window.pageYOffset;
+        const header = document.querySelector("header");
+        //scroll up
+        if (prevScrollpos > currentScrollPos) {
+            header.style.top = "0";
+            // scroll down
+        } else if (currentScrollPos > 5) {
+            header.style.top = "-150px";
+        }
+        prevScrollpos = currentScrollPos;
+    };
 });
 
 
