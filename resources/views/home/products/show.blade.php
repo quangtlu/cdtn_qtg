@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.two-column')
 @section('title', $product->name)
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
