@@ -16,7 +16,7 @@ class DocumentLawService
     }
 
     public function getPaginate(){
-        $documentLaws = $this->documentLawModel->latest()->paginate(10);
+        $documentLaws = $this->documentLawModel->latest();
         return $documentLaws;
     }
 
@@ -73,7 +73,7 @@ class DocumentLawService
         if($file = $request->file('url')) {
             $url = $file->getClientOriginalName();
             $file->move('document',$url);
-            $data['thumbnail'] = $url;
+            $data['url'] = $url;
         }
         $documentLaw->update($data);
     }
