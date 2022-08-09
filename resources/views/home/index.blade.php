@@ -92,18 +92,18 @@
         <div class="home-section wow fadeInUp">
             <h4 class="title-section-page">Top chuyên gia tư vấn</h4>
             <div class="row counselor-list">
-                @foreach ($users as $user)
+                @foreach ($counselors as $counselor)
                     <div class="col-md-3 counselor-item">
                         <div class="counselor-item-wrap">
-                            <img src="{{ asset('image/profile') . '/' . $user->image }}" alt=""
+                            <img src="{{ asset('image/profile') . '/' . $counselor->image }}" alt=""
                                 class="counselor-item__avt">
                             <div class="couselor-item-info">
                                 <ul>
                                     <li>
-                                        <h4 class="active">{{ $user->name }}</h4>
+                                        <h4 class="active">{{ $counselor->name }}</h4>
                                     </li>
                                     <li>
-                                        <a data-toggle="modal" data-target="#myModal-{{ $user->id }}"
+                                        <a data-toggle="modal" data-target="#myModal-{{ $counselor->id }}"
                                             class="agileits w3layouts counselor-button">Thông tin</a>
                                         <a href="" class="agileits w3layouts counselor-button button-active">Hẹn tư
                                             vấn</a>
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="myModal-{{ $user->id }}" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="myModal-{{ $counselor->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -124,12 +124,12 @@
                                 </div>
                                 <div class="modal-body counselor-info-detail">
                                     <ul class="counselor-info-detail__list">
-                                        <li><b>Họ tên: </b>{{ $user->name }}</li>
-                                        <li><b>Giới tính: </b>{{ $user->gender_text }}</li>
-                                        <li><b>Tuổi: </b>{{ $user->age }}</li>
+                                        <li><b>Họ tên: </b>{{ $counselor->name }}</li>
+                                        <li><b>Giới tính: </b>{{ $counselor->gender_text }}</li>
+                                        <li><b>Tuổi: </b>{{ $counselor->age }}</li>
                                         <li><b>Chuyên môn: </b>
-                                            @if ($user->categories->count())
-                                                @foreach ($user->categories as $index => $category)
+                                            @if ($counselor->categories->count())
+                                                @foreach ($counselor->categories as $index => $category)
                                                     <a
                                                         href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                                                         {{ $index + 1 != $categories->count() ? $category->name . ', ' : $category->name }}
@@ -139,8 +139,8 @@
                                                 Chưa rõ
                                             @endif
                                         </li>
-                                        <li><b>Email: </b>{{ $user->email }}</li>
-                                        <li><b>SDT: </b>{{ $user->phone }}</li>
+                                        <li><b>Email: </b>{{ $counselor->email }}</li>
+                                        <li><b>SDT: </b>{{ $counselor->phone }}</li>
                                     </ul>
                                 </div>
                                 <div class="modal-footer">

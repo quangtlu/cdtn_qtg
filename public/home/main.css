@@ -1,11 +1,14 @@
+.primary-color {
+    color: var(--primary-color);
+}
 .side-bar-left {
-    border-right: 1px solid var(--primary-color);
-    padding-right: 10px;
+    max-height: 700px;
+    overflow-y: scroll;
 }
 
 .side-bar-right {
-    border-left: 1px solid var(--primary-color);
-    padding-left: 10px;
+    max-height: 700px;
+    overflow-y: scroll;
 }
 .ck-editor__editable[role="textbox"] {
     /* editing area */
@@ -394,6 +397,11 @@
     padding: 5px 0;
     font-size: 20px;
 }
+
+.list-counselor-sidebar {
+    padding-left: 10px;
+    flex-direction: column;
+}
 .footer-agile-info {
     padding-bottom: 30px;
     margin-top: 20px;
@@ -407,3 +415,9 @@
     border-top: 1px solid #fff;
 }
 
+.counselor-button-sidebar{
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 3px 5px !important;
+    font-size: 11px !important;
+}

@@ -82,15 +82,15 @@ class DocumentLawService
         return $this->documentLawModel->destroy($id);
     }
 
-    // public function filter($request)
-    // {
-    //     $documentLaws = DocumentLaw::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->paginate(10);
-    //     return $documentLaws;
-    // }
+    public function filter($request)
+    {
+        $documentLaws = DocumentLaw::query()->filterTitle($request)->paginate(10);
+        return $documentLaws;
+    }
 
-    // public function searchAndFilter($request)
-    // {
-    //     $documentLaws = DocumentLaw::query()->filterName($request)->filterGender($request)->filterEmail($request)->filterPhone($request)->search($request->keyword)->paginate(10);
-    //     return $documentLaws;
-    // }
+    public function searchAndFilter($request)
+    {
+        $documentLaws = DocumentLaw::query()->filterTitle($request)->search($request->keyword)->paginate(10);
+        return $documentLaws;
+    }
 }

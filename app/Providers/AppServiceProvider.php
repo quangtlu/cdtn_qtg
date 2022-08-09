@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,9 +37,12 @@ class AppServiceProvider extends ServiceProvider
         $productCategories = Category::where('parent_id', 0)->type([config('consts.category.type.product.value')])->get();
         $tags = Tag::latest()->get();
         $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();
-
+        $counselors = User::role('counselor')->get();
         if ($newestPosts) {
             view()->share('newestPosts', $newestPosts);
+        }
+        if ($counselors) {
+            view()->share('counselors', $counselors);
         }
         if ($newestProducts) {
             view()->share('newestProducts', $newestProducts);

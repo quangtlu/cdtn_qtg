@@ -99,16 +99,6 @@
     @include('home.component.posts.search-filter', ['categories' => $categories, 'tags' => $tags])
     @include('home.component.posts.list', ['posts' => $posts])
 @endsection
-@section('side-bar')
-    @include('partials.home.categories-tags', [
-        'tags' => $tags,
-        'newestPosts' => $newestPosts,
-        'newestProducts' => $newestProducts,
-        'refrenceCategories' => $refrenceCategories,
-        'productCategories' => $productCategories,
-        'postReferences' => $postReferences,
-    ])
-@endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>

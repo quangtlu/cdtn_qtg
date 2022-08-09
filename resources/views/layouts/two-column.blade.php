@@ -71,10 +71,9 @@
     @include('partials.home.header')
     <div class="container" style="padding-top: 89px" id="container" data-messageSuccess="{{ Session::get('success') }}"
         data-messageError="{{ Session::get('error') }}">
-        <div class="banner-btm-agile">
-            <div class="col-md-9 btm-wthree-left">@yield('content')</div>
-            <div class="col-md-3 w3agile_blog_left">@include('partials.home.list-counselor')</div>
-            <div class="clearfix"></div>
+        <div style="margin-top: 5rem; display: flex; justify-content:space-around">
+            <div class="col-md-10 btm-wthree-left">@yield('content')</div>
+            <div class="col-md-2 side-bar-right">@include('partials.home.list-counselor')</div>
         </div>
     </div>
     @include('partials.home.footer')

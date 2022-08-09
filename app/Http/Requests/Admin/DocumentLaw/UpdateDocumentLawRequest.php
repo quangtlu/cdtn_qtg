@@ -24,9 +24,7 @@ class UpdateDocumentLawRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'url' => 'required',
-            'thumbnail' => 'required',
+            'title' => 'required',
         ];
     }
 
@@ -34,8 +32,6 @@ class UpdateDocumentLawRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng tên văn bản pháp luật',
-            'url.required' => 'Vui lòng nhập file',
-            'thumbnail.required' => 'Vui lòng nhập ảnh',
         ];
     }
 }

@@ -31,7 +31,7 @@
         $('#search').click(function() {
             $('#toggle').fadeToggle();
         });
-        $('#header-search-form').attr('action', '{{ route('posts.getReference') }}');
+        $('#header-search-form').attr('action', '{{ route('posts.references') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
     </script>
 @endsection
