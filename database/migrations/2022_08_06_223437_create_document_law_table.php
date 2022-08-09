@@ -16,7 +16,7 @@ class CreateDocumentLawTable extends Migration
         Schema::create('document_law', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('url');
+            $table->text('url');
             $table->text('description')->nullable();
             $table->text('thumbnail');
             $table->timestamps();

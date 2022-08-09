@@ -1,55 +1,52 @@
 @extends('layouts.two-column')
 @section('title', 'Văn bản pháp luật')
 @section('css')
-    <style>
-        .document-law-list{
-            list-style: none;
-            padding: 5px;
-        }
-        .document-law-item{
-            display: flex;
-            align-items: center;
-            min-height: 120px;
-            padding: 10px;
-        }
-        .document-law{
-            border: 1px solid #337ab7;
-            border-radius: 10px;
-        }
-        .document-law-title{
-            color: #212121;
-            font-weight: 600;
-            text-decoration: none;
-        }
-    </style>
+<style>
+    .img{
+        border-radius: 5px;
+        width: 60px;
+        height: 60px;
+    }
+    .document-law-description{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    .panel{
+        background-color: var(--primary-color)
+    }
+    .title-document{
+        color: white;
+        text-decoration: none !important;
+    }
+    .title-document:hover{
+        color: var(--red-color);
+    }
+</style>
 @endsection
 @section('content')
 @if ($documentLaws->count())
-    <div>
-        <ul class="document-law-list">
+<div class="row">
             @foreach ($documentLaws as $index => $documentLaw)
-                <li
-                    class="document-law panel">
-                    <a
-                        href="{{ asset('document/'.$documentLaw->url) }}" target="_blank" style="text-decoration-line: none">
-                        <div class="document-law-item">
-                            <img src="{{ asset('image/documentLaws/'.$documentLaw->thumbnail) }}"
-                                alt="" class="notice-item__avatar" style="width: 70px; height:70px">
-                            <div
-                                class="notice-item-content-wrap post-content-limit-line" style="padding-left: 20px">
-                                <h3 class="document-law-title">
-                                    {{ $documentLaw->title }}
-                                </h3>
-                                <div class="notice-item-content__time" style="margin-top: 5px">
-                                    {!! $documentLaw->description !!}
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+
+            <div class="panel panel-default" style="height: 100px">
+                <div class="panel-body">
+                    <div class="col-md-3">
+                        <img src="{{ asset('image/documentLaws/'.$documentLaw->thumbnail) }}" class="img" alt="">
+                    </div>
+                    <div class="col-md-7 document-law-description">
+                        <a class="title-document" href="{{ asset('document/'.$documentLaw->url) }}" target="_blank"><h4 >{{ $documentLaw->title }}</h4></a>
+                        {!! $documentLaw->description !!}
+                    </div>
+                    
+                    
+                </div>
+              </div>
             @endforeach
-        </ul>
-    </div>
+        </div>
     {{ $documentLaws->withQueryString()->links() }}
 @else
 <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có văn bản pháp luật nào nào</div>
