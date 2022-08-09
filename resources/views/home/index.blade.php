@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.one-column')
 @section('title', 'Trang chủ')
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
@@ -74,7 +74,7 @@
                 </a>
             </div>
         </div>
-        <div class="home-section">
+        <div class="home-section wow fadeInUp">
             <h4 class="title-section-page">Top <span class="active">{{ $categories->count() }}</span> chủ đề được quan tâm
                 nhất</h4>
             <ul class="top-list">
@@ -85,11 +85,11 @@
                 @endforeach
             </ul>
         </div>
-        <div class="home-section">
+        <div class="home-section wow fadeInUp">
             <h4 class="title-section-page">Top <span class="active">{{ $posts->count() }}</span> bài viết phổ biến nhất</h4>
-            @include('home.component.posts.list', ['posts' => $posts, 'paginate' => false])
+            @include('home.component.posts.list', ['posts' => $posts, 'isTop' => true])
         </div>
-        <div class="home-section">
+        <div class="home-section wow fadeInUp">
             <h4 class="title-section-page">Top chuyên gia tư vấn</h4>
             <div class="row counselor-list">
                 @foreach ($users as $user)

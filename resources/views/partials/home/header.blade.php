@@ -8,16 +8,17 @@
                 </div>
                 <div class="col-md-10">
                     <div class="row">
-                        <ul class="nav navbar-nav" @auth style="margin-top: -24px;" @endauth >
+                        <ul class="nav navbar-nav" @auth style="margin-top: -24px;" @endauth>
                             <li><a class="{{ Request::is('/*') ? 'active' : '' }}"
                                     href="{{ route('home.index') }}">Trang
                                     chủ</a></li>
-                            <li><a href="" class="">Về QSHTT</a></li>
+                            <li><a href="{{ route('posts.getReference') }}"
+                                    class="{{ Request::is('posts/reference*') ? 'active' : '' }}">Về QSHTT</a></li>
                             <li><a href="" class="">Văn bản pháp luật</a></li>
                             <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                                     href="{{ route('faq.index') }}">FAQ</a></li>
-                            <span style="color: #D91E1E">|</span>
-                            <li><a class="{{ Request::is('posts*') ? 'active' : '' }}"
+                            <span class="active">|</span>
+                            <li><a class="{{ Request::is('posts/forum*') ? 'active' : '' }}"
                                     href="{{ route('posts.index') }}">Diễn đàn</a></li>
                             <li><a href="{{ route('messenger.index') }}">Tư vấn</a></li>
                             @auth
@@ -62,7 +63,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </a></li>
+                                                            </a>
+                                                        </li>
                                                         {{-- Connect notification --}}
                                                     @elseif ($notification->type == 'App\Notifications\ConnectNotification')
                                                         <li
@@ -169,6 +171,39 @@
             </div>
         </div><!-- /.container-fluid -->
     </nav>
-
     <!-- //navigation -->
+    @auth
+        <div class="user-info-wrap">
+            <div class="user-info">
+                <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
+                    alt="avatar">
+                <div>
+                    <span class="user-info__name">{{ Auth::user()->name }}</span>
+                    <ul class="dropdown-menu dropdown-menu__user-info ">
+                        <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
+                                nhân</a></li>
+                        <li><a class="header-link user-name" href="{{ route('posts.myPost') }}">Bài
+                                viết của
+                                tôi</a></li>
+                        @hasanyrole('admin|mod')
+                            <li><a class="header-link user-name" href="{{ route('posts.getPotRequest') }}">Kiểm duyệt
+                                    bài viết</a></li>
+                        @endhasanyrole
+                        <li><a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                {{-- <span class="header-link-logout">Đăng xuất</span> --}}
+                                Đăng xuất
+                                <i class="fa fa-sign-in text-danger" style="padding-left: 10px"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                                <input type="hidden" name="url_redirect_name" value="home.index">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endauth
 </header>

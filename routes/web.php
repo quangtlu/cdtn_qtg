@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['register' => true]);
 Route::middleware('auth')->group(function () {
     //Role: admin
-    Route::name('admin.')->prefix('admin')->group(function () {        
+    Route::name('admin.')->prefix('admin')->group(function () {
         Route::name('users.')->prefix('/users')->group(function () {
             Route::get('/', 'Admin\UserController@index')->name('index')->middleware('can:list-user');
             Route::get('/create', 'Admin\UserController@create')->name('create')->middleware('can:add-user');
@@ -147,7 +147,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', 'home\MessageController@store');
     Route::post('/feedback', 'home\FeedbackController@update');
     Route::get('/feedback/latest/{chatroom_id}', 'home\FeedbackController@latest');
-    
+
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');
         Route::get('/edit/{id}', 'home\ProfileController@edit')->name('edit');
@@ -162,18 +162,19 @@ Route::middleware('auth')->group(function () {
 //No auth
 Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
-Route::name('posts')->prefix('posts')->group(function () {
-    Route::get('/', 'home\PostController@index')->name('.index');
-    Route::get('/{id}', 'home\PostController@show')->name('.show');
-    Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('.getPostByCategory');
-    Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('.getPostByUser');
-    Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('.getPostByTag');
+Route::name('posts.')->prefix('posts')->group(function () {
+    Route::get('/', 'home\PostController@index')->name('index');
+    Route::get('/reference', 'home\PostController@getReference')->name('getReference');
+    Route::get('/{id}', 'home\PostController@show')->name('show');
+    Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('getPostByCategory');
+    Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('getPostByUser');
+    Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('getPostByTag');
 });
 
-Route::name('products')->prefix('products')->group(function () {
-    Route::get('/', 'home\ProductController@index')->name('.index');
-    Route::get('/{id}', 'home\ProductController@show')->name('.show');
-    Route::get('/category/{id}', 'home\ProductController@getProductByCategory')->name('.getProductByCategory');
-    Route::get('/author/{id}', 'home\ProductController@getProductByAuthor')->name('.getProductByAuthor');
-    Route::get('/owner/{id}', 'home\ProductController@getProductByOwner')->name('.getProductByOwner');
+Route::name('products.')->prefix('products')->group(function () {
+    Route::get('/', 'home\ProductController@index')->name('index');
+    Route::get('/{id}', 'home\ProductController@show')->name('show');
+    Route::get('/category/{id}', 'home\ProductController@getProductByCategory')->name('getProductByCategory');
+    Route::get('/author/{id}', 'home\ProductController@getProductByAuthor')->name('getProductByAuthor');
+    Route::get('/owner/{id}', 'home\ProductController@getProductByOwner')->name('getProductByOwner');
 });

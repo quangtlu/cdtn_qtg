@@ -13,6 +13,7 @@ use App\Services\ChatroomService;
 use App\Services\NotificationService;
 use App\Services\TagService;
 use Spatie\Permission\Traits\HasRoles;
+
 class PostController extends Controller
 {
     use HasRoles;
@@ -41,7 +42,10 @@ class PostController extends Controller
         $this->notificationService = $notificationService;
         $tags = $this->tagService->getAll();
         $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
-        view()->share(['tags' => $tags, 'categories' => $categories]);
+        view()->share([
+            'tags' => $tags,
+            'categories' => $categories,
+        ]);
     }
 
     public function index(Request $request)
@@ -60,7 +64,7 @@ class PostController extends Controller
             if ($request->sort) {
                 $posts = $this->postService->sortPost($request->sort);
             }
-            if($request->keyword) {
+            if ($request->keyword) {
                 if (!$posts->count()) {
                     return redirect()->back()->with('error', 'Không có bài viết nào được tìm thấy');
                 }
@@ -69,14 +73,13 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        
     }
 
     public function getPotRequest()
     {
         try {
             $posts = $this->postService->getPostRequest();
-            if(!$posts->count()) {
+            if (!$posts->count()) {
                 return redirect()->back()->with('error', 'Không có bài viết nào yêu cầu phê duyệt');
             } else {
                 return view('home.posts.post-request', compact('posts'));
@@ -84,13 +87,19 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
+    }
 
+    public function getReference()
+    {
+        $posts = Post::accepted()->reference()->latest()->paginate(10);
+        return view('home.posts.reference', compact('posts')
+        );
     }
 
     public function getMyPost()
     {
         $posts = $this->postService->myPost();
-        $isMyPost = true; 
+        $isMyPost = true;
         return view('home.posts.my-post', compact('posts'));
     }
 
@@ -99,53 +108,50 @@ class PostController extends Controller
         $postContainUnaccept = $this->postService->getById($id);
         $user = Auth::user();
         if (
-            ($postContainUnaccept->status == config('consts.post.status.request.value') || $postContainUnaccept->status == config('consts.post.status.refuse.value')) 
-            && $user 
-            && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'admin'))) {
+            ($postContainUnaccept->status == config('consts.post.status.request.value') || $postContainUnaccept->status == config('consts.post.status.refuse.value'))
+            && $user
+            && ($user->id == $postContainUnaccept->user_id || $user->hasAnyRole('mod', 'admin'))
+        ) {
             $post = $postContainUnaccept;
-        } else{
+        } else {
             $post = $this->postService->getDetailPost($id);
         }
 
-        if($post) {
+        if ($post) {
             $postRelates = $this->postService->getPostRelate($id);
             $counselors = $this->postService->getAllCounselor($id);
             return view('home.posts.show', compact('post', 'postRelates', 'counselors'));
         } else {
             abort('404');
         }
-
     }
 
     public function store(StorePostRequest $request)
     {
         $post = $this->postService->create($request);
-        
+
         $message = 'Bài viết đang chờ phê duyệt';
-        if(Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
+        if (Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
             $orther['getPostByUser'] = route('posts.getPostByUser', ['id' => $post->user_id]);
             $orther['showPost'] =  route('posts.show', ['id' => $post->id]);
             $orther['destroyPost'] =  route('posts.destroy', ['id' => $post->id]);
             $orther['time'] =  $post->created_at->diffForHumans();
             $orther['userName'] =  $post->user->name;
             foreach (config('consts.post.status') as $status) {
-                if($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
+                if ($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
                     $orther['status']['name'] =  $status['name'];
                     $orther['status']['className'] =  $status['className'];
                     $orther['status']['classIcon'] =  $status['classIcon'];
                 }
             }
             $message = 'Đăng bài thành công';
-            return response()->json(['post' => $post,'orther' =>  $orther, 'message' => $message]);        
-
-        }
-        else {
+            return response()->json(['post' => $post, 'orther' =>  $orther, 'message' => $message]);
+        } else {
             $this->notificationService->notiRequestPost($post);
             $this->notificationService->sendNotiResult($post, '');
-            return response()->json(['message' => $message]);        
+            return response()->json(['message' => $message]);
         }
     }
-
 
     public function update(StorePostRequest $request, $id)
     {
@@ -163,15 +169,14 @@ class PostController extends Controller
     public function handleRequest(Request $request, $id)
     {
         $action = $request->action;
-        if($request->noti_id) {
+        if ($request->noti_id) {
             $this->notificationService->destroy($request->noti_id);
-        } 
-        if($this->postService->getById($id)->status != config('consts.post.status.request.value')) {
-            return response()->json(['message' => 'Bài viết đã được xét duyệt']);
         }
-        else {
+        if ($this->postService->getById($id)->status != config('consts.post.status.request.value')) {
+            return response()->json(['message' => 'Bài viết đã được xét duyệt']);
+        } else {
             $user = Auth::user();
-            if($user->hasAnyRole('mod', 'admin')) {
+            if ($user->hasAnyRole('mod', 'admin')) {
                 $post = $this->postService->handleRequestPost($id, $action);
                 $this->notificationService->sendNotiResult($post, $action);
                 $message = $action == config('consts.post.action.accept') ? 'Phê duyệt thành công' : 'Từ chối thành công';
@@ -180,7 +185,6 @@ class PostController extends Controller
                 abort(403);
             }
         }
-
     }
 
     public function toogleStatus($id)
@@ -199,7 +203,7 @@ class PostController extends Controller
         $post = $this->postService->getById($id);
         if ($post->user->id == Auth::user()->id) {
             $post = $this->postService->delete($id);
-            if($post->chatroom) {
+            if ($post->chatroom) {
                 $this->chatroomService->delete($post->chatroom->id);
             }
             return response()->json(['post' => $post, 'message' => 'Xóa bài viết thành công']);

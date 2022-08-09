@@ -312,7 +312,7 @@ header {
     letter-spacing: 2px;
 }
 .w3ls-social-icons{
-	margin-top:20px;
+	margin-bottom:20px;
 	text-align:center;
 }
 .w3ls-social-icons i, .w3ls-social i {
@@ -763,7 +763,7 @@ header {
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
     color: #ffffff;
     text-decoration: none;
-    background-color: #000000;
+    background-color: var(--primary-color);
 }
 .dropdown-menu {
 	border-radius:0;
@@ -1001,9 +1001,7 @@ a.pa_italic:focus {
 .agileits_popular_posts_grid {
     margin-top: 2em;
 }
-.w3l_categories {
-    margin-top: 4em;
-}
+
 ul.tag {
     margin-top: 2em;
 }

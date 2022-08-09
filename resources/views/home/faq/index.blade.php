@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.two-column')
 @section('title', 'FAQ')
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/faq/style.css') }}">
