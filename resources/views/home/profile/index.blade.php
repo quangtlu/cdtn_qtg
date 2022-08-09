@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.one-column')
 @section('title', 'Thông tin tài khoản')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/profile/index.css') }}">

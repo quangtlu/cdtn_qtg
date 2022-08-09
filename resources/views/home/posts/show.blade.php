@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.one-column')
 @section('title', $post->title)
 @section('css')
 

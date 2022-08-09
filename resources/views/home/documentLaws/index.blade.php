@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.two-column')
 @section('title', 'Văn bản pháp luật')
 @section('css')
     <style>

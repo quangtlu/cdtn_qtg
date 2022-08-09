@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.two-column')
 @section('title', 'Diễn đàn')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     @endauth
     @guest
         <a style="margin-bottom: 10px" class="agileits w3layouts" href="{{ route('login') }}">Đăng nhập để đăng bài viết<span
@@ -136,7 +136,7 @@
                 color: type == 'success' ? '#fff' : '#000',
             });
         }
-       
+
         function resetForm(formElement, action)
         {
             formElement.trigger("reset");
@@ -147,11 +147,11 @@
         function renderValidateMessage(id, message)
         {
             if(!$('#error-' + id).length) {
-                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`); 
+                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`);
             }
         }
 
-        $('#add-post-form').submit(function (e) { 
+        $('#add-post-form').submit(function (e) {
             e.preventDefault();
             const that = $(this)
             const unsolvedStatus = {{ config('consts.post.status.unsolved.value') }}
@@ -168,7 +168,7 @@
                     resetForm(that)
                     if(response.post.status == unsolvedStatus){
                         let showPostUrl = response.orther.showPost
-                        var html = 
+                        var html =
                             `
                                 <div class="post-ajax-${response.post.id} wthree-top-1 animate__animated animate__fadeInUp">
                                     <div class="w3agile-top">
@@ -186,7 +186,7 @@
                                                     </a>
                                                 </li>`;
                                                 if (response.orther.status) {
-                                                    html += 
+                                                    html +=
                                                     `<li>
                                                         <a class="${response.orther.status.className}" href="${response.orther.toogleStatus}">
                                                             <i class="fa ${response.orther.status.classIcon}" aria-hidden="true"></i>
@@ -194,7 +194,7 @@
                                                         </a>
                                                     </li>`
                                                 }
-                                                    
+
                                             html += `
                                                 <li><a class="post-info__link btn-delete"
                                                         data-url="${response.orther.destroyPost}"><i

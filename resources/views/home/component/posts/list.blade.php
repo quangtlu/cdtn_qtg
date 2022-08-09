@@ -81,7 +81,7 @@
             </div>
         </div>
     @endforeach
-    @if ($paginate)
+    @if (isset($isTop) == false)
         {{ $posts->withQueryString()->links() }}
     @endif
 @else

@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.two-column')
 @section('title', 'Tác phẩm')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
