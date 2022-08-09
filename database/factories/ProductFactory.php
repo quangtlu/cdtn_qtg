@@ -23,7 +23,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'Ph. N. Gonobolin Những phẩm chất tâm lí của người giảng viên',
         'Công văn số 1276/BGD ĐT-NG (20/02/2008) Hướng dẫn tổ chức lấy ý kiến phản hồi từ người học về hoạt động giảng dạy của giảng viên',
         'Nguyễn Bằng Sinh viên đánh giá giảng viên: Đừng hiểu sai!,
-        Báo Hà Nội mới Sinh viên đánh giá giảng viên: Mỗi nơi một kiểu Báo cáo kết quả thực hiện lấy ý kiến phản hồi từ 
+        Báo Hà Nội mới Sinh viên đánh giá giảng viên: Mỗi nơi một kiểu Báo cáo kết quả thực hiện lấy ý kiến phản hồi từ
         người học về hoạt động giảng dạy của giảng viên gửi Cục Nhà giáo và Cán bộ quản lý CSGD – Bộ GDĐT (30/09/2011)',
         'Shahida Sajjad Phương pháp giảng dạy hiệu quả ở bậc đại học',
         'Thomas A. Angelo và K. Patricia Cross Classroom assessment techniques: A handbook for college teachers ',
@@ -43,16 +43,16 @@ $factory->define(Product::class, function (Faker $faker) {
         'Trần Thị Tú Anh (2010) Cách ứng phó với khó khăn tâm lý của sinh viên thiệt thòi.',
         'Abdulghani, H.M (2008) Stress and depression among medical students: a cross sectional study at a medical college in Saudi Abrabia',
         'Lưu Song Hà Cách thức cha mẹ quan hệ với con và hành vi lệch chuẩn của trẻ',
-        ' Nguyễn Duy Hiệp (2016) Hành vi lệch chuẩn trong học tập của sinh viên hiện nay - Nghiên cứu trường hợp tại trường Đại học 
+        ' Nguyễn Duy Hiệp (2016) Hành vi lệch chuẩn trong học tập của sinh viên hiện nay - Nghiên cứu trường hợp tại trường Đại học
         Khoa học Xã hội và Nhân văn và trường Đại học Khoa học tự nhiên Hà Nội',
 
     ];
     return [
         'name' => $faker->randomElement($products),
         'description' => $faker->text,
-        // 'image' => '1.jpg|2.jpg|3.jpg',
-        'pub_date' => $faker->dateTime('-2 years'),
-        'regis_date' => $faker->dateTime('-2 years'),
+        'image' => '1.jpg|2.jpg|3.jpg',
+        'pub_date' => $faker->dateTime(),
+        'regis_date' => $faker->dateTime(),
         'owner_id' => rand(1, 20)
     ];
 });

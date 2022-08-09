@@ -46,10 +46,11 @@
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        <div class="col-md-9 w3agile-right post-content-limit-line">
+                        <div class="col-md-9 w3agile-right ">
                             <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
                             </h3>
-                            <div class="post-content-limit-line">{!! $post->content !!}</div>
+                            <div class="">{!! $post->content !!}</div>
+                            @include('home.component.posts.list-comment', ['post' => $post])
                             @if (isset($isPostRequest) && $isPostRequest)
                                 <form class="hanle-request-form"
                                     action="{{ route('posts.handleRequest', ['id' => $post->id]) }}" method="post">
