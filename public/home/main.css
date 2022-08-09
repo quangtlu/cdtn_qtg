@@ -1,15 +1,7 @@
 .primary-color {
-    color: var(--primary-color);
-}
-.side-bar-left {
-    max-height: 700px;
-    overflow-y: scroll;
+    color: var(--primary-color) !important;
 }
 
-.side-bar-right {
-    max-height: 700px;
-    overflow-y: scroll;
-}
 .ck-editor__editable[role="textbox"] {
     /* editing area */
     min-height: 200px;
