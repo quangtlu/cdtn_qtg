@@ -5,63 +5,36 @@ html{
 html::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+    background-color: var(--primary-color);
 }
 
 html::-webkit-scrollbar
 {
-	width: 5px;
-	background-color: #F5F5F5;
+    width: 10px;
+    background-color: var(--red-color);
 }
 
 html::-webkit-scrollbar-thumb
 {
-	background-color: var(--primary-color);
+    background-color: var(--red-color);
 }
-
-.side-bar-left:hover {
+.side-bar-left, .side-bar-right {
     max-height: 700px;
     overflow-y: scroll;
 }
 
-.side-bar-right:hover {
-    max-height: 700px;
-    overflow-y: scroll;
-}
-
-.side-bar-left::-webkit-scrollbar-track
+.side-bar-left::-webkit-scrollbar, .side-bar-right::-webkit-scrollbar
 {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
-
-.side-bar-left::-webkit-scrollbar
-{
+    background-color: var(--primary-color);
 	width: 3px;
-	background-color: #F5F5F5;
 }
 
-.side-bar-left::-webkit-scrollbar-thumb
-{
-	background-color: var(--primary-color);
-}
-
-.side-bar-right::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
-
-.side-bar-right::-webkit-scrollbar
-{
-	width: 3px;
-	background-color: #F5F5F5;
-}
-
+.side-bar-left::-webkit-scrollbar-thumb,
 .side-bar-right::-webkit-scrollbar-thumb
 {
-	background-color: var(--primary-color);
+    background-color: var(--red-color);
 }
+
 .primary-color {
     color: var(--primary-color) !important;
 }

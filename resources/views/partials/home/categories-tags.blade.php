@@ -10,12 +10,11 @@
                             {{ $index }}.{{ $category->name }}
                         </a>
                         @if ($category->categories->count())
-                            <ul style="padding-left: 35px">
+                            <ul style="padding-left: 15px">
                                 @foreach ($category->categories as $indexChild => $categoryChild)
                                     <li>
                                         <a href="{{ route('posts.getPostByCategory', ['id' => $categoryChild->id]) }}">
-                                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                            {{ $index . '.' . ($indexChild + 1) . '. ' . $categoryChild->name }}
+                                            <b>{{ $index . '.' . ($indexChild + 1)}}</b>. {{$categoryChild->name }}
                                         </a>
                                     </li>
                                 @endforeach

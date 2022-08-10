@@ -2,6 +2,7 @@
 @section('title', 'Quyền sở hữu trí tuệ')
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
 @endsection
 @section('content')
     @include('home.component.posts.list', ['posts' => $posts])
@@ -34,4 +35,5 @@
         $('#header-search-form').attr('action', '{{ route('posts.references') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
     </script>
+    @include('home.component.commentjs')
 @endsection

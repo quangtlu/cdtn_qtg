@@ -1982,16 +1982,15 @@ h2.typoh2{
 }
 .comments-grid-left{
 	float:left;
-	width:15%;
+	width:10%;
 }
 .comments-grid-left img{
-	padding:.3em;
-	border:2px solid var(--primary-color);
-	border-radius:50px;
+	border:1px solid var(--primary-color);
+    border-radius: 50% !important;
 }
 .comments-grid-right{
 	float:right;
-	width:75%;
+	width:88%;
 }
 .comments-grid-right ul{
 	padding:1em 0;
@@ -2136,7 +2135,7 @@ h2.typoh2{
 		font-size: .8em;
 	}
 	.comments-grid-left {
-		width: 20%;
+		width: 10%;
 	}
 	.leave-coment-form input[type="text"], .leave-coment-form input[type="email"], .leave-coment-form textarea {
 		width: 100%;
@@ -2198,10 +2197,10 @@ h2.typoh2{
 		margin: 2em 0 0;
 	}
 	.comments-grid-left {
-		width: 30%;
+		width: 10%;
 	}
 	.comments-grid-right {
-		width: 65%;
+		width: 86%;
 	}
 	.comments-grid-right ul li i {
 		margin: 0 0.4em;
