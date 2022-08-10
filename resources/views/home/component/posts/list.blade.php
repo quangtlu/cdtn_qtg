@@ -2,11 +2,10 @@
     @foreach ($posts as $index => $post)
         <div class="wthree-top-1">
             <div class="w3agile-top">
-                <div class="col-md-3 w3agile-left">
+                <div class="col-md-2 w3agile-left">
                     <ul class="post-info">
-                        <a class="post-info__link"
-                            href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i class="fa fa-user"
-                            aria-hidden="true"></i>{{ $post->user->name }}</a>
+                        <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i
+                                class="fa fa-user" aria-hidden="true"></i>{{ $post->user->name }}</a>
                         <li><a class="post-info__link" href="{{ route('posts.show', ['id' => $post->id]) }}">
                                 <i class="fa fa-clock-o"
                                     aria-hidden="true"></i>{{ $post->created_at->diffForHumans() }}</a>
@@ -46,7 +45,7 @@
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        <div class="col-md-9 w3agile-right ">
+                        <div class="col-md-10 w3agile-right ">
                             <h3><a href="{{ route('posts.show', ['id' => $post->id]) }}">{{ $post->title }}</a>
                             </h3>
                             <div class="">{!! $post->content !!}</div>
@@ -56,11 +55,13 @@
                                     action="{{ route('posts.handleRequest', ['id' => $post->id]) }}" method="post">
                                     @csrf
                                     <div style="display: flex; float: left; padding-top:10px">
-                                        <button data-screen='post-request' data-action="{{ config('consts.post.action.refuse') }}"
+                                        <button data-screen='post-request'
+                                            data-action="{{ config('consts.post.action.refuse') }}"
                                             class="btn btn-danger action-btn">
                                             {{ config('consts.post.action.refuse') }}
                                         </button>
-                                        <button data-screen='post-request' data-action="{{ config('consts.post.action.accept') }}"
+                                        <button data-screen='post-request'
+                                            data-action="{{ config('consts.post.action.accept') }}"
                                             class="action-btn btn btn-success" style="margin-left: 5px">
                                             {{ config('consts.post.action.accept') }}
                                         </button>

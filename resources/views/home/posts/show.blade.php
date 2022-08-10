@@ -11,10 +11,11 @@
         <h3 id="post-title" class="title-relate">{{ $post->title }}</h3>
         <ul class="post-info-list">
             <li class="user-post-info-wrap">
-                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i class="fa fa-user" aria-hidden="true"></i> {{ $post->user->name }}</a>
+                <a class="post-info__link" href="{{ route('posts.getPostByUser', ['id' => $post->user_id]) }}"><i
+                        class="fa fa-user" aria-hidden="true"></i> {{ $post->user->name }}</a>
             </li>
-            <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a
-                    href="#tag" id="number-tag">{{ $post->tags->count() }}
+            <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="#tag"
+                    id="number-tag">{{ $post->tags->count() }}
                     Tag</a>
             </li>
             <li><span class="fa fa-comment" aria-hidden="true"></span><a id="number-comment"
@@ -107,12 +108,13 @@
                             <h4 class="modal-title" id="post-modalLabel">Sửa bài viết</h4>
                         </div>
                         <div class="modal-body">
-                            <form id="edit-post-form" action="{{ route('posts.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
+                            <form id="edit-post-form" action="{{ route('posts.update', ['id' => $post->id]) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div id="title" class="form-group">
                                     <label class="label-required" for="title">Tiêu đề</label>
-                                    <input  type="text" name="title" class="form-control"
-                                        value="{{ old('title') ? old('title') : $post->title}}">
+                                    <input type="text" name="title" class="form-control"
+                                        value="{{ old('title') ? old('title') : $post->title }}">
                                     @error('title')
                                         <span class="mt-1 text-danger">{{ $message }}</span>
                                     @enderror
@@ -121,34 +123,40 @@
                                     <label>Thẻ tag</label>
                                     <select name="tag_id[]" class="form-control select2_init" multiple>
                                         @foreach ($tags as $tag)
-                                            <option {{ $post->tags->contains($tag) ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                            <option {{ $post->tags->contains($tag) ? 'selected' : '' }}
+                                                value="{{ $tag->id }}">{{ $tag->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div  id="category_id" class="form-group">
+                                <div id="category_id" class="form-group">
                                     <label for="category">Mục lục</label>
                                     <select name="category_id[]" class="form-control select2_init" multiple>
                                         @foreach ($categories as $category)
                                             @if ($category->type == config('consts.category.type.post_reference.value'))
                                                 @role('admin|editor')
-                                                    <option {{ $post->categories->contains($category) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option {{ $post->categories->contains($category) ? 'selected' : '' }}
+                                                        value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endrole
                                             @else
-                                                <option {{ $post->categories->contains($category) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option {{ $post->categories->contains($category) ? 'selected' : '' }}
+                                                    value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endif
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="label-required">Nội dung</label>
-                                    <textarea id="editor" value="{{ old('content') ?? $post->content }}" name="content" cols="30" rows="5">{{ $post->content }}</textarea>
+                                    <textarea id="editor" value="{{ old('content') ?? $post->content }}" name="content" cols="30"
+                                        rows="5">{{ $post->content }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Ảnh</label>
                                     <input type="file" multiple class="form-control-file" name="image[]" id="image">
                                 </div>
-                                <button type="submit" id="submit-btn-edit" class="btn-modal-post btn btn-success mb-2">Cập nhật</button>
-                                <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Hủy</button>
+                                <button type="submit" id="submit-btn-edit" class="btn-modal-post btn btn-success mb-2">Cập
+                                    nhật</button>
+                                <button type="button" class="btn-modal-post btn btn-danger"
+                                    data-dismiss="modal">Hủy</button>
                             </form>
                         </div>
                     </div>
@@ -161,7 +169,8 @@
                     <button style="margin-top:10px" class="btn btn-success">Đã kết nối với chuyên gia tư vấn <i
                             class="fa fa-check-circle" aria-hidden="true"></i></button>
                 @else
-                    <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết nối
+                    <button style="margin-top: 10px" data-toggle="modal" data-target="#post-modal" class="btn btn-success">Kết
+                        nối
                         với
                         chuyên gia <i class="fa fa-comments"></i></button>
                     <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
@@ -185,7 +194,8 @@
                                         </div>
                                         <button type="submit" id="submit-btn" class="btn-modal-post btn btn-success mb-2">Kết
                                             nối</button>
-                                        <button type="button" class="btn-modal-post btn btn-danger" data-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn-modal-post btn btn-danger"
+                                            data-dismiss="modal">Đóng</button>
                                     </form>
                                 </div>
                             </div>
@@ -209,9 +219,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="module" src="{{ asset('js/alert.js') }}"></script>
     <script type="text/javascript">
-    $('#header-search-form').attr('action', '{{ route('posts.index') }}');
-    $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
-    // init libary
+        $('#header-search-form').attr('action', '{{ route('posts.index') }}');
+        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
+        // init libary
         $('.flexslider').flexslider({
             animation: "slide",
             start: function(slider) {
@@ -222,8 +232,7 @@
             .create(document.querySelector('#editor'))
         $('.select2_init').select2()
 
-        function alertMessage(message, type, time)
-        {
+        function alertMessage(message, type, time) {
             Swal.fire({
                 toast: true,
                 icon: type == 'success' ? 'success' : 'error',
@@ -242,152 +251,26 @@
             });
         }
 
-        function renderValidateMessage(id, message)
-        {
-            if(!$('#error-' + id).length) {
+        function renderValidateMessage(id, message) {
+            if (!$('#error-' + id).length) {
                 $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`);
             }
         }
 
-        function repComment() {
-            let userName = $(this).attr('data-userName')
-            $('#leave-coment').text(userName)
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#leave-coment").offset().top
-            }, 1000);
-        }
-        function toogleEditCommentWrap() {
-            $(this).closest('.comments-grid-right').children('.edit-comment-wrap').fadeToggle()
-            $(this).closest('.comments-grid-right').children('.comment-content').fadeToggle()
-        }
-        function updateComment(e) {
-            e.preventDefault();
-            const action = $(this).attr('action')
-            const that = $(this)
-            $.ajax({
-                type: "POST",
-                url: action,
-                data: $(this).serialize(),
-                dataType: "json",
-                success: function (response) {
-                    const newComment = response.comment.comment
-                    const message = response.message
-                    that.closest('.comments-grid-right').children('.comment-content').text(newComment)
-                    that.closest('.edit-comment-wrap').fadeOut()
-                    that.closest('.comments-grid-right').children('.comment-content').fadeToggle()
-                    alertMessage(message, 'success')
-                },
-                error: function(errors) {
-                    let message = errors.responseJSON.errors.comment
-                    alertMessage(message, 'error')
-                }
-            });
-        }
-
-        $('.rep-comment').on('click', repComment)
-
-        // call update comment
-        $('.btn-edit-comment').on('click', toogleEditCommentWrap)
-        $('.edit-comment-form').submit(updateComment);
-
-        // call create comment
-        $('.form-create-comment').submit(function (e) {
-            e.preventDefault();
-            that = $(this)
-            $.ajax({
-                type: "POST",
-                url: "{{ route('comments.store') }}",
-                data: $(this).serialize(),
-                dataType: "json",
-                success: function (res) {
-                    const comment = res.comment
-                    const orther = res.ortherData
-                    const userAuthId = @auth {{ Auth::user()->id }} @endauth
-
-                    $('.form-create-comment').trigger("reset");
-
-                    var html = `
-                        <div class="comments-grid animate__animated animate__fadeInUp" style="margin-top: 25px; margin-bottom:5px">
-                            <div class="comments-grid-left">
-                                <img src="${orther.userImage}" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="comments-grid-right panel">
-                                <h4><a
-                                        href="${orther.GetPostByUser}">${comment.user.name}</a>
-                                </h4>`
-
-                                if (comment.user_id == comment.post.user_id) {
-                                    html += ` <h6 style="color:#4599ff; background-color:#c5defd; padding: 5px 10px; width:fit-content; border-radius:6px">
-                                        Tác giả <i class="fa fa-pencil-square-o" aria-hidden="true"></i></h6>`
-                                }
-
-                                html += `
-                                <ul>
-                                    <li><a href="#${comment.id}">${orther.time}</a><i>|</i>
-                                    </li>
-                                    <li>
-                                        <a class="rep-comment comment-action-link"
-                                            data-userName="${comment.user.name}">Trả
-                                            lời <i class="fa fa-mail-reply"></i></a>
-                                            |
-                                    </li>
-                                    <li><a class="comment-action-link btn-delete-comment"
-                                            data-url="${orther.destroyComment}">Xóa
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>|</li>
-                                    </li>
-                                    <li><a class="comment-action-link btn-edit-comment btn-edit-comment-ajax">Chỉnh sửa
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a></li>
-                                    </li>
-                                </ul>
-                                <p class="comment-content">${comment.comment}</p>
-                                    <div class="leave-coment-form edit-comment-wrap">
-                                        <form class="edit-comment-form" action="${orther.updateComment}" method="post">
-                                            @csrf
-                                            <textarea name="comment" placeholder="Nhập bình luận...">${comment.comment}</textarea>
-                                            @error('comment')
-                                                <span class="mt-1 text-danger">{{ $message }}</span>
-                                            @enderror
-                                            <input type="hidden" name="post_id" value="${comment.post.id}">
-                                            <div class="w3_single_submit">
-                                                <input type="submit" value="Cập nhật">
-                                            </div>
-                                        </form>
-                                    </div>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>`
-
-
-                    $('.comment-wrap').append(html)
-                    let totalCommentBefore = Number($('#number-comment').text().replace(/\D/g, ""))
-                    $('#number-comment').text(totalCommentBefore + 1 + ' bình luận')
-                    $('.btn-edit-comment-ajax').on('click', toogleEditCommentWrap)
-                    $('.edit-comment-form').submit(updateComment)
-                    $('.rep-comment').on('click', repComment)
-                },
-                error: function(errors) {
-                    let message = errors.responseJSON.errors.comment
-                    alertMessage(message, 'error')
-                }
-            });
-        });
-
-        $('#edit-post-form').submit(function (e) {
+        $('#edit-post-form').submit(function(e) {
             e.preventDefault();
             const referenceType = {{ config('consts.category.type.post_reference.value') }}
             $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
                 data: new FormData(this),
-                contentType:false,
-                processData:false,
+                contentType: false,
+                processData: false,
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     $('#edit-modal').modal('hide')
                     alertMessage(response.message, 'success')
-                    post =  response.post
+                    post = response.post
                     $('#post-title').text(post.title)
                     $('#post-content').html(post.content)
                     $('#number-tag').text(post.tags.length + ' Tag')
@@ -395,53 +278,43 @@
 
                     var htmlTag = `<span style="margin-top:10px; font-size:18px">Tags: </span>`
                     var htmlCategory = `<span style="margin-top:10px; font-size:18px">Mục lục: </span>`
-                    if(post.tags.length) {
+                    if (post.tags.length) {
                         post.tags.forEach(tag => {
-                            htmlTag += `<li class="li-category-tag"><a href="/posts/tag/${tag.id}">${tag.name}</a></li>`
+                            htmlTag +=
+                                `<li class="li-category-tag"><a href="/posts/tag/${tag.id}">${tag.name}</a></li>`
                         });
                     }
-                    if(post.categories.length) {
+                    if (post.categories.length) {
                         post.categories.forEach(category => {
-                            category.type == referenceType ? $('.post-status-wrap').hide() : $('.post-status-wrap').show()
-                            htmlCategory += `<li class="li-category-tag"><a href="/posts/category/${category.id}">${category.name}</a></li>`
+                            category.type == referenceType ? $('.post-status-wrap').hide() : $(
+                                '.post-status-wrap').show()
+                            htmlCategory +=
+                                `<li class="li-category-tag"><a href="/posts/category/${category.id}">${category.name}</a></li>`
                         });
                     }
                     $('#tag-list').html(htmlTag)
                     $('#category-list').html(htmlCategory)
 
                 },
-                error: function (errors) {
+                error: function(errors) {
                     let messageError = errors.responseJSON.errors
                     for (let obj in messageError) {
-                        if(obj) {
+                        if (obj) {
                             renderValidateMessage(obj, messageError[obj][0])
                         }
                     }
                 }
             });
         });
-
     </script>
+    @include('home.component.commentjs')
+
 @endsection
 <style>
     ul.tag li a {
         padding: 5px !important;
         font-size: 10px !important;
         font-weight: bold;
-    }
-
-    .comments-grid-left {
-        width: 10% !important;
-    }
-
-    .comments-grid-right {
-        width: 85% !important;
-    }
-
-    .comments-grid-left img {
-        padding: 0 !important;
-        border: 1px solid #060a52 !important;
-        border-radius: 50% !important;
     }
 
     .relate-post:hover {

@@ -213,20 +213,6 @@
     </script>
 @endsection
 <style>
-    .comments-grid-left {
-        width: 10% !important;
-    }
-
-    .comments-grid-right {
-        width: 85% !important;
-    }
-
-    .comments-grid-left img {
-        padding: 0 !important;
-        border: 1px solid #060a52 !important;
-        border-radius: 50% !important;
-    }
-
     .title-relate {
         text-transform: uppercase;
         font-size: 1.4em;
