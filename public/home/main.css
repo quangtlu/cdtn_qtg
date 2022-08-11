@@ -34,7 +34,10 @@ html::-webkit-scrollbar-thumb
     background-color: var(--red-color);
 }
 .side-bar-left, .side-bar-right {
-    max-height: 700px;
+    min-height: 700px;
+}
+
+.side-bar-left, .side-bar-right :hover {
     overflow-y: scroll;
 }
 
