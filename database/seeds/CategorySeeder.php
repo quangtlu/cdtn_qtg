@@ -14,7 +14,6 @@ class CategorySeeder extends Seeder
     public function run()
     {
             Category::insert(
-                ['name' => 'Giới thiệu'],
                 ['name' => 'Văn bản pháp luật'],
                 ['name' => 'Hỏi và đáp'],
             );

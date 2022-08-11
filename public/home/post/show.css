@@ -24,3 +24,21 @@
 .product-info-content {
     color: #000 !important;
 }
+ul.tag li a {
+    padding: 5px !important;
+    font-size: 10px !important;
+    font-weight: bold;
+}
+
+.relate-post:hover {
+    color: #060a52 !important;
+}
+
+.title-relate {
+    text-transform: uppercase;
+    font-size: 1.4em;
+    color: #212121;
+    padding-left: 0.8em;
+    border-left: 3px solid #060a52;
+    font-weight: 600;
+}

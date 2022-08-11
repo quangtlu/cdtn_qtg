@@ -88,7 +88,6 @@
         </div>
         <div class="home-section wow fadeInUp">
             <h4 class="title-section-page">Top <span class="active">{{ $posts->count() }}</span> bài viết phổ biến nhất</h4>
-            @include('home.component.posts.list', ['posts' => $posts, 'isTop' => true])
         </div>
         <div class="home-section wow fadeInUp">
             <h4 class="title-section-page">Top chuyên gia tư vấn</h4>
@@ -194,5 +193,4 @@
             right: auto !important;
         }
     </style>
-    @include('home.component.commentjs')
 @endsection
