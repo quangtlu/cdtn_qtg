@@ -6,13 +6,13 @@
 @section('content')
     @if ($faqs->count())
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            @foreach ($faqs as $faq)
+            @foreach ($faqs as $key=>$faq)
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading{{ $faq->id }}">
                         <h4 class="panel-title">
                             <a class="collapsed" role="button" style="text-decoration: none" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $faq->id }}"
                                 aria-expanded="false" aria-controls="collapse{{ $faq->id }}">
-                                {!! $faq->question !!}
+                                {{$key+1}}. {!! $faq->question !!}
                             </a>
                         </h4>
                     </div>
