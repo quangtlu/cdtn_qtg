@@ -11,13 +11,13 @@
                         <li><a class="{{ Request::is('/*') ? 'active' : '' }}"
                                 href="{{ route('home.index') }}">Trang
                                 chủ</a></li>
-                        <li><a href="{{ route('posts.references') }}"
-                                class="{{ Request::is('post-references*') ? 'active' : '' }}">Về QSHTT</a></li>
+                        <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceCategories->first()->id]) }}"
+                                class="{{ Request::is('posts/category/*') ? 'active' : '' }}">Về QSHTT</a></li>
                         <li><a href="{{ route('documentLaws.index') }}" class="{{ Request::is('document-laws*') ? 'active' : '' }}">Văn bản pháp luật</a></li>
                         <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
                                 href="{{ route('faq.index') }}">FAQ</a></li>
                         <span class="active">|</span>
-                        <li><a class="{{ Request::is('posts/*') ? 'active' : '' }}"
+                        <li><a class=""
                                 href="{{ route('posts.index') }}">Diễn đàn</a></li>
                         <li><a href="{{ route('messenger.index') }}">Tư vấn</a></li>
                         @auth

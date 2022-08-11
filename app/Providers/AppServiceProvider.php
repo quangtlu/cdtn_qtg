@@ -31,25 +31,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $newestPosts = Post::accepted()->latest()->limit(5)->get();
         $refrenceCategories = Category::where('parent_id', 0)->type([config('consts.category.type.post_reference.value')])->get();
-        $tags = Tag::latest()->get();
-        $postReferences = Post::accepted()->reference()->latest()->limit(6)->get();
         $counselors = User::role('counselor')->get();
-        if ($newestPosts) {
-            view()->share('newestPosts', $newestPosts);
-        }
         if ($counselors) {
             view()->share('counselors', $counselors);
         }
         if ($refrenceCategories) {
             view()->share('refrenceCategories', $refrenceCategories);
-        }
-        if ($tags) {
-            view()->share('tags', $tags);
-        }
-        if ($postReferences) {
-            view()->share('postReferences', $postReferences);
         }
     }
 }
