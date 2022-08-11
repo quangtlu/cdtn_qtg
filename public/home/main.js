@@ -118,8 +118,10 @@ function actionDeletePost() {
                 type: "GET",
                 url: urlRequest,
                 success: function (res) {
-                    that.closest(".wthree-top-1").remove();
-                    alertMessage(res.message, "success");
+                    that.closest(".post-container").fadeOut(('slow', function() {
+                        that.closest(".post-container").remove();
+                        alertMessage(res.message, "success");
+                    }));
                 },
             });
         }
@@ -157,6 +159,9 @@ function actionDeleteComment() {
     });
 }
 $(function () {
+    $(".carousel").carousel({
+        interval: false,
+    });
     const messageSuccess = $("#container").attr("data-messageSuccess");
     const messageError = $("#container").attr("data-messageError");
     if (messageSuccess) {
@@ -183,7 +188,64 @@ $(function () {
         }
         prevScrollpos = currentScrollPos;
     };
+
+    $('.read-more-btn').on('click', function(e) {
+        e.preventDefault()
+        const postContent = $(this).closest('.post-content').find('.post-content-body')
+        postContent.toggleClass('limit-line');
+        $(this).text(function(i, text){
+            return text === "Xem thêm" ? "Ẩn bớt" : "Xem thêm";
+        })
+    })
 });
 
+(function () {
+    var measurer = $("<span>", {
+        style: "display:inline-block;word-break:break-word;visibility:hidden;white-space:pre-wrap;",
+    }).appendTo("body");
+    function initMeasurerFor(textarea) {
+        var maxWidth = textarea.css("max-width");
+        measurer
+            .text(textarea.text())
+            .css(
+                "max-width",
+                maxWidth == "none" ? textarea.width() + "px" : maxWidth
+            )
+            .css("font", textarea.css("font"))
+            .css("min-height", textarea.css("min-height"))
+            .css("min-width", textarea.css("min-width"))
+            .css("padding", textarea.css("padding"))
+            .css("border", textarea.css("border"))
+            .css("box-sizing", textarea.css("box-sizing"));
+    }
+    function updateTextAreaSize(textarea) {
+        textarea.height(measurer.height());
+        var w = measurer.width();
+        textarea.width(w + 2);
+    }
+    $("textarea.autofit").on({
+        input: function () {
+            var text = $(this).val();
+            measurer.html(text);
+            updateTextAreaSize($(this));
+        },
+        focus: function () {
+            initMeasurerFor($(this));
+        },
+        keypress: function (e) {
+            var text = $(this).val();
+            if (e.which == 13 ) {
+                e.preventDefault();
+                if(text.length){
+                    // submit comment
+                }
+            }
+            if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
+                $(this).val(text+'\r\n')
+                measurer.html(text);
+                updateTextAreaSize($(this));
+            }
+        },
+    });
 
-
+})();

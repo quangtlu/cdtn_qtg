@@ -174,8 +174,6 @@ Route::name('posts.')->prefix('posts')->group(function () {
     Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('getPostByUser');
     Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('getPostByTag');
 });
-Route::get('post-references', 'home\PostController@getReference')->name('posts.references');
-
 
 Route::name('products.')->prefix('products')->group(function () {
     Route::get('/', 'home\ProductController@index')->name('index');

@@ -38,27 +38,6 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('template_blog/js/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('template_blog/js/main.js') }}"></script>
-    <script src="{{ asset('template_blog/js/skdslider.min.js') }}"></script>
-    <link href="{{ asset('template_blog/css/skdslider.css') }}" rel="stylesheet">
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('#demo1').skdslider({
-                'delay': 5000,
-                'animationSpeed': 2000,
-                'showNextPrev': true,
-                'showPlayButton': true,
-                'autoSlide': true,
-                'animationType': 'fading'
-            });
-
-            jQuery('#responsive').change(function() {
-                $('#responsive_wrapper').width(jQuery(this).val());
-            });
-
-        });
-    </script>
-    <!-- //main slider-banner -->
-    <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="{{ asset('template_blog/js/move-top.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template_blog/js/easing.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('home/main.css') }}">

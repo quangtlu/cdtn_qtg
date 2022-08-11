@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    @include('home.component.posts.list', ['posts' => $posts, 'paginate' => true])
+    @include('home.component.posts.list-post', ['posts' => $posts])
 @endsection
 @section('js')
     <script>

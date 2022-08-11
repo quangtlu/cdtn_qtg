@@ -104,7 +104,7 @@
                 class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
     @endguest
     @include('home.component.posts.search-filter', ['categories' => $categories, 'tags' => $tags])
-    @include('home.component.posts.list', ['posts' => $posts])
+    @include('home.component.posts.list-post', ['posts' => $posts])
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -122,99 +122,5 @@
         });
         $('#header-search-form').attr('action', '{{ route('posts.index') }}');
         $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
-
-        function resetForm(formElement, action)
-        {
-            formElement.trigger("reset");
-            $(".select2_init").val([]).change();
-        }
-
-        function renderValidateMessage(id, message)
-        {
-            if(!$('#error-' + id).length) {
-                $('#' + id).append(`<span id="error-${id}" class="mt-1 text-danger">${message}</span>`);
-            }
-        }
-
-        $('#add-post-form').submit(function (e) {
-            e.preventDefault();
-            const that = $(this)
-            const unsolvedStatus = {{ config('consts.post.status.unsolved.value') }}
-            $.ajax({
-                type: "POST",
-                url: $(this).attr('action'),
-                data: new FormData(this),
-                contentType:false,
-                processData:false,
-                dataType: "json",
-                success: function (response) {
-                    $('#add-modal').modal('hide')
-                    alertMessage(response.message, 'success')
-                    resetForm(that)
-                    if(response.post.status == unsolvedStatus){
-                        let showPostUrl = response.orther.showPost
-                        var html =
-                            `
-                                <div class="post-ajax-${response.post.id} wthree-top-1 animate__animated animate__fadeInUp">
-                                    <div class="w3agile-top">
-                                        <div class="col-md-3 w3agile-left">
-                                            <ul class="post-info">
-                                                <li><a class="post-info__link" href="${response.orther.getPostByUser}"><i
-                                                            class="fa  fa-user" aria-hidden="true"></i>${response.orther.userName}</a>
-                                                </li>
-                                                <li><a class="post-info__link" href="${showPostUrl}">
-                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>${response.orther.time}</a>
-                                                </li>
-                                                <li><a class="post-info__link" href="${showPostUrl}">
-                                                    <i class="fa fa-comment" aria-hidden="true"></i>0
-                                                        BÌNH LUẬN
-                                                    </a>
-                                                </li>`;
-                                                if (response.orther.status) {
-                                                    html +=
-                                                    `<li>
-                                                        <a class="${response.orther.status.className}" href="${response.orther.toogleStatus}">
-                                                            <i class="fa ${response.orther.status.classIcon}" aria-hidden="true"></i>
-                                                            ${response.orther.status.name}
-                                                        </a>
-                                                    </li>`
-                                                }
-
-                                            html += `
-                                                <li><a class="post-info__link btn-delete"
-                                                        data-url="${response.orther.destroyPost}"><i
-                                                            class="fa fa-trash" aria-hidden="true"></i> Xóa bài viết</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="panel panel-primary">
-                                            <div class="panel-body">
-                                                <div class="col-md-9 w3agile-right post-content-limit-line">
-                                                    <h3><a href="${showPostUrl}">${response.post.title}</a></h3>
-                                                    <div class="post-content-limit-line">${response.post.content}</div>
-                                                    <a class="agileits w3layouts" href="${showPostUrl}">Xem
-                                                        thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
-                                                            aria-hidden="true"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            `
-                        $('.search-and-filter').after(html)
-                        $('.alert-no-post').hide()
-                    }
-                },
-                error: function (errors) {
-                    let messageError = errors.responseJSON.errors
-                    for (let obj in messageError) {
-                        if(obj) {
-                            renderValidateMessage(obj, messageError[obj][0])
-                        }
-                    }
-                }
-            });
-        });
     </script>
-    @include('home.component.commentjs')
 @endsection

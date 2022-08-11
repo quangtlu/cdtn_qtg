@@ -89,13 +89,6 @@ class PostController extends Controller
         }
     }
 
-    public function getReference()
-    {
-        $posts = Post::accepted()->reference()->latest()->paginate(10);
-        return view('home.posts.reference', compact('posts')
-        );
-    }
-
     public function getMyPost()
     {
         $posts = $this->postService->myPost();
@@ -128,28 +121,19 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $post = $this->postService->create($request);
-
-        $message = 'Bài viết đang chờ phê duyệt';
-        if (Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
-            $orther['getPostByUser'] = route('posts.getPostByUser', ['id' => $post->user_id]);
-            $orther['showPost'] =  route('posts.show', ['id' => $post->id]);
-            $orther['destroyPost'] =  route('posts.destroy', ['id' => $post->id]);
-            $orther['time'] =  $post->created_at->diffForHumans();
-            $orther['userName'] =  $post->user->name;
-            foreach (config('consts.post.status') as $status) {
-                if ($post->status == $status['value'] && !$post->categories->contains('type', config('consts.category.type.post_reference.value'))) {
-                    $orther['status']['name'] =  $status['name'];
-                    $orther['status']['className'] =  $status['className'];
-                    $orther['status']['classIcon'] =  $status['classIcon'];
-                }
+        try {
+            $post = $this->postService->create($request);
+            $message = 'Bài viết đang chờ phê duyệt';
+            if (Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
+                $message = 'Đăng bài thành công';
+                return redirect()->back()->with('success', $message);
+            } else {
+                $this->notificationService->notiRequestPost($post);
+                $this->notificationService->sendNotiResult($post, '');
+                return redirect()->back()->with('success', $message);
             }
-            $message = 'Đăng bài thành công';
-            return response()->json(['post' => $post, 'orther' =>  $orther, 'message' => $message]);
-        } else {
-            $this->notificationService->notiRequestPost($post);
-            $this->notificationService->sendNotiResult($post, '');
-            return response()->json(['message' => $message]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình đăng bài');
         }
     }
 
@@ -215,7 +199,14 @@ class PostController extends Controller
     public function getPostByCategory($categoryId)
     {
         $posts = $this->postService->getByCategory($categoryId);
-        return view('home.posts.index', compact('posts'));
+        $category = $this->categoryService->getById($categoryId);
+
+        if($category->type == config('consts.category.type.post_reference.value')) {
+            $post = $posts->first();
+            return view('home.posts.reference', compact('post'));
+        } else {
+            return view('home.posts.index', compact('posts'));
+        }
     }
 
     public function getPostByUser($userId)

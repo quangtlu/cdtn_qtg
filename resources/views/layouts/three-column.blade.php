@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="{{ asset('home/WOW-master/css/libs/animate.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="{{ asset('template_blog/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('template_blog/css/flexslider.css') }}" type="text/css" media="screen"
-        property="" />
     <link rel="icon" type="image/x-icon" href="{{ asset('image/logo.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -39,25 +37,6 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('template_blog/js/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('template_blog/js/main.js') }}"></script>
-    <script src="{{ asset('template_blog/js/skdslider.min.js') }}"></script>
-    <link href="{{ asset('template_blog/css/skdslider.css') }}" rel="stylesheet">
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('#demo1').skdslider({
-                'delay': 5000,
-                'animationSpeed': 2000,
-                'showNextPrev': true,
-                'showPlayButton': true,
-                'autoSlide': true,
-                'animationType': 'fading'
-            });
-
-            jQuery('#responsive').change(function() {
-                $('#responsive_wrapper').width(jQuery(this).val());
-            });
-
-        });
-    </script>
     <!-- //main slider-banner -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="{{ asset('template_blog/js/move-top.js') }}"></script>
