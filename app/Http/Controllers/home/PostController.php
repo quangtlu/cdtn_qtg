@@ -144,7 +144,7 @@ class PostController extends Controller
             $postUpdated = $this->postService->update($request, $id);
             $postUpdated->tags;
             $postUpdated->categories;
-            return response()->json(['post' => $postUpdated, 'message' => 'Cập nhật thành công']);
+            return redirect()->back()->with('success', 'Cập nhật thành công');;
         } else {
             abort(403);
         }

@@ -105,13 +105,14 @@ function actionDeletePost() {
     let urlRequest = $(this).data("url");
     let that = $(this);
     Swal.fire({
-        title: "Bạn có chắc muốn xóa bài viết này?",
+        title: "Xác nhận xóa bài viết",
         text: "Bạn sẽ không thể khôi phục bài viết này",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Xóa",
+        cancelButtonText: "Hủy",
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -132,13 +133,13 @@ function actionDeleteComment() {
     let urlRequest = $(this).data("url");
     let that = $(this);
     Swal.fire({
-        title: "Bạn có chắc muốn xóa bình luận này?",
+        title: "Xác nhận xóa bình luận",
         text: "Bạn sẽ không thể khôi phục bình luận này",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Xóa",
+        cancelButtonText: "Hủy",
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -159,9 +160,24 @@ function actionDeleteComment() {
     });
 }
 $(function () {
+    $('.select2_init').select2()
     $(".carousel").carousel({
         interval: false,
     });
+
+    window.editors = {};
+
+    document.querySelectorAll('.editor').forEach((node, index) => {
+        ClassicEditor
+            .create(node, {})
+            .then(newEditor => {
+                window.editors[index] = newEditor
+            });
+    });
+    $().UItoTop({
+        easingType: 'easeOutQuart'
+    });
+
     const messageSuccess = $("#container").attr("data-messageSuccess");
     const messageError = $("#container").attr("data-messageError");
     if (messageSuccess) {

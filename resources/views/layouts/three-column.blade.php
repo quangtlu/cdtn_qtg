@@ -22,19 +22,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Quang Vinh copyright" />
-    <script type="application/x-javascript">
-        addEventListener("load", function() {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
     <link
         href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
         rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script type="text/javascript" src="{{ asset('template_blog/js/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('template_blog/js/main.js') }}"></script>
     <!-- //main slider-banner -->
@@ -58,21 +51,12 @@
         </div>
     </div>
     @include('partials.home.footer')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $().UItoTop({
-                easingType: 'easeOutQuart'
-            });
-        });
-    </script>
-
     <script src="{{ asset('template_blog/js/bootstrap.js') }}"></script>
     <script src="{{ asset('home/WOW-master/dist/wow.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="{{ asset('home/main.js') }}"></script>
-    <script>
-        new WOW().init();
-    </script>
     @yield('js')
 </body>
 

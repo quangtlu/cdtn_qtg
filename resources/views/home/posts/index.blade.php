@@ -1,7 +1,6 @@
 @extends('layouts.two-column')
 @section('title', 'Diễn đàn')
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
     <style>
@@ -84,7 +83,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea id="editor" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
+                                <textarea class="editor" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="image">Ảnh</label>
@@ -107,20 +106,9 @@
     @include('home.component.posts.list-post', ['posts' => $posts])
 @endsection
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
-        $('.select2_init').select2()
-
         $('#search').click(function() {
             $('#toggle').fadeToggle();
         });
-        $('#header-search-form').attr('action', '{{ route('posts.index') }}');
-        $('#search-input').attr('placeholder', 'Tìm kiếm bài viết theo tiêu đề, nội dung, tác giả...');
     </script>
 @endsection
