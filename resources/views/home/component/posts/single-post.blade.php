@@ -124,8 +124,8 @@
         @guest
             <a class="button-primary" href="{{ route('login') }}">Đăng nhập để bình luận</a>
         @endguest
-        @if ($post->comments->count())
-            <ul class="list-comment">
+        <ul class="list-comment">
+            @if ($post->comments->count())
                 @foreach ($post->comments->sortByDesc('status')->all() as $comment)
                     <li class="comment-item">
                         <div class="comment-item-content">
@@ -163,8 +163,8 @@
                         @endauth
                     </li>
                 @endforeach
-            </ul>
-        @endif
+            @endif
+        </ul>
     </div>
 </div>
 {{-- Modal edit post --}}

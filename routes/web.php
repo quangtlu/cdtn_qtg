@@ -134,7 +134,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'home\PostController@update')->name('update');
         Route::get('/update/status/{id}', 'home\PostController@toogleStatus')->name('toogleStatus');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('destroy');
-        Route::get('/post-request', 'home\PostController@getPotRequest')->name('getPotRequest');
+        Route::get('/post-request', 'home\PostController@getPotRequest')->name('getPotRequest')->middleware('can:approve-post');
         Route::post('/handle-request-post/{id}', 'home\PostController@handleRequest')->name('handleRequest')->middleware('can:approve-post');
         Route::post('/connect-to-counselor/{id}', 'home\PostController@connectToCounselor')->name('connectToCounselor')->middleware('can:connect-counselor');
     });
