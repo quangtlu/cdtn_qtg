@@ -15,12 +15,13 @@
                     @if (Auth::user()->id == $post->user_id)
                         <div class="dropdown">
                             <span class="dropdown-toggle glyphicon glyphicon-option-horizontal post-control"
-                                id="dropdownMenu-{{ $post->id }}" data-toggle="dropdown" aria-hidden="true" aria-haspopup="true"
-                                aria-expanded="true">
+                                id="dropdownMenu-{{ $post->id }}" data-toggle="dropdown" aria-hidden="true"
+                                aria-haspopup="true" aria-expanded="true">
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-{{ $post->id }}">
                                 <li><a href="{{ route('posts.show', ['id' => $post->id]) }}">Chi tiết</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#edit-modal-{{ $post->id }}">Chỉnh sửa</a></li>
+                                <li><a href="#" data-toggle="modal"
+                                        data-target="#edit-modal-{{ $post->id }}">Chỉnh sửa</a></li>
                                 @if ($post->status == config('consts.post.status.unsolved.value'))
                                     <li>
                                         <a href="{{ route('posts.toogleStatus', ['id' => $post->id]) }}">
@@ -36,7 +37,8 @@
                                     </li>
                                 @endif
                                 <li role="separator" class="divider"></li>
-                                <li><a class="btn-delete" data-url="{{ route('posts.destroy', ['id' => $post->id]) }}">Xóa bài viết</a></li>
+                                <li><a class="btn-delete" data-url="{{ route('posts.destroy', ['id' => $post->id]) }}">Xóa
+                                        bài viết</a></li>
                             </ul>
                         </div>
                     @endif
@@ -44,9 +46,10 @@
             </div>
         @endif
         <div class="post-content ">
-            <span class="post-content-title">{{ $post->title }}<a data-toggle="tooltip" data-placement="top" title="{{ $post->status_name }}" class="{{ $post->status_class }}" href="">
-                <i class="fa {{$post->status_icon_class}}"></i>
-            </a></span>
+            <span class="post-content-title">{{ $post->title }}<a data-toggle="tooltip" data-placement="top"
+                    title="{{ $post->status_name }}" class="{{ $post->status_class }}" href="">
+                    <i class="fa {{ $post->status_icon_class }}"></i>
+                </a></span>
             <div class="post-content-body limit-line">
                 {!! $post->content !!}
             </div>
@@ -56,22 +59,23 @@
             @if ($post->tags->count())
                 <div class="post-tags">
                     @foreach ($post->tags as $tag)
-                        <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}" class="post-tag-item">#{{$tag->name}}</a>
+                        <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}"
+                            class="post-tag-item">#{{ $tag->name }}</a>
                     @endforeach
                 </div>
             @endif
             @if ($post->categories->count())
                 <div class="post-tags">
                     @foreach ($post->categories as $category)
-                        <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}" class="active">#{{$category->name}}</a>
+                        <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}"
+                            class="active">#{{ $category->name }}</a>
                     @endforeach
                 </div>
             @endif
         </div>
         <div class="post-image">
             @if ($post->image)
-                <div id="carousel-example-generic-{{ $post->id }}" class="carousel slide"
-                    data-ride="carousel">
+                <div id="carousel-example-generic-{{ $post->id }}" class="carousel slide" data-ride="carousel">
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         @foreach (explode('|', $post->image) as $index => $image)
@@ -108,9 +112,11 @@
                         class="user-post-avt">
                 </div>
                 <div class="col-md-11 comment-input-right">
-                    <form action="{{ route('comments.store') }}" method="POST">
+                    <form class="create-comment-form" action="{{ route('comments.store') }}" method="POST">
                         @csrf
-                        <textarea placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <textarea name="comment" placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
                     </form>
                 </div>
             </div>
@@ -120,13 +126,13 @@
         @endguest
         @if ($post->comments->count())
             <ul class="list-comment">
-                @foreach ($post->comments as $comment)
+                @foreach ($post->comments->sortByDesc('status')->all() as $comment)
                     <li class="comment-item">
                         <div class="comment-item-content">
                             <a class="comment-item-content-left"
                                 href="{{ route('posts.getPostByUser', ['id' => $comment->user_id]) }}">
-                                <img src="{{ asset('image/profile') . '/' . $comment->user->image }}"
-                                    alt="" class="user-post-avt">
+                                <img src="{{ asset('image/profile') . '/' . $comment->user->image }}" alt=""
+                                    class="user-post-avt">
                             </a>
                             <div class="comment-item-content-right">
                                 <ul class="comment-item-content-right-list">
@@ -162,7 +168,8 @@
     </div>
 </div>
 {{-- Modal edit post --}}
-<div class="modal fade" id="edit-modal-{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="post-modalLabel">
+<div class="modal fade" id="edit-modal-{{ $post->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="post-modalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
@@ -186,7 +193,8 @@
                         <label>Thẻ tag</label>
                         <select name="tag_id[]" class="form-control select2_init" multiple>
                             @foreach ($tags as $tag)
-                                <option {{ $post->tags->contains($tag) ? 'selected' : '' }} value="{{ $tag->id }}">
+                                <option {{ $post->tags->contains($tag) ? 'selected' : '' }}
+                                    value="{{ $tag->id }}">
                                     {{ $tag->name }}</option>
                             @endforeach
                         </select>
@@ -209,7 +217,8 @@
                     </div>
                     <div class="form-group">
                         <label class="label-required">Nội dung</label>
-                        <textarea id="editor-{{ $post->id }}" class="editor" value="{{ old('content') ?? $post->content }}" name="content" cols="30" rows="5">{{ $post->content }}</textarea>
+                        <textarea id="editor-{{ $post->id }}" class="editor" value="{{ old('content') ?? $post->content }}"
+                            name="content" cols="30" rows="5">{{ $post->content }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Ảnh</label>

@@ -27,13 +27,13 @@ class CommentController extends Controller
         if($comment->user_id != $userPost->id){
             $this->notificationService->notiComment($comment, $userPost);
         }
-        $ortherData['GetPostByUser'] = route('posts.getPostByUser', ['id' => $comment->user_id]);
-        $ortherData['destroyComment'] =  route('comments.destroy', ['id' => $comment->id]);
-        $ortherData['updateComment'] =  route('comments.update', ['id' => $comment->id]);
-        $ortherData['userImage'] =  asset('image/profile') .'/'. $comment->user->image;
-        $ortherData['time'] =  $comment->created_at->diffForHumans();
+        $others['GetPostByUser'] = route('posts.getPostByUser', ['id' => $comment->user_id]);
+        $others['destroyComment'] =  route('comments.destroy', ['id' => $comment->id]);
+        $others['updateComment'] =  route('comments.update', ['id' => $comment->id]);
+        $others['userImage'] =  asset('image/profile') .'/'. $comment->user->image;
+        $others['time'] =  $comment->created_at->diffForHumans();
 
-        return response()->json(['comment' => $comment, 'ortherData' => $ortherData]);
+        return response()->json(['comment' => $comment, 'others' => $others]);
     }
 
     public function update(CommentRequest $request, $id)

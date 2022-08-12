@@ -119,10 +119,13 @@ function actionDeletePost() {
                 type: "GET",
                 url: urlRequest,
                 success: function (res) {
-                    that.closest(".post-container").fadeOut(('slow', function() {
-                        that.closest(".post-container").remove();
-                        alertMessage(res.message, "success");
-                    }));
+                    that.closest(".post-container").fadeOut(
+                        ("slow",
+                        function () {
+                            that.closest(".post-container").remove();
+                            alertMessage(res.message, "success");
+                        })
+                    );
                 },
             });
         }
@@ -160,22 +163,20 @@ function actionDeleteComment() {
     });
 }
 $(function () {
-    $('.select2_init').select2()
+    $(".select2_init").select2();
     $(".carousel").carousel({
         interval: false,
     });
 
     window.editors = {};
 
-    document.querySelectorAll('.editor').forEach((node, index) => {
-        ClassicEditor
-            .create(node, {})
-            .then(newEditor => {
-                window.editors[index] = newEditor
-            });
+    document.querySelectorAll(".editor").forEach((node, index) => {
+        ClassicEditor.create(node, {}).then((newEditor) => {
+            window.editors[index] = newEditor;
+        });
     });
     $().UItoTop({
-        easingType: 'easeOutQuart'
+        easingType: "easeOutQuart",
     });
 
     const messageSuccess = $("#container").attr("data-messageSuccess");
@@ -205,14 +206,16 @@ $(function () {
         prevScrollpos = currentScrollPos;
     };
 
-    $('.read-more-btn').on('click', function(e) {
-        e.preventDefault()
-        const postContent = $(this).closest('.post-content').find('.post-content-body')
-        postContent.toggleClass('limit-line');
-        $(this).text(function(i, text){
+    $(".read-more-btn").on("click", function (e) {
+        e.preventDefault();
+        const postContent = $(this)
+            .closest(".post-content")
+            .find(".post-content-body");
+        postContent.toggleClass("limit-line");
+        $(this).text(function (i, text) {
             return text === "Xem thêm" ? "Ẩn bớt" : "Xem thêm";
-        })
-    })
+        });
+    });
 });
 
 (function () {
@@ -239,6 +242,7 @@ $(function () {
         var w = measurer.width();
         textarea.width(w + 2);
     }
+
     $("textarea.autofit").on({
         input: function () {
             var text = $(this).val();
@@ -250,18 +254,71 @@ $(function () {
         },
         keypress: function (e) {
             var text = $(this).val();
-            if (e.which == 13 ) {
+            if (e.which == 13) {
                 e.preventDefault();
-                if(text.length){
-                    // submit comment
+                if (text.length) {
+                    // Comment
+                    const form = $(this).closest(".create-comment-form");
+                    const data = form.serialize();
+                    const action = form.attr("action");
+                    const that = $(this);
+                    $.ajax({
+                        type: "POST",
+                        url: action,
+                        data: data,
+                        dataType: "json",
+                        success: function (response) {
+                            that.val('');
+                            const comment = response.comment;
+                            const others = response.others;
+                            let htmlComment = `
+                                <li class="comment-item animate__animated  animate__fadeIn">
+                                    <div class="comment-item-content">
+                                        <a class="comment-item-content-left"
+                                            href="${others.GetPostByUser}">
+                                            <img src="${others.userImage}" alt=""
+                                                class="user-post-avt">
+                                        </a>
+                                        <div class="comment-item-content-right">
+                                            <ul class="comment-item-content-right-list">`;
+                            if (comment.user_id == comment.post.user_id) {
+                                htmlComment += `
+                                                        <li class="comment-item-content-right-list__item comment-item-author">
+                                                            <i class="fa fa-pencil"></i>
+                                                            <span>Tác giả</span>
+                                                        </li>`;
+                            }
+                            htmlComment += `
+                                                <li class="comment-item-content-right-list__item">
+                                                    <a class="comment-item-content-left"
+                                                        href="${others.GetPostByUser}">
+                                                        <span class="comment-user-name">${comment.user.name}</span>
+                                                    </a>
+                                                </li>
+                                                <li class="comment-item-content-right-list__item">
+                                                    ${comment.comment}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                            <span class="glyphicon glyphicon-option-horizontal comment-item-control"
+                                                aria-hidden="true">
+                                            </span>
+                                </li>
+                                `;
+
+                            that.closest(".post-comment")
+                                .find(".list-comment")
+                                .prepend(htmlComment);
+                        },
+                    });
                 }
             }
             if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
-                $(this).val(text+'\r\n')
+                $(this).val(text + "\r\n");
                 measurer.html(text);
                 updateTextAreaSize($(this));
             }
         },
     });
-
 })();
