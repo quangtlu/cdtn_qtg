@@ -19,20 +19,27 @@
     <!-- fontawesome v5 -->
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
     @yield('css')
-
+    <style>
+        .label-required::after {
+            content: "*";
+            color: red;
+            padding-left: 2px;
+        }
+    </style>
 </head>
 
 <body>
 
-<section class="forms">
-    <div class="container">
-        <div class="forms-grid">
-            @yield('content')
+    <section class="forms">
+        <div class="container">
+            <div class="forms-grid">
+                @yield('content')
+            </div>
         </div>
-    </div>
-</section>
-<script src={{ asset("AdminLTE/plugins/jquery/jquery.min.js") }}></script>
-<script src="{{ asset('js/showPasswordAuth.js') }}"></script>
-@yield('js')
+    </section>
+    <script src={{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}></script>
+    <script src="{{ asset('js/showPasswordAuth.js') }}"></script>
+    @yield('js')
 </body>
+
 </html>

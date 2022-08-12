@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = ["title", "content", 'user_id', 'image', 'status'];
-
+    protected $appends = ["status_name", "status_icon_class", 'status_class'];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -100,5 +100,26 @@ class Post extends Model
             $query->where('status', $request->status);
         }
         return $query;
+    }
+
+    public function getKeyInStatus($key)
+    {
+        foreach (config('consts.post.status') as $status) {
+            if($this->status == $status['value']) {
+                return $status[$key];
+            }
+        }
+    }
+
+    public function getStatusNameAttribute() {
+        return $this->getKeyInStatus('name');
+    }
+
+    public function getStatusIconClassAttribute() {
+        return $this->getKeyInStatus('classIcon');
+    }
+
+    public function getStatusClassAttribute() {
+        return $this->getKeyInStatus('className');
     }
 }

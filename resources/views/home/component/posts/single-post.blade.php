@@ -19,8 +19,22 @@
                                 aria-expanded="true">
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-{{ $post->id }}">
-                                <li><a href="{{ route('posts.show', ['id' => $post->id]) }}">Xem chi tiết</a></li>
+                                <li><a href="{{ route('posts.show', ['id' => $post->id]) }}">Chi tiết</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#edit-modal-{{ $post->id }}">Chỉnh sửa</a></li>
+                                @if ($post->status == config('consts.post.status.unsolved.value'))
+                                    <li>
+                                        <a href="{{ route('posts.toogleStatus', ['id' => $post->id]) }}">
+                                            Đã được giải đáp
+                                        </a>
+                                    </li>
+                                @endif
+                                @if ($post->status == config('consts.post.status.solved.value'))
+                                    <li>
+                                        <a href="{{ route('posts.toogleStatus', ['id' => $post->id]) }}">
+                                            Chưa được giải đáp
+                                        </a>
+                                    </li>
+                                @endif
                                 <li role="separator" class="divider"></li>
                                 <li><a class="btn-delete" data-url="{{ route('posts.destroy', ['id' => $post->id]) }}">Xóa bài viết</a></li>
                             </ul>
@@ -30,12 +44,28 @@
             </div>
         @endif
         <div class="post-content ">
-            <span class="post-content-title">{{ $post->title }}</span>
+            <span class="post-content-title">{{ $post->title }}<a data-toggle="tooltip" data-placement="top" title="{{ $post->status_name }}" class="{{ $post->status_class }}" href="">
+                <i class="fa {{$post->status_icon_class}}"></i>
+            </a></span>
             <div class="post-content-body limit-line">
                 {!! $post->content !!}
             </div>
             @if (strlen($post->content) > 811)
                 <a href="#" class="read-more-btn">Xem thêm</a>
+            @endif
+            @if ($post->tags->count())
+                <div class="post-tags">
+                    @foreach ($post->tags as $tag)
+                        <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}" class="post-tag-item">#{{$tag->name}}</a>
+                    @endforeach
+                </div>
+            @endif
+            @if ($post->categories->count())
+                <div class="post-tags">
+                    @foreach ($post->categories as $category)
+                        <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}" class="active">#{{$category->name}}</a>
+                    @endforeach
+                </div>
             @endif
         </div>
         <div class="post-image">

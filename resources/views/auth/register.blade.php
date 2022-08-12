@@ -23,7 +23,7 @@
                 <div class="form">
                     <div class="form-row">
                         <span class="fas fa-user"></span>
-                        <label class="form-label" for="input">Họ tên</label>
+                        <label class="form-label label-required" for="input">Họ tên</label>
                         <input type="text" value="{{ old('name') }}" name="name" class="form-text">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -33,10 +33,11 @@
                     </div>
                     <div class="form-row">
                         <span class="fas fa-venus-mars"></span>
-                        <label class="form-label" for="input">Giới tính</label>
+                        <label class="form-label label-required" for="input">Giới tính</label>
                         <select name="gender" class="form-text" id="gender">
+                            <option value=""></option>
                             @foreach (config('consts.user.gender') as $gender)
-                                <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
+                                <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}
                                 value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
                             @endforeach
                         </select>
@@ -58,7 +59,7 @@
                     </div>
                     <div class="form-row">
                         <span class="fas fa-envelope"></span>
-                        <label class="form-label" for="input">E-mail</label>
+                        <label class="form-label label-required" for="input">E-mail</label>
                         <input type="email" name="email" value="{{ old('email') }}" class="form-text" @error('email') is-invalid @enderror">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -68,7 +69,7 @@
                     </div>
                     <div class="form-row">
                         <span class="fas fa-mobile-alt"></span>
-                        <label class="form-label" for="input">Số điện thoại</label>
+                        <label class="form-label label-required" for="input">Số điện thoại</label>
                         <input type="phone" name="phone" value="{{ old('phone') }}" class="form-text" @error('phone') is-invalid @enderror">
                         @error('phone')
                         <span class="invalid-feedback" role="alert">
@@ -78,7 +79,7 @@
                     </div>
                     <div class="form-row">
                         <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
-                        <label class="form-label" for="input">Mật khẩu</label>
+                        <label class="form-label label-required" for="input">Mật khẩu</label>
                         <input id="input-password" value="{{ old('password') }}" type="password" name="password"
                                autocomplete="new-password" class="form-text" id="password" type="password">
                         @error('password')
@@ -96,9 +97,9 @@
                     </div>
                 </div>
             </fieldset>
-        </div>        
+        </div>
     </form>
-    
+
     <!-- //register -->
 @endsection
 @section('js')
