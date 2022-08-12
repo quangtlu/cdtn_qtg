@@ -4,7 +4,7 @@ export function alertMessage(message, type){
         icon: type == 'success' ? 'success' : 'error',
         title: message,
         position: 'top',
-        timer: 2000,
+        timer: 3000,
         showConfirmButton: false,
         showClass: {
             popup: 'animate__animated animate__fadeInDown'
