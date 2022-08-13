@@ -50,17 +50,8 @@ class CommentService
     public function toogleStatus($id)
     {
         $comment = $this->getById($id);
-        $post = $comment->post;
         $data = ['status' => $comment->status == config('consts.post.status.unsolved.value') ? config('consts.post.status.solved.value') : config('consts.post.status.unsolved.value')];
-        try {
-            $comment->update($data);
-            $post->update($data);
-            return true;
-        }
-        catch(Exception $ex) {
-            return false;
-        }
-
+        return $comment->update($data);
     }
 
     public function delete($id)

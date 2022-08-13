@@ -591,6 +591,10 @@ html::-webkit-scrollbar-thumb
     display: none;
 }
 
+.unlimit-number-comment{
+    display: none;
+}
+
 .input-comment{
     padding: 10px;
     background-color: #f0f2f5;
