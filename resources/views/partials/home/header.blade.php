@@ -8,16 +8,16 @@
                 </div>
                 <div class="col-md-10">
                     <ul class="nav navbar-nav" @auth style="margin-top: 0;" @endauth>
-                        <li><a class="{{ Request::is('/*') ? 'active' : '' }}"
-                                href="{{ route('home.index') }}">Trang
+                        <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                                 chủ</a></li>
                         <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceCategories->first()->id]) }}"
                                 class="{{ Request::is('posts/category/*') ? 'active' : '' }}">Về QSHTT</a></li>
-                        <li><a href="{{ route('documentLaws.index') }}" class="{{ Request::is('document-laws*') ? 'active' : '' }}">Văn bản pháp luật</a></li>
-                        <li><a class="{{ Request::is('faq') ? 'active' : '' }}"
-                                href="{{ route('faq.index') }}">FAQ</a></li>
+                        <li><a href="{{ route('documentLaws.index') }}"
+                                class="{{ Request::is('document-laws*') ? 'active' : '' }}">Văn bản pháp luật</a></li>
+                        <li><a class="{{ Request::is('faq') ? 'active' : '' }}" href="{{ route('faq.index') }}">FAQ</a>
+                        </li>
                         <span class="active">|</span>
-                        <li><a class=""
+                        <li><a class="{{ Request::is('posts/forum*') ? 'active' : '' }}"
                                 href="{{ route('posts.index') }}">Diễn đàn</a></li>
                         <li><a href="{{ route('messenger.index') }}">Tư vấn</a></li>
                         @auth
@@ -186,7 +186,8 @@
                         @hasanyrole('admin|mod')
                             <li><a class="header-link user-name" href="{{ route('posts.getPotRequest') }}">Kiểm duyệt
                                     bài viết</a></li>
-                            <li><a class="header-link user-name" href="{{ route('admin.dashboard.index') }}">Trang quản trị</a></li>
+                            <li><a class="header-link user-name" href="{{ route('admin.dashboard.index') }}">Trang quản
+                                    trị</a></li>
                         @endhasanyrole
                         <li><a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
