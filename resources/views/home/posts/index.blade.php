@@ -2,9 +2,9 @@
 @section('title', 'Diễn đàn')
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('home/post/show.css') }}">
     <style>
-        .panel-primary>.panel-heading, .header-modal-post{
+        .panel-primary>.panel-heading,
+        .header-modal-post {
             background-color: var(--primary-color) !important;
             color: #fff !important;
         }
@@ -33,17 +33,17 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header header-modal-post">
-                        <button type="button" style="color: #fff;"  class="close" data-dismiss="modal" aria-label="Close"><span
+                        <button type="button" style="color: #fff;" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="post-modalLabel">Đăng bài viết</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="add-post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+                        <form id="add-post-form" action="{{ route('posts.store') }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div id="title" class="form-group">
                                 <label class="label-required" for="title">Tiêu đề</label>
-                                <input  type="text" name="title" class="form-control"
-                                    value="{{ old('title') }}">
+                                <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                             </div>
                             <div id="tag_id" class="form-group">
                                 <label>Thẻ tag</label>
@@ -62,18 +62,22 @@
                                     <option></option>
                                     @foreach ($categories as $index => $category)
                                         @hasanyrole('admin|editor')
-                                            <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                            <option value="{{ $category->id }}">{{ $index . '. ' . $category->name }}</option>
                                             @if ($category->categories->count())
                                                 @foreach ($category->categories as $indexChild => $categoryChild)
-                                                    <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                    <option value="{{ $categoryChild->id }}">
+                                                        {{ $index . '.' . ($indexChild + 1) . '. ' . $categoryChild->name }}
+                                                    </option>
                                                 @endforeach
                                             @endif
                                         @else
                                             @if ($category->type != config('consts.category.type.post_reference.value') && $category->parent_id == 0)
-                                                <option value="{{ $category->id }}">{{$index.'. '.$category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $index . '. ' . $category->name }}</option>
                                                 @if ($category->categories->count())
                                                     @foreach ($category->categories as $indexChild => $categoryChild)
-                                                        <option value="{{ $categoryChild->id }}">{{$index . '.' . ($indexChild+1) . '. '.$categoryChild->name }}</option>
+                                                        <option value="{{ $categoryChild->id }}">
+                                                            {{ $index . '.' . ($indexChild + 1) . '. ' . $categoryChild->name }}
+                                                        </option>
                                                     @endforeach
                                                 @endif
                                             @endif
