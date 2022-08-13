@@ -167,7 +167,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
 Route::name('posts.')->prefix('posts')->group(function () {
-    Route::get('/', 'home\PostController@index')->name('index');
+    Route::get('/forum', 'home\PostController@index')->name('index');
     Route::get('/{id}', 'home\PostController@show')->name('show');
     Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('getPostByCategory');
     Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('getPostByUser');
