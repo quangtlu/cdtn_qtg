@@ -2,14 +2,6 @@
     cursor: pointer;
 }
 
-.btn-delete-comment {
-    color: red !important;
-}
-
-.btn-edit-comment {
-    color: rgb(38, 182, 218) !important;
-}
-
 .edit-comment-wrap {
     display: none;
 }

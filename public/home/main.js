@@ -61,14 +61,13 @@ function actionDeleteComment() {
                 type: "GET",
                 url: urlRequest,
                 success: function (res) {
-                    that.closest(".comments-grid").fadeOut();
-                    let totalCommentBefore = Number(
-                        $("#number-comment").text().replace(/\D/g, "")
+                    that.closest(".comment-item").fadeOut(
+                        ("slow",
+                        function () {
+                            that.closest(".comment-item").remove();
+                            alertMessage(res.message, "success");
+                        })
                     );
-                    $("#number-comment").text(
-                        totalCommentBefore - 1 + " bình luận"
-                    );
-                    alertMessage(res.message, "success");
                 },
             });
         }
@@ -119,13 +118,24 @@ function showAlertMessageInSession() {
     }
 }
 
-function readMorePost() {
+function readMoreLess() {
     $(".read-more-btn").on("click", function (e) {
         e.preventDefault();
         const postContent = $(this)
             .closest(".post-content")
             .find(".post-content-body");
         postContent.toggleClass("limit-line");
+        $(this).text(function (i, text) {
+            return text === "Xem thêm" ? "Ẩn bớt" : "Xem thêm";
+        });
+    });
+
+    $(".read-more-btn-comment").on("click", function (e) {
+        e.preventDefault();
+        const commentContent = $(this)
+            .closest(".comment-item-content-right-list")
+            .find(".comment-item-body");
+        commentContent.toggleClass("limit-line");
         $(this).text(function (i, text) {
             return text === "Xem thêm" ? "Ẩn bớt" : "Xem thêm";
         });
@@ -153,12 +163,154 @@ function updateTextAreaSize(textarea, measurer) {
     textarea.width(w + 2);
 }
 
+function submitComment(e, _this, measurer) {
+    var text = _this.val();
+    if (e.which == 13) {
+        e.preventDefault();
+        if (text.length) {
+            // Ajax Comment
+            const form = _this.closest(".create-comment-form");
+            const data = form.serialize();
+            const action = form.attr("action");
+            const that = _this;
+            const submittype = _this.data("submittype");
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    // create comment
+                    if (submittype == "create") {
+                        that.val("");
+                        const comment = response.comment;
+                        const others = response.others;
+                        let htmlComment = `
+                            <li class="comment-item animate__animated  animate__fadeIn">
+                                <div class="comment-item-content">
+                                    <a class="comment-item-content-left"
+                                        href="${others.GetPostByUser}">
+                                        <img src="${others.userImage}" alt=""
+                                            class="user-post-avt">
+                                    </a>
+                                    <div class="comment-item-content-right">
+                                        <ul class="comment-item-content-right-list">`;
+                        if (comment.user_id == comment.post.user_id) {
+                            htmlComment += `
+                                                    <li class="comment-item-content-right-list__item comment-item-author">
+                                                        <i class="fa fa-pencil"></i>
+                                                        <span>Tác giả</span>
+                                                    </li>`;
+                        }
+                        htmlComment += `
+                                            <li class="comment-item-content-right-list__item">
+                                                <a class="comment-item-content-left"
+                                                    href="${others.GetPostByUser}">
+                                                    <span class="comment-user-name">${comment.user.name}</span>
+                                                </a>
+                                            </li>
+                                            <li class="comment-item-content-right-list__item comment-item-body limit-line">
+                                                ${comment.comment}
+                                            </li>
+                                            `;
+                        if (comment.comment.length > 934) {
+                            htmlComment += `
+                                                <a href="#" class="read-more-btn-comment">Xem thêm</a>
+                                                `;
+                        }
+
+                        htmlComment += `<a data-toggle="tooltip" data-placement="bottom"
+                                                title="${comment.created_at}"
+                                                style="color: rgb(131, 125, 125); font-size: 12px"
+                                                class="comment-item-content-right-list__item">
+                                                ${others.time}
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <span
+                                        class="dropdown-toggle glyphicon glyphicon-option-horizontal comment-item-control"
+                                        id="dropdownMenu-${comment.id}" data-toggle="dropdown" aria-hidden="true"
+                                        aria-haspopup="true" aria-expanded="true">
+                                    </span>
+                                    <ul class="dropdown-menu dropdown-menu-action-comment" aria-labelledby="dropdownMenu-${comment.id}">
+                                        <li><a class="btn-edit-comment">Chỉnh sửa</a></li>
+                                        <li><a class="btn-delete-comment"
+                                                data-url="${others.destroyComment}">Xóa</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <div class="comment-input-wrap-edit">
+                                <div class="col-md-1 comment-input-left">
+                                    <img src="${others.userImage}" alt=""
+                                        class="user-post-avt">
+                                </div>
+                                <div class="col-md-11 comment-input-right">
+                                    <form class="create-comment-form"
+                                        action="${others.updateComment}" method="POST">
+                                        <input type="hidden" name="_token" value="${others._token}">
+                                        <input type="hidden" name="post_id" value="${comment.post_id}">
+                                        <textarea data-submittype="update" name="comment" placeholder="Viết bình luận..." class="input-comment autofit autofit-ajax">${comment.comment}</textarea>
+                                    </form>
+                                    <a class="cancle-edit-comment-btn">Hủy</a>
+                                </div>
+                            </div>
+                            `;
+                        // append comment
+                        that.closest(".post-comment")
+                            .find(".list-comment")
+                            .prepend(htmlComment);
+                        // read more/less event
+                        readMoreLess();
+                        // Edit comment just append
+                        $(".btn-edit-comment").on("click", showFormEditComment);
+                        $(".cancle-edit-comment-btn").on(
+                            "click",
+                            hideFormEditComment
+                        );
+                        var measurer = $("<span>", {
+                            style: "display:inline-block;word-break:break-word;visibility:hidden;white-space:pre-wrap;",
+                        }).appendTo("body");
+                        updateTextAreaSize(that, measurer);
+                        $(".autofit-ajax").on({
+                            input: function () {
+                                var text = $(this).val();
+                                measurer.html(text);
+                                updateTextAreaSize($(this), measurer);
+                            },
+                            focus: function () {
+                                initMeasurerFor($(this), measurer);
+                            },
+                            keypress: function (e) {
+                                submitComment(e, $(this), measurer);
+                            },
+                        });
+                    } else {
+                        hideFormEditComment(response.comment.comment, that);
+                        alertMessage(response.message, "success");
+                    }
+                },
+                error: function (errors) {
+                    alertMessage("Có lỗi xảy ra", "error");
+                },
+            });
+        }
+    }
+    if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
+        _this.val(text + "\r\n");
+        measurer.html(text);
+        updateTextAreaSize(_this, measurer);
+    }
+}
+
 function autofitCommentInput() {
     var measurer = $("<span>", {
         style: "display:inline-block;word-break:break-word;visibility:hidden;white-space:pre-wrap;",
     }).appendTo("body");
 
-    $("textarea.autofit").on({
+    $(".autofit").on({
         input: function () {
             var text = $(this).val();
             measurer.html(text);
@@ -168,77 +320,33 @@ function autofitCommentInput() {
             initMeasurerFor($(this), measurer);
         },
         keypress: function (e) {
-            var text = $(this).val();
-            if (e.which == 13) {
-                e.preventDefault();
-                if (text.length) {
-                    // Ajax create Comment
-                    const form = $(this).closest(".create-comment-form");
-                    const data = form.serialize();
-                    const action = form.attr("action");
-                    const that = $(this);
-                    $.ajax({
-                        type: "POST",
-                        url: action,
-                        data: data,
-                        dataType: "json",
-                        success: function (response) {
-                            that.val("");
-                            const comment = response.comment;
-                            const others = response.others;
-                            let htmlComment = `
-                                <li class="comment-item animate__animated  animate__fadeIn">
-                                    <div class="comment-item-content">
-                                        <a class="comment-item-content-left"
-                                            href="${others.GetPostByUser}">
-                                            <img src="${others.userImage}" alt=""
-                                                class="user-post-avt">
-                                        </a>
-                                        <div class="comment-item-content-right">
-                                            <ul class="comment-item-content-right-list">`;
-                            if (comment.user_id == comment.post.user_id) {
-                                htmlComment += `
-                                                        <li class="comment-item-content-right-list__item comment-item-author">
-                                                            <i class="fa fa-pencil"></i>
-                                                            <span>Tác giả</span>
-                                                        </li>`;
-                            }
-                            htmlComment += `
-                                                <li class="comment-item-content-right-list__item">
-                                                    <a class="comment-item-content-left"
-                                                        href="${others.GetPostByUser}">
-                                                        <span class="comment-user-name">${comment.user.name}</span>
-                                                    </a>
-                                                </li>
-                                                <li class="comment-item-content-right-list__item">
-                                                    ${comment.comment}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                            <span class="glyphicon glyphicon-option-horizontal comment-item-control"
-                                                aria-hidden="true">
-                                            </span>
-                                </li>
-                                `;
-
-                            that.closest(".post-comment")
-                                .find(".list-comment")
-                                .prepend(htmlComment);
-                        },
-                        error: function (errors) {
-                            alertMessage("Có lỗi xảy ra", "error");
-                        },
-                    });
-                }
-            }
-            if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
-                $(this).val(text + "\r\n");
-                measurer.html(text);
-                updateTextAreaSize($(this), measurer);
-            }
+            submitComment(e, $(this), measurer);
         },
     });
+}
+
+function hideFormEditComment(comment = null, pointer = null) {
+    const _this = pointer ? pointer : $(this);
+    const commentOrigin = _this.closest(".comment-input-wrap-edit").prev();
+    const commentEditForm = _this.closest(".comment-input-wrap-edit");
+    if (typeof comment == "string") {
+        commentOrigin.find(".comment-item-body").text(comment);
+    }
+    commentEditForm.fadeOut();
+    commentOrigin.css("display", "flex").hide().fadeIn();
+}
+
+function showFormEditComment() {
+    var measurer = $("<span>", {
+        style: "display:inline-block;word-break:break-word;visibility:hidden;white-space:pre-wrap;",
+    }).appendTo("body");
+    const commentOrigin = $(this).closest(".comment-item");
+    const commentEditForm = commentOrigin.next();
+    const textarea = commentEditForm.find(".autofit");
+    measurer.html(textarea.val());
+    updateTextAreaSize(textarea, measurer);
+    commentOrigin.fadeOut();
+    commentEditForm.css("display", "flex").hide().fadeIn();
 }
 
 // Ready
@@ -248,7 +356,7 @@ $(function () {
     // buttonToTop
     $().UItoTop({ easingType: "easeOutQuart" });
     showAlertMessageInSession();
-    readMorePost();
+    readMoreLess();
     autofitCommentInput();
     // Delete post
     $(document).on("click", ".btn-delete", actionDeletePost);
@@ -340,4 +448,8 @@ $(function () {
             },
         });
     });
+
+    // edit comment
+    $(".btn-edit-comment").on("click", showFormEditComment);
+    $(".cancle-edit-comment-btn").on("click", hideFormEditComment);
 });

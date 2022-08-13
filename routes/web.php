@@ -125,7 +125,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', 'Admin\DocumentLawController@update')->name('update')->middleware('can:edit-documentLaw');
             Route::get('/destroy/{id}', 'Admin\DocumentLawController@destroy')->name('destroy')->middleware('can:delete-documentLaw');
         });
-
     });
     // User
     Route::name('posts.')->prefix('posts')->group(function () {

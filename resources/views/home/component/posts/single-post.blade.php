@@ -116,7 +116,7 @@
                         @csrf
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <textarea name="comment" placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
+                        <textarea data-submittype="create" name="comment" placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
                     </form>
                 </div>
             </div>
@@ -126,7 +126,7 @@
         @endguest
         <ul class="list-comment">
             @if ($post->comments->count())
-                @foreach ($post->comments->sortByDesc('status')->all() as $comment)
+                @foreach ($post->comments->sortByDesc('created_at')->all() as $comment)
                     <li class="comment-item">
                         <div class="comment-item-content">
                             <a class="comment-item-content-left"
@@ -148,20 +148,60 @@
                                             <span class="comment-user-name">{{ $comment->user->name }}</span>
                                         </a>
                                     </li>
-                                    <li class="comment-item-content-right-list__item">
-                                        {!! $comment->comment !!}
+                                    <li class="comment-item-content-right-list__item comment-item-body limit-line">
+                                        {{ $comment->comment }}
                                     </li>
+                                    @if (strlen($comment->comment) > 934)
+                                        <a href="#" class="read-more-btn-comment">Xem thêm</a>
+                                    @endif
+                                    <a data-toggle="tooltip" data-placement="bottom"
+                                        title="{{ $comment->created_at }}"
+                                        style="color: rgb(131, 125, 125); font-size: 12px"
+                                        class="comment-item-content-right-list__item">
+                                        {{ $comment->created_at->diffForHumans() }}
+                                    </a>
                                 </ul>
                             </div>
                         </div>
                         @auth
                             @if (Auth::user()->id == $comment->user_id)
-                                <span class="glyphicon glyphicon-option-horizontal comment-item-control"
-                                    aria-hidden="true">
-                                </span>
+                                <div class="dropdown">
+                                    <span
+                                        class="dropdown-toggle glyphicon glyphicon-option-horizontal comment-item-control"
+                                        id="dropdownMenu-{{ $comment->id }}" data-toggle="dropdown" aria-hidden="true"
+                                        aria-haspopup="true" aria-expanded="true">
+                                    </span>
+                                    <ul class="dropdown-menu dropdown-menu-action-comment"
+                                        aria-labelledby="dropdownMenu-{{ $comment->id }}">
+                                        <li><a class="btn-edit-comment">Chỉnh sửa</a></li>
+                                        <li><a class="btn-delete-comment"
+                                                data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             @endif
                         @endauth
                     </li>
+                    {{-- form edit comment --}}
+                    @auth
+                        @if (Auth::user()->id == $comment->user_id)
+                            <div class="comment-input-wrap-edit">
+                                <div class="col-md-1 comment-input-left">
+                                    <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
+                                        class="user-post-avt">
+                                </div>
+                                <div class="col-md-11 comment-input-right">
+                                    <form class="create-comment-form"
+                                        action="{{ route('comments.update', ['id' => $comment->id]) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <textarea data-submittype="update" name="comment" placeholder="Viết bình luận..." class="input-comment autofit">{{ $comment->comment }}</textarea>
+                                    </form>
+                                    <a class="cancle-edit-comment-btn">Hủy</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endauth
                 @endforeach
             @endif
         </ul>
