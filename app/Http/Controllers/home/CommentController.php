@@ -55,13 +55,13 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = $this->commentService->getById($id);
-        if (Auth::user()->id != $comment->user->id) {
-            abort(403);
-        } else {
+        if (Auth::user()->id == $comment->user->id || Auth::user()->id == $comment->post->user_id) {
             $commentDeleted = $this->commentService->delete($id);
             if ($commentDeleted) {
                 return response()->json(['message' => 'Xóa bình luận thành công', 'comment' => $comment]);
             }
+        } else {
+            abort(403);
         }
     }
 }

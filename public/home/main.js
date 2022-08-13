@@ -229,7 +229,7 @@ function submitComment(e, _this, measurer) {
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                    <span
+                                    <span title="Chỉnh sửa hoặc xóa bình luận này"
                                         class="dropdown-toggle glyphicon glyphicon-option-horizontal comment-item-control"
                                         id="dropdownMenu-${comment.id}" data-toggle="dropdown" aria-hidden="true"
                                         aria-haspopup="true" aria-expanded="true">
