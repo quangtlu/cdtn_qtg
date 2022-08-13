@@ -124,9 +124,9 @@
         @guest
             <a class="button-primary" href="{{ route('login') }}">Đăng nhập để bình luận</a>
         @endguest
-        <ul class="list-comment">
+        <ul class="list-comment limit-number-comment">
             @if ($post->comments->count())
-                @foreach ($post->comments->sortByDesc('created_at')->all() as $comment)
+                @foreach ($post->comments->take(5)->sortByDesc('created_at')->all() as $comment)
                     <li class="comment-item">
                         <div class="comment-item-content">
                             <a class="comment-item-content-left"
@@ -203,8 +203,96 @@
                         @endif
                     @endauth
                 @endforeach
+                @if ($post->comments->count() > 5)
+                    <a class="list-all-comment-btn">Xem tất cả bình luận</a>
+                @endif
             @endif
         </ul>
+        @if ($post->comments->count() > 5)
+            <div class="unlimit-number-comment">
+                <ul class="list-comment ">
+                    @foreach ($post->comments->sortByDesc('created_at')->all() as $comment)
+                        <li class="comment-item">
+                            <div class="comment-item-content">
+                                <a class="comment-item-content-left"
+                                    href="{{ route('posts.getPostByUser', ['id' => $comment->user_id]) }}">
+                                    <img src="{{ asset('image/profile') . '/' . $comment->user->image }}"
+                                        alt="" class="user-post-avt">
+                                </a>
+                                <div class="comment-item-content-right">
+                                    <ul class="comment-item-content-right-list">
+                                        @if ($comment->user_id == $post->user_id)
+                                            <li class="comment-item-content-right-list__item comment-item-author">
+                                                <i class="fa fa-pencil"></i>
+                                                <span>Tác giả</span>
+                                            </li>
+                                        @endif
+                                        <li class="comment-item-content-right-list__item">
+                                            <a class="comment-item-content-left"
+                                                href="{{ route('posts.getPostByUser', ['id' => $comment->user_id]) }}">
+                                                <span class="comment-user-name">{{ $comment->user->name }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="comment-item-content-right-list__item comment-item-body limit-line">
+                                            {{ $comment->comment }}
+                                        </li>
+                                        @if (strlen($comment->comment) > 934)
+                                            <a href="#" class="read-more-btn-comment">Xem thêm</a>
+                                        @endif
+                                        <a data-toggle="tooltip" data-placement="bottom"
+                                            title="{{ $comment->created_at }}"
+                                            style="color: rgb(131, 125, 125); font-size: 12px"
+                                            class="comment-item-content-right-list__item">
+                                            {{ $comment->created_at->diffForHumans() }}
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                            @auth
+                                @if (Auth::user()->id == $comment->user_id)
+                                    <div class="dropdown">
+                                        <span
+                                            class="dropdown-toggle glyphicon glyphicon-option-horizontal comment-item-control"
+                                            id="dropdownMenu-{{ $comment->id }}" data-toggle="dropdown"
+                                            aria-hidden="true" aria-haspopup="true" aria-expanded="true">
+                                        </span>
+                                        <ul class="dropdown-menu dropdown-menu-action-comment"
+                                            aria-labelledby="dropdownMenu-{{ $comment->id }}">
+                                            <li><a class="btn-edit-comment">Chỉnh sửa</a></li>
+                                            <li><a class="btn-delete-comment"
+                                                    data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endif
+                            @endauth
+                        </li>
+                        {{-- form edit comment --}}
+                        @auth
+                            @if (Auth::user()->id == $comment->user_id)
+                                <div class="comment-input-wrap-edit">
+                                    <div class="col-md-1 comment-input-left">
+                                        <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}"
+                                            alt="" class="user-post-avt">
+                                    </div>
+                                    <div class="col-md-11 comment-input-right">
+                                        <form class="create-comment-form"
+                                            action="{{ route('comments.update', ['id' => $comment->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                            <textarea data-submittype="update" name="comment" placeholder="Viết bình luận..." class="input-comment autofit">{{ $comment->comment }}</textarea>
+                                        </form>
+                                        <a class="cancle-edit-comment-btn">Hủy</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endauth
+                    @endforeach
+                </ul>
+                <a class="list-limit-comment-btn">Ẩn bớt bình luận</a>
+            </div>
+        @endif
     </div>
 </div>
 {{-- Modal edit post --}}

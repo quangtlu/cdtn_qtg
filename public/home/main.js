@@ -349,6 +349,32 @@ function showFormEditComment() {
     commentEditForm.css("display", "flex").hide().fadeIn();
 }
 
+function listAllComment() {
+    const limitComment = $(this)
+        .closest(".post-comment")
+        .find(".limit-number-comment");
+    const unlimitComment = $(this)
+        .closest(".post-comment")
+        .find(".unlimit-number-comment");
+    limitComment.hide();
+    unlimitComment.show();
+}
+
+function listLimitComment() {
+    const limitComment = $(this)
+        .closest(".post-comment")
+        .find(".limit-number-comment");
+    const unlimitComment = $(this).closest(".unlimit-number-comment");
+    limitComment.show();
+    unlimitComment.hide();
+    $([document.documentElement, document.body]).animate(
+        {
+            scrollTop: $(this).closest(".post-comment").offset().top,
+        },
+        1500
+    );
+}
+
 // Ready
 $(function () {
     initPackage();
@@ -452,4 +478,6 @@ $(function () {
     // edit comment
     $(".btn-edit-comment").on("click", showFormEditComment);
     $(".cancle-edit-comment-btn").on("click", hideFormEditComment);
+    $(".list-all-comment-btn").on("click", listAllComment);
+    $(".list-limit-comment-btn").on("click", listLimitComment);
 });
