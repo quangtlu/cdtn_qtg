@@ -25,7 +25,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="label-required" for="category_name">Thumbnail</label>
+                        <label for="category_name">Thumbnail</label>
                         <input type="file" accept="image/*" multiple class="form-control-file" name="thumbnail"
                             id="" cols="30" rows="5">
                         @error('thumbnail')

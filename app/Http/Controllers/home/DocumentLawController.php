@@ -20,7 +20,7 @@ class DocumentLawController extends Controller
     public function index(Request $request)
     {
         try {
-            $documentLaws = $this->documentLawService->getPaginate()->paginate(6);
+            $documentLaws = $this->documentLawService->getPaginate();
             if($request->keyword) {
                 $documentLaws = $this->documentLawService->search($request);
                 if (!$documentLaws->count()) {
@@ -31,7 +31,7 @@ class DocumentLawController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        
+
     }
 
 }

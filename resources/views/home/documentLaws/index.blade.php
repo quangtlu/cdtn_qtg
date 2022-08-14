@@ -1,56 +1,37 @@
 @extends('layouts.two-column')
 @section('title', 'Văn bản pháp luật')
-@section('css')
-<style>
-    .img{
-        border-radius: 5px;
-        width: 60px;
-        height: 60px;
-    }
-    .document-law-description{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
-    .panel{
-        background-color: var(--primary-color)
-    }
-    .title-document{
-        color: white;
-        text-decoration: none !important;
-    }
-    .title-document:hover{
-        color: var(--red-color);
-    }
-</style>
-@endsection
 @section('content')
-@if ($documentLaws->count())
-<div class="row">
-            @foreach ($documentLaws as $index => $documentLaw)
-
-            <div class="panel panel-default" style="height: 100px">
-                <div class="panel-body">
-                    <div class="col-md-3">
-                        <img src="{{ asset('image/documentLaws/'.$documentLaw->thumbnail) }}" class="img" alt="">
+    @if ($documentLaws->count())
+        @foreach ($documentLaws as $index => $documentLaw)
+            <div class="row document-wrap">
+                <div class="col-md-3 document-left">
+                    <div class="document-thumb">
+                        @if ($documentLaw->thumbnail)
+                            <img class="document-thumb-img" src="{{ asset('image/documentLaws') . '/' . $documentLaw->thumbnail}}">
+                        @else
+                            <img class="document-thumb-img" src="{{ asset('image/documentLaws/default.png')}}">
+                        @endif
                     </div>
-                    <div class="col-md-7 document-law-description">
-                        <a class="title-document" href="{{ asset('document/'.$documentLaw->url) }}" target="_blank"><h4 >{{ $documentLaw->title }}</h4></a>
+                    <a href="{{ asset('document/' . $documentLaw->url) }}">
+                        {{ $documentLaw->url }}
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <a class="title-document" href="{{ asset('document/' . $documentLaw->url) }}">
+                        <h4 class="limit-line-2">{{ $documentLaw->title }}</h4>
+                    </a>
+                    <div class="limit-line-2">
                         {!! $documentLaw->description !!}
                     </div>
-                    
-                    
                 </div>
-              </div>
-            @endforeach
-        </div>
-    {{ $documentLaws->withQueryString()->links() }}
-@else
-<div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có văn bản pháp luật nào nào</div>
-@endif
+            </div>
+            {{-- <embed src="{{asset('document/' . $documentLaw->url)}}" width="100%" height="800px" /> --}}
+        @endforeach
+        {{ $documentLaws->withQueryString()->links() }}
+    @else
+        <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có văn bản pháp luật
+            nào</div>
+    @endif
 @endsection
 @section('js')
     <script>

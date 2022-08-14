@@ -19,7 +19,7 @@ class DocumentLawController extends Controller
 
     public function index(Request $request)
     {
-        $documentLaws = $this->documentLawService->getPaginate()->paginate(10);
+        $documentLaws = $this->documentLawService->getPaginate();
         if($request->keyword) {
             $documentLaws = $this->documentLawService->search($request);
         }

@@ -15,8 +15,9 @@ class DocumentLawService
         $this->documentLawModel = $documentLawModel;
     }
 
-    public function getPaginate(){
-        $documentLaws = $this->documentLawModel->latest();
+    public function getPaginate()
+    {
+        $documentLaws = $this->documentLawModel->latest()->paginate(10);
         return $documentLaws;
     }
 
@@ -31,54 +32,56 @@ class DocumentLawService
         $documentLaws = $this->documentLawModel->all();
         return $documentLaws;
     }
-    
-    public function getById($id){
-        $documentLaws = $this->documentLawModel->findOrFail($id);   
-        return $documentLaws; 
+
+    public function getById($id)
+    {
+        $documentLaws = $this->documentLawModel->findOrFail($id);
+        return $documentLaws;
     }
 
-    public function create($request){
-        if($file = $request->file('thumbnail')) {
-            $thumbnail = $file->getClientOriginalName();
-            $file->move('image/documentLaws',$thumbnail);
-        }
-
-        if($file = $request->file('url')) {
-            $url = $file->getClientOriginalName();
-            $file->move('document',$url);
-        }
-
+    public function create($request)
+    {
+        $file = $request->file('url');
+        $url = $file->getClientOriginalName();
+        $file->move('document', $url);
         $data = [
             "title" => $request->title,
-            "url" => $url,
             "description" => $request->description,
-            "thumbnail" => $thumbnail,
+            "url" => $url,
         ];
+        if ($file = $request->file('thumbnail')) {
+            $thumbnail = $file->getClientOriginalName();
+            $file->move('image/documentLaws', $thumbnail);
+            $data["thumbnail"] = $thumbnail;
+        }
+
         $this->documentLawModel->create($data);
     }
 
-    public function update($request, $id){
+    public function update($request, $id)
+    {
         $documentLaw = $this->getById($id);
         $data = [
             "title" => $request->title,
             "description" => $request->description,
         ];
 
-        if($file=$request->file('thumbnail')) {
+        if ($file = $request->file('thumbnail')) {
             $thumbnail = $file->getClientOriginalName();
-            $file->move('image/documentLaws',$thumbnail);
+            $file->move('image/documentLaws', $thumbnail);
             $data['thumbnail'] = $thumbnail;
         }
 
-        if($file = $request->file('url')) {
+        if ($file = $request->file('url')) {
             $url = $file->getClientOriginalName();
-            $file->move('document',$url);
+            $file->move('document', $url);
             $data['url'] = $url;
         }
         $documentLaw->update($data);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         return $this->documentLawModel->destroy($id);
     }
 

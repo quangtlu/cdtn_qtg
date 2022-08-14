@@ -3,6 +3,28 @@
     min-height: 200px;
 }
 
+.limit-line, .limit-line-2, .limit-line-3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+
+    -webkit-box-orient: vertical;
+}
+.limit-line {
+    -webkit-line-clamp: 10; /* number of lines to show */
+    line-clamp: 10;
+}
+
+.limit-line-2 {
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+}
+
+.limit-line-3 {
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
+}
+
 .ck-content .image {
     /* block images */
     max-width: 80%;
@@ -61,7 +83,7 @@
     width: 230px;
 }
 
-.avt-side 
+.avt-side
 {
     border-radius: 50%;
     height: 40px!important;

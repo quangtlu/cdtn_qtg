@@ -618,7 +618,6 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-
     -webkit-box-orient: vertical;
 }
 .limit-line {
@@ -833,9 +832,13 @@ a.comment-item-content-left{
     font-size: 12px;
     max-width: 23%;
     width: 23%;
-    max-height: 66%;
+    max-height: 64%;
     color: #000;
     overflow-y: hidden;
+}
+
+.slide-comment-list:hover{
+    overflow-y: scroll;
 }
 
 .slide-comment-list .user-post-avt {
@@ -847,6 +850,23 @@ a.comment-item-content-left{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+.document-wrap{
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.document-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.document-thumb-img{
+    height: 32px;
+    width: 32px;
+}
 
 
 
