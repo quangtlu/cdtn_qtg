@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Thêm mới tác giả')
+@section('title', 'Thêm mới văn bản pháp luật')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
 @endsection
@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label class="label-required" for="category_name">Tệp đính kèm</label>
-                        <input type="file" accept="file_extension" multiple class="form-control-file" name="url"
+                        <input accept=".pdf,.doc*" type="file" accept="file_extension" multiple class="form-control-file" name="url"
                             id="" cols="30" rows="5" value="{{ old('url') }}">
                         @error('url')
                             <span class="mt-1 text-danger">{{ $message }}</span>

@@ -858,16 +858,34 @@ a.comment-item-content-left{
     margin-bottom: 5px;
 }
 
-.document-left{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 .document-thumb-img{
-    height: 32px;
-    width: 32px;
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
 }
 
+.document-left{
+   display: flex;
+   align-items: center;
+}
+
+.document-left-info{
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.document-left-info-name{
+    font-size: 16px;
+    color: var(--primary-color);
+    text-decoration: none !important;
+    padding-top: 5px;
+}
+
+.document-left-info-name:hover{
+    color: var(--red-color);
+}
 
 
 

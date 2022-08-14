@@ -5,19 +5,26 @@
         @foreach ($documentLaws as $index => $documentLaw)
             <div class="row document-wrap">
                 <div class="col-md-3 document-left">
-                    <div class="document-thumb">
-                        @if ($documentLaw->thumbnail)
-                            <img class="document-thumb-img" src="{{ asset('image/documentLaws') . '/' . $documentLaw->thumbnail}}">
-                        @else
-                            <img class="document-thumb-img" src="{{ asset('image/documentLaws/default.png')}}">
-                        @endif
+                    @if ($documentLaw->thumbnail)
+                        <img class="document-thumb-img"
+                            src="{{ asset('image/documentLaws') . '/' . $documentLaw->thumbnail }}">
+                    @else
+                        <img class="document-thumb-img" src="{{ asset('image/documentLaws/default.png') }}">
+                    @endif
+                    <div class="document-left-info">
+                        <div>
+                            <a href="{{ asset('document/' . $documentLaw->url) }}"
+                                class="btn button-primary button-sm">Xem</a>
+                            <a href="{{ asset('document/' . $documentLaw->url) }}" download
+                                class="btn button-active button-sm">Tải xuống</a>
+                        </div>
+                        <a class="limit-line-2 document-left-info-name">
+                            {{ $documentLaw->url }}
+                        </a>
                     </div>
-                    <a href="{{ asset('document/' . $documentLaw->url) }}">
-                        {{ $documentLaw->url }}
-                    </a>
                 </div>
                 <div class="col-md-7">
-                    <a class="title-document" href="{{ asset('document/' . $documentLaw->url) }}">
+                    <a class="title-document">
                         <h4 class="limit-line-2">{{ $documentLaw->title }}</h4>
                     </a>
                     <div class="limit-line-2">
@@ -25,7 +32,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <embed src="{{asset('document/' . $documentLaw->url)}}" width="100%" height="800px" /> --}}
         @endforeach
         {{ $documentLaws->withQueryString()->links() }}
     @else
