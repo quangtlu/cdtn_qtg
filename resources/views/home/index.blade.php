@@ -6,20 +6,18 @@
 @endsection
 @section('content')
     <div class="container">
-        <div class="home-section">
-            {{-- about --}}
-            <div
-                style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
-                padding-bottom: 48px; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
-                border-radius: 8px; will-change: transform;">
-                <iframe loading="lazy"
-                    style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-                    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFJLyhkiQQ&#x2F;view?embed"
-                    allowfullscreen="allowfullscreen" allow="fullscreen" allow="autoplay">
-                </iframe>
-            </div>
+        {{-- canvas slide --}}
+        <div
+            style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+            padding-bottom: 48px; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+            border-radius: 8px; will-change: transform;">
+            <iframe loading="lazy"
+                style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFJLyhkiQQ&#x2F;view?embed"
+                allowfullscreen="allowfullscreen" allow="fullscreen" allow="autoplay">
+            </iframe>
         </div>
-        <div class="home-section wow fadeInUp">
+        <div class="home-section wow fadeInUp" style="margin-top: 3rem">
             <h4 class="title-section-page">Top các chủ đề được quan tâm</h4>
             <ul class="top-list">
                 <div class="row">
@@ -67,7 +65,8 @@
                                     src="{{ asset('image/profile') . '/' . $post->user->image }}" alt="">
                                 <span class="slide-item-post-author-name limit-line-2">{{ $post->user->name }}</span>
                                 <span class="slide-item-post-content limit-line-3">{!! $post->content !!}</span>
-                                <a href="{{ route('posts.show', ['id' => $post->id]) }}" class="button-primary-outline">Xem
+                                <a href="{{ route('posts.show', ['id' => $post->id]) }}"
+                                    class="btn button-primary-outline btn-sm">Xem
                                     thêm</a>
                             </div>
                             <ul class="slide-comment-list">
@@ -157,8 +156,8 @@
                                 <span class="slide-item-post-author-name limit-line-2">{{ $counselor->name }}</span>
                                 <div class="row">
                                     <a data-toggle="modal" data-target="#myModal-{{ $counselor->id }}"
-                                        class="agileits w3layouts counselor-button">Thông tin</a>
-                                    <a href="" class="agileits w3layouts counselor-button button-active">Hẹn tư
+                                        class="btn button-primary">Thông tin</a>
+                                    <a href="" class="btn button-active">Hẹn tư
                                         vấn</a>
                                 </div>
                             </div>
@@ -195,8 +194,8 @@
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
-                                        <a class="agileits w3layouts counselor-button" data-dismiss="modal">Đóng</a>
-                                        <a class="agileits w3layouts counselor-button button-active">Hẹn tư vấn</a>
+                                        <a class="btn button-primary" data-dismiss="modal">Đóng</a>
+                                        <a class="btn button-active">Hẹn tư vấn</a>
                                     </div>
                                 </div>
                             </div>

@@ -52,8 +52,7 @@
                                                             <div class="notice-item-wrap">
                                                                 <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
                                                                     alt="" class="notice-item__avatar">
-                                                                <div
-                                                                    class="notice-item-content-wrap limit-line-2">
+                                                                <div class="notice-item-content-wrap limit-line-2">
                                                                     {!! $notification->data['title'] !!}:
                                                                     '{{ $notification->data['content'] }}'
                                                                     <div class="notice-item-content__time">
@@ -158,7 +157,10 @@
                         @endauth
                         <li><a class="icon-search-header fa fa-search" href="#cd-search"> <span></span></a></li>
                         @guest
-                            <a class="button-primary" href="{{ route('login') }}">Đăng nhập</a>
+                            <div class="btn-group">
+                                <a href="{{ route('register') }}" class="btn btn button-primary button-sm">Đăng ký</a>
+                                <a href="{{ route('login') }}" class="btn button-active button-sm">Đăng nhập</a>
+                            </div>
                         @endguest
 
                     </ul>

@@ -7,7 +7,8 @@
                 <div class="caption">
                     <h4 class="primary-color text-center">{{ $counselor->name }}</h4>
                     <div class="btn-group">
-                        <a data-toggle="modal" data-target="#myModal-{{ $counselor->id }}" class="btn button-primary button-sm">Thông tin</a>
+                        <a data-toggle="modal" data-target="#myModal-{{ $counselor->id }}"
+                            class="btn btn button-primary button-sm">Thông tin</a>
                         <a href="" class="btn button-active button-sm">Hẹn tư vấn</a>
                     </div>
                 </div>
@@ -43,8 +44,8 @@
                             </ul>
                         </div>
                         <div class="modal-footer">
-                            <a class="agileits w3layouts counselor-button" data-dismiss="modal">Đóng</a>
-                            <a class="agileits w3layouts counselor-button button-active">Hẹn tư vấn</a>
+                            <a class="btn button-primary" data-dismiss="modal">Đóng</a>
+                            <a class="btn button-active">Hẹn tư vấn</a>
                         </div>
                     </div>
                 </div>

@@ -17,16 +17,10 @@
         <div class="col-md-4 w3-agile" style="width:30%">
             <h3>Trò chuyện với chuyên gia</h3>
             <p>Người dùng được tư vấn trực tiếp, cụ thể mọi thắc mắc về quyền tác giả</p>
-            <a class="btn btn-success" href="{{ route('messenger.index') }}">Trò chuyện ngay</a>
+            <a class="btn button-active" href="{{ route('messenger.index') }}">Trò chuyện ngay</a>
         </div>
         <!-- copyright -->
 
-    </div>
-    <div class="w3ls-social-icons">
-        @guest
-            <a class="btn btn-sm btn-success" href="{{ route('login') }}">Đăng nhập <i class="fa fa-sign-in"></i></a>
-            <a class="btn btn-sm btn-primary" href="{{ route('register') }}">Đăng ký <i class="fa fa-sign-in"></i></a>
-        @endguest
     </div>
     <div class="copyright container">
         <div class="agileinfo">

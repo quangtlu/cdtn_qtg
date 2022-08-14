@@ -317,11 +317,8 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
 }
 .button-primary-outline, .button-primary {
     text-decoration: none !important;
-    padding: 5px 10px;
-    border-radius: 5px;
     border: 1px solid var(--primary-color);
     transition: all linear 0.2s;
-    font-weight: bold;
 }
 
 .button-primary{
@@ -453,6 +450,10 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
 
 .home-section {
     margin-bottom: 3rem;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 .title-section-page{
@@ -500,23 +501,26 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
     padding: 5px 0;
 }
 
-.counselor-button{
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 5px 10px !important;
-    letter-spacing: 1px;
-    font-size: 14px !important;
-    margin-top: 0 !important;
+.button-active {
+    border-color: var(--red-color);
+    background-color: var(--red-color);
+    color: #fff;
 }
 
-.button-active {
-    background-color: var(--red-color) !important;
-    border-color: var(--red-color) !important;
-    color: #fff !important;
+.button-active-outline {
+    border-color: var(--red-color);
+    background-color: #fff;
+    color: var(--red-color);
 }
+
+.button-active-outline:hover {
+    background-color: var(--red-color);
+    color: #fff;
+}
+
 .button-active:hover {
-    background-color: #fff !important;
-    color: var(--red-color) !important;
+    background-color: #fff;
+    color: var(--red-color);
 }
 
 .counselor-info-detail__list{

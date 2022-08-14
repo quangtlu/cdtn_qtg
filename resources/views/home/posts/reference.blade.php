@@ -6,7 +6,7 @@
 @endsection
 @section('content')
 @if ($post)
-    @include('home.component.posts.single-post', ['post' => $post, 'isHidePostHeader' => true])
+    @include('home.component.posts.single-post', ['post' => $post, 'isPostReference' => true])
 @else
     <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có bài viết nào</div>
 @endif
