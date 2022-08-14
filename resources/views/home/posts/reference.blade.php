@@ -1,4 +1,4 @@
-@extends('layouts.three-column')
+@extends('layouts.three-columns')
 @section('title', 'Quyền sở hữu trí tuệ')
 @section('css')
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">

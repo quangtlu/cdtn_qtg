@@ -1,4 +1,4 @@
-<div class="post-container">
+<div style="{{ isset($isHidePostHeader) ? "margin-top: 0" : '' }}" class="post-container">
     {{-- Post --}}
     <div class="post-wrap">
         @if (!isset($isHidePostHeader))

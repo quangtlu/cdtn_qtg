@@ -1,6 +1,6 @@
 <div class="w3l_categories">
-    <h3>Chuyên mục</h3>
-    <div class="w3l_wrap">
+    <h4 class="side-bar-heading">Chuyên mục bài viết</h4>
+    <div class="side-bar-wrap">
         <ul>
             @foreach ($refrenceCategories as $index => $category)
                 @if ($index != 0)

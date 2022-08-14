@@ -32,12 +32,16 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         $refrenceCategories = Category::where('parent_id', 0)->type([config('consts.category.type.post_reference.value')])->get();
+        $refrenceChildCategories = Category::where('parent_id', '!=', 0)->type([config('consts.category.type.post_reference.value')])->get();
         $counselors = User::role('counselor')->get();
         if ($counselors) {
             view()->share('counselors', $counselors);
         }
         if ($refrenceCategories) {
             view()->share('refrenceCategories', $refrenceCategories);
+        }
+        if ($refrenceChildCategories) {
+            view()->share('refrenceChildCategories', $refrenceChildCategories);
         }
     }
 }

@@ -943,7 +943,7 @@ l.wthreesearch input[type="search"]:active, li.wthreesearch input[type="search"]
 .panel-default > .panel-heading {
     border-color: #FFF;
     color: #fff;
-    background-color:#8D8D8D;
+    background-color: var(--primary-color);
 }
 .panel-body {
     padding: 2em;
@@ -960,7 +960,7 @@ a.pa_italic:focus {
     text-decoration: none;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-    border-top-color: transparent;
+    border-top-color: var(--primary-color);
 }
 .wthree_panel{
 	margin:2em 0 0;

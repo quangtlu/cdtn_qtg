@@ -10,7 +10,7 @@
                     <ul class="nav navbar-nav" @auth style="margin-top: 0;" @endauth>
                         <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                                 chủ</a></li>
-                        <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceCategories->first()->id]) }}"
+                        <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}"
                                 class="{{ Request::is('posts/category/*') ? 'active' : '' }}">Về QSHTT</a></li>
                         <li><a href="{{ route('documentLaws.index') }}"
                                 class="{{ Request::is('document-laws*') ? 'active' : '' }}">Văn bản pháp luật</a></li>
