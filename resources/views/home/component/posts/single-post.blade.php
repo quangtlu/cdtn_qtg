@@ -130,7 +130,7 @@
         @guest
             <a class="button-primary" href="{{ route('login') }}">Đăng nhập để bình luận</a>
         @endguest
-        <ul class="list-comment limit-number-comment">
+        <ul @guest style="padding-top: 20px" @endguest class="list-comment limit-number-comment">
             @if ($post->comments->count())
                 @foreach ($post->comments->sortByDesc('status')->take(5) as $comment)
                     @include('home.component.posts.comment-item', ['comment' => $comment])
