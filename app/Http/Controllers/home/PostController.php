@@ -128,7 +128,7 @@ class PostController extends Controller
             $message = 'Bài viết đang chờ phê duyệt';
             if (Auth::user()->hasAnyRole('mod', 'admin', 'editor')) {
                 $message = 'Đăng bài thành công';
-                return redirect()->back()->with('success', $message);
+                return redirect()->route('posts.index')->with('success', $message);
             } else {
                 $this->notificationService->notiRequestPost($post);
                 $this->notificationService->sendNotiResult($post, '');
@@ -146,7 +146,7 @@ class PostController extends Controller
             $postUpdated = $this->postService->update($request, $id);
             $postUpdated->tags;
             $postUpdated->categories;
-            return redirect()->back()->with('success', 'Cập nhật thành công');;
+            return redirect()->route('posts.index')->with('success', 'Cập nhật thành công');;
         } else {
             abort(403);
         }
