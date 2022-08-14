@@ -26,7 +26,6 @@ class StoreDocumentLawRequest extends FormRequest
         return [
             'title' => 'required',
             'url' => 'required',
-            'thumbnail' => 'required',
         ];
     }
 
@@ -34,8 +33,7 @@ class StoreDocumentLawRequest extends FormRequest
     {
         return [
             'title.required' => 'Vui lòng tên văn bản pháp luật',
-            'url.required' => 'Vui lòng nhập file',
-            'thumbnail.required' => 'Vui lòng nhập ảnh',
+            'url.required' => 'Vui lòng chọn file đính kèm',
         ];
     }
 }

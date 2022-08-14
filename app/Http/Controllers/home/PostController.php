@@ -41,10 +41,12 @@ class PostController extends Controller
         $this->chatroomService = $chatroomService;
         $this->notificationService = $notificationService;
         $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        $categories = $this->categoryService->getParentBytype([config('consts.category.type.post.value')]);
+        $categoryReferences = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share([
             'tags' => $tags,
             'categories' => $categories,
+            'categoryReferences' => $categoryReferences,
         ]);
     }
 
@@ -201,7 +203,7 @@ class PostController extends Controller
         $posts = $this->postService->getByCategory($categoryId);
         $category = $this->categoryService->getById($categoryId);
 
-        if($category->type == config('consts.category.type.post_reference.value')) {
+        if ($category->type == config('consts.category.type.post_reference.value')) {
             $post = $posts->first();
             return view('home.posts.reference', compact('post'));
         } else {

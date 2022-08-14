@@ -44,28 +44,41 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
 {
     background-color: var(--red-color);
 }
+
 .side-bar-left, .side-bar-right {
-    max-height: 700px;
-    overflow: hidden;
+    padding: 0 !important;
+}
+.side-bar-wrap {
+    max-height: 100vh;
+    overflow-y: hidden;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+.side-bar-heading{
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    background-color: var(--primary-color);
+    text-align: center;
+    padding: 10px 0;
+}
+.button-sm{
+    padding: 3px !important;
+}
 
-.side-bar-right:hover, .slide-comment-list:hover{
+.side-bar-wrap:hover{
     overflow-y: scroll;
 }
 
-.side-bar-left:hover{
-    overflow-y: scroll;
-}
-
-.side-bar-left::-webkit-scrollbar, .side-bar-right::-webkit-scrollbar
+.side-bar-wrap::-webkit-scrollbar
 {
     background-color: var(--primary-color);
 	width: 3px;
 }
 
-.side-bar-left::-webkit-scrollbar-thumb,
-.side-bar-right::-webkit-scrollbar-thumb
+.side-bar-wrap::-webkit-scrollbar-thumb
 {
     background-color: var(--red-color);
 }
@@ -304,12 +317,8 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
 }
 .button-primary-outline, .button-primary {
     text-decoration: none !important;
-    font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 5px;
     border: 1px solid var(--primary-color);
     transition: all linear 0.2s;
-    font-weight: bold;
 }
 
 .button-primary{
@@ -441,6 +450,10 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
 
 .home-section {
     margin-bottom: 3rem;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 .title-section-page{
@@ -467,8 +480,10 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
     color: var(--red-color);
     font-weight: 600;
 }
-.counselor-item-wrap{
-    display:flex; flex-direction: column; align-items: center
+.counselor-item-wrap, .counselor-item{
+    display:flex;
+    flex-direction: column;
+    align-items: center
 }
 .counselor-item__avt{
     height: 100px;
@@ -486,23 +501,32 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
     padding: 5px 0;
 }
 
-.counselor-button{
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 5px 10px !important;
-    letter-spacing: 1px;
-    font-size: 14px !important;
-    margin-top: 0 !important;
+.button-active {
+    border-color: var(--red-color);
+    background-color: var(--red-color);
+    color: #fff;
 }
 
-.button-active {
-    background-color: var(--red-color) !important;
-    border-color: var(--red-color) !important;
-    color: #fff !important;
+.button-active-outline {
+    border-color: var(--red-color);
+    background-color: #fff;
+    color: var(--red-color);
 }
+
+.button-active-outline:hover {
+    background-color: var(--red-color);
+    color: #fff;
+}
+
 .button-active:hover {
-    background-color: #fff !important;
-    color: var(--red-color) !important;
+    background-color: #fff;
+    color: var(--red-color);
+}
+
+.navigation-button-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .counselor-info-detail__list{
@@ -594,7 +618,6 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-
     -webkit-box-orient: vertical;
 }
 .limit-line {
@@ -809,9 +832,13 @@ a.comment-item-content-left{
     font-size: 12px;
     max-width: 23%;
     width: 23%;
-    max-height: 66%;
+    max-height: 64%;
     color: #000;
     overflow-y: hidden;
+}
+
+.slide-comment-list:hover{
+    overflow-y: scroll;
 }
 
 .slide-comment-list .user-post-avt {
@@ -823,7 +850,42 @@ a.comment-item-content-left{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+.document-wrap{
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
 
+.document-thumb-img{
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.document-left{
+   display: flex;
+   align-items: center;
+}
+
+.document-left-info{
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.document-left-info-name{
+    font-size: 16px;
+    color: var(--primary-color);
+    text-decoration: none !important;
+    padding-top: 5px;
+}
+
+.document-left-info-name:hover{
+    color: var(--red-color);
+}
 
 
 

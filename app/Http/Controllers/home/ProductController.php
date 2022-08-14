@@ -32,7 +32,7 @@ class ProductController extends Controller
         $this->categoryService = $categoryService;
         $this->ownerService = $ownerService;
         $authors = $this->authorService->getAll();
-        $categories = $this->categoryService->getBytype([config('consts.category.type.product.value')]);
+        $categories = $this->categoryService->getParentBytype([config('consts.category.type.product.value')]);
         $owners = $this->ownerService->getAll();
         view()->share(['authors' => $authors, 'categories' => $categories, 'owners' => $owners]);
     }
@@ -41,32 +41,27 @@ class ProductController extends Controller
     {
         try {
             $products = $this->productService->getPaginate();
-            if($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
+            if ($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
                 $products = $this->productService->searchAndFilter($request);
-            }
-            else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
+            } else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
                 $products = $this->productService->filter($request);
-            }
-            else if ($request->keyword) {
+            } else if ($request->keyword) {
                 $products = $this->productService->search($request);
             }
 
-            if($request->sort) {
+            if ($request->sort) {
                 $products = $this->productService->sortProductPublicRegisDate($request->sort);
             }
-            if($request->keyword) {
+            if ($request->keyword) {
                 if (!$products->count()) {
                     return redirect()->back()->with('error', 'Không có tác phẩm nào được tìm thấy');
                 }
             }
 
-            return view('home.products.index', compact( 'products'));
-
+            return view('home.products.index', compact('products'));
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
-        
-        
     }
 
     public function show($id)

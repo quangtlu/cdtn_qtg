@@ -59,30 +59,15 @@
                             <div id="category_id" class="form-group">
                                 <label for="category">Mục lục</label>
                                 <select name="category_id[]" class="form-control select2_init" multiple>
-                                    <option></option>
-                                    @foreach ($categories as $index => $category)
-                                        @hasanyrole('admin|editor')
-                                            <option value="{{ $category->id }}">{{ $index . '. ' . $category->name }}</option>
-                                            @if ($category->categories->count())
-                                                @foreach ($category->categories as $indexChild => $categoryChild)
-                                                    <option value="{{ $categoryChild->id }}">
-                                                        {{ $index . '.' . ($indexChild + 1) . '. ' . $categoryChild->name }}
-                                                    </option>
-                                                @endforeach
-                                            @endif
-                                        @else
-                                            @if ($category->type != config('consts.category.type.post_reference.value') && $category->parent_id == 0)
-                                                <option value="{{ $category->id }}">{{ $index . '. ' . $category->name }}</option>
-                                                @if ($category->categories->count())
-                                                    @foreach ($category->categories as $indexChild => $categoryChild)
-                                                        <option value="{{ $categoryChild->id }}">
-                                                            {{ $index . '.' . ($indexChild + 1) . '. ' . $categoryChild->name }}
-                                                        </option>
-                                                    @endforeach
-                                                @endif
-                                            @endif
-                                        @endhasanyrole
-                                    @endforeach
+                                    @hasanyrole('admin|editor')
+                                        @include('common.option-categories', [
+                                            'categories' => $categoryReferences,
+                                        ])
+                                    @else
+                                        @include('common.option-categories', [
+                                            'categories' => $categories,
+                                        ])
+                                    @endhasanyrole
                                 </select>
                             </div>
                             <div class="form-group">

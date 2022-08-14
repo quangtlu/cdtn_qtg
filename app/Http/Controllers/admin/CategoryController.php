@@ -8,12 +8,16 @@ use App\Components\Recusive;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Controllers\Controller;
 class CategoryController extends Controller
-{    
+{
     private $categoryService;
 
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
+        $categoryReferences = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        view()->share([
+            'categoryReferences' => $categoryReferences,
+        ]);
     }
 
     public function index(Request $request)
@@ -27,8 +31,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = $this->categoryService->getAll();
-        return view('admin.categories.create', compact('categories'));
+        return view('admin.categories.create');
     }
 
     public function store(StoreCategoryRequest $request)
@@ -37,42 +40,10 @@ class CategoryController extends Controller
         return Redirect(route('admin.categories.index'))->with('success', 'Thêm mục lục thành công');
     }
 
-    public function getType(Request $request) {
-        $category_id = $request->category_id;
-        if ($category_id) {
-            $typeValue = $this->categoryService->getById($category_id)->type;
-            $typeName = '';
-            foreach (config('consts.category.type') as $type) {
-                if($type['value'] == $typeValue) {
-                    $typeName = $type['name'];
-                }
-            }
-            $htmlOptions = "<option value='$typeValue'>$typeName</option>";
-        }
-        else {
-            $htmlOptions = '';
-            foreach (config('consts.category.type') as $type) {
-                $typeValue = $type['value'];
-                $typeName = $type['name'];
-                $htmlOptions .= "<option value='$typeValue'>$typeName</option>";
-            }
-        }
-        return $htmlOptions;
-    }
-
-    public function getCategory($parentId)
-    {
-        $data = $this->categoryService->getAll();
-        $recusive = new Recusive($data);
-        $htmlOption = $recusive->categoryRecusive($parentId);
-        return $htmlOption;
-    }
-
     public function edit($id)
     {
         $category = $this->categoryService->getById($id);
-        $categories = $this->categoryService->getAll();
-        return view('admin.categories.edit', compact('category', 'categories'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     public function update(StoreCategoryRequest $request, $id)

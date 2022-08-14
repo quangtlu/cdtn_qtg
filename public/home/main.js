@@ -454,7 +454,13 @@ $(function () {
                         renderNoNotication();
                     }
                 } else {
-                    that.closest(".wthree-top-1").remove();
+                    that.closest(".post-container").fadeOut(
+                        ("slow",
+                        function () {
+                            that.closest(".post-container").remove();
+                            alertMessage(res.message, "success");
+                        })
+                    );
                 }
                 alertMessage(response.message, "success");
             },

@@ -4,7 +4,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/product/index.css') }}">
-    
+
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -40,10 +40,7 @@
                                 <label>Danh mục</label>
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                            <option {{ $postOfCategories->contains('id', $category->id) ? 'selected' : '' }}
-                                                value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
+                                    @include('common.option-categories', ['categories' => $categories, 'selectedBy' => $post])
                                 </select>
                                 @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

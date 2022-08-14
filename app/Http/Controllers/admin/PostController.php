@@ -23,7 +23,7 @@ class PostController extends Controller
         $this->tagService = $tagService;
         $this->categoryService = $categoryService;
         $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        $categories = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share(['tags' => $tags, 'categories' => $categories]);
     }
 

@@ -2,6 +2,12 @@
 @section('title', 'Quản lý văn bản pháp luật')
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/product/index.css') }}" />
+    <style>
+        .document-thumb-img {
+            height: 32px;
+            width: 32px;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -13,8 +19,8 @@
                         <div class="card-body">
                             <div class="row justify-content-between">
                                 <div>
-                                    <a class="btn btn-success btn-sm"
-                                        href="{{ route('admin.documentLaws.create') }}">Thêm mới</a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('admin.documentLaws.create') }}">Thêm
+                                        mới</a>
                                 </div>
                                 <div id="search">
                                     <a class="btn btn-info btn-sm" data-toggle="collapse" href="#collapseSearch"
@@ -45,11 +51,12 @@
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" name="keyword"
-                                                placeholder="Tìm kiếm tên văn bản pháp luật"
-                                                class="form-control" value="{{ request()->keyword }}">
+                                                placeholder="Tìm kiếm tên văn bản pháp luật" class="form-control"
+                                                value="{{ request()->keyword }}">
                                         </div>
                                         <div class="col-md-1">
-                                            <button type="submit" class="btn btn-info btn-block"><i class="fas fa-search"></i></button>
+                                            <button type="submit" class="btn btn-info btn-block"><i
+                                                    class="fas fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -73,13 +80,18 @@
                                     <tr>
                                         <td>{{ $documentLaw->id }}</td>
                                         <td>
-                                                <img class="avt-product index-avt"
-                                                    src=" {{ asset('image/documentLaws/'.$documentLaw->thumbnail) }}"
-                                                    alt="">
+                                            @if ($documentLaw->thumbnail)
+                                                <img class="document-thumb-img"
+                                                    src="{{ asset('image/documentLaws') . '/' . $documentLaw->thumbnail }}">
+                                            @else
+                                                <img class="document-thumb-img"
+                                                    src="{{ asset('image/documentLaws/default.png') }}">
+                                            @endif
                                         </td>
-                                        <td>{{ $documentLaw->title }}</td>
-                                        <td><a href="{{ asset('document/'.$documentLaw->url) }}" target="_blank">{{ $documentLaw->url }}</a></td>
-                                        <td>{{ strip_tags($documentLaw->description) }}</td>
+                                        <td class="limit-line-2">{{ $documentLaw->title }}</td>
+                                        <td><a href="{{ asset('document/' . $documentLaw->url) }}"
+                                                target="_blank">{{ $documentLaw->url }}</a></td>
+                                        <td class="limit-line-2">{!! $documentLaw->description !!}</td>
                                         <td>
                                             <a href="{{ route('admin.documentLaws.edit', ['id' => $documentLaw->id]) }}"><button
                                                     class="btn btn-info btn-sm">Sửa</button></a>

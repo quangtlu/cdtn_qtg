@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = ["name", "parent_id", "type"];
-    
+
     public function posts()
     {
         return $this->belongsToMany(Post::class, 'post_category');
@@ -43,6 +43,11 @@ class Category extends Model
     public function scopeType($query, $type)
     {
         return $query->whereIn('type', $type);
+    }
+
+    public function scopeParent($query)
+    {
+        return $query->where('parent_id', 0);
     }
 
 }

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
 @endsection
 @section('content')
-    @include('home.component.posts.list-post', ['posts' => $posts, 'isHideComment' => true])
+    @include('home.component.posts.list-post', ['posts' => $posts, 'isPostRequest' => true])
 @endsection
 @section('js')
     <script>

@@ -1,9 +1,16 @@
 @if ($posts->count())
-    @if (isset($isHidePostHeader))
+    @if (isset($isPostReference))
         @foreach ($posts as $post)
             @include('home.component.posts.single-post', [
                 'post' => $post,
-                'isHidePostHeader' => $isHidePostHeader,
+                'isPostReference' => $isPostReference,
+            ])
+        @endforeach
+    @elseif (isset($isPostRequest))
+        @foreach ($posts as $post)
+            @include('home.component.posts.single-post', [
+                'post' => $post,
+                'isPostRequest' => $isPostRequest,
             ])
         @endforeach
     @else

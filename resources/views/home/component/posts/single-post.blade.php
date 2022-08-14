@@ -1,7 +1,7 @@
-<div class="post-container">
+<div style="{{ isset($isPostReference) ? 'margin-top: 0' : '' }}" class="post-container">
     {{-- Post --}}
     <div class="post-wrap">
-        @if (!isset($isHidePostHeader))
+        @if (!isset($isPostReference))
             <div class="post-header">
                 <div class="user-post-wrap">
                     <img src="{{ asset('image/profile') . '/' . $post->user->image }}" class="user-post-avt">
@@ -47,14 +47,34 @@
                         </div>
                     @endif
                 @endauth
+                @if (isset($isPostRequest))
+                    <form class="hanle-request-form" action="{{ route('posts.handleRequest', ['id' => $post->id]) }}"
+                        method="post">
+                        @csrf
+                        <div style="display: flex; float: left; padding-top:10px">
+                            <button data-screen='post-request' data-action="{{ config('consts.post.action.refuse') }}"
+                                class="btn button-active action-btn">
+                                {{ config('consts.post.action.refuse') }}
+                            </button>
+                            <button data-screen='post-request' data-action="{{ config('consts.post.action.accept') }}"
+                                class="action-btn btn button-primary" style="margin-left: 5px">
+                                {{ config('consts.post.action.accept') }}
+                            </button>
+                            <a href="{{ route('posts.show', ['id' => $post->id]) }}"><button type="button"
+                                    style="margin-left: 5px" class=" btn btn-info">Chi tiết</button></a>
+                        </div>
+                    </form>
+                @endif
             </div>
         @endif
         <div class="post-content ">
             <span class="post-content-title">{{ $post->title }}
-                <a data-toggle="tooltip" data-placement="top" title="{{ $post->status_name }}"
-                    class="{{ $post->status_class }}">
-                    <i class="fa {{ $post->status_icon_class }}"></i>
-                </a>
+                @if (!isset($isPostReference))
+                    <a data-toggle="tooltip" data-placement="top" title="{{ $post->status_name }}"
+                        class="{{ $post->status_class }}">
+                        <i class="fa {{ $post->status_icon_class }}"></i>
+                    </a>
+                @endif
             </span>
             <div class="post-content-body limit-line">
                 {!! $post->content !!}
@@ -105,52 +125,55 @@
         </div>
     </div>
     {{-- Comment --}}
-    <div class="post-comment">
-        <div class="sort-comment">
-            <span class="sort-title">Bình luận hữu ích</span>
-            <i class="fa fa-caret-down"></i>
-        </div>
-        <div class="clearfix"></div>
-        @auth
-            <div class="comment-input-wrap">
-                <div class="col-md-1 comment-input-left">
-                    <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
-                        class="user-post-avt">
-                </div>
-                <div class="col-md-11 comment-input-right">
-                    <form class="create-comment-form" action="{{ route('comments.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <textarea data-submittype="create" name="comment" placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
-                    </form>
-                </div>
+    @if (!isset($isPostRequest))
+        <div class="post-comment">
+            <div class="sort-comment">
+                <span class="sort-title">Bình luận hữu ích</span>
+                <i class="fa fa-caret-down"></i>
             </div>
-        @endauth
-        @guest
-            <a class="button-primary" href="{{ route('login') }}">Đăng nhập để bình luận</a>
-        @endguest
-        <ul @guest style="padding-top: 20px" @endguest class="list-comment limit-number-comment">
-            @if ($post->comments->count())
-                @foreach ($post->comments->sortByDesc('status')->take(5) as $comment)
-                    @include('home.component.posts.comment-item', ['comment' => $comment])
-                @endforeach
-                @if ($post->comments->count() > 5)
-                    <a class="list-all-comment-btn">Xem tất cả bình luận</a>
-                @endif
-            @endif
-        </ul>
-        @if ($post->comments->count() > 5)
-            <div class="unlimit-number-comment">
-                <ul class="list-comment ">
-                    @foreach ($post->comments->sortByDesc('status')->all() as $comment)
+            <div class="clearfix"></div>
+            @auth
+                <div class="comment-input-wrap">
+                    <div class="col-md-1 comment-input-left"
+                        style="{{ isset($isPostReference) ? 'margin-right: 5px' : '' }}">
+                        <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
+                            class="user-post-avt">
+                    </div>
+                    <div class="col-md-11 comment-input-right">
+                        <form class="create-comment-form" action="{{ route('comments.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <textarea data-submittype="create" name="comment" placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+            @guest
+                <a class="btn button-primary" href="{{ route('login') }}">Đăng nhập để bình luận</a>
+            @endguest
+            <ul @guest style="padding-top: 20px" @endguest class="list-comment limit-number-comment">
+                @if ($post->comments->count())
+                    @foreach ($post->comments->sortByDesc('status')->take(5) as $comment)
                         @include('home.component.posts.comment-item', ['comment' => $comment])
                     @endforeach
-                </ul>
-                <a class="list-limit-comment-btn">Ẩn bớt bình luận</a>
-            </div>
-        @endif
-    </div>
+                    @if ($post->comments->count() > 5)
+                        <a class="list-all-comment-btn">Xem tất cả bình luận</a>
+                    @endif
+                @endif
+            </ul>
+            @if ($post->comments->count() > 5)
+                <div class="unlimit-number-comment">
+                    <ul class="list-comment ">
+                        @foreach ($post->comments->sortByDesc('status')->all() as $comment)
+                            @include('home.component.posts.comment-item', ['comment' => $comment])
+                        @endforeach
+                    </ul>
+                    <a class="list-limit-comment-btn">Ẩn bớt bình luận</a>
+                </div>
+            @endif
+        </div>
+    @endif
 </div>
 {{-- Modal edit post --}}
 <div class="modal fade" id="edit-modal-{{ $post->id }}" tabindex="-1" role="dialog"
@@ -187,17 +210,17 @@
                     <div id="category_id" class="form-group">
                         <label for="category">Mục lục</label>
                         <select name="category_id[]" class="form-control select2_init" multiple>
-                            @foreach ($categories as $category)
-                                @if ($category->type == config('consts.category.type.post_reference.value'))
-                                    @role('admin|editor')
-                                        <option {{ $post->categories->contains($category) ? 'selected' : '' }}
-                                            value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endrole
-                                @else
-                                    <option {{ $post->categories->contains($category) ? 'selected' : '' }}
-                                        value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endif
-                            @endforeach
+                            @hasanyrole('admin|editor')
+                                @include('common.option-categories', [
+                                    'categories' => $categoryReferences,
+                                    'selectedBy' => $post,
+                                ])
+                            @else
+                                @include('common.option-categories', [
+                                    'categories' => $categories,
+                                    'selectedBy' => $post,
+                                ])
+                            @endhasanyrole
                         </select>
                     </div>
                     <div class="form-group">
