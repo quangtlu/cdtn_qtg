@@ -22,7 +22,7 @@ class ProductController extends Controller
     ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
-        $categories = $this->categoryService->getBytype([config('consts.category.type.product.value')]);
+        $categories = $this->categoryService->getParentBytype([config('consts.category.type.product.value')]);
         view()->share(['categories' => $categories]);
     }
 

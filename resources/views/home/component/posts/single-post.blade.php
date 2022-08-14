@@ -48,31 +48,33 @@
                     @endif
                 @endauth
                 @if (isset($isPostRequest))
-                <form class="hanle-request-form" action="{{ route('posts.handleRequest', ['id' => $post->id]) }}"
-                    method="post">
-                    @csrf
-                    <div style="display: flex; float: left; padding-top:10px">
-                        <button data-screen='post-request' data-action="{{ config('consts.post.action.refuse') }}"
-                            class="btn button-active action-btn">
-                            {{ config('consts.post.action.refuse') }}
-                        </button>
-                        <button data-screen='post-request' data-action="{{ config('consts.post.action.accept') }}"
-                            class="action-btn btn button-primary" style="margin-left: 5px">
-                            {{ config('consts.post.action.accept') }}
-                        </button>
-                        <a href="{{ route('posts.show', ['id' => $post->id]) }}"><button type="button"
-                                style="margin-left: 5px" class=" btn btn-info">Chi tiết</button></a>
-                    </div>
-                </form>
-            @endif
+                    <form class="hanle-request-form" action="{{ route('posts.handleRequest', ['id' => $post->id]) }}"
+                        method="post">
+                        @csrf
+                        <div style="display: flex; float: left; padding-top:10px">
+                            <button data-screen='post-request' data-action="{{ config('consts.post.action.refuse') }}"
+                                class="btn button-active action-btn">
+                                {{ config('consts.post.action.refuse') }}
+                            </button>
+                            <button data-screen='post-request' data-action="{{ config('consts.post.action.accept') }}"
+                                class="action-btn btn button-primary" style="margin-left: 5px">
+                                {{ config('consts.post.action.accept') }}
+                            </button>
+                            <a href="{{ route('posts.show', ['id' => $post->id]) }}"><button type="button"
+                                    style="margin-left: 5px" class=" btn btn-info">Chi tiết</button></a>
+                        </div>
+                    </form>
+                @endif
             </div>
         @endif
         <div class="post-content ">
             <span class="post-content-title">{{ $post->title }}
-                <a data-toggle="tooltip" data-placement="top" title="{{ $post->status_name }}"
-                    class="{{ $post->status_class }}">
-                    <i class="fa {{ $post->status_icon_class }}"></i>
-                </a>
+                @if (!isset($isPostReference))
+                    <a data-toggle="tooltip" data-placement="top" title="{{ $post->status_name }}"
+                        class="{{ $post->status_class }}">
+                        <i class="fa {{ $post->status_icon_class }}"></i>
+                    </a>
+                @endif
             </span>
             <div class="post-content-body limit-line">
                 {!! $post->content !!}
@@ -208,17 +210,17 @@
                     <div id="category_id" class="form-group">
                         <label for="category">Mục lục</label>
                         <select name="category_id[]" class="form-control select2_init" multiple>
-                            @foreach ($categories as $category)
-                                @if ($category->type == config('consts.category.type.post_reference.value'))
-                                    @role('admin|editor')
-                                        <option {{ $post->categories->contains($category) ? 'selected' : '' }}
-                                            value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endrole
-                                @else
-                                    <option {{ $post->categories->contains($category) ? 'selected' : '' }}
-                                        value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endif
-                            @endforeach
+                            @hasanyrole('admin|editor')
+                                @include('common.option-categories', [
+                                    'categories' => $categoryReferences,
+                                    'selectedBy' => $post,
+                                ])
+                            @else
+                                @include('common.option-categories', [
+                                    'categories' => $categories,
+                                    'selectedBy' => $post,
+                                ])
+                            @endhasanyrole
                         </select>
                     </div>
                     <div class="form-group">

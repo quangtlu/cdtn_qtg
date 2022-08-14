@@ -45,7 +45,7 @@
     <div class="container" style="padding-top: 89px" id="container" data-messageSuccess="{{ Session::get('success') }}"
         data-messageError="{{ Session::get('error') }}">
         <div style="margin-top: 5rem; display: flex; justify-content:space-between">
-            <div class="col-md-3 side-bar-left">@include('partials.home.categories-tags')</div>
+            <div class="col-md-3 side-bar-left">@include('partials.home.list-category')</div>
             <div class="col-md-7">@yield('content')</div>
             <div class="col-md-2 side-bar-right">@include('partials.home.list-counselor')</div>
         </div>

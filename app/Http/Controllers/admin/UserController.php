@@ -24,7 +24,7 @@ class UserController extends Controller
         $this->roleSercice = $roleSercice;
         $this->categoryService = $categoryService;
         $roles = $this->roleSercice->getAll();
-        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        $categories = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
         view()->share(['roles' => $roles, 'categories' => $categories]);
     }
 

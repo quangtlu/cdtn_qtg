@@ -49,10 +49,7 @@
                                 <label>Mục lục</label>
                                 <select name="categoryIds[]" class="form-control select2_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                            <option {{ $productOfCategories->contains('id', $category->id) ? 'selected' : '' }}
-                                                value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
+                                    @include('common.option-categories', ['categories' => $categories, 'selectedBy' => $product])
                                 </select>
                                 @error('categoryIds')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

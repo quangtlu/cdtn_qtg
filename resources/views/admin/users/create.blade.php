@@ -2,7 +2,7 @@
 @section('title', 'Thêm mới người dùng')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    
+
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/user/create.css') }}">
 @endsection
@@ -33,7 +33,7 @@
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
                                     @foreach (config('consts.user.gender') as $gender)
-                                        <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}  
+                                        <option {{ (old('gender') == $gender['value']) ? 'selected' : '' }}
                                         value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
                                     @endforeach
                                 </select>
@@ -81,9 +81,7 @@
                                 <label>Mục lục</label>
                                 <select name="" class="form-control select3_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
+                                    @include('common.option-categories', ['categories' => $categories])
                                 </select>
                                 @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

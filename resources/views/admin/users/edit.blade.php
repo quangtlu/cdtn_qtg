@@ -32,7 +32,7 @@
                                 <select name="gender" class="form-control" id="gender">
                                     <option value=""></option>
                                     @foreach (config('consts.user.gender') as $gender)
-                                        <option {{ (old('gender') == $gender['value'] || $user->gender == $gender['value']) ? 'selected' : '' }}  
+                                        <option {{ (old('gender') == $gender['value'] || $user->gender == $gender['value']) ? 'selected' : '' }}
                                         value="{{ $gender['value']  }}">{{$gender['name'] }}</option>
                                     @endforeach
                                 </select>
@@ -79,9 +79,7 @@
                                 <label>Mục lục</label>
                                 <select name="" class="form-control select3_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                        <option {{ $user->categories->contains($category->id) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
+                                    @include('common.option-categories', ['categories' => $categories, 'selectedBy' => $user])
                                 </select>
                                 @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>

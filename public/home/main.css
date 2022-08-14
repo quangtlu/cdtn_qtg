@@ -523,6 +523,12 @@ html::-webkit-scrollbar-thumb, .slide-comment-list::-webkit-scrollbar-thumb
     color: var(--red-color);
 }
 
+.navigation-button-wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .counselor-info-detail__list{
     list-style: none;
 }
