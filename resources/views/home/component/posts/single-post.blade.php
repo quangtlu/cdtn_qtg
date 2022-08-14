@@ -47,6 +47,24 @@
                         </div>
                     @endif
                 @endauth
+                @if (isset($isPostRequest))
+                <form class="hanle-request-form" action="{{ route('posts.handleRequest', ['id' => $post->id]) }}"
+                    method="post">
+                    @csrf
+                    <div style="display: flex; float: left; padding-top:10px">
+                        <button data-screen='post-request' data-action="{{ config('consts.post.action.refuse') }}"
+                            class="btn button-active action-btn">
+                            {{ config('consts.post.action.refuse') }}
+                        </button>
+                        <button data-screen='post-request' data-action="{{ config('consts.post.action.accept') }}"
+                            class="action-btn btn button-primary" style="margin-left: 5px">
+                            {{ config('consts.post.action.accept') }}
+                        </button>
+                        <a href="{{ route('posts.show', ['id' => $post->id]) }}"><button type="button"
+                                style="margin-left: 5px" class=" btn btn-info">Chi tiết</button></a>
+                    </div>
+                </form>
+            @endif
             </div>
         @endif
         <div class="post-content ">
@@ -114,7 +132,8 @@
             <div class="clearfix"></div>
             @auth
                 <div class="comment-input-wrap">
-                    <div class="col-md-1 comment-input-left" style="{{ isset($isPostReference) ? 'margin-right: 5px' : '' }}">
+                    <div class="col-md-1 comment-input-left"
+                        style="{{ isset($isPostReference) ? 'margin-right: 5px' : '' }}">
                         <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
                             class="user-post-avt">
                     </div>
