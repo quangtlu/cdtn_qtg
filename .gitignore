@@ -4,8 +4,8 @@
 /public/js
 /public/css
 /public/storage
-/public/image
-/public/document
+# /public/image
+# /public/document
 /storage/*.key
 /vendor
 .env
