@@ -14,14 +14,15 @@ class CategoryService
         $this->categoryModel = $categoryModel;
     }
 
-    public function getPaginate(){
+    public function getPaginate()
+    {
         $categories = $this->categoryModel->latest()->paginate(10);
         return $categories;
     }
 
     public function getByPopular($limit)
     {
-        return $this->categoryModel->limit($limit)->latest()->get();
+        return Category::where('parent_id', '!=', 0)->type([config('consts.category.type.post_reference.value')])->limit($limit)->get();
     }
 
     public function search($request)

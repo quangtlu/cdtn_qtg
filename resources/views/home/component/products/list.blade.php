@@ -36,14 +36,14 @@
                             <h3><a
                                     href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->name }}</a>
                             </h3>
-                            <div class="post-content-limit-line">{!! $product->description !!}</div>
+                            <div class="limit-line-3">{!! $product->description !!}</div>
                             <a class="agileits w3layouts"
                                 href="{{ route('products.show', ['id' => $product->id]) }}">Xem
                                 thêm<span class="glyphicon agileits w3layouts glyphicon-arrow-right"
                                     aria-hidden="true"></span></a>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="clearfix"></div>
             </div>

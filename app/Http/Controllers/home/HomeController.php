@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $categories = $this->categoryService->getByPopular(5);
         $posts = $this->postService->getByPopular(5);
-        $counselors = $this->userService->getTopCounselor(4);
+        $counselors = $this->userService->getTopCounselor(5);
         return view('home.index', compact('categories', 'posts', 'counselors'));
     }
 }

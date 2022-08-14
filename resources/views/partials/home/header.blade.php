@@ -53,7 +53,7 @@
                                                                 <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
                                                                     alt="" class="notice-item__avatar">
                                                                 <div
-                                                                    class="notice-item-content-wrap post-content-limit-line">
+                                                                    class="notice-item-content-wrap limit-line-2">
                                                                     {!! $notification->data['title'] !!}:
                                                                     '{{ $notification->data['content'] }}'
                                                                     <div class="notice-item-content__time">
@@ -75,7 +75,7 @@
                                                                     <p>{!! $notification->data['title'] !!}</p>
                                                                 </li>
                                                                 <li>
-                                                                    <p class="post-content-limit-line">
+                                                                    <p class="limit-line-2">
                                                                         {!! $notification->data['content'] !!}</p>
                                                                 </li>
                                                                 <li class="notice-item-content__time ">
@@ -105,7 +105,7 @@
                                                                     <p>{!! $notification->data['title'] !!}</p>
                                                                 </li>
                                                                 <li>
-                                                                    <p class="post-content-limit-line">
+                                                                    <p class="limit-line-2">
                                                                         {!! $notification->data['content'] !!}</p>
                                                                 </li>
                                                                 <li class="notice-item-content__time ">
@@ -157,6 +157,10 @@
                             </li>
                         @endauth
                         <li><a class="icon-search-header fa fa-search" href="#cd-search"> <span></span></a></li>
+                        @guest
+                            <a class="button-primary" href="{{ route('login') }}">Đăng nhập</a>
+                        @endguest
+
                     </ul>
                 </div>
             </div>
