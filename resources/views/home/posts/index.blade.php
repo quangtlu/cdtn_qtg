@@ -44,6 +44,9 @@
                             <div id="title" class="form-group">
                                 <label class="label-required" for="title">Tiêu đề</label>
                                 <input type="text" name="title" class="form-control" value="{{ old('title') }}">
+                                @error('title')
+                                    <span id="error-title" class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div id="tag_id" class="form-group">
                                 <label>Thẻ tag</label>
@@ -71,8 +74,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Nội dung</label>
+                                <label class="label-required">Nội dung</label>
                                 <textarea class="editor" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
+                                @error('content')
+                                    <span id="error-content" class="mt-1 text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="image">Ảnh</label>
@@ -99,5 +105,22 @@
         $('#search').click(function() {
             $('#toggle').fadeToggle();
         });
+        @if ($errors->any())
+            var htmlError = `<ul>`
+            const messageContent = $('#error-content').text();
+            const messageTitle = $('#error-title').text();
+            if (messageTitle) {
+                htmlError += `<li>${messageTitle}</li>`
+            }
+            if (messageContent) {
+                htmlError += `<li>${messageContent}</li>`
+            }
+            htmlError += `</ul>`
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi nhập dữ liệu',
+                html: htmlError,
+            })
+        @endif
     </script>
 @endsection
