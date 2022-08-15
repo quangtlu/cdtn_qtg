@@ -27,10 +27,10 @@ class DocumentLawController extends Controller
                     $html = "";
                     if($documentsAjax->count()) {
                         foreach ($documentsAjax as $document) {
-                            $url = asset('document/' . $document->url);
+                            $url = route('documentLaws.show', ['id' => $document->id]);
                             $html .= "
                                 <li class='search-result-item'>
-                                    <a href='$url' download class='limit-line-1 search-result-item__link' >
+                                    <a href='$url' class='limit-line-1 search-result-item__link' >
                                         $document->title
                                     </a>
                                 </li>
@@ -47,6 +47,12 @@ class DocumentLawController extends Controller
             return redirect()->back()->with('error', config('consts.message.error.getData'));
         }
 
+    }
+
+    public function show($id)
+    {
+        $documentLaw = $this->documentLawService->getById($id);
+        return view('home.documentLaws.show', compact('documentLaw'));
     }
 
 }

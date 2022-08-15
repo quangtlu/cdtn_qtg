@@ -13,7 +13,7 @@
                     @endif
                     <div class="document-left-info">
                         <div>
-                            <a href="{{ asset('document/' . $documentLaw->url) }}"
+                            <a href="{{ route('documentLaws.show', ['id' => $documentLaw->id]) }}"
                                 class="btn button-primary button-sm">Xem</a>
                             <a href="{{ asset('document/' . $documentLaw->url) }}" download
                                 class="btn button-active button-sm">Tải xuống</a>
