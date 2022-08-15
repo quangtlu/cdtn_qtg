@@ -9,6 +9,7 @@ class Post extends Model
 {
     protected $fillable = ["title", "content", 'user_id', 'image', 'status'];
     protected $appends = ["status_name", "status_icon_class", 'status_class'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

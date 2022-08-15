@@ -69,7 +69,7 @@ class PostController extends Controller
                             $urlShow = route('posts.show', ['id' => $post->id]);
                             $html .= "
                                 <li class='search-result-item'>
-                                    <a class='limit-line-1 search-result-item__link' >
+                                    <a href='$urlShow' class='limit-line-1 search-result-item__link' >
                                         $post->title
                                     </a>
                                 </li>

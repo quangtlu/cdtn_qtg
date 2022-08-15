@@ -877,7 +877,7 @@ a.comment-item-content-left{
 .document-wrap{
     background-color: #fff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 5px;
+    padding: 20px 0;
     border-radius: 10px;
     margin-bottom: 5px;
 }

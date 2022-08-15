@@ -98,7 +98,7 @@
                 class="glyphicon agileits w3layouts glyphicon-arrow-right" aria-hidden="true"></span></a>
     @endguest
     @include('home.component.posts.search-filter', ['categories' => $categories, 'tags' => $tags])
-    @include('home.component.posts.list-post', ['posts' => $posts])
+    @include('home.component.posts.list-post', ['posts' => $posts, 'isForum' => true])
 @endsection
 @section('js')
     <script>

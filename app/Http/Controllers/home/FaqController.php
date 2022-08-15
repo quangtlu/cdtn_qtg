@@ -37,10 +37,9 @@ class FaqController extends Controller
                             ";
                         }
                     }
-
                     return response()->json(['html' => $html]);
                 } else {
-                    $posts = $this->postService->search($request);
+                    $faqs = $this->faqService->search($request);
                 }
             }
             return view('home.faq.index', compact('faqs'));
