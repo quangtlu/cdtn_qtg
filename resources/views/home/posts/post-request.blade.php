@@ -7,10 +7,3 @@
 @section('content')
     @include('home.component.posts.list-post', ['posts' => $posts, 'isPostRequest' => true])
 @endsection
-@section('js')
-    <script>
-        $('#search').click(function() {
-            $('#toggle').fadeToggle();
-        });
-    </script>
-@endsection

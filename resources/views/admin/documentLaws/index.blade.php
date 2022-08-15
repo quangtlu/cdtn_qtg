@@ -68,8 +68,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Thumbnail</th>
-                                    <th>Tên văn bản</th>
+                                    <th>Ảnh</th>
+                                    <th>Tiêu đề</th>
                                     <th>Tệp đính kèm</th>
                                     <th>Mô tả</th>
                                     <th>Action</th>

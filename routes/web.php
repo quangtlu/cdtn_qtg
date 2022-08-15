@@ -166,6 +166,7 @@ Route::middleware('auth')->group(function () {
 //No auth
 Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
+Route::get('/faq/{id}', 'home\FaqController@show')->name('faq.show');
 Route::name('posts.')->prefix('posts')->group(function () {
     Route::get('/forum', 'home\PostController@index')->name('index');
     Route::get('/{id}', 'home\PostController@show')->name('show');
@@ -184,4 +185,5 @@ Route::name('products.')->prefix('products')->group(function () {
 
 Route::name('documentLaws')->prefix('document-laws')->group(function () {
     Route::get('/', 'home\DocumentLawController@index')->name('.index');
+    Route::get('/{id}', 'home\DocumentLawController@show')->name('.show');
 });

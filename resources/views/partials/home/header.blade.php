@@ -168,10 +168,14 @@
             </div>
             <div class="clearfix"> </div>
             <div id="cd-search" class="cd-search">
-                <form id="header-search-form" action="" method="GET">
+                <form id="header-search-form" action="{{ route('posts.index') }}" method="GET">
                     <input id="search-input" required name="keyword" type="search"
                         placeholder="Tìm kiếm bài viết theo tiêu dề, nội dung,...">
                 </form>
+                <ul class="search-result-list">
+
+                    {{-- <button type="submit">Xem tất cả</button> --}}
+                </ul>
             </div>
         </div><!-- /.container-fluid -->
     </nav>

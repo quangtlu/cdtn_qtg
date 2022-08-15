@@ -21,9 +21,9 @@ class DocumentLawService
         return $documentLaws;
     }
 
-    public function search($request)
+    public function search($request, $isAjax = false)
     {
-        $documentLaws = DocumentLaw::search($request->keyword)->paginate(10);
+        $documentLaws = $isAjax ? DocumentLaw::search($request->keyword)->get() : DocumentLaw::search($request->keyword)->paginate(10);
         return $documentLaws;
     }
 

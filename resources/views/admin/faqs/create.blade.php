@@ -11,7 +11,7 @@
                             @csrf
                             <div class="form-group">
                                 <label class="label-required" for="category_name">Câu hỏi</label>
-                                <textarea class="form-control" id="question" name="question" cols="30" rows="5">{{ old('question') }}</textarea>
+                                <input class="form-control" name="question" value="{{ old('question') }}">
                                 @error('question')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
@@ -36,11 +36,6 @@
 @section('js')
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#question'))
-            .catch(error => {
-                console.error(error);
-            });
         ClassicEditor
         .create(document.querySelector('#answer'))
         .catch(error => {

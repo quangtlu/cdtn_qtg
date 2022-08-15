@@ -486,4 +486,31 @@ $(function () {
     $(".cancle-edit-comment-btn").on("click", hideFormEditComment);
     $(".list-all-comment-btn").on("click", listAllComment);
     $(".list-limit-comment-btn").on("click", listLimitComment);
+    // live search
+    $("#search-input").on("input", function (e) {
+        const form = $(this).closest("#header-search-form");
+        var inputVal = $(this).val();
+        if (!inputVal) {
+            $(".search-result-list").slideUp();
+        } else {
+            $(".search-result-list").slideDown();
+            $.ajax({
+                type: "GET",
+                url: form.attr("action"),
+                data: { keyword: inputVal, isAjax: true },
+                dataType: "json",
+                success: function (response) {
+                    if (response.html) {
+                        $(".search-result-list").html(response.html);
+                    } else {
+                        $(".search-result-list").html(`
+                            <li class='search-result-item active'>
+                                Không có kết quả tìm kiếm phù hợp
+                            </li>
+                        `);
+                    }
+                },
+            });
+        }
+    });
 });
