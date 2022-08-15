@@ -61,15 +61,28 @@ class PostController extends Controller
                 $posts = $this->postService->filter($request);
             }
             if ($request->keyword) {
-                $posts = $this->postService->search($request);
+                if($request->isAjax) {
+                    $postAjaxs = $this->postService->search($request, $request->isAjax);
+                    $html = "";
+                    if($postAjaxs->count()) {
+                        foreach ($postAjaxs as $post) {
+                            $urlShow = route('posts.show', ['id' => $post->id]);
+                            $html .= "
+                                <li class='search-result-item'>
+                                    <a class='limit-line-1 search-result-item__link' >
+                                        $post->title
+                                    </a>
+                                </li>
+                            ";
+                        }
+                    }
+                    return response()->json(['html' => $html]);
+                 } else {
+                    $posts = $this->postService->search($request);
+                 }
             }
             if ($request->sort) {
                 $posts = $this->postService->sortPost($request->sort);
-            }
-            if ($request->keyword) {
-                if (!$posts->count()) {
-                    return redirect()->back()->with('error', 'Không có bài viết nào được tìm thấy');
-                }
             }
             return view('home.posts.index', compact('posts'));
         } catch (\Throwable $th) {

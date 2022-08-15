@@ -30,3 +30,4 @@
         <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có bài viết nào</div>
     @endif
 @endsection
+

@@ -37,9 +37,9 @@ class PostService
         return $posts;
     }
 
-    public function search($request)
+    public function search($request, $isAjax = false)
     {
-        $posts = Post::accepted()->search($request->keyword)->paginate(10);
+        $posts = $isAjax ? Post::accepted()->search($request->keyword)->get() : Post::accepted()->search($request->keyword)->paginate(10);
         return $posts;
     }
 
