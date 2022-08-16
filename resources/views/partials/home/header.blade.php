@@ -158,8 +158,8 @@
                         <li><a class="icon-search-header fa fa-search" href="#cd-search"> <span></span></a></li>
                         @guest
                             <div class="btn-group">
-                                <a href="{{ route('register') }}" class="btn btn button-primary button-sm">Đăng ký</a>
-                                <a href="{{ route('login') }}" class="btn button-active button-sm">Đăng nhập</a>
+                                <a style="font-size: 13px !important" href="{{ route('register') }}" class="btn btn button-primary button-sm">Đăng ký</a>
+                                <a style="font-size: 13px !important" href="{{ route('login') }}" class="btn button-active button-sm">Đăng nhập</a>
                             </div>
                         @endguest
 

@@ -24,4 +24,5 @@
             @endforeach
         </ul>
     </div>
+    <div class="side-bar-footer"></div>
 </div>

@@ -28,7 +28,7 @@ class PostService
 
     public function getByPopular($number)
     {
-        return Post::accepted()->latest()->limit($number)->get();
+        return Post::accepted()->hasComment()->latest()->limit($number)->get();
     }
 
     public function getAllPaginate()

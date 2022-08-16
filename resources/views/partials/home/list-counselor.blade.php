@@ -52,4 +52,5 @@
             </div>
         @endforeach
     </div>
+    <div class="side-bar-footer"></div>
 </div>

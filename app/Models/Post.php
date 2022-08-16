@@ -40,6 +40,11 @@ class Post extends Model
         return $this->hasOne(Chatroom::class);
     }
 
+    public function scopeHasComment($query)
+    {
+        return $query->whereHas('comments');
+    }
+
     public function scopeAccepted($query)
     {
         return $query->whereNotIn('posts.status', [config('consts.post.status.refuse.value'), config('consts.post.status.request.value')]);
