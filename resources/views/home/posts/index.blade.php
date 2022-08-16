@@ -13,10 +13,9 @@
 @section('content')
     {{-- add/update post --}}
     @auth
-        <div class="panel panel-primary">
-            <div class="panel-heading">Đăng bài viết</div>
-            <div class="panel-body">
-                <div class="row">
+        <div class="post-container">
+            <div class="post-content">
+                <div style="display: flex; align-items:center">
                     <div class="col-md-1">
                         <img id="avt-user" src="{{ asset('image/profile/' . Auth::user()->image) }}" alt="">
                     </div>
