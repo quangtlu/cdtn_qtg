@@ -24,16 +24,17 @@ class CommentController extends Controller
         $comment = $this->commentService->create($request);
         $userPost = $comment->post->user;
 
-        if($comment->user_id != $userPost->id){
+        if ($comment->user_id != $userPost->id) {
             $this->notificationService->notiComment($comment, $userPost);
         }
-        $ortherData['GetPostByUser'] = route('posts.getPostByUser', ['id' => $comment->user_id]);
-        $ortherData['destroyComment'] =  route('comments.destroy', ['id' => $comment->id]);
-        $ortherData['updateComment'] =  route('comments.update', ['id' => $comment->id]);
-        $ortherData['userImage'] =  asset('image/profile') .'/'. $comment->user->image;
-        $ortherData['time'] =  $comment->created_at->diffForHumans();
+        $others['GetPostByUser'] = route('posts.getPostByUser', ['id' => $comment->user_id]);
+        $others['destroyComment'] =  route('comments.destroy', ['id' => $comment->id]);
+        $others['updateComment'] =  route('comments.update', ['id' => $comment->id]);
+        $others['userImage'] =  asset('image/profile') . '/' . $comment->user->image;
+        $others['time'] =  $comment->created_at->diffForHumans();
+        $others['_token'] =  csrf_token();
 
-        return response()->json(['comment' => $comment, 'ortherData' => $ortherData]);
+        return response()->json(['comment' => $comment, 'others' => $others]);
     }
 
     public function update(CommentRequest $request, $id)
@@ -54,15 +55,13 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = $this->commentService->getById($id);
-        if (Auth::user()->id != $comment->user->id ) {
-            abort(403);
-        }
-        else {
+        if (Auth::user()->id == $comment->user->id || Auth::user()->id == $comment->post->user_id) {
             $commentDeleted = $this->commentService->delete($id);
-            if($commentDeleted) {
+            if ($commentDeleted) {
                 return response()->json(['message' => 'Xóa bình luận thành công', 'comment' => $comment]);
             }
+        } else {
+            abort(403);
         }
     }
-
 }

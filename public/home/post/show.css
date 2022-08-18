@@ -2,21 +2,12 @@
     cursor: pointer;
 }
 
-.btn-delete-comment {
-    color: red !important;
-}
-
-.btn-edit-comment {
-    color: rgb(38, 182, 218) !important;
-}
-
 .edit-comment-wrap {
     display: none;
 }
 
 .post-info__link {
     text-decoration: none !important;
-    color: #fca003 !important;
     font-size: 14px;
     padding: 5px 0;
     display: block;
@@ -24,4 +15,22 @@
 }
 .product-info-content {
     color: #000 !important;
+}
+ul.tag li a {
+    padding: 5px !important;
+    font-size: 10px !important;
+    font-weight: bold;
+}
+
+.relate-post:hover {
+    color: #060a52 !important;
+}
+
+.title-relate {
+    text-transform: uppercase;
+    font-size: 1.4em;
+    color: #212121;
+    padding-left: 0.8em;
+    border-left: 3px solid #060a52;
+    font-weight: 600;
 }

@@ -5,8 +5,19 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => true]);
 Route::middleware('auth')->group(function () {
-    //Role: admin
-    Route::name('admin.')->prefix('admin')->group(function () {        
+    Route::name('admin.')->prefix('admin')->group(function () {
+        // admin or editor
+        Route::middleware('role:admin|editor')->group(function () {
+            Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard.index');
+
+            Route::name('profile.')->prefix('/profile-user')->group(function () {
+                Route::get('/', 'Admin\ProfileController@index')->name('index');
+                Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('edit');
+                Route::post('/update{id}', 'Admin\ProfileController@update')->name('update');
+            });
+        });
+
+        //Role: admin
         Route::name('users.')->prefix('/users')->group(function () {
             Route::get('/', 'Admin\UserController@index')->name('index')->middleware('can:list-user');
             Route::get('/create', 'Admin\UserController@create')->name('create')->middleware('can:add-user');
@@ -106,12 +117,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/destroy/{id}', 'Admin\CategoryController@destroy')->name('destroy')->middleware('can:delete-category');
         });
 
-        Route::name('profile.')->prefix('/profile-user')->middleware('role:admin|editor')->group(function () {
-            Route::get('/', 'Admin\ProfileController@index')->name('index');
-            Route::get('/edit/{id}', 'Admin\ProfileController@edit')->name('edit');
-            Route::post('/update{id}', 'Admin\ProfileController@update')->name('update');
+        Route::name('documentLaws.')->prefix('/documentLaws')->group(function () {
+            Route::get('/', 'Admin\DocumentLawController@index')->name('index')->middleware('can:list-documentLaw');
+            Route::get('/create', 'Admin\DocumentLawController@create')->name('create')->middleware('can:add-documentLaw');
+            Route::post('/store', 'Admin\DocumentLawController@store')->name('store')->middleware('can:add-documentLaw');
+            Route::get('/edit/{id}', 'Admin\DocumentLawController@edit')->name('edit')->middleware('can:edit-documentLaw');
+            Route::post('/update/{id}', 'Admin\DocumentLawController@update')->name('update')->middleware('can:edit-documentLaw');
+            Route::get('/destroy/{id}', 'Admin\DocumentLawController@destroy')->name('destroy')->middleware('can:delete-documentLaw');
         });
-
     });
     // User
     Route::name('posts.')->prefix('posts')->group(function () {
@@ -120,7 +133,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'home\PostController@update')->name('update');
         Route::get('/update/status/{id}', 'home\PostController@toogleStatus')->name('toogleStatus');
         Route::get('/destroy/{id}', 'home\PostController@destroy')->name('destroy');
-        Route::get('/post-request', 'home\PostController@getPotRequest')->name('getPotRequest');
+        Route::get('/post-request', 'home\PostController@getPotRequest')->name('getPotRequest')->middleware('can:approve-post');
         Route::post('/handle-request-post/{id}', 'home\PostController@handleRequest')->name('handleRequest')->middleware('can:approve-post');
         Route::post('/connect-to-counselor/{id}', 'home\PostController@connectToCounselor')->name('connectToCounselor')->middleware('can:connect-counselor');
     });
@@ -138,7 +151,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', 'home\MessageController@store');
     Route::post('/feedback', 'home\FeedbackController@update');
     Route::get('/feedback/latest/{chatroom_id}', 'home\FeedbackController@latest');
-    
+
     Route::name('profile.')->prefix('/profile-user')->group(function () {
         Route::get('/', 'home\ProfileController@index')->name('index');
         Route::get('/edit/{id}', 'home\ProfileController@edit')->name('edit');
@@ -153,18 +166,24 @@ Route::middleware('auth')->group(function () {
 //No auth
 Route::get('/', 'home\HomeController@index')->name('home.index');
 Route::get('/faq', 'home\FaqController@index')->name('faq.index');
-Route::name('posts')->prefix('posts')->group(function () {
-    Route::get('/', 'home\PostController@index')->name('.index');
-    Route::get('/{id}', 'home\PostController@show')->name('.show');
-    Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('.getPostByCategory');
-    Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('.getPostByUser');
-    Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('.getPostByTag');
+Route::get('/faq/{id}', 'home\FaqController@show')->name('faq.show');
+Route::name('posts.')->prefix('posts')->group(function () {
+    Route::get('/forum', 'home\PostController@index')->name('index');
+    Route::get('/{id}', 'home\PostController@show')->name('show');
+    Route::get('/category/{id}', 'home\PostController@getPostByCategory')->name('getPostByCategory');
+    Route::get('/user/{id}', 'home\PostController@getPostByUser')->name('getPostByUser');
+    Route::get('/tag/{id}', 'home\PostController@getPostByTag')->name('getPostByTag');
 });
 
-Route::name('products')->prefix('products')->group(function () {
-    Route::get('/', 'home\ProductController@index')->name('.index');
-    Route::get('/{id}', 'home\ProductController@show')->name('.show');
-    Route::get('/category/{id}', 'home\ProductController@getProductByCategory')->name('.getProductByCategory');
-    Route::get('/author/{id}', 'home\ProductController@getProductByAuthor')->name('.getProductByAuthor');
-    Route::get('/owner/{id}', 'home\ProductController@getProductByOwner')->name('.getProductByOwner');
+Route::name('products.')->prefix('products')->group(function () {
+    Route::get('/', 'home\ProductController@index')->name('index');
+    Route::get('/{id}', 'home\ProductController@show')->name('show');
+    Route::get('/category/{id}', 'home\ProductController@getProductByCategory')->name('getProductByCategory');
+    Route::get('/author/{id}', 'home\ProductController@getProductByAuthor')->name('getProductByAuthor');
+    Route::get('/owner/{id}', 'home\ProductController@getProductByOwner')->name('getProductByOwner');
+});
+
+Route::name('documentLaws')->prefix('document-laws')->group(function () {
+    Route::get('/', 'home\DocumentLawController@index')->name('.index');
+    Route::get('/{id}', 'home\DocumentLawController@show')->name('.show');
 });

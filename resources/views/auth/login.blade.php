@@ -10,12 +10,12 @@
                 <div class="form">
                     <div class="form-row">
                         <span class="fas fa-envelope"></span>
-                        <label class="form-label" for="input">Email</label>
+                        <label class="form-label label-required" for="input">Email</label>
                         <input type="email" name="email" class="form-text">
                     </div>
                     <div class="form-row">
                         <span title="Hiển thị mật khẩu" id="show-pass-icon" class="fas fa-eye"></span>
-                        <label class="form-label" for="input">Mật khẩu</label>
+                        <label class="form-label label-required" for="input">Mật khẩu</label>
                         <input id="input-password" type="password" name="password" class="form-text">
                         @error('email')
                         <span class="invalid-feedback" role="alert">

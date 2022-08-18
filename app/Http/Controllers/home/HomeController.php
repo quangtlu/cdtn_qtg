@@ -5,46 +5,30 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use App\Services\PostService;
-use App\Services\TagService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     private $postService;
-    private $tagService;
+    private $userService;
     private $categoryService;
 
-    /**
-     * @param $postService
-     */
     public function __construct(
         PostService $postService,
-        TagService $tagService,
-        CategoryService $categoryService
+        CategoryService $categoryService,
+        UserService $userService
     ) {
         $this->postService = $postService;
-        $this->tagService = $tagService;
         $this->categoryService = $categoryService;
-
-        $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
-        view()->share(['tags' => $tags, 'categories' => $categories]);
+        $this->userService = $userService;
     }
 
     public function index(Request $request)
     {
-        try {
-            $posts = $this->postService->getReferencePosts();
-            if ($request->keyword) {
-                $posts = $this->postService->search($request);
-                if (!$posts->count()) {
-                    return redirect()->back()->with('error', 'Không có bài viết nào phù hợp');
-                }
-            }
-            return view('home.index', compact('posts'));
-        } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Có lỗi xảy ra trong quá trình lấy dữ liệu');
-        }
-        
+        $categories = $this->categoryService->getByPopular(5);
+        $posts = $this->postService->getByPopular(5);
+        $counselors = $this->userService->getTopCounselor(5);
+        return view('home.index', compact('categories', 'posts', 'counselors'));
     }
 }

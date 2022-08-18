@@ -14,26 +14,26 @@ return [
             'request' => [
                 'value' => 1,
                 'name' => 'Chưa được phê duyệt',
-                'classIcon' => 'fa-circle text-warning',
-                'className' => 'status-name-link text-warning',
+                'classIcon' => 'fa-rotate-right text-info',
+                'className' => 'text-warning',
             ],
             'refuse' => [
                 'value' => 2,
                 'name' => 'Đã bị từ chối',
                 'classIcon' => 'fa-times-circle',
-                'className' => 'status-name-link text-danger',
+                'className' => 'text-danger',
             ],
             'unsolved' => [
                 'value' => 3,
                 'name' => 'Chưa được giải đáp',
                 'classIcon' => 'fa-question-circle',
-                'className' => 'status-name-link text-primary',
+                'className' => 'text-primary',
             ],
             'solved' => [
                 'value' => 4,
                 'name' => 'Đã được giải đáp',
                 'classIcon' => 'fa-check-circle',
-                'className' => 'status-name-link text-success',
+                'className' => 'text-success',
             ],
         ],
         'action' => [
@@ -48,7 +48,7 @@ return [
     ],
     'owner' => [
         'all' => 0,
-        'none' => -1, 
+        'none' => -1,
     ],
 
     'category' => [
@@ -288,97 +288,97 @@ return [
             nghiệm thực tiễn tốt</i> (<i>best practices</i>) luôn là một chủ đề được quan
             tâm hàng đầu. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
             107%;mso-ansi-language:EN-US">&nbsp;</span></p><p>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </p><p class="MsoListParagraphCxSpLast"><span style="font-size:13.0pt;line-height:
             107%;mso-ansi-language:EN-US">Đây cũng là một lĩnh vực ứng dụng quan trọng các
             công cụ Tin học, từ phát triển các thuật toán và phần mềm giải quyết các bài
@@ -1613,97 +1613,97 @@ return [
             nghiệm thực tiễn tốt</i> (<i>best practices</i>) luôn là một chủ đề được quan
             tâm hàng đầu. <o:p></o:p></span></p><p class="MsoListParagraphCxSpMiddle"><span style="font-size:13.0pt;line-height:
             107%;mso-ansi-language:EN-US">&nbsp;</span></p><p>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </p><p class="MsoListParagraphCxSpLast"><span style="font-size:13.0pt;line-height:
             107%;mso-ansi-language:EN-US">Đây cũng là một lĩnh vực ứng dụng quan trọng các
             công cụ Tin học, từ phát triển các thuật toán và phần mềm giải quyết các bài

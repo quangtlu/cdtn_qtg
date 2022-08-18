@@ -24,7 +24,7 @@ class StoreAuthorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|max:255',
             'phone' => 'bail|required|unique:authors|regex:/(0)[0-9]{9}/|max:10',
             'email' => 'bail|required|unique:authors|email:rfc,dns',
             'dob' => 'before:today|nullable',

@@ -6,26 +6,14 @@
     <div class="card-body contacts_body">
       <div class="container">
         <div class="form-group">
-          <i
-            v-for="score in maxScore"
-            :key="score"
-            :class="score <= feedback.score ? 'fas ' : 'far '"
-            class="fa-star star-icon"
-            data-toggle="tooltip" data-placement="top" :title="toolTipRate(score)"
-            @click="rate(score)"
-          >
+          <i v-for="score in maxScore" :key="score" :class="score <= feedback.score ? 'fas ' : 'far '"
+            class="fa-star star-icon" data-toggle="tooltip" data-placement="top" :title="toolTipRate(score)"
+            @click="rate(score)">
           </i>
         </div>
         <div class="form-group">
           <label class="form-label text-white">Nhận xét</label>
-          <textarea
-            v-model="feedback.note"
-            class="form-control"
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-          ></textarea>
+          <textarea v-model="feedback.note" class="form-control" name="" id="" cols="30" rows="10"></textarea>
         </div>
         <button @click="submit()" class="btn btn-success btn-block">Gửi</button>
       </div>
@@ -101,7 +89,7 @@ export default {
           return 'Rất tuyệt'
         case 5:
           return 'Rất hài lòng'
-        
+
         default:
           break;
       }
@@ -112,7 +100,7 @@ export default {
       return this.$route.params.roomId;
     },
   },
-  mounted () {
+  mounted() {
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })

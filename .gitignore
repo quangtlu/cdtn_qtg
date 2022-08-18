@@ -1,8 +1,11 @@
 /node_modules
 /dump.rdb
 /public/hot
+/public/js
+/public/css
 /public/storage
 /public/image
+/public/document
 /storage/*.key
 /vendor
 .env
@@ -14,3 +17,7 @@ npm-debug.log
 yarn-error.log
 laravel-echo-server.lock
 dump.rdb
+laravel-echo-server.json
+package-lock.json
+public/js/app.js
+public/mix-manifest.json

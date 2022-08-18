@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|max:255',
             'content' => 'required',
         ];
     }
@@ -34,6 +34,7 @@ class StorePostRequest extends FormRequest
         return [
             'content.required' => 'Vui lòng nhập nội dung',
             'title.required' => 'Vui lòng nhập tiêu đề',
+            'title.max' => 'Tiêu đề không được quá 255 kí tự',
         ];
     }
 }

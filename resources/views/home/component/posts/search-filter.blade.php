@@ -1,9 +1,9 @@
-<div class="col my-auto" id="search" style="margin-top: 2px;">
-    <a class="card btn btn-default my-auto" data-toggle="collapse" href="#collapseSearch" aria-expanded="false"
+<div class="col my-auto" id="search" style="margin: 10px 0;">
+    <button class="card btn btn-default my-auto" data-toggle="collapse" href="#collapseSearch" aria-expanded="false"
         aria-controls="collapseExample">
         <i class="fa fa-search"></i>
         <span>Tìm kiếm bài viết</span>
-    </a>
+    </button>
 </div>
 <div class="panel panel-primary search-and-filter" id="toggle" style="margin-top: 10px; display:none; padding: 15px">
     <div>

@@ -45,10 +45,13 @@
 
 .post-info__link {
     text-decoration: none !important;
-    color: #fca003;
     font-size: 14px;
     padding: 5px 0;
     display: block;
+}
+
+.post-info__link:hover {
+    color: #d91e1e;
 }
 
 .error-message {
@@ -84,13 +87,6 @@
 }
 .select2-selection__choice__remove{
     color: red !important;
-}
-
-.user-post-avt{
-    width: 50px;
-    border-radius: 50%;
-    border: 1px solid #fca003;
-    margin-right: 5px;
 }
 
 .post-info-list{

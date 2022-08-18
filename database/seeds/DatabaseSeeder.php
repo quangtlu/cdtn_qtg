@@ -14,10 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(OwnerSeeder::class);
-        $this->call(ProductSeeder::class);
-        $this->call(AuthorSeeder::class);
-        // $this->call(TagSeeder::class);
-        // $this->call(FaqSeeder::class);
+        $this->call(TagSeeder::class);
+        $this->call(FaqSeeder::class);
+        $this->call(PostSeeder::class);
     }
 }

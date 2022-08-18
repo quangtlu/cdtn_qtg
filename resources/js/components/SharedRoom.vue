@@ -15,13 +15,8 @@
     </div>
     <div class="card-footer">
       <div class="input-group">
-        <textarea
-          v-model="inputMessage"
-          name=""
-          class="form-control type_msg"
-          placeholder="Nhập nội dung tin nhắn..."
-          @keyup.enter="saveMessage"
-        />
+        <textarea v-model="inputMessage" name="" class="form-control type_msg" placeholder="Nhập nội dung tin nhắn..."
+          @keyup.enter="saveMessage" />
         <div class="input-group-append">
           <span @click="saveMessage" class="input-group-text send_btn"><i class="fas fa-paper-plane"></i></span>
         </div>
@@ -46,13 +41,13 @@ export default {
   components: {
     MessageItem
   },
-  data () {
+  data() {
     return {
       inputMessage: ''
     }
   },
   methods: {
-    saveMessage () {
+    saveMessage() {
       this.$emit('saveMessage', this.inputMessage)
       this.inputMessage = ''
     }

@@ -13,12 +13,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-            Category::insert(
-                ['name' => 'Giới thiệu'],
-                ['name' => 'Văn bản pháp luật'],
-                ['name' => 'Hỏi và đáp'],
-            );
-
             $cate1 = Category::create(['name' => 'Về quyền SH công nghiệp (SHCN)']);
             $cate2 = Category::create(['name' => 'Về quyền tác giả']);
             $cate3 = Category::create(['name' => 'Về quyền liên quan']);

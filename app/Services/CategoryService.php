@@ -14,9 +14,15 @@ class CategoryService
         $this->categoryModel = $categoryModel;
     }
 
-    public function getPaginate(){
+    public function getPaginate()
+    {
         $categories = $this->categoryModel->latest()->paginate(10);
         return $categories;
+    }
+
+    public function getByPopular($limit)
+    {
+        return Category::parent()->type([config('consts.category.type.post_reference.value')])->limit($limit)->get();
     }
 
     public function search($request)
@@ -33,8 +39,8 @@ class CategoryService
 
     public function getById($id)
     {
-        $category = $this->categoryModel->findOrFail($id);   
-        return $category; 
+        $category = $this->categoryModel->findOrFail($id);
+        return $category;
     }
 
     public function create($request)
@@ -63,8 +69,8 @@ class CategoryService
         return $this->categoryModel->destroy($id);
     }
 
-    public function getBytype($type)
+    public function getParentBytype($type)
     {
-        return Category::type($type)->get();
+        return Category::parent()->type($type)->get();
     }
 }

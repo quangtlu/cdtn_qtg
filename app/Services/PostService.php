@@ -26,15 +26,20 @@ class PostService
         return $posts;
     }
 
+    public function getByPopular($number)
+    {
+        return Post::accepted()->hasComment()->latest()->limit($number)->get();
+    }
+
     public function getAllPaginate()
     {
         $posts = Post::latest()->paginate(10);
         return $posts;
     }
 
-    public function search($request)
+    public function search($request, $isAjax = false)
     {
-        $posts = Post::accepted()->search($request->keyword)->paginate(10);
+        $posts = $isAjax ? Post::accepted()->search($request->keyword)->get() : Post::accepted()->search($request->keyword)->paginate(10);
         return $posts;
     }
 
@@ -171,7 +176,7 @@ class PostService
             else {
                 $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->where('user_id', Auth::user()->id)->paginate(10);
             }
-        } 
+        }
         else {
             $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
         }

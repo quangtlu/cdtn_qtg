@@ -25,10 +25,6 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:products',
-            'pub_date' => 'before:today',
-            'regis_date' => 'nullable|before:today',
-            'author_id' => 'required',
-            'owner_id' => 'required',
             'description' => 'required',
         ];
     }
@@ -38,10 +34,6 @@ class StoreProductRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng nhập tên tác phẩm',
             'name.unique' => 'Tên tác phẩm đã tồn tại',
-            'pub_date.before' => 'Ngày xuất bản tác phẩm không được là ngày trong tương lai',
-            'regis_date.before' => 'Ngày đăng kí bản quyền tác phẩm không được là ngày trong tương lai',
-            'author_id.required' => 'Vui lòng chọn tác giả',
-            'owner_id.required' => 'Vui lòng chọn chủ sở hữu',
             'description.required' => 'Vui lòng nhập miêu tả',
         ];
     }

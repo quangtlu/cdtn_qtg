@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Admin\Product\UpdateProductRequest;
-use App\Services\AuthorService;
-use App\Services\OwnerService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use function redirect;
@@ -16,37 +14,28 @@ use App\Services\CategoryService;
 class ProductController extends Controller
 {
     private $productService;
-    private $ownerService;
-    private $authorService;
     private $categoryService;
 
     public function __construct(
         ProductService $productService,
-        OwnerService $ownerService,
-        AuthorService $authorService,
         CategoryService $categoryService
     ) {
         $this->productService = $productService;
-        $this->ownerService = $ownerService;
-        $this->authorService = $authorService;
         $this->categoryService = $categoryService;
-        $authors = $this->authorService->getAll();
-        $owners = $this->ownerService->getAll();
-        $categories = $this->categoryService->getBytype([config('consts.category.type.product.value')]);
-        view()->share(['authors' => $authors, 'owners' => $owners, 'categories' => $categories]);
+        $categories = $this->categoryService->getParentBytype([config('consts.category.type.product.value')]);
+        view()->share(['categories' => $categories]);
     }
 
     public function index(Request $request)
     {
         $products = $this->productService->getPaginate();
-        if ($request->keyword && ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id)) {
+        if ($request->keyword && $request->category_id) {
             $products = $this->productService->searchAndFilter($request);
-        } else if ($request->category_id || $request->author_id || $request->owner_id == config('consts.owner.none') || $request->owner_id) {
+        } else if ($request->category_id) {
             $products = $this->productService->filter($request);
         } else if ($request->keyword) {
             $products = $this->productService->search($request);
         }
-
         return view('admin.products.index', compact('products'));
     }
 
@@ -71,10 +60,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productService->getById($id);
-        $productOfAuthors = $product->authors;
         $productOfCategories = $product->categories;
         $productImg = explode("|", $product->image)[0];
-        return view('admin.products.edit', compact('product', 'productOfAuthors', 'productImg', 'productOfCategories'));
+        return view('admin.products.edit', compact('product', 'productImg', 'productOfCategories'));
     }
 
     public function update(UpdateProductRequest $request, $id)

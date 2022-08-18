@@ -25,6 +25,15 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard.index') }}"
+                        class="nav-link {{ Request::is('admin/dashboard*') ? 'active' : '' }}">
+                        <i class="fas fa-home"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
                 @can('list-user')
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}"
@@ -144,8 +153,19 @@
                                 Quản lý phòng tư vấn
                             </p>
                         </a>
-                    </li>                    
+                    </li>
                 @endcan
+                @can('list-documentLaw')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.documentLaws.index') }}"
+                            class="nav-link {{ Request::is('admin/documentLaws*') ? 'active' : '' }}">
+                            <i class="fas fa-book"></i>
+                            <p>
+                                Quản lý văn bản pháp luật
+                            </p>
+                        </a>
+                    </li>
+                 @endcan
                 <li class="nav-item">
                     <a class="nav-link text-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

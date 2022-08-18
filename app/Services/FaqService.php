@@ -14,15 +14,15 @@ class FaqService
         $this->faqModel = $faqModel;
     }
 
-    public function getPaginate(){
+    public function getPaginate()
+    {
         $faqs = $this->faqModel->latest()->paginate(10);
         return $faqs;
     }
 
-    public function search($request)
+    public function search($request, $isAjax = false)
     {
-        $faqs = Faq::search($request->keyword)->latest()->paginate(10);
-        return $faqs;
+        return $isAjax ? Faq::search($request->keyword)->get() : Faq::search($request->keyword)->latest()->paginate(10);
     }
 
     public function getAll()
@@ -31,12 +31,14 @@ class FaqService
         return $faqs;
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $faq = $this->faqModel->findOrFail($id);
         return $faq;
     }
 
-    public function create($request){
+    public function create($request)
+    {
         $data = [
             "question" => $request->question,
             "answer" => $request->answer,
@@ -44,7 +46,8 @@ class FaqService
         $this->faqModel->create($data);
     }
 
-    public function update($request, $id){
+    public function update($request, $id)
+    {
         $faq = $this->getById($id);
         $data = [
             "question" => $request->question,
@@ -53,7 +56,8 @@ class FaqService
         $faq->update($data);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         return $this->faqModel->destroy($id);
     }
 }

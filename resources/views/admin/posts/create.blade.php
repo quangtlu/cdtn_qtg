@@ -35,11 +35,7 @@
                                 <label>Mục lục</label>
                                 <select name="category_id[]" class="form-control select3_init" multiple>
                                     <option></option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                            {{ collect(old('category_id'))->contains($category->id) ? 'selected' : '' }}>
-                                            {{ $category->name }}</option>
-                                    @endforeach
+                                    @include('common.option-categories', ['categories' => $categories])
                                 </select>
                             </div>
                             <div class="form-group">
@@ -86,6 +82,6 @@
         $('#summernote').summernote({
             height: 400
         });
-        
+
     </script>
 @endsection
