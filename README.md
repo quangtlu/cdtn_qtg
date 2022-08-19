@@ -18,13 +18,14 @@ Chạy ứng dụng:
  *Cách 1: $ sh run-app.sh
 
  *Cách 2: Mỗi lệnh 1 terminal:
-        - php artisan serve
-        - npm run watch
-        - laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
-        - php artisan queue:work
+- php artisan serve
+- npm run watch
+- laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)
+- php artisan queue:work
 
 -----------------------------
 Account trong file seed:
+ - password chung: 'password'
  - admin: admin@gmail.com
  - mod: mod@gmail.com
  - editor: editor@gmail.com
