@@ -17,8 +17,7 @@ và thiết lập laravel-echo-server như hình cách 1
 Chạy ứng dụng:
  *Cách 1: $ sh run-app.sh
 
- *Cách 2: 
- Mỗi lệnh 1 terminal:
+ *Cách 2: Mỗi lệnh 1 terminal:
 - php artisan serve
 - npm run watch
 - laravel-echo-server start (Nếu có lỗi thì Đăng nhập trước khi chạy)

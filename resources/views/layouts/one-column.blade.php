@@ -36,7 +36,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="{{ asset('home/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('home/responsive.css') }}">
     @yield('css')
 
 </head>
