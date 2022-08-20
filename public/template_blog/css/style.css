@@ -1046,7 +1046,7 @@ ul.tag li a:hover{
 	margin: 0em 0 1em;
 }
 .w3l_categories ul{
-	padding:2em 0 0;
+	padding-top: 2rem;
 }
 .w3l_categories ul li{
 	display:block;
