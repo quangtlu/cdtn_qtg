@@ -125,7 +125,7 @@
         </div>
     </div>
     {{-- Comment --}}
-    @if (!isset($isPostRequest))
+    @if (!isset($isPostRequest) && !isset($isPostReference))
         <div class="post-comment">
             <div class="sort-comment">
                 <span class="sort-title">Bình luận hữu ích</span>
@@ -134,8 +134,7 @@
             <div class="clearfix"></div>
             @auth
                 <div class="comment-input-wrap">
-                    <div class="col-md-1 comment-input-left"
-                        style="{{ isset($isPostReference) ? 'margin-right: 5px' : '' }}">
+                    <div class="col-md-1 comment-input-left">
                         <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
                             class="user-post-avt">
                     </div>
@@ -175,6 +174,57 @@
         </div>
     @endif
 </div>
+@if (isset($isPostReference))
+    <div class="post-container">
+        <div class="post-comment" style="border-top: none">
+            <div class="sort-comment">
+                <span class="sort-title">Bình luận hữu ích</span>
+                <i class="fa fa-caret-down"></i>
+            </div>
+            <div class="clearfix"></div>
+            @auth
+                <div class="comment-input-wrap">
+                    <div class="col-md-1 comment-input-left"
+                        style="margin-right: 5px'}">
+                        <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
+                            class="user-post-avt">
+                    </div>
+                    <div class="col-md-11 comment-input-right">
+                        <form class="create-comment-form" action="{{ route('comments.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <textarea data-submittype="create" name="comment" placeholder="Viết bình luận..." class="input-comment autofit"></textarea>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+            @guest
+                <a class="btn button-primary" href="{{ route('login') }}">Đăng nhập để bình luận</a>
+            @endguest
+            <ul @guest style="padding-top: 20px" @endguest class="list-comment limit-number-comment">
+                @if ($post->comments->count())
+                    @foreach ($post->comments->sortByDesc('status')->take(5) as $comment)
+                        @include('home.component.posts.comment-item', ['comment' => $comment])
+                    @endforeach
+                    @if ($post->comments->count() > 5)
+                        <a class="list-all-comment-btn">Xem tất cả bình luận</a>
+                    @endif
+                @endif
+            </ul>
+            @if ($post->comments->count() > 5)
+                <div class="unlimit-number-comment">
+                    <ul class="list-comment ">
+                        @foreach ($post->comments->sortByDesc('status')->all() as $comment)
+                            @include('home.component.posts.comment-item', ['comment' => $comment])
+                        @endforeach
+                    </ul>
+                    <a class="list-limit-comment-btn">Ẩn bớt bình luận</a>
+                </div>
+            @endif
+        </div>
+    </div>
+@endif
 {{-- Modal edit post --}}
 <div class="modal fade" id="edit-modal-{{ $post->id }}" tabindex="-1" role="dialog"
     aria-labelledby="post-modalLabel">

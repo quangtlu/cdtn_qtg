@@ -2,19 +2,19 @@
     <!-- navigation -->
     <nav class="navbar navbar-default navbar-custom">
         <div class="container">
-            <div class="row" style="display: flex; align-items:center">
+            <div class="row space-between" style="display: flex; align-items:center">
                 <div class="col-md-2">
                     <img class="logo-tlu" src="{{ asset('image/logo.svg') }}" alt="">
                 </div>
                 <div class="col-md-10">
-                    <ul class="nav navbar-nav" @auth style="margin-top: 0;" @endauth>
+                    <ul class="nav navbar-nav hide-on-mobile" @auth style="margin-top: 0;" @endauth>
                         <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                                 chủ</a></li>
                         <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}"
                                 class="{{ Request::is('posts/category/*') ? 'active' : '' }}">Về QSHTT</a></li>
                         <li><a href="{{ route('documentLaws.index') }}"
                                 class="{{ Request::is('document-laws*') ? 'active' : '' }}">Văn bản pháp luật</a></li>
-                        <li><a class="{{ Request::is('faq') ? 'active' : '' }}" href="{{ route('faq.index') }}">FAQ</a>
+                        <li><a class="{{ Request::is('faq/*') ? 'active' : '' }}" href="{{ route('faq.index') }}">FAQ</a>
                         </li>
                         <span class="active">|</span>
                         <li><a class="{{ Request::is('posts/forum*') ? 'active' : '' }}"
@@ -181,7 +181,7 @@
     </nav>
     <!-- //navigation -->
     @auth
-        <div class="user-info-wrap">
+        <div class="user-info-wrap hide-on-mobile">
             <div class="user-info">
                 <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
                     alt="avatar">
