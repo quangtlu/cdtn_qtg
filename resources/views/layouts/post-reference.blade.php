@@ -46,8 +46,7 @@
         data-messageError="{{ Session::get('error') }}">
         <div style="margin-top: 5rem; display: flex; justify-content:space-between">
             <div class="col-md-3 side-bar-left">@include('partials.home.list-category')</div>
-            <div class="col-md-7">@yield('content')</div>
-            <div class="col-md-2 side-bar-right">@include('partials.home.list-counselor')</div>
+            <div class="col-md-9">@yield('content')</div>
         </div>
     </div>
     @include('partials.home.footer')
