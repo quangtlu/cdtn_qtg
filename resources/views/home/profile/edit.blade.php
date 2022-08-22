@@ -2,7 +2,7 @@
 @section('title', 'Thông tin tài khoản')
 @section('css')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('AdminLTE/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('admin/profile/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/avatar.css') }}">
     <link rel="stylesheet" href="{{ asset('home/post/style.css') }}">
@@ -158,13 +158,11 @@
 @section('js')
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('js/avatar.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $('.select2_init').select2()
-    </script>
-    <script>
         flatpickr("input[type=datetime-local]", {});
     </script>
 @endsection

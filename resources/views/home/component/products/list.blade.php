@@ -1,11 +1,12 @@
 @if ($products->count())
     @foreach ($products as $index => $product)
-        <div class="wthree-top-1 {{ $index != 0 ? 'wow fadeInUp' : '' }} ">
+        <div class="wthree-top-1 {{ $index != 0 ? '' : '' }} ">
             <div class="w3agile-top">
                 <div class="col-md-3 w3agile-left">
                     <ul class="post-info">
                         <li>
-                            <a data-toggle="tooltip" data-placement="top" title="Tác giả" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                            <a data-toggle="tooltip" data-placement="top" title="Tác giả" class="post-info__link"
+                                href="{{ route('products.show', ['id' => $product->id]) }}">
                                 <i class="fa  fa-users" aria-hidden="true"></i>
                                 @if ($product->authors->count())
                                     @foreach ($product->authors as $index => $author)
@@ -16,25 +17,27 @@
                                 @endif
                             </a>
                         </li>
-                        <li><a data-toggle="tooltip" data-placement="top" title="Ngày xuất bản" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
-                                    class="fa fa-calendar" aria-hidden="true"></i>{{ $product->pub_date }}</a>
+                        <li><a data-toggle="tooltip" data-placement="top" title="Ngày xuất bản" class="post-info__link"
+                                href="{{ route('products.show', ['id' => $product->id]) }}"><i class="fa fa-calendar"
+                                    aria-hidden="true"></i>{{ $product->pub_date }}</a>
                         </li>
                         <li>
-                            <a data-toggle="tooltip" data-placement="top" title="Chủ sở hữu" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}">
+                            <a data-toggle="tooltip" data-placement="top" title="Chủ sở hữu" class="post-info__link"
+                                href="{{ route('products.show', ['id' => $product->id]) }}">
                                 <i class="fa  fa-user" aria-hidden="true"></i>
                                 {{ $product->owner->name ?? 'Chưa xác định' }}
                             </a>
                         </li>
-                        <li><a data-toggle="tooltip" data-placement="top" title="Ngày đăng ký bản quyền" class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
-                            class="fa fa-calendar-o" aria-hidden="true"></i>{{ $product->regis_date }}</a>
-                </li>
+                        <li><a data-toggle="tooltip" data-placement="top" title="Ngày đăng ký bản quyền"
+                                class="post-info__link" href="{{ route('products.show', ['id' => $product->id]) }}"><i
+                                    class="fa fa-calendar-o" aria-hidden="true"></i>{{ $product->regis_date }}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <div class="col-md-9 w3agile-right">
-                            <h3><a
-                                    href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->name }}</a>
+                            <h3><a href="{{ route('products.show', ['id' => $product->id]) }}">{{ $product->name }}</a>
                             </h3>
                             <div class="limit-line-3">{!! $product->description !!}</div>
                             <a class="agileits w3layouts"
@@ -51,5 +54,5 @@
     @endforeach
     {{ $products->withQueryString()->links() }}
 @else
-<div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có tác phẩm nào</div>
+    <div class="alert alert-warning alert-no-post" style="margin-top: 10px" role="alert">Không có tác phẩm nào</div>
 @endif
