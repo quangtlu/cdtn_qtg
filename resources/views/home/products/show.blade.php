@@ -19,7 +19,7 @@
                     Mục lục</a>
             </li>
         </ul>
-        <div class="row wow fadeInUp">
+        <div class="row ">
             <div class="col-md-12">
                 <hr />
                 <div class="">
@@ -71,7 +71,7 @@
         </div>
     </div>
     @if ($product->image != null)
-        <div class="w3agile-top wow fadeInUp">
+        <div class="w3agile-top ">
             <section class="slider">
                 <div class="flexslider">
                     <ul class="slides">
@@ -178,7 +178,7 @@
             </li>
         </ul>
     </div>
-    <div class="wow fadeInUp" style="margin-top: 30px">
+    <div class="" style="margin-top: 30px">
         <h3 class="title-relate">Tác phẩm liên quan</h3>
         @include('home.component.products.list', ['products' => $productRelates])
     </div>
