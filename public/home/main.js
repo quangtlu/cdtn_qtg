@@ -88,25 +88,6 @@ function headerScroll() {
     };
 }
 
-function initPackage() {
-    $('[data-toggle="tooltip"]').tooltip();
-    // ckeditor
-    window.editors = {};
-    document.querySelectorAll(".editor").forEach((node, index) => {
-        ClassicEditor.create(node, {}).then((newEditor) => {
-            window.editors[index] = newEditor;
-        });
-    });
-
-    // select2
-    $(".select2_init").select2();
-
-    // carousel
-    $(".carousel").carousel({
-        interval: false,
-    });
-}
-
 function showAlertMessageInSession() {
     const messageSuccess = $("#container").attr("data-messageSuccess");
     const messageError = $("#container").attr("data-messageError");
@@ -377,7 +358,6 @@ function listLimitComment() {
 
 // Ready
 $(function () {
-    initPackage();
     headerScroll();
     // buttonToTop
     $().UItoTop({ easingType: "easeOutQuart" });
