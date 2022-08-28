@@ -197,7 +197,7 @@
         })
 
         $('.carousel').carousel({
-            interval: false
+            interval: 5000
         })
         $('#search').click(function() {
             $('#toggle').fadeToggle();
