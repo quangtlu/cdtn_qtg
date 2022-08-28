@@ -76,13 +76,13 @@
                     </a>
                 @endif
             </span>
-            <div class="post-content-body limit-line">
+            <div class="post-content-body {{ !isset($isPostReference) ? 'limit-line' : '' }} ">
                 {!! $post->content !!}
             </div>
-            @if (strlen($post->content) > 811)
+            @if (strlen($post->content) > 811 && !isset($isPostReference))
                 <a href="#" class="read-more-btn">Xem thêm</a>
             @endif
-            @if ($post->tags->count())
+            @if ($post->tags->count() && !isset($isPostReference))
                 <div class="post-tags">
                     @foreach ($post->tags as $tag)
                         <a href="{{ route('posts.getPostByTag', ['id' => $tag->id]) }}"
@@ -90,7 +90,7 @@
                     @endforeach
                 </div>
             @endif
-            @if ($post->categories->count())
+            @if ($post->categories->count() && !isset($isPostReference))
                 <div class="post-tags">
                     @foreach ($post->categories as $category)
                         <a href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}"
