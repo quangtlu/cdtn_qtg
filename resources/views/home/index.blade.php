@@ -44,7 +44,7 @@
                             <div style="padding-left: 0px;" class="col-md-6 top-category-name">
                                 <a data-toggle="tooltip" data-placement="right" title="Xem thêm các chủ đề"
                                     style="font-size: 20px; font-weight: bold" class="top-item__link"
-                                    href="{{ route('posts.getPostByCategory', ['id' => $categories->first()->id]) }}">
+                                    href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}">
                                     Xem thêm
                                 </a>
                             </div>
