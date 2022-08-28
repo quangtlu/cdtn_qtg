@@ -29,7 +29,7 @@
                                 <img src="{{ asset('image/home/number/top-') . ($index + 1) . '.png' }}" alt=""
                                     class="col-md-6 number-image">
                                 <div class="col-md-6 top-category-name">
-                                    <a style="font-size: 20px; font-weight: bold" class="top-item__link"
+                                    <a style="font-size: 20px;" class="top-item__link"
                                         href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                                         {{ $category->name }}
                                     </a>
@@ -43,7 +43,7 @@
                                 class="col-md-6 number-image">
                             <div style="padding-left: 0px;" class="col-md-6 top-category-name">
                                 <a data-toggle="tooltip" data-placement="right" title="Xem thêm các chủ đề"
-                                    style="font-size: 20px; font-weight: bold" class="top-item__link"
+                                    style="font-size: 20px;" class="top-item__link"
                                     href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}">
                                     Xem thêm
                                 </a>
