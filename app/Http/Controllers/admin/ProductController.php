@@ -6,24 +6,33 @@ use App\Http\Requests\Admin\Product\StoreProductRequest;
 use App\Http\Requests\Admin\Product\UpdateProductRequest;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
-use function redirect;
-use function view;
 use App\Http\Controllers\Controller;
+use App\Services\AuthorService;
 use App\Services\CategoryService;
+use App\Services\OwnerService;
 
 class ProductController extends Controller
 {
     private $productService;
     private $categoryService;
+    private $authorService;
+    private $ownerService;
 
     public function __construct(
         ProductService $productService,
-        CategoryService $categoryService
+        CategoryService $categoryService,
+        AuthorService $authorService,
+        OwnerService $ownerService
     ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
+        $this->authorService = $authorService;
+        $this->ownerService = $ownerService;
+
         $categories = $this->categoryService->getParentBytype([config('consts.category.type.product.value')]);
-        view()->share(['categories' => $categories]);
+        $authors = $this->authorService->getAll();
+        $owners = $this->ownerService->getAll();
+        view()->share(['categories' => $categories, 'authors' => $authors, 'owners' => $owners]);
     }
 
     public function index(Request $request)
