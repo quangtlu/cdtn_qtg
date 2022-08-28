@@ -825,7 +825,6 @@ a.comment-item-content-left{
     justify-content: center;
     align-items: center;
     height: 500px;
-    max-width: 36%;
     margin: 0 auto;
     color: #fff !important;
     text-align: center;
@@ -891,8 +890,8 @@ a.comment-item-content-left{
 }
 
 .document-thumb-img{
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     border-radius: 5px;
 }
 
