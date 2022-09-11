@@ -4,7 +4,7 @@
     @if ($documentLaws->count())
         @foreach ($documentLaws as $index => $documentLaw)
             <div class="row document-wrap">
-                <div class="col-md-3 document-left">
+                <div class="col-md-3 col-xs-12 document-left">
                     @if ($documentLaw->thumbnail)
                         <img class="document-thumb-img"
                             src="{{ asset('image/documentLaws') . '/' . $documentLaw->thumbnail }}">
@@ -23,7 +23,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 col-xs-12">
                     <a class="title-document">
                         <h4 class="limit-line-2">{{ $documentLaw->title }}</h4>
                     </a>

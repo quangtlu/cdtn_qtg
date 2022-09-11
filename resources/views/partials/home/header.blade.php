@@ -2,12 +2,13 @@
     <!-- navigation -->
     <nav class="navbar navbar-default navbar-custom">
         <div class="container">
-            <div class="row space-between" style="display: flex; align-items:center">
-                <div class="col-md-2">
-                    <img class="logo-tlu" src="{{ asset('image/logo.svg') }}" alt="">
+            <div style="display: flex; align-items:center; justify-content:space-between">
+                <div class="col-md-2 col-xs-10">
+                    <a href="{{ route('home.index') }}"><img class="logo-tlu" src="{{ asset('image/logo.svg') }}"
+                            alt=""></a>
                 </div>
-                <div class="col-md-10">
-                    <ul class="nav navbar-nav " @auth style="margin-top: 0;" @endauth>
+                <div class="col-md-10 col-xs-2">
+                    <ul class="nav navbar-nav hide-on-mobile" @auth style="margin-top: 0;" @endauth>
                         <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                                 chủ</a></li>
                         <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}"
@@ -166,6 +167,8 @@
                         @endguest
 
                     </ul>
+                    {{-- navbar on Mobile --}}
+                    <i class="fa fa-bars  only-mobile nav-bar-icon"></i>
                 </div>
             </div>
             <div class="clearfix"> </div>
@@ -183,7 +186,7 @@
     </nav>
     <!-- //navigation -->
     @auth
-        <div class="user-info-wrap ">
+        <div class="user-info-wrap hide-on-mobile">
             <div class="user-info">
                 <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
                     alt="avatar">
@@ -219,3 +222,62 @@
         </div>
     @endauth
 </header>
+{{-- navbar mobile --}}
+<div class=" only-mobile navbar-wrap">
+    <ul class="navbar-mobile-list">
+        <li><a class="navbar-mobile-item {{ Request::is('/*') ? 'active' : '' }}"
+                href="{{ route('home.index') }}">Trang
+                chủ</a></li>
+        <li><a href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}"
+                class="navbar-mobile-item {{ Request::is('posts/category/*') ? 'active' : '' }}">Về quyền sở hữu trí
+                tuệ</a></li>
+        <li><a href="{{ route('documentLaws.index') }}"
+                class="navbar-mobile-item {{ Request::is('document-laws*') ? 'active' : '' }}">Văn bản pháp luật</a>
+        </li>
+        <li><a class="navbar-mobile-item {{ Request::is('faq*') ? 'active' : '' }}"
+                href="{{ route('faq.index') }}">FAQ - Câu hỏi thường gặp</a>
+        </li>
+        <li><a class="navbar-mobile-item {{ Request::is('posts/forum*') ? 'active' : '' }}"
+                href="{{ route('posts.index') }}">Diễn
+                đàn</a></li>
+        <li><a class="navbar-mobile-item" href="{{ route('messenger.index') }}">Tư vấn</a></li>
+        @guest
+            <li><a class="navbar-mobile-item" href="{{ route('register') }}">Đăng ký</a></li>
+            <li><a class="navbar-mobile-item" href="{{ route('login') }}">Đăng nhập</a></li>
+        @endguest
+        @auth
+            <div class=" only-mobile user-info-mobile">
+                <img class="user-info__avt" src="{{ asset(config('consts.image.profile') . Auth::user()->image) }}"
+                    alt="avatar">
+                <div>
+                    <span class="user-info__name">{{ Auth::user()->name }}</span>
+                    <ul class="dropdown-menu dropdown-menu__user-info ">
+                        <li><a class="header-link user-name" href="{{ route('profile.index') }}">Thông tin cá
+                                nhân</a></li>
+                        <li><a class="header-link user-name" href="{{ route('posts.myPost') }}">Bài
+                                viết của
+                                tôi</a></li>
+                        @hasanyrole('admin|mod')
+                            <li><a class="header-link user-name" href="{{ route('posts.getPotRequest') }}">Kiểm duyệt
+                                    bài viết</a></li>
+                            <li><a class="header-link user-name" href="{{ route('admin.dashboard.index') }}">Trang quản
+                                    trị</a></li>
+                        @endhasanyrole
+                        <li><a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{-- <span class="header-link-logout">Đăng xuất</span> --}}
+                                Đăng xuất
+                                <i class="fa fa-sign-in text-danger" style="padding-left: 10px"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                                <input type="hidden" name="url_redirect_name" value="home.index">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endauth
+    </ul>
+</div>

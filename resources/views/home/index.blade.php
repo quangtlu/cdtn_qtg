@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         {{-- canvas slide --}}
-        <div
+        <div class="hide-on-mobile"
             style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
  padding-bottom: 48px; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
@@ -27,8 +27,8 @@
                         <div class="col-md-6 col-lg-4">
                             <div style="display: flex; align-items:center">
                                 <img src="{{ asset('image/home/number/top-') . ($index + 1) . '.png' }}" alt=""
-                                    class="col-md-6 number-image">
-                                <div class="col-md-6 top-category-name">
+                                    class="col-md-6 col-xs-3 number-image">
+                                <div class="col-md-6 col-xs-9 top-category-name">
                                     <a style="font-size: 20px;" class="top-item__link"
                                         href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                                         {{ $category->name }}
@@ -40,8 +40,8 @@
                     <div class="col-md-6 col-lg-4">
                         <div style="display: flex; align-items:center">
                             <img src="{{ asset('image/home/number/see-more.png') }}" alt=""
-                                class="col-md-6 number-image">
-                            <div style="padding-left: 0px;" class="col-md-6 top-category-name">
+                                class="col-md-6 col-xs-3 number-image">
+                            <div class="col-md-6 col-xs-9 top-category-name">
                                 <a data-toggle="tooltip" data-placement="right" title="Xem thêm các chủ đề"
                                     style="font-size: 20px;" class="top-item__link"
                                     href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}">
@@ -73,7 +73,7 @@
                                     class="btn button-primary-outline btn-sm">Xem
                                     thêm</a>
                             </div>
-                            <ul class="slide-comment-list col-md-4">
+                            <ul class="slide-comment-list col-md-4 hide-on-mobile">
                                 @foreach ($post->comments->take(10) as $comment)
                                     <li class="comment-item">
                                         <div class="comment-item-content">

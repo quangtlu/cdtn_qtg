@@ -28,6 +28,7 @@
     <script type="text/javascript" src="{{ asset('template_blog/js/easing.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('home/main.css') }}">
     @yield('css')
+    <link rel="stylesheet" href="{{ asset('home/responsive.css') }}">
 
 </head>
 

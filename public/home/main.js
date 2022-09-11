@@ -74,18 +74,19 @@ function actionDeleteComment() {
     });
 }
 
-function headerScroll() {
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function (e) {
-        var currentScrollPos = window.pageYOffset;
-        const header = document.querySelector("header");
-        if (prevScrollpos > currentScrollPos) {
-            header.style.top = "0";
-        } else if (currentScrollPos > 5) {
-            header.style.top = "-150px";
-        }
-        prevScrollpos = currentScrollPos;
-    };
+function actionMobile() {
+    $(".nav-bar-icon").on("click", function () {
+        $(".navbar-wrap").slideToggle();
+        $(this).toggleClass("active");
+    });
+
+    $(".list-category-icon").on("click", function () {
+        $(".side-bar-left").fadeIn();
+    });
+
+    $(".close-list-category").on("click", function () {
+        $(".side-bar-left").fadeOut();
+    });
 }
 
 function showAlertMessageInSession() {
@@ -358,7 +359,7 @@ function listLimitComment() {
 
 // Ready
 $(function () {
-    headerScroll();
+    actionMobile();
     // buttonToTop
     $().UItoTop({ easingType: "easeOutQuart" });
     showAlertMessageInSession();
