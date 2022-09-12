@@ -884,7 +884,8 @@ header {
 }
 
 .comment-item-content {
-    display: flex;
+    width: 100%;
+    overflow-x: hidden;
 }
 .comment-item-content-right {
     background-color: #f0f2f5;
@@ -907,7 +908,7 @@ a.comment-item-content-left {
 }
 .post-control,
 .comment-item-control {
-    margin-left: 5px;
+    margin-left: 20px;
     padding: 10px;
     border-radius: 50%;
     cursor: pointer;
@@ -927,8 +928,8 @@ a.comment-item-content-left {
 }
 
 .dropdown-menu-action-comment {
-    top: -26px;
-    left: 35px;
+    top: -87px;
+    left: -41px;
     border-radius: 10px;
 }
 
@@ -939,7 +940,7 @@ a.comment-item-content-left {
 }
 
 .number-image {
-    width: 150px;
+    width: 100px;
     height: auto;
 }
 

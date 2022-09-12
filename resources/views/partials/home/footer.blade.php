@@ -3,16 +3,19 @@
     <div class="container">
         <div class="col-md-4 col-xs-12 w3layouts-footer">
             <h3>Liên hệ</h3>
-            <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>Hà Nội, Việt Nam</p>
+            <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>Khoa Công nghệ thông tin Đại học Thăng Long
+            </p>
             <p><span><i class="fa fa-envelope" aria-hidden="true"></i></span><a
-                    href="#">quangvinh.copyright@gmail.com</a> </p>
-            <p><span><i class="fa fa-mobile" aria-hidden="true"></i></span>P: +254 2564584 / +542 8245658 </p>
-            <p><span><i class="fa fa-globe" aria-hidden="true"></i></span><a href="#">www.quang-vinh.com</a></p>
+                    href="mailto:shtt.info@thanglong.edu.vn">shtt.info@thanglong.edu.vn</a> </p>
+            <p><span><i class="fa fa-mobile" aria-hidden="true"></i></span><a href="tel:to">0982311946</a></p>
+            <p><span><i class="fa fa-globe" aria-hidden="true"></i></span><a
+                    href="https://thanglong.edu.vn/">https://thanglong.edu.vn</a></p>
         </div>
         <div class="col-md-4 col-xs-12 wthree-footer">
-            <h2>Quang Vinh Copyright</h2>
-            <p>Trang web cho phép tìm kiếm tác phẩm, diễn đàn trao đổi và tư vấn về khai thác các tác phẩm được bảo hộ
-                về quyền tác giả.</p>
+            <h2>Phạm vi trách nghiệm</h2>
+            <p>Mục đích của website là cung cấp cho bạn đọc các tài nguyên và thông tin để giải quyết các câu hỏi về
+                bản quyền.
+                Các thông tin được cung cấp chỉ dành cho mục đích giáo dục và không phải là lời khuyên pháp lý.</p>
         </div>
         <div class="col-md-4 col-xs-12 w3-agile">
             <h3>Trò chuyện với chuyên gia</h3>

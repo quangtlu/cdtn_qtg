@@ -1,9 +1,10 @@
 <li class="comment-item">
-    <div class="comment-item-content">
-        <a class="comment-item-content-left" href="{{ route('posts.getPostByUser', ['id' => $comment->user_id]) }}">
+    <div class="row comment-item-content">
+        <a class="col-md-1 col-xs-3 comment-item-content-left"
+            href="{{ route('posts.getPostByUser', ['id' => $comment->user_id]) }}">
             <img src="{{ asset('image/profile') . '/' . $comment->user->image }}" alt="" class="user-post-avt">
         </a>
-        <div class="comment-item-content-right">
+        <div class="col-md-11 col-xs-9 comment-item-content-right">
             <ul class="comment-item-content-right-list">
                 @if ($comment->user_id == $post->user_id)
                     <li class="comment-item-content-right-list__item comment-item-author">
@@ -29,7 +30,7 @@
                 @if (strlen($comment->comment) > 934)
                     <a href="#" class="read-more-btn-comment">Xem thêm</a>
                 @endif
-                <a data-toggle="tooltip" data-placement="bottom" title="{{ $comment->created_at }}"
+                <a data-toggle="tooltip" data-placement="top" title="{{ $comment->created_at }}"
                     style="color: rgb(131, 125, 125); font-size: 12px" class="comment-item-content-right-list__item">
                     {{ $comment->created_at->diffForHumans() }}
                 </a>
@@ -45,7 +46,7 @@
                     aria-expanded="true">
                 </span>
                 <ul class="dropdown-menu dropdown-menu-action-comment" aria-labelledby="dropdownMenu-{{ $comment->id }}">
-                    <li><a class="btn-edit-comment">Chỉnh sửa</a></li>
+                    <li class="btn-edit-comment"><a>Chỉnh sửa</a></li>
                     <li><a class="btn-delete-comment"
                             data-url="{{ route('comments.destroy', ['id' => $comment->id]) }}">Xóa</a>
                     </li>
@@ -66,6 +67,17 @@
                     </li>
                 </ul>
             </div>
+        @else
+            <div class="dropdown">
+                <span
+                    style="margin-left: 20px;
+                padding: 10px;
+                border-radius: 50%;
+                cursor: pointer;
+                opacity:0"
+                    class="dropdown-toggle glyphicon glyphicon-option-horizontal">
+                </span>
+            </div>
         @endif
     @endauth
 </li>
@@ -73,10 +85,10 @@
 @auth
     @if (Auth::user()->id == $comment->user_id)
         <div class="comment-input-wrap-edit">
-            <div class="col-md-1 comment-input-left">
+            <div class="col-md-1 col-xs-2 comment-input-left">
                 <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt="" class="user-post-avt">
             </div>
-            <div class="col-md-11 comment-input-right">
+            <div class="col-md-11 col-xs-10 comment-input-right">
                 <form class="create-comment-form" action="{{ route('comments.update', ['id' => $comment->id]) }}"
                     method="POST">
                     @csrf

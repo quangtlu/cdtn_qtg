@@ -168,7 +168,12 @@
 
                     </ul>
                     {{-- navbar on Mobile --}}
-                    <i class="fa fa-bars  only-mobile nav-bar-icon"></i>
+                    <div style="display: flex; align-items: center;
+                    justify-content: space-around;">
+                        <span class="fa fa-search only-mobile icon-search-header" href="#cd-search">
+                            <span></span></span>
+                        <i class="fa fa-bars  only-mobile nav-bar-icon"></i>
+                    </div>
                 </div>
             </div>
             <div class="clearfix"> </div>
@@ -177,10 +182,7 @@
                     <input id="search-input" required name="keyword" type="search"
                         placeholder="Tìm kiếm bài viết theo tiêu dề, nội dung,...">
                 </form>
-                <ul class="search-result-list">
-
-                    {{-- <button type="submit">Xem tất cả</button> --}}
-                </ul>
+                <ul class="search-result-list"></ul>
             </div>
         </div><!-- /.container-fluid -->
     </nav>

@@ -20,7 +20,7 @@
         z-index: 100;
     }
     .nav-bar-icon {
-        font-size: 16px;
+        font-size: 25px;
     }
     .logo-tlu {
         max-width: 50%;
@@ -39,7 +39,7 @@
     .navbar-wrap {
         position: fixed;
         background-color: var(--primary-color);
-        z-index: 100;
+        z-index: 1000;
         left: 0;
         right: 0;
         bottom: 0;
@@ -114,6 +114,7 @@
         bottom: 0;
         height: 100vh;
     }
+
     .side-bar-heading {
         text-align: left;
         padding-left: 10px;
@@ -130,5 +131,16 @@
     }
     .comment-item-control {
         opacity: 1;
+    }
+    .dropdown-menu-action-comment {
+        min-width: 100px;
+    }
+    .comment-item-content-left {
+        padding-left: 0;
+    }
+    .icon-search-header {
+        position: absolute;
+        right: 53px;
+        font-size: 20px;
     }
 }
