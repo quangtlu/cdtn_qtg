@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         {{-- canvas slide --}}
-        <div
+        <div class=""
             style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
  padding-bottom: 48px; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
@@ -20,15 +20,15 @@
             </iframe>
         </div>
         <div class="home-section" style="margin-top: 3rem">
-            <h4 class="title-section-page">Top các chủ đề được quan tâm</h4>
+            <h4 class="title-section-page">Các chủ đề được quan tâm nhất</h4>
             <ul class="top-list">
                 <div class="row">
                     @foreach ($categories as $index => $category)
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6" style="padding-left: 0">
                             <div style="display: flex; align-items:center">
                                 <img src="{{ asset('image/home/number/top-') . ($index + 1) . '.png' }}" alt=""
-                                    class="col-md-6 number-image">
-                                <div class="col-md-6 top-category-name">
+                                    class="col-md-6 col-xs-3 number-image">
+                                <div class="col-md-6 col-xs-9 top-category-name">
                                     <a style="font-size: 20px;" class="top-item__link"
                                         href="{{ route('posts.getPostByCategory', ['id' => $category->id]) }}">
                                         {{ $category->name }}
@@ -37,11 +37,11 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6" style="padding-left: 0">
                         <div style="display: flex; align-items:center">
                             <img src="{{ asset('image/home/number/see-more.png') }}" alt=""
-                                class="col-md-6 number-image">
-                            <div style="padding-left: 0px;" class="col-md-6 top-category-name">
+                                class="col-md-6 col-xs-3 number-image">
+                            <div class="col-md-6 col-xs-9 top-category-name">
                                 <a data-toggle="tooltip" data-placement="right" title="Xem thêm các chủ đề"
                                     style="font-size: 20px;" class="top-item__link"
                                     href="{{ route('posts.getPostByCategory', ['id' => $refrenceChildCategories->first()->id]) }}">
@@ -54,7 +54,7 @@
             </ul>
         </div>
         <div class="home-section">
-            <h4 class="title-section-page">Top thảo luận được quan tâm nhất</h4>
+            <h4 class="title-section-page">Những thảo luận được quan tâm nhất</h4>
             <div id="carousel-example-generic"
                 style="background-image: url({{ asset('image/home/slide/forum_bg.jpeg') }}); background-repeat: no-repeat;
                     background-size: cover;}"
@@ -73,16 +73,16 @@
                                     class="btn button-primary-outline btn-sm">Xem
                                     thêm</a>
                             </div>
-                            <ul class="slide-comment-list col-md-4">
+                            <ul style="padding-left: 0" class="slide-comment-list col-md-4 hide-on-mobile">
                                 @foreach ($post->comments->take(10) as $comment)
                                     <li class="comment-item">
-                                        <div class="comment-item-content">
-                                            <a class="comment-item-content-left"
+                                        <div style="align-items: start" class="comment-item-content">
+                                            <a style="padding-left: 0" class="col-md-2 comment-item-content-left"
                                                 href="{{ route('posts.getPostByUser', ['id' => $comment->user_id]) }}">
                                                 <img src="{{ asset('image/profile') . '/' . $comment->user->image }}"
                                                     alt="" class="user-post-avt">
                                             </a>
-                                            <div class="comment-item-content-right">
+                                            <div class="col-md-10 comment-item-content-right">
                                                 <ul class="comment-item-content-right-list">
                                                     @if ($comment->user_id == $post->user_id)
                                                         <li
@@ -145,7 +145,7 @@
             </div>
         </div>
         <div class="home-section">
-            <h4 class="title-section-page">Top chuyên gia tư vấn</h4>
+            <h4 class="title-section-page">Chuyên gia tư vấn nổi bật</h4>
             <div class="owl-carousel owl-theme owl-loaded"
                 style="background-image: url(https://thanglong.edu.vn/sites/default/files/2020-05/facilities-top-01.jpg);
                 background-size:cover; background-repeat:repeat">
@@ -181,7 +181,7 @@
             margin: 20,
             responsive: {
                 0: {
-                    items: 1,
+                    items: 2,
                     nav: true
                 },
                 600: {

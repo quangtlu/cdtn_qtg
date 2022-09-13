@@ -2,7 +2,7 @@
     {{-- Post --}}
     <div class="post-wrap">
         @if (!isset($isPostReference))
-            <div class="post-header">
+            <div class="post-header {{ isset($isPostRequest) ? 'post-header-request-mobile' : '' }}">
                 <div class="user-post-wrap">
                     <img src="{{ asset('image/profile') . '/' . $post->user->image }}" class="user-post-avt">
                     <div class="post-other-info">
@@ -18,7 +18,7 @@
                                 id="dropdownMenu-{{ $post->id }}" data-toggle="dropdown" aria-hidden="true"
                                 aria-haspopup="true" aria-expanded="true">
                             </span>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu-{{ $post->id }}">
+                            <ul class="dropdown-menu menu-action-mobile" aria-labelledby="dropdownMenu-{{ $post->id }}">
                                 <li><a href="{{ route('posts.show', ['id' => $post->id]) }}">Chi tiết</a></li>
                                 <li><a href="#" data-toggle="modal"
                                         data-target="#edit-modal-{{ $post->id }}">Chỉnh sửa</a></li>
@@ -51,7 +51,7 @@
                     <form class="hanle-request-form" action="{{ route('posts.handleRequest', ['id' => $post->id]) }}"
                         method="post">
                         @csrf
-                        <div style="display: flex; float: left; padding-top:10px">
+                        <div class="btn-group-wrap" style="display: flex; float: left; padding-top:10px">
                             <button data-screen='post-request' data-action="{{ config('consts.post.action.refuse') }}"
                                 class="btn button-active action-btn">
                                 {{ config('consts.post.action.refuse') }}
@@ -134,11 +134,11 @@
             <div class="clearfix"></div>
             @auth
                 <div class="comment-input-wrap">
-                    <div class="col-md-1 comment-input-left">
+                    <div class="col-md-1 col-xs-2 comment-input-left">
                         <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
                             class="user-post-avt">
                     </div>
-                    <div class="col-md-11 comment-input-right">
+                    <div class="col-md-11 col-xs-10 comment-input-right">
                         <form class="create-comment-form" action="{{ route('comments.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -184,12 +184,11 @@
             <div class="clearfix"></div>
             @auth
                 <div class="comment-input-wrap">
-                    <div class="col-md-1 comment-input-left"
-                        style="margin-right: 5px'}">
+                    <div class="col-md-1 col-xs-2 comment-input-left" style="margin-right: 5px">
                         <img src="{{ asset('image/profile') . '/' . Auth::user()->image }}" alt=""
                             class="user-post-avt">
                     </div>
-                    <div class="col-md-11 comment-input-right">
+                    <div class="col-md-11 col-xs-10 comment-input-right">
                         <form class="create-comment-form" action="{{ route('comments.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">

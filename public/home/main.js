@@ -74,18 +74,19 @@ function actionDeleteComment() {
     });
 }
 
-function headerScroll() {
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function (e) {
-        var currentScrollPos = window.pageYOffset;
-        const header = document.querySelector("header");
-        if (prevScrollpos > currentScrollPos) {
-            header.style.top = "0";
-        } else if (currentScrollPos > 5) {
-            header.style.top = "-150px";
-        }
-        prevScrollpos = currentScrollPos;
-    };
+function actionMobile() {
+    $(".nav-bar-icon").on("click", function () {
+        $(".navbar-wrap").slideToggle();
+        $(this).toggleClass("active");
+    });
+
+    $(".list-category-icon").on("click", function () {
+        $(".side-bar-left").fadeIn();
+    });
+
+    $(".close-list-category").on("click", function () {
+        $(".side-bar-left").fadeOut();
+    });
 }
 
 function showAlertMessageInSession() {
@@ -168,13 +169,13 @@ function submitComment(e, _this, measurer) {
                         const others = response.others;
                         let htmlComment = `
                             <li class="comment-item animate__animated  animate__fadeIn">
-                                <div class="comment-item-content">
-                                    <a class="comment-item-content-left"
+                                <div class="row comment-item-content">
+                                    <a class="col-md-1 col-xs-3 comment-item-content-left"
                                         href="${others.GetPostByUser}">
                                         <img src="${others.userImage}" alt=""
                                             class="user-post-avt">
                                     </a>
-                                    <div class="comment-item-content-right">
+                                    <div class="col-md-11 col-xs-9 comment-item-content-right">
                                         <ul class="comment-item-content-right-list">`;
                         if (comment.user_id == comment.post.user_id) {
                             htmlComment += `
@@ -358,7 +359,7 @@ function listLimitComment() {
 
 // Ready
 $(function () {
-    headerScroll();
+    actionMobile();
     // buttonToTop
     $().UItoTop({ easingType: "easeOutQuart" });
     showAlertMessageInSession();
