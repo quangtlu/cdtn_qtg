@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-11 col-xs-10">
                         <span data-toggle="modal" data-target="#add-modal" id="create-post" class="form-control">
-                            {{ Auth::user()->name }} ơi, đăng bài lên diễn đàm để cùng thảo luận nào
+                            <b>{{ Auth::user()->name }}</b> ơi, đăng bài lên diễn đàn nào...
                         </span>
                     </div>
                 </div>

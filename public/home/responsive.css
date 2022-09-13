@@ -59,7 +59,7 @@
         padding-bottom: 5px;
     }
     #create-post {
-        font-size: 10px;
+        font-size: 11px;
     }
     .user-info__name {
         color: #fff;
@@ -139,8 +139,33 @@
         padding-left: 0;
     }
     .icon-search-header {
-        position: absolute;
-        right: 53px;
-        font-size: 20px;
+        font-size: 24px;
+        padding: 0 24px;
+    }
+    .notification-icon {
+        font-size: 23px;
+    }
+    .bell {
+        margin-top: 20px;
+        width: auto;
+    }
+    .notification-container {
+        left: -18%;
+        width: 90vw;
+    }
+    .notice-list {
+        width: 100%;
+    }
+    .header-noti-wrap a {
+        font-size: 13px;
+    }
+    .notification-item-list {
+        font-size: 12px;
+    }
+    .filter-input {
+        padding-bottom: 13px;
+    }
+    .comment-input-right {
+        padding-left: 8px;
     }
 }

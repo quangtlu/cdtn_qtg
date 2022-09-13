@@ -157,7 +157,6 @@
 @endsection
 @section('js')
     <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
     <script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('js/avatar.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

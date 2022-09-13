@@ -3,11 +3,11 @@
     <nav class="navbar navbar-default navbar-custom">
         <div class="container">
             <div style="display: flex; align-items:center; justify-content:space-between">
-                <div class="col-md-2 col-xs-10">
+                <div class="col-md-2 col-xs-7">
                     <a href="{{ route('home.index') }}"><img class="logo-tlu" src="{{ asset('image/logo.svg') }}"
                             alt=""></a>
                 </div>
-                <div class="col-md-10 col-xs-2">
+                <div class="col-md-10 col-xs-5">
                     <ul class="nav navbar-nav hide-on-mobile" @auth style="margin-top: 0;" @endauth>
                         <li><a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{ route('home.index') }}">Trang
                                 chủ</a></li>
@@ -169,7 +169,143 @@
                     </ul>
                     {{-- navbar on Mobile --}}
                     <div style="display: flex; align-items: center;
-                    justify-content: space-around;">
+                    justify-content: end;">
+                        @auth
+                            <div class="notice-nav only-mobile"
+                                data-noimg="{{ asset('image/notification/no_notification.gif') }}">
+                                @if (Auth::user()->notifications->count())
+                                    <span
+                                        class="fa fa-bell notification-icon {{ Auth::user()->notifications->first->unread() ? 'bell' : '' }}"></span>
+                                    <span class="fake-element">
+                                        @if (Auth::user()->unreadNotifications()->count() > 0)
+                                            <span
+                                                class="number-notification">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                                        @endif
+                                    </span>
+                                    <div id="has-notification" class="notification-container">
+                                        <div
+                                            class="row no-gutters justify-content-between align-items-center header-noti-wrap">
+                                            <a class="col-md-6 col-xs-6 read-all-noti-link"
+                                                href="{{ route('notifications.markAsReadAll') }}"><i
+                                                    class="fa fa-check"></i> Đánh dấu tất cả là đã đọc</a>
+                                            <a class="col-md-6 col-xs-6 remove-all-noti-link"
+                                                href="{{ route('notifications.deleteAll') }}"><i
+                                                    class="fa  fa-trash-o"></i> Xóa tất cả</a>
+                                        </div>
+                                        <ul class="notice-list">
+                                            @foreach (Auth::user()->notifications as $notification)
+                                                {{-- Comemnt notification --}}
+                                                @if ($notification->type == 'App\Notifications\CommentNotification')
+                                                    <li
+                                                        class="notice-item panel {{ $notification->unread() ? 'unread' : '' }}">
+                                                        <a
+                                                            href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                            <div class="notice-item-wrap">
+                                                                <img src="{{ asset(config('consts.image.profile') . $notification->data['user_image']) }}"
+                                                                    alt="" class="notice-item__avatar">
+                                                                <div class="notice-item-content-wrap limit-line-2">
+                                                                    {!! $notification->data['title'] !!}:
+                                                                    '{{ $notification->data['content'] }}'
+                                                                    <div class="notice-item-content__time">
+                                                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                                        {{ $notification->created_at->diffForHumans() }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    {{-- Connect notification --}}
+                                                @elseif ($notification->type == 'App\Notifications\ConnectNotification')
+                                                    <li
+                                                        class="notice-item panel {{ $notification->unread() ? 'unread' : '' }}">
+                                                        <a
+                                                            href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                            <ul class="notification-item-list">
+                                                                <li>
+                                                                    <p>{!! $notification->data['title'] !!}</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="limit-line-2">
+                                                                        {!! $notification->data['content'] !!}</p>
+                                                                </li>
+                                                                <li class="notice-item-content__time ">
+                                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                                    {{ $notification->created_at->diffForHumans() }}
+                                                                </li>
+                                                                <li>
+                                                                    <button
+                                                                        class="btn btn-primary btn-sm btn-block text-center">
+                                                                        <a style="color: white; font-size:14px"
+                                                                            href="{{ route('messenger.show', ['id' => $notification->data['chatroom_id']]) }}">{{ $notification->data['text_btn'] }}
+                                                                            <i class="fa fa-comments-o"></i></a>
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </a>
+                                                    </li>
+                                                    {{-- post notification --}}
+                                                @elseif ($notification->type == 'App\Notifications\PostRequestNotification' ||
+                                                    $notification->type == 'App\Notifications\PostResultNotification')
+                                                    <li
+                                                        class="notice-item panel {{ $notification->unread() ? 'unread' : '' }}">
+                                                        <a
+                                                            href="{{ route('notifications.showPost', ['id' => $notification->id]) }}">
+                                                            <ul class="notification-item-list" style="list-style: none">
+                                                                <li class="panel-header">
+                                                                    <p>{!! $notification->data['title'] !!}</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="limit-line-2">
+                                                                        {!! $notification->data['content'] !!}</p>
+                                                                </li>
+                                                                <li class="notice-item-content__time ">
+                                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                                    {{ $notification->created_at->diffForHumans() }}
+                                                                </li>
+                                                                {{-- handle request --}}
+                                                                @if ($notification->type == 'App\Notifications\PostRequestNotification')
+                                                                    <li>
+                                                                        <form class="hanle-request-form"
+                                                                            action="{{ route('posts.handleRequest', ['id' => $notification->data['post_id']]) }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            <input type="hidden" name="noti_id"
+                                                                                value="{{ $notification->id }}">
+                                                                            <div
+                                                                                style="display: flex; justify-content: center;">
+                                                                                <button data-screen='header'
+                                                                                    data-action="{{ config('consts.post.action.refuse') }}"
+                                                                                    style="margin-right: 5px"
+                                                                                    class="btn btn-danger action-btn">
+                                                                                    {{ config('consts.post.action.refuse') }}
+                                                                                </button>
+                                                                                <button data-screen='header'
+                                                                                    data-action="{{ config('consts.post.action.accept') }}"
+                                                                                    class="action-btn btn btn-success"
+                                                                                    style="margin-left: 5px">
+                                                                                    {{ config('consts.post.action.accept') }}
+                                                                                </button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @else
+                                    <span class="fa fa-bell notification-icon"></span>
+                                    <div class="notification-container">
+                                        <img class="no-notification-img"
+                                            src="{{ asset('image/notification/no_notification.gif') }}" alt="">
+                                        <h4 style="padding: 10px 0" class="active">Bạn không có thông báo nào</h4>
+                                    </div>
+                                @endif
+                            </div>
+                        @endauth
                         <span class="fa fa-search only-mobile icon-search-header" href="#cd-search">
                             <span></span></span>
                         <i class="fa fa-bars  only-mobile nav-bar-icon"></i>
