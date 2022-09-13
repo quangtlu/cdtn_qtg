@@ -431,7 +431,7 @@ $(function () {
                     totalNoti--;
                     $(that).closest(".notice-item").remove();
                     $(".number-notification").text(totalNoti);
-                    if (totalNoti < 1) {
+                    if (totalNoti < 2) {
                         renderNoNotication();
                     }
                 } else {
