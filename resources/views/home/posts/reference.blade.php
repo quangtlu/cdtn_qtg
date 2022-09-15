@@ -17,7 +17,7 @@
     <div style="margin-top: 5rem; display: flex; justify-content:space-between">
         <i class="fa fa-bars only-mobile list-category-icon"></i>
         <div class="col-md-3 side-bar-left hide-on-mobile">@include('partials.home.list-category')</div>
-        <div class="col-md-7 col-xs-12">
+        <div class="{{ $post->references->count ? 'col-md-7' : 'col-md-9' }} col-xs-12">
             @if ($post)
                 @include('home.component.posts.single-post', ['post' => $post, 'isPostReference' => true])
                 <div class="navigation-button-wrap">
@@ -67,7 +67,9 @@
                 </div>
             @endif
         </div>
-        <div class="col-md-2 side-bar-left hide-on-mobile">@include('partials.home.list-referecnce', ['references' => $post->references])</div>
+        @if ($post->references->count)
+            <div class="col-md-2 side-bar-left hide-on-mobile">@include('partials.home.list-referecnce', ['references' => $post->references])</div>
+        @endif
     </div>
 @endsection
 @section('js')
