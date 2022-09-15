@@ -8,6 +8,7 @@ use App\Services\PostService;
 use App\Services\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\ReferenceService;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -17,14 +18,15 @@ class PostController extends Controller
     public function __construct(
         PostService $postService,
         TagService $tagService,
+        ReferenceService $referenceService,
         CategoryService $categoryService
     ) {
         $this->postService = $postService;
-        $this->tagService = $tagService;
-        $this->categoryService = $categoryService;
-        $tags = $this->tagService->getAll();
-        $categories = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
-        view()->share(['tags' => $tags, 'categories' => $categories]);
+
+        $tags = $tagService->getAll();
+        $references = $referenceService->getAll();
+        $categories = $categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+        view()->share(['tags' => $tags, 'categories' => $categories, 'references' => $references]);
     }
 
     public function index(Request $request)

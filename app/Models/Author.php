@@ -8,11 +8,6 @@ class Author extends Model
 {
     protected $fillable = ["name", "dob", "email", "phone", "gender"];
 
-    public function authorProduct()
-    {
-        return $this->hasMany(AuthorProduct::class);
-    }
-
     public function products()
     {
         return $this->belongsToMany(Product::class, 'author_product');

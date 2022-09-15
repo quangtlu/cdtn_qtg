@@ -22,11 +22,15 @@ class chatroomController
 
     public function index(Request $request)
     {
-        $chatrooms = $this->chatroomService->getPaginate();
-        if ($request->keyword) {
-            $chatrooms = $this->chatroomService->search($request);
+        try {
+            $chatrooms = $this->chatroomService->getPaginate();
+            if ($request->keyword) {
+                $chatrooms = $this->chatroomService->search($request);
+            }
+            return view('admin.chatrooms.index', compact('chatrooms'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        return view('admin.chatrooms.index', compact('chatrooms'));
     }
 
     public function create()
@@ -36,25 +40,41 @@ class chatroomController
 
     public function store(StoreChatroomRequest $request)
     {
-        $this->chatroomService->create($request);
-        return Redirect(route('admin.chatrooms.index'))->with('success', 'Thêm phòng tư vấn thành công');
+        try {
+            $this->chatroomService->create($request);
+            return Redirect(route('admin.chatrooms.index'))->with('success', 'Thêm phòng tư vấn thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $chatroom = $this->chatroomService->getById($id);
-        return view('admin.chatrooms.edit', compact('chatroom'));
+        try {
+            $chatroom = $this->chatroomService->getById($id);
+            return view('admin.chatrooms.edit', compact('chatroom'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateChatroomRequest $request, $id)
     {
-        $this->chatroomService->update($request, $id);
-        return Redirect(route('admin.chatrooms.index'))->with('success', 'Cập nhật phòng tư vấn thành công');
+        try {
+            $this->chatroomService->update($request, $id);
+            return Redirect(route('admin.chatrooms.index'))->with('success', 'Cập nhật phòng tư vấn thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $chatroom = $this->chatroomService->delete($id);
-        return response()->json(['chatroom' => $chatroom, 'message' => 'Xóa phòng tư vấn thành công']);
+        try {
+            $chatroom = $this->chatroomService->delete($id);
+            return response()->json(['chatroom' => $chatroom, 'message' => 'Xóa phòng tư vấn thành công']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

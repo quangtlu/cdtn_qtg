@@ -96,3 +96,7 @@
     color: red;
     padding-left: 2px;
 }
+
+.content-wrapper{
+    height: auto;
+}

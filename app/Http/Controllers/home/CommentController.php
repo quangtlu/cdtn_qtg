@@ -40,15 +40,21 @@ class CommentController extends Controller
     public function update(CommentRequest $request, $id)
     {
         $comment = $this->commentService->update($request, $id);
-        return response()->json(['message' => 'Cập nhật thành công', 'comment' => $comment]);
+        return response()->json([
+            'message' => config('consts.message.success.update'), 'comment' => $comment
+        ]);
     }
 
     public function toogleStatus($id)
     {
-        if ($this->commentService->toogleStatus($id)) {
-            return Redirect()->back()->with('success', 'Cập nhật thành công');
-        } else {
-            return Redirect()->back()->with('error', 'Cập nhật thất bại');
+        try {
+            $this->commentService->toogleStatus($id);
+            return Redirect()->back()->with(
+                'success',
+                config('consts.message.success.update')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
     }
 
@@ -58,7 +64,7 @@ class CommentController extends Controller
         if (Auth::user()->id == $comment->user->id || Auth::user()->id == $comment->post->user_id) {
             $commentDeleted = $this->commentService->delete($id);
             if ($commentDeleted) {
-                return response()->json(['message' => 'Xóa bình luận thành công', 'comment' => $comment]);
+                return response()->json(['message' => config('consts.message.success.delete'), 'comment' => $comment]);
             }
         } else {
             abort(403);

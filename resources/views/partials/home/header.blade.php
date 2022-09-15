@@ -339,6 +339,8 @@
                         @hasanyrole('admin|mod')
                             <li><a class="header-link user-name" href="{{ route('posts.getPotRequest') }}">Kiểm duyệt
                                     bài viết</a></li>
+                        @endhasanyrole
+                        @hasanyrole('admin|editor')
                             <li><a class="header-link user-name" href="{{ route('admin.dashboard.index') }}">Trang quản
                                     trị</a></li>
                         @endhasanyrole

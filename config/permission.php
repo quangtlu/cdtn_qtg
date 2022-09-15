@@ -171,6 +171,7 @@ return [
         'faq',
         'category',
         'tag',
+        'reference'
     ],
 
     'module-admin' => [
@@ -188,6 +189,7 @@ return [
         'faq',
         'category',
         'tag',
+        'reference'
     ],
 
     'action' => [

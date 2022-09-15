@@ -61,7 +61,7 @@
                                 </select>
                             </div>
                             <div id="category_id" class="form-group">
-                                <label for="category">Mục lục</label>
+                                <label for="category_id">Mục lục</label>
                                 <select name="category_id[]" class="form-control select2_init" multiple>
                                     @hasanyrole('admin|editor')
                                         @include('common.option-categories', [
@@ -74,6 +74,19 @@
                                     @endhasanyrole
                                 </select>
                             </div>
+                            @hasanyrole('admin|editor')
+                                <div class="reference_id-group">
+                                    <label>Tài liệu tham khảo</label>
+                                    <select name="reference_id[]" class="form-control select2_init" multiple>
+                                        <option></option>
+                                        @foreach ($references as $reference)
+                                            <option value="{{ $reference->id }}"
+                                                {{ collect(old('reference_id'))->contains($reference->id) ? 'selected' : '' }}>
+                                                {{ $reference->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endhasanyrole
                             <div class="form-group">
                                 <label class="label-required">Nội dung</label>
                                 <textarea class="editor" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>

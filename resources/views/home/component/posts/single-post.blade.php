@@ -272,6 +272,19 @@
                             @endhasanyrole
                         </select>
                     </div>
+                    @hasanyrole('admin|editor')
+                        <div class="form-group">
+                            <label>Tài liệu tham khảo</label>
+                            <select name="reference_id[]" class="form-control select2_init" multiple>
+                                <option></option>
+                                @foreach ($references as $reference)
+                                    <option value="{{ $reference->id }}"
+                                        {{ $post->references->contains($reference->id) || collect(old('reference_id'))->contains($reference->id) ? 'selected' : '' }}>
+                                        {{ $reference->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endhasanyrole
                     <div class="form-group">
                         <label class="label-required">Nội dung</label>
                         <textarea id="editor-{{ $post->id }}" class="editor" value="{{ old('content') ?? $post->content }}"

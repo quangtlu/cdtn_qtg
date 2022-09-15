@@ -106,7 +106,7 @@
                                                 @if ($post->status == $status['value'])
                                                     <a class="{{ $status['className'] }}">
                                                         {{ $status['name'] }}
-                                                    </a> 
+                                                    </a>
                                                 @endif
                                             @endforeach
                                         </td>

@@ -51,8 +51,13 @@ class DocumentLawController extends Controller
 
     public function show($id)
     {
-        $documentLaw = $this->documentLawService->getById($id);
-        return view('home.documentLaws.show', compact('documentLaw'));
+        try {
+            $documentLaw = $this->documentLawService->getById($id);
+            return view('home.documentLaws.show', compact('documentLaw'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
 }
