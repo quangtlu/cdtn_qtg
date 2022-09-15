@@ -19,21 +19,23 @@ class DocumentLawController extends Controller
 
     public function index(Request $request)
     {
-        $documentLaws = $this->documentLawService->getPaginate();
-        if($request->keyword) {
-            $documentLaws = $this->documentLawService->search($request);
+        try {
+            $documentLaws = $this->documentLawService->getPaginate();
+            if ($request->keyword) {
+                $documentLaws = $this->documentLawService->search($request);
+            }
+            if ($request->keyword && ($request->title)) {
+                $documentLaws = $this->documentLawService->searchAndFilter($request);
+            } else if ($request->title) {
+                $documentLaws = $this->documentLawService->filter($request);
+            } else if ($request->keyword) {
+                $documentLaws = $this->documentLawService->search($request);
+            }
+            $documentLawAll = $this->documentLawService->getAll();
+            return view('admin.documentLaws.index', compact('documentLaws', 'documentLawAll'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        if($request->keyword && ($request->title)) {
-            $documentLaws = $this->documentLawService->searchAndFilter($request);
-        }
-        else if ($request->title) {
-            $documentLaws = $this->documentLawService->filter($request);
-        }
-        else if ($request->keyword) {
-            $documentLaws = $this->documentLawService->search($request);
-        }
-        $documentLawAll = $this->documentLawService->getAll();
-        return view('admin.documentLaws.index', compact('documentLaws', 'documentLawAll'));
     }
 
     public function create()
@@ -43,27 +45,51 @@ class DocumentLawController extends Controller
 
     public function store(StoreDocumentLawRequest $request)
     {
-        $this->documentLawService->create($request);
-        return Redirect(route('admin.documentLaws.index'))->with('success', 'Thêm văn bản pháp luật thành công');
+        try {
+            $this->documentLawService->create($request);
+            return Redirect(route('admin.documentLaws.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $documentLaw = $this->documentLawService->getById($id);
-        $url = $documentLaw->url;
-        $thumbnail = $documentLaw->thumbnail;
-        return view('admin.documentLaws.edit', compact('documentLaw', 'url', 'thumbnail'));
+        try {
+            $documentLaw = $this->documentLawService->getById($id);
+            $url = $documentLaw->url;
+            $thumbnail = $documentLaw->thumbnail;
+            return view('admin.documentLaws.edit', compact('documentLaw', 'url', 'thumbnail'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateDocumentLawRequest $request, $id)
     {
-        $this->documentLawService->update($request, $id);
-        return Redirect(route('admin.documentLaws.index'))->with('success', 'Cập nhật văn bản pháp luật thành công');
+        try {
+            $this->documentLawService->update($request, $id);
+            return Redirect(route('admin.documentLaws.index'))->with(
+                'success',
+                config('consts.message.success.udpate')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $documentLaw = $this->documentLawService->delete($id);
-        return response()->json(['documentLaw' => $documentLaw, 'message' => 'Xóa văn bản pháp luật thành công']);
+        try {
+            $documentLaw = $this->documentLawService->delete($id);
+            return response()->json([
+                'documentLaw' => $documentLaw, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

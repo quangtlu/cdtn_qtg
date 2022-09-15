@@ -17,15 +17,15 @@
                             @csrf
                             <div class="form-group">
                                 <label class="label-required" for="category_name">Tiêu đề</label>
-                                <input type="text" value="{{ old('title') ?? $post->title }}" name="title" class="form-control"
-                                    id="category_name">
+                                <input type="text" value="{{ old('title') ?? $post->title }}" name="title"
+                                    class="form-control" id="category_name">
                                 @error('title')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Thẻ tag</label>
-                                <select name="tag_id[]" class="form-control select2_init" multiple>
+                                <select name="tag_id[]" class="form-control select2" multiple>
                                     <option></option>
                                     @foreach ($tags as $tag)
                                         <option {{ $postOfTags->contains('id', $tag->id) ? 'selected' : '' }}
@@ -37,26 +37,41 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Danh mục</label>
-                                <select name="category_id[]" class="form-control select3_init" multiple>
+                                <label>Mục lục</label>
+                                <select name="category_id[]" class="form-control select2" multiple>
                                     <option></option>
-                                    @include('common.option-categories', ['categories' => $categories, 'selectedBy' => $post])
+                                    @include('common.option-categories', [
+                                        'categories' => $categories,
+                                        'selectedBy' => $post,
+                                    ])
                                 </select>
                                 @error('category_id')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label>Tài liệu tham khảo</label>
+                                <select name="reference_id[]" class="form-control select2" multiple>
+                                    <option></option>
+                                    @foreach ($references as $reference)
+                                        <option value="{{ $reference->id }}"
+                                            {{ $post->references->contains($reference->id) || collect(old('reference_id'))->contains($reference->id) ? 'selected' : '' }}>
+                                            {{ $reference->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label class="label-required" for="category_name">Nội dung</label>
-                                <textarea class="form-control" value="{{ old('content') ?? $post->content }}" name="content" id="editor" cols="30" rows="5">{{ $post->content }}</textarea>
+                                <textarea class="form-control" value="{{ old('content') ?? $post->content }}" name="content" id="editor"
+                                    cols="30" rows="5">{{ $post->content }}</textarea>
                                 @error('content')
                                     <span class="mt-1 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="category_name">Ảnh</label>
-                                <input type="file" accept="image/*" multiple class="form-control-file" name="image[]" id="" cols="30"
-                                    rows="5" value="">
+                                <input type="file" accept="image/*" multiple class="form-control-file" name="image[]"
+                                    id="" cols="30" rows="5" value="">
                                 <div class="picture">
                                     <img class="product-img" src="{{ asset("image/posts/$postImgs") }}" alt="">
                                 </div>
@@ -77,17 +92,12 @@
     <script src="{{ asset('admin/product/add.js') }}"></script>
     <script>
         $(function() {
-            $('.select2_init').select2({
-                'placeholder': 'Chọn thẻ tag'
-            })
-            $('.select3_init').select2({
-                'placeholder': 'Chọn danh mục'
-            })
+            $('.select2').select2()
             ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
         })
     </script>
 @endsection

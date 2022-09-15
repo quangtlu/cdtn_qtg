@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
-use App\Components\Recusive;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Controllers\Controller;
+
 class CategoryController extends Controller
 {
     private $categoryService;
@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = $this->categoryService->getPaginate();
-        if($request->keyword) {
+        if ($request->keyword) {
             $categories = $this->categoryService->search($request);
         }
         return view('admin.categories.index', compact('categories'));

@@ -19,11 +19,15 @@ class FaqController extends Controller
 
     public function index(Request $request)
     {
-        $faqs = $this->faqService->getPaginate();
-        if ($request->keyword) {
-            $faqs = $this->faqService->search($request);
+        try {
+            $faqs = $this->faqService->getPaginate();
+            if ($request->keyword) {
+                $faqs = $this->faqService->search($request);
+            }
+            return view('admin.faqs.index', compact('faqs'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        return view('admin.faqs.index', compact('faqs'));
     }
 
     public function create()
@@ -33,25 +37,49 @@ class FaqController extends Controller
 
     public function store(StoreFaqRequest $request)
     {
-        $this->faqService->create($request);
-        return Redirect(route('admin.faqs.index'))->with('success', 'Thêm FAQ thành công');
+        try {
+            $this->faqService->create($request);
+            return Redirect(route('admin.faqs.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $faq = $this->faqService->getById($id);
-        return view('admin.faqs.edit', compact('faq'));
+        try {
+            $faq = $this->faqService->getById($id);
+            return view('admin.faqs.edit', compact('faq'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateFaqRequest $request, $id)
     {
-        $this->faqService->update($request, $id);
-        return Redirect(route('admin.faqs.index'))->with('success', 'Cập nhật FAQ thành công');
+        try {
+            $this->faqService->update($request, $id);
+            return Redirect(route('admin.faqs.index'))->with(
+                'success',
+                config('consts.message.success.udpate')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $faq = $this->faqService->delete($id);
-        return response()->json(['faq' => $faq, 'message' => 'Xóa FAQ thành công']);
+        try {
+            $faq = $this->faqService->delete($id);
+            return response()->json([
+                'faq' => $faq, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

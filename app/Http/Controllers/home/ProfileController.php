@@ -24,29 +24,42 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $userId = Auth::user()->id;
-        $profile = $this->userService->getById($userId);
-        return view('home.profile.index', compact('profile'));
+        try {
+            $userId = Auth::user()->id;
+            $profile = $this->userService->getById($userId);
+            return view('home.profile.index', compact('profile'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function edit($id)
     {
-        if (Auth::user()->id == $id) {
-            $profile = $this->userService->getById($id);
-            $categories = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
-            return view('home.profile.edit', compact('profile', 'categories'));
-        } else {
-            abort(403);
+        try {
+            if (Auth::user()->id == $id) {
+                $profile = $this->userService->getById($id);
+                $categories = $this->categoryService->getParentBytype([config('consts.category.type.post.value'), config('consts.category.type.post_reference.value')]);
+                return view('home.profile.edit', compact('profile', 'categories'));
+            } else {
+                abort(403);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
     }
 
     public function update(UpdateUserRequest $request, $id)
     {
-        if (Auth::user()->id == $id) {
-            $this->userService->update($request, $id);
-            return Redirect(route('profile.index'))->with('success', 'Cập nhật thành công');
-        } else {
-            abort(403);
+        try {
+            if (Auth::user()->id == $id) {
+                $this->userService->update($request, $id);
+                return Redirect(route('profile.index'))->with('success', 'Cập nhật thành công');
+            } else {
+                abort(403);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
     }
 }

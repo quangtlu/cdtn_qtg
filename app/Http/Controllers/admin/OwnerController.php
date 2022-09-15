@@ -19,19 +19,23 @@ class OwnerController extends Controller
 
     public function index(Request $request)
     {
-        $owners = $this->ownerService->getPaginate();
-        if ($request->keyword && ($request->name || $request->email || $request->phone)) {
-            $owners = $this->ownerService->searchAndFilter($request);
-        } else if ($request->name || $request->email || $request->phone) {
-            $owners = $this->ownerService->filter($request);
-        } else if ($request->keyword) {
-            $owners = $this->ownerService->search($request);
+        try {
+            $owners = $this->ownerService->getPaginate();
+            if ($request->keyword && ($request->name || $request->email || $request->phone)) {
+                $owners = $this->ownerService->searchAndFilter($request);
+            } else if ($request->name || $request->email || $request->phone) {
+                $owners = $this->ownerService->filter($request);
+            } else if ($request->keyword) {
+                $owners = $this->ownerService->search($request);
+            }
+            $ownerAll = $this->ownerService->getAll();
+            if (!$owners->count() && $request->keyword) {
+                return redirect()->back()->with('error', 'Không có chủ sở hữu nào phù hợp');
+            }
+            return view('admin.owners.index', compact('ownerAll', 'owners'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        $ownerAll = $this->ownerService->getAll();
-        if (!$owners->count() && $request->keyword) {
-            return redirect()->back()->with('error', 'Không có chủ sở hữu nào phù hợp');
-        }
-        return view('admin.owners.index', compact('ownerAll', 'owners'));
     }
 
     public function create()

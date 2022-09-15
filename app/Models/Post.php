@@ -20,11 +20,6 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function postTag()
-    {
-        return $this->hasMany(PostTag::class, 'post_id');
-    }
-
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
@@ -33,6 +28,11 @@ class Post extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'post_category');
+    }
+
+    public function references()
+    {
+        return $this->belongsToMany(Reference::class, 'post_reference', 'post_id', 'reference_id');
     }
 
     public function chatroom()
@@ -111,21 +111,24 @@ class Post extends Model
     public function getKeyInStatus($key)
     {
         foreach (config('consts.post.status') as $status) {
-            if($this->status == $status['value']) {
+            if ($this->status == $status['value']) {
                 return $status[$key];
             }
         }
     }
 
-    public function getStatusNameAttribute() {
+    public function getStatusNameAttribute()
+    {
         return $this->getKeyInStatus('name');
     }
 
-    public function getStatusIconClassAttribute() {
+    public function getStatusIconClassAttribute()
+    {
         return $this->getKeyInStatus('classIcon');
     }
 
-    public function getStatusClassAttribute() {
+    public function getStatusClassAttribute()
+    {
         return $this->getKeyInStatus('className');
     }
 }

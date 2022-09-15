@@ -1044,3 +1044,6 @@ a.comment-item-content-left {
 .document-left-info-name:hover {
     color: var(--red-color);
 }
+#header-search-form {
+    margin: 0;
+}

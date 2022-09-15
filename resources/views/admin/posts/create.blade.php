@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Thẻ tag</label>
-                                <select name="tag_id[]" class="form-control select2_init" multiple>
+                                <select name="tag_id[]" class="form-control select2" multiple>
                                     <option></option>
                                     @foreach ($tags as $tag)
                                         <option value="{{ $tag->id }}"
@@ -33,9 +33,20 @@
                             </div>
                             <div class="form-group">
                                 <label>Mục lục</label>
-                                <select name="category_id[]" class="form-control select3_init" multiple>
+                                <select name="category_id[]" class="form-control select2" multiple>
                                     <option></option>
                                     @include('common.option-categories', ['categories' => $categories])
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tài liệu tham khảo</label>
+                                <select name="reference_id[]" class="form-control select2" multiple>
+                                    <option></option>
+                                    @foreach ($references as $reference)
+                                        <option value="{{ $reference->id }}"
+                                            {{ collect(old('reference_id'))->contains($reference->id) ? 'selected' : '' }}>
+                                            {{ $reference->title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -72,16 +83,11 @@
                 console.error(error);
             });
         $(function() {
-            $('.select2_init').select2({
-                'placeholder': 'Chọn thẻ tag',
-            })
-            $('.select3_init').select2({
-                'placeholder': 'Chọn mục lục',
-            })
+            $('.select2').select2()
+
         })
         $('#summernote').summernote({
             height: 400
         });
-
     </script>
 @endsection

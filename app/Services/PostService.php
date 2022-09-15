@@ -83,12 +83,12 @@ class PostService
         }
 
         return User::whereHas('roles', function ($query) {
-                        $query->where('name', 'counselor');
-                    })
-                    ->orWhereHas('categories', function ($query) use ($categoryIds) {
-                        $query->orWhereIn('categories.id', $categoryIds);
-                    })
-                    ->get();
+            $query->where('name', 'counselor');
+        })
+            ->orWhereHas('categories', function ($query) use ($categoryIds) {
+                $query->orWhereIn('categories.id', $categoryIds);
+            })
+            ->get();
     }
 
 
@@ -101,7 +101,7 @@ class PostService
             "user_id" => $user->id,
             'status' => config('consts.post.status.request.value')
         ];
-        if($user->hasAnyRole('mod', 'admin', 'editor')) {
+        if ($user->hasAnyRole('mod', 'admin', 'editor')) {
             $data['status'] = config('consts.post.status.unsolved.value');
         }
         if ($files = $request->file('image')) {
@@ -111,8 +111,15 @@ class PostService
             $data['image'] = null;
         }
         $post = $this->postModel->create($data);
-        $post->tags()->attach($request->tag_id);
-        $post->categories()->attach($request->category_id);
+        if($request->tag_id) {
+            $post->tags()->attach($request->tag_id);
+        }
+        if($request->category_id) {
+            $post->categories()->attach($request->category_id);
+        }
+        if($request->reference_id) {
+            $post->references()->attach($request->reference_id);
+        }
 
         return $post;
     }
@@ -128,6 +135,7 @@ class PostService
         }
         $post->tags()->sync($request->tag_id);
         $post->categories()->sync($request->category_id);
+        $post->references()->sync($request->reference_id);
         $post->save();
         return $post;
     }
@@ -164,20 +172,19 @@ class PostService
         $this->postModel->destroy($id);
         $post->categories()->detach();
         $post->tags()->detach();
+        $post->references()->detach();
         return $post;
     }
 
     public function filter($request)
     {
-        if($request->status == config('consts.post.status.refuse.value') || $request->status == config('consts.post.status.request.value')) {
+        if ($request->status == config('consts.post.status.refuse.value') || $request->status == config('consts.post.status.request.value')) {
             if (Auth::user()->hasAnyRole('mod', 'admin')) {
                 $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
-            }
-            else {
+            } else {
                 $posts = Post::filterCategory($request)->filterTag($request)->filterStatus($request)->where('user_id', Auth::user()->id)->paginate(10);
             }
-        }
-        else {
+        } else {
             $posts = Post::accepted()->filterCategory($request)->filterTag($request)->filterStatus($request)->paginate(10);
         }
         return $posts;
@@ -186,11 +193,11 @@ class PostService
     public function searchAndFilter($request)
     {
         $posts = Post::accepted()
-                    ->filterCategory($request)
-                    ->filterTag($request)
-                    ->filterStatus($request)
-                    ->search($request->keyword)
-                    ->paginate(10);
+            ->filterCategory($request)
+            ->filterTag($request)
+            ->filterStatus($request)
+            ->search($request->keyword)
+            ->paginate(10);
         return $posts;
     }
 

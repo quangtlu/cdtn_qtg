@@ -26,9 +26,13 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $categories = $this->categoryService->getByPopular(5);
-        $posts = $this->postService->getByPopular(5);
-        $counselors = $this->userService->getTopCounselor(5);
-        return view('home.index', compact('categories', 'posts', 'counselors'));
+        try {
+            $categories = $this->categoryService->getByPopular(5);
+            $posts = $this->postService->getByPopular(5);
+            $counselors = $this->userService->getTopCounselor(5);
+            return view('home.index', compact('categories', 'posts', 'counselors'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

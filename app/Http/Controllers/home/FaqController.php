@@ -50,7 +50,12 @@ class FaqController extends Controller
 
     public function show($id)
     {
-        $faq = $this->faqService->getById($id);
-        return view('home.faq.show', compact('faq'));
+        try {
+            $faq = $this->faqService->getById($id);
+            return view('home.faq.show', compact('faq'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.getData'));
+        }
+
     }
 }
