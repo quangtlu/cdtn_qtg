@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreatePostReferenceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('post_reference', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('pub_date');
-            $table->date('regis_date');
-            $table->integer('owner_id');
-            $table->text('description');
-            $table->text('image')->nullable();
+            $table->integer('post_id');
+            $table->integer('reference_id');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('post_reference');
     }
 }

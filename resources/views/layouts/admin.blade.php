@@ -26,9 +26,8 @@
     <script src={{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}></script>
     <script src={{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
     <script src={{ asset('AdminLTE/dist/js/adminlte.min.js') }}></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('AdminLTE/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script type="module" src="{{ asset('admin/main.js') }}"></script>
-
     @yield('js')
 </body>
 

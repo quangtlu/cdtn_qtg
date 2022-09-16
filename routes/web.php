@@ -125,6 +125,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', 'Admin\DocumentLawController@update')->name('update')->middleware('can:edit-documentLaw');
             Route::get('/destroy/{id}', 'Admin\DocumentLawController@destroy')->name('destroy')->middleware('can:delete-documentLaw');
         });
+
+        Route::name('references.')->prefix('/references')->group(function () {
+            Route::get('/', 'Admin\ReferenceController@index')->name('index')->middleware('can:list-reference');
+            Route::get('/create', 'Admin\ReferenceController@create')->name('create')->middleware('can:add-reference');
+            Route::post('/store', 'Admin\ReferenceController@store')->name('store')->middleware('can:add-reference');
+            Route::get('/edit/{id}', 'Admin\ReferenceController@edit')->name('edit')->middleware('can:edit-reference');
+            Route::post('/update/{id}', 'Admin\ReferenceController@update')->name('update')->middleware('can:edit-reference');
+            Route::get('/destroy/{id}', 'Admin\ReferenceController@destroy')->name('destroy')->middleware('can:delete-reference');
+        });
     });
     // User
     Route::name('posts.')->prefix('posts')->group(function () {

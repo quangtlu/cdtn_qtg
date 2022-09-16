@@ -111,6 +111,17 @@
                         </a>
                     </li>
                 @endcan
+                @can('list-reference')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.references.index') }}"
+                            class="nav-link {{ Request::is('admin/references*') ? 'active' : '' }}">
+                            <i class="fas fa-book"></i>
+                            <p>
+                                Quản lý tài liệu tham khảo
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @can('list-faq')
                     <li class="nav-item">
                         <a href="{{ route('admin.faqs.index') }}"
@@ -165,7 +176,7 @@
                             </p>
                         </a>
                     </li>
-                 @endcan
+                @endcan
                 <li class="nav-item">
                     <a class="nav-link text-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

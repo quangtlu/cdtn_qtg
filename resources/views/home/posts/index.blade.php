@@ -18,12 +18,12 @@
         <div class="post-container">
             <div class="post-content">
                 <div style="display: flex; align-items:center">
-                    <div class="col-md-1">
+                    <div class="col-md-1 col-xs-2">
                         <img id="avt-user" src="{{ asset('image/profile/' . Auth::user()->image) }}" alt="">
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-11 col-xs-10">
                         <span data-toggle="modal" data-target="#add-modal" id="create-post" class="form-control">
-                            {{ Auth::user()->name }} ơi, đăng bài lên diễn đàm để cùng thảo luận nào
+                            <b>{{ Auth::user()->name }}</b> ơi, đăng bài lên diễn đàn nào...
                         </span>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                 </select>
                             </div>
                             <div id="category_id" class="form-group">
-                                <label for="category">Mục lục</label>
+                                <label for="category_id">Mục lục</label>
                                 <select name="category_id[]" class="form-control select2_init" multiple>
                                     @hasanyrole('admin|editor')
                                         @include('common.option-categories', [
@@ -74,6 +74,19 @@
                                     @endhasanyrole
                                 </select>
                             </div>
+                            @hasanyrole('admin|editor')
+                                <div class="reference_id-group">
+                                    <label>Tài liệu tham khảo</label>
+                                    <select name="reference_id[]" class="form-control select2_init" multiple>
+                                        <option></option>
+                                        @foreach ($references as $reference)
+                                            <option value="{{ $reference->id }}"
+                                                {{ collect(old('reference_id'))->contains($reference->id) ? 'selected' : '' }}>
+                                                {{ $reference->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endhasanyrole
                             <div class="form-group">
                                 <label class="label-required">Nội dung</label>
                                 <textarea class="editor" name="content" class="content" cols="30" rows="5">{{ old('content') }}</textarea>
