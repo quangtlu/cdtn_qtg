@@ -24,9 +24,14 @@ class RoleController extends Controller
 
     public function index(Request $request)
     {
-        $roles = $this->roleService->getPaginate();
-        $roles = $this->roleService->search($request);
-        return view('admin.roles.index', compact('roles'));
+        try {
+            $roles = $this->roleService->getPaginate();
+            $roles = $this->roleService->search($request);
+            return view('admin.roles.index', compact('roles'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function create()
@@ -36,26 +41,49 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        $this->roleService->create($request);
-        return Redirect(route('admin.roles.index'))->with('success', 'Thêm vai trò thành công');
+        try {
+            $this->roleService->create($request);
+            return Redirect(route('admin.roles.index'))->with('success', config('consts.message.success.create')
+        );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function edit($id)
     {
-        $role = $this->roleService->getById($id);
-        $permissionsSelected = $role->getAllPermissions();
-        return view('admin.roles.edit', compact('role', 'permissionsSelected'));
+        try {
+            $role = $this->roleService->getById($id);
+            $permissionsSelected = $role->getAllPermissions();
+            return view('admin.roles.edit', compact('role', 'permissionsSelected'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function update(UpdateRoleRequest $request, $id)
     {
-        $this->roleService->update($request, $id);
-        return Redirect(route('admin.roles.index'))->with('success', 'Cập nhật vai trò thành công');
+        try {
+            $this->roleService->update($request, $id);
+            return Redirect(route('admin.roles.index'))->with('success', config('consts.message.success.update')
+        );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function destroy($id)
     {
-        $role = $this->roleService->delete($id);
-        return response()->json(['role' => $role, 'message' => 'Xóa vài trò thành công']);
+        try {
+            $role = $this->roleService->delete($id);
+            return response()->json(['role' => $role, 'message' => config('consts.message.success.delete')
+        ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 }

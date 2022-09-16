@@ -19,19 +19,23 @@ class AuthorController extends Controller
 
     public function index(Request $request)
     {
-        $authors = $this->authorService->getPaginate();
-        if ($request->keyword) {
-            $authors = $this->authorService->search($request);
+        try {
+            $authors = $this->authorService->getPaginate();
+            if ($request->keyword) {
+                $authors = $this->authorService->search($request);
+            }
+            if ($request->keyword && ($request->name || $request->gender || $request->email || $request->phone)) {
+                $authors = $this->authorService->searchAndFilter($request);
+            } else if ($request->name || $request->gender || $request->email || $request->phone) {
+                $authors = $this->authorService->filter($request);
+            } else if ($request->keyword) {
+                $authors = $this->authorService->search($request);
+            }
+            $authorAll = $this->authorService->getAll();
+            return view('admin.authors.index', compact('authors', 'authorAll'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        if ($request->keyword && ($request->name || $request->gender || $request->email || $request->phone)) {
-            $authors = $this->authorService->searchAndFilter($request);
-        } else if ($request->name || $request->gender || $request->email || $request->phone) {
-            $authors = $this->authorService->filter($request);
-        } else if ($request->keyword) {
-            $authors = $this->authorService->search($request);
-        }
-        $authorAll = $this->authorService->getAll();
-        return view('admin.authors.index', compact('authors', 'authorAll'));
     }
 
     public function create()

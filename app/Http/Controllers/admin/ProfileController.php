@@ -19,34 +19,45 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $userId = Auth::user()->id;
-        $profile = $this->userService->getById($userId);
-        return view('admin.profile.index', compact('profile'));
+        try {
+            $userId = Auth::user()->id;
+            $profile = $this->userService->getById($userId);
+            return view('admin.profile.index', compact('profile'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function edit($id)
     {
-        if ($this->checkPermission($id)) {
-            $profile = $this->userService->getById($id);
-            $profileImg = $profile->image;
-            return view('admin.profile.edit', compact('profile', 'profileImg'));
-        } else {
-            abort(403);
+        try {
+            if ($id == Auth::user()->id) {
+                $profile = $this->userService->getById($id);
+                $profileImg = $profile->image;
+                return view('admin.profile.edit', compact('profile', 'profileImg'));
+            } else {
+                abort(403);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
+
     }
 
     public function update(Request $request, $id)
     {
-        if ($this->checkPermission($id)) {
-            $this->userService->update($request, $id);
-            return Redirect(route('admin.profile.index'))->with('success', 'Cập nhật thành công');
-        } else {
-            abort(403);
+        try {
+            if ($id == Auth::user()->id) {
+                $this->userService->update($request, $id);
+                return Redirect(route('admin.profile.index'))->with('success', config('consts.message.success.update')
+            );
+            } else {
+                abort(403);
+            }
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-    }
 
-    public function checkPermission($id)
-    {
-        return $id == Auth::user()->id;
     }
 }

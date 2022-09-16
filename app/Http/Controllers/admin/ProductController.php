@@ -55,34 +55,62 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $this->productService->create($request);
-        return Redirect(route('admin.products.index'))->with('success', 'Thêm tác phẩm thành công');
+        try {
+            $this->productService->create($request);
+            return Redirect(route('admin.products.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function show($id)
     {
-        $product = $this->productService->getById($id);
-        $productImgs = $product->image ?  explode("|", $product->image) : null;
-        return view('admin.products.show', compact('product', 'productImgs'));
+        try {
+            $product = $this->productService->getById($id);
+            $productImgs = $product->image ?  explode("|", $product->image) : null;
+            return view('admin.products.show', compact('product', 'productImgs'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $product = $this->productService->getById($id);
-        $productOfCategories = $product->categories;
-        $productImg = explode("|", $product->image)[0];
-        return view('admin.products.edit', compact('product', 'productImg', 'productOfCategories'));
+        try {
+            $product = $this->productService->getById($id);
+            $productOfCategories = $product->categories;
+            $productImg = explode("|", $product->image)[0];
+            return view('admin.products.edit', compact('product', 'productImg', 'productOfCategories'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateProductRequest $request, $id)
     {
-        $this->productService->update($request, $id);
-        return Redirect(route('admin.products.index'))->with('success', 'Cập nhật tác phẩm thành công');
+        try {
+            $this->productService->update($request, $id);
+            return Redirect(route('admin.products.index'))->with(
+                'success',
+                config('consts.message.success.update')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $product = $this->productService->delete($id);
-        return response()->json(['product' => $product, 'message' => 'Xóa tác phẩm thành công']);
+        try {
+            $product = $this->productService->delete($id);
+            return response()->json([
+                'product' => $product, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

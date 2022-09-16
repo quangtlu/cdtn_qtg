@@ -30,23 +30,27 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = $this->userService->getPaginate();
+        try {
+            $users = $this->userService->getPaginate();
 
-        if ($request->keyword) {
-            $users = $this->userService->search($request);
+            if ($request->keyword) {
+                $users = $this->userService->search($request);
+            }
+
+            if ($request->keyword && ($request->name || $request->gender || $request->email || $request->phone || $request->role_id)) {
+                $users = $this->userService->searchAndFilter($request);
+            } else if ($request->name || $request->gender || $request->email || $request->phone || $request->role_id) {
+                $users = $this->userService->filter($request);
+            } else if ($request->keyword) {
+                $users = $this->userService->search($request);
+            }
+
+            $userAll = $this->userService->getAll();
+
+            return view('admin.users.index', compact('users', 'userAll'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-
-        if ($request->keyword && ($request->name || $request->gender || $request->email || $request->phone || $request->role_id)) {
-            $users = $this->userService->searchAndFilter($request);
-        } else if ($request->name || $request->gender || $request->email || $request->phone || $request->role_id) {
-            $users = $this->userService->filter($request);
-        } else if ($request->keyword) {
-            $users = $this->userService->search($request);
-        }
-
-        $userAll = $this->userService->getAll();
-
-        return view('admin.users.index', compact('users', 'userAll'));
     }
 
     public function create()
@@ -56,27 +60,51 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $this->userService->create($request);
-        return Redirect(route('admin.users.index'))->with('success', 'Thêm thành công');
+        try {
+            $this->userService->create($request);
+            return Redirect(route('admin.users.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $user = $this->userService->getById($id);
-        $roleOfUsers = $user->roles;
-        $userImg = $user->image;
-        return view('admin.users.edit', compact('user', 'roleOfUsers', 'userImg'));
+        try {
+            $user = $this->userService->getById($id);
+            $roleOfUsers = $user->roles;
+            $userImg = $user->image;
+            return view('admin.users.edit', compact('user', 'roleOfUsers', 'userImg'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateUserRequest $request, $id)
     {
-        $this->userService->update($request, $id);
-        return Redirect(route('admin.users.index'))->with('success', 'Cập nhật thành công');
+        try {
+            $this->userService->update($request, $id);
+            return Redirect(route('admin.users.index'))->with(
+                'success',
+                config('consts.message.success.update')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $user = $this->userService->delete($id);
-        return response()->json(['user' => $user, 'message' => 'Xóa người dùng thành công']);
+        try {
+            $user = $this->userService->delete($id);
+            return response()->json([
+                'user' => $user, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

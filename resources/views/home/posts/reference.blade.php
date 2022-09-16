@@ -68,7 +68,7 @@
             @endif
         </div>
         @if ($post && $post->references->count() > 0)
-            <div class="col-md-2 side-bar-left hide-on-mobile">@include('partials.home.list-referecnce', ['references' => $post->references])</div>
+            <div class="col-md-2 side-bar-right hide-on-mobile">@include('partials.home.list-referecnce', ['references' => $post->references])</div>
         @endif
     </div>
 @endsection
