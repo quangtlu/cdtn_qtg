@@ -244,7 +244,6 @@ class PostController extends Controller
         try {
             $posts = $this->postService->getByCategory($categoryId);
             $category = $this->categoryService->getById($categoryId);
-
             if ($category->type == config('consts.category.type.post_reference.value')) {
                 $post = $posts->first();
                 return view('home.posts.reference', compact('post'));
