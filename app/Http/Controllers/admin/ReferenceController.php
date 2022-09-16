@@ -19,11 +19,16 @@ class ReferenceController extends Controller
 
     public function index(Request $request)
     {
-        $references = $this->referenceService->getPaginate();
-        if ($request->keyword) {
-            $references = $this->referenceService->search($request);
+        try {
+            $references = $this->referenceService->getPaginate();
+            if ($request->keyword) {
+                $references = $this->referenceService->search($request);
+            }
+            return view('admin.references.index', compact('references'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        return view('admin.references.index', compact('references'));
+
     }
 
     public function create()
@@ -43,19 +48,34 @@ class ReferenceController extends Controller
 
     public function edit($id)
     {
-        $reference = $this->referenceService->getById($id);
-        return view('admin.references.edit', compact('reference'));
+        try {
+            $reference = $this->referenceService->getById($id);
+            return view('admin.references.edit', compact('reference'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function update(UpdateReferenceRequest $request, $id)
     {
-        $this->referenceService->update($request, $id);
-        return Redirect(route('admin.references.index'))->with('success', config('consts.message.success.update'));
+        try {
+            $this->referenceService->update($request, $id);
+            return Redirect(route('admin.references.index'))->with('success', config('consts.message.success.update'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 
     public function destroy($id)
     {
-        $reference = $this->referenceService->delete($id);
-        return response()->json(['reference' => $reference, 'message' => config('consts.message.success.delete')]);
+        try {
+            $reference = $this->referenceService->delete($id);
+            return response()->json(['reference' => $reference, 'message' => config('consts.message.success.delete')]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
+
     }
 }

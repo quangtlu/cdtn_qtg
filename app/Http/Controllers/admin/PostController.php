@@ -55,43 +55,72 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $this->postService->create($request);
-        return Redirect(route('admin.posts.index'))->with('success', 'Thêm mới bài viết thành công');
+        try {
+            $this->postService->create($request);
+            return Redirect(route('admin.posts.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function show($id)
     {
-        $post = $this->postService->getById($id);
-        $postImgs = $post->image ?  explode("|", $post->image) : null;
-        return view('admin.posts.show', compact('post', 'postImgs'));
+        try {
+            $post = $this->postService->getById($id);
+            $postImgs = $post->image ?  explode("|", $post->image) : null;
+            return view('admin.posts.show', compact('post', 'postImgs'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $post = $this->postService->getById($id);
-        if ($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
-            abort(403);
+        try {
+            $post = $this->postService->getById($id);
+            if ($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+                abort(403);
+            }
+            $postUser = $post->user;
+            $postOfTags = $post->tags;
+            $postOfCategories = $post->categories;
+            $postImgs = explode("|", $post->image)[0];
+            return view('admin.posts.edit', compact('post', 'postUser', 'postImgs', 'postOfTags', 'postOfCategories'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        $postUser = $post->user;
-        $postOfTags = $post->tags;
-        $postOfCategories = $post->categories;
-        $postImgs = explode("|", $post->image)[0];
-        return view('admin.posts.edit', compact('post', 'postUser', 'postImgs', 'postOfTags', 'postOfCategories'));
     }
 
     public function update(StorePostRequest $request, $id)
     {
-        $this->postService->update($request, $id);
-        return Redirect(route('admin.posts.index'))->with('success', 'Cập nhật bài viết thành công');
+        try {
+            $this->postService->update($request, $id);
+            return Redirect(route('admin.posts.index'))->with(
+                'success',
+                config('consts.message.success.update')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $post = $this->postService->getById($id);
-        if ($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
-            abort(403);
+        try {
+            //code...
+            $post = $this->postService->getById($id);
+            if ($post->user_id != Auth::user()->id && !Auth::user()->hasRole('admin')) {
+                abort(403);
+            }
+            $post = $this->postService->delete($id);
+            return response()->json([
+                'post' => $post, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        $post = $this->postService->delete($id);
-        return response()->json(['post' => $post, 'message' => 'Xóa bài viết thành công']);
     }
 }

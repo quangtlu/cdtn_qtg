@@ -19,11 +19,15 @@ class TagController extends Controller
 
     public function index(Request $request)
     {
-        $tags = $this->tagService->getPaginate();
-        if ($request->keyword) {
-            $tags = $this->tagService->search($request);
+        try {
+            $tags = $this->tagService->getPaginate();
+            if ($request->keyword) {
+                $tags = $this->tagService->search($request);
+            }
+            return view('admin.tags.index', compact('tags'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        return view('admin.tags.index', compact('tags'));
     }
 
     public function create()
@@ -33,25 +37,49 @@ class TagController extends Controller
 
     public function store(StoreTagRequest $request)
     {
-        $this->tagService->create($request);
-        return Redirect(route('admin.tags.index'))->with('success', 'Thêm tag thành công');
+        try {
+            $this->tagService->create($request);
+            return Redirect(route('admin.tags.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $tag = $this->tagService->getById($id);
-        return view('admin.tags.edit', compact('tag'));
+        try {
+            $tag = $this->tagService->getById($id);
+            return view('admin.tags.edit', compact('tag'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateTagRequest $request, $id)
     {
-        $this->tagService->update($request, $id);
-        return Redirect(route('admin.tags.index'))->with('success', 'Câp nhật tag thành công');
+        try {
+            $this->tagService->update($request, $id);
+            return Redirect(route('admin.tags.index'))->with(
+                'success',
+                config('consts.message.success.update')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $tag = $this->tagService->delete($id);
-        return response()->json(['tag' => $tag, 'message' => 'Xóa tag thành công']);
+        try {
+            $tag = $this->tagService->delete($id);
+            return response()->json([
+                'tag' => $tag, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }
