@@ -168,6 +168,12 @@
                 </div>
             </div>
         </div>
+        <div class="home-section">
+            <h4 class="title-section-page">Phạm vi trách nghiệm</h4>
+            <p>Mục đích của website là cung cấp cho bạn đọc các tài nguyên và thông tin để giải quyết các câu hỏi về
+                bản quyền.
+                Các thông tin được cung cấp chỉ dành cho mục đích giáo dục và không phải là lời khuyên pháp lý.</p>
+        </div>
     </div>
 @endsection
 @section('js')
