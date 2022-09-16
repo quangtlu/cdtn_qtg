@@ -151,7 +151,7 @@
                                     <div class="notification-container">
                                         <img class="no-notification-img"
                                             src="{{ asset('image/notification/no_notification.gif') }}" alt="">
-                                        <h4 style="padding: 10px 0" class="active">Bạn không có thông báo nào</h4>
+                                        <h4 style="padding: 10px 0; text-align:center" class="active">Bạn không có thông báo nào</h4>
                                     </div>
                                 @endif
                             </li>

@@ -22,11 +22,15 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $categories = $this->categoryService->getPaginate();
-        if ($request->keyword) {
-            $categories = $this->categoryService->search($request);
+        try {
+            $categories = $this->categoryService->getPaginate();
+            if ($request->keyword) {
+                $categories = $this->categoryService->search($request);
+            }
+            return view('admin.categories.index', compact('categories'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
         }
-        return view('admin.categories.index', compact('categories'));
     }
 
     public function create()
@@ -36,25 +40,49 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $this->categoryService->create($request);
-        return Redirect(route('admin.categories.index'))->with('success', 'Thêm mục lục thành công');
+        try {
+            $this->categoryService->create($request);
+            return Redirect(route('admin.categories.index'))->with(
+                'success',
+                config('consts.message.success.create')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $category = $this->categoryService->getById($id);
-        return view('admin.categories.edit', compact('category'));
+        try {
+            $category = $this->categoryService->getById($id);
+            return view('admin.categories.edit', compact('category'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(StoreCategoryRequest $request, $id)
     {
-        $this->categoryService->update($request, $id);
-        return Redirect(route('admin.categories.index'))->with('success', 'Câp nhật mục lục thành công');
+        try {
+            $this->categoryService->update($request, $id);
+            return Redirect(route('admin.categories.index'))->with(
+                'success',
+                config('consts.message.success.update')
+            );
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $category = $this->categoryService->delete($id);
-        return response()->json(['category' => $category, 'message' => 'Xóa mục lục thành công']);
+        try {
+            $category = $this->categoryService->delete($id);
+            return response()->json([
+                'category' => $category, 'message' => config('consts.message.success.delete')
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

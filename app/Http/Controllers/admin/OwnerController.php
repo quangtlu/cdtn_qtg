@@ -45,25 +45,41 @@ class OwnerController extends Controller
 
     public function store(StoreOwnerRequest $request)
     {
-        $this->ownerService->create($request);
-        return Redirect(route('admin.owners.index'))->with('success', 'Thêm chủ sở hữu thành công');
+        try {
+            $this->ownerService->create($request);
+            return Redirect(route('admin.owners.index'))->with('success', 'Thêm chủ sở hữu thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function edit($id)
     {
-        $owner = $this->ownerService->getById($id);
-        return view('admin.owners.edit', compact('owner'));
+        try {
+            $owner = $this->ownerService->getById($id);
+            return view('admin.owners.edit', compact('owner'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function update(UpdateOwnerRequest $request, $id)
     {
-        $this->ownerService->update($request, $id);
-        return Redirect(route('admin.owners.index'))->with('success', 'Câp nhật chủ sở hữu thành công');
+        try {
+            $this->ownerService->update($request, $id);
+            return Redirect(route('admin.owners.index'))->with('success', config('consts.message.success.update'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 
     public function destroy($id)
     {
-        $owner = $this->ownerService->delete($id);
-        return response()->json(['owner' => $owner, 'message' => 'Xóa chủ sở hữu thành công']);
+        try {
+            $owner = $this->ownerService->delete($id);
+            return response()->json(['owner' => $owner, 'message' => config('consts.message.error.common')]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', config('consts.message.error.common'));
+        }
     }
 }

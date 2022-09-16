@@ -64,7 +64,7 @@ class FaqController extends Controller
             $this->faqService->update($request, $id);
             return Redirect(route('admin.faqs.index'))->with(
                 'success',
-                config('consts.message.success.udpate')
+                config('consts.message.success.update')
             );
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.common'));

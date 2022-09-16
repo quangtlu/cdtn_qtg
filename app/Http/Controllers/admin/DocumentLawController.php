@@ -74,7 +74,7 @@ class DocumentLawController extends Controller
             $this->documentLawService->update($request, $id);
             return Redirect(route('admin.documentLaws.index'))->with(
                 'success',
-                config('consts.message.success.udpate')
+                config('consts.message.success.update')
             );
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', config('consts.message.error.common'));
