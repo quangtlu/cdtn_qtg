@@ -21,3 +21,10 @@ laravel-echo-server.json
 package-lock.json
 public/js/app.js
 public/mix-manifest.json
+package-lock.json
+laravel-echo-server.json
+public/mix-manifest.json
+public/css/app.css
+public/js/manifest.js
+public/js/vendor.js
+public/mix-manifest.json
